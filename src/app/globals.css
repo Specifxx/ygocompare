@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Theme variables (--c-*) are written by app/layout.tsx from SITE.theme for
+   the dark default; the light theme and Halloween override them here. */
+:root[data-theme="light"] {
+  --c-ink-950: 255 255 255;
+  --c-ink-900: 248 249 252;
+  --c-ink-850: 241 243 248;
+  --c-ink-800: 230 233 241;
+  --c-ink-700: 210 215 228;
+  --c-ink-600: 180 187 205;
+  --c-fg: 17 20 36;
+  --c-muted: 82 90 112;
+  --page-bg: #f4f5fa;
+}
+
+html { background: var(--page-bg); color: rgb(var(--c-fg)); }
+body { background: var(--page-bg); min-height: 100vh; }
+
+.wordmark {
+  background: var(--wordmark);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 0.02em;
+}
+
+.card-surface { @apply rounded-xl border border-ink-700/60 bg-ink-900; }
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition; }
+.btn-primary { @apply btn bg-brand text-ink-950 hover:bg-brand-400; }
+.btn-buy { @apply btn bg-buy text-white hover:bg-buy-400 px-3 py-1.5; }
+.btn-ghost { @apply btn border border-ink-700 text-fg hover:bg-ink-800; }
+.chip { @apply inline-flex items-center rounded-md border border-ink-700 px-2 py-0.5 text-xs text-muted; }
+.link { @apply text-brand-400 hover:underline; }
+.prose-site h2 { @apply mt-8 mb-3 text-xl font-bold; }
+.prose-site h3 { @apply mt-6 mb-2 text-lg font-semibold; }
+.prose-site p { @apply my-3 leading-relaxed text-fg/90; }
+.prose-site ul { @apply my-3 list-disc pl-6 space-y-1; }
+.prose-site ol { @apply my-3 list-decimal pl-6 space-y-1; }
+.prose-site a { @apply text-brand-400 underline; }
+.prose-site table { @apply my-4 w-full text-sm; }
+.prose-site th { @apply border-b border-ink-700 py-2 text-left; }
+.prose-site td { @apply border-b border-ink-800 py-2 pr-3; }
+
+/* ── Halloween (lib/season.ts; until 31 October, visitor's local time) ────── */
+.season-only { display: none; }
+:root[data-season="halloween"] .season-only { display: block; }
+:root[data-season="halloween"]:not([data-theme="light"]) {
+  --page-bg: #0d0716;
+  --c-ink-950: 10 5 20;
+  --c-ink-900: 20 10 34;
+  --c-ink-850: 28 14 46;
+  --c-ink-800: 38 20 60;
+  --c-ink-700: 66 36 98;
+  --c-accent: 255 122 26;
+}
+:root[data-season="halloween"] .hero-band {
+  background:
+    radial-gradient(60rem 20rem at 80% -10%, rgba(255, 122, 26, 0.25), transparent 60%),
+    radial-gradient(40rem 18rem at 10% 110%, rgba(124, 58, 237, 0.3), transparent 60%);
+}
+.bat { position: absolute; width: 28px; height: 14px; opacity: 0.7; animation: bat-fly 14s linear infinite; }
+@keyframes bat-fly {
+  0% { transform: translate(-10vw, 0) scale(1); }
+  50% { transform: translate(50vw, -30px) scale(0.8); }
+  100% { transform: translate(110vw, 10px) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .bat { animation: none; display: none; } }
+

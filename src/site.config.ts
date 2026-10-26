@@ -1,0 +1,139 @@
+// The ONE game-specific configuration file. YGO Compare, Lorcana Compare and
+// Gundam Compare run the same engine (the Rift Compare playbook, rebuilt
+// lean); everything that differs between them — names, colours, data sources,
+// stores, copy — lives here or in src/content/. Keep engine code free of game
+// names.
+import type { SiteConfig } from "@/lib/site-types";
+import { STORES } from "@/content/stores";
+
+export const SITE: SiteConfig = {
+  key: "ygo",
+  name: "YGO Compare",
+  shortName: "YGOCompare",
+  wordmark: ["YGO", "COMPARE"],
+  game: "Yu-Gi-Oh! TCG",
+  gameShort: "Yu-Gi-Oh!",
+  domain: "ygocompare.com",
+  tagline: "Compare Yu-Gi-Oh! card prices across every store",
+  description:
+    "Free Yu-Gi-Oh! price comparison: live prices for Yu-Gi-Oh! TCG cards, 1st Editions and booster boxes across TCGplayer, eBay and game stores in the US, UK, Canada and Australia.",
+  keywords: [
+    "yugioh card prices",
+    "yu-gi-oh card prices",
+    "yugioh price guide",
+    "yugioh booster box price",
+    "yugioh card value",
+    "quarter century secret rare prices",
+  ],
+  adminEmails: ["bill.jyang101@gmail.com"],
+  supportEmail: "riftcompare@gmail.com",
+  ownerEmail: "bill.jyang101@gmail.com",
+
+  tcgcsvCategoryId: 2,
+  tcgplayerSlug: "yugioh",
+  ebay: {
+    // The card number ("RA01-EN008") or the product name is specific enough;
+    // sellers spell the game "Yu-Gi-Oh!", "Yugioh" and "YGO", so no game word.
+    query: "",
+    singlesCategoryId: "183454",
+    sealedCategoryId: "183456",
+    // Yu-Gi-Oh! has thousands of $10 cards: only $20+ cards get a call (every
+    // sealed product does), so the 1,500 calls reach the cards buyers check.
+    minPriceUsd: 20,
+    // One eBay app, three sites: Lorcana, Gundam and YGO Compare, 1,500 each
+    // (owner, 2026-10-26). Never raise it without lowering another site's.
+    dailyBudget: 1500,
+    // Lorcana runs at 06 UTC and Gundam at 18 UTC on the same app; eBay's
+    // day resets at midnight Pacific, so each eBay day holds one run of each.
+    runHourUtc: 12,
+  },
+
+  // "LOB-EN005": set code, language, number. One number can exist in several
+  // rarities (Rarity Collection, Quarter Century reprints), so titles that
+  // name a rarity must name the product's own.
+  numberStyle: "ygo",
+  slugStyle: "name-number",
+  rarityMustAgree: true,
+  rarityAliases: {
+    "Quarter Century Secret Rare": ["QCSR", "QCScR", "QCSCR", "Quarter Century Secret", "25th Secret Rare", "Quarter Century Rare"],
+    "Starlight Rare": ["StR", "STR"],
+    "Prismatic Secret Rare": ["PScR", "PSCR", "Prismatic Secret"],
+    "Platinum Secret Rare": ["PlScR", "PLSCR", "Platinum Secret"],
+    "Collector's Rare": ["Collectors Rare", "CR", "CoR"],
+    "Ghost Rare": ["GR"],
+    "Ultimate Rare": ["UtR", "UTR"],
+    "Secret Rare": ["ScR", "SCR"],
+    "Ultra Rare": ["UR"],
+    "Super Rare": ["SR"],
+  },
+  // Tens of thousands of printings, most of them worth cents: cards under $1
+  // in every printing stay out (except in new sets). Keeps the data, the
+  // build and every server function small.
+  catalogMinCardCents: 100,
+  extraAttrs: ["Attribute", "Card Type", "Monster Type", "MonsterType", "Attack", "Defense", "Link Rating", "LinkRating", "Rank", "Scale", "Pendulum Scale"],
+  sealedTypes: [
+    // Accessories TCGplayer lists beside the game: not sealed product.
+    [/\b(sleeves?|playmat|game mat|duel(ist)? mat|deck box|deck case|binder|portfolio|card case|dice|field center|token pack|tokens?)\b/i, "Insert"],
+    [/\bcase\b/i, "Case"],
+    [/\bmega[- ]?tins?\b|\btins?\b/i, "Tin"],
+    [/structure deck/i, "Structure Deck"],
+    [/special edition/i, "Special Edition"],
+    [/booster (box|display)|\bdisplay\b/i, "Booster Box"],
+    [/booster pack|\bpack\b/i, "Booster Pack"],
+    [/box set|collector'?s? (box|set)|collection|legendary decks?|gift/i, "Collection"],
+  ],
+  rarityOrder: [
+    "Quarter Century Secret Rare",
+    "Starlight Rare",
+    "Ghost Rare",
+    "Platinum Secret Rare",
+    "Prismatic Secret Rare",
+    "Prismatic Collector's Rare",
+    "Prismatic Ultimate Rare",
+    "Collector's Rare",
+    "Ultimate Rare",
+    "Ghost/Gold Rare",
+    "Gold Secret Rare",
+    "Premium Gold Rare",
+    "Gold Rare",
+    "10000 Secret Rare",
+    "Extra Secret Rare",
+    "Secret Rare",
+    "Ultra Rare",
+    "Super Rare",
+    "Mosaic Rare",
+    "Starfoil Rare",
+    "Shatterfoil Rare",
+    "Rare",
+    "Super Short Print",
+    "Short Print",
+    "Common",
+  ],
+  chaseRarities: ["Quarter Century Secret Rare", "Starlight Rare", "Ghost Rare", "Platinum Secret Rare", "Prismatic Secret Rare", "Collector's Rare", "Ultimate Rare"],
+
+  theme: {
+    brand: "#e8553d",
+    brandLight: "#ff8a6b",
+    brandDark: "#b8341f",
+    accent: "#f2c14e",
+    pageDark: "#0d0907",
+    inkDark: ["#090605", "#120c0a", "#19110e", "#221813", "#3a2a21", "#574034"],
+    wordmarkGradient: "linear-gradient(180deg, #fff1c9 0%, #f2c14e 50%, #c98a1b 100%)",
+    displayFont: "Exo 2",
+  },
+  halloween: {
+    headline: "Shadow Game: the Graveyard is open until 31 October",
+    blurb: "Spooky season in the Shadow Realm: find the cheapest Zombie, Fiend and Ghost Rare cards before the clock strikes midnight.",
+  },
+
+  stores: STORES,
+  sisterSites: [
+    { name: "Rift Compare", url: "https://riftcompare.com", game: "Riftbound" },
+    { name: "OP Compare", url: "https://opcompare.app", game: "One Piece" },
+    { name: "Lorcana Compare", url: "https://lorcanacompare.com", game: "Disney Lorcana" },
+    { name: "Gundam Compare", url: "https://gundamcompare.com", game: "Gundam" },
+    { name: "DexCompare", url: "https://www.dexcompare.app", game: "Pokémon" },
+    { name: "MTG Compare", url: "https://mtgcompare.app", game: "Magic" },
+  ],
+  social: { reddit: "https://www.reddit.com/r/yugioh/" },
+};
