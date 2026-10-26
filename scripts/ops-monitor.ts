@@ -7,7 +7,10 @@ import { SITE } from "@/site.config";
 import type { Meta } from "@/lib/site-types";
 
 type Result = { name: string; status: "ok" | "warn" | "fail"; detail: string };
-const site = (process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE.domain}`).replace(/\/$/, "");
+const site = (process.env.NEXT_PUBLIC_SITE_URL || `https://www.${SITE.domain}`).replace(/\/$/, "");
+// Until the site is live (the SITE_URL repository variable is set at launch),
+// the live checks warn instead of failing every three hours.
+const live = !!process.env.NEXT_PUBLIC_SITE_URL;
 
 async function check(name: string, fn: () => Promise<Omit<Result, "name">>): Promise<Result> {
   try {
@@ -22,10 +25,12 @@ async function main() {
   const ageH = (Date.now() - new Date(meta.updatedAt).getTime()) / 3_600_000;
   const results = await Promise.all([
     check("Live site", async () => {
+      if (!live) return { status: "warn", detail: "SITE_URL repository variable not set — live checks skipped" };
       const r = await fetch(site, { signal: AbortSignal.timeout(20000) });
       return r.ok ? { status: "ok", detail: `${r.status}` } : { status: "fail", detail: `HTTP ${r.status}` };
     }),
     check("A card page", async () => {
+      if (!live) return { status: "warn", detail: "SITE_URL repository variable not set — live checks skipped" };
       const r = await fetch(`${site}/cards`, { signal: AbortSignal.timeout(20000) });
       return r.ok ? { status: "ok", detail: `${r.status}` } : { status: "fail", detail: `HTTP ${r.status}` };
     }),
