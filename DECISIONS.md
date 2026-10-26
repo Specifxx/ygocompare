@@ -2,6 +2,10 @@
 
 Newest at the bottom. Each entry: what was decided, why, and what it replaced.
 
+The entries dated 2026-10-25 come with the engine from Gundam Compare
+(`Specifxx/GundamCompare`), which YGO Compare runs unchanged; they explain
+the engine. YGO Compare's own entries start on 2026-10-26.
+
 ## Launch architecture: the Rift Compare playbook, rebuilt lean — 2026-10-25
 
 **Owner:** "I want now expand to Lorcana Compare and Gundam Compare … design the
@@ -338,3 +342,61 @@ English Buy It Now case listings.
   card, set, hub and guide pages; set pages link to neighbouring sets.
 - The sitemap was already clean (only 200, self-canonical, no parameters);
   checked with curl over every non-card URL and a sample of card pages.
+
+## YGO Compare: the Gundam/Lorcana engine, sized for Yu-Gi-Oh! — 2026-10-26
+
+**Owner:** "create a website for comparing Yu-Gi-Oh cards … leverage how we
+did it for Gundam and Lorcana … they don't really have a database … you
+don't really need accounts … blog posts as well … split the eBay API keys …
+1,500 each … we don't want it to cost a lot to run Vercel."
+
+**Engine, not a fork.** Copied from Gundam Compare (identical to Lorcana
+Compare); every Yu-Gi-Oh!-specific need became a `site.config.ts` option the
+other two leave off, and the engine changes were ported back to both repos.
+The half-built `apps/ygocompare` in `Specifxx/CompareEmpire` was a DexCompare
+copy with generated prices; only its candidate store list was reused.
+
+**What Yu-Gi-Oh! needed:**
+
+* **Numbers** (`numberStyle: "ygo"`): `LOB-EN005`, `RA01-EN008`,
+  `YGLD-ENA01`, old `LOB-001` and European `LOB-E001`. The language is part
+  of the key, so `-DE`, `-FR`, `-AE` (Asian English) and the rest never match.
+* **Rarity must agree** (`rarityMustAgree`): Rarity Collections and
+  Quarter Century reprints give one number up to six rarities. A store or
+  eBay title that names a rarity, in full or by an alias (QCSR, PlScR, UR),
+  must name the product's own, after the card's own name is removed ("Rare
+  Metal Dragon"). A title naming none, between several rarities, is a tie and
+  no match, as before.
+* **Editions**: 1st Edition / Unlimited / Limited are TCGplayer printings. A
+  store's edition comes from its title or variant; unstated with several
+  printings stays unknown. Shopify variants that mix editions become one offer
+  per edition.
+* **Slugs** (`slugStyle: "name-number"`): "Dark Magician" has dozens of
+  printings, so every card slug carries its number, and clashes take the
+  rarity, settled from the whole TCGplayer listing so a slug never moves.
+* **A US$1 catalogue floor** (`catalogMinCardCents: 100`): TCGplayer lists
+  tens of thousands of Yu-Gi-Oh! printings, most worth cents. Every server
+  function bundles `data/`, so cards under $1 in every printing stay out,
+  except in sets from the last 120 days. Sealed always stays.
+* **Sealed types** (`sealedTypes`): tins, structure decks, special editions,
+  and accessories (sleeves, mats, deck boxes) marked as not-sealed so they
+  never get an eBay call.
+
+**Stores.** `scripts/probe-stores.ts` (run in GitHub Actions; the stores
+can't be reached from Claude's sandbox) checked 534 candidate stores: 207 sell
+English Yu-Gi-Oh! through Shopify. BinderPOS stores list their whole ~46,000
+card catalogue, mostly out of stock, so their in-stock collection is used
+where one exists. Used, damaged and graded listings are now left out
+everywhere.
+
+**eBay**: 1,500 calls a day at 12:17 UTC, cards from $20 (Yu-Gi-Oh! has
+thousands of $10 cards), every sealed product. Gundam and Lorcana dropped
+from 2,500 to 1,500 the same day.
+
+**TCGCSV** began answering HTTP 401 to browser-like User-Agents (first seen
+from this site's first run): the engine now names the app
+(`YGOCompare/1.0 (+https://www.ygocompare.com)`); ported to the other two.
+
+**IndexNow** now sends the hubs, the newest sets, the guides and every product
+from a set released in the last 45 days (at most 1,000 URLs), at the www
+address the canonicals use, instead of nine hub URLs at the bare domain.

@@ -1,35 +1,40 @@
 import type { Post } from "./types";
 
 export const post: Post = {
-  slug: "gundam-card-game-rarities-explained",
-  title: "Gundam Card Game rarities explained: C+, R+, LR, LR+ and LR++",
+  slug: "yu-gi-oh-rarities-explained",
+  title: "Yu-Gi-Oh! rarities explained: from Common to Quarter Century Secret Rare",
   description:
-    "What every Gundam Card Game rarity means — Common to Legend Rare, the + parallels, LR++ alternate arts, SP and Link Rare — and how much each is worth.",
-  date: "2026-10-25",
-  keywords: ["gundam card game rarities", "what is lr++ gundam", "gundam parallel rarity", "gundam card game lr+ vs lr++", "gundam card game link rare"],
+    "How to tell every Yu-Gi-Oh! TCG rarity apart (Rare, Super, Ultra, Secret, Ultimate, Ghost, Starlight, Collector's, Platinum and Quarter Century Secret Rare) and what each is worth.",
+  date: "2026-10-26",
+  keywords: ["yugioh rarities", "yugioh rarity guide", "quarter century secret rare", "starlight rare yugioh", "how to tell yugioh rarity", "ghost rare"],
   html: `
-<p>Gundam Card Game rarities look confusing at first because every rarity has a parallel version. Once you know the ladder, it is simple.</p>
+<p>In Yu-Gi-Oh! the same card is often printed in several rarities, sometimes in the same set under the same set number. The rarity is shown by the foil on the card's name and artwork, and it is often the biggest single factor in the price.</p>
 
-<h2>The base rarities</h2>
+<h2>How to read the rarity</h2>
 <ul>
-<li><b>C — Common</b>, <b>U — Uncommon</b>, <b>R — Rare</b>: the bulk of each set.</li>
-<li><b>LR — Legend Rare</b>: the headline mobile suits and pilots, around 12 per main set.</li>
+<li><b>Common</b>: no foil anywhere. The name is printed in plain black or white.</li>
+<li><b>Rare</b>: the card name is in silver foil; the artwork is not foil.</li>
+<li><b>Super Rare</b>: the artwork is holofoil; the name is plain.</li>
+<li><b>Ultra Rare</b>: gold foil name and holofoil artwork.</li>
+<li><b>Secret Rare</b>: a rainbow foil name and a diagonally patterned foil artwork.</li>
+<li><b>Ultimate Rare</b>: the artwork, attribute and border are embossed, so you can feel the relief.</li>
+<li><b>Ghost Rare</b>: the artwork is a pale, ghostly hologram that changes with the light.</li>
+<li><b>Collector's Rare</b>: a textured foil across the artwork, with a foil name.</li>
+<li><b>Starlight Rare</b>: the whole card, border included, is covered in a glittering foil pattern. Usually one or two per box at most, and among the most valuable printings in any modern set.</li>
+<li><b>Platinum Secret Rare</b> and <b>Prismatic Secret Rare</b>: Secret Rare variants with a silver (Platinum) or prismatic foil treatment, seen mostly in special sets such as the Rarity Collections and Mega Tins.</li>
+<li><b>Quarter Century Secret Rare</b>: a Secret Rare with a 25th-anniversary stamp, from the anniversary sets onward. Often the most expensive printing of a staple.</li>
 </ul>
 
-<h2>The "+" parallels</h2>
-<p>Every rarity has a parallel printing with the same card number and game text but premium foil treatment and often alternate art: <b>C+, U+, R+ and LR+</b>. Some sets add <b>C++</b> as well. On TCGplayer, and on our card pages, parallels are listed as separate cards with the rarity in brackets — for example "Psycho Gundam (LR+)".</p>
+<h2>The same number, several rarities</h2>
+<p>Sets like the Rarity Collections print each card in several rarities with the same set number (for example RA01-EN008). On TCGplayer and on our card pages each rarity is its own product, so the page you open is for one exact printing. Our store matching works the same way: a store listing that names a different rarity is never shown as a price for this one.</p>
 
-<h2>LR++: the chase cards</h2>
-<p><b>LR++</b> is the top alternate-art version of a Legend Rare and the most valuable thing you can pull. As a scale: GD01-001 Gundam is about $2 as a base card, about $48 as LR+ and around $590 as LR++. Freedom Ascension's {{card:707601}} is {{price:707601}} today.</p>
-
-<h2>Special rarities</h2>
-<ul>
-<li><b>SP (Special)</b> cards and SP-foil <b>EX Resource</b> tokens: some GD05 EX Resource tokens sell for hundreds of dollars — {{card:707591}} is {{price:707591}}.</li>
-<li><b>Link Rare</b>, added with the first-anniversary set Freedom Ascension (GD05).</li>
-<li><b>Promos</b> from release events and organized play (the GCG-PR line), and Edition Beta cards from the pre-launch release.</li>
-</ul>
-
-<h2>Sorting by rarity on Gundam Compare</h2>
-<p>Every <a href="/sets">set price guide</a> lists its cards rarest first, with today's market price and the cheapest store for each.</p>
+<h2>Prices by rarity</h2>
+<p>Browse every card of a rarity, most valuable first: <a href="/cards/rarity/quarter-century-secret-rare">Quarter Century Secret Rare</a>, <a href="/cards/rarity/starlight-rare">Starlight Rare</a>, <a href="/cards/rarity/ghost-rare">Ghost Rare</a>, <a href="/cards/rarity/collectors-rare">Collector's Rare</a>, <a href="/cards/rarity/secret-rare">Secret Rare</a> and <a href="/cards/rarity/ultra-rare">Ultra Rare</a>.</p>
+<h3>The five most valuable Ghost Rares today</h3>
+{{rarity:Ghost Rare:5}}
 `,
+  faq: [
+    { q: "What is the rarest Yu-Gi-Oh! rarity?", a: "In modern booster sets, Starlight Rares and Quarter Century Secret Rares are the hardest to pull. Older Ghost Rares and tournament prize cards are scarce too." },
+    { q: "How do I tell a Secret Rare from an Ultra Rare?", a: "An Ultra Rare has a gold foil name. A Secret Rare's name is rainbow foil and its artwork has a diagonal foil pattern." },
+  ],
 };
