@@ -1,0 +1,340 @@
+# Decisions
+
+Newest at the bottom. Each entry: what was decided, why, and what it replaced.
+
+## Launch architecture: the Rift Compare playbook, rebuilt lean — 2026-10-25
+
+**Owner:** "I want now expand to Lorcana Compare and Gundam Compare … design the
+website in the exact same way as Rift Compare and OP Compare … minimize costs
+in Vercel, the optimizations that Rift Compare has."
+
+**Not a fork.** Rift Compare's repo is ~1,000 source files, most of them
+Riftbound-specific (Radiance, legends, runes, its arcade). Forking would carry
+all of that and its Neon history. Instead one engine was written for both new
+sites, keeping Rift's decisions rather than its code:
+
+* **Public data in files, not Neon** (Rift's `PUBLIC_DATA_MODE=files`, here the
+  only mode). The daily import writes `data/public/*.json` and per-set history
+  files; pages read them. Neon carries accounts, alerts and clicks only.
+* **One build a day.** Rift's `[deploy]` subject gate, unchanged. The daily data
+  commit is the release; `production-deploy.yml` is the fallback/manual button.
+* **Nothing prerendered at build, revalidate ≥ 6 hours** (Rift, DECISIONS
+  2026-09-11 and 2026-10-14).
+* **Halloween theme** from Rift's `lib/season.ts`: visitor-local window
+  16–31 October, stamped before paint, so ISR caching cannot keep it on into
+  November.
+* **Affiliate accounts shared with Rift:** the same eBay Partner Network
+  campaign and TCGplayer Impact link, with a per-site `customid`/`subId`.
+
+## eBay: 2,500 calls a day, nothing under $20, value × demand × staleness — 2026-10-25
+
+**Owner:** "you have a 2,500 quota for each of the websites because we're
+splitting the quota … don't use it for anything that's under $20 … think about
+a good strategy depending on the demand and the popularity."
+
+Both sites use one eBay app (5,000/day). Each site counts its own calls and
+stops at 2,500, and also never spends below the app's live remaining count
+minus a reserve of 100. The sites run at different hours (Lorcana 06 UTC,
+Gundam 18 UTC) so each eBay day (it resets at midnight Pacific) holds one run of
+each.
+
+Eligible: TCGplayer reference price ≥ $20. Refresh interval by value ($100+
+daily, $50–100 every 2 days, $20–50 every 4), shortened by demand (affiliate
+clicks in 30 days: 3+ → 2 days, 10+ → daily) and halved for chase rarities,
+booster boxes/cases and sets released in the last 45 days or upcoming. Due
+products are ranked by log(price) × (1 + log2(1 + clicks)) × boosts × how
+overdue, and the budget is spent from the top: 75% on eBay US, 12.5% each on
+eBay UK and AU for the top of the ranking. An eBay result is shown for up to
+five days. The homepage "eBay Picks" banner reuses these results (no extra
+calls).
+
+## Store matching: number and name, or nothing — 2026-10-25
+
+Rift Compare's lesson: a wrong match puts a common's price and a buy button on
+a chase card's page. Cards match on number + ≥60% of the name, variant markers
+must agree (Enchanted, LR+, a generic "parallel" ↔ the product's "+" rarity);
+titles without a number match only by exact name inside a set the product type
+or tags name; ties are no match; non-English product never matches; a price
+under ¼ or over 4× TCGplayer's is dropped. On the first runs (2026-10-24) the
+price-outlier audit flagged ~4% of priced Gundam offers, and the samples
+checked were genuine market spread rather than wrong cards.
+
+## Admin is hard-coded — 2026-10-25
+
+**Owner:** "just make bill.jyang101@gmail.com the admin. I just hard code that
+in." `SITE.adminEmails`; `ADMIN_EMAILS` (env) can add more, never remove.
+
+## eBay keys are secrets, not source — 2026-10-25
+
+The owner offered to have the eBay keys hard-coded. The App ID is harmless, but
+the Cert ID is the app's client secret and this repo's `data/` is published, so
+both go into GitHub Actions secrets (`EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET`)
+via the setup prompt instead. On 2026-10-25 the pair returned
+`invalid_client` from eBay's token endpoint: a new production keyset stays
+disabled until the Marketplace Account Deletion notification is configured or
+an exemption is filed (docs/SETUP.md, step 4).
+
+## Store coverage: every Rift Compare store, plus the sister sites' — 2026-10-25
+
+**Owner:** "we want to have as many sources as possible … Take a look at how
+many stores RiftCompare has. If we can get like 80% of that, or more … aim for
+at least 200 stores."
+
+Rift Compare tracks 221 Shopify stores. Every one, plus the 321 other stores in
+OP Compare's and MTG Compare's lists and an agent search of US/UK stores, was
+probed: `/collections.json` for a Lorcana / Gundam Card Game collection (no
+Gunpla, Gundam Assemble or Japanese-only collections), then that collection's
+`products.json` checked for real product. Collections that came back empty, and
+duplicate hostnames of one shop, were dropped after the first full import.
+Result: Lorcana 318 stores, Gundam 189 (80% of Rift is 177). On the 2026-10-25
+run Lorcana had 379,097 prices; a $20+ card is listed at a median of 56 stores
+(6 in stock), and Gundam at 27 (5 in stock). Expensive singles sell out, so
+tiles show both "N stores · M in stock", and out-of-stock rows stay in the price
+table (dimmed) with their last price.
+
+Stores are fetched 8 at a time (each still one page at a time) so ~300 stores
+fit the workflow's timeout. Prices are stored as compact tuples, one file per
+set (`data/public/prices/`), plus `summary.json` for list pages: the single
+`prices.json` had reached 95 MB.
+
+Currency is now proved per store: four Canadian stores had been labelled US by
+the probe (their CAD prices would have shown as US$) and one New Zealand store
+as Australian. They were corrected or removed, and the daily import now reads
+each store's `/cart.js` currency first and refuses a store whose currency is not
+its market's, the ops monitor reporting it.
+
+The same day the cause of a worse bug was found: without `?country=` Shopify
+Markets answers in the visitor's currency, and the runners are in the US, so
+every non-US store's prices had come back converted to USD (Gameology's A$179.95
+box as 135.00) and been labelled local. Every store request now sends the
+store's own country (`countryOf`, eurozone → ES as on Rift Compare).
+
+Not yet covered: big non-Shopify US stores (CoolStuffInc, Star City Games,
+Troll and Toad, GameNerdz). Each needs its own scraper, and several sit behind
+Cloudflare challenges.
+
+## Domains are .com; eBay account deletion is a real endpoint — 2026-10-25
+
+**Owner:** "Lorcanacompare.com and Gundam compare.com are both domains that I
+just now bought in Vercel." `SITE.domain` and every link moved from the
+planned `.app` names. The sister-site links point at the .com domains; Rift
+Compare's own footer was not touched (owner: don't edit Rift Compare).
+
+eBay disables a production keyset until the app handles Marketplace Account
+Deletion notifications. Rather than file the exemption, both sites serve
+`/api/ebay/account-deletion`: GET answers eBay's challenge with
+sha256(challenge_code + EBAY_VERIFICATION_TOKEN + endpoint URL), POST
+acknowledges a notice with 200. No eBay user data is stored, so there is
+nothing to delete. The shared app registers the Lorcana site's endpoint only.
+
+## Buy clicks are Vercel Analytics events too — 2026-10-25
+
+**Owner:** "enable Vercel web analytics and also … by-click events … the
+retailer that it's coming from for each website."
+
+Every buy link already goes through `/go` (which tags the affiliate URL and
+writes a `ClickEvent` row for /admin). `BuyClickTracker` (in the root layout)
+listens for clicks and middle-clicks on any `/go?` link and sends the Vercel
+event `buy_click` with retailer (display name), retailer_key, market,
+product, page and destination host. One listener means a new buy button
+anywhere is tracked without extra code. Custom events need Vercel Pro; the
+`ClickEvent` log works on any plan. Amazon links use Rift Compare's tag
+`riftcompare-20` until each site has its own `AMAZON_ASSOCIATE_TAG`.
+`tests/affiliate.test.ts` pins the EPN, Impact and Amazon tagging.
+
+## Neon only where it is essential — 2026-10-25
+
+**Owner:** "most of the data, like any sort of public data, is now stored [in
+files] … we really aren't using Neon at all for a lot of things, it's only for
+… private data that it must have. Make sure there's not much dependency on Neon."
+
+This site was built that way from the start (public data is only files), and
+two remaining touchpoints were tightened:
+
+* `/api/me` (called on every page view by a signed-in visitor) reads a signed
+  snapshot of the account (email, tier, admin) from the session cookie, and
+  goes to Neon at most once a day per visitor to refresh it. Signed-out
+  visitors never cause a query.
+* `/go` gives its click-log insert 800 ms at most. A slow or missing database
+  costs a log row, never a buy click (Vercel's `buy_click` event still records it).
+
+Neon is used for exactly: accounts and sessions refresh, price alerts and
+their daily email run, the affiliate click log (admin dashboard and the eBay
+demand signal), contact/newsletter rows and Stripe webhook idempotency. Built
+and served with `DATABASE_URL` unset on 2026-10-25, every public page, search,
+the sitemap and the affiliate redirect still worked. `tests/no-db-on-public-pages.test.ts`
+fails if a public page or component imports the database or session reader.
+
+## Paid plans "coming soon"; the first 50 accounts get Premium free — 2026-10-25
+
+**Owner:** "for the premium features, we'll just say coming soon. And we'll
+just give the first 50 accounts that register premium … I can't be bothered to
+set up Stripe right now."
+
+Sign-up gives the first 50 non-admin accounts per site `foundingMember`,
+`tier: premium` and `premiumUntil: 2100-01-01` (Premium for good). /premium
+shows the founding offer with places left (`/api/founding`, one count query
+cached five minutes at the edge) and "Coming soon" on Plus and Premium. The
+checkout API refuses until `PAYMENTS_ENABLED=1` and a Stripe key are set; the
+Stripe code is complete and documented in docs/SETUP.md ("Turning payments
+on"). Tested 2026-10-25 against a local Postgres: accounts 1–50 founding
+Premium, 51–52 free, the counter at 0, checkout answering "coming soon".
+
+## Google is the only sign-in method — 2026-10-25
+
+**Owner:** "I want Google OAuth … just like how we did it for Rift Compare …
+That's the only sign-in method."
+
+`/api/auth/google` → Google (authorization-code flow, random `state` in a
+10-minute httpOnly cookie, scopes openid/email/profile) →
+`/api/auth/google/callback`, which checks the state, requires a verified
+email, finds the account by Google id or email (or creates it; the first 50
+non-admin accounts become founding members, as before) and signs in with the
+same session cookie. Email/password sign-up and login were removed with
+bcrypt; `passwordHash` stays as an unused nullable column so the schema
+change is additive. `next` only accepts same-site paths. Setup:
+docs/GOOGLE-OAUTH-PROMPT.md (one Google Cloud project, one web client per
+site, `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` in each Vercel project).
+
+## Price comparison only: accounts, Premium, alerts, email and the database removed — 2026-10-25
+
+**Owner:** "I don't care about the sign-in feature anymore … get rid of the
+sign-in features. We don't need the user accounts at all. Get rid of the
+premium … just have it in an archive … get rid of anything that we need to send
+as an email to users. We don't need Resend … it's just a website that helps you
+compare the price of cards, monetized through affiliates and in the future,
+potentially ads … make it more minimalistic."
+
+Removed from the build and moved to `archive/accounts-premium/` (README there
+explains how to restore): Google sign-in and sessions, the Prisma/Neon
+database, Free/Plus/Premium and Stripe, founding members, price alerts and
+their email run, Resend and owner notifications, the contact form, the
+newsletter and /admin. The full price history is now public on every card
+page. Contact is a mailto link to the public address. Clicks are recorded only
+by the Vercel `buy_click` event, so the eBay prioritiser ranks by value,
+rarity, sealed type and set age (its demand input is an empty map). The ops
+monitor fails its workflow run instead of sending email: GitHub notifies the
+owner. This supersedes the account, Premium, founding-member, Google sign-in
+and Neon entries above. The eBay Marketplace Account Deletion endpoint stays
+(eBay requires it, and it stores nothing).
+
+## Rift Compare's Premium tools are free here; new logo and link thumbnail — 2026-10-25
+
+**Owner:** "a lot of the features that we have on Rift Compare, like Deal
+Finder, Rising Cards, Demand Finder … let's just make it all free … any users
+can use it for free."
+
+`/tools` hosts them, free and account-less, all computed from the daily
+summary (`src/lib/tools.ts`):
+
+* **Deal Finder:** every in-stock store or eBay offer 8–60% under TCGplayer
+  market, in every market (converted to USD for the comparison), capped at the
+  1,200 biggest savings. Filters are client-side. `/deals` 308s here.
+* **Rising Cards:** up more than 2% in 7 days and not down over 30, weighted
+  by the size of the rise, the 30-day trend and how few stores still have stock.
+* **Demand Finder:** cards listed at 10+ stores, ranked by the share sold out.
+* **Best Basket:** paste a list and get the cheapest in-stock price per card
+  in your market (US TCGplayer/eBay as fallback), plus the stores that can
+  fill most of it. A plain name matches the base printing; add the number for
+  a variant. Postage is not included (Rift Compare's measured postage was not
+  ported).
+* **Trade Calculator** and **Selling Fee Calculator** (TCGplayer 10.75% +
+  2.5% + $0.30; eBay 13.25% + $0.40, labelled as estimates).
+
+Not ported: Box EV (no reliable pull rates yet, and a wrong EV misleads
+buyers) and the pull tracker (it needs accounts).
+
+**Logo:** original marks, not trademarks. Lorcana is a faceted hexagonal ink
+crystal with an ink drop and sparkles. Gundam is a mecha head with V-fin, eyes
+and red chin. `src/content/logo.tsx` is the source; `icon.svg`, `apple-icon.png`
+and the header use it. **Link thumbnail** (`opengraph-image.jpg` /
+`twitter-image.jpg`, 2400×1260) is built like Rift Compare's: headline, logo
+and bullets on the left, real screenshots of a card page's price table and a
+set page in browser frames on the right. Blog posts set it explicitly, because
+their own `openGraph` would otherwise drop it.
+
+**eBay matching tightened** after the first production runs put a Japanese
+"Set of 3" and PSA/TAG-graded slabs on English raw cards: graded and
+non-English listings are rejected, the price floor rose from 40% to 50% of
+market, and each import re-checks saved results against the current rules,
+so a tightened rule purges old matches without spending calls.
+
+## eBay is highlighted, and its coverage was raised before launch — 2026-10-25
+
+**Owner:** "make sure that eBay prices are highlighted, and all the eBay
+prices are on the websites … the API keys are working before we make these
+posts."
+
+Every card page now opens its price comparison with an eBay call-out: the
+cheapest Buy It Now in the visitor's market (eBay US as the fallback), with
+shipping where eBay gives it, an eBay-blue "Buy on eBay" button and an "All
+eBay listings" search link. Both go through /go, so the affiliate tags and the
+`buy_click` event apply. eBay rows in the table carry the eBay wordmark, a
+tint and the same button.
+
+The keys were confirmed working (a token was issued and the live remaining
+count read) and the first production runs were audited. Three matcher gaps
+were fixed:
+
+* Promos numbered "14" on TCGplayer but "14/P3", "14/D23" or "6/CC1" by sellers
+  now match on the numerator.
+* Sealed queries no longer contain an apostrophe ("Illumineer's" found nothing).
+* Bracketed qualifiers ("Store Tournament Winner Pack 01", "SDCC 2026") must
+  be at least half present in the title, so a participation card or a magazine
+  promo never takes a winner card's price. Numbers in brackets don't count,
+  and NTC / WCS are expanded.
+
+`scripts/ebay-recheck-misses.ts` re-queried only the products without a match,
+inside each site's daily share: about 1,060 calls in total.
+
+Result on 2026-10-25, cards worth $20+ with a live eBay price: Lorcana 407 of
+493 (82%), Gundam 274 of 362 (75%), across eBay US, UK and AU. The rest had no
+matching English, ungraded, single-copy Buy It Now listing. Most are event
+promos and serialized cards.
+
+## eBay: cards from $10, every sealed product — 2026-10-25
+
+**Owner:** "all the sealed products also must have … the eBay quota … change
+it to cards that are $10 or more … all the sealed products should have it as
+well."
+
+`SITE.ebay.minPriceUsd` 20 → 10, and it now applies to cards only: every
+sealed product is eligible whatever its price. Pre-orders with no TCGplayer
+price rank as a $50 product and are searched with no price window. Sealed
+refreshes at least every 48 hours. The planner still spends from the top of a
+value × demand × staleness ranking inside each site's 2,500.
+
+Sealed matching was the weak side (cases matched 0 of 29). Three fixes:
+
+* Sealed searches use eBay's whole Collectible Card Games category (2536).
+  Cases, decks and gift sets are listed outside "Sealed Booster Boxes" (183456).
+* "Boxes", "packs" and "decks" in a title count as the singular.
+* Pack fillers TCGplayer lists as sealed products (inserts, lore cards,
+  tokens) are typed "Insert". They never get an eBay call and don't appear on
+  /sealed.
+* A "Bonus Pack" product never takes a listing that says "deck only" or "no
+  bonus pack".
+
+Result on 2026-10-25 after re-checking every eligible product without an eBay
+price on eBay US. Lorcana: cards $10+ 406 of 411, sealed 145 of 217 (booster
+boxes 14/16, Troves 14/15, collections 17/18, starter decks 38/47, cases
+24/59). Gundam: cards $10+ 396 of 458, sealed 77 of 134 (booster boxes 7/7,
+booster packs 25/26, cases 7/29). Cases are the weak spot: there are few
+English Buy It Now case listings.
+
+## 2026-10-25 — SEO hygiene: www is canonical, hub pages, breadcrumbs
+
+- **Canonical host is `www.`** (`SITE_URL` in `src/lib/site.ts`). Canonicals,
+  og:url, the sitemap and robots.txt all use it. The apex → www 301 is a Vercel
+  domain setting (Domains: www primary, apex "Redirect to www", 301), not code:
+  a code redirect would loop while Vercel still sends www to the apex. If
+  `NEXT_PUBLIC_SITE_URL` is set in Vercel it overrides this; keep it unset or www.
+- **og:url follows the canonical.** The layout used to set og:url to the site
+  root, so every page shared the homepage's. `canon(path)` sets both.
+- **Hub pages:** `/cards/rarity/<rarity>` and `/sealed/<type>` (`src/lib/hubs.ts`),
+  only for rarities/types that have products, so the sitemap never lists an
+  empty hub. "+" becomes "-plus" in slugs (LR+ and LR++ must not collide).
+- **Breadcrumbs** (`components/Breadcrumbs.tsx`, with BreadcrumbList schema) on
+  card, set, hub and guide pages; set pages link to neighbouring sets.
+- The sitemap was already clean (only 200, self-canonical, no parameters);
+  checked with curl over every non-card URL and a sample of card pages.
