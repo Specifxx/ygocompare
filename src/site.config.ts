@@ -13,8 +13,8 @@ export const SITE: SiteConfig = {
   wordmark: ["YGO", "COMPARE"],
   game: "Yu-Gi-Oh! TCG",
   gameShort: "Yu-Gi-Oh!",
-  domain: "ygocompare.app",
-  // The bare domain is the address (owner bought ygocompare.app, 2026-10-26).
+  domain: "ygocompare.com",
+  // The bare domain is the address (owner, 2026-10-26: ygocompare.com).
   apexHost: true,
   tagline: "Compare Yu-Gi-Oh! card prices across every store",
   description:

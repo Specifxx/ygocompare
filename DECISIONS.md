@@ -412,3 +412,11 @@ There is no app-level www redirect, and the setup prompt adds only the bare
 domain in Vercel, ADDS DNS records and never edits or deletes one, and sets
 no redirect: today's outage on the other sites came from redirect and DNS
 changes made before Vercel showed the records as valid.
+
+## 2026-10-26 — Correction: the domain is ygocompare.com
+
+The owner owns ygocompare.com, not .app (the entry above named the wrong one).
+`SITE.domain` is `ygocompare.com`; everything else in that entry stands: the
+bare domain is canonical (`apexHost: true`), no www, no redirects, and setup
+only adds DNS records. The first Vercel project was deleted; the setup prompt
+creates a new one.
