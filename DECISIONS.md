@@ -400,3 +400,15 @@ from this site's first run): the engine now names the app
 **IndexNow** now sends the hubs, the newest sets, the guides and every product
 from a set released in the last 45 days (at most 1,000 URLs), at the www
 address the canonicals use, instead of nine hub URLs at the bare domain.
+
+## 2026-10-26 — The address is ygocompare.app, bare domain, no www
+
+The owner bought ygocompare.app (not .com). `SITE.apexHost: true` makes the
+bare domain canonical (`SITE_HOST` in `src/lib/site.ts`): canonicals, the
+sitemap, robots, IndexNow, the ops monitor and the TCGCSV User-Agent all use
+`https://ygocompare.app`. This reverses the "www is canonical" entry above for
+this site only; the other engine sites keep www (the option defaults off).
+There is no app-level www redirect, and the setup prompt adds only the bare
+domain in Vercel, ADDS DNS records and never edits or deletes one, and sets
+no redirect: today's outage on the other sites came from redirect and DNS
+changes made before Vercel showed the records as valid.

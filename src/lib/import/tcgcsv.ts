@@ -2,6 +2,7 @@
 // TCGplayer's catalog API as static JSON once a day (~20:00 UTC). No key, no
 // quota: three requests per set.
 import { SITE } from "@/site.config";
+import { SITE_HOST } from "@/lib/site";
 import type { Product, SetInfo, TcgPrice } from "@/lib/site-types";
 import { slugify } from "@/lib/slug";
 import { fetchJson, sleep } from "./http";
@@ -9,7 +10,7 @@ import { fetchJson, sleep } from "./http";
 const BASE = "https://tcgcsv.com/tcgplayer";
 // TCGCSV blocks browser-like User-Agents (HTTP 401, seen 2026-10-26) and asks
 // each app to name itself.
-export const TCGCSV_INIT: RequestInit = { headers: { "User-Agent": `${SITE.shortName}/1.0 (+https://www.${SITE.domain})` } };
+export const TCGCSV_INIT: RequestInit = { headers: { "User-Agent": `${SITE.shortName}/1.0 (+https://${SITE_HOST})` } };
 
 interface Group {
   groupId: number;
