@@ -7,6 +7,9 @@ import { slugify } from "@/lib/slug";
 import { fetchJson, sleep } from "./http";
 
 const BASE = "https://tcgcsv.com/tcgplayer";
+// TCGCSV blocks browser-like User-Agents (HTTP 401, seen 2026-10-26) and asks
+// each app to name itself.
+export const TCGCSV_INIT: RequestInit = { headers: { "User-Agent": `${SITE.shortName}/1.0 (+https://www.${SITE.domain})` } };
 
 interface Group {
   groupId: number;
@@ -75,7 +78,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
   tcg: Record<number, Record<string, TcgPrice>>;
 }> {
   const cat = SITE.tcgcsvCategoryId;
-  const groups = (await fetchJson<{ results: Group[] }>(`${BASE}/${cat}/groups`)).results;
+  const groups = (await fetchJson<{ results: Group[] }>(`${BASE}/${cat}/groups`, TCGCSV_INIT)).results;
   const sets: SetInfo[] = [];
   const products: Product[] = [];
   const tcg: Record<number, Record<string, TcgPrice>> = {};
@@ -83,8 +86,8 @@ export async function loadTcgcsv(now = new Date()): Promise<{
 
   for (const g of groups) {
     const [prods, prices] = await Promise.all([
-      fetchJson<{ results: RawProduct[] }>(`${BASE}/${cat}/${g.groupId}/products`),
-      fetchJson<{ results: RawPrice[] }>(`${BASE}/${cat}/${g.groupId}/prices`),
+      fetchJson<{ results: RawProduct[] }>(`${BASE}/${cat}/${g.groupId}/products`, TCGCSV_INIT),
+      fetchJson<{ results: RawPrice[] }>(`${BASE}/${cat}/${g.groupId}/prices`, TCGCSV_INIT),
     ]);
     const setSlug = slugify(g.name);
     const released = g.publishedOn ? g.publishedOn.slice(0, 10) : null;

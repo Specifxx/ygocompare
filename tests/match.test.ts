@@ -117,3 +117,27 @@ test("ygo editions: named edition, single printing, or unknown", () => {
   assert.equal(printingOf("Ash Blossom - RA01-EN008 Unlimited", "", ["1st Edition"]), undefined);
   assert.equal(printingOf("Elsa - Spirit of Winter Holo Foil", "", ["Normal", "Foil"]), "Foil");
 });
+
+test("used, damaged and graded store listings are left out", async () => {
+  const { isUnfitListing } = await import("@/lib/import/match");
+  assert.equal(isUnfitListing("Yu-Gi-Oh Dark Crisis - Guardian Grarl - DCR-007 - Used Ultra Rare card"), true);
+  assert.equal(isUnfitListing("2002 Yu-Gi-Oh! Magic Ruler 1st Edition #076 Toon World PSA 9"), true);
+  assert.equal(isUnfitListing("Ash Blossom & Joyous Spring - RA01-EN008 - Quarter Century Secret Rare - 1st Edition"), false);
+  assert.equal(isUnfitListing("Elsa - Spirit of Winter (42/204) [The First Chapter]"), false);
+});
+
+test("ygo: real store title formats from the 2026-10-26 probe", () => {
+  const p = [
+    card(300, "Swiftwind Panther Warrior (Super Rare)", "BETB-EN001", 103, "Super Rare"),
+    card(301, "Swiftwind Panther Warrior (Starlight Rare)", "BETB-EN001", 103, "Starlight Rare"),
+    card(302, "Garura, Wings of Resonant Life", "RA02-EN024", 101, "Ultra Rare"),
+    card(303, "Garura, Wings of Resonant Life (Secret Rare)", "RA02-EN024", 101, "Secret Rare"),
+    card(304, "Fiendsmith in Paradise", "INFO-EN072", 103, "Super Rare"),
+  ];
+  const i = buildIndex(p, ygoSets, "ygo", { rarityMustAgree: true, rarityAliases: { "Starlight Rare": ["StR"], "Ultra Rare": ["UR"], "Super Rare": ["SR"] } });
+  assert.equal(matchCard("Swiftwind Panther Warrior (Starlight Rare) [BETB-EN001-StR]", i)?.product.id, 301);
+  assert.equal(matchCard("Swiftwind Panther Warrior (Super Rare) [BETB-EN001-SuR]", i)?.product.id, 300);
+  assert.equal(matchCard("Garura, Wings of Resonant Life (UR) [RA02 - RA02-EN024]", i)?.product.id, 302);
+  assert.equal(matchCard("Fiendsmith in Paradise [INFO-EN072] Super Rare", i)?.product.id, 304);
+  assert.equal(matchCard("Yu-Gi-Oh! Crackle Blitzclique CORI-EN012 1st Edition NM", i), null);
+});

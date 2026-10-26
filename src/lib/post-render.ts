@@ -3,6 +3,7 @@
 //   {{price:ID}}             TCGplayer market price of product ID
 //   {{toplist:SETID:N}}      table of the N most valuable cards in a set
 //   {{topall:N}}             the N most valuable cards in the game
+//   {{rarity:NAME:N}}        the N most valuable cards of one rarity
 //   {{sealed:SETID}}         the set's sealed products, cheapest in-stock offer
 //   {{card:ID}}              link to a product page with its name
 import { byValue, priceOf, productById, products, productsInSet, refCents, setById, summaryOf } from "./data";
@@ -31,6 +32,7 @@ export function renderPost(html: string): string {
     })
     .replace(/\{\{toplist:(\d+):(\d+)\}\}/g, (_, s, n) => table(byValue(productsInSet(Number(s)).filter((p) => p.kind === "card")).slice(0, Number(n)), false))
     .replace(/\{\{topall:(\d+)\}\}/g, (_, n) => table(byValue(products().filter((p) => p.kind === "card")).slice(0, Number(n)), true))
+    .replace(/\{\{rarity:([^:}]+):(\d+)\}\}/g, (_, r, n) => table(byValue(products().filter((p) => p.kind === "card" && p.rarity === r)).slice(0, Number(n)), true))
     .replace(/\{\{sealed:(\d+)\}\}/g, (_, s) => {
       const rows = byValue(productsInSet(Number(s)).filter((p) => p.kind === "sealed"))
         .map((p) => {

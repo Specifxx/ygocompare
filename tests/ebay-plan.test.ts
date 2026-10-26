@@ -112,3 +112,12 @@ test("Yu-Gi-Oh!: a listing that names another rarity of the same number never ma
   assert.equal(listingMatches(qcsr, "Ash Blossom & Joyous Spring RA01-DE008 Quarter Century Secret Rare German"), false);
   assert.equal(listingMatches(qcsr, "Ash Blossom & Joyous Spring RA01-AE008 Quarter Century Secret Rare"), false);
 });
+
+test("Yu-Gi-Oh!: a rarity abbreviation in the product name is the rarity, not a qualifier", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const { SITE } = await import("@/site.config");
+  if (SITE.numberStyle !== "ygo") return;
+  const pcr: Product = { ...p(6), name: "Rokket Tracer (PCR)", number: "RA05-EN015", rarity: "Prismatic Collector's Rare", printings: ["1st Edition"] };
+  assert.equal(listingMatches(pcr, "Yugioh Rokket Tracer RA05-EN015 Prismatic Collector's Rare 1st Edition"), true);
+  assert.equal(listingMatches(pcr, "Yugioh Rokket Tracer RA05-EN015 Super Rare 1st Edition"), false);
+});

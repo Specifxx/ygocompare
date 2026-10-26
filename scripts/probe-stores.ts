@@ -13,6 +13,7 @@ import path from "node:path";
 import { fetchJson, sleep } from "@/lib/import/http";
 import { numbersInTitle } from "@/lib/import/match";
 import { SITE } from "@/site.config";
+import { TCGCSV_INIT } from "@/lib/import/tcgcsv";
 
 const MARKET: Record<string, string> = { USD: "US", GBP: "UK", CAD: "CA", AUD: "AU", EUR: "EU", SGD: "SG" };
 const YGO_HANDLE = /yu-?gi-?oh|yugioh|\bygo\b|ygo-/i;
@@ -101,15 +102,15 @@ function pick(f: Found): { handles: string[]; kind: "singles" | "sealed" | "both
 async function tcgcsvSize() {
   const BASE = "https://tcgcsv.com/tcgplayer";
   const cat = SITE.tcgcsvCategoryId;
-  const groups = (await fetchJson<{ results: { groupId: number; name: string; publishedOn: string }[] }>(`${BASE}/${cat}/groups`)).results;
+  const groups = (await fetchJson<{ results: { groupId: number; name: string; publishedOn: string }[] }>(`${BASE}/${cat}/groups`, TCGCSV_INIT)).results;
   let cards = 0, sealed = 0, overFloor = 0, over10 = 0, over20 = 0;
   const rarities = new Map<string, number>();
   const printings = new Map<string, number>();
   const numbers: string[] = [];
   for (const g of groups) {
     const [prods, prices] = await Promise.all([
-      fetchJson<{ results: { productId: number; name: string; extendedData: { name: string; value: string }[] }[] }>(`${BASE}/${cat}/${g.groupId}/products`),
-      fetchJson<{ results: { productId: number; marketPrice: number | null; midPrice: number | null; lowPrice: number | null; subTypeName: string }[] }>(`${BASE}/${cat}/${g.groupId}/prices`),
+      fetchJson<{ results: { productId: number; name: string; extendedData: { name: string; value: string }[] }[] }>(`${BASE}/${cat}/${g.groupId}/products`, TCGCSV_INIT),
+      fetchJson<{ results: { productId: number; marketPrice: number | null; midPrice: number | null; lowPrice: number | null; subTypeName: string }[] }>(`${BASE}/${cat}/${g.groupId}/prices`, TCGCSV_INIT),
     ]);
     const best = new Map<number, number>();
     for (const p of prices.results) {
@@ -130,7 +131,7 @@ async function tcgcsvSize() {
     }
     await sleep(100);
   }
-  const ext = (await fetchJson<{ results: { extendedData: { name: string }[] }[] }>(`${BASE}/${cat}/${groups[0].groupId}/products`)).results.flatMap((p) => p.extendedData.map((e) => e.name));
+  const ext = (await fetchJson<{ results: { extendedData: { name: string }[] }[] }>(`${BASE}/${cat}/${groups[0].groupId}/products`, TCGCSV_INIT)).results.flatMap((p) => p.extendedData.map((e) => e.name));
   console.log(JSON.stringify({ groups: groups.length, cards, sealed, cardsAtLeast1usd: overFloor, cardsAtLeast10usd: over10, cardsAtLeast20usd: over20, rarities: Object.fromEntries([...rarities].sort((a, b) => b[1] - a[1])), printings: Object.fromEntries(printings), extendedFields: [...new Set(ext)], sampleNumbers: numbers }, null, 1));
 }
 

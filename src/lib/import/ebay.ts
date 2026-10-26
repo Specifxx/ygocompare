@@ -194,8 +194,9 @@ export function qualifiersAgree(productName: string, title: Set<string>, rarity:
   const have = new Set(title);
   for (const t of title) for (const w of ABBREV[t] ?? []) have.add(w);
   for (const m of productName.matchAll(/\(([^)]*)\)/g)) {
-    // "(Quarter Century Secret Rare)" is the rarity itself: rarityAgrees() judges it.
-    if (rarity && m[1].trim().toLowerCase() === rarity.toLowerCase()) continue;
+    // "(Quarter Century Secret Rare)" or "(PCR)" is the rarity itself: rarityAgrees() judges it.
+    const q = m[1].trim().toLowerCase();
+    if (rarity && (q === rarity.toLowerCase() || (SITE.rarityAliases?.[rarity] ?? []).some((a) => a.toLowerCase() === q))) continue;
     // Pure numbers ("2026", "Pack 01", "Season 1") vary in how sellers write
     // them, so only words count.
     const words = tokens(m[1]).filter((t) => !QUAL_SKIP.has(t) && !/\d/.test(t) && !/^(lr|r|u|c)\+*$/.test(t) && !/\+/.test(t));
