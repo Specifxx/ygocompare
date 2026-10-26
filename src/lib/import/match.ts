@@ -215,6 +215,11 @@ export interface MatchResult {
 const FOREIGN = /\b(japanese|japan|jp|chinese|simplified|traditional|french|fran[cç]ais|german|deutsch|italian|italiano|spanish|espa[nñ]ol|korean|portuguese|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\))\b/i;
 export const isForeign = (title: string) => FOREIGN.test(title);
 
+// A store listing for a used, damaged or graded copy is not the card's
+// near-mint price ("... - Used Super Rare card", "... PSA 9").
+const UNFIT = /\b(used|damaged|heavily played|poor condition|psa\s?\d|bgs\s?\d|cgc\s?\d|beckett|graded|slab(bed)?)\b/i;
+export const isUnfitListing = (title: string) => UNFIT.test(title);
+
 // Multiples: "(Pair)", "Bundle of 2", "Set of 4", "x2". A title and a product
 // must agree on whether they are a multiple.
 const MULTI = /\b(pair|bundle of \d+|set of \d+|\d+\s*x|x\s*\d+|\d+[- ]pack bundle|lot of)\b/i;

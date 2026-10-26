@@ -16,7 +16,7 @@ import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Prices, StoreS
 import { CURRENCY } from "@/lib/site-types";
 import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
 import { fetchStore, storeCurrency } from "@/lib/import/shopify";
-import { buildIndex, isPreorder, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
+import { buildIndex, isPreorder, isUnfitListing, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
   ebayCredentials,
   ebayRemaining,
@@ -102,6 +102,7 @@ async function main() {
         // keep the cheapest in-stock one per printing.
         const best = new Map<string, Offer>();
         for (const it of items) {
+          if (isUnfitListing(it.title)) continue;
           const sealed = looksSealed(it.title, it.productType);
           const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;

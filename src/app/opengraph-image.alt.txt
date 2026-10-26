@@ -1,1 +1,1 @@
-GundamCompare: compare Gundam Card Game card prices across TCGplayer, eBay and hundreds of stores, cheapest first
+YGOCompare: compare Yu-Gi-Oh! card and booster box prices across TCGplayer, eBay and game stores, cheapest first
