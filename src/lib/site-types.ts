@@ -46,6 +46,8 @@ export interface SiteConfig {
   game: string;
   gameShort: string;
   domain: string;
+  /** Serve and link the bare domain (no `www.`); the default is www. */
+  apexHost?: boolean;
   tagline: string;
   description: string;
   keywords: string[];

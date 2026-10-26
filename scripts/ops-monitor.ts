@@ -5,9 +5,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
 import type { Meta } from "@/lib/site-types";
+import { SITE_HOST } from "@/lib/site";
 
 type Result = { name: string; status: "ok" | "warn" | "fail"; detail: string };
-const site = (process.env.NEXT_PUBLIC_SITE_URL || `https://www.${SITE.domain}`).replace(/\/$/, "");
+const site = (process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE_HOST}`).replace(/\/$/, "");
 // Until the site is live (the SITE_URL repository variable is set at launch),
 // the live checks warn instead of failing every three hours.
 const live = !!process.env.NEXT_PUBLIC_SITE_URL;

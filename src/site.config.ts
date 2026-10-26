@@ -13,7 +13,9 @@ export const SITE: SiteConfig = {
   wordmark: ["YGO", "COMPARE"],
   game: "Yu-Gi-Oh! TCG",
   gameShort: "Yu-Gi-Oh!",
-  domain: "ygocompare.com",
+  domain: "ygocompare.app",
+  // The bare domain is the address (owner bought ygocompare.app, 2026-10-26).
+  apexHost: true,
   tagline: "Compare Yu-Gi-Oh! card prices across every store",
   description:
     "Free Yu-Gi-Oh! price comparison: live prices for Yu-Gi-Oh! TCG cards, 1st Editions and booster boxes across TCGplayer, eBay and game stores in the US, UK, Canada and Australia.",
