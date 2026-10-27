@@ -470,3 +470,13 @@ attributes.
 - Not ported: accounts, watch buttons, Pro (owner's choice) and store codes
   (`STORE_PARTNER_DEALS` is still empty on RiftCompare; port it when a store
   signs).
+
+## 2026-10-27 — 515 stores: every sister site's stores probed
+
+Owner: "we need like way more stores … it's a bigger game, so we can get even
+more stores." Every store host in the sister repos (Rift, OP, MTG, Gundam,
+Lorcana, CompareEmpire) that the first probe had not seen, 2,350 of them
+(`research/candidate-hosts-2.txt`), went through the same probe: 312 sell
+English Yu-Gi-Oh! through Shopify. Four were left out by hand (graded and
+Japanese only, accessories only, Japanese only, event tickets), and 308 were
+added: 515 stores (US 209, CA 123, AU 68, UK 66, EU 48, SG 1).
