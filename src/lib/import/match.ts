@@ -300,6 +300,8 @@ export function matchSealed(title: string, idx: MatchIndex): MatchResult | null 
   for (const p of idx.sealed) {
     if (sealedTypeOf(p.name) !== type) continue;
     if (isMulti(p.name) !== isMulti(title)) continue;
+    // "Pack Bundle Magnificent Maestros" is several packs, not one.
+    if (/\bbundle\b/i.test(title) && !/\bbundle\b/i.test(p.name)) continue;
     const setTokens = idx.setName.get(p.setId) ?? [];
     if (setTokens.length && overlap(setTokens, have) < 1) continue;
     const need = tokens(p.name).filter((t) => !STOP.has(t));
