@@ -27,8 +27,8 @@ export interface PriceRows {
   /**
    * The table's display order (owner, 2026-10-27: "the top rows should be eBay
    * and TCGplayer, even if they are not the cheapest"): the market's cheapest
-   * eBay offer, then its cheapest TCGplayer offer (a local row, else the US
-   * reference), then every other live row (in stock, then references), then
+   * eBay offer and its cheapest TCGplayer offer (a local row, else the US
+   * reference), the cheaper on top (`pinnedOrder`), then every other live row (in stock, then references), then
    * out of stock. `pinned` holds the two moved rows. `cheapest` is unchanged.
    */
   display: Offer[];
@@ -57,7 +57,21 @@ export function priceRows(offers: Offer[], market: Market): PriceRows {
   }
   const live = [...inStock, ...refs];
   const pick = (src: string) => inStock.find((o) => o.source === src) ?? refs.find((o) => o.source === src);
-  const pinned = [pick("ebay"), pick("tcgplayer")].filter((o): o is Offer => o != null);
+  const pinned = pinnedOrder(pick("ebay") ?? null, pick("tcgplayer") ?? null, market);
   const display = [...pinned, ...live.filter((o) => !pinned.includes(o)), ...outOfStock];
   return { inStock, refs, outOfStock, cheapest, paidAlternative, display, pinned };
+}
+
+/**
+ * The two pinned rows in display order (2026-10-27): the cheaper on top,
+ * TCGplayer on a tie, when both are this market's own rows; a local TCGplayer
+ * row above a US eBay reference; otherwise eBay first, as before. eBay always
+ * led until then, above a cheaper TCGplayer row on most US products, and
+ * TCGplayer pays about 2.5 times more per click.
+ */
+export function pinnedOrder(ebay: Offer | null, tcgplayer: Offer | null, market: Market): Offer[] {
+  const local = (o: Offer | null) => o != null && o.market === market;
+  const tcgFirst =
+    local(tcgplayer) && (!local(ebay) || (ebay!.currency === tcgplayer!.currency && tcgplayer!.cents <= ebay!.cents));
+  return (tcgFirst ? [tcgplayer, ebay] : [ebay, tcgplayer]).filter((o): o is Offer => o != null);
 }

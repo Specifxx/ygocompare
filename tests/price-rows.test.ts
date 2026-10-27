@@ -30,10 +30,12 @@ test("paidAlternative: eBay or TCGplayer within 20% when a store is cheapest, wi
   assert.equal(priceRows([o("tcgplayer", "US", 1000), o("au1", "AU", 1000)], "AU").paidAlternative, null, "a US reference is never a local alternative");
 });
 
-test("display: eBay then TCGplayer first (local rows, else the US references), the rest by price, cheapest unchanged", () => {
+test("display: eBay and TCGplayer first, the cheaper on top (local rows, else the US references), the rest by price, cheapest unchanged", () => {
   const us = priceRows([o("store1", "US", 1000), o("tcgplayer", "US", 1100), o("store2", "US", 1050), o("ebay", "US", 1300), o("store3", "US", 900, false)], "US");
-  assert.deepEqual(us.display.map((x) => x.source), ["ebay", "tcgplayer", "store1", "store2", "store3"]);
-  assert.deepEqual(us.pinned.map((x) => x.source), ["ebay", "tcgplayer"]);
+  assert.deepEqual(us.display.map((x) => x.source), ["tcgplayer", "ebay", "store1", "store2", "store3"]);
+  assert.deepEqual(us.pinned.map((x) => x.source), ["tcgplayer", "ebay"]);
+  assert.deepEqual(priceRows([o("ebay", "US", 1000), o("tcgplayer", "US", 1100)], "US").pinned.map((x) => x.source), ["ebay", "tcgplayer"], "eBay cheaper");
+  assert.deepEqual(priceRows([o("ebay", "US", 1100), o("tcgplayer", "US", 1100)], "US").pinned.map((x) => x.source), ["tcgplayer", "ebay"], "a tie");
   assert.equal(us.cheapest?.source, "store1");
   const au = priceRows([o("au1", "AU", 3000), o("tcgplayer", "US", 50), o("ebay", "US", 40)], "AU");
   assert.deepEqual(au.display.map((x) => x.source), ["ebay", "tcgplayer", "au1"]);
