@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/Link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
@@ -8,7 +8,7 @@ import { sealedHubs } from "@/lib/hubs";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const revalidate = 21600;
+export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const generateStaticParams = () => [];
 
 const hub = (slug: string) => sealedHubs().find((h) => h.slug === slug) ?? null;

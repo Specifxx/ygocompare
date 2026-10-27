@@ -8,6 +8,16 @@ import { tokens } from "@/lib/slug";
 // "Cached pages refresh every 6 to 24 hours"): six hours at the edge.
 export const dynamic = "force-dynamic";
 
+// Each product's search tokens, built once per server instance: tokenising all
+// ~17,000 names on every query cost ~40 ms of CPU per keystroke.
+let index: { hay: string[]; set: Set<string> }[] | null = null;
+function haystacks() {
+  return (index ??= products().map((p) => {
+    const hay = tokens(`${p.name} ${setById(p.setId)?.name ?? ""} ${p.number ?? ""}`);
+    return { hay, set: new Set(hay) };
+  }));
+}
+
 export function GET(req: Request) {
   const u = new URL(req.url);
   const q = (u.searchParams.get("q") ?? "").slice(0, 80);
@@ -16,10 +26,10 @@ export function GET(req: Request) {
   const numQ = q.match(/\d+\s*\/\s*\d+|[A-Z]{1,4}\d{0,2}-\d{2,3}/i)?.[0]?.replace(/\s/g, "").toUpperCase();
   const scored: { s: number; i: number }[] = [];
   const all = products();
+  const idx = want.length ? haystacks() : [];
   if (want.length) {
     all.forEach((p, i) => {
-      const hay = tokens(`${p.name} ${setById(p.setId)?.name ?? ""} ${p.number ?? ""}`);
-      const set = new Set(hay);
+      const { hay, set } = idx[i];
       let hit = 0;
       for (const w of want) if (set.has(w) || hay.some((h) => h.startsWith(w))) hit++;
       if (numQ && p.number?.toUpperCase() === numQ) hit += want.length;

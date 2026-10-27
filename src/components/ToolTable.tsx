@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/Link";
 import type { Product } from "@/lib/site-types";
 import { setById } from "@/lib/data";
 import { shortName } from "@/lib/names";

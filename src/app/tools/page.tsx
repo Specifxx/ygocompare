@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { TOOLS } from "@/lib/tool-list";

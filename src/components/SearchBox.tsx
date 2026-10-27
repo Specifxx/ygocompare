@@ -15,11 +15,12 @@ export function SearchBox({ big = false, placeholder }: { big?: boolean; placeho
     if (q.trim().length < 2) return setHits([]);
     t.current = setTimeout(async () => {
       try {
-        const r = await fetch(`/api/search?q=${encodeURIComponent(q.trim())}`);
+        // Lower-cased so "Dark Magician" and "dark magician" share one CDN entry.
+        const r = await fetch(`/api/search?q=${encodeURIComponent(q.trim().toLowerCase())}`);
         setHits(((await r.json()) as { hits: Hit[] }).hits);
         setOpen(true);
       } catch {}
-    }, 150);
+    }, 250);
   }, [q]);
   return (
     <form
