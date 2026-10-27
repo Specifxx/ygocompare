@@ -31,8 +31,10 @@ export const PRICE_TABLE_ID = "price-comparison";
 export function PriceTable({ offers, fx, productId, page, compact = false }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean }) {
   const { market } = useMarket();
   const [showOut, setShowOut] = useState(false);
-  const { inStock, refs, outOfStock, cheapest } = priceRows(offers, market);
-  const rows = [...inStock, ...refs, ...outOfStock];
+  // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
+  // stays on the real cheapest and a dearer pinned row says by how much.
+  const { inStock, refs, outOfStock, cheapest, display, pinned } = priceRows(offers, market);
+  const rows = display;
   const cur = CURRENCY[market];
   const conv = (o: Offer) => (o.currency === cur ? null : Math.round((o.cents / (fx[o.currency] ?? 1)) * (fx[cur] ?? 1)));
   if (!rows.length)
@@ -44,7 +46,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
   const live = [...inStock, ...refs];
   // Out-of-stock rows show when asked, or when nothing is in stock at all.
   const unfold = showOut || live.length === 0;
-  const shown = compact ? rows.slice(0, 6) : unfold ? rows : live;
+  const shown = compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o));
   const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
   return (
     <div id={PRICE_TABLE_ID} className="overflow-hidden rounded-xl border border-ink-700/60">
@@ -70,6 +72,11 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
                     <span className="font-medium text-fg">{sourceName(o)}</span>
                   )}
                   {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Cheapest</span>}
+                  {pinned.includes(o) && (
+                    <span data-shown-first title="eBay and TCGplayer are shown first, whatever their price. Stores below are sorted by price." className="ml-2 inline-block whitespace-nowrap rounded bg-sky-500/10 px-1.5 py-0.5 text-[10px] font-semibold text-sky-300">
+                      Shown first
+                    </span>
+                  )}
                 </td>
                 <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
                   {o.printing && o.printing !== "Normal" && <span className="chip mr-1">{o.printing}</span>}
@@ -81,9 +88,12 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
                 <td className="px-3 py-2.5 text-right font-semibold tabular-nums">
                   {money(o.cents, o.currency)}
                   {c != null && <span className="block text-xs font-normal text-muted">≈ {money(c, cur)}</span>}
+                  {pinned.includes(o) && cheapest && o !== cheapest && o.currency === cheapest.currency && cheapest.cents > 0 && o.cents > cheapest.cents && (
+                    <span className="block text-xs font-normal text-muted">+{Math.round(((o.cents - cheapest.cents) / cheapest.cents) * 100)}% vs cheapest</span>
+                  )}
                 </td>
                 <td className="px-3 py-2.5 text-right">
-                  <a href={goHref(o, productId, page)} rel="sponsored nofollow noopener" target="_blank" className={o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : "btn-buy"}>
+                  <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : "btn-buy"}>
                     {o.source === "ebay" ? "Buy on eBay" : o.inStock ? "Buy" : "View"}
                   </a>
                 </td>

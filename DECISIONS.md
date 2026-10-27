@@ -515,3 +515,17 @@ Lorcana, CompareEmpire) that the first probe had not seen, 2,350 of them
 English Yu-Gi-Oh! through Shopify. Four were left out by hand (graded and
 Japanese only, accessories only, Japanese only, event tickets), and 308 were
 added: 515 stores (US 209, CA 123, AU 68, UK 66, EU 48, SG 1).
+2026-10-26 catalogues it moves 7 YGO sets and nothing in Gundam or Lorcana.
+Engine change, all three repos.
+
+## eBay and TCGplayer lead every price table — 2026-10-27
+
+Owner: eBay and TCGplayer at the very top of every price list, even when they
+are not the cheapest. `priceRows` returns `display` and `pinned`: the market's
+cheapest eBay offer, then its cheapest TCGplayer offer (a local row, else the
+US reference, "≈" converted), then the other live rows, then out of stock.
+`PriceTable` draws that order with a "Shown first" tag on the two pinned rows
+and "+N% vs cheapest" when one is dearer; "Cheapest" stays on `cheapest`, which
+the phone buy block, sticky bar and metadata still read. Their clicks go
+through `/go` with `from=<page>_pinned`. `/about` says so. Engine change, all
+three repos; same change on RiftCompare and OP Compare that day.

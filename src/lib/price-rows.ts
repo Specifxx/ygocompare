@@ -24,6 +24,15 @@ export interface PriceRows {
    * row at its real price, never called cheaper, never reordered.
    */
   paidAlternative: { offer: Offer; pctMore: number } | null;
+  /**
+   * The table's display order (owner, 2026-10-27: "the top rows should be eBay
+   * and TCGplayer, even if they are not the cheapest"): the market's cheapest
+   * eBay offer, then its cheapest TCGplayer offer (a local row, else the US
+   * reference), then every other live row (in stock, then references), then
+   * out of stock. `pinned` holds the two moved rows. `cheapest` is unchanged.
+   */
+  display: Offer[];
+  pinned: Offer[];
 }
 
 /** At most 20% above the cheapest in-stock item price. */
@@ -46,5 +55,9 @@ export function priceRows(offers: Offer[], market: Market): PriceRows {
       paidAlternative = { offer: alt, pctMore: cheapest.cents > 0 ? Math.round(((alt.cents - cheapest.cents) / cheapest.cents) * 100) : 0 };
     }
   }
-  return { inStock, refs, outOfStock, cheapest, paidAlternative };
+  const live = [...inStock, ...refs];
+  const pick = (src: string) => inStock.find((o) => o.source === src) ?? refs.find((o) => o.source === src);
+  const pinned = [pick("ebay"), pick("tcgplayer")].filter((o): o is Offer => o != null);
+  const display = [...pinned, ...live.filter((o) => !pinned.includes(o)), ...outOfStock];
+  return { inStock, refs, outOfStock, cheapest, paidAlternative, display, pinned };
 }
