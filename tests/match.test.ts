@@ -16,6 +16,7 @@ const products = [
   sealed(20, "Disney Lorcana: Hyperia City Booster Box", 2),
   sealed(21, "Disney Lorcana: Hyperia City Booster Box Case", 2),
   sealed(22, "Disney Lorcana: Into the Inkdark Collector Booster Display", 2),
+  sealed(23, "Disney Lorcana: Hyperia City Booster Pack", 2),
 ];
 const idx = buildIndex(products, sets, "fraction");
 
@@ -42,6 +43,12 @@ test("sealed: box vs case vs collector display", () => {
   assert.equal(matchSealed("Disney Lorcana: Hyperia City - Booster Box", idx)?.product.id, 20);
   assert.equal(matchSealed("Disney Lorcana: Hyperia City Booster Box Case (4 boxes)", idx)?.product.id, 21);
   assert.equal(matchSealed("Disney Lorcana - Into the Inkdark Booster Display - EN", idx), null);
+});
+
+test("sealed: a pack bundle is never one pack (live, 2026-10-27: Mad Merchant)", () => {
+  assert.equal(matchSealed("Disney Lorcana: Hyperia City Booster Pack", idx)?.product.id, 23);
+  assert.equal(matchSealed("Disney Lorcana Pack Bundle - Hyperia City", idx), null);
+  assert.equal(matchSealed("Disney Lorcana: Hyperia City Booster Pack Bundle", idx), null);
 });
 
 test("variant markers", () => {

@@ -220,7 +220,11 @@ async function main() {
     for (const [mk, e] of Object.entries(markets ?? {}) as [Market, { at: string; offer: Offer | null }][]) {
       if (!p || !e?.offer) continue;
       const usd = e.offer.cents / (fx[e.offer.currency] ?? 1);
-      if (!listingMatches(p, e.offer.title) || (ref != null && usd < ref * 0.5)) markets![mk] = { at: e.at, offer: null };
+      // A listing read as one printing ("1st Edition") is held to that
+      // printing's price: under half of it is a mislabelled or other copy.
+      const own = e.offer.printing ? tcg[p.id]?.[e.offer.printing] : undefined;
+      const floor = (own && (own.market ?? own.mid ?? own.low)) ?? ref;
+      if (!listingMatches(p, e.offer.title) || (floor != null && usd < floor * 0.5)) markets![mk] = { at: e.at, offer: null };
     }
   }
   // Drop state for products that left the catalogue.

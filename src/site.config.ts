@@ -69,10 +69,13 @@ export const SITE: SiteConfig = {
     "Secret Pharaoh’s Rare": ["Secret Pharaoh's Rare", "Secret Pharaohs Rare"],
     "Ultra Pharaoh’s Rare": ["Ultra Pharaoh's Rare", "Ultra Pharaohs Rare"],
     "Ghost Rare": ["GR"],
-    "Ultimate Rare": ["UtR", "UTR"],
-    "Secret Rare": ["ScR", "SCR"],
-    "Ultra Rare": ["UR"],
-    "Super Rare": ["SR"],
+    // Sellers often drop "Rare": "Black Rose Dragon - 1st Edition - Ultra". The
+    // bare words are case-sensitive and the card's own name is removed first,
+    // so "Ultimate Conductor Tyranno" is not read as a rarity.
+    "Ultimate Rare": ["UtR", "UTR", "Ultimate"],
+    "Secret Rare": ["ScR", "SCR", "Secret"],
+    "Ultra Rare": ["UR", "Ultra"],
+    "Super Rare": ["SR", "Super"],
   },
   // Tens of thousands of printings, most of them worth cents: cards under $1
   // in every printing stay out (except in new sets). Keeps the data, the

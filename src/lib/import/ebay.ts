@@ -168,9 +168,10 @@ interface ItemSummary {
   itemAffiliateWebUrl?: string;
   buyingOptions?: string[];
   condition?: string;
+  categories?: { categoryId: string }[];
 }
 
-const JUNK = /\b(proxy|custom|orica|fan ?made|replica|lot of|lot|set of \d+|bundle of \d+|choose|pick|you pick|select|playset|x[2-9]|[2-9]x|graded|slab|gem ?mint|empty|opened|digital|code card|sleeve|sleeves|playmat|binder|deck box)\b/i;
+const JUNK = /\b(proxy|custom|orica|fan ?made|replica|lot of|lot|set of \d+|bundle of \d+|choose|pick|you pick|select|playset|x[2-9]|[2-9]x|graded|slab|gem ?mint|misprint|miscut|crimped|empty|opened|digital|code card|sleeve|sleeves|playmat|binder|deck box)\b/i;
 // Graded copies: "PSA 10", "PSA10", "P SA10", "BGS 9.5", "CGC", "TAG 10", "ACE 10".
 const GRADED = /\b(p\s?sa|bgs|cgc|tag|ace|sgc|beckett)\s?-?\d{1,2}(\.5)?\b|\b(psa|bgs|cgc|beckett|sgc)\b/i;
 // Non-English copies, in the ways sellers write them.
@@ -231,11 +232,20 @@ export function listingMatches(p: Product, title: string): boolean {
       ? nums.includes(want) || (promoStyle && nums.some((n) => parseInt(n, 10) === parseInt(p.number!, 10)))
       : !!bare && new RegExp(`(^|[#\\s])0*${bare}($|\\s)`).test(title);
     if (!numOk) return false;
+    // A title naming a second number ("MFC-000 ... YSYR-EN011") is a reprint
+    // or a lot, and either way not certainly this printing.
+    const same = (n: string) => n === want || (promoStyle && parseInt(n, 10) === parseInt(p.number!, 10));
+    if (nums.some((n) => !same(n))) return false;
     const base = tokens(p.name.replace(/\([^)]*\)/g, " ")).filter((t) => t.length > 1);
     const ok = base.filter((t) => have.has(t)).length / Math.max(1, base.length);
     return ok >= 0.6 && markersAgree(p.name, p.rarity, title) && rarityAgrees(p, title, sellerRarities()) && qualifiersAgree(p.name, have, p.rarity);
   }
   if (p.sealedType === "Insert") return false;
+  // A card number in the title is a single. So is a bare set code with no
+  // product word: "Evil Box Magnificent Maestros MAMS-EN" is a pre-order single,
+  // "Order Of Chaos Booster Box : ORCS-EN" is the box.
+  if (numbersInTitle(title, SITE.numberStyle).length) return false;
+  if (/\b[A-Z0-9]{2,5}-EN(?![A-Z0-9])/.test(title) && !/booster|display|\btins?\b|deck|\bcase\b|\bpacks?\b/i.test(title)) return false;
   if (sealedTypeOf(title) !== sealedTypeOf(p.name)) return false;
   // "Deck ONLY - no bonus pack" is the opposite of a bonus-pack product.
   if (/bonus/i.test(p.name) && /\b(no|without|minus)\s+bonus|deck only|only deck/i.test(title)) return false;
@@ -285,6 +295,9 @@ export async function searchLowest(
   for (const it of d.itemSummaries ?? []) {
     if (!it.price || it.price.currency !== mp.currency) continue;
     if (!listingMatches(p, it.title)) continue;
+    // A sealed product never comes from the singles category: a pre-order
+    // single titled "... Box ..." is still one card.
+    if (p.kind === "sealed" && it.categories?.some((c) => c.categoryId === SITE.ebay.singlesCategoryId)) continue;
     const cents = Math.round(Number(it.price.value) * 100);
     const ship = it.shippingOptions?.[0]?.shippingCost?.value;
     const shippingCents = ship != null ? Math.round(Number(ship) * 100) : null;
