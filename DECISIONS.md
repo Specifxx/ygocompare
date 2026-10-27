@@ -483,3 +483,14 @@ muted line ("or $13.78 on TCGplayer (+3%) →", Paid link tag) through `/go` wit
 at its real price: never called cheaper, never reordered, the Buy button stays
 on the cheapest. Outside the US the converted US references never qualify.
 Same change on RiftCompare and OP Compare that day (engine change, all three repos).
+
+## Cards TCGplayer has no photo of — 2026-10-27
+
+Every tile in YGO Compare's "newest set" was a broken image. TCGCSV fills in
+`imageUrl` for every product, but when `imageCount` is 0 TCGplayer's CDN
+answers 403: a whole reprint set (Legendary Dragon Decks, 2020 Date Reprint)
+and about one Yu-Gi-Oh! product in twelve. The import now stores no image for
+those, and a card without one takes the photo of another printing with the
+same number and name (same rarity first), never a looser match: a missing
+photo is better than the wrong card. A tile with no image says "No image yet".
+Engine change, all three repos.
