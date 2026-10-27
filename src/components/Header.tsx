@@ -17,9 +17,9 @@ export const NAV = [
 export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink-700/60 bg-ink-950/90 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
-        <Link href="/" className="flex shrink-0 items-center gap-2 font-display text-lg font-black leading-none" aria-label={`${SITE.name} home`}>
-          <img src="/icon.svg" alt="" width={34} height={34} className="h-[34px] w-[34px] rounded-lg" />
+      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:gap-4">
+        <Link href="/" className="flex min-w-0 shrink items-center gap-2 overflow-hidden whitespace-nowrap sm:shrink-0 sm:overflow-visible font-display text-base font-black leading-none sm:text-lg" aria-label={`${SITE.name} home`}>
+          <img src="/icon.svg" alt="" width={34} height={34} className="h-[30px] w-[30px] shrink-0 rounded-lg sm:h-[34px] sm:w-[34px]" />
           <span className="wordmark">{SITE.wordmark[0]}</span>{" "}
           <span className="text-fg">{SITE.wordmark[1]}</span>
           <span className="season-only ml-1 inline" aria-hidden>🎃</span>
@@ -34,8 +34,14 @@ export function Header() {
         <div className="ml-auto hidden w-56 md:block">
           <SearchBox />
         </div>
-        <MarketPicker />
-        <ThemeToggle />
+        <div className="ml-auto flex shrink-0 items-center gap-2 md:ml-0">
+          <MarketPicker />
+          <ThemeToggle />
+        </div>
+      </div>
+      {/* Phones search too: on RiftCompare search is the most-used control. */}
+      <div className="px-4 pb-2 md:hidden">
+        <SearchBox />
       </div>
       <nav className="flex gap-1 overflow-x-auto px-4 pb-2 xl:hidden" aria-label="Main mobile">
         {NAV.map((n) => (

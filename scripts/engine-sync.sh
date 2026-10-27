@@ -16,7 +16,7 @@ const fs = require("fs"), path = require("path"), { execFileSync } = require("ch
 const [src, dest] = process.argv.slice(2);
 const m = JSON.parse(fs.readFileSync(path.join(src, "engine.json"), "utf8"));
 const isEngine = (p) => m.paths.some((e) => p === e || p.startsWith(e + "/")) && !m.exclude.includes(p);
-const tracked = (dir) => execFileSync("git", ["ls-files", "--", ...m.paths], { cwd: dir, encoding: "utf8" }).split("\n").filter((p) => p && isEngine(p));
+const tracked = (dir) => execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard", "--", ...m.paths], { cwd: dir, encoding: "utf8" }).split("\n").filter((p) => p && isEngine(p));
 const want = new Set(tracked(src));
 for (const p of tracked(dest)) if (!want.has(p)) { fs.rmSync(path.join(dest, p)); console.log(`deleted ${p}`); }
 for (const p of want) {

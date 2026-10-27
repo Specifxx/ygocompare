@@ -441,3 +441,32 @@ whole repo: `data/` is too big for a recursive listing). On a pull request it
 only reports, because the first of three PRs is always ahead of the other two;
 the Tuesday run fails, so GitHub emails the owner, when drift has outlived a
 release. `scripts/probe-stores.ts` is YGO research, not engine.
+
+## RiftCompare's buy path on the card page — 2026-10-27
+
+Second step of the owner's "Shared engine + polish, no Pro". The engine
+already used RiftCompare's colours and buttons; what it lacked was
+RiftCompare's buy path. At 390px wide, the card image filled the first screen
+and the price table started about 1,000px down, below the image and the
+attributes.
+
+- Phones get the name, price and a "Cheapest in <market>" block with its Buy
+  button first, with a small thumbnail beside the name. The big image and the
+  details come after the prices. Once that block and the table have scrolled
+  away, a sticky "$X at store · Buy" bar shows (RiftCompare's
+  `CardMobileBuy.tsx`). Both links go through `/go` with `from=card_top` /
+  `card_bar`, so `buy_click` counts them separately from table clicks.
+- `lib/price-rows.ts` is the one row order (in stock, cheapest item price
+  first; then the US references; then out of stock). The table, the top block
+  and the bar all read it, so they can't name different "cheapest" rows.
+  Before this, a store's out-of-stock row could sit above a cheaper in-stock
+  one. Out-of-stock rows now fold behind "Show N out-of-stock listings".
+- "Prices checked N hours ago" sits beside the table. It's relative in the
+  browser, because the page is cached for six hours. The in-stock count in the
+  header now says "worldwide", because it counts every market.
+- The phone header fits at 390px (market picker shows the code only, theme
+  toggle shows the icon only), and phones get the search box.
+- `scripts/engine-sync.sh` now copies new, not-yet-committed engine files too.
+- Not ported: accounts, watch buttons, Pro (owner's choice) and store codes
+  (`STORE_PARTNER_DEALS` is still empty on RiftCompare; port it when a store
+  signs).

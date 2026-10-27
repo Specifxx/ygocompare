@@ -8,6 +8,7 @@ import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { PriceTable } from "@/components/PriceTable";
+import { CardStickyBuyBar, CardTopBuy, CheckedAgo } from "@/components/CardBuy";
 import { EbayCallout } from "@/components/EbayCallout";
 import { PriceChart } from "@/components/PriceChart";
 import { TileGrid } from "@/components/ProductTile";
@@ -81,8 +82,10 @@ export default function CardPage({ params }: { params: { slug: string } }) {
       />
       <Breadcrumbs items={[{ name: p.kind === "sealed" ? "Sealed" : "Cards", href: p.kind === "sealed" ? "/sealed" : "/cards" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
-        <div className="flex flex-col gap-4">
-          {p.image && <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="w-full rounded-xl" width={400} height={560} />}
+        {/* Phones: the name, price and Buy come first; the big image and the
+            details follow the prices (RiftCompare's card page, 2026-09-26). */}
+        <div className="order-2 flex flex-col gap-4 md:order-1">
+          {p.image && <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="hidden w-full rounded-xl md:block" width={400} height={560} />}
           <dl className="card-surface grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 text-sm">
             {set && (<><dt className="text-muted">Set</dt><dd><Link className="link" href={`/sets/${set.slug}`}>{set.name}</Link></dd></>)}
             {p.number && (<><dt className="text-muted">Number</dt><dd>{p.number}</dd></>)}
@@ -91,14 +94,18 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             {Object.entries(p.attrs).slice(0, 8).map(([k, v]) => (<Fragment key={k}><dt className="text-muted">{k.replace(/([a-z])([A-Z])/g, "$1 $2")}</dt><dd>{v}</dd></Fragment>))}
           </dl>
         </div>
-        <div className="flex min-w-0 flex-col gap-6">
+        <div className="order-1 flex min-w-0 flex-col gap-6 md:order-2">
           <header>
-            <h1 className="font-display text-2xl font-black md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
+            <div className="flex items-start gap-3">
+              {p.image && <img src={imageAt(p.image, "200w")!} alt="" aria-hidden className="w-20 shrink-0 rounded-md md:hidden" width={80} height={112} />}
+              <h1 className="font-display text-2xl font-black md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
+            </div>
             <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-2">
               <p><span className="text-3xl font-black text-brand-400">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
               <p className="text-sm">7d <span className={(e.change7d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change7d)}</span> · 30d <span className={(e.change30d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change30d)}</span></p>
-              <p className="text-sm text-muted">{inStock.length} in-stock listing{inStock.length === 1 ? "" : "s"}</p>
+              <p className="text-sm text-muted">{inStock.length} in-stock listing{inStock.length === 1 ? "" : "s"} worldwide</p>
             </div>
+            <CardTopBuy offers={e.offers} productId={p.id} />
             {Object.keys(e.tcg).length > 1 && (
               <p className="mt-2 flex flex-wrap gap-2 text-xs">
                 {Object.entries(e.tcg).map(([k, v]) => (
@@ -108,7 +115,10 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             )}
           </header>
           <section>
-            <h2 className="mb-2 text-lg font-bold">Compare prices</h2>
+            <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
+              <h2 className="text-lg font-bold">Compare prices</h2>
+              <CheckedAgo at={m?.updatedAt} />
+            </div>
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" />
             <p className="mt-2 flex flex-wrap gap-3 text-xs text-muted">
@@ -135,6 +145,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           <TileGrid items={related} />
         </section>
       )}
+      <CardStickyBuyBar offers={e.offers} productId={p.id} />
     </article>
   );
 }
