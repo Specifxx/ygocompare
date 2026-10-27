@@ -420,3 +420,24 @@ The owner owns ygocompare.com, not .app (the entry above named the wrong one).
 bare domain is canonical (`apexHost: true`), no www, no redirects, and setup
 only adds DNS records. The first Vercel project was deleted; the setup prompt
 creates a new one.
+
+## One engine, three repos — 2026-10-27
+
+**Owner** chose, on the "which direction for the other sites" card, "Shared
+engine + polish, no Pro": the three no-database sites keep one engine, get
+RiftCompare's look, and get no accounts or Pro until a site passes about 50
+Google clicks a day and RiftCompare Pro has 10 paying members.
+
+The engine was already copied by hand into three repos, and had drifted by
+three files in a day (the family footer, the ops monitor's not-yet-live
+warning, YGO's store probe). Merging the repos into one was rejected: each
+Vercel project, its secrets, its daily data commit and its `[deploy]` gate
+point at its own repo, and moving them is owner work in three dashboards for
+no visitor-facing gain. Instead `engine.json` names the engine's files,
+`scripts/engine-sync.sh` copies them (keeping each repo's `package.json`
+name), and `scripts/engine-drift.ts` compares git blob ids with the sisters'
+`main` through the GitHub API (one tree call per engine directory, never the
+whole repo: `data/` is too big for a recursive listing). On a pull request it
+only reports, because the first of three PRs is always ahead of the other two;
+the Tuesday run fails, so GitHub emails the owner, when drift has outlived a
+release. `scripts/probe-stores.ts` is YGO research, not engine.

@@ -36,7 +36,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="mb-2 font-semibold">Also from us</p>
+          <p className="mb-2 font-semibold">The Compare Empire family</p>
           <ul className="space-y-1 text-muted">
             {SITE.sisterSites.map((s) => (
               <li key={s.url}>
