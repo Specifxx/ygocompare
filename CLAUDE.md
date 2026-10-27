@@ -6,6 +6,18 @@ Lorcana Compare run the same engine. Engine code (`src/lib`, `src/app`,
 goes in `src/site.config.ts` or `src/content/`. When you change the engine,
 make the same change in the other two repos.
 
+## One engine, three repos
+
+Gundam Compare, Lorcana Compare and YGO Compare run ONE engine. `engine.json`
+lists its files (the code, tests and build config; never `src/site.config.ts`,
+`src/content/`, icons, share images, workflows or `data/`), and they must be
+byte-identical in all three repos. After an engine change here, copy it with
+`scripts/engine-sync.sh ../<sister> ../<sister>`, run the checks in each and
+open the three PRs together; `npx tsx scripts/engine-drift.ts ../<sister>…`
+shows what still differs. The weekly *Engine drift* workflow fails (and
+emails the owner) if `main` differs from a sister's `main`. Anything one game
+needs is an option in `site.config.ts`, off by default.
+
 ## Deploys are gated — do not add `[deploy]` to commit subjects
 
 Production builds only when the commit SUBJECT carries `[deploy]`
