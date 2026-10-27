@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/Link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
@@ -10,7 +10,7 @@ import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { TileGrid } from "@/components/ProductTile";
 
-export const revalidate = 21600;
+export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
 // after its first visit instead of rendering on every request.
 export const generateStaticParams = () => [];

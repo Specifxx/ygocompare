@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/Link";
 import { Fragment } from "react";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
@@ -19,12 +19,10 @@ import { abs } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { rarityHref, sealedHref } from "@/lib/hubs";
 
-export const revalidate = 21600;
+export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
 // after its first visit instead of rendering on every request.
 export const generateStaticParams = () => [];
-// No generateStaticParams: card pages render on first visit, then cache
-// (Rift Compare rule: nothing prerendered at build).
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = productBySlug(params.slug);

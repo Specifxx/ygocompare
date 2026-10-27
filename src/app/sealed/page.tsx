@@ -3,10 +3,10 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { byValue, products, setById } from "@/lib/data";
 import { SEALED_ORDER as ORDER, SEALED_PLURAL as PLURAL, sealedHref } from "@/lib/hubs";
-import Link from "next/link";
+import Link from "@/components/Link";
 import { TileGrid } from "@/components/ProductTile";
 
-export const revalidate = 21600;
+export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const metadata: Metadata = {
   title: `${SITE.gameShort} booster box prices — cheapest sealed product`,
   description: `Compare ${SITE.game} booster box, booster pack, starter deck and sealed product prices across TCGplayer, eBay and ${SITE.stores.length} stores.`,

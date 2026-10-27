@@ -554,3 +554,45 @@ Engine change, all three repos: `SisterSite.anchor` (optional) is the link
 text in the footer and the blog's "Also from us" line, the name after it;
 `tests/sister-sites.test.ts` pins eight others, once each, never this site.
 Each site's list is in its own `site.config.ts`.
+
+## Vercel cost: no prefetch, a day per page, fewer bots — 2026-10-27
+
+**Owner:** "we gotta make sure ygocompare is also optimised to cost less on
+vercel." YGO Compare has ~16,700 card URLs, three times Gundam's, so every
+per-URL cost is three times larger here. Already lean before this: no
+database, no middleware, image optimisation off, nothing prerendered at
+build, one build a day. What was still spending:
+
+* **Link prefetch.** In production every visible `<Link>` to an ISR page
+  fetches its whole RSC payload, and a card nobody has opened since the
+  release renders and writes to the ISR cache on that prefetch alone. A set
+  page shows hundreds of tiles; scrolling one cost up to hundreds of renders
+  and writes. `src/components/Link.tsx` wraps `next/link` with
+  `prefetch = false` (as MTG Compare and Rift Compare do), and every file uses
+  it. A click still navigates client-side.
+* **ISR timers that could never show new data.** `data/` ships inside the
+  deployment and each daily release starts with an empty ISR cache, so a card
+  re-rendered six hours after the release showed exactly the same prices and
+  wrote them again: up to four renders and writes per crawled URL a day for
+  nothing. Card, set, rarity and sealed-type pages and the list hubs now
+  revalidate every 86400 s. Freshness is unchanged: the release, not the
+  timer, brings new prices. The home page ("Prices updated N hours ago") and
+  preorders (filters by today's date) stay at 21600. Nothing goes under 21600
+  (`tests/vercel-cost.test.ts`).
+* **Crawlers.** robots.txt now blocks Rift Compare's list of bulk scrapers
+  (Bytespider, MJ12bot, DotBot, PetalBot…) that render the long tail and send
+  nobody, and `Disallow: /*?` (no sitemap URL carries a query; Allows keep
+  `/_next/`, share images and icons). Google, Bing, the AI answer engines,
+  AhrefsBot and SemrushBot are untouched; the test pins it.
+* **Search CPU.** `/api/search` tokenised all ~17,000 product names on every
+  keystroke (~40 ms of CPU); the tokens are now built once per instance
+  (~5–10 ms a query). The box waits 250 ms instead of 150 and sends the query
+  lower-cased so different casings share one CDN entry.
+
+**Not done.** CDN-cached `force-dynamic` card pages (OP Compare's move):
+with one render per card per release left, ISR is close to break-even, and
+the CDN cache is per region. Revisit if Vercel's ISR writes line still leads
+the bill. Skew Protection (a project setting, ~15% of each write) is the
+owner's call.
+
+Engine change, all three repos.

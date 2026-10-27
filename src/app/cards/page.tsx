@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import Link from "@/components/Link";
 import { Suspense } from "react";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
@@ -10,7 +10,7 @@ import { SearchBox } from "@/components/SearchBox";
 import { ChipList } from "@/components/ChipList";
 import { CardSearch } from "./CardSearch";
 
-export const revalidate = 21600;
+export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const metadata: Metadata = {
   title: `${SITE.gameShort} card prices — every card, cheapest first`,
   description: `Search and compare prices for every ${SITE.game} card across TCGplayer, eBay and ${SITE.stores.length} stores. Updated daily.`,

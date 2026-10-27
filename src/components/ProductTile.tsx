@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/Link";
 import type { Product } from "@/lib/site-types";
 import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
