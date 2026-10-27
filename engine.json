@@ -4,6 +4,7 @@
   "paths": ["src/app", "src/components", "src/lib", "scripts", "tests", "engine.json", "next.config.js", "tsconfig.json", "tailwind.config.ts", "postcss.config.js", ".eslintrc.json", "vercel.json"],
   "exclude": [
     "src/app/apple-icon.png",
+    "src/app/favicon.ico",
     "src/app/icon.svg",
     "src/app/opengraph-image.jpg",
     "src/app/opengraph-image.alt.txt",
