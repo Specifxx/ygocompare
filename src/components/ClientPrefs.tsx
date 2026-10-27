@@ -45,7 +45,8 @@ export function MarketPicker() {
       aria-label="Your market"
       value={market}
       onChange={(e) => setMarket(e.target.value as Market)}
-      className="rounded-md border border-ink-700 bg-ink-900 px-2 py-1 text-xs text-fg"
+      title={MARKET_LABEL[market]}
+      className="w-[3.75rem] rounded-md border border-ink-700 bg-ink-900 px-2 py-1 text-xs text-fg sm:w-auto"
     >
       {MARKETS.map((m) => (
         <option key={m} value={m}>
@@ -73,7 +74,7 @@ export function ThemeToggle() {
         setLight(!light);
       }}
     >
-      {light ? "☾ Dark" : "☀ Light"}
+      {light ? "☾" : "☀"}<span className="hidden sm:inline">{light ? " Dark" : " Light"}</span>
     </button>
   );
 }

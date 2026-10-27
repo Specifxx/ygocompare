@@ -2,10 +2,15 @@
 // The price rows: every offer for the visitor's market, cheapest in-stock
 // first, each with a tracked buy button. TCGplayer and eBay US stay listed in
 // every market as the reference ("≈" converted at the day's ECB rate).
+// Out-of-stock rows fold behind a button, as on RiftCompare: they are the
+// last thing a buyer needs and used to push the live prices off the screen.
+// Row order is lib/price-rows.ts, shared with the phone buy block.
+import { useState } from "react";
 import { SITE } from "@/site.config";
 import { CURRENCY, MARKET_LABEL, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
 import { goHref } from "@/lib/affiliate";
+import { priceRows } from "@/lib/price-rows";
 import { useMarket } from "./ClientPrefs";
 import { EbayWord } from "./EbayCallout";
 
@@ -20,11 +25,14 @@ export function sourceName(o: Offer) {
   return NAMES[o.source] ?? o.source;
 }
 
+/** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
+export const PRICE_TABLE_ID = "price-comparison";
+
 export function PriceTable({ offers, fx, productId, page, compact = false }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean }) {
   const { market } = useMarket();
-  const local = offers.filter((o) => o.market === market);
-  const refs = market === "US" ? [] : offers.filter((o) => o.market === "US" && (o.source === "tcgplayer" || o.source === "ebay"));
-  const rows = [...local, ...refs];
+  const [showOut, setShowOut] = useState(false);
+  const { inStock, refs, outOfStock, cheapest } = priceRows(offers, market);
+  const rows = [...inStock, ...refs, ...outOfStock];
   const cur = CURRENCY[market];
   const conv = (o: Offer) => (o.currency === cur ? null : Math.round((o.cents / (fx[o.currency] ?? 1)) * (fx[cur] ?? 1)));
   if (!rows.length)
@@ -33,10 +41,13 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
         No live listings in {MARKET_LABEL[market]} right now. Switch market at the top of the page, or check eBay below.
       </p>
     );
-  const shown = compact ? rows.slice(0, 6) : rows;
-  const cheapest = local.find((o) => o.inStock);
+  const live = [...inStock, ...refs];
+  // Out-of-stock rows show when asked, or when nothing is in stock at all.
+  const unfold = showOut || live.length === 0;
+  const shown = compact ? rows.slice(0, 6) : unfold ? rows : live;
+  const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
   return (
-    <div className="overflow-hidden rounded-xl border border-ink-700/60">
+    <div id={PRICE_TABLE_ID} className="overflow-hidden rounded-xl border border-ink-700/60">
       <table className="w-full text-sm">
         <thead className="bg-ink-850 text-left text-xs uppercase tracking-wide text-muted">
           <tr>
@@ -81,6 +92,11 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
           })}
         </tbody>
       </table>
+      {folded > 0 && (
+        <button type="button" onClick={() => setShowOut(true)} className="w-full border-t border-ink-800 px-3 py-2.5 text-left text-sm text-muted hover:bg-ink-850 hover:text-fg">
+          Show {folded} out-of-stock listing{folded === 1 ? "" : "s"} ↓
+        </button>
+      )}
     </div>
   );
 }
