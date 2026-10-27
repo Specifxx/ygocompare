@@ -19,6 +19,8 @@ import { abs, SHARE_IMAGE } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { rarityHref, sealedHref } from "@/lib/hubs";
 
+import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
+
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
 // after its first visit instead of rendering on every request.
@@ -30,11 +32,12 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const set = setById(p.setId);
   const ref = refCents(p.id);
   const name = shortName(p.name);
-  const title = `${name}${p.number ? ` ${p.number}` : ""} price${set ? ` — ${set.name}` : ""}`;
+  // "<card> <number> Price — <game> <set>", stepped down to fit 60 characters (lib/seo-title.ts).
+  const title = fitTitle(cardTitleCandidates(name, p.number, set?.name ?? null, p.kind === "sealed")).absolute;
   const stores = new Set(priceOf(p.id).offers.map((o) => o.source)).size;
   const description = `${name} (${set?.name ?? SITE.gameShort}${p.rarity ? `, ${p.rarity}` : ""}) is worth about ${money(ref)} today. Compare ${stores} live prices from TCGplayer, eBay and ${SITE.gameShort} stores, with price history.`;
   return {
-    title,
+    title: { absolute: title },
     description,
     alternates: { canonical: `/card/${p.slug}` },
     openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description, images: p.image ? [imageAt(p.image, "in_1000x1000")!] : [SHARE_IMAGE] },

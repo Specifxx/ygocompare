@@ -4,18 +4,25 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { productsInSet, refCents, sets } from "@/lib/data";
 import { money } from "@/lib/format";
+import { fitTitle } from "@/lib/seo-title";
+import { JsonLd } from "@/components/JsonLd";
+import { abs } from "@/lib/site";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
-  title: `${SITE.gameShort} set price guides`,
-  description: `Price guides for every ${SITE.game} set: each card's value, the most valuable cards and the set's total value.`,
+  // "sets in order" is how people ask for this list (Rift Compare's /blog/riftbound-sets-in-order ranks for it).
+  title: fitTitle([`${SITE.gameShort} Sets in Order — Card Lists & Prices`, `${SITE.gameShort} Sets in Order`]),
+  description: `Every ${SITE.game} set in release order, newest first, with each set's card list, card prices, the most valuable cards and the set's total value.`,
   ...canon("/sets"),
 };
 
 export default function Sets() {
+  const listed = sets().filter((s) => s.productCount > 0);
   return (
     <div>
-      <h1 className="mb-6 font-display text-3xl font-black">{SITE.gameShort} set price guides</h1>
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} sets`, numberOfItems: listed.length, itemListElement: listed.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name, url: abs(`/sets/${s.slug}`) })) }} />
+      <h1 className="mb-6 font-display text-3xl font-black">{SITE.gameShort} sets in order</h1>
+      <p className="-mt-3 mb-6 text-sm text-muted">Newest first. Open a set for its full card list with prices.</p>
       <div className="overflow-hidden rounded-xl border border-ink-700/60">
         <table className="w-full text-sm">
           <thead className="bg-ink-850 text-left text-xs uppercase text-muted">

@@ -9,10 +9,12 @@ import { TileGrid } from "@/components/ProductTile";
 import { SearchBox } from "@/components/SearchBox";
 import { ChipList } from "@/components/ChipList";
 import { CardSearch } from "./CardSearch";
+import { fitTitle } from "@/lib/seo-title";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 export const metadata: Metadata = {
-  title: `${SITE.gameShort} card prices — every card, cheapest first`,
+  // Owns "<game> card list" (Rift Compare's /browse); the homepage owns "<game> card prices".
+  title: fitTitle([`${SITE.gameShort} Card List & Prices — Every Card`, `${SITE.gameShort} Card List & Prices`]),
   description: `Search and compare prices for every ${SITE.game} card across TCGplayer, eBay and ${SITE.stores.length} stores. Updated daily.`,
   ...canon("/cards"),
 };

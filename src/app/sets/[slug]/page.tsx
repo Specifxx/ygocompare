@@ -9,6 +9,10 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { TileGrid } from "@/components/ProductTile";
+import { JsonLd } from "@/components/JsonLd";
+import { abs } from "@/lib/site";
+import { fitTitle, setTitleCandidates } from "@/lib/seo-title";
+import { postsAbout } from "@/lib/posts";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
@@ -18,10 +22,14 @@ export const generateStaticParams = () => [];
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const s = setBySlug(params.slug);
   if (!s) return {};
+  // List intent first, prices second, as on Rift Compare's set pages ("<set> card list" is the bigger query).
+  const count = productsInSet(s.id).filter((p) => p.kind === "card").length;
+  const title = fitTitle(setTitleCandidates(s.name, count));
   return {
-    title: `${s.name} price guide — every ${SITE.gameShort} card's value`,
-    description: `${s.name} card prices: the most valuable cards, every card's TCGplayer market price, and the cheapest store and eBay listings. Updated daily.`,
+    title,
+    description: `${count > 0 ? `All ${count} ${s.name} cards` : `The ${s.name} card list`} with prices: the most valuable cards, every card's TCGplayer market price, and the cheapest store and eBay listings. Updated daily.`,
     ...canon(`/sets/${s.slug}`),
+    openGraph: { ...canon(`/sets/${s.slug}`).openGraph, title: title.absolute },
   };
 }
 
@@ -39,13 +47,25 @@ export default function SetPage({ params }: { params: { slug: string } }) {
   const newer = i > 0 ? listed[i - 1] : null;
   const older = i >= 0 && i < listed.length - 1 ? listed[i + 1] : null;
   const others = listed.filter((x) => x.id !== s.id && x.productCount > 20).slice(0, 12);
+  const guides = postsAbout([s.name, s.code]).slice(0, 4);
   return (
     <div className="flex flex-col gap-8">
+      {cards.length > 0 && (
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: `${s.name} card list`,
+            numberOfItems: cards.length,
+            itemListElement: cards.slice(0, 30).map((p, i) => ({ "@type": "ListItem", position: i + 1, name: shortName(p.name), url: abs(`/card/${p.slug}`) })),
+          }}
+        />
+      )}
       <div>
       <Breadcrumbs items={[{ name: "Sets", href: "/sets" }, { name: s.name }]} />
       <header>
         <p className="text-xs uppercase tracking-wide text-brand-400">{s.upcoming ? "Upcoming" : "Released"} {s.releasedOn}</p>
-        <h1 className="font-display text-3xl font-black">{s.name} price guide</h1>
+        <h1 className="font-display text-3xl font-black">{s.name} card list &amp; prices</h1>
         <p className="mt-2 text-muted">{cards.length} cards · one of each is worth {money(value)} at TCGplayer market · {sealed.length} sealed products.</p>
       </header>
       </div>
@@ -76,13 +96,19 @@ export default function SetPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
       )}
+      {guides.length > 0 && (
+        <section>
+          <h2 className="mb-3 text-lg font-bold">{s.name} guides</h2>
+          <ul className="list-disc pl-5 text-sm">{guides.map((g) => <li key={g.slug}><Link className="link" href={`/blog/${g.slug}`}>{g.title}</Link></li>)}</ul>
+        </section>
+      )}
       <nav className="flex flex-wrap justify-between gap-3 text-sm" aria-label="Neighbouring sets">
         {older ? <Link className="link" href={`/sets/${older.slug}`}>← {older.name}</Link> : <span />}
         {newer && <Link className="link" href={`/sets/${newer.slug}`}>{newer.name} →</Link>}
       </nav>
       {others.length > 0 && (
         <section>
-          <h2 className="mb-3 text-lg font-bold">Other {SITE.gameShort} set price guides</h2>
+          <h2 className="mb-3 text-lg font-bold">Other {SITE.gameShort} card lists</h2>
           <div className="flex flex-wrap gap-2">{others.map((x) => <Link key={x.id} href={`/sets/${x.slug}`} className="chip hover:border-brand">{x.name}</Link>)}</div>
         </section>
       )}

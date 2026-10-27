@@ -12,6 +12,20 @@ import { shortName } from "@/lib/names";
 import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import { TOOLS } from "@/lib/tool-list";
+import type { Metadata } from "next";
+import { fitTitle } from "@/lib/seo-title";
+
+// The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
+export function generateMetadata(): Metadata {
+  const n = SITE.stores.length;
+  const title = fitTitle([`${SITE.gameShort} Card Prices — Compare ${n} Stores`, `${SITE.gameShort} Card Prices`]);
+  return {
+    title,
+    description: `Compare ${SITE.game} card and booster box prices across TCGplayer, eBay and ${n} online stores. Cheapest in-stock first, in your currency, updated daily.`,
+    alternates: { canonical: "/", types: { "application/rss+xml": "/feed.xml" } },
+    openGraph: { type: "website", siteName: SITE.name, url: "/", title: title.absolute },
+  };
+}
 
 export const revalidate = 21600;
 
@@ -31,7 +45,8 @@ export default function Home() {
   ];
   return (
     <div className="flex flex-col gap-10">
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/cards?q={q}`, "query-input": "required name=q" } }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` }, potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/cards?q={q}`, "query-input": "required name=q" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
       <section className="hero-band -mx-4 rounded-none px-4 py-10 md:rounded-2xl md:py-14">
