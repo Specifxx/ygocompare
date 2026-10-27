@@ -19,3 +19,13 @@ test("outside the US, TCGplayer and eBay US are references, never the cheapest",
   assert.deepEqual(r.refs.map((x) => x.source), ["ebay", "tcgplayer"]);
   assert.deepEqual(r.outOfStock.map((x) => x.source), ["au1"]);
 });
+
+test("paidAlternative: eBay or TCGplayer within 20% when a store is cheapest, with how much more it is", () => {
+  const r = priceRows([o("store1", "US", 1000), o("store2", "US", 1050), o("tcgplayer", "US", 1080), o("ebay", "US", 1100)], "US");
+  assert.equal(r.cheapest?.source, "store1");
+  assert.equal(r.paidAlternative?.offer.source, "tcgplayer");
+  assert.equal(r.paidAlternative?.pctMore, 8);
+  assert.equal(priceRows([o("store1", "US", 1000), o("tcgplayer", "US", 1201)], "US").paidAlternative, null, "past the band");
+  assert.equal(priceRows([o("ebay", "US", 900), o("store1", "US", 1000)], "US").paidAlternative, null, "the cheapest already pays");
+  assert.equal(priceRows([o("tcgplayer", "US", 1000), o("au1", "AU", 1000)], "AU").paidAlternative, null, "a US reference is never a local alternative");
+});

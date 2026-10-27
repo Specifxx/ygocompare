@@ -471,6 +471,41 @@ attributes.
   (`STORE_PARTNER_DEALS` is still empty on RiftCompare; port it when a store
   signs).
 
+## The phone Cheapest block names eBay or TCGplayer — 2026-10-27
+
+Owner: more eBay and TCGplayer clicks, visible on a phone and clicked because
+they are worth it. Below md `CardTopBuy` showed one row, and when a store is
+cheapest its link earns nothing. `priceRows` now returns `paidAlternative`: the
+market's cheapest in-stock eBay or TCGplayer offer when a store is cheapest and
+it is within 20%, with how much more it costs. The block names it on a second
+muted line ("or $13.78 on TCGplayer (+3%) →", Paid link tag) through `/go` with
+`from=card_top_alt`, so its clicks count separately from `card_top`. A real row
+at its real price: never called cheaper, never reordered, the Buy button stays
+on the cheapest. Outside the US the converted US references never qualify.
+Same change on RiftCompare and OP Compare that day (engine change, all three repos).
+
+## Cards TCGplayer has no photo of — 2026-10-27
+
+Every tile in YGO Compare's "newest set" was a broken image. TCGCSV fills in
+`imageUrl` for every product, but when `imageCount` is 0 TCGplayer's CDN
+answers 403: a whole reprint set (Legendary Dragon Decks, 2020 Date Reprint)
+and about one Yu-Gi-Oh! product in twelve. The import now stores no image for
+those, and a card without one takes the photo of another printing with the
+same number and name (same rarity first), never a looser match: a missing
+photo is better than the wrong card. A tile with no image says "No image yet".
+Engine change, all three repos.
+
+## Old sets TCGplayer re-dated to today — 2026-10-27
+
+TCGplayer moved 18 old Yu-Gi-Oh! groups' `publishedOn` to 2026-10-25 (2004
+promos up to a 2025 reprint), so a 2020 Date Reprint became the home page's
+"newest set" and every card in those sets skipped the catalogue floor.
+Product ids only grow, so the import (`fixRedatedSets`) dates a set by its
+lowest product id: a date in the last 60 days more than a year after the
+median date of the five sets with the nearest ids takes that median. Older
+dates are never touched (promo groups gain products for years). On the
+2026-10-26 catalogues it moves 7 YGO sets and nothing in Gundam or Lorcana.
+Engine change, all three repos.
 ## 2026-10-27 — 515 stores: every sister site's stores probed
 
 Owner: "we need like way more stores … it's a bigger game, so we can get even
