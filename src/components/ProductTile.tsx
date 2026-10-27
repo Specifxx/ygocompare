@@ -13,8 +13,10 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
   return (
     <Link href={`/card/${p.slug}`} className="group card-surface flex flex-col overflow-hidden transition hover:border-brand/60">
       <div className="aspect-[5/7] bg-ink-850">
-        {p.image && (
+        {p.image ? (
           <img src={imageAt(p.image, "400w")!} alt={`${shortName(p.name)} ${p.kind === "card" ? "card" : ""}`} loading="lazy" className="h-full w-full object-contain p-1.5 transition group-hover:scale-[1.02]" />
+        ) : (
+          <div className="flex h-full items-center justify-center p-3 text-center text-xs text-muted">No image yet</div>
         )}
       </div>
       <div className="flex flex-1 flex-col gap-1 p-2.5">
