@@ -596,3 +596,31 @@ the bill. Skew Protection (a project setting, ~15% of each write) is the
 owner's call.
 
 Engine change, all three repos.
+
+## Rift Compare's search playbook, ported — 2026-10-27
+
+**Owner:** take Rift Compare's SEO and apply every best practice to the other sites.
+
+Rift Compare's search clicks come from pages whose titles say what people type:
+"<set> card list" (its set pages lead with "Card List: All N Cards + Prices"),
+card titles that fit Google's ~60 characters with the price word kept, and a
+homepage that leads with "<game> Card Prices". This engine now does the same:
+
+* **Titles fit 60 characters** (`src/lib/seo-title.ts`): every page offers a
+  ladder of candidates, most specific first, each tried with " | <site>" and
+  then bare. Card pages: "<card> <number> Price — <game> <set>", stepping down;
+  a number already in the store's name is said once. Set pages:
+  "<game> <set> Card List: All N Cards + Prices"; `/sets` owns "<game> sets in
+  order"; `/cards` owns "<game> card list"; the homepage "<game> Card Prices —
+  Compare N Stores".
+* **Structured data:** `ItemList` on set pages and `/sets`, `Organization` on
+  the homepage (the WebSite names it as publisher), an image and logo on every
+  Article.
+* **Internal links:** a set page lists the guides that name it (`postsAbout`,
+  whole-word, three characters or more); every guide ends with "More guides" and
+  "Free price tools".
+* **`/llms.txt`** maps the site for AI answer engines (Rift Compare has had one
+  since September), built from the same data as the pages.
+
+Not ported: Rift Compare's author pages and Person bylines (its byline is the
+owner's statement about that site only), and its news sitemap (no news posts here).
