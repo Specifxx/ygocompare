@@ -145,6 +145,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
     }
     await sleep(150);
   }
+  fixRedatedSets(sets, products, now);
   sets.sort((a, b) => (b.releasedOn ?? "").localeCompare(a.releasedOn ?? ""));
   borrowImages(products);
   if (SITE.slugStyle === "name-number") settleSlugs(products, sets);
@@ -154,6 +155,36 @@ export async function loadTcgcsv(now = new Date()): Promise<{
     return { sets, products: kept, tcg };
   }
   return { sets, products, tcg };
+}
+
+/** TCGplayer sometimes moves an old group's publishedOn to today (18 Yu-Gi-Oh!
+ *  groups, from 2004 promos to a 2025 reprint, all dated 2026-10-25), which
+ *  made a 2020 reprint the "newest set" and kept every card in those sets past
+ *  the catalogue floor. Product ids only grow, so a set's lowest product id
+ *  dates it: a date in the last 60 days that is over a year after the median
+ *  date of the five sets with the nearest lowest ids is replaced by that
+ *  median. Older dates are left alone (promo groups gain new products for
+ *  years), and so is any set too small to compare. */
+export function fixRedatedSets(sets: SetInfo[], products: Product[], now: Date) {
+  const minId = new Map<number, number>();
+  for (const p of products) minId.set(p.setId, Math.min(minId.get(p.setId) ?? Infinity, p.id));
+  const DAY = 86_400_000;
+  const recent = (s: SetInfo) => !!s.releasedOn && Math.abs(now.getTime() - new Date(s.releasedOn).getTime()) < 60 * DAY;
+  const ref = sets
+    .filter((s) => s.releasedOn && minId.has(s.id) && !recent(s))
+    .map((s) => ({ id: minId.get(s.id)!, date: s.releasedOn! }))
+    .sort((a, b) => a.id - b.id);
+  if (ref.length < 5) return;
+  for (const s of sets) {
+    const id = minId.get(s.id);
+    if (id == null || !recent(s)) continue;
+    const nearest = [...ref].sort((a, b) => Math.abs(a.id - id) - Math.abs(b.id - id)).slice(0, 5).map((r) => r.date).sort();
+    const median = nearest[2];
+    if (new Date(s.releasedOn!).getTime() - new Date(median).getTime() > 365 * DAY) {
+      s.releasedOn = median;
+      s.upcoming = false;
+    }
+  }
 }
 
 /** A card TCGplayer has no photo of takes the photo of another printing of

@@ -33,3 +33,21 @@ test("the same rarity's photo wins", async () => {
   borrowImages(list);
   assert.equal(list[2].image, img(11));
 });
+
+test("an old set TCGplayer re-dated to today gets its neighbours' date back", async () => {
+  const { fixRedatedSets } = await import("@/lib/import/tcgcsv");
+  const now = new Date("2026-10-27T00:00:00Z");
+  const set = (id: number, releasedOn: string) => ({ id, name: `S${id}`, code: "", slug: "", releasedOn, productCount: 1, upcoming: false });
+  const sets = [
+    set(1, "2025-01-24"), set(2, "2025-02-14"), set(3, "2025-03-14"), set(4, "2025-04-11"), set(5, "2025-05-02"),
+    set(6, "2026-10-25"), // re-dated reprint, products from early 2025
+    set(7, "2026-10-09"), // a real new set
+  ];
+  const ids: Record<number, number> = { 1: 586046, 2: 588104, 3: 594707, 4: 605103, 5: 614142, 6: 606221, 7: 711263 };
+  const products = Object.entries(ids).map(([setId, id]) => ({ ...card(id, "x", null, null, null), setId: Number(setId) }));
+  sets.push(set(8, "2026-01-23"), set(9, "2026-03-13"), set(10, "2026-08-07"), set(11, "2026-09-04"));
+  products.push(...[[8, 663407], [9, 668392], [10, 693164], [11, 694826]].map(([setId, id]) => ({ ...card(id, "x", null, null, null), setId })));
+  fixRedatedSets(sets, products, now);
+  assert.equal(sets[5].releasedOn, "2025-03-14");
+  assert.equal(sets[6].releasedOn, "2026-10-09");
+});
