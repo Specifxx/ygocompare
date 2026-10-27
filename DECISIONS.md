@@ -506,3 +506,12 @@ median date of the five sets with the nearest ids takes that median. Older
 dates are never touched (promo groups gain products for years). On the
 2026-10-26 catalogues it moves 7 YGO sets and nothing in Gundam or Lorcana.
 Engine change, all three repos.
+## 2026-10-27 — 515 stores: every sister site's stores probed
+
+Owner: "we need like way more stores … it's a bigger game, so we can get even
+more stores." Every store host in the sister repos (Rift, OP, MTG, Gundam,
+Lorcana, CompareEmpire) that the first probe had not seen, 2,350 of them
+(`research/candidate-hosts-2.txt`), went through the same probe: 312 sell
+English Yu-Gi-Oh! through Shopify. Four were left out by hand (graded and
+Japanese only, accessories only, Japanese only, event tickets), and 308 were
+added: 515 stores (US 209, CA 123, AU 68, UK 66, EU 48, SG 1).
