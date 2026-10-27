@@ -4,7 +4,7 @@
 // src/content/stores.ts listing and writes research/ygo-stores-probe.json.
 // It never changes the site: a person reads the result and copies stores in.
 //
-//   npx tsx scripts/probe-stores.ts [--tcgcsv]
+//   npx tsx scripts/probe-stores.ts [--tcgcsv] [--hosts research/candidate-hosts-2.txt]
 //
 // Candidates: research/candidate-hosts.txt (every store the sister sites
 // track, plus the CompareEmpire ygocompare prototype's list).
@@ -139,10 +139,12 @@ async function main() {
   if (process.argv.includes("--tcgcsv")) {
     await tcgcsvSize().catch((e) => console.error(`[tcgcsv] ${(e as Error).message}`));
   }
-  const hosts = fs.readFileSync(path.join(process.cwd(), "research/candidate-hosts.txt"), "utf8").split("\n").map((s) => s.trim()).filter(Boolean);
+  const hostsArg = process.argv.indexOf("--hosts");
+  const hostsFile = hostsArg > 0 ? process.argv[hostsArg + 1] : "research/candidate-hosts.txt";
+  const hosts = fs.readFileSync(path.join(process.cwd(), hostsFile), "utf8").split("\n").map((s) => s.trim()).filter(Boolean).map((h) => (/^https?:\/\//.test(h) ? h : `https://${h}`));
   const queue = hosts.slice();
   const results: (Found | { host: string; skip: string })[] = [];
-  await Promise.all(Array.from({ length: 12 }, async () => {
+  await Promise.all(Array.from({ length: 20 }, async () => {
     while (queue.length) {
       const h = queue.shift()!;
       const r = await probe(h).catch((e) => ({ host: h, skip: (e as Error).message }));

@@ -11,6 +11,10 @@ on:
         description: "Also measure the TCGplayer catalogue (cards, prices, rarities)"
         type: boolean
         default: true
+      hosts:
+        description: "Candidate list to probe"
+        type: string
+        default: research/candidate-hosts.txt
 
 permissions:
   contents: read
@@ -18,7 +22,7 @@ permissions:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,7 +30,7 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npx tsx scripts/probe-stores.ts ${{ inputs.tcgcsv && '--tcgcsv' || '' }}
+      - run: npx tsx scripts/probe-stores.ts ${{ inputs.tcgcsv && '--tcgcsv' || '' }} --hosts "${{ inputs.hosts }}"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
