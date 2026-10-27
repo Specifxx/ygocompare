@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { refCents } from "@/lib/data";
 import { money } from "@/lib/format";
 import { rarityHubs } from "@/lib/hubs";
+import { ChipList } from "@/components/ChipList";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
@@ -38,9 +38,7 @@ export default function RarityHub({ params }: { params: { slug: string } }) {
       <TileGrid items={h.items.slice(0, 120)} />
       <section>
         <h2 className="mb-3 text-lg font-bold">Other rarities</h2>
-        <div className="flex flex-wrap gap-2">
-          {rarityHubs().filter((x) => x.slug !== h.slug).map((x) => <Link key={x.slug} href={`/cards/rarity/${x.slug}`} className="chip hover:border-brand">{x.label}</Link>)}
-        </div>
+        <ChipList items={rarityHubs().filter((x) => x.slug !== h.slug).map((x) => ({ key: x.slug, href: `/cards/rarity/${x.slug}`, label: x.label }))} more="rarities" />
       </section>
     </div>
   );
