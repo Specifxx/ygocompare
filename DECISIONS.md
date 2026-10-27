@@ -494,3 +494,15 @@ those, and a card without one takes the photo of another printing with the
 same number and name (same rarity first), never a looser match: a missing
 photo is better than the wrong card. A tile with no image says "No image yet".
 Engine change, all three repos.
+
+## Old sets TCGplayer re-dated to today — 2026-10-27
+
+TCGplayer moved 18 old Yu-Gi-Oh! groups' `publishedOn` to 2026-10-25 (2004
+promos up to a 2025 reprint), so a 2020 Date Reprint became the home page's
+"newest set" and every card in those sets skipped the catalogue floor.
+Product ids only grow, so the import (`fixRedatedSets`) dates a set by its
+lowest product id: a date in the last 60 days more than a year after the
+median date of the five sets with the nearest ids takes that median. Older
+dates are never touched (promo groups gain products for years). On the
+2026-10-26 catalogues it moves 7 YGO sets and nothing in Gundam or Lorcana.
+Engine change, all three repos.
