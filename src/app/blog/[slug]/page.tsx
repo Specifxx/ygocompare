@@ -40,7 +40,7 @@ export default function PostPage({ params }: { params: { slug: string } }) {
       )}
       <aside className="card-surface mt-10 p-5 text-sm">
         <p className="font-semibold">Also from us</p>
-        <p className="mt-1 text-muted">{SITE.sisterSites.map((s, i) => (<span key={s.url}>{i ? " · " : ""}<a className="link" href={s.url} rel="noopener">{s.name}</a> ({s.game})</span>))}</p>
+        <p className="mt-1 text-muted">{SITE.sisterSites.map((s, i) => (<span key={s.url}>{i ? " · " : ""}<a className="link" href={s.url} rel="noopener">{s.anchor ?? s.name}</a> ({s.anchor ? s.name : s.game})</span>))}</p>
       </aside>
     </article>
   );

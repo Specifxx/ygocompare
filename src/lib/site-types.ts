@@ -36,6 +36,9 @@ export interface SisterSite {
   name: string;
   url: string;
   game: string;
+  /** Link text: what a searcher types ("Riftbound card prices"), the site's
+   *  name after it. Without one the name is the link. */
+  anchor?: string;
 }
 
 export interface SiteConfig {

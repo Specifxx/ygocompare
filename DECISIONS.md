@@ -529,3 +529,28 @@ and "+N% vs cheapest" when one is dearer; "Cheapest" stays on `cheapest`, which
 the phone buy block, sticky bar and metadata still read. Their clicks go
 through `/go` with `from=<page>_pinned`. `/about` says so. Engine change, all
 three repos; same change on RiftCompare and OP Compare that day.
+
+
+## 2026-10-27 — every site links the whole family
+
+The owner, once YGO Compare existed: "our website should all have all of our
+compare websites now in the suite of websites … just try to backlink all of
+it." Every site's footer now links the other eight: RiftCompare, OP Compare,
+DexCompare, MTG Compare, Gundam Compare, Lorcana Compare, YGO Compare
+(ygocompare.com), CamCompare (www.camcompare.app) and Compare Empire
+(www.compareempire.com, Australian tech prices), each on the host it already
+uses (no apex or www change). Plain followed links, never sponsored: they are
+our own sites. The link text says what each compares ("Yu-Gi-Oh! card prices",
+"Camera and lens prices"), with the site's name after it, rather than the
+brand alone. MTG Compare is sealed-only since 2026-10-21, so its anchor now
+says "Magic: The Gathering sealed prices" everywhere.
+
+Footer only. In-page blocks ("Compare other TCGs" on card and product pages,
+the article blocks) keep to card games, and the two sites that are not card
+games are labelled as the wider family, so nine look-alike sites linked from
+every page body never read as a link network.
+
+Engine change, all three repos: `SisterSite.anchor` (optional) is the link
+text in the footer and the blog's "Also from us" line, the name after it;
+`tests/sister-sites.test.ts` pins eight others, once each, never this site.
+Each site's list is in its own `site.config.ts`.

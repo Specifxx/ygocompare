@@ -40,7 +40,7 @@ export function Footer() {
           <ul className="space-y-1 text-muted">
             {SITE.sisterSites.map((s) => (
               <li key={s.url}>
-                <a href={s.url} rel="noopener">{s.name}</a> <span className="text-xs">· {s.game}</span>
+                <a href={s.url} rel="noopener">{s.anchor ?? s.name}</a> <span className="text-xs">· {s.anchor ? s.name : s.game}</span>
               </li>
             ))}
           </ul>
