@@ -31,18 +31,36 @@ function buyClass(o: Offer) {
 
 export function CardTopBuy({ offers, productId }: { offers: Offer[]; productId: number }) {
   const { market } = useMarket();
-  const best = priceRows(offers, market).cheapest;
+  const { cheapest: best, paidAlternative: alt } = priceRows(offers, market);
   if (!best) return null;
   return (
-    <div {...{ [TOP_BUY_ATTR]: "" }} className="mt-3 flex items-center justify-between gap-3 rounded-lg border border-brand/30 bg-brand/[0.06] p-3 md:hidden">
-      <div className="min-w-0">
-        <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">Cheapest in {MARKET_LABEL[market]}</div>
-        <div className="text-lg font-bold tabular-nums text-fg">{money(best.cents, best.currency)}</div>
-        <div className="truncate text-xs text-muted">at {sourceName(best)}{postage(best)}</div>
+    <div {...{ [TOP_BUY_ATTR]: "" }} className="mt-3 rounded-lg border border-brand/30 bg-brand/[0.06] p-3 md:hidden">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0">
+          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">Cheapest in {MARKET_LABEL[market]}</div>
+          <div className="text-lg font-bold tabular-nums text-fg">{money(best.cents, best.currency)}</div>
+          <div className="truncate text-xs text-muted">at {sourceName(best)}{postage(best)}</div>
+        </div>
+        <a href={goHref(best, productId, "card_top")} rel="sponsored nofollow noopener" target="_blank" className={`${buyClass(best)} shrink-0`}>
+          Buy →
+        </a>
       </div>
-      <a href={goHref(best, productId, "card_top")} rel="sponsored nofollow noopener" target="_blank" className={`${buyClass(best)} shrink-0`}>
-        Buy →
-      </a>
+      {/* A store that pays nothing is cheapest: name eBay or TCGplayer when
+          within 20% (lib/price-rows.ts paidAlternative). */}
+      {alt && (
+        <div className="mt-2 flex items-center gap-2 border-t border-ink-700/60 pt-1 text-xs text-muted">
+          <a
+            href={goHref(alt.offer, productId, "card_top_alt")}
+            rel="sponsored nofollow noopener"
+            target="_blank"
+            className="block min-w-0 flex-1 truncate py-2 font-semibold text-brand-400 hover:underline"
+          >
+            or <span className="tabular-nums">{money(alt.offer.cents, alt.offer.currency)}</span> on {alt.offer.source === "ebay" ? "eBay" : "TCGplayer"}
+            {alt.pctMore > 0 ? ` (+${alt.pctMore}%)` : ""} →
+          </a>
+          <span className="shrink-0 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] text-muted">Paid link</span>
+        </div>
+      )}
     </div>
   );
 }
