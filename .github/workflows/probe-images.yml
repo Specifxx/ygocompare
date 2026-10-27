@@ -1,0 +1,19 @@
+name: Probe images (temporary)
+on:
+  push:
+    branches: ["claude/project-thread-933eyd"]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          UA="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
+          for id in 678916 713237 724323; do for s in 200w 400w in_1000x1000; do
+            for ref in "" "https://ygocompare.com/" "https://gundamcompare.com/"; do
+              echo "$id $s ref=$ref -> $(curl -s -o /tmp/o -w '%{http_code} %{content_type} %{size_download}' -A "$UA" ${ref:+-e $ref} https://tcgplayer-cdn.tcgplayer.com/product/${id}_${s}.jpg)"
+            done; done; done
+          curl -sI -A "$UA" -e https://ygocompare.com/ https://tcgplayer-cdn.tcgplayer.com/product/678916_400w.jpg
+          curl -s -A "$UA" https://ygocompare.com/ -D /tmp/h -o /tmp/p.html; cat /tmp/h; grep -o '<img[^>]*>' /tmp/p.html | head -5
+          curl -s -A "$UA" https://gundamcompare.com/ -o /tmp/g.html; grep -o '<img[^>]*>' /tmp/g.html | head -3
