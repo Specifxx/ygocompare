@@ -596,3 +596,14 @@ the bill. Skew Protection (a project setting, ~15% of each write) is the
 owner's call.
 
 Engine change, all three repos.
+
+## The cheaper marketplace leads the pinned pair — 2026-10-27
+
+The pin above put eBay over TCGplayer whatever their prices. In the US
+TCGplayer is the cheaper of the two on most products, and it pays about 2.5
+times more per click than eBay (30 days to 2026-10-26, across the family), so a
+dearer eBay row sat on top of it. `pinnedOrder` (`src/lib/price-rows.ts`) now
+puts the cheaper of the two first, TCGplayer on a tie, when both are this
+market's own rows; a local TCGplayer row goes above a US eBay reference;
+otherwise eBay leads as before. Measure `/go?from=card_pinned` by retailer a
+week after release against the week before. Same change on all five card sites.
