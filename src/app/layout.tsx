@@ -43,6 +43,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href={fontHref} />
         <link rel="preconnect" href="https://tcgplayer-cdn.tcgplayer.com" />
+        {/* Impact's verifier reads the tag exactly as it issues it: `value`, not `content`. */}
+        {SITE.impactSiteVerification && <meta name="impact-site-verification" {...{ value: SITE.impactSiteVerification }} />}
         {ADSENSE && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}`} crossOrigin="anonymous" />}
       </head>
       <body className="font-sans antialiased">

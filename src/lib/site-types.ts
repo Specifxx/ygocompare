@@ -57,6 +57,8 @@ export interface SiteConfig {
   supportEmail: string;
   /** Private: where the ops monitor and form notifications go. Never rendered. */
   ownerEmail: string;
+  /** Impact (affiliate network) site-verification id, rendered in every page's <head>. */
+  impactSiteVerification?: string;
   tcgcsvCategoryId: number;
   tcgplayerSlug: string;
   ebay: {
