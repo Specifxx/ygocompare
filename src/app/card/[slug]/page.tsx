@@ -15,7 +15,7 @@ import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { amazonSearchUrl, goHref } from "@/lib/affiliate";
-import { abs } from "@/lib/site";
+import { abs, SHARE_IMAGE } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { rarityHref, sealedHref } from "@/lib/hubs";
 
@@ -39,7 +39,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title,
     description,
     alternates: { canonical: `/card/${p.slug}` },
-    openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description, images: p.image ? [imageAt(p.image, "in_1000x1000")!] : undefined },
+    openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description, images: p.image ? [imageAt(p.image, "in_1000x1000")!] : [SHARE_IMAGE] },
+    twitter: { card: "summary_large_image", images: p.image ? [imageAt(p.image, "in_1000x1000")!] : [SHARE_IMAGE] },
   };
 }
 
