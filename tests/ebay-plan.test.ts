@@ -121,3 +121,34 @@ test("Yu-Gi-Oh!: a rarity abbreviation in the product name is the rarity, not a 
   assert.equal(listingMatches(pcr, "Yugioh Rokket Tracer RA05-EN015 Prismatic Collector's Rare 1st Edition"), true);
   assert.equal(listingMatches(pcr, "Yugioh Rokket Tracer RA05-EN015 Super Rare 1st Edition"), false);
 });
+
+test("eBay listings: a title with a second card number never matches (live, 2026-10-27)", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const { SITE } = await import("@/site.config");
+  if (SITE.numberStyle !== "ygo") return;
+  const dmg: Product = { ...p(7), name: "Dark Magician Girl", number: "MFC-000", rarity: "Secret Rare", printings: ["1st Edition", "Unlimited"] };
+  assert.equal(listingMatches(dmg, "Yu-Gi-Oh! Dark Magician Girl MFC-000 Secret Rare 1st Ed English"), true);
+  assert.equal(listingMatches(dmg, "Yu-Gi-Oh! Dark Magician Girl MFC-000 Secret Rare 1st Ed English YSYR-ENO11"), false);
+});
+
+test("Yu-Gi-Oh!: 'Ultra' without 'Rare' is still Ultra Rare, and misprints never match (live, 2026-10-27)", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const { SITE } = await import("@/site.config");
+  if (SITE.numberStyle !== "ygo") return;
+  const utr: Product = { ...p(8), name: "Black Rose Dragon (UTR)", number: "CSOC-EN039", rarity: "Ultimate Rare", printings: ["1st Edition", "Unlimited"] };
+  const ur: Product = { ...utr, id: 9, name: "Black Rose Dragon", rarity: "Ultra Rare" };
+  assert.equal(listingMatches(utr, "Yu-Gi-Oh! Black Rose Dragon - 1st Edition - Ultra CSOC-EN039"), false);
+  assert.equal(listingMatches(ur, "Yu-Gi-Oh! Black Rose Dragon - 1st Edition - Ultra CSOC-EN039"), true);
+  assert.equal(listingMatches(utr, "Black Rose Dragon CSOC-EN039 Ultimate 1st Edition"), true);
+  assert.equal(listingMatches(ur, "Yu-Gi-Oh! Misprint Black Rose Dragon - 1st Edition - Ultra - Crimped CSOC-EN039"), false);
+  const tyranno: Product = { ...utr, id: 10, name: "Ultimate Conductor Tyranno", number: "MP16-EN216", rarity: "Ultra Rare" };
+  assert.equal(listingMatches(tyranno, "Ultimate Conductor Tyranno MP16-EN216 Ultra Rare 1st"), true);
+});
+
+test("sealed: a single titled like a box never matches (live, 2026-10-27)", async () => {
+  const { listingMatches } = await import("@/lib/import/ebay");
+  const box: Product = { ...p(11, "Rare", "sealed"), name: "Magnificent Maestros Box", number: null, rarity: null, sealedType: "Other" };
+  assert.equal(listingMatches(box, "Yugioh! Evil Box Magnificent Maestros MAMS-EN PREORDER"), false);
+  const orcs: Product = { ...box, id: 12, name: "Order of Chaos - Booster Box [1st Edition]", sealedType: "Booster Box" };
+  assert.equal(listingMatches(orcs, "Yu-Gi-Oh! Order Of Chaos English Booster Box : ORCS-EN 1st edition"), true);
+});
