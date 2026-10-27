@@ -470,3 +470,16 @@ attributes.
 - Not ported: accounts, watch buttons, Pro (owner's choice) and store codes
   (`STORE_PARTNER_DEALS` is still empty on RiftCompare; port it when a store
   signs).
+
+## The phone Cheapest block names eBay or TCGplayer — 2026-10-27
+
+Owner: more eBay and TCGplayer clicks, visible on a phone and clicked because
+they are worth it. Below md `CardTopBuy` showed one row, and when a store is
+cheapest its link earns nothing. `priceRows` now returns `paidAlternative`: the
+market's cheapest in-stock eBay or TCGplayer offer when a store is cheapest and
+it is within 20%, with how much more it costs. The block names it on a second
+muted line ("or $13.78 on TCGplayer (+3%) →", Paid link tag) through `/go` with
+`from=card_top_alt`, so its clicks count separately from `card_top`. A real row
+at its real price: never called cheaper, never reordered, the Buy button stays
+on the cheapest. Outside the US the converted US references never qualify.
+Same change on RiftCompare and OP Compare that day (engine change, all three repos).
