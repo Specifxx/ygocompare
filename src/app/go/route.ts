@@ -26,7 +26,8 @@ export function GET(req: Request) {
   if (!host || !ALLOWED.some((r) => r.test(host)) || !/^https:\/\//.test(dest)) return NextResponse.redirect(new URL("/", req.url));
   const pid = Number(u.searchParams.get("p")) || null;
   const page = (u.searchParams.get("from") ?? "").slice(0, 40) || null;
-  const res = NextResponse.redirect(tagged(dest, subId(page, pid)), 302);
+  const market = (u.searchParams.get("m") ?? "").slice(0, 4) || null;
+  const res = NextResponse.redirect(tagged(dest, subId(market, page, pid)), 302);
   res.headers.set("X-Robots-Tag", "noindex, nofollow");
   return res;
 }

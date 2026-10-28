@@ -15,7 +15,7 @@ pre-order copy).
 GitHub Actions, daily 12:17 UTC (refresh-prices.yml)
   TCGCSV (TCGplayer catalogue + prices, category 2; cards under $1 left out)
   + every Shopify store in src/content/stores.ts  (products.json)
-  + eBay Browse API, budgeted (1,500 calls/day, cards from $20, all sealed)
+  + eBay Browse API, budgeted (2,200 calls/day, cards from $20, all sealed)
   → data/public/*.json, data/history/<set>.json, data/state/*.json
   → commit to main with "[deploy]" in the subject  → one Vercel build a day
   → IndexNow ping

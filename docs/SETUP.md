@@ -15,8 +15,8 @@ secrets, search engines) is the Claude in Chrome prompt in
 * Adding stores: add candidates to `research/candidate-hosts.txt`, run
   Actions → Probe stores, review the printed listing, then copy the store
   into `src/content/stores.ts`.
-* eBay: one app shared with Gundam Compare and Lorcana Compare, 1,500 calls a
-  day each. Lorcana Compare serves the Marketplace Account Deletion endpoint
+* eBay: one app shared with Gundam Compare and Lorcana Compare, 1,150 (Gundam,
+  Lorcana) or 2,200 (YGO) calls a day. Lorcana Compare serves the Marketplace Account Deletion endpoint
   for the app; this site's copy of the route is harmless without
   `EBAY_VERIFICATION_TOKEN`.
 

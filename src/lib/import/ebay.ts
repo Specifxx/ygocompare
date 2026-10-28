@@ -2,8 +2,9 @@
 // a call.
 //
 // THE BUDGET. One eBay developer app (5,000 Browse calls a day) is shared by
-// Lorcana Compare, Gundam Compare and YGO Compare, 1,500 each (owner,
-// 2026-10-26; 2,500 each for the first two before), leaving 500 spare. The
+// Lorcana Compare, Gundam Compare and YGO Compare: SITE.ebay.dailyBudget each,
+// 4,500 in all, leaving 500 spare (1,500 each from the owner's 2026-10-26
+// split; since 2026-10-28 Lorcana and Gundam 1,150, YGO 2,200). The
 // app's remaining count (Developer Analytics API, free) is shared too, so each
 // site also keeps ITS OWN count in data/state/ebay-usage.json and stops at its
 // share, whichever limit comes first. The sites run at different hours
