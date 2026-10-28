@@ -20,7 +20,8 @@ export interface PriceRows {
    * When `cheapest` is a store (whose link pays nothing), the market's cheapest
    * in-stock eBay or TCGplayer offer if it is within PAID_ALTERNATIVE_BAND of
    * it, with how much more it costs; else null. The phone buy block names it on
-   * a second line (2026-10-27, owner: more eBay and TCGplayer clicks). A real
+   * a second line (2026-10-27, owner: more eBay and TCGplayer clicks), or an eBay
+   * search when there is none (2026-10-28). A real
    * row at its real price, never called cheaper, never reordered.
    */
   paidAlternative: { offer: Offer; pctMore: number } | null;
@@ -35,8 +36,8 @@ export interface PriceRows {
   pinned: Offer[];
 }
 
-/** At most 20% above the cheapest in-stock item price. */
-export const PAID_ALTERNATIVE_BAND = 1.2;
+/** At most 50% above the cheapest in-stock item price (20% until 2026-10-28, when the owner asked for eBay to be pushed harder). */
+export const PAID_ALTERNATIVE_BAND = 1.5;
 
 const isPaidSource = (o: Offer) => o.source === "ebay" || o.source === "tcgplayer";
 
