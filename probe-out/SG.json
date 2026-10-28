@@ -1,0 +1,237 @@
+[
+ {
+  "host": "hideoutcg.com",
+  "base": "https://hideoutcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (81 collections)"
+ },
+ {
+  "host": "actionpoint.sg",
+  "base": "https://actionpoint.sg",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (36 collections)"
+ },
+ {
+  "host": "thetcgalchemists.com",
+  "base": "https://thetcgalchemists.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (39 collections)"
+ },
+ {
+  "host": "brintsco.com",
+  "base": "https://brintsco.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (38 collections)"
+ },
+ {
+  "host": "goattcg.com",
+  "base": "https://www.goattcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "apgtcg.com",
+  "base": "https://apgtcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "4elements.sg",
+  "base": "https://www.4elements.sg",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (35 collections)"
+ },
+ {
+  "host": "1collectiblestcg.com",
+  "base": "https://1collectiblestcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (97 collections)"
+ },
+ {
+  "host": "teamcardgame.com",
+  "base": "https://teamcardgame.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (65 collections)"
+ },
+ {
+  "host": "1collectibles.com",
+  "base": "https://www.1collectibles.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (84 collections)"
+ },
+ {
+  "host": "sc-collection.sg",
+  "base": "https://sc-collection.sg",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (51 collections)"
+ },
+ {
+  "host": "sg-manapro.com",
+  "base": "https://sg-manapro.com",
+  "market": "SG",
+  "ok": false,
+  "name": "MANA PRO",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "SGD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-booster-box(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "greyogregames.com",
+  "base": "https://www.greyogregames.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (81 collections)"
+ },
+ {
+  "host": "flagshipgames.sg",
+  "base": "https://www.flagshipgames.sg",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (398 collections)"
+ },
+ {
+  "host": "humbletcg.com",
+  "base": "https://humbletcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "jiggletcg.com",
+  "base": "https://jiggletcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (12 collections)"
+ },
+ {
+  "host": "cardboardcollectible.com",
+  "base": "https://cardboardcollectible.com",
+  "market": "SG",
+  "ok": false,
+  "name": "Cardboard Collectible",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "SGD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-products(20):0/20"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tefudagames.com",
+  "base": "https://tefudagames.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (202 collections)"
+ },
+ {
+  "host": "kenkyohobby.com",
+  "base": "https://kenkyohobby.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (5 collections)"
+ },
+ {
+  "host": "spearingcollectibles.com",
+  "base": "https://www.spearingcollectibles.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (49 collections)"
+ },
+ {
+  "host": "sawadeekard.com",
+  "base": "https://sawadeekard.com",
+  "market": "SG",
+  "ok": false,
+  "name": "Sawadeekard",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "SGD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "new-nav-yugioh(3):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "pikkuplay.com",
+  "base": "https://pikkuplay.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (195 collections)"
+ },
+ {
+  "host": "toyspace.com.sg",
+  "base": "https://toyspace.com.sg",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (57 collections)"
+ },
+ {
+  "host": "cardscitadel.com",
+  "base": "https://cardscitadel.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "theavidcollectors.com",
+  "base": "https://theavidcollectors.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (170 collections)"
+ },
+ {
+  "host": "sentinelgamessg.com",
+  "base": "https://sentinelgamessg.com",
+  "market": "SG",
+  "ok": false,
+  "name": "Sentinel Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "SGD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "bang-dream-mygo-x-ave-mujica(297):0/250",
+   "en-bang-dream-mygo-x-ave-mujica(283):0/250",
+   "en-bang-dream-mygo-x-ave-mujica-sr(48):0/48",
+   "en-bang-dream-mygo-x-ave-mujica-sr-2(46):0/46",
+   "en-bang-dream-mygo-x-ave-mujica-rrr-1(31):0/31",
+   "en-bang-dream-mygo-x-ave-mujica-c(30):0/30",
+   "en-bang-dream-mygo-x-ave-mujica-u(28):0/28",
+   "en-bang-dream-mygo-x-ave-mujica-r(22):0/22",
+   "en-bd-mygo-td(20):0/20",
+   "en-bang-dream-mygo-x-ave-mujica-td(19):0/19"
+  ],
+  "samples": []
+ }
+]

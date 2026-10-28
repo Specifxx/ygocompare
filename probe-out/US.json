@@ -1,0 +1,1374 @@
+[
+ {
+  "host": "singles.bardsandcards.com",
+  "base": "https://singles.bardsandcards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (134 collections)"
+ },
+ {
+  "host": "bentonville.geargamingstore.com",
+  "base": "https://bentonville.geargamingstore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (68 collections)"
+ },
+ {
+  "host": "themythicstore.com",
+  "base": "https://themythicstore.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (285 collections)"
+ },
+ {
+  "host": "mistymountaingames.com",
+  "base": "https://www.mistymountaingames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "singles.stompinggroundstcg.com",
+  "base": "https://singles.stompinggroundstcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "onestoptcg.com",
+  "base": "https://onestoptcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (64 collections)"
+ },
+ {
+  "host": "grognardgames.com",
+  "base": "https://grognardgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (113 collections)"
+ },
+ {
+  "host": "pokeboxusa.com",
+  "base": "https://www.pokeboxusa.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (312 collections)"
+ },
+ {
+  "host": "store.gglehi.com",
+  "base": "https://store.gglehi.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (590 collections)"
+ },
+ {
+  "host": "foxandfablegames.com",
+  "base": "https://foxandfablegames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "shippintexas.com",
+  "base": "https://shippintexas.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (67 collections)"
+ },
+ {
+  "host": "vegas.singles",
+  "base": "https://vegas.singles",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (20 collections)"
+ },
+ {
+  "host": "thecardcave.com.au",
+  "base": "https://thecardcave.com.au",
+  "market": "AU",
+  "ok": false,
+  "name": "The Card Cave",
+  "existingKey": null,
+  "collections": [
+   "yugioh"
+  ],
+  "kind": "sealed",
+  "matched": 5,
+  "inStock": 1,
+  "currency": "AUD",
+  "reason": "matched 5, in stock 1",
+  "tried": [
+   "yugioh(5):5/5",
+   "yugioh-singles(3):2/3",
+   "yugioh-latest-set(1):1/1"
+  ],
+  "samples": [
+   "Beyond the Brave Booster Box [1st Edition]",
+   "Battles of Legend: Glorious Gallery Booster Box [1st Edition]",
+   "YU-GI-OH: Magnificent Monsters Display Box",
+   "Beyond the Brave Booster Pack [1st Edition]",
+   "Battles of Legend: Glorious Gallery Booster Pack [1st Edition]",
+   "Diabellstar the Black Witch (New Art) (Quarter Century Secret Rare) (RA04-EN047) - Quarter Century Stampede 1st Edition"
+  ]
+ },
+ {
+  "host": "phantasmalv.com",
+  "base": "https://phantasmalv.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (36 collections)"
+ },
+ {
+  "host": "gachaboba.com",
+  "base": "https://gachaboba.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (30 collections)"
+ },
+ {
+  "host": "gamecraftgamestore.com",
+  "base": "https://gamecraftgamestore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (60 collections)"
+ },
+ {
+  "host": "tothetable.game",
+  "base": "https://tothetable.game",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (6 collections)"
+ },
+ {
+  "host": "thenerdmerchant.com",
+  "base": "https://thenerdmerchant.com",
+  "market": "US",
+  "ok": false,
+  "name": "The Nerd Merchant",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed(0):0/0",
+   "yu-gi-oh-singles(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "nexustabletopgames.com",
+  "base": "https://nexustabletopgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (185 collections)"
+ },
+ {
+  "host": "mainephasehobbies.com",
+  "base": "https://mainephasehobbies.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "wolfdentcg.com",
+  "base": "https://wolfdentcg.com",
+  "market": "US",
+  "ok": false,
+  "name": "Wolf Den Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(3):0/3"
+  ],
+  "samples": []
+ },
+ {
+  "host": "lapinetabletopgaming.com",
+  "base": "https://lapinetabletopgaming.com",
+  "market": "US",
+  "ok": false,
+  "name": "La Pine Tabletop Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(4):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "zamliytcg.com",
+  "base": "https://zamliytcg.com",
+  "market": "US",
+  "ok": false,
+  "name": "Zamliy TCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0",
+   "yu-gi-oh-singles(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "thewarpgate.net",
+  "base": "https://thewarpgate.net",
+  "market": "US",
+  "ok": true,
+  "name": "The Warp Gate",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-sealed"
+  ],
+  "kind": "sealed",
+  "matched": 16,
+  "inStock": 16,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-sealed(27):16/25"
+  ],
+  "samples": [
+   "Chaos Origins Booster Box [1st Edition]",
+   "Phantom Revenge Booster Pack [1st Edition]",
+   "Supreme Darkness Booster Pack (1st Edition)",
+   "Supreme Darkness Booster Box (1st Edition)",
+   "Justice Hunters Booster Box [1st Edition] - Justice Hunters",
+   "Cyber Strike - Structure Deck (1st Edition)"
+  ]
+ },
+ {
+  "host": "dkscards.com",
+  "base": "https://dkscards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (5 collections)"
+ },
+ {
+  "host": "shop.fabricatorsforge.com",
+  "base": "https://shop.fabricatorsforge.com",
+  "market": "US",
+  "ok": false,
+  "name": "Fabricator's Forge",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(2):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "thehubtcg.com",
+  "base": "https://thehubtcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (39 collections)"
+ },
+ {
+  "host": "troveofcollectibles.com",
+  "base": "https://troveofcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "name": "Trove of Collectibles ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(1):0/1",
+   "yu-gi-oh-cards(0):0/0",
+   "yugioh-extra-deck(0):0/0",
+   "yugioh-monster(0):0/0",
+   "yugioh-spell(0):0/0",
+   "yugioh-trap(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gamegridif.com",
+  "base": "https://gamegridif.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (50 collections)"
+ },
+ {
+  "host": "npcollectibles.com",
+  "base": "https://npcollectibles.com",
+  "market": "CA",
+  "ok": true,
+  "name": "NexPack Collectibles",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles",
+   "yugioh-sealed"
+  ],
+  "kind": "both",
+  "matched": 187,
+  "inStock": 4,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles(16816):180/250",
+   "yugioh-sealed(9):7/7",
+   "yugioh-best-seller-with-stock(5):4/4",
+   "yugioh-all-products(0):0/0",
+   "yugioh-in-stock(0):0/0"
+  ],
+  "samples": [
+   "Hi-Speedroid Rubber Band Shooter (UR) [LAVD-ENS36] Ultra Rare",
+   "Hi-Speedroid Glider #2 (UR) [LAVD-ENS35] Ultra Rare",
+   "Clear Wing Fast Dragon [LAVD-ENS29] Common",
+   "Hi-Speedroid Puzzle [LAVD-ENS28] Common",
+   "Hi-Speedroid Chanbara [LAVD-ENS25] Common",
+   "Infinite Impermanence [LAVD-ENS21] Common"
+  ]
+ },
+ {
+  "host": "vaultgamestore.com",
+  "base": "https://vaultgamestore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (19 collections)"
+ },
+ {
+  "host": "spankyscardshop.com",
+  "base": "https://spankyscardshop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (258 collections)"
+ },
+ {
+  "host": "gamenerdz.com",
+  "base": "https://www.gamenerdz.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (ipt type=\"module\" async fetchpriority=\"low\" src=\"https://www.gamenerdz.com/.webm)"
+ },
+ {
+  "host": "cardxcards.com",
+  "base": "https://cardxcards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "cardcaverntradingcards.com",
+  "base": "https://www.cardcaverntradingcards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (350 collections)"
+ },
+ {
+  "host": "columbuscardshop.com",
+  "base": "https://columbuscardshop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (19 collections)"
+ },
+ {
+  "host": "wulfgaming.com",
+  "base": "https://wulfgaming.com",
+  "market": "US",
+  "ok": true,
+  "name": "Wulf Gaming",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-1"
+  ],
+  "kind": "both",
+  "matched": 156,
+  "inStock": 34,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-1(208):156/208"
+  ],
+  "samples": [
+   "Chaos Origins Booster Box [1st Edition] [CORI]",
+   "2025 Mega-Pack Bundle [MP25 - 000]",
+   "Alliance Insight Booster Pack [1st Edition] [ALIN - 000]",
+   "Magnificent Monsters Box [MAMO]",
+   "Thunder Dragon [HISU - HISU-EN046]",
+   "Legendary Arc-V Decks: Box Set [LAVD]"
+  ]
+ },
+ {
+  "host": "forgottenpathgames.com",
+  "base": "https://forgottenpathgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (48 collections)"
+ },
+ {
+  "host": "frankscardshopnj.com",
+  "base": "https://frankscardshopnj.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (45 collections)"
+ },
+ {
+  "host": "tier1games.com",
+  "base": "https://tier1games.com",
+  "market": "US",
+  "ok": true,
+  "name": "Tier 1 Games",
+  "existingKey": null,
+  "collections": [
+   "yugioh-in-stock"
+  ],
+  "kind": "singles",
+  "matched": 116,
+  "inStock": 116,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yugioh-in-stock(939):116/250",
+   "yugioh-all-products(6):0/0"
+  ],
+  "samples": [
+   "Rescue Cat [TU03-EN002] Super Rare",
+   "Deep Sea Diva [TU04-EN004] Super Rare",
+   "Obelisk the Tormentor (Secret Rare) [GBI-002] Secret Rare",
+   "Black Luster Soldier - Envoy of the Beginning [MC2-EN004] Secret Rare",
+   "Dark Magician of Chaos (Quarter Century Secret Rare) [RA03-EN134] Quarter Century Secret Rare",
+   "Slifer the Sky Dragon (Ultra Rare) [GBI-001] Ultra Rare"
+  ]
+ },
+ {
+  "host": "gamelandia.fun",
+  "base": "https://gamelandia.fun",
+  "market": "US",
+  "ok": false,
+  "name": "Gamelandia",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "us.storedevastation.com",
+  "base": "https://us.storedevastation.com",
+  "market": "US",
+  "ok": false,
+  "name": "Devastation Store",
+  "existingKey": null,
+  "collections": [
+   "cartas-yugioh"
+  ],
+  "kind": "singles",
+  "matched": 56,
+  "inStock": 1,
+  "currency": "USD",
+  "reason": "matched 56, in stock 1",
+  "tried": [
+   "cartas-yugioh(32244):56/250",
+   "productos-yugioh(1):1/1"
+  ],
+  "samples": [
+   "Dark Hole [LCYW-EN053] Secret Rare",
+   "Torrential Tribute [LON-025] Ultra Rare",
+   "Blue-Eyes White Dragon [YAP1-EN001] Ultra Rare",
+   "Odd-Eyes Pendulum Dragon [DUEA-EN004] Secret Rare",
+   "Dark Rebellion Xyz Dragon [NECH-EN053] Secret Rare",
+   "Clear Wing Synchro Dragon [CROS-EN046] Secret Rare"
+  ]
+ },
+ {
+  "host": "solacido.com",
+  "base": "https://solacido.com",
+  "market": "US",
+  "ok": false,
+  "name": "Solacido",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 3,
+  "currency": "USD",
+  "reason": "matched 3, in stock 3",
+  "tried": [
+   "yu-gi-oh(5):3/4"
+  ],
+  "samples": [
+   "Beyond the Brave Booster Box [1st Edition]",
+   "Blue-Eyes White Destiny Structure Deck",
+   "Yu-Gi-Oh! Magnificent Monsters Box"
+  ]
+ },
+ {
+  "host": "thehaventabletop.com",
+  "base": "https://thehaventabletop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "thetrainercourt.com",
+  "base": "https://www.thetrainercourt.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (153 collections)"
+ },
+ {
+  "host": "levelupgamesmd.com",
+  "base": "https://www.levelupgamesmd.com",
+  "market": "US",
+  "ok": false,
+  "name": "Level Up Games MD",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles-instock(1):0/0",
+   "yugioh-singles-all(1):0/0",
+   "yu-gi-oh-booster-packs(0):0/0",
+   "yu-gi-oh-sealed-products(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "superanimestore.com",
+  "base": "https://superanimestore.com",
+  "market": "US",
+  "ok": true,
+  "name": "Super Anime Store",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 16,
+  "inStock": 3,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(46):16/46"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! TCG Doom of Dimensions Booster Pack (1st Edition)",
+   "Yu-Gi-Oh! TCG Chaos Origins Booster Pack (1st Edition)",
+   "Yu-Gi-Oh! TCG Battles of Legend: Glorious Gallery Booster Pack (1st Edition)",
+   "Yu-Gi-Oh TCG Legendary Duelists Duels From the Deep Booster Pack - Konami",
+   "Yu-Gi-Oh 25th Anniversary Rarity Collection II Booster Pack - Konami Official",
+   "Yu-GI-Oh Battles of Legend: Chapter 1 Collector’s Set (1 Box)"
+  ]
+ },
+ {
+  "host": "sweetsandgeeks.com",
+  "base": "https://sweetsandgeeks.com",
+  "market": "US",
+  "ok": true,
+  "name": "Sweets and Geeks",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-tcg-singles",
+   "yu-gi-oh-tcg"
+  ],
+  "kind": "both",
+  "matched": 338,
+  "inStock": 148,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-tcg-singles(2774):185/250",
+   "yu-gi-oh-tcg(205):153/198",
+   "yugioh-tcg(216):28/180",
+   "yu-gi-oh(180):0/137"
+  ],
+  "samples": [
+   "Kashtira Fenrir (Prismatic Secret Rare) (1st Edition) MP23-EN163 - 25th Anniversary Tin: Dueling Heroes Mega Pack",
+   "Ash Blossom & Joyous Spring - (Unlimited) (Ultra Rare) - Legendary Collection Kaiba - LCKC-EN080",
+   "Mulcharmy Fuwalos (1st Edition) (Super Rare) - Quarter Century Stampede - #RA04-EN050",
+   "Blue-Eyes White Dragon (Ultra Rare) (1st Edition) RA05-EN085 - Rarity Collection 5",
+   "Elfnote Lucina (1st Edition) (Secret Rare) - Burst Protocol BPRO-EN010",
+   "Dark Magician (Unlimited)(Ultra Rare) - Starter Deck: Yugi - SDY-006"
+  ]
+ },
+ {
+  "host": "thecollectionrealm.com",
+  "base": "https://thecollectionrealm.com",
+  "market": "US",
+  "ok": true,
+  "name": "COLLECTION REALM",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 11,
+  "inStock": 4,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-tcg(34):11/25",
+   "ygo-tcg-booster-box(17):6/16",
+   "ygo-tcg-chronicles-deck(2):1/2",
+   "ygo-tcg-booster-pack(8):0/0",
+   "yu-gi-oh-tcg-pre-sale(2):0/1",
+   "ygo-beyond-the-brave(1):0/0",
+   "ygo-single-card(0):0/0",
+   "ygo-tournament(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! World Championship 2026 OTS Limited Pack Exclusive Box",
+   "Yu-Gi-Oh! TCG 1st Edition Shonen Jump Legendary Arc-V Decks English Box Set",
+   "Yu-Gi-Oh Chaos Origins 1st Edition Booster Box 24 Packs 216 Cards English TCG",
+   "Yu-Gi-Oh! Maze of Muertos Booster Box [1st Edition] – Anime-Inspired TCG Cards Featuring Pumpking, Darkuriboh, Dark Magician of Destruction & More",
+   "Yu-Gi-Oh! Rarity Collection 5 Booster Box | 24 Packs per Box | All-Foil Cards | Variant Art in Every Pack | Tournament-Level & Collector Rarities",
+   "Yu-Gi-Oh! TCG The Chronicles Deck Spirit Charmers (All-Foil Edition) Deck"
+  ]
+ },
+ {
+  "host": "waywardcitygames.net",
+  "base": "https://waywardcitygames.net",
+  "market": "US",
+  "ok": false,
+  "name": "Wayward City Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-tcg(19):1/8"
+  ],
+  "samples": [
+   "Blue-Eyes White Destiny - Structure Deck"
+  ]
+ },
+ {
+  "host": "tradingcardworld.store",
+  "base": "https://tradingcardworld.store",
+  "market": "US",
+  "ok": false,
+  "name": "Trading Card World",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(74):1/1"
+  ],
+  "samples": [
+   "Alliance Insight - Booster Box (1st Edition)"
+  ]
+ },
+ {
+  "host": "blackswampgames.com",
+  "base": "https://blackswampgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "zulusgames.com",
+  "base": "https://zulusgames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Zulus Games",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles"
+  ],
+  "kind": "singles",
+  "matched": 2,
+  "inStock": 2,
+  "currency": "USD",
+  "reason": "matched 2, in stock 2",
+  "tried": [
+   "yugioh-singles(2):2/2",
+   "yugioh(4):1/3"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! TCG: Pharaonic Guardian Booster Pack (1st Edition)",
+   "Dark Paladin [DMG-001] Secret Rare",
+   "Phoenixian Cluster Amaryllis [RGBT-EN006] Super Rare"
+  ]
+ },
+ {
+  "host": "triadgroup.shop",
+  "base": "https://triadgroup.shop",
+  "market": "US",
+  "ok": true,
+  "name": "Triad Group",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles",
+   "yugioh-sealed"
+  ],
+  "kind": "both",
+  "matched": 57,
+  "inStock": 54,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles(101):54/95",
+   "yugioh-sealed(27):3/6",
+   "yugioh(0):0/0"
+  ],
+  "samples": [
+   "Red-Eyes B. Dragon (SDJ-001) (SDJ)",
+   "Dark Magician (SDY-006) (SDY)",
+   "Monster Reborn (LOB-118) (LOB)",
+   "Right Leg of the Forbidden One (LOB-120) (LOB)",
+   "Left Leg of the Forbidden One (LOB-121) (LOB)",
+   "Right Arm of the Forbidden One (LOB-122) (LOB)"
+  ]
+ },
+ {
+  "host": "brickandboardgames.com",
+  "base": "https://brickandboardgames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Brick & Board Games and Cards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "cardhaven-games.com",
+  "base": "https://cardhaven-games.com",
+  "market": "US",
+  "ok": false,
+  "name": "Cardhaven Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed-product(2):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "alohacardshop.com",
+  "base": "https://www.alohacardshop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (40 collections)"
+ },
+ {
+  "host": "collectivecubed.com",
+  "base": "https://collectivecubed.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (17 collections)"
+ },
+ {
+  "host": "collectionhousecafe.com",
+  "base": "https://collectionhousecafe.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (17 collections)"
+ },
+ {
+  "host": "smokeandmirrorshobby.com",
+  "base": "https://www.smokeandmirrorshobby.com",
+  "market": "US",
+  "ok": true,
+  "name": "Smoke and Mirrors Hobby",
+  "existingKey": null,
+  "collections": [
+   "shop-all-yu-gi-oh",
+   "yu-gi-oh-structure-decks"
+  ],
+  "kind": "sealed",
+  "matched": 73,
+  "inStock": 5,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "shop-all-yu-gi-oh(109):66/82",
+   "yu-gi-oh(74):41/49",
+   "yu-gi-oh-booster-packs-1(35):25/33",
+   "yu-gi-oh-25th-anniversary(10):10/10",
+   "yu-gi-oh-structure-decks(16):7/14",
+   "yu-gi-oh-in-stock(5):5/5",
+   "yugioh-all-products(0):0/0",
+   "yugioh-in-stock(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! TCG: 25th Anniversary Tin: Dueling Heroes (Case of 12) (1st Edition)",
+   "Yu-Gi-Oh! TCG: Shadow Specters - Booster Box (1st Edition)",
+   "Yu-Gi-Oh! TCG: Rarity Collection 5 - Booster Box (1st Edition)",
+   "Yu-Gi-Oh! TCG: 25th Anniversary Rarity Collection - Booster Box (1st Edition)",
+   "Yu-Gi-Oh! TCG: Quarter Century Bonanza - Booster Box",
+   "Yu-Gi-Oh! TCG: Rage of the Abyss - Booster Box [1st Edition]"
+  ]
+ },
+ {
+  "host": "theclubhousecards.com",
+  "base": "https://theclubhousecards.com",
+  "market": "US",
+  "ok": false,
+  "name": "Clubhouse Cards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-card(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "finalformcards.com",
+  "base": "https://www.finalformcards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "darkstonecomics.com",
+  "base": "https://www.darkstonecomics.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (38 collections)"
+ },
+ {
+  "host": "dynamiccardcollectors.com",
+  "base": "https://dynamiccardcollectors.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (221 collections)"
+ },
+ {
+  "host": "onendunncards.com",
+  "base": "https://onendunncards.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (https://onendunncards.com/meta.json: HTTP 404 )"
+ },
+ {
+  "host": "lthobbies.com",
+  "base": "https://www.lthobbies.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (66 collections)"
+ },
+ {
+  "host": "shufflenroll.com",
+  "base": "https://shufflenroll.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "nolatcg.com",
+  "base": "https://nolatcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (304 collections)"
+ },
+ {
+  "host": "spankyslootstash.com",
+  "base": "https://www.spankyslootstash.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (196 collections)"
+ },
+ {
+  "host": "greendoorcollectibles.com",
+  "base": "https://greendoorcollectibles.com",
+  "market": "US",
+  "ok": true,
+  "name": "Green Door Collectibles",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 10,
+  "inStock": 8,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(49):10/40"
+  ],
+  "samples": [
+   "Magnificent Monsters Box-Magnificent Monsters--Normal",
+   "2025 Mega-Pack Bundle-2025 Mega-Pack--Normal",
+   "Legendary Arc-V Decks: Box Set-Legendary Arc-V Decks--Normal",
+   "Battles of Legend: Chapter 1 Box-Battles of Legend: Chapter 1--Normal",
+   "Blue-Eyes White Destiny Structure Deck-Structure Deck: Blue-Eyes White Destiny--Normal",
+   "2-Player Starter Set-2-Player Starter Set--Normal"
+  ]
+ },
+ {
+  "host": "glamorousgamers.com",
+  "base": "https://www.glamorousgamers.com",
+  "market": "US",
+  "ok": false,
+  "name": "Glamorous Gamers",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "single-cards-yu-gi-oh(0):0/0",
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tabletopgamingcenter.com",
+  "base": "https://www.tabletopgamingcenter.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (35 collections)"
+ },
+ {
+  "host": "thegamecornergames.com",
+  "base": "https://www.thegamecornergames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (47 collections)"
+ },
+ {
+  "host": "dublin.littlerootgames.com",
+  "base": "https://dublin.littlerootgames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Littleroot Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-sealed-all(0):0/0",
+   "yugioh-singles-in-stock(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "mightymeeple.com",
+  "base": "https://mightymeeple.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "unsettledgeeks.com",
+  "base": "https://unsettledgeeks.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "evvgamingguild.com",
+  "base": "https://www.evvgamingguild.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (429 collections)"
+ },
+ {
+  "host": "thenexusgnv.com",
+  "base": "https://thenexusgnv.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "cardtopiacollectibles.com",
+  "base": "https://cardtopiacollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (7 collections)"
+ },
+ {
+  "host": "svsportscards.com",
+  "base": "https://svsportscards.com",
+  "market": "US",
+  "ok": true,
+  "name": "SV Sports & Trading Cards",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "both",
+  "matched": 149,
+  "inStock": 149,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(315):149/250"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Trading Card Game: Magnificent Monsters Box",
+   "Yu-Gi-Oh! Dark Magical Curtain (Starlight Rare) (Extended Art) MAMO-EN003",
+   "Yu-Gi-Oh! Vanity's Fiend Cyberdark Impact Rare • CDIP-EN017",
+   "Yu-Gi-Oh! Red-Eyes B. Dragon Starter Deck: Joey Ultra Rare • SDJ-001",
+   "Yu-Gi-Oh! Dark Lucius LV8 Cyberdark Impact Ultra Rare • CDIP-EN011",
+   "Yu-Gi-Oh! Graceful Charity Starter Deck: Pegasus SR SDP-040"
+  ]
+ },
+ {
+  "host": "hobbycardshop.com",
+  "base": "https://hobbycardshop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (36 collections)"
+ },
+ {
+  "host": "geekerygames.com",
+  "base": "https://geekerygames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (86 collections)"
+ },
+ {
+  "host": "common-lands.com",
+  "base": "https://common-lands.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (129 collections)"
+ },
+ {
+  "host": "gghobbycard.com",
+  "base": "https://gghobbycard.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "jarocards.com",
+  "base": "https://jarocards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "poke-collect.com",
+  "base": "https://poke-collect.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (48 collections)"
+ },
+ {
+  "host": "mhdealsplus.com",
+  "base": "https://mhdealsplus.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (73 collections)"
+ },
+ {
+  "host": "n4ytcg.com",
+  "base": "https://www.n4ytcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (30 collections)"
+ },
+ {
+  "host": "loosepacks.com",
+  "base": "https://loosepacks.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (137 collections)"
+ },
+ {
+  "host": "tcgora.com",
+  "base": "https://tcgora.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "roboskillz.com",
+  "base": "https://www.roboskillz.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (26 collections)"
+ },
+ {
+  "host": "stonebrookcollectibles.com",
+  "base": "https://stonebrookcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (46 collections)"
+ },
+ {
+  "host": "nerdzoic.com",
+  "base": "https://nerdzoic.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (284 collections)"
+ },
+ {
+  "host": "evanstongames.com",
+  "base": "https://evanstongames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (33 collections)"
+ },
+ {
+  "host": "ettingames.com",
+  "base": "https://ettingames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (87 collections)"
+ },
+ {
+  "host": "fayetteville.geargamingstore.com",
+  "base": "https://fayetteville.geargamingstore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (67 collections)"
+ },
+ {
+  "host": "gatecitygames.us",
+  "base": "https://gatecitygames.us",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "hobbyvault.com",
+  "base": "https://hobbyvault.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (26 collections)"
+ },
+ {
+  "host": "madtownhobby.com",
+  "base": "https://madtownhobby.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (28 collections)"
+ },
+ {
+  "host": "tcghobby.com",
+  "base": "https://www.tcghobby.com",
+  "market": "US",
+  "ok": false,
+  "name": "TCGHOBBY",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(27):1/27",
+   "yu-gi-oh-booster-box(12):1/12",
+   "yu-gi-oh-single-cards(8):0/8"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! TCG Code Of The Duelist Booster Box",
+   "Yu-Gi-Oh! TCG Code Of The Duelist Booster Box"
+  ]
+ },
+ {
+  "host": "primecitycomics.com",
+  "base": "https://primecitycomics.com",
+  "market": "US",
+  "ok": false,
+  "name": "PRIME CITY COMICS",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "card-game-smd(36):0/7",
+   "yu-gi-oh-cards(22):0/4"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gamerealm.com",
+  "base": "https://gamerealm.com",
+  "market": "US",
+  "ok": false,
+  "name": "Game Realm",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0",
+   "yu-gi-oh-singles(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "mythicforgegames.com",
+  "base": "https://mythicforgegames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "alchemistsrefuge.shop",
+  "base": "https://alchemistsrefuge.shop",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1368 collections)"
+ },
+ {
+  "host": "oldschoolgamesandcards.com",
+  "base": "https://oldschoolgamesandcards.com",
+  "market": "US",
+  "ok": false,
+  "name": "Old School Games And Cards ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed-product(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "pfcomics.com",
+  "base": "https://pfcomics.com",
+  "market": "US",
+  "ok": false,
+  "name": "Pulp Fiction Comics & Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles-all(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "moonshotgamestore.com",
+  "base": "https://moonshotgamestore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (469 collections)"
+ },
+ {
+  "host": "store.mothershipatx.com",
+  "base": "https://store.mothershipatx.com",
+  "market": "US",
+  "ok": true,
+  "name": "Mothership Books and Games - Austin",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 16,
+  "inStock": 3,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(112):16/47"
+  ],
+  "samples": [
+   "Yugioh 2025 Mega-Pack Bundle",
+   "Yugioh Spirit Charmers All-Foil Edition The Chronicles Deck",
+   "Yugioh Legendary Arc-V Decks Box Set",
+   "Yugioh Quarter Century Stampede Booster Box",
+   "Yugioh Rarity Collection 5 Booster Pack",
+   "Yugioh 25th Anniversary Rarity 2 Booster Pack"
+  ]
+ },
+ {
+  "host": "wnygaming.com",
+  "base": "https://wnygaming.com",
+  "market": "US",
+  "ok": true,
+  "name": "WNY Gaming",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles-all",
+   "yugioh-singles-instock"
+  ],
+  "kind": "singles",
+  "matched": 93,
+  "inStock": 93,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles-all(1447):72/250",
+   "yugioh-singles-instock(37):36/37"
+  ],
+  "samples": [
+   "Fire King Courtier Ulcanix [ROTA-EN098] Secret Rare",
+   "Solemn Strike (Quarter Century Secret Rare) [RA02-EN079] Quarter Century Secret Rare",
+   "Thunder King Rai-Oh [YG02-EN001] Secret Rare",
+   "Primite Drillbeam [ROTA-EN060] Ultra Rare",
+   "Soul Servant (Platinum Secret Rare) [RA03-EN271] Platinum Secret Rare",
+   "Light and Darkness Dragonlord [INFO-EN034] Ultra Rare"
+  ]
+ }
+]

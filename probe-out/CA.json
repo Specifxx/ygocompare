@@ -1,0 +1,1326 @@
+[
+ {
+  "host": "jacksonqueen.ca",
+  "base": "https://jacksonqueen.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (160 collections)"
+ },
+ {
+  "host": "toysnowman.com",
+  "base": "https://toysnowman.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (139 collections)"
+ },
+ {
+  "host": "shop.espercardsandgames.com",
+  "base": "https://shop.espercardsandgames.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (34 collections)"
+ },
+ {
+  "host": "hobbyexpert.ca",
+  "base": "https://hobbyexpert.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (389 collections)"
+ },
+ {
+  "host": "empiretradings.com",
+  "base": "https://www.empiretradings.com",
+  "market": "CA",
+  "ok": false,
+  "name": "EMPIRE TRADING",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-events(0):0/0",
+   "yu-gi-oh-pre-order(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "redriotgames.ca",
+  "base": "https://redriotgames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (275 collections)"
+ },
+ {
+  "host": "eclipsegames.ca",
+  "base": "https://eclipsegames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (45 collections)"
+ },
+ {
+  "host": "invasioncnc.ca",
+  "base": "https://invasioncnc.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Invasion Inc",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-singls(1123):0/250",
+   "yu-gi-oh-sealed(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "laboutiquemythique.com",
+  "base": "https://laboutiquemythique.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (285 collections)"
+ },
+ {
+  "host": "game-time.ca",
+  "base": "https://game-time.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (185 collections)"
+ },
+ {
+  "host": "boutiquelapioche.com",
+  "base": "https://boutiquelapioche.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (817 collections)"
+ },
+ {
+  "host": "wanderingadventures.ca",
+  "base": "https://wanderingadventures.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (282 collections)"
+ },
+ {
+  "host": "northernwartable.com",
+  "base": "https://northernwartable.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (39 collections)"
+ },
+ {
+  "host": "everythinggames.ca",
+  "base": "https://everythinggames.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Everything Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "sealed-yugioh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tapsgames.com",
+  "base": "https://tapsgames.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Taps Games",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 9,
+  "inStock": 9,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(36):9/36",
+   "black-friday-tcgs-one-piece-yu-gi-oh-and-more(38):2/38",
+   "yu-gi-oh-preorder(5):0/5"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Mega-Pack Bundle 2025",
+   "Yu-Gi-Oh! 25th Anniversary Tin: Dueling Heroes - Mega Pack (1st Edition)",
+   "Yu-Gi-Oh! Battles of Legend: Glorious Gallery - Booster Box (First Edition)",
+   "Yu-Gi-Oh! Crossover Breakers - Booster Box",
+   "Yu-Gi-Oh! 25th Anniversary Rarity Collection 2 - Booster Box (1st Edition)",
+   "Yu-Gi-Oh! The Infinite Forbidden - Booster Box (1st Edition)"
+  ]
+ },
+ {
+  "host": "itsgametime.ca",
+  "base": "https://itsgametime.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Game Time Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "boutiqueartefact.com",
+  "base": "https://boutiqueartefact.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "silvergoblin.cards",
+  "base": "https://silvergoblin.cards",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (107 collections)"
+ },
+ {
+  "host": "vulcancollectibles.com",
+  "base": "https://vulcancollectibles.com",
+  "market": "CA",
+  "ok": false,
+  "name": "VulcanCollectibles",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 2,
+  "currency": "CAD",
+  "reason": "matched 2, in stock 2",
+  "tried": [
+   "yu-gi-oh(6):2/6",
+   "yu-gi-oh-1(2):2/2"
+  ],
+  "samples": [
+   "Yugioh : Limited Pack World Championship 2026",
+   "Beyond the Brave Booster Box [1st Edition] Pre-Order October 9th",
+   "Yugioh : Limited Pack World Championship 2026",
+   "Beyond the Brave Booster Box [1st Edition] Pre-Order October 9th"
+  ]
+ },
+ {
+  "host": "cartesleo.ca",
+  "base": "https://cartesleo.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (165 collections)"
+ },
+ {
+  "host": "amusengames.ca",
+  "base": "https://amusengames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (708 collections)"
+ },
+ {
+  "host": "3mana.ca",
+  "base": "https://3mana.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "3 Mana CA",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed-in-stock(0):0/0",
+   "yugioh-singles-instock(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "drawforturn.ca",
+  "base": "https://drawforturn.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Draw For Turn Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-event(0):0/0",
+   "yu-gi-oh-sealed(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "abbyboardwalk.com",
+  "base": "https://abbyboardwalk.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (22 collections)"
+ },
+ {
+  "host": "203collectibles.com",
+  "base": "https://203collectibles.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (36 collections)"
+ },
+ {
+  "host": "thedropcardshop.com",
+  "base": "https://thedropcardshop.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (151 collections)"
+ },
+ {
+  "host": "torchlightgh.com",
+  "base": "https://torchlightgh.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (418 collections)"
+ },
+ {
+  "host": "animealley.ca",
+  "base": "https://animealley.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "store.401games.ca",
+  "base": "https://store.401games.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "401 Games",
+  "existingKey": null,
+  "collections": [
+   "all-yugioh",
+   "yugioh-25th-anniversary-tin-dueling-mirrors",
+   "high-end-yugioh-singles",
+   "boxing-week-2022-yugioh-movie-packs"
+  ],
+  "kind": "both",
+  "matched": 460,
+  "inStock": 265,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "all-yugioh(60084):168/250",
+   "yugioh-25th-anniversary-tin-dueling-mirrors(402):127/250",
+   "high-end-yugioh-singles(124):88/121",
+   "boxing-week-2022-yugioh-movie-packs(297):78/250",
+   "collectors-corner-yugioh(195):38/153",
+   "fall-sale-2021-yugioh(11):6/10",
+   "events-by-game-yugioh(194):0/15",
+   "a-great-place-to-begin-yu-gi-oh(0):0/0"
+  ],
+  "samples": [
+   "Yugioh - 2022 Tin of the Pharaoh's Gods",
+   "Yugioh - 2021 Tin of Ancient Battles",
+   "Yugioh - Ghosts From The Past: The 2nd Haunting - 1st Edition (Display of 5)",
+   "Yugioh - Legendary Collection: 25th Anniversary Edition",
+   "Yugioh - Ghosts From the Past - 1st Edition - (Display of 5)",
+   "Yugioh - 2023 Tin - 25th Anniversary: Dueling Heroes - 1st Edition"
+  ]
+ },
+ {
+  "host": "negativezonecomics.com",
+  "base": "https://negativezonecomics.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (41 collections)"
+ },
+ {
+  "host": "manaconfluence.com",
+  "base": "https://manaconfluence.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (61 collections)"
+ },
+ {
+  "host": "mantatrading.com",
+  "base": "https://mantatrading.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Manta Trading",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(4):0/3"
+  ],
+  "samples": []
+ },
+ {
+  "host": "skyfoxgames.com",
+  "base": "https://www.skyfoxgames.com",
+  "market": "CA",
+  "ok": true,
+  "name": "SKYFOX GAMES",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles-all",
+   "yu-gi-oh-tcg",
+   "yugioh-booster-packs",
+   "yugioh-booster-boxes"
+  ],
+  "kind": "both",
+  "matched": 421,
+  "inStock": 162,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles-all(46785):182/250",
+   "yu-gi-oh-tcg(284):153/250",
+   "yugioh-booster-packs(219):137/211",
+   "yu-gi-oh-sealed-booster-packs(135):92/132",
+   "yugioh-booster-boxes(139):85/121",
+   "yu-gi-oh-sealed-booster-box(55):34/47",
+   "yugioh-structure-decks-sealed-test(53):25/48",
+   "yu-gi-oh-preorders(45):1/3",
+   "events-1(48):0/9",
+   "yu-gi-oh-funko-pops(44):0/44"
+  ],
+  "samples": [
+   "Shrink [SJC-EN003] Ultra Rare",
+   "Crush Card Virus [SJCS-EN004] Ultra Rare",
+   "Minerva, the Exalted Lightsworn [YCSW-EN008] Ultra Rare",
+   "Chaos Emperor, the Dragon of Armageddon [YCSW-EN011] Ultra Rare",
+   "Blood Mefist [YCSW-EN004] Ultra Rare",
+   "Number 89: Diablosis the Mind Hacker [YCSW-EN010] Ultra Rare"
+  ]
+ },
+ {
+  "host": "springerhobbies.com",
+  "base": "https://springerhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (130 collections)"
+ },
+ {
+  "host": "cryptmtg.com",
+  "base": "https://cryptmtg.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "cards.collect-edition.com",
+  "base": "https://cards.collect-edition.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (971 collections)"
+ },
+ {
+  "host": "newrealmgames.com",
+  "base": "https://newrealmgames.com",
+  "market": "CA",
+  "ok": true,
+  "name": "New Realm Games",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles",
+   "yugioh-sealed-product"
+  ],
+  "kind": "both",
+  "matched": 183,
+  "inStock": 11,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles(163):96/163",
+   "yugioh-sealed-product(179):87/171",
+   "yugioh-pre-order(1):0/1"
+  ],
+  "samples": [
+   "Yugioh - 25th Anniversary Tin: Dueling Heroes - 1st Edition",
+   "Yugioh - 2022 Tin of the Pharaoh's Gods",
+   "Yugioh - Battle of Chaos Booster Box - 1st Edition",
+   "Yugioh - Structure Deck - Blue Eyes - White Destiny",
+   "Yugioh - Darkwing Blast Booster Box - 1st Edition",
+   "Yugioh - Legendary Collection: 25th Anniversary Edition"
+  ]
+ },
+ {
+  "host": "boardgamebliss.com",
+  "base": "https://www.boardgamebliss.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (2000 collections)"
+ },
+ {
+  "host": "thecgrealm.com",
+  "base": "https://thecgrealm.com",
+  "market": "CA",
+  "ok": true,
+  "name": "The CG Realm",
+  "existingKey": null,
+  "collections": [
+   "yugioh-high-end",
+   "yugioh-singles-instock"
+  ],
+  "kind": "singles",
+  "matched": 328,
+  "inStock": 328,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-high-end(431):213/250",
+   "yugioh-singles-instock(25748):116/250",
+   "yugioh-sealed(31):4/31"
+  ],
+  "samples": [
+   "Graceful Charity (SDP-040) - Starter Deck: Pegasus Unlimited",
+   "Trap Dustshoot (PGD-049) - Pharaonic Guardian Unlimited",
+   "Knightmare Phoenix (GEIM-EN051) - Genesis Impact 1st Edition",
+   "Infinite Impermanence (SDCS-EN036) - Structure Deck: Cyber Strike Unlimited",
+   "Red Dragon Archfiend (HSRD-EN023) - High-Speed Riders 1st Edition",
+   "Bystial Magnamhut (DABL-EN006) - Darkwing Blast 1st Edition"
+  ]
+ },
+ {
+  "host": "infinitycards.ca",
+  "base": "https://www.infinitycards.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (42 collections)"
+ },
+ {
+  "host": "hairyt.com",
+  "base": "https://www.hairyt.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (258 collections)"
+ },
+ {
+  "host": "luniversdelacarte.ca",
+  "base": "https://luniversdelacarte.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (386 collections)"
+ },
+ {
+  "host": "piratecards.shop",
+  "base": "https://piratecards.shop",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (26 collections)"
+ },
+ {
+  "host": "manacore.ca",
+  "base": "https://manacore.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (40 collections)"
+ },
+ {
+  "host": "cardboardclassics.ca",
+  "base": "https://cardboardclassics.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (416 collections)"
+ },
+ {
+  "host": "skafexpress.ca",
+  "base": "https://www.skafexpress.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Let's Play! Cards and Games!",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(157):5/52",
+   "yu-gi-oh(2):1/1",
+   "yugioh-boxes(0):0/0"
+  ],
+  "samples": [
+   "Yugioh Battle Of Chaos 1st Edition Single Pack",
+   "YGO Holiday Box 2022 (Magnificent Mavens)",
+   "Yugioh Magnificent Monsters Box LIMIT 10",
+   "YuGiOh 2025 Mega Pack Bundle",
+   "Lightly Played Blue-Eyes White dragon #SDK-001 Unlimited (Cabinet-MP)",
+   "Lightly Played Blue-Eyes White dragon #SDK-001 Unlimited (Cabinet-MP)"
+  ]
+ },
+ {
+  "host": "carderaco.com",
+  "base": "https://carderaco.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (77 collections)"
+ },
+ {
+  "host": "sunnyhobbies.com",
+  "base": "https://sunnyhobbies.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Sunny Hobbies",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles-tcg",
+   "yugioh",
+   "yugioh-singles"
+  ],
+  "kind": "both",
+  "matched": 220,
+  "inStock": 129,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles-tcg(8239):94/250",
+   "yugioh(303):69/188",
+   "yugioh-singles(53854):57/250",
+   "yugioh-pre-order(11):1/3",
+   "ygo-deck-cores(28):0/26",
+   "yugioh-singles-non-english(13):0/13"
+  ],
+  "samples": [
+   "\"Infernoble Arms - Almace\" (Quarter Century Secret Rare) - DUNE-EN056 - Duelist Nexus 1st Edition",
+   "\"Infernoble Arms - Almace\" - DUNE-EN056 - Duelist Nexus 1st Edition",
+   "\"Infernoble Arms - Durendal\" - ROTD-EN053 - Rise of the Duelist 1st Edition",
+   "- 2021 Tin of Ancient Battles 1st Edition",
+   "- 2021 Tin of Ancient Battles 1st Edition",
+   "- 2021 Tin of Ancient Battles 1st Edition"
+  ]
+ },
+ {
+  "host": "championcitygames.ca",
+  "base": "https://championcitygames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (25 collections)"
+ },
+ {
+  "host": "diademhobbies.com",
+  "base": "https://diademhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Diadem Cards & Hobbies",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(205):22/205"
+  ],
+  "samples": [
+   "Millennium Ankh - 2025 Mega-Pack (MP25) NM",
+   "The Black Goat Laughs - 2025 Mega-Pack (MP25) NM",
+   "Ame no Murakumo no Mitsurugi (Emblazoned Secret Rare) - Limited Pack World Championship 2026 (26LP) NM *FOIL*",
+   "Lunalight Masquerade (Emblazoned Secret Rare) - Limited Pack World Championship 2026 (26LP) NM *FOIL*",
+   "YummySnatchy (Emblazoned Alternate Art) - Limited Pack World Championship 2026 (26LP) NM *FOIL*",
+   "YummySnatchy (Emblazoned Secret Rare) - Limited Pack World Championship 2026 (26LP) NM *FOIL*"
+  ]
+ },
+ {
+  "host": "dungeoncomicsandcards.ca",
+  "base": "https://dungeoncomicsandcards.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (516 collections)"
+ },
+ {
+  "host": "kapescaping.ca",
+  "base": "https://kapescaping.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (20 collections)"
+ },
+ {
+  "host": "envcollectible.com",
+  "base": "https://envcollectible.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (94 collections)"
+ },
+ {
+  "host": "pandahobby.ca",
+  "base": "https://pandahobby.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (485 collections)"
+ },
+ {
+  "host": "tistacards.com",
+  "base": "https://tistacards.com",
+  "market": "CA",
+  "ok": true,
+  "name": "TistaCards",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles-instock",
+   "yugioh-singles-all"
+  ],
+  "kind": "singles",
+  "matched": 320,
+  "inStock": 239,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles-instock(6988):232/250",
+   "yugioh-singles-all(46513):92/250",
+   "yugioh-sealed-all(1785):2/2"
+  ],
+  "samples": [
+   "Celtic Guardian (25th Anniversary) [LOB-EN007] Super Rare",
+   "Condolence Puppet [IGAS-EN059] Common",
+   "Cosmic Blazar Dragon [LED6-EN029] Common",
+   "Dark Magician [SYE-001] Super Rare",
+   "Centur-Ion Auxila [LEDE-EN042] Secret Rare",
+   "Kashtira Arise-Heart [PHHY-EN046] Secret Rare"
+  ]
+ },
+ {
+  "host": "radgameshop.ca",
+  "base": "https://www.radgameshop.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "thesidedeck.ca",
+  "base": "https://thesidedeck.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "The Side Deck ",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-singles-now-in-stock",
+   "yu-gi-oh-1",
+   "yu-gi-oh-sealed-products"
+  ],
+  "kind": "both",
+  "matched": 329,
+  "inStock": 281,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-singles-now-in-stock(27426):217/250",
+   "yu-gi-oh-1(54782):74/250",
+   "yu-gi-oh-sealed-products(110):39/99",
+   "yu-gi-oh-booster-packs(34):13/34",
+   "yu-gi-oh-booster-boxes(39):11/33",
+   "yu-gi-oh-structure-and-starter-decks(17):5/16",
+   "yu-gi-oh-special-edition-sets-and-blisters(8):4/7",
+   "yu-gi-oh-tins(4):4/4",
+   "yu-gi-oh-pre-orders(4):1/4",
+   "yu-gi-oh-legendary-collections-and-decks(6):0/5"
+  ],
+  "samples": [
+   "Magistus Chorozo (SUDA-EN100) - Supreme Darkness 1st Edition",
+   "The Hallowed Azamina (ROTA-EN053) - Rage of the Abyss 1st Edition",
+   "Secreterion Dragon (DUAD-EN037) - Duelist's Advance 1st Edition",
+   "Eclipse Twins (SUDA-EN047) - Supreme Darkness 1st Edition",
+   "Therion \"King\" Regulus (MP23-EN063) - 25th Anniversary Tin: Dueling Heroes Mega Pack 1st Edition",
+   "Garura, Wings of Resonant Life (UR) (RA02-EN024) - 25th Anniversary Rarity Collection II 1st Edition"
+  ]
+ },
+ {
+  "host": "seatoskygames.com",
+  "base": "https://seatoskygames.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (459 collections)"
+ },
+ {
+  "host": "teamcollectors.com",
+  "base": "https://teamcollectors.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (19 collections)"
+ },
+ {
+  "host": "tabletopgiant.ca",
+  "base": "https://tabletopgiant.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Tabletop Giant",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tcg.dragoncardsandgames.com",
+  "base": "https://tcg.dragoncardsandgames.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Dragon Cards & Games",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles-instock",
+   "yugioh-singles-all"
+  ],
+  "kind": "singles",
+  "matched": 301,
+  "inStock": 172,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles-instock(887):172/250",
+   "yugioh-singles-all(46580):169/250"
+  ],
+  "samples": [
+   "Kashtira Fenrir [MP23-EN163] Prismatic Secret Rare",
+   "D/D/D Wave High King Caesar [OP24-EN009] Super Rare",
+   "Lovely Labrynth of the Silver Castle [MP23-EN226] Prismatic Secret Rare",
+   "Infinite Impermanence [MAMA-EN100] Ultra Rare",
+   "Kashtira Birth [MP23-EN200] Prismatic Secret Rare",
+   "Unchained Soul Lord of Yama [DUNE-EN049] Ultra Rare"
+  ]
+ },
+ {
+  "host": "prestigegames.ca",
+  "base": "https://prestigegames.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Prestige Games",
+  "existingKey": null,
+  "collections": [
+   "yugioh"
+  ],
+  "kind": "sealed",
+  "matched": 16,
+  "inStock": 14,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh(30):16/22",
+   "ygo-featured(29):15/21",
+   "yugioh-booster-box(11):8/8",
+   "yugioh-single-pack(7):3/3",
+   "yugioh-tuck-box(3):2/3",
+   "yugioh-structure-deck(1):1/1",
+   "yugioh-tin(1):1/1",
+   "yugioh-modern-deck(1):0/0"
+  ],
+  "samples": [
+   "Yugioh! - Chaos Origins Booster Pack - 1st Edition",
+   "Yugioh! - Chaos Origins Booster Box - 1st Edition",
+   "Yugioh! - Structure Deck: Blue-Eyes White Destiny",
+   "Yugioh! - Trading Card Game - Magnificent Monsters Box - 1st Edition",
+   "Yugioh - 2021 Tin of Ancient Battles",
+   "Yugioh! - Maze of Memories Booster Box - 1st Edition"
+  ]
+ },
+ {
+  "host": "twinmoonstcg.com",
+  "base": "https://twinmoonstcg.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (12 collections)"
+ },
+ {
+  "host": "trinityhobby.com",
+  "base": "https://trinityhobby.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Trinity Hobby",
+  "existingKey": null,
+  "collections": [
+   "yugioh-new-arrivals",
+   "ygo-sealed"
+  ],
+  "kind": "both",
+  "matched": 171,
+  "inStock": 171,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-new-arrivals(200):161/200",
+   "ygo-sealed(20):10/20"
+  ],
+  "samples": [
+   "Foolish Burial Goods [MP17-EN218] Secret Rare",
+   "Illusion Gate [MZMU-EN023] - Maze of Muertos 1st Edition - Secret Rare",
+   "Nervedo the Shadebeast Power Patron [BLZD-EN011] - Blazing Dominion 1st Edition - Ultra Rare",
+   "Angelechy Opening to e4 [CORI-EN096] - Chaos Origins 1st Edition - Ultra Rare",
+   "Theorealized Medius (Starlight Rare) [BETB-EN017] - Beyond the Brave 1st Edition - Starlight Rare",
+   "Cyber Dragon Herz [CYHO-EN015] Ultra Rare"
+  ]
+ },
+ {
+  "host": "ateliertcg.com",
+  "base": "https://ateliertcg.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (dth=device-width, initial-scale=1\">\n<title>Page not found | L&#39;Atelier TCG</t)"
+ },
+ {
+  "host": "paradoxtcg.com",
+  "base": "https://paradoxtcg.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (https://paradoxtcg.com/meta.json: HTTP 500)"
+ },
+ {
+  "host": "tkotoyco.com",
+  "base": "https://tkotoyco.com",
+  "market": "CA",
+  "ok": true,
+  "name": "TKO Toy Company",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-magnificent-monsters-world-championship-2026-singles",
+   "yu-gi-oh-singles",
+   "yu-gi-oh-sealed"
+  ],
+  "kind": "both",
+  "matched": 230,
+  "inStock": 137,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-magnificent-monsters-world-championship-2026-singles(315):166/250",
+   "yu-gi-oh-singles(695):123/250",
+   "yu-gi-oh-sealed(20):15/19",
+   "yugioh-chaos-origins(3):2/2",
+   "yu-gi-oh-beyond-the-brave-sealed(2):2/2"
+  ],
+  "samples": [
+   "Red Dragon Archfiend [TDGS-EN041] Ultimate Rare",
+   "Monster Reborn [26LP-EN001] Starlight Rare",
+   "Pot of Greed [DPKB-EN029] Ultimate Rare",
+   "The Great Gallant Bandit [BETB-EN027] Secret Rare",
+   "Mystical Refpanel [DREV-EN090] Secret Rare",
+   "Harpie's Pet Baby Dragon [EOJ-EN013] Ultimate Rare"
+  ]
+ },
+ {
+  "host": "comfyhobbies.com",
+  "base": "https://comfyhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "totalplay.ca",
+  "base": "https://totalplay.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Total Play",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles-instock",
+   "yugioh-singles-all"
+  ],
+  "kind": "singles",
+  "matched": 344,
+  "inStock": 259,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yugioh-singles-instock(2910):239/250",
+   "yugioh-singles-all(46792):116/250",
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": [
+   "Eternal Soul [LDK2-ENS06] Secret Rare",
+   "Dark Magician [SYE-001] Super Rare",
+   "Relinquished Anima [BROL-EN087] Secret Rare",
+   "Blue-Eyes White Dragon [SDK-001] Ultra Rare",
+   "K9-17 Izuna [JUSH-EN031] Ultra Rare",
+   "Galaxy-Eyes Cipher X Dragon [GFTP-EN011] Ultra Rare"
+  ]
+ },
+ {
+  "host": "cardlegendstcg.com",
+  "base": "https://www.cardlegendstcg.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Card Legends TCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "elitecardstoronto.com",
+  "base": "https://elitecardstoronto.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "flaringlair.com",
+  "base": "https://flaringlair.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (122 collections)"
+ },
+ {
+  "host": "mysticalsparktcg.ca",
+  "base": "https://www.mysticalsparktcg.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "pokegemsmtl.com",
+  "base": "https://pokegemsmtl.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (236 collections)"
+ },
+ {
+  "host": "hobbystoptcg.com",
+  "base": "https://www.hobbystoptcg.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Hobby Stop TCG ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "ygo(2):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "vancitytcg.ca",
+  "base": "https://www.vancitytcg.ca",
+  "ok": false,
+  "reason": "not Shopify or unreachable (l; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta nam)"
+ },
+ {
+  "host": "vancitycj.com",
+  "base": "https://vancitycj.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (89 collections)"
+ },
+ {
+  "host": "popcollectibles.ca",
+  "base": "https://popcollectibles.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "Pop Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(62):0/62"
+  ],
+  "samples": []
+ },
+ {
+  "host": "toontownhobbies.com",
+  "base": "https://toontownhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "name": "ToonTownHobbies",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "yumecards.ca",
+  "base": "https://www.yumecards.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "shop.bastiongames.ca",
+  "base": "https://shop.bastiongames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "bootownsgamesandhobbies.com",
+  "base": "https://bootownsgamesandhobbies.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (239 collections)"
+ },
+ {
+  "host": "vaultedicons.com",
+  "base": "https://vaultedicons.com",
+  "market": "CA",
+  "ok": false,
+  "name": "Vaulted Icons",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-tcg(2):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gamebridge.ca",
+  "base": "https://gamebridge.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (100 collections)"
+ },
+ {
+  "host": "pandorasboox.ca",
+  "base": "https://pandorasboox.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (48 collections)"
+ },
+ {
+  "host": "magicartestore.com",
+  "base": "https://magicartestore.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "shopmancalamonk.com",
+  "base": "https://shopmancalamonk.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "taverneducollectionneur.com",
+  "base": "https://taverneducollectionneur.com",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (41 collections)"
+ },
+ {
+  "host": "upnorthgames.ca",
+  "base": "https://upnorthgames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (15 collections)"
+ },
+ {
+  "host": "waypointgames.ca",
+  "base": "https://waypointgames.ca",
+  "market": "CA",
+  "ok": false,
+  "reason": "no ygo collection (121 collections)"
+ },
+ {
+  "host": "houseofcards.ca",
+  "base": "https://www.houseofcards.ca",
+  "market": "CA",
+  "ok": false,
+  "name": "House of Cards ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "CAD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0",
+   "yu-gi-oh-singles(0):0/0",
+   "yu-gi-oh-tins-box-sets(0):0/0",
+   "yu-gi-oh-sealed-product(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "store.wizardtower.com",
+  "base": "https://store.wizardtower.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Wizard's Tower",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-booster-packs"
+  ],
+  "kind": "sealed",
+  "matched": 6,
+  "inStock": 6,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-tcg(75):8/48",
+   "yu-gi-oh-booster-packs(34):6/30",
+   "yu-gi-oh-booster-boxes(35):4/18",
+   "yu-gi-oh-decks(8):0/2"
+  ],
+  "samples": [
+   "Yu-Gi-Oh 25th Anniversary Rarity Collection II Booster Pack",
+   "Yu-Gi-Oh Magnificent Monsters Box",
+   "Yu-Gi-Oh Legendary Duelists Soulburning Volcano Booster Pack",
+   "Yu-Gi-Oh Battles of Legend Monstrous Revenge Booster Pack",
+   "Yu-Gi-Oh Crossover Breakers Booster Pack",
+   "Yu-Gi-Oh 25th Anniversary Rarity Collection II Booster Box"
+  ]
+ },
+ {
+  "host": "chimeragamingonline.com",
+  "base": "https://chimeragamingonline.com",
+  "market": "CA",
+  "ok": true,
+  "name": "Chimera Gaming",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-new-releases"
+  ],
+  "kind": "sealed",
+  "matched": 11,
+  "inStock": 4,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-new-releases(48):11/46",
+   "yu-gi-oh(24):6/24",
+   "yu-gi-oh-booster-boxes-on-sale(11):2/11",
+   "yu-gi-oh-locals(30):0/21",
+   "yu-gi-oh-premiere-tickets(0):0/0",
+   "yu-gi-oh-preorders(0):0/0",
+   "yu-gi-oh-events(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh Blue Eyes White Destiny Structure Deck",
+   "Yu-gi-oh - Crossover Breakers Booster Pack",
+   "Yu-gi-oh - Crossover Breakers Booster Box",
+   "Yu-Gi-Oh Quarter Century Bonanza Booster Pack",
+   "Yu-Gi-Oh Quarter Century Bonanza Booster Box",
+   "Yu-Gi-Oh Battles of Legend Terminal Revenge Booster Pack"
+  ]
+ },
+ {
+  "host": "untouchables.ca",
+  "base": "https://untouchables.ca",
+  "market": "CA",
+  "ok": true,
+  "name": "Untouchables",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-showcase",
+   "ygo-oos-tax",
+   "yu-gi-oh-tcg-singles-collection",
+   "yu-gi-oh-doom-of-dimensions"
+  ],
+  "kind": "singles",
+  "matched": 458,
+  "inStock": 420,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-showcase(319):236/250",
+   "ygo-oos-tax(40865):180/250",
+   "yu-gi-oh-tcg-singles-collection(46763):73/250",
+   "ygo-tax-in-bootleg(6480):72/250",
+   "yu-gi-oh-doom-of-dimensions(132):47/132",
+   "holiday-yugioh-sales(158):17/143",
+   "yu-gi-oh-tcg(158):17/143",
+   "ygo-singles-full(168):0/0",
+   "yu-gi-oh-model-kits(8):0/8",
+   "yugioh-showcase(4):0/0"
+  ],
+  "samples": [
+   "Lacrima the Crimson Tears [ROTA-EN014] Secret Rare",
+   "Forbidden Droplet [RA01-EN064] Super Rare",
+   "Arms of Genex Return Zero [BLTR-EN009] Secret Rare",
+   "Radiant Typhoon Chant [DOOD-EN061] Ultra Rare",
+   "Mitsurugi Ritual [SUDA-EN095] Ultra Rare",
+   "Winged Kuriboh LV6 [BLTR-EN001] Secret Rare"
+  ]
+ },
+ {
+  "host": "realmhoppers.com",
+  "base": "https://www.realmhoppers.com",
+  "market": "CA",
+  "ok": true,
+  "name": "REALM HOPPERS",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh",
+   "yu-gi-oh-tcg-in-stock-singles-copy",
+   "yu-gi-oh-normal-monster-in-stock-singles-copy",
+   "yu-gi-oh-spell-card-in-stock-singles-copy"
+  ],
+  "kind": "singles",
+  "matched": 521,
+  "inStock": 521,
+  "currency": "CAD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(5619):239/250",
+   "yu-gi-oh-tcg-in-stock-singles-copy(2000):201/250",
+   "yu-gi-oh-normal-monster-in-stock-singles-copy(1323):139/250",
+   "yu-gi-oh-spell-card-in-stock-singles-copy(910):99/250",
+   "yu-gi-oh-link-monster-in-stock-singles-copy-1(211):67/211",
+   "yu-gi-oh-normal-monster-in-stock-singles-copy-1(178):53/178",
+   "yu-gi-oh-synchro-monster-in-stock-singles-copy(195):52/195",
+   "yu-gi-oh-effect-monster-in-stock-singles-copy(180):33/180",
+   "yu-gi-oh-link-monster-in-stock-singles-copy(91):14/91",
+   "yu-gi-oh-fusion-monster-in-stock-singles-copy(159):7/159"
+  ],
+  "samples": [
+   "Dark Flare Knight [DCR-EN017] Super Rare",
+   "Destiny HERO - Dreadnought Master (Starlight Rare) [BETB-EN037] Starlight Rare",
+   "Breaker the Magical Warrior [MFC-071] Ultra Rare",
+   "B. Skull Dragon [MRD-018] Ultra Rare",
+   "Magic Cylinder [LON-EN104] Secret Rare",
+   "Fairy Tail - Matchgiru (Starlight Rare) [BLZD-EN016] Starlight Rare"
+  ]
+ }
+]

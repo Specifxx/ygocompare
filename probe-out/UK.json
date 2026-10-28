@@ -1,0 +1,827 @@
+[
+ {
+  "host": "shop.forbiddenplanet.co.uk",
+  "base": "https://shop.forbiddenplanet.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (976 collections)"
+ },
+ {
+  "host": "yardsgames.com",
+  "base": "https://yardsgames.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (84 collections)"
+ },
+ {
+  "host": "spellboundgames.co.uk",
+  "base": "https://spellboundgames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (1014 collections)"
+ },
+ {
+  "host": "evolutiontradingcards.co.uk",
+  "base": "https://evolutiontradingcards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (358 collections)"
+ },
+ {
+  "host": "axionnow.com",
+  "base": "https://www.axionnow.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Axion Now",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-sealed"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 3, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed(11):3/7",
+   "ygo-tins(3):2/2",
+   "ygo-booster-displays(4):1/2",
+   "ygo-booster-packs(4):0/3"
+  ],
+  "samples": [
+   "25th Anniversary Tin: Dueling Heroes",
+   "Speed Duel: Streets of Battle City Box",
+   "Legendary Duelists 10: Soulburning Volcano 1st Edition Booster Display",
+   "Legendary Duelists 10: Soulburning Volcano 1st Edition Booster Display",
+   "25th Anniversary Tin: Dueling Heroes",
+   "Speed Duel: Streets of Battle City Box"
+  ]
+ },
+ {
+  "host": "redsuncollectables.com",
+  "base": "https://redsuncollectables.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Red Sun Collectables",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "bulwarkgames.co.uk",
+  "base": "https://bulwarkgames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (296 collections)"
+ },
+ {
+  "host": "thistletavern.com",
+  "base": "https://thistletavern.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Thistle Tavern",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(52):1/16",
+   "yu-gi-oh-booster-boxes-packs(30):1/9",
+   "yu-gi-oh-singles(752):0/250",
+   "yu-gi-oh-quarter-century-bonanza(287):0/250",
+   "yu-gi-oh-new-releases(1):0/1"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! World Championship 2026 Limited Pack OTS EXCLUSIVE",
+   "Yu-Gi-Oh! World Championship 2026 Limited Pack OTS EXCLUSIVE"
+  ]
+ },
+ {
+  "host": "unioncountygames.co.uk",
+  "base": "https://unioncountygames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (937 collections)"
+ },
+ {
+  "host": "dicesaloonsingles.co.uk",
+  "base": "https://dicesaloonsingles.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Dice Saloon Singles",
+  "existingKey": null,
+  "collections": [
+   "yugioh-sealed"
+  ],
+  "kind": "sealed",
+  "matched": 17,
+  "inStock": 9,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "yugioh-sealed(47):17/39",
+   "yu-gi-oh(18):9/16"
+  ],
+  "samples": [
+   "Phantom Revenge Booster Pack [1st Edition]",
+   "Duelist's Advance - Booster Pack (1st Edition)",
+   "Supreme Darkness - Booster Pack (1st Edition)",
+   "Duelist Nexus - Booster Pack (1st Edition)",
+   "Dimension Force - Booster Pack (1st Edition)",
+   "Crossover Breakers - Booster Pack"
+  ]
+ },
+ {
+  "host": "moxinthehole.co.uk",
+  "base": "https://moxinthehole.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Mox in the Hole",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "board-game.co.uk",
+  "base": "https://www.board-game.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (30 collections)"
+ },
+ {
+  "host": "7thcitycollectables.com",
+  "base": "https://7thcitycollectables.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (1411 collections)"
+ },
+ {
+  "host": "totalcards.net",
+  "base": "https://totalcards.net",
+  "market": "UK",
+  "ok": true,
+  "name": "Total Cards",
+  "existingKey": null,
+  "collections": [
+   "new-yugioh",
+   "all-yugioh",
+   "featured-yugioh"
+  ],
+  "kind": "both",
+  "matched": 219,
+  "inStock": 151,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "new-yugioh(92):86/92",
+   "all-yugioh(595):77/250",
+   "featured-yugioh(100):66/99",
+   "gaming-centre-event-available-booster-packs-yugioh(8):2/7"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - Magnificent Monsters - Booster Pack",
+   "Yu-Gi-Oh! - Magnificent Maestros Box",
+   "Yu-Gi-Oh! - World Championship 2026 - Limited Pack - Booster Pack",
+   "Yu-Gi-Oh! - Dueling Heroes 25th Anniversary - Mega Tin (Empty)",
+   "Yu-Gi-Oh! - Magnificent Monsters Box",
+   "Yu-Gi-Oh! - Battles of Legend - Chapter 1 - Box 2"
+  ]
+ },
+ {
+  "host": "cardrush.co.uk",
+  "base": "https://www.cardrush.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (1096 collections)"
+ },
+ {
+  "host": "onepiecesingles.com",
+  "base": "https://onepiecesingles.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "comicsandbeyond.co.uk",
+  "base": "https://www.comicsandbeyond.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (959 collections)"
+ },
+ {
+  "host": "gatheringpointgames.co.uk",
+  "base": "https://gatheringpointgames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "GatheringPointGames",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles-all(0):0/0",
+   "yugioh-singles-instock(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "stylecreep.com",
+  "base": "https://www.stylecreep.com",
+  "market": "UK",
+  "ok": false,
+  "name": "stylecreep.com",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "cardgoblin.shop",
+  "base": "https://www.cardgoblin.shop",
+  "market": "UK",
+  "ok": false,
+  "name": "Card Goblin",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(8255):13/250",
+   "yu-gi-oh-singles(5269):12/250",
+   "yugioh(8255):8/250",
+   "yu-gi-oh-battles-of-legend-terminal-revenge-booster-1(225):2/107",
+   "yugioh-single(4669):1/250",
+   "yu-gi-oh-quarter-century-stampede-1(1039):1/250",
+   "yu-gi-oh-quarter-century-bonanza-1(600):1/250",
+   "yugioh-arrivals(2398):0/250",
+   "yu-gi-oh-supreme-darkness-1(201):0/99",
+   "yu-gi-oh-legacy-of-destruction-1(199):0/96"
+  ],
+  "samples": [
+   "Blue-Eyes White Dragon (V.1 - Ultra Rare) - Legend of Blue Eyes White Dragon (Ultra Rare) [LOB-001]",
+   "Yu-Gi-Oh! - Quarter Century Stampede Booster Box",
+   "Yu-Gi-Oh 25th Anniversary Rarity Collection Booster Box",
+   "Yu-Gi-Oh! Quarter Century Bonanza Booster Box",
+   "Yu-Gi-Oh! Age of Overlord Booster Box",
+   "Yu-Gi-Oh! Battles Of Legend: Terminal Revenge Booster Box"
+  ]
+ },
+ {
+  "host": "thegamerslodge.com",
+  "base": "https://thegamerslodge.com",
+  "market": "UK",
+  "ok": true,
+  "name": "The Gamers Lodge ",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 7,
+  "inStock": 5,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(193):7/33",
+   "yu-gi-oh-structure-decks(10):2/7",
+   "yu-gi-oh-tins(3):1/1",
+   "yu-gi-oh-boosters(56):0/7",
+   "yu-gi-oh-phantom-revenge(5):0/1",
+   "yu-gi-oh-burst-protocol(3):0/1",
+   "yu-gi-oh-battles-of-legend-glorious-gallery(2):0/1",
+   "yu-gi-oh-blazing-dominion(1):0/0",
+   "yu-gi-oh-maze-of-muertos(0):0/0",
+   "yugioh-single-cards(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - The Chronicles Deck: The Fallen & The Virtuous (All-Foil Edition)",
+   "Yu-Gi-Oh! - Mega Pack Bundle Tuckbox 2025",
+   "Yu-Gi-Oh! TCG 25th Anniversary Tin: Dueling Heroes",
+   "Yu-Gi-Oh! TCG - Blue Eyes White Destiny Structure Deck",
+   "Yugioh TCG -  Saga Of Blue Eyes White Dragon - Structure Deck Reprint Unlimited Edition",
+   "Yugioh TCG - Codebreaker -Starter Deck 2018"
+  ]
+ },
+ {
+  "host": "tengentreasures.co.uk",
+  "base": "https://tengentreasures.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (33 collections)"
+ },
+ {
+  "host": "unioncountygames.com",
+  "base": "https://www.unioncountygames.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (937 collections)"
+ },
+ {
+  "host": "aftermkt.co.uk",
+  "base": "https://aftermkt.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (31 collections)"
+ },
+ {
+  "host": "shopmysterytavern.co.uk",
+  "base": "https://www.shopmysterytavern.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Mystery Tavern ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):1/1",
+   "yu-gi-oh-booster-packs(1):1/1",
+   "yu-gi-oh-booster-box(0):0/0",
+   "yu-gi-oh-collection-boxes(0):0/0",
+   "yu-gi-oh-decks(0):0/0",
+   "yu-gi-oh-singles(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Legendary Duelists: Duels from the Deep - Booster Pack",
+   "Maze of Memories Booster Pack [1st Edition]"
+  ]
+ },
+ {
+  "host": "sidequestgames.uk",
+  "base": "https://www.sidequestgames.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "E Toys World",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles(201):12/201",
+   "yu-gi-oh-sealed(3):0/3"
+  ],
+  "samples": [
+   "DoomZ Raiders (DOOD-EN057)",
+   "King of the Feral Imps (BLMM-EN154)",
+   "R.B. Lambda Cannon (DOOD-EN090)",
+   "Necroquip Princess (BLMM-EN146)",
+   "Herald of Orange Light (BLMM-EN103)",
+   "Draco Awakening (DOOD-EN064)"
+  ]
+ },
+ {
+  "host": "buyanycards.co.uk",
+  "base": "https://buyanycards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (108 collections)"
+ },
+ {
+  "host": "bristolindependentgaming.co.uk",
+  "base": "https://bristolindependentgaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (338 collections)"
+ },
+ {
+  "host": "thegrumpygoblin.co.uk",
+  "base": "https://thegrumpygoblin.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "The Grumpy Goblin",
+  "existingKey": null,
+  "collections": [
+   "yugioh-singles",
+   "yu-gi-oh-singles",
+   "yu-gi-oh-duel-monsters-international-worldwide-edition"
+  ],
+  "kind": "singles",
+  "matched": 202,
+  "inStock": 75,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "yugioh-singles(4280):134/250",
+   "yu-gi-oh-singles(2667):75/250",
+   "yu-gi-oh-duel-monsters-international-worldwide-edition(4):4/4",
+   "yu-gi-oh-the-movie-promo-set(1):1/1",
+   "yu-gi-oh(3):0/2",
+   "yu-gi-oh-movie-exclusive-pack(1):0/1",
+   "yugioh-preorders(0):0/0"
+  ],
+  "samples": [
+   "Exodia the Forbidden One (MC1-EN001)",
+   "Sky Striker Mecha - Widow Anchor (MAMA-EN010)",
+   "Triple Tactics Talent (Secret Rare) (RA01-EN063)",
+   "Ash Blossom & Joyous Spring (DUDE-EN003)",
+   "Droll & Lock Bird (SR14-EN023)",
+   "Left Arm of the Forbidden One (Quarter Century Secret Rare) (MP24-EN005)"
+  ]
+ },
+ {
+  "host": "crackthepack.com",
+  "base": "https://crackthepack.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (26 collections)"
+ },
+ {
+  "host": "cardandink.com",
+  "base": "https://www.cardandink.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "dungeonsandjoypads.com",
+  "base": "https://dungeonsandjoypads.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (31 collections)"
+ },
+ {
+  "host": "trainerlegacy.com",
+  "base": "https://www.trainerlegacy.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Trainer Legacy",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles-all(1180):9/250",
+   "yugioh-singles-instock(1179):9/250",
+   "yugioh-fusion(0):0/0",
+   "yu-gi-oh-link(0):0/0",
+   "yugioh-monster(0):0/0",
+   "yu-gi-oh-pendulum(0):0/0",
+   "yu-gi-oh-ritual(0):0/0",
+   "yu-gi-oh-spell(0):0/0",
+   "yu-gi-oh-trap(0):0/0",
+   "yu-gi-oh-secrets(0):0/0"
+  ],
+  "samples": [
+   "Ryzeal Plasma Hole (CRBR-EN010) (Crossover Breakers)",
+   "Winged Dragon, Guardian of the Fortress #1 (MRD-002) (Metal Raiders)",
+   "Toon Rollback (DLCS-EN075) (Dragons of Legend: The Complete Series)",
+   "Toon Mask (SS04-ENB24) (Speed Duel Decks: Match of the Millennium)",
+   "Toon Cannon Soldier (LDS1-EN060) (Legendary Duelists: Season 1)",
+   "Souleating Oviraptor (WISU-EN012) (Wild Survivors)"
+  ]
+ },
+ {
+  "host": "gocardsuk.co.uk",
+  "base": "https://gocardsuk.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (55 collections)"
+ },
+ {
+  "host": "evocards.com",
+  "base": "https://www.evocards.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Evo Cards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(6):0/3"
+  ],
+  "samples": []
+ },
+ {
+  "host": "hoctcg.com",
+  "base": "https://hoctcg.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (45 collections)"
+ },
+ {
+  "host": "hokeypokegames.co.uk",
+  "base": "https://hokeypokegames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (43 collections)"
+ },
+ {
+  "host": "japan2uk.com",
+  "base": "https://www.japan2uk.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (200 collections)"
+ },
+ {
+  "host": "jarvvos.co.uk",
+  "base": "https://www.jarvvos.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (155 collections)"
+ },
+ {
+  "host": "gogetcollectables.com",
+  "base": "https://gogetcollectables.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Go Get Collectables",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(8):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "koolthings.co.uk",
+  "base": "https://www.koolthings.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (138 collections)"
+ },
+ {
+  "host": "gameon.games",
+  "base": "https://www.gameon.games",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (170 collections)"
+ },
+ {
+  "host": "tierzerogames.com",
+  "base": "https://tierzerogames.com",
+  "market": "UK",
+  "ok": true,
+  "name": "TierZero Games",
+  "existingKey": null,
+  "collections": [
+   "yugioh",
+   "yugioh-single-cards",
+   "maze-of-muertos-ygo",
+   "yugioh-burst-protocol-copy"
+  ],
+  "kind": "both",
+  "matched": 405,
+  "inStock": 191,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "yugioh(3808):183/250",
+   "yugioh-single-cards(35175):117/250",
+   "maze-of-muertos-ygo(146):53/144",
+   "yugioh-burst-protocol-copy(238):52/234",
+   "yugioh-burst-protocol(234):43/231",
+   "yugioh-sealed-product(355):17/250",
+   "yugioh-2020-collectors-tin(269):16/250",
+   "yugioh-booster-boxes(243):15/165",
+   "yugioh-single(8554):0/250",
+   "yugioh-deck-cores(213):0/63"
+  ],
+  "samples": [
+   "JUSH-EN034 - K9-ØØ Lupis - Ultra Rare - Justice Hunters",
+   "JUSH-EN031 - K9-17 Izuna - Ultra Rare - Justice Hunters",
+   "JUSH-EN002 - Dracotail Faimena - Ultra Rare - Justice Hunters",
+   "JUSH-EN001 - Dracotail Lukias - Ultra Rare - Justice Hunters",
+   "MP24-EN007 - Relinquished Anima - Quarter Century Secret Rare - 25th Anniversary Tin: Dueling Mirrors",
+   "BODE-EN039 - Destiny HERO - Destroyer Phoenix Enforcer - Secret Rare - Burst of Destiny"
+  ]
+ },
+ {
+  "host": "obsidia-tcg.store",
+  "base": "https://obsidia-tcg.store",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (87 collections)"
+ },
+ {
+  "host": "neocards.co.uk",
+  "base": "https://www.neocards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (83 collections)"
+ },
+ {
+  "host": "meeplescorner.co.uk",
+  "base": "https://meeplescorner.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (665 collections)"
+ },
+ {
+  "host": "pokevend.co.uk",
+  "base": "https://pokevend.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (29 collections)"
+ },
+ {
+  "host": "terrorstcg.com",
+  "base": "https://www.terrorstcg.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (15 collections)"
+ },
+ {
+  "host": "thecardclubuk.shop",
+  "base": "https://thecardclubuk.shop",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "londonmagictraders.com",
+  "base": "https://londonmagictraders.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (246 collections)"
+ },
+ {
+  "host": "pixel-hub.co.uk",
+  "base": "https://pixel-hub.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Pixel-Hub Media Ltd",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(2):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "trolltradercards.com",
+  "base": "https://trolltradercards.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (713 collections)"
+ },
+ {
+  "host": "gundamlab.com",
+  "base": "https://gundamlab.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (76 collections)"
+ },
+ {
+  "host": "ultrararecards.co.uk",
+  "base": "https://ultrararecards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Ultra Rare Cards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(14):2/14"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - Blue Eyes White Destiny Structure Deck",
+   "Yu-Gi-Oh! - 2024 Dueling Mirrors 25th Anniversary Tin"
+  ]
+ },
+ {
+  "host": "thirstymeeples.co.uk",
+  "base": "https://www.thirstymeeples.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Thirsty Meeples",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-trading-card-game(48):4/43"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Photon Hypernova Booster Pack",
+   "Yu-Gi-Oh! 25th Anniversary Rarity Collection II Premium Booster Pack",
+   "Yu-Gi-Oh! Mega Pack Tin 2025",
+   "Yu-Gi-Oh! Battles of Legend: Monstrous Revenge - Booster Pack"
+  ]
+ },
+ {
+  "host": "doublesleeved.co.uk",
+  "base": "https://www.doublesleeved.co.uk",
+  "market": "UK",
+  "ok": true,
+  "name": "Double Sleeved",
+  "existingKey": null,
+  "collections": [
+   "yugioh-cards"
+  ],
+  "kind": "sealed",
+  "matched": 27,
+  "inStock": 6,
+  "currency": "GBP",
+  "reason": null,
+  "tried": [
+   "yugioh-cards(70):27/70",
+   "yu-gi-oh-ancient-guardians(2):2/2",
+   "yu-gi-oh-legendary-duelists-synchro-storm(2):2/2",
+   "yu-gi-oh-the-grand-creators(2):2/2",
+   "yugioh(3):1/3",
+   "yu-gi-oh-lightning-overdrive(2):1/2",
+   "yugioh-tcg-crimson-king-structure-deck(3):0/3",
+   "yugioh-tcg-structure-deck-beware-the-traptrix(3):0/3",
+   "yu-gi-oh-dimension-force(2):0/2",
+   "yu-gi-oh-ghosts-from-the-past-2022(2):0/2"
+  ],
+  "samples": [
+   "Yugioh TCG: 2-Player Starter Set",
+   "Yugioh TCG: Age of Overlord Booster Box",
+   "Yugioh TCG: 25th Anniversary Tin: Dueling Heroes",
+   "Yugioh TCG: Legendary Duelists: Soulburning Volcano - Booster Box",
+   "Yugioh TCG: Speed Duel - Streets of Battle City Box",
+   "Yugioh TCG: Speed Duel GX Box - Duelists of Shadows"
+  ]
+ },
+ {
+  "host": "travellingman.com",
+  "base": "https://travellingman.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Travelling Man UK",
+  "existingKey": null,
+  "collections": [
+   "tcg-yu-gi-oh-tcg"
+  ],
+  "kind": "sealed",
+  "matched": 31,
+  "inStock": 2,
+  "currency": "GBP",
+  "reason": "matched 31, in stock 2",
+  "tried": [
+   "yugioh(175):31/172",
+   "tcg-yu-gi-oh-tcg(129):31/126"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Structure Deck Blue-Eyes White Destiny Reprint",
+   "Yu-Gi-Oh! TCG Quarter Century Stampede Premium Booster Box",
+   "Yu-Gi-Oh! TCG Crossover Breakers Booster Box",
+   "Yu-Gi-Oh! TCG Quarter Century Bonanza Booster Box",
+   "Yu-Gi-Oh TCG 25th Anniversary Tin: Dueling Mirrors",
+   "Yu-Gi-Oh! TCG Battles of Legend Terminal Revenge Booster Box"
+  ]
+ }
+]
