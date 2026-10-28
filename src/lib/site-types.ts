@@ -39,6 +39,10 @@ export interface SisterSite {
   /** Link text: what a searcher types ("Riftbound card prices"), the site's
    *  name after it. Without one the name is the link. */
   anchor?: string;
+  /** The sister site's own search for a query, `{q}` replaced by it (its
+   *  SearchAction target). Card games only: the "Searching another game?"
+   *  line under /cards search results (components/FamilySearch.tsx). */
+  search?: string;
 }
 
 export interface SiteConfig {
