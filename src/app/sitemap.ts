@@ -3,6 +3,7 @@ import { meta, products, refCents, sets } from "@/lib/data";
 import { posts } from "@/lib/posts";
 import { rarityHubs, sealedHubs } from "@/lib/hubs";
 import { SITE_URL } from "@/lib/site";
+import { SITE } from "@/site.config";
 
 export const revalidate = 86400;
 
@@ -22,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...sealedHubs().map((h) => ({ url: `${SITE_URL}/sealed/${h.slug}`, lastModified: at, priority: 0.6 })),
     ...sets().filter((s) => s.productCount > 0).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...products()
-      .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= 50))
+      .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= (SITE.sitemapMinCardCents ?? 50)))
       .map((p) => ({ url: `${SITE_URL}/card/${p.slug}`, lastModified: at, priority: 0.5 })),
   ];
 }

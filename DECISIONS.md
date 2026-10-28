@@ -682,3 +682,13 @@ link must say which site it came from.
   boxes at US$83-129.
 * **Pack inserts out of the index.** Lorcana's 157 puzzle inserts and ink drops
   (a few cents each) were 12% of its sitemap; now out of it and noindex.
+
+## Sitemap lists cards from $5 — 2026-10-28
+
+Search Console's URL Inspection sample on 2026-10-28: 28 of 31 URLs from the
+16,191-URL sitemap were unknown to Google, two weeks after launch. A new domain
+gets a small crawl budget, and it was spread over thousands of $1 cards nobody
+searches for. `SITE.sitemapMinCardCents` (engine option, default 50) is 500
+here: about 8,000 URLs, every sealed product, set and guide included. Cheaper
+cards are still linked from their set pages. Revisit once most of the sitemap
+is indexed.
