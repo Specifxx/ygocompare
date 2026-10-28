@@ -150,6 +150,9 @@ export interface KitsConfig {
   itemCodeJanPrefix?: string;
   /** eBay and Amazon search words put before a kit's name ("gunpla"). */
   searchPrefix: string;
+  /** The section's link preview (a 2400×1260 file under public/), so a shared
+   *  /kits link shows kits, not the card site. Unset: the site's image. */
+  shareImage?: { url: string; alt: string };
   stores: KitStoreConfig[];
 }
 

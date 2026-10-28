@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
-import { canon } from "@/lib/site";
+import { canon, KITS_SHARE_IMAGE } from "@/lib/site";
 import { gradeHubs, kits, kitsOn, kitsUpdatedAt, newKits, popular } from "@/lib/kits";
 import { KitGrid } from "@/components/KitTile";
 import { KitSearch } from "@/components/KitSearch";
@@ -18,7 +18,7 @@ export function generateMetadata(): Metadata {
   return {
     title: `${SITE.kits.label} prices: compare ${n} hobby shops`,
     description: `Compare ${SITE.kits.noun} prices across ${n} hobby shops in the US, UK, Canada and Australia: HG, RG, MG, PG and more, cheapest in-stock first, updated daily.`,
-    ...canon("/kits"),
+    ...canon("/kits", KITS_SHARE_IMAGE),
   };
 }
 

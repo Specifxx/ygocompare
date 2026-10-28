@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
-import { canon } from "@/lib/site";
+import { canon, KITS_SHARE_IMAGE } from "@/lib/site";
 import { gradeHubBySlug, gradeHubs, kitBestByMarket } from "@/lib/kits";
 import { KitGrid } from "@/components/KitTile";
 import { KitPrice } from "@/components/KitPrice";
@@ -21,7 +21,7 @@ export function generateMetadata({ params }: { params: { grade: string } }): Met
   return {
     title: `${h.label} ${SITE.kits.label} prices: compare ${SITE.kits.stores.length} shops`,
     description: `Compare prices for ${h.items.length} ${h.label} kits across ${SITE.kits.stores.length} hobby shops in the US, UK, Canada and Australia, cheapest in-stock first.`,
-    ...canon(`/kits/grade/${h.slug}`),
+    ...canon(`/kits/grade/${h.slug}`, KITS_SHARE_IMAGE),
   };
 }
 
