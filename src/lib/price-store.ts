@@ -29,6 +29,8 @@ export interface SummaryEntry {
   l?: number;
   /** cheapest in-stock offer per market (and TCGplayer) */
   b: OfferTuple[];
+  /** cheapest in-stock eBay listing per market (the card ad strips, lib/card-ads.ts) */
+  e?: OfferTuple[];
 }
 
 export const decodeEntry = (e: StoredEntry): PriceEntry => ({
@@ -40,12 +42,15 @@ export const decodeEntry = (e: StoredEntry): PriceEntry => ({
 
 export function summarize(e: PriceEntry): SummaryEntry {
   const best = new Map<string, Offer>();
+  const ebay = new Map<string, Offer>();
   for (const o of e.offers) {
     if (!o.inStock) continue;
     const k = o.source === "tcgplayer" ? "tcg" : o.market;
     const cur = best.get(k);
     if (!cur || o.cents < cur.cents) best.set(k, o);
+    if (o.source === "ebay" && !o.preorder && (!ebay.has(o.market) || o.cents < ebay.get(o.market)!.cents)) ebay.set(o.market, o);
   }
+  const e8 = [...ebay.values()].map(encodeOffer).filter((x): x is OfferTuple => !!x);
   return {
     t: e.tcg,
     c7: e.change7d,
@@ -53,6 +58,7 @@ export function summarize(e: PriceEntry): SummaryEntry {
     n: new Set(e.offers.filter((o) => o.inStock).map((o) => o.source)).size,
     l: new Set(e.offers.map((o) => o.source)).size,
     b: [...best.values()].map(encodeOffer).filter((x): x is OfferTuple => !!x),
+    ...(e8.length ? { e: e8 } : {}),
   };
 }
 
@@ -92,6 +98,16 @@ export function readAllPrices(): Record<string, PriceEntry> {
     for (const f of fs.readdirSync(PRICES_DIR)) if (f.endsWith(".json")) Object.assign(out, readSetPrices(Number(f.replace(".json", ""))));
   } catch {}
   return out;
+}
+
+/** Rewrites summary.json from the committed shards (no import, no network):
+ *  used when the summary gains a field, so pages get it before the next import. */
+export function rebuildSummary(): number {
+  const all = readAllPrices();
+  const summary: Record<string, SummaryEntry> = {};
+  for (const [id, e] of Object.entries(all)) summary[id] = summarize(e);
+  fs.writeFileSync(SUMMARY_FILE, JSON.stringify(summary) + "\n");
+  return Object.keys(summary).length;
 }
 
 export function readSummary(): Record<string, SummaryEntry> {

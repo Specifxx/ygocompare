@@ -14,6 +14,8 @@ import { PriceChart } from "@/components/PriceChart";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
+import { EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
+import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrl, goHref } from "@/lib/affiliate";
 import { abs, SHARE_IMAGE } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -135,6 +137,9 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <h2 className="mb-2 text-lg font-bold">Price history</h2>
             <PriceChart series={series} days={365} />
           </section>
+          {/* Below the comparison and the chart, never between a buyer and the
+              price rows: more of this set on eBay (lib/card-ads.ts). */}
+          <EbayCardStrip ads={{ ebay: cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true }).ebay }} page="card" query={adSearch(set?.name).ebayQuery} title={`More ${set?.name ?? SITE.gameShort} & chase cards on eBay`} />
           <section className="prose-site max-w-none text-sm">
             <h2>Is {name} worth it?</h2>
             <p>
@@ -150,6 +155,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           <TileGrid items={related} />
         </section>
       )}
+      <TcgplayerCardStrip ads={{ tcgplayer: cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true }).tcgplayer }} page="card" searchUrl={adSearch(set?.name).tcgplayerUrl} title={`Shop ${set?.name ?? SITE.gameShort} & more on TCGplayer`} />
       <CardStickyBuyBar offers={e.offers} productId={p.id} />
     </article>
   );

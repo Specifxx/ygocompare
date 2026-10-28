@@ -101,6 +101,9 @@ export const SITE: SiteConfig = {
     [/box set|collector'?s? (box|set)|collection|legendary decks?|gift/i, "Collection"],
   ],
   // Every rarity TCGplayer used for Yu-Gi-Oh! on 2026-10-26, rarest first.
+  // TCGplayer Direct ships Yu-Gi-Oh! singles to Australia since 2026-10-07
+  // (TCGplayer press release); the TCGplayer ad strip says so to AU visitors.
+  tcgplayerDirectMarkets: ["AU"],
   rarityOrder: [
     "Quarter Century Secret Rare",
     "Grand Master Rare",

@@ -106,6 +106,11 @@ export interface SiteConfig {
   rarityMustAgree?: boolean;
   /** Extra ways sellers write a rarity: { "Quarter Century Secret Rare": ["QCSR", "QCScR"] }. */
   rarityAliases?: Record<string, string[]>;
+  /** Markets outside the US where TCGplayer Direct ships this game's singles
+   *  (the TCGplayer ad strip says so there). Off by default: say nothing we
+   *  have not checked. TCGplayer Direct: AU since 2026-10-07 for Magic,
+   *  Pokémon and Yu-Gi-Oh! singles. */
+  tcgplayerDirectMarkets?: Market[];
   rarityOrder: string[];
   chaseRarities: string[];
   theme: {

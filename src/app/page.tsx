@@ -1,7 +1,8 @@
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { SearchBox } from "@/components/SearchBox";
-import { EbayPicks } from "@/components/EbayPicks";
+import { CardAdPair } from "@/components/CardAds";
+import { adSearch, cardAds } from "@/lib/card-ads";
 import { AdSlot } from "@/components/AdSlot";
 import { HalloweenBanner } from "@/components/HalloweenDecor";
 import { TileGrid } from "@/components/ProductTile";
@@ -72,9 +73,10 @@ export default function Home() {
       </section>
 
       <HalloweenBanner />
-      {/* Ad banners near the top of the homepage, as on Rift Compare: the eBay
-          Picks unit under the hero, then one display slot. */}
-      <EbayPicks />
+      {/* Ad banners near the top of the homepage, as on Rift Compare: real
+          cards on eBay (the visitor's market) and on TCGplayer under the hero,
+          then one display slot (lib/card-ads.ts). */}
+      <CardAdPair ads={cardAds({ kind: "card", limit: 12 })} page="home" {...adSearch()} ebayTitle={`Chase ${SITE.gameShort} cards on eBay right now`} tcgTitle={`Top ${SITE.gameShort} cards on TCGplayer`} />
       <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME} />
 
       {/* Sealed is as big a market as singles: it gets the first shelf. */}
@@ -97,7 +99,7 @@ export default function Home() {
           <Header title="Today's top deals" href="/tools/deal-finder" sub="In-stock listings below TCGplayer market" />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {topDeals.map((d) => (
-              <Link key={`${d.p.id}${d.offer.source}`} href={`/card/${d.p.slug}`} className="card-surface flex items-center gap-3 p-3 hover:border-brand/60">
+              <Link key={`${d.p.id}${d.offer.source}`} href={`/card/${d.p.slug}`} className="card-surface flex min-w-0 items-center gap-3 p-3 hover:border-brand/60">
                 {d.p.image && <img src={d.p.image} alt="" className="h-20 w-14 object-contain" loading="lazy" />}
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{shortName(d.p.name)}</p>

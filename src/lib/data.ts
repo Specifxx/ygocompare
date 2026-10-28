@@ -74,8 +74,10 @@ export interface Summary {
   listedSources: number;
   /** Cheapest in-stock offer per market, plus TCGplayer. */
   best: Offer[];
+  /** Cheapest in-stock eBay listing per market (ad strips only, never a price claim). */
+  ebay: Offer[];
 }
-const EMPTY_SUMMARY: Summary = { tcg: {}, change7d: null, change30d: null, inStockSources: 0, listedSources: 0, best: [] };
+const EMPTY_SUMMARY: Summary = { tcg: {}, change7d: null, change30d: null, inStockSources: 0, listedSources: 0, best: [], ebay: [] };
 const decoded = new Map<number, Summary>();
 /** Everything a list page needs, without loading the per-set shards. */
 export function summaryOf(id: number): Summary {
@@ -83,7 +85,7 @@ export function summaryOf(id: number): Summary {
   if (hit) return hit;
   const e = load().summary[id];
   if (!e) return EMPTY_SUMMARY;
-  const s: Summary = { tcg: e.t, change7d: e.c7, change30d: e.c30, inStockSources: e.n, listedSources: e.l ?? e.n, best: e.b.map(decodeOffer).filter((o): o is Offer => !!o) };
+  const s: Summary = { tcg: e.t, change7d: e.c7, change30d: e.c30, inStockSources: e.n, listedSources: e.l ?? e.n, best: e.b.map(decodeOffer).filter((o): o is Offer => !!o), ebay: (e.e ?? []).map(decodeOffer).filter((o): o is Offer => !!o) };
   decoded.set(id, s);
   return s;
 }
