@@ -1,0 +1,2800 @@
+[
+ {
+  "host": "1upgamesgeorgia.com",
+  "base": "https://1upgamesgeorgia.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (30 collections)"
+ },
+ {
+  "host": "akhtradingcardco.com",
+  "base": "https://akhtradingcardco.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (6 collections)"
+ },
+ {
+  "host": "619collectables.com",
+  "base": "https://619collectables.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "allaboutgames.com",
+  "base": "https://allaboutgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "animazedstore.com",
+  "base": "https://animazedstore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (25 collections)"
+ },
+ {
+  "host": "animezingescape.com",
+  "base": "https://animezingescape.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "shoparmada.com",
+  "base": "https://shoparmada.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (126 collections)"
+ },
+ {
+  "host": "4gsgames.com",
+  "base": "https://4gsgames.com",
+  "market": "US",
+  "ok": false,
+  "name": "4GS Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(17):1/17"
+  ],
+  "samples": [
+   "Legend of Blue Eyes White Dragon 25th Anniversary - Booster Pack"
+  ]
+ },
+ {
+  "host": "alteregocng.com",
+  "base": "https://alteregocng.com",
+  "market": "US",
+  "ok": false,
+  "name": "Alter Ego Comics and Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ballerstcg.com",
+  "base": "https://ballerstcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "asgardkeep.com",
+  "base": "https://asgardkeep.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "thebanditshideout.com",
+  "base": "https://thebanditshideout.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (12 collections)"
+ },
+ {
+  "host": "bandegames.com",
+  "base": "https://bandegames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (12 collections)"
+ },
+ {
+  "host": "bgetabletop.com",
+  "base": "https://bgetabletop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (91 collections)"
+ },
+ {
+  "host": "blackcastlegamez.com",
+  "base": "https://blackcastlegamez.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (4 collections)"
+ },
+ {
+  "host": "cobbco.store",
+  "base": "https://cobbco.store",
+  "market": "US",
+  "ok": false,
+  "name": "Cobbco",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "bluerune.shop",
+  "base": "https://bluerune.shop",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (106 collections)"
+ },
+ {
+  "host": "boardwalk-games.com",
+  "base": "https://boardwalk-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "bobaheroes.com",
+  "base": "https://bobaheroes.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "bonafidecomicstore.com",
+  "base": "https://bonafidecomicstore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (43 collections)"
+ },
+ {
+  "host": "boomingtcg.com",
+  "base": "https://boomingtcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (3 collections)"
+ },
+ {
+  "host": "brassdragongames.com",
+  "base": "https://brassdragongames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (32 collections)"
+ },
+ {
+  "host": "brewdacity.myshopify.com",
+  "base": "https://brewdacity.myshopify.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "brazosvalleyhobbyandgames.com",
+  "base": "https://brazosvalleyhobbyandgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (182 collections)"
+ },
+ {
+  "host": "bigdeckenergygames.com",
+  "base": "https://bigdeckenergygames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Big Deck Energy Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "sealed-pokemon-products(4291):0/0",
+   "yu-gi-oh-tcg(29):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "cadetstoys.com",
+  "base": "https://cadetstoys.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (121 collections)"
+ },
+ {
+  "host": "capesandcrepes.com",
+  "base": "https://capesandcrepes.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (76 collections)"
+ },
+ {
+  "host": "capstone-games.com",
+  "base": "https://capstone-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "cbanons.com",
+  "base": "https://cbanons.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "batcitygc.com",
+  "base": "https://batcitygc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (160 collections)"
+ },
+ {
+  "host": "cardshopsantaclara.com",
+  "base": "https://cardshopsantaclara.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "cardboardcolosseumnj.com",
+  "base": "https://cardboardcolosseumnj.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable ( initial-scale=1, maximum-scale=1, user-scalable=yes\"/><link rel=\"preload\" as=\"s)"
+ },
+ {
+  "host": "castleofgames.com",
+  "base": "https://castleofgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "carolinacomics.net",
+  "base": "https://carolinacomics.net",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "cardshopnear.me",
+  "base": "https://cardshopnear.me",
+  "market": "US",
+  "ok": false,
+  "name": "CardShopNear.Me",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed(10):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "charmcitycollectibles.com",
+  "base": "https://charmcitycollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (31 collections)"
+ },
+ {
+  "host": "chasecardtcg.com",
+  "base": "https://chasecardtcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (39 collections)"
+ },
+ {
+  "host": "cloviscards.com",
+  "base": "https://cloviscards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "ccgprime.com",
+  "base": "https://ccgprime.com",
+  "market": "US",
+  "ok": false,
+  "name": "CCGPrime",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "coldfoilheroes.com",
+  "base": "https://coldfoilheroes.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (72 collections)"
+ },
+ {
+  "host": "collect.gg",
+  "base": "https://collect.gg",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "boomloot.com",
+  "base": "https://boomloot.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (77 collections)"
+ },
+ {
+  "host": "collectiblesnkicks.com",
+  "base": "https://collectiblesnkicks.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (5 collections)"
+ },
+ {
+  "host": "collectorshaventcg.com",
+  "base": "https://collectorshaventcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "indycollectorsemporium.com",
+  "base": "https://indycollectorsemporium.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (36 collections)"
+ },
+ {
+  "host": "collectorzown.com",
+  "base": "https://collectorzown.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (29 collections)"
+ },
+ {
+  "host": "collectbinghamton.com",
+  "base": "https://collectbinghamton.com",
+  "market": "US",
+  "ok": false,
+  "name": "Collect Binghamton",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "colestreetgamevault.com",
+  "base": "https://colestreetgamevault.com",
+  "market": "US",
+  "ok": false,
+  "name": "Cole Street Game Vault",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-sealed-all(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "crazy-squirrel-game-store.myshopify.com",
+  "base": "https://crazy-squirrel-game-store.myshopify.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (100 collections)"
+ },
+ {
+  "host": "creatorpultgames.com",
+  "base": "https://creatorpultgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (31 collections)"
+ },
+ {
+  "host": "crimsonhobbies.com",
+  "base": "https://crimsonhobbies.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (307 collections)"
+ },
+ {
+  "host": "curiocavern.com",
+  "base": "https://curiocavern.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "crucible-games.com",
+  "base": "https://crucible-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "cromatcg.com",
+  "base": "https://cromatcg.com",
+  "market": "US",
+  "ok": false,
+  "name": "CromaTCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "cultureshockpcs.com",
+  "base": "https://cultureshockpcs.com",
+  "market": "US",
+  "ok": false,
+  "name": "Culture Shock PCS",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "damegames.store",
+  "base": "https://damegames.store",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (6 collections)"
+ },
+ {
+  "host": "darbysdungeon.com",
+  "base": "https://darbysdungeon.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "d20comics.com",
+  "base": "https://d20comics.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "d20gamestore.com",
+  "base": "https://d20gamestore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (69 collections)"
+ },
+ {
+  "host": "dealinghigh.com",
+  "base": "https://dealinghigh.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "deriumandwifey.com",
+  "base": "https://deriumandwifey.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (46 collections)"
+ },
+ {
+  "host": "dicehead.com",
+  "base": "https://dicehead.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (91 collections)"
+ },
+ {
+  "host": "destinefantasy.games",
+  "base": "https://destinefantasy.games",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (15 collections)"
+ },
+ {
+  "host": "dd20s.com",
+  "base": "https://dd20s.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "diceaddiction.com",
+  "base": "https://diceaddiction.com",
+  "market": "US",
+  "ok": false,
+  "name": "Dice Addiction LLC",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-product-test(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "dealsndragons.com",
+  "base": "https://dealsndragons.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (47 collections)"
+ },
+ {
+  "host": "dreamingcitygames.com",
+  "base": "https://dreamingcitygames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (31 collections)"
+ },
+ {
+  "host": "drawntogethergames.com",
+  "base": "https://drawntogethergames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "duelanddice.com",
+  "base": "https://duelanddice.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "dynastytoystore.com",
+  "base": "https://dynastytoystore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (19 collections)"
+ },
+ {
+  "host": "drumislandtrading.com",
+  "base": "https://drumislandtrading.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable ( initial-scale=1, maximum-scale=1, user-scalable=yes\"/><link rel=\"preload\" as=\"s)"
+ },
+ {
+  "host": "e4cards.com",
+  "base": "https://e4cards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "elcardboard.shop",
+  "base": "https://elcardboard.shop",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "dzcomics.com",
+  "base": "https://dzcomics.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "empiregamecenter.com",
+  "base": "https://empiregamecenter.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "emeraldknights.com",
+  "base": "https://emeraldknights.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (35 collections)"
+ },
+ {
+  "host": "egcollectiblesde.com",
+  "base": "https://egcollectiblesde.com",
+  "market": "US",
+  "ok": false,
+  "name": "EG Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-booster-packs(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "empire-games.com",
+  "base": "https://empire-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (86 collections)"
+ },
+ {
+  "host": "expedition-outpost.com",
+  "base": "https://expedition-outpost.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "fabfoundry.co",
+  "base": "https://fabfoundry.co",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "evolvecardshop.com",
+  "base": "https://evolvecardshop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (48 collections)"
+ },
+ {
+  "host": "elysiumvideogames.com",
+  "base": "https://elysiumvideogames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Elysium Video Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles-all(0):0/0",
+   "yugioh-singles-instock(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "firstcapitolcards.com",
+  "base": "https://firstcapitolcards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (120 collections)"
+ },
+ {
+  "host": "forhonorandglory.com",
+  "base": "https://forhonorandglory.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "fourthemeraldgames.com",
+  "base": "https://fourthemeraldgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "fabledtavern.com",
+  "base": "https://fabledtavern.com",
+  "market": "US",
+  "ok": false,
+  "name": "Fabled Tavern",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "finalround.games",
+  "base": "https://finalround.games",
+  "market": "US",
+  "ok": false,
+  "name": "Final Round Game Shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-sealed(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gamefellas.net",
+  "base": "https://gamefellas.net",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "galacticgamesnc.com",
+  "base": "https://galacticgamesnc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (33 collections)"
+ },
+ {
+  "host": "gambit-games.com",
+  "base": "https://gambit-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "gglayton.com",
+  "base": "https://gglayton.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "kwcollectibles.com",
+  "base": "https://kwcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (32 collections)"
+ },
+ {
+  "host": "ggnorthogden.com",
+  "base": "https://ggnorthogden.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "game-grove.shop",
+  "base": "https://game-grove.shop",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (6 collections)"
+ },
+ {
+  "host": "hilogameshop.com",
+  "base": "https://hilogameshop.com",
+  "market": "US",
+  "ok": false,
+  "name": "Gam3 Escape",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(25):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gamekastle.com",
+  "base": "https://gamekastle.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "gamekastle.com",
+  "base": "https://gamekastle.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "gamekastle.com",
+  "base": "https://gamekastle.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "gameongames.com",
+  "base": "https://gameongames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (25 collections)"
+ },
+ {
+  "host": "gamesongames.com",
+  "base": "https://gamesongames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (5 collections)"
+ },
+ {
+  "host": "deepdivegamesathens.store",
+  "base": "https://deepdivegamesathens.store",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "gamerschoice.com",
+  "base": "https://gamerschoice.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (22 collections)"
+ },
+ {
+  "host": "gameonarizona.com",
+  "base": "https://gameonarizona.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (523 collections)"
+ },
+ {
+  "host": "gamersgetawaykc.com",
+  "base": "https://gamersgetawaykc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "gclegion.com",
+  "base": "https://gclegion.com",
+  "market": "US",
+  "ok": false,
+  "name": "Gamers-Corps",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(20):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gamerscove.net",
+  "base": "https://gamerscove.net",
+  "market": "US",
+  "ok": false,
+  "name": "Gamers Cove",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "gamershavenohio.shop",
+  "base": "https://gamershavenohio.shop",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (28 collections)"
+ },
+ {
+  "host": "gamesformeeple.com",
+  "base": "https://gamesformeeple.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "gamersrowmn.com",
+  "base": "https://gamersrowmn.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (46 collections)"
+ },
+ {
+  "host": "gameoutpost.com",
+  "base": "https://gameoutpost.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "gameoutpost.com",
+  "base": "https://gameoutpost.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "gamesandstuffonline.com",
+  "base": "https://gamesandstuffonline.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (88 collections)"
+ },
+ {
+  "host": "gardenstatetcg.net",
+  "base": "https://gardenstatetcg.net",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "gamezenter.com",
+  "base": "https://gamezenter.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (213 collections)"
+ },
+ {
+  "host": "geekyglamorous.com",
+  "base": "https://geekyglamorous.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (89 collections)"
+ },
+ {
+  "host": "geekyvillain.com",
+  "base": "https://geekyvillain.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (197 collections)"
+ },
+ {
+  "host": "thegeekpeek.com",
+  "base": "https://thegeekpeek.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (263 collections)"
+ },
+ {
+  "host": "gloriousgamesandgoods.com",
+  "base": "https://gloriousgamesandgoods.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (34 collections)"
+ },
+ {
+  "host": "golden-gate-games.com",
+  "base": "https://golden-gate-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (34 collections)"
+ },
+ {
+  "host": "gonelucidgames.com",
+  "base": "https://gonelucidgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (4 collections)"
+ },
+ {
+  "host": "glhfinc.com",
+  "base": "https://glhfinc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (37 collections)"
+ },
+ {
+  "host": "gootzygaming.com",
+  "base": "https://gootzygaming.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (63 collections)"
+ },
+ {
+  "host": "gongaii.com",
+  "base": "https://gongaii.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (142 collections)"
+ },
+ {
+  "host": "grandmastergames.net",
+  "base": "https://grandmastergames.net",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "gophermafia.com",
+  "base": "https://gophermafia.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (86 collections)"
+ },
+ {
+  "host": "gamespacefl.com",
+  "base": "https://gamespacefl.com",
+  "market": "US",
+  "ok": false,
+  "name": "Game Space FL",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles(9):0/0",
+   "yugioh-sealed(5):0/0",
+   "yu-gi-oh-singles(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "guildhallnc.com",
+  "base": "https://guildhallnc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (139 collections)"
+ },
+ {
+  "host": "guardiangamingvt.com",
+  "base": "https://guardiangamingvt.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "heroeshideoutsa.com",
+  "base": "https://heroeshideoutsa.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "hilltopcollectibles.shop",
+  "base": "https://hilltopcollectibles.shop",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (12 collections)"
+ },
+ {
+  "host": "halcyon.games",
+  "base": "https://halcyon.games",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (155 collections)"
+ },
+ {
+  "host": "glaciergamesak.com",
+  "base": "https://glaciergamesak.com",
+  "market": "US",
+  "ok": false,
+  "name": "Glacier Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles-all(0):0/0",
+   "yugioh-singles-instock(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "hobby-sports.com",
+  "base": "https://hobby-sports.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (88 collections)"
+ },
+ {
+  "host": "hometowncomicsandgames.com",
+  "base": "https://hometowncomicsandgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (31 collections)"
+ },
+ {
+  "host": "gamekastle.com",
+  "base": "https://gamekastle.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "holosq.com",
+  "base": "https://holosq.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (3 collections)"
+ },
+ {
+  "host": "hoovshangout.com",
+  "base": "https://hoovshangout.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "houseruleslounge.com",
+  "base": "https://houseruleslounge.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (48 collections)"
+ },
+ {
+  "host": "impulsegc.com",
+  "base": "https://impulsegc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "ichooseyou.cards",
+  "base": "https://ichooseyou.cards",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (74 collections)"
+ },
+ {
+  "host": "isleofgamesaz.com",
+  "base": "https://isleofgamesaz.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "reevesgaminghouse.com",
+  "base": "https://reevesgaminghouse.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (           height: 100%;\n            margin: 0;\n            padding: 0;\n        )"
+ },
+ {
+  "host": "javagamehauscafe.com",
+  "base": "https://javagamehauscafe.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (40 collections)"
+ },
+ {
+  "host": "jchobby.com",
+  "base": "https://jchobby.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "kassarsgames.com",
+  "base": "https://kassarsgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (4 collections)"
+ },
+ {
+  "host": "justpressplayonline.com",
+  "base": "https://justpressplayonline.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "kitsap-comics-and-games.myshopify.com",
+  "base": "https://kitsap-comics-and-games.myshopify.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (40 collections)"
+ },
+ {
+  "host": "jaystoysandgames.com",
+  "base": "https://jaystoysandgames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Jay's Toys And Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "trading-card-games(195):0/60"
+  ],
+  "samples": []
+ },
+ {
+  "host": "kitchentabletcg.com",
+  "base": "https://kitchentabletcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (33 collections)"
+ },
+ {
+  "host": "krakendice.com",
+  "base": "https://krakendice.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (132 collections)"
+ },
+ {
+  "host": "jandjgamingfactory.com",
+  "base": "https://jandjgamingfactory.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (277 collections)"
+ },
+ {
+  "host": "krakenhits.com",
+  "base": "https://krakenhits.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (3 collections)"
+ },
+ {
+  "host": "jafcomics.com",
+  "base": "https://jafcomics.com",
+  "market": "US",
+  "ok": false,
+  "name": "JAF Comics",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "trading-card-games(130):2/126",
+   "tcg-event-registrations(65):0/2"
+  ],
+  "samples": [
+   "YuGiOh The Chronicles- Spirit Charmers Deck Display (All-Foil Edition) by Konami",
+   "Yu-Gi-OPh! Legendary Duelists - Soulburning Volcano Booster BOX"
+  ]
+ },
+ {
+  "host": "landfalloutpost.com",
+  "base": "https://landfalloutpost.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (72 collections)"
+ },
+ {
+  "host": "leftoversloungeshop.com",
+  "base": "https://leftoversloungeshop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (15 collections)"
+ },
+ {
+  "host": "legacysportscards.com",
+  "base": "https://legacysportscards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "kingfandom.com",
+  "base": "https://kingfandom.com",
+  "market": "US",
+  "ok": false,
+  "name": "King Fandom",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(8):0/0",
+   "yu-gi-oh-tcg(8):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "laytongaming.com",
+  "base": "https://laytongaming.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (116 collections)"
+ },
+ {
+  "host": "limitbreakcards.com",
+  "base": "https://limitbreakcards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (7 collections)"
+ },
+ {
+  "host": "leveluphobbies.com",
+  "base": "https://leveluphobbies.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (l-scale=1.0\">\n<title>Page Not Found | Level Up Hobbies</title>\n<meta name=\"descr)"
+ },
+ {
+  "host": "comicbooksurplus.com",
+  "base": "https://comicbooksurplus.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (43 collections)"
+ },
+ {
+  "host": "lscards.com",
+  "base": "https://lscards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "lost4toys.com",
+  "base": "https://lost4toys.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (92 collections)"
+ },
+ {
+  "host": "lurkcardsandcollectibles.com",
+  "base": "https://lurkcardsandcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (6 collections)"
+ },
+ {
+  "host": "lingstergames.com",
+  "base": "https://lingstergames.com",
+  "market": "US",
+  "ok": false,
+  "name": "LingSter Games",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 6,
+  "inStock": 2,
+  "currency": "USD",
+  "reason": "matched 6, in stock 2",
+  "tried": [
+   "yu-gi-oh(10):6/10"
+  ],
+  "samples": [
+   "Yu-Gi-Oh Crossover Breakers Booster pack",
+   "Yu-Gi-Oh Crossover Breakers Booster BOX (24 pack count)",
+   "Yu-Gi-Oh Quarter Century Bonanza Booster Pack",
+   "Yu-Gi-Oh Quarter Century Bonanza Booster Box",
+   "Yu-Gi-Oh 25th Anniversary Rarity Collection 2  Booster Pack",
+   "Yu-Gi-Oh 25th Anniversary Rarity Collection 5  Booster Pack"
+  ]
+ },
+ {
+  "host": "lootcardshop.com",
+  "base": "https://lootcardshop.com",
+  "market": "US",
+  "ok": false,
+  "name": "Loot Card Shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-booster-boxes(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "lvl1gamingla.com",
+  "base": "https://lvl1gamingla.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "luckyhits.shop",
+  "base": "https://luckyhits.shop",
+  "market": "US",
+  "ok": true,
+  "name": "Lucky Hits Inc",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 5,
+  "inStock": 4,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(15):5/14"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! TCG: Magnificent Monsters Box (MAMO)",
+   "Yu-Gi-Oh! TCG: 25th Anniversary Rarity Collection Single Pack",
+   "Yu-Gi-Oh! TCG: Chaos Origins Booster Box [1st Edition]",
+   "Yu-Gi-Oh! TCG: Duelist’s Advance Booster Box [1st Edition] (DUAD)",
+   "Yu-Gi-Oh! TCG: 25th Anniversary Rarity Collection II Booster Box"
+  ]
+ },
+ {
+  "host": "mainstreetcollectibles.com",
+  "base": "https://mainstreetcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (20 collections)"
+ },
+ {
+  "host": "atwatercardz.com",
+  "base": "https://atwatercardz.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "shop.mintygem.com",
+  "base": "https://shop.mintygem.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "minmaxgames.com",
+  "base": "https://minmaxgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (137 collections)"
+ },
+ {
+  "host": "mnpcollectz.com",
+  "base": "https://mnpcollectz.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "meeplesandbeyond.com",
+  "base": "https://meeplesandbeyond.com",
+  "market": "US",
+  "ok": false,
+  "name": "Meeples & Beyond",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "letsplaytcg.com",
+  "base": "https://letsplaytcg.com",
+  "market": "US",
+  "ok": false,
+  "name": "Let's Play TCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "sealed-yugioh(46):0/0",
+   "yu-gi-oh(46):0/0",
+   "yu-gi-oh-boosters(22):0/0",
+   "yu-gi-oh-decks(8):0/0",
+   "yu-gi-oh-tins(7):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "miltonscollectibles.com",
+  "base": "https://miltonscollectibles.com",
+  "market": "US",
+  "ok": false,
+  "name": "Milton's Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "themoltenmakerspace.com",
+  "base": "https://themoltenmakerspace.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (3 collections)"
+ },
+ {
+  "host": "motostcg.com",
+  "base": "https://motostcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (7 collections)"
+ },
+ {
+  "host": "moxboardinghouse.com",
+  "base": "https://moxboardinghouse.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (73 collections)"
+ },
+ {
+  "host": "nat20games.gg",
+  "base": "https://nat20games.gg",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "navtoysandcollectibles.com",
+  "base": "https://navtoysandcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "newkawaii.com",
+  "base": "https://newkawaii.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (57 collections)"
+ },
+ {
+  "host": "nexus-entertainment.com",
+  "base": "https://nexus-entertainment.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (57 collections)"
+ },
+ {
+  "host": "moxvalleygames.com",
+  "base": "https://moxvalleygames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Mox Valley Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ninaherisson.com",
+  "base": "https://ninaherisson.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (26 collections)"
+ },
+ {
+  "host": "norcaltcg.com",
+  "base": "https://norcaltcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "novabreak.com",
+  "base": "https://novabreak.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "oceansidetcg.com",
+  "base": "https://oceansidetcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "mysteryshop805.com",
+  "base": "https://mysteryshop805.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (org/xfn/11\">\n\n\t<title>Page not found &#8211; The Mystery Shop</title>\n<meta name)"
+ },
+ {
+  "host": "ohpharmacyga.com",
+  "base": "https://ohpharmacyga.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "ohiocardexchange.com",
+  "base": "https://ohiocardexchange.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (39 collections)"
+ },
+ {
+  "host": "omnisciencecardsandgames.com",
+  "base": "https://omnisciencecardsandgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "orangeclawclub.com",
+  "base": "https://orangeclawclub.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "onthehuntcollectibles.com",
+  "base": "https://onthehuntcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "pandogames.com",
+  "base": "https://pandogames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (5 collections)"
+ },
+ {
+  "host": "orbtradingcards.com",
+  "base": "https://orbtradingcards.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable ( name=\"viewport\" content=\"width=device-width,initial-scale=1\"/><meta name=\"appli)"
+ },
+ {
+  "host": "pegasusbrz.com",
+  "base": "https://pegasusbrz.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "peachstategames.com",
+  "base": "https://peachstategames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (144 collections)"
+ },
+ {
+  "host": "phillytcg.com",
+  "base": "https://phillytcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "thepokestops.com",
+  "base": "https://thepokestops.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "kuson.group",
+  "base": "https://kuson.group",
+  "market": "US",
+  "ok": false,
+  "name": "Kuson Group",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "pokeoasis.com",
+  "base": "https://pokeoasis.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "popculturerama.com",
+  "base": "https://popculturerama.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "pokemalltcg.com",
+  "base": "https://pokemalltcg.com",
+  "market": "US",
+  "ok": false,
+  "name": "PokeMall TCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "pixelthattcg.com",
+  "base": "https://pixelthattcg.com",
+  "market": "US",
+  "ok": false,
+  "name": "PixelThat TCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(6):1/1"
+  ],
+  "samples": [
+   "YGO MEGA-PACK BUNDLE 2025 (One Random Bundle)"
+  ]
+ },
+ {
+  "host": "pressplaycards.com",
+  "base": "https://pressplaycards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "portalsshop.com",
+  "base": "https://portalsshop.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (575 collections)"
+ },
+ {
+  "host": "razzocards.com",
+  "base": "https://razzocards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "purepaniccg.com",
+  "base": "https://purepaniccg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "reapergamestore.com",
+  "base": "https://reapergamestore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (36 collections)"
+ },
+ {
+  "host": "recessgames.com",
+  "base": "https://recessgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (161 collections)"
+ },
+ {
+  "host": "redraccoongames.com",
+  "base": "https://redraccoongames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (70 collections)"
+ },
+ {
+  "host": "resistancecomicsgames.com",
+  "base": "https://resistancecomicsgames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "rerolled.com",
+  "base": "https://rerolled.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "pcbhobby.com",
+  "base": "https://pcbhobby.com",
+  "market": "US",
+  "ok": false,
+  "name": "PCB Hobby",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-all(0):0/0",
+   "yugioh-booster-boxes(0):0/0",
+   "yugioh-preorder(0):0/0",
+   "yugioh-sets(0):0/0",
+   "yugioh-speed-duel(0):0/0",
+   "yugioh-structure-decks(0):0/0",
+   "yugioh-tins(0):0/0",
+   "yugioh-wild-survivors(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ripandcollect.com",
+  "base": "https://ripandcollect.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "pandemoniumbooks.com",
+  "base": "https://pandemoniumbooks.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (2000 collections)"
+ },
+ {
+  "host": "rng-gamez.com",
+  "base": "https://rng-gamez.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (https://rng-gamez.com/meta.json: HTTP 404 )"
+ },
+ {
+  "host": "roguestate.gg",
+  "base": "https://roguestate.gg",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (49 collections)"
+ },
+ {
+  "host": "rooksgamesandmore.com",
+  "base": "https://rooksgamesandmore.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "rareandsleeveless.com",
+  "base": "https://rareandsleeveless.com",
+  "market": "US",
+  "ok": false,
+  "name": "Rare and Sleeveless",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(3):0/0",
+   "yu-gi-oh-events(3):0/0",
+   "yu-gi-oh-structure-decks(1):0/0",
+   "yu-gi-oh-booster-box(0):0/0",
+   "yu-gi-oh-special-collection-1(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "rwtcollective.com",
+  "base": "https://rwtcollective.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "rooted-games.com",
+  "base": "https://rooted-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "sagesportalcafe.com",
+  "base": "https://sagesportalcafe.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (3 collections)"
+ },
+ {
+  "host": "sanctumcgc.com",
+  "base": "https://sanctumcgc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (78 collections)"
+ },
+ {
+  "host": "ripnshiparena.com",
+  "base": "https://ripnshiparena.com",
+  "market": "US",
+  "ok": false,
+  "name": "Rip n Ship Arena",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(60):0/0",
+   "yu-gi-oh-pre-orders(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "shigii.com",
+  "base": "https://shigii.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "slickmimics.com",
+  "base": "https://slickmimics.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "prodigygames.com",
+  "base": "https://prodigygames.com",
+  "market": "US",
+  "ok": false,
+  "name": "Prodigy Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-blisters(0):0/0",
+   "yu-gi-oh-boxes(0):0/0",
+   "yu-gi-oh-bundles(0):0/0",
+   "yu-gi-oh-chests(0):0/0",
+   "yu-gi-oh-decks(0):0/0",
+   "yu-gi-oh-packs(0):0/0",
+   "yu-gi-oh-preorders(0):0/0",
+   "yu-gi-oh-starter-sets(0):0/0",
+   "yu-gi-oh(0):0/0",
+   "yu-gi-oh-tins(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "sjcards.com",
+  "base": "https://sjcards.com",
+  "market": "US",
+  "ok": false,
+  "name": "SJ Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(5):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "spellcastersstash.com",
+  "base": "https://spellcastersstash.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "southtexastcg.com",
+  "base": "https://southtexastcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (400 collections)"
+ },
+ {
+  "host": "sportscardszone.com",
+  "base": "https://sportscardszone.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (4 collections)"
+ },
+ {
+  "host": "solzgc.com",
+  "base": "https://solzgc.com",
+  "market": "US",
+  "ok": false,
+  "name": "Solz Gaming and Collectibles LLC",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0",
+   "yugioh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "stormxtcg.com",
+  "base": "https://stormxtcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "shopsummitcards.com",
+  "base": "https://shopsummitcards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "remisae.com",
+  "base": "https://remisae.com",
+  "market": "US",
+  "ok": false,
+  "name": "Remis Arcane Exchange",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-2(0):0/0",
+   "yu-gi-oh-booster-box(0):0/0",
+   "yu-gi-oh-1(0):0/0",
+   "yu-gi-oh(0):0/0",
+   "yu-gi-oh-sealed-products(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "superkocards.com",
+  "base": "https://superkocards.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "stateofcomics.com",
+  "base": "https://stateofcomics.com",
+  "market": "US",
+  "ok": false,
+  "name": "State of Comics",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-tcg(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ttgaming.quest",
+  "base": "https://ttgaming.quest",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (32 collections)"
+ },
+ {
+  "host": "stgcards.com",
+  "base": "https://stgcards.com",
+  "market": "US",
+  "ok": false,
+  "name": "STG Cards and Collectables",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(34):0/0",
+   "yugioh-singles(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "saltiregames.com",
+  "base": "https://saltiregames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1472 collections)"
+ },
+ {
+  "host": "sydequest.games",
+  "base": "https://sydequest.games",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (80 collections)"
+ },
+ {
+  "host": "tcganimekings.com",
+  "base": "https://tcganimekings.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (4 collections)"
+ },
+ {
+  "host": "tabletcg.com",
+  "base": "https://tabletcg.com",
+  "market": "US",
+  "ok": true,
+  "name": "Tabletop Cards & Games",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 5,
+  "inStock": 3,
+  "currency": "USD",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(15):5/15"
+  ],
+  "samples": [
+   "2025 Mega-Pack Bundle",
+   "Legendary Duelists: Duels From the Deep Booster Pack",
+   "Legendary Duelists: Duels From the Deep Booster Box",
+   "Speed Duel GX: Midterm Paradox Mini Box",
+   "Mega-Pack Bundle 2025 Tuck Box Display"
+  ]
+ },
+ {
+  "host": "tacoma-games.com",
+  "base": "https://tacoma-games.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (61 collections)"
+ },
+ {
+  "host": "stupidgeeksinc.com",
+  "base": "https://stupidgeeksinc.com",
+  "market": "US",
+  "ok": false,
+  "name": "Stupid Geeks, Inc",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-singles-all(0):0/0",
+   "yugioh-singles-instock(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tcbgamesandcollectibles.com",
+  "base": "https://tcbgamesandcollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (16 collections)"
+ },
+ {
+  "host": "trollandtoad.com",
+  "base": "https://trollandtoad.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "tcgvillage.com",
+  "base": "https://tcgvillage.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (4 collections)"
+ },
+ {
+  "host": "tabletopvillage.com",
+  "base": "https://tabletopvillage.com",
+  "market": "US",
+  "ok": false,
+  "name": "Tabletop Village LLC",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tc-warroom.com",
+  "base": "https://tc-warroom.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (210 collections)"
+ },
+ {
+  "host": "thecardboardbros.com",
+  "base": "https://thecardboardbros.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (22 collections)"
+ },
+ {
+  "host": "thecompleatstrategist.com",
+  "base": "https://thecompleatstrategist.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "thecollective.store",
+  "base": "https://thecollective.store",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (3 collections)"
+ },
+ {
+  "host": "darksidecomics.com",
+  "base": "https://darksidecomics.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "thegamersnest.com",
+  "base": "https://thegamersnest.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (4 collections)"
+ },
+ {
+  "host": "thedragonloft.store",
+  "base": "https://thedragonloft.store",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (59 collections)"
+ },
+ {
+  "host": "arcanumsanctorum.com",
+  "base": "https://arcanumsanctorum.com",
+  "market": "US",
+  "ok": false,
+  "name": "The Arcanum Sanctorum",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "thefeistygoblin.com",
+  "base": "https://thefeistygoblin.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (65 collections)"
+ },
+ {
+  "host": "thegamingcantina.com",
+  "base": "https://thegamingcantina.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (16 collections)"
+ },
+ {
+  "host": "thegatheringhouse.co",
+  "base": "https://thegatheringhouse.co",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "theguardtower.com",
+  "base": "https://theguardtower.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "thedorkden.com",
+  "base": "https://thedorkden.com",
+  "market": "US",
+  "ok": false,
+  "name": "The Dork Den",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "sealed-yugioh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "thehiddencloud.com",
+  "base": "https://thehiddencloud.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (12 collections)"
+ },
+ {
+  "host": "themightyhobby.com",
+  "base": "https://themightyhobby.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "thesocialboardhq.com",
+  "base": "https://thesocialboardhq.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "theportalcomicsandgaming.com",
+  "base": "https://theportalcomicsandgaming.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (66 collections)"
+ },
+ {
+  "host": "thepeoplescardshop.com",
+  "base": "https://thepeoplescardshop.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable ( - Not Found</title>\r\n    <script type=\"module\" async fetchpriority=\"low\" src=\"h)"
+ },
+ {
+  "host": "theprintedmeeple.com",
+  "base": "https://theprintedmeeple.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "thepokehive.com",
+  "base": "https://thepokehive.com",
+  "market": "US",
+  "ok": false,
+  "name": "ThePokeHive",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "thiccripstcg.com",
+  "base": "https://thiccripstcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "shop.tinygoblingames.com",
+  "base": "https://shop.tinygoblingames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (123 collections)"
+ },
+ {
+  "host": "thepk.gg",
+  "base": "https://thepk.gg",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (16 collections)"
+ },
+ {
+  "host": "totalescapegames.com",
+  "base": "https://totalescapegames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (65 collections)"
+ },
+ {
+  "host": "tournamentcitygames.gg",
+  "base": "https://tournamentcitygames.gg",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "tiltedgamingtcg.com",
+  "base": "https://tiltedgamingtcg.com",
+  "market": "US",
+  "ok": false,
+  "name": "Tilted Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "titoricks.com",
+  "base": "https://titoricks.com",
+  "market": "US",
+  "ok": false,
+  "name": "Tito Ricks ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "triangleatc.com",
+  "base": "https://triangleatc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "twinfusecollectibles.com",
+  "base": "https://twinfusecollectibles.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (29 collections)"
+ },
+ {
+  "host": "toynadoalley.com",
+  "base": "https://toynadoalley.com",
+  "market": "US",
+  "ok": false,
+  "name": "toynadoalley.com",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 3,
+  "currency": "USD",
+  "reason": "matched 3, in stock 3",
+  "tried": [
+   "yu-gi-oh(9):3/9"
+  ],
+  "samples": [
+   "Crystal Revenge Battles of Legend Yu-Gi-Oh! Booster Box",
+   "Duels from the Deep Legendary Duelists Yu-Gi-Oh! Booster Box",
+   "Soulburning Volcano Legendary Duelists Yu-Gi-Oh! Booster Box"
+  ]
+ },
+ {
+  "host": "trinitygamesllc.com",
+  "base": "https://trinitygamesllc.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (3 collections)"
+ },
+ {
+  "host": "victorypointlgs.com",
+  "base": "https://victorypointlgs.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (85 collections)"
+ },
+ {
+  "host": "victorypointcafe.com",
+  "base": "https://victorypointcafe.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (1 collections)"
+ },
+ {
+  "host": "unpluggedtabletop.com",
+  "base": "https://unpluggedtabletop.com",
+  "market": "US",
+  "ok": false,
+  "name": "Unplugged Tabletop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(5):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "watsontcg.com",
+  "base": "https://watsontcg.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (66 collections)"
+ },
+ {
+  "host": "trademarksportscards.com",
+  "base": "https://trademarksportscards.com",
+  "market": "US",
+  "ok": false,
+  "name": "Trademark Cards & Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(56):1/1",
+   "yu-gi-oh-packs(22):0/0",
+   "yu-gi-oh-pre-order(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh: Magnificent Monsters Box"
+  ]
+ },
+ {
+  "host": "waterloogames.com",
+  "base": "https://waterloogames.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "wethehobby.com",
+  "base": "https://wethehobby.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "topspot.cards",
+  "base": "https://topspot.cards",
+  "market": "US",
+  "ok": false,
+  "name": "Topspot Cards",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 12,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 12, in stock 0",
+  "tried": [
+   "yu-gi-oh(89):12/39",
+   "yu-gi-oh-booster-boxes(56):10/32",
+   "yu-gi-oh-preorders(0):0/0"
+  ],
+  "samples": [
+   "Quarter Century Stampede Booster Pack",
+   "Quarter Century Stampede Booster Box",
+   "25th Anniversary Tin: Dueling Mirrors Tin",
+   "Battles of Legend: Terminal Revenge Booster Pack",
+   "Battles of Legend: Terminal Revenge Booster Box",
+   "25th Anniversary Rarity Collection II Booster Pack"
+  ]
+ },
+ {
+  "host": "wyattswarehouse.com",
+  "base": "https://wyattswarehouse.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (21 collections)"
+ },
+ {
+  "host": "wolcowgaming.com",
+  "base": "https://wolcowgaming.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (20 collections)"
+ },
+ {
+  "host": "worldchampionsportscards.org",
+  "base": "https://worldchampionsportscards.org",
+  "ok": false,
+  "reason": "not Shopify or unreachable (https://worldchampionsportscards.org/meta.json: HTTP 404 )"
+ },
+ {
+  "host": "utopiatoysandmodels.com",
+  "base": "https://utopiatoysandmodels.com",
+  "market": "US",
+  "ok": false,
+  "reason": "no ygo collection (167 collections)"
+ },
+ {
+  "host": "wr.games",
+  "base": "https://wr.games",
+  "ok": false,
+  "reason": "not Shopify or unreachable (ale=1\"/><title>White Rabbit Game Emporium</title><link rel=\"preconnect\" href=\"ht)"
+ },
+ {
+  "host": "wegeektogether.com",
+  "base": "https://wegeektogether.com",
+  "market": "US",
+  "ok": false,
+  "name": "We Geek Together",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-card-singles(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "yuudachitcgarena.com",
+  "base": "https://yuudachitcgarena.com",
+  "market": "US",
+  "ok": false,
+  "name": "Yuudachi TCG Arena",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0",
+   "yu-gi-oh-1(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "zombiehideoutllc.com",
+  "base": "https://zombiehideoutllc.com",
+  "market": "US",
+  "ok": false,
+  "name": "Zombie Hideout  ",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(0):0/0",
+   "yugioh-sealed(0):0/0",
+   "yugioh-singles(0):0/0"
+  ],
+  "samples": []
+ }
+]

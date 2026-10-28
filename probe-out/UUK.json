@@ -1,0 +1,327 @@
+[
+ {
+  "host": "aj-tcg.co.uk",
+  "base": "https://aj-tcg.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (23 collections)"
+ },
+ {
+  "host": "gamecorner.com",
+  "base": "https://gamecorner.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (26 collections)"
+ },
+ {
+  "host": "gameguru.co.uk",
+  "base": "https://gameguru.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (63 collections)"
+ },
+ {
+  "host": "jestergamesstore.com",
+  "base": "https://jestergamesstore.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (27 collections)"
+ },
+ {
+  "host": "dicecupcafe.co.uk",
+  "base": "https://dicecupcafe.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Dice Cup Cafe",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "excelsiorgamesandcomics.co.uk",
+  "base": "https://excelsiorgamesandcomics.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Excelsior! Bristol",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(8):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "hexlabsgames.com",
+  "base": "https://hexlabsgames.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Hex Labs Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "binderful.co.uk",
+  "base": "https://binderful.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Binderful",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "ygo(44):0/0",
+   "ygo-booster-packs(16):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "kingdomgaming.co.uk",
+  "base": "https://kingdomgaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (5 collections)"
+ },
+ {
+  "host": "hullpops.co.uk",
+  "base": "https://hullpops.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Hull Pops Ltd",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-events(4):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "leannesanimeandcollectables.com",
+  "base": "https://leannesanimeandcollectables.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (49 collections)"
+ },
+ {
+  "host": "northumbriantinsoldier.com",
+  "base": "https://northumbriantinsoldier.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (146 collections)"
+ },
+ {
+  "host": "phantomcardsuk.com",
+  "base": "https://phantomcardsuk.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (16 collections)"
+ },
+ {
+  "host": "rollthedicecornwall.com",
+  "base": "https://rollthedicecornwall.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (144 collections)"
+ },
+ {
+  "host": "justplaygames.uk",
+  "base": "https://justplaygames.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "JustPlayGames",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0",
+   "yu-gi-oh-preorders(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "sarahs-shinies.co.uk",
+  "base": "https://sarahs-shinies.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (29 collections)"
+ },
+ {
+  "host": "pixelandblock.co.uk",
+  "base": "https://pixelandblock.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Pixel and Block Shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "snapsgames.co.uk",
+  "base": "https://snapsgames.co.uk",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (53 collections)"
+ },
+ {
+  "host": "nostalgiatcg.com",
+  "base": "https://nostalgiatcg.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Nostalgia TCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-yu-gi-oh-tcg(14):2/11"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! TCG Legendary Duelists Soulburning Volcano Booster Pack",
+   "Yu-Gi-Oh! TCG Legendary Duelists Soulburning Volcano Booster Box"
+  ]
+ },
+ {
+  "host": "knightlygaming.co.uk",
+  "base": "https://knightlygaming.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Knightly Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(4):0/4",
+   "yugioh-sealed(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "theludoquist.com",
+  "base": "https://theludoquist.com",
+  "market": "UK",
+  "ok": false,
+  "reason": "no ygo collection (189 collections)"
+ },
+ {
+  "host": "thehivegaming.com",
+  "base": "https://thehivegaming.com",
+  "market": "UK",
+  "ok": false,
+  "name": "The Hive Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(2):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tridentcards.co.uk",
+  "base": "https://tridentcards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Trident Cards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(6):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "willstoyshop.com",
+  "base": "https://willstoyshop.com",
+  "market": "UK",
+  "ok": false,
+  "name": "Wills Toy Shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-tcg(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "unifiedcards.co.uk",
+  "base": "https://unifiedcards.co.uk",
+  "market": "UK",
+  "ok": false,
+  "name": "Unified Cards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "GBP",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-1(0):0/0",
+   "yugioh-single-cards(0):0/0"
+  ],
+  "samples": []
+ }
+]

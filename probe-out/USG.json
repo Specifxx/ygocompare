@@ -1,0 +1,65 @@
+[
+ {
+  "host": "cardconnectsg.com",
+  "base": "https://cardconnectsg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "huattoru.com",
+  "base": "https://huattoru.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (15 collections)"
+ },
+ {
+  "host": "gameshaventcg.com",
+  "base": "https://gameshaventcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (37 collections)"
+ },
+ {
+  "host": "theimaginariumsg.com",
+  "base": "https://theimaginariumsg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (42 collections)"
+ },
+ {
+  "host": "game-academia.com",
+  "base": "https://game-academia.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (583 collections)"
+ },
+ {
+  "host": "hideyoshitcg.com",
+  "base": "https://hideyoshitcg.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "paintandplay.sg",
+  "base": "https://paintandplay.sg",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (22 collections)"
+ },
+ {
+  "host": "universecards.sg",
+  "base": "https://universecards.sg",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "fyendalhobby.com",
+  "base": "https://fyendalhobby.com",
+  "market": "SG",
+  "ok": false,
+  "reason": "no ygo collection (76 collections)"
+ }
+]

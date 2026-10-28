@@ -1,0 +1,2562 @@
+[
+ {
+  "host": "alaragames.se",
+  "base": "https://alaragames.se",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "alertehit.fr",
+  "base": "https://alertehit.fr",
+  "ok": false,
+  "reason": "not Shopify or unreachable (ale=1,maximum-scale=1,user-scalable=no\"/><title>ALERTE HIT</title><meta name=\"ap)"
+ },
+ {
+  "host": "arcaneforge.nl",
+  "base": "https://arcaneforge.nl",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (51 collections)"
+ },
+ {
+  "host": "baltzergames.dk",
+  "base": "https://baltzergames.dk",
+  "ok": false,
+  "reason": "currency DKK"
+ },
+ {
+  "host": "1uprm.com",
+  "base": "https://1uprm.com",
+  "market": "EU",
+  "ok": false,
+  "name": "1UP",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(14):0/14"
+  ],
+  "samples": []
+ },
+ {
+  "host": "azcardtrading.it",
+  "base": "https://azcardtrading.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (57 collections)"
+ },
+ {
+  "host": "bcnretroclass.com",
+  "base": "https://bcnretroclass.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "animerch.nl",
+  "base": "https://animerch.nl",
+  "market": "EU",
+  "ok": false,
+  "name": "Animerch",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-trading-card-game(6):0/6",
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "adcardcollectibles.com",
+  "base": "https://adcardcollectibles.com",
+  "market": "EU",
+  "ok": false,
+  "name": "AdCard Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-boosters-boxes(8):1/8",
+   "yu-gi-oh-outros(1):1/1",
+   "yu-gi-oh-boosters(6):0/6",
+   "yu-gi-oh-decks(1):0/1",
+   "yu-gi-oh-singles(1):0/1"
+  ],
+  "samples": [
+   "YU-GI-OH! - 25TH ANNIVERSARY RARITY COLLECTION II BOOSTER DISPLAY (24 PACKS)",
+   "YU-GI-OH! - 25TH ANNIVERSARY TIN - DUELING MIRRORS"
+  ]
+ },
+ {
+  "host": "ceanerdcorner.com",
+  "base": "https://ceanerdcorner.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (24 collections)"
+ },
+ {
+  "host": "boostertcg.de",
+  "base": "https://boostertcg.de",
+  "market": "EU",
+  "ok": false,
+  "name": "BoosterTCG",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 1,
+  "currency": "EUR",
+  "reason": "matched 2, in stock 1",
+  "tried": [
+   "yu-gi-oh(7):2/7"
+  ],
+  "samples": [
+   "Yu-Gi-Oh: Magnificent Monsters Box - Englisch",
+   "Yu-Gi-Oh: Blue-Eyes White Destiny Structure Deck Reprint - Englisch"
+  ]
+ },
+ {
+  "host": "boardgamefanatic.nl",
+  "base": "https://boardgamefanatic.nl",
+  "market": "EU",
+  "ok": false,
+  "name": "Boardgame Fanatic",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(4):1/4"
+  ],
+  "samples": [
+   "Realm Of Light Structure Deck (Reprint)"
+  ]
+ },
+ {
+  "host": "baruzcard.it",
+  "base": "https://baruzcard.it",
+  "market": "EU",
+  "ok": false,
+  "name": "BaruZcard Tcg & Accessori",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(118):14/118",
+   "box-di-buste-yugioh(54):4/54",
+   "bustine-singole-yugioh(10):0/10",
+   "deck-precostruiti-yugioh(10):0/10"
+  ],
+  "samples": [
+   "Yugioh Rarity Collection 5 Collezione Rarità 5 Display Box 24 Buste ITA",
+   "Yu-gi-oh! 2025 TuckBox Mega Pack 2025 (3 Mega-Pack) ENG - Cassa 12 Tuckbox",
+   "Yu-gi-oh! 2025 TuckBox Mega Pack 2025 (3 Mega-Pack) ITA - Cassa 12 TuckBox",
+   "Yu-gi-oh! 2025 TuckBox Mega Pack 2025 (3 Mega-Pack) ENG",
+   "Yu-gi-oh! 2025 TuckBox Mega Pack 2025 (3 Mega-Pack) ITA",
+   "Yu-gi-oh! 2025 Mega Pack Tin ENG - Case 12 Pezzi"
+  ]
+ },
+ {
+  "host": "cardcorner.at",
+  "base": "https://cardcorner.at",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (46 collections)"
+ },
+ {
+  "host": "cardaniacity.de",
+  "base": "https://cardaniacity.de",
+  "market": "EU",
+  "ok": false,
+  "name": "CardaniaCity",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-artikel(39):3/34",
+   "yu-gi-oh-einzelkarten(59):0/59"
+  ],
+  "samples": [
+   "Star Pack VRAINS Booster DE",
+   "Structure Deck Legend of the Crystal Beasts DEU",
+   "Speed Duel Arena of Lost Souls Display (18 Booster) DEU"
+  ]
+ },
+ {
+  "host": "cardbuddys.de",
+  "base": "https://cardbuddys.de",
+  "market": "EU",
+  "ok": false,
+  "name": "CardBuddys",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(40):1/10",
+   "yu-gi-oh-events(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Magnificent Monsters 1st Display DE"
+  ]
+ },
+ {
+  "host": "allyoucanplay.eu",
+  "base": "https://allyoucanplay.eu",
+  "market": "EU",
+  "ok": true,
+  "name": "All You Can Play",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 7,
+  "inStock": 4,
+  "currency": "EUR",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(29):7/29",
+   "yu-gi-oh-2025-mega-pack(2):2/2",
+   "yu-gi-oh-quarter-century-bonanza(2):2/2",
+   "yu-gi-oh-rarity-collection-5(2):2/2",
+   "yu-gi-oh-alliance-insight(2):0/2",
+   "yu-gi-oh-burst-protocol(2):0/2",
+   "yu-gi-oh-duelists-advance(2):0/2",
+   "yu-gi-oh-maze-of-muertos(2):0/2",
+   "yu-gi-oh-phantom-revenge(2):0/2",
+   "yu-gi-oh-quarter-century-stampede(2):0/2"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - Mega-Pack 2025 - Booster Pack | ENG",
+   "Yu-Gi-Oh! - Quarter Century Bonanza - Booster Pack - ENG",
+   "Yu-Gi-Oh! - Booster Pack - Rarity Collection 5 - RA05 - ENG",
+   "Yu-Gi-Oh! - Display Booster Box -   Rarity Collection 5  - RA05 - ENG",
+   "Yu-Gi-Oh! - Mega-Pack 2025 - Tuckbox 3 Boosters ENG",
+   "Yu-Gi-Oh! - Crossover Breakers \\ Distruttori Incrociati - Display Booster Box ENG \\ ITA"
+  ]
+ },
+ {
+  "host": "cardgamestore.de",
+  "base": "https://cardgamestore.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (130 collections)"
+ },
+ {
+  "host": "cardhorizon.com",
+  "base": "https://cardhorizon.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (110 collections)"
+ },
+ {
+  "host": "card-collector.net",
+  "base": "https://card-collector.net",
+  "market": "EU",
+  "ok": false,
+  "name": "Card Collector",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(154):1/39",
+   "yu-gi-oh-1(212):0/8",
+   "yu-gi-oh-side-event(5):0/5"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - Limited Pack World Championship 2026 Booster (1 Pack) Englisch"
+  ]
+ },
+ {
+  "host": "collectistore.com",
+  "base": "https://collectistore.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (7 collections)"
+ },
+ {
+  "host": "cardyx.sk",
+  "base": "https://cardyx.sk",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (56 collections)"
+ },
+ {
+  "host": "daansshop.com",
+  "base": "https://daansshop.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (141 collections)"
+ },
+ {
+  "host": "card-knights.de",
+  "base": "https://card-knights.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Card-Knights",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(29):4/24"
+  ],
+  "samples": [
+   "Blue-Eyes White Destiny Structure Deck Display",
+   "Realm of Light Structure Deck",
+   "Quarter Century Stampede: Special 3-Pack Tuckbox",
+   "Quarter Century Stampede Booster Box"
+  ]
+ },
+ {
+  "host": "cardclub.de",
+  "base": "https://cardclub.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Card Club",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(16):1/16",
+   "yu-gi-oh-tin(1):1/1",
+   "yu-gi-oh-display(10):0/10",
+   "yu-gi-oh-booster(5):0/5",
+   "yu-gi-oh-structure-deck(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - 2025 Mega-Pack Bundle - englisch",
+   "Yu-Gi-Oh! - 2025 Mega-Pack Bundle - englisch"
+  ]
+ },
+ {
+  "host": "cardverse.it",
+  "base": "https://cardverse.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Cardverse",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-italiano"
+  ],
+  "kind": "sealed",
+  "matched": 5,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 5, in stock 0",
+  "tried": [
+   "yu-gi-oh(53):7/52",
+   "yu-gi-oh-italiano(15):5/15",
+   "yu-gi-oh-inglese(7):1/7",
+   "yu-gi-oh-giapponese(5):0/5"
+  ],
+  "samples": [
+   "Yu-Gi-Oh - Magnificent Monsters Box 3 Buste (IT)",
+   "Yu-Gi-Oh - Structure Deck Yugi Muto (ENG)",
+   "Yu-Gi-Oh - Structure Deck Yugi Muto (IT)",
+   "Yu-Gi-Oh - Magnificent Maestros Box 3 Buste (IT)",
+   "YU-GI-OH Mega-Pack 2025 Tuckbox 3 buste (1a Edizione - IT)",
+   "YU-GI-OH Mega-Pack 2025 Tin (1a Edizione - IT)"
+  ]
+ },
+ {
+  "host": "dctrading.at",
+  "base": "https://dctrading.at",
+  "market": "EU",
+  "ok": true,
+  "name": "DC-Trading",
+  "existingKey": null,
+  "collections": [
+   "yugioh"
+  ],
+  "kind": "sealed",
+  "matched": 6,
+  "inStock": 6,
+  "currency": "EUR",
+  "reason": null,
+  "tried": [
+   "yugioh(27):6/16"
+  ],
+  "samples": [
+   "2021 Tin of Ancient Battles – EN",
+   "Magnificent Monsters Box 2026 – EN",
+   "25th Anniversary Rarity Collection II Booster Display – EN",
+   "THE CHRONICLES DECK: Spirit Charmers All-Foil Edition – EN",
+   "Structure Deck: Legend of the Crystal Beasts – EN",
+   "2025 Mega-Pack Bundle – EN"
+  ]
+ },
+ {
+  "host": "battle-bear.de",
+  "base": "https://battle-bear.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Battle Bear Trading Cards & Games",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-decks"
+  ],
+  "kind": "sealed",
+  "matched": 4,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 4, in stock 0",
+  "tried": [
+   "yu-gi-oh(129):14/129",
+   "yu-gi-oh-booster(70):4/70",
+   "yu-gi-oh-decks(15):4/15",
+   "yu-gi-oh-displays(16):2/16",
+   "yu-gi-oh-zubehor(9):0/9",
+   "yu-gi-oh-events(2):0/1",
+   "deutsche-yu-gi-oh-einzelkarten(0):0/0",
+   "english-yu-gi-oh-singles(0):0/0",
+   "yu-gi-oh-einzelkarten(0):0/0",
+   "yu-gi-oh-einzelkarten-bis-10(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! World Championship 2026 Limited Pack Box (10 Packs) Englisch",
+   "Yu-Gi-Oh! Magnificent Monsters Box Englisch",
+   "Yu-Gi-Oh! The Chronicles Deck (Spirit Charmers - All-Foil Edition) Englisch",
+   "Yu-Gi-Oh! 2025 Mega-Pack Bundle Englisch",
+   "Yu-Gi-Oh! Structure Deck Blue-Eyes White Destiny Englisch (Reprint)",
+   "Yu-Gi-Oh! 25th Anniversary Tin Dueling Mirrors Booster Englisch"
+  ]
+ },
+ {
+  "host": "defconduezero.com",
+  "base": "https://defconduezero.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (39 collections)"
+ },
+ {
+  "host": "de-dondersteen.nl",
+  "base": "https://de-dondersteen.nl",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (365 collections)"
+ },
+ {
+  "host": "collgamers.nl",
+  "base": "https://collgamers.nl",
+  "market": "EU",
+  "ok": false,
+  "name": "CollGamers",
+  "existingKey": null,
+  "collections": [
+   "yugioh"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 3,
+  "currency": "EUR",
+  "reason": "matched 3, in stock 3",
+  "tried": [
+   "yugioh(7):3/6",
+   "yugioh-collectors-sets-en-meer(4):3/4",
+   "yugioh-booster-box(5):2/4",
+   "pre-order-yu-gi-oh(3):2/2"
+  ],
+  "samples": [
+   "YuGiOh! Magnificent Monsters Box (EU) - Konami",
+   "YuGiOh! Magnificent mavens box (ENG) - Konami",
+   "YuGiOh! Magnificent Maestros Box (EU) - Konami",
+   "YuGiOh! Magnificent Monsters Box (EU) - Konami",
+   "YuGiOh! Magnificent Maestros Box (EU) - Konami",
+   "YuGiOh! Magnificent Monsters Box (EU) - Konami"
+  ]
+ },
+ {
+  "host": "derivegeek.fr",
+  "base": "https://derivegeek.fr",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (26 collections)"
+ },
+ {
+  "host": "dragonslair.se",
+  "base": "https://dragonslair.se",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "dadiemattoncini.it",
+  "base": "https://dadiemattoncini.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Dadi e Mattoncini",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "carte-yu-gi-oh(14):0/13"
+  ],
+  "samples": []
+ },
+ {
+  "host": "drawphase.pt",
+  "base": "https://drawphase.pt",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "donmazo.com",
+  "base": "https://donmazo.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Don Mazo",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(19):1/13"
+  ],
+  "samples": [
+   "25º Aniversario: Quarter Century Stampede: Booster Box"
+  ]
+ },
+ {
+  "host": "elitestoretcg.com",
+  "base": "https://elitestoretcg.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "deichcards.de",
+  "base": "https://deichcards.de",
+  "market": "EU",
+  "ok": false,
+  "name": "deichcards.de",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-karten"
+  ],
+  "kind": "sealed",
+  "matched": 14,
+  "inStock": 1,
+  "currency": "EUR",
+  "reason": "matched 14, in stock 1",
+  "tried": [
+   "yu-gi-oh-karten(55):14/47",
+   "konami-yu-gi-oh-klassiker-neue-strategien-im-tcg(53):13/45"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Retro Pack 2 Display Box (Reprint, EN)",
+   "Yu-Gi-Oh! Retro Pack 2 Display Box (Reprint, DE)",
+   "Yu-Gi-Oh! Structure Deck: Blue-Eyes White Destiny (Reprint, DE)",
+   "Yu-Gi-Oh! Quarter Century Stampede Display Box (DE)",
+   "Yu-Gi-Oh! Structure Deck: Blue-Eyes White Destiny (DE)",
+   "Yu-Gi-Oh! Crossover Breakers Display Box (DE)"
+  ]
+ },
+ {
+  "host": "elturnoextra.es",
+  "base": "https://elturnoextra.es",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (17 collections)"
+ },
+ {
+  "host": "dungeonstreet.com",
+  "base": "https://dungeonstreet.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Dungeon Street",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(7):1/7"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Structure Deck: Blue-Eyes White Destiny ITA"
+  ]
+ },
+ {
+  "host": "factorycardstcg.com",
+  "base": "https://factorycardstcg.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (10 collections)"
+ },
+ {
+  "host": "eldoradotcg.de",
+  "base": "https://eldoradotcg.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Eldorado TCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(4):0/4",
+   "yugioh-sonstiges(3):0/3",
+   "yugioh-starter-decks(1):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "exchangeplayinvest.com",
+  "base": "https://exchangeplayinvest.com",
+  "market": "EU",
+  "ok": false,
+  "name": "E.P.I.",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-confezioni-speciali(1):0/1",
+   "yu-gi-oh-buste-singole(0):0/0",
+   "yu-gi-oh-carte-singole(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "fuhrious-tc.shop",
+  "base": "https://fuhrious-tc.shop",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (36 collections)"
+ },
+ {
+  "host": "facetofacegames.nl",
+  "base": "https://facetofacegames.nl",
+  "market": "EU",
+  "ok": false,
+  "name": "Face to Face Games NL",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(1):1/1",
+   "yugioh-display(1):1/1"
+  ],
+  "samples": [
+   "25th Anniversary Rarity Collection II Booster Box (US Version - 18 Packs) - 25th Anniversary Rarity Collection II",
+   "25th Anniversary Rarity Collection II Booster Box (US Version - 18 Packs) - 25th Anniversary Rarity Collection II"
+  ]
+ },
+ {
+  "host": "freakcorp.com",
+  "base": "https://freakcorp.com",
+  "market": "EU",
+  "ok": true,
+  "name": "FreakCorp",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 9,
+  "inStock": 4,
+  "currency": "EUR",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(40):9/36",
+   "outlet-yugioh(14):1/14"
+  ],
+  "samples": [
+   "YUGIOH - 2025 Mega Pack Bundle",
+   "YUGIOH - 2025 LATA Mega Pack Tin (CASE 12 unidades)",
+   "YUGIOH - 2025 LATA Mega Pack Tin",
+   "Justice Hunters - Booster Box (1st Edition)",
+   "Duelist's Advance - Booster Box (1st Edition)",
+   "YUGIOH QUARTER CENTURY STAMPEDE – Booster Box"
+  ]
+ },
+ {
+  "host": "dateacard.fr",
+  "base": "https://dateacard.fr",
+  "market": "EU",
+  "ok": false,
+  "name": "DateACard",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(207):0/207",
+   "yu-gi-oh-dac-vault(163):0/163",
+   "protege-cartes-yu-gi-oh(106):0/106",
+   "display-yu-gi-oh(16):0/16",
+   "tournois-yu-gi-oh(15):0/11",
+   "produits-derives-yu-gi-oh(13):0/13",
+   "deck-de-structure-yu-gi-oh(8):0/8",
+   "coffret-yu-gi-oh(7):0/7",
+   "booster-yu-gi-oh(5):0/5"
+  ],
+  "samples": []
+ },
+ {
+  "host": "freakshowstore.com",
+  "base": "https://freakshowstore.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (882 collections)"
+ },
+ {
+  "host": "gamers-academy.org",
+  "base": "https://gamers-academy.org",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (43 collections)"
+ },
+ {
+  "host": "gamesalley.it",
+  "base": "https://gamesalley.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (34 collections)"
+ },
+ {
+  "host": "fumetteriageco.it",
+  "base": "https://fumetteriageco.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Fumetteria Geco",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-1(31):4/31"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - 2025 Mega-Pack - ITA",
+   "Yu-Gi-Oh! - World Championship 2025 Limited Pack (10 bustine) ENG",
+   "Yu-Gi-Oh! - Tin 2025 Mega-Pack - ENG",
+   "Yu-Gi-Oh! - Tin 2025 Mega-Pack - ITA"
+  ]
+ },
+ {
+  "host": "garajeux.shop",
+  "base": "https://garajeux.shop",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "glitchless.de",
+  "base": "https://glitchless.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "goblincafeshop.it",
+  "base": "https://goblincafeshop.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (2 collections)"
+ },
+ {
+  "host": "gamestimespoleto.it",
+  "base": "https://gamestimespoleto.it",
+  "market": "EU",
+  "ok": false,
+  "name": "GAMES TIME SPOLETO",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(20):0/20"
+  ],
+  "samples": []
+ },
+ {
+  "host": "grandlinecards.shop",
+  "base": "https://grandlinecards.shop",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (16 collections)"
+ },
+ {
+  "host": "grainedegeek.fr",
+  "base": "https://grainedegeek.fr",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "grillecards.com",
+  "base": "https://grillecards.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (16 collections)"
+ },
+ {
+  "host": "hallicards.de",
+  "base": "https://hallicards.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (22 collections)"
+ },
+ {
+  "host": "goose-games.de",
+  "base": "https://goose-games.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Goose Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(17):0/9"
+  ],
+  "samples": []
+ },
+ {
+  "host": "halmeshule.dk",
+  "base": "https://halmeshule.dk",
+  "ok": false,
+  "reason": "currency DKK"
+ },
+ {
+  "host": "hanadacards.dk",
+  "base": "https://hanadacards.dk",
+  "ok": false,
+  "reason": "currency DKK"
+ },
+ {
+  "host": "funside.it",
+  "base": "https://funside.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Funside.it",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(188):12/175",
+   "yu-gi-oh-carte-collezionabili(87):12/81"
+  ],
+  "samples": [
+   "YU-GI-OH! - STRUCTURE DECK YUGI MUTO - ITA",
+   "YU-GI-OH!- TUCKBOX MEGA-PACK 2025 (3 MEGA PACK) - ITA",
+   "BOX YU-GI-OH! - MAGNIFICENT MAESTROS (3 BUSTE) - ITA",
+   "YU-GI-OH! - STRUCTURE DECK - BLUE-EYES WHITE DESTINY UNLIMITED - ENG (MAZZO SINGOLO)",
+   "YU-GI-OH! - STRUCTURE DECK - BLUE-EYES WHITE DESTINY UNLIMITED - ITA (MAZZO SINGOLO)",
+   "BOX YU-GI-OH! - MAGNIFICENT MONSTERS (3 BUSTE) - ENG"
+  ]
+ },
+ {
+  "host": "hallofgamestcg.de",
+  "base": "https://hallofgamestcg.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Hall Of Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(31):0/28"
+  ],
+  "samples": []
+ },
+ {
+  "host": "evlutcg.com",
+  "base": "https://evlutcg.com",
+  "market": "EU",
+  "ok": true,
+  "name": "Evolution TCG",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-sealed-products"
+  ],
+  "kind": "sealed",
+  "matched": 21,
+  "inStock": 16,
+  "currency": "EUR",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh-sealed-products(99):21/98",
+   "yu-gi-oh(2134):7/250",
+   "yu-gi-oh-singles(2006):0/250",
+   "yu-gi-oh-mega-pack-2025-bundle-tin(252):0/250",
+   "yu-gi-oh-duelist-advance-eu-english(130):0/130",
+   "yu-gi-oh-doom-of-dimensions-eu-english(127):0/127",
+   "yu-gi-oh-justic-hunters-eu-english(117):0/117",
+   "yu-gi-oh-alliance-insight-eu-english(115):0/115",
+   "yu-gi-oh-phantom-revenge-eu-english(85):0/85",
+   "yu-gi-oh-cores(22):0/22"
+  ],
+  "samples": [
+   "25th Anniversary Rarity Collection AMERICAN Booster Box",
+   "Yu-Gi-Oh! Structure Deck: Beware of Traptrix EU English 1st Edition [Sealed]",
+   "Yu-Gi-Oh! Structure Deck: The Crimson King EU English 1st Edition [Sealed]",
+   "25th Anniversary Tin: Dueling Heroes 1st Edition EU English Case (Packs & Promos only)",
+   "Yu-Gi-Oh! Retro Pack 2 Reprint Booster Display (24 Packs) EU English",
+   "Yu-Gi-Oh! Structure Deck: Blue-Eyes White Destiny EU English 1st Edition"
+  ]
+ },
+ {
+  "host": "thehouseofgames.eu",
+  "base": "https://thehouseofgames.eu",
+  "market": "EU",
+  "ok": false,
+  "name": "House of Games",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 1,
+  "currency": "EUR",
+  "reason": "matched 2, in stock 1",
+  "tried": [
+   "yu-gi-oh(10):2/7",
+   "ygo-quarter-century-stampede(2):0/1"
+  ],
+  "samples": [
+   "Yu Gi Oh! - 2025 Mega-Pack Tin Display - EN",
+   "25th Anniversary Tin: Dueling Heroes - Yu Gi Oh!"
+  ]
+ },
+ {
+  "host": "pelikrypta.fi",
+  "base": "https://pelikrypta.fi",
+  "market": "EU",
+  "ok": false,
+  "name": "Pelikrypta Ikamaa",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "tuoteryhma-yu-gi-oh(34):1/11"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Limited Pack World Championship 2026 Booster"
+  ]
+ },
+ {
+  "host": "ikigaicomicstienda.com",
+  "base": "https://ikigaicomicstienda.com",
+  "market": "EU",
+  "ok": false,
+  "name": "IKIGAI COMICS",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(31):3/31"
+  ],
+  "samples": [
+   "Limited Pack World Championship 2026 (10 Sobres) Inglés - Yu-Gi-Oh!",
+   "Booster Display (Sobre) Retro Pack 2 Inglés - Yu-Gi-Oh!",
+   "Limited Pack World Championship 2025 (10 Sobres) Inglés - Yu-Gi-Oh!"
+  ]
+ },
+ {
+  "host": "iconic-cards.it",
+  "base": "https://iconic-cards.it",
+  "market": "EU",
+  "ok": false,
+  "name": "ICONIC CARDS",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ilnerdozio.it",
+  "base": "https://ilnerdozio.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Il Nerdozio",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(3):0/3"
+  ],
+  "samples": []
+ },
+ {
+  "host": "isengard.com.cy",
+  "base": "https://isengard.com.cy",
+  "market": "EU",
+  "ok": false,
+  "name": "Isengard Fantasy Shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(116):1/12"
+  ],
+  "samples": [
+   "Mega-Pack Bundle 2025"
+  ]
+ },
+ {
+  "host": "jay-cs.at",
+  "base": "https://jay-cs.at",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "gamerzparadize.nl",
+  "base": "https://gamerzparadize.nl",
+  "market": "EU",
+  "ok": true,
+  "name": "GamerzParadize",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-booster-packs",
+   "yu-gi-oh-booster-boxen",
+   "yu-gi-oh-decks"
+  ],
+  "kind": "sealed",
+  "matched": 11,
+  "inStock": 11,
+  "currency": "EUR",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(107):15/94",
+   "yu-gi-oh-booster-packs(25):5/21",
+   "yu-gi-oh-booster-boxen(18):3/15",
+   "yu-gi-oh-decks(16):3/13",
+   "yu-gi-oh-special-editions(13):3/13",
+   "yu-gi-oh-themed-accessoires(19):0/18",
+   "yu-gi-oh-merchandise(9):0/7",
+   "funko-yu-gi-oh(7):0/6",
+   "yu-gi-oh-losse-kaarten(7):0/7",
+   "events-yu-gi-oh-events(6):0/6"
+  ],
+  "samples": [
+   "2025 Mega Pack Tuckbox Yu-Gi-Oh!",
+   "2025 Mega Tin Booster Pack Yu-Gi-Oh!",
+   "25th Anniversary Tin - Dueling Heroes Yu-Gi-Oh!",
+   "Battles of Legend - Chapter 1 Box Yu-Gi-Oh!",
+   "Blue-Eyes White Destiny Structure Deck Yu-Gi-Oh! - (Reprint)",
+   "Magnificent Monsters Booster Pack Yu-Gi-Oh!"
+  ]
+ },
+ {
+  "host": "isoladeicollezionisti.it",
+  "base": "https://isoladeicollezionisti.it",
+  "ok": false,
+  "reason": "not Shopify or unreachable (econnect\" href=\"https://cdn.shopify.com\"/><link rel=\"preconnect\" href=\"https://c)"
+ },
+ {
+  "host": "kardsgreifswald.de",
+  "base": "https://kardsgreifswald.de",
+  "market": "EU",
+  "ok": false,
+  "name": "KARDS Greifswald",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-tcg(1):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "kingdomwargamesvalencia.com",
+  "base": "https://kingdomwargamesvalencia.com",
+  "ok": false,
+  "reason": "not Shopify or unreachable (idth, initial-scale=1.0\" />\n    <meta name=\"theme-color\" content=\"#2e3142\" />\n  )"
+ },
+ {
+  "host": "kazuma.it",
+  "base": "https://kazuma.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Kazuma games shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "tcg-yugioh-1(7):0/7"
+  ],
+  "samples": []
+ },
+ {
+  "host": "kortarkivet.se",
+  "base": "https://kortarkivet.se",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "heartforcards.com",
+  "base": "https://heartforcards.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Heartforcards",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-tins"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 2,
+  "currency": "EUR",
+  "reason": "matched 2, in stock 2",
+  "tried": [
+   "yu-gi-oh(40):7/37",
+   "yu-gi-oh-displays(37):3/31",
+   "yu-gi-oh-booster(35):3/32",
+   "yu-gi-oh-decks-1(26):2/22",
+   "yu-gi-oh-tins(7):2/6",
+   "yu-gi-oh-einzelkarten(7):1/7",
+   "yu-gi-oh-kartensets(7):0/7",
+   "yu-gi-oh-orica(4):0/4",
+   "yugioh-orica(0):0/0",
+   "yu-gi-oh-booster-display(0):0/0"
+  ],
+  "samples": [
+   "Yu‑Gi‑Oh!  Speed Duel GX Duel Academy Box – Trading Card Game (Deutsche Ausgabe)+ Heartforcards® Versandschutz",
+   "Yu-Gi-Oh! Speed Duel GX: Midterm Paradox Mini-Box | Englisch | 100 Karten + Spielmatte",
+   "Yu-Gi-Oh! 2025 Mega Pack Bundle (ENG)– Zufälliges Design+ Heartforcards® Versandschutz",
+   "Yu-Gi-Oh! Tactical Masters Booster Box (1st Edition)",
+   "Yu-Gi-Oh! Legendary Collection: 25th Anniversary Edition (English) | 6 Boosterpacks + 6 Ultra Rares | Quarter Century Secret Rare | NEU & OVP – Jubiläums-Sammelbox",
+   "Yu-Gi-Oh! Speed Duel GX Duel Academy Box Englisch – Trading Card Game"
+  ]
+ },
+ {
+  "host": "kofuku.de",
+  "base": "https://kofuku.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Kofuku.de",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(50):4/30",
+   "yugioh-ots-events(1):0/1"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Battles of Legend Crystal Revenge Booster Pack (englisch)",
+   "[Nur Abholung möglich] 25th Anniversary Dueling Mirrors Tin Box (englisch)",
+   "[Nur Abholung möglich] Yu-Gi-Oh! 25th Anniversary Tin Dueling Heroes (englisch)",
+   "Yu-Gi-Oh! TCG: Magnificent Mavens Single Box - 1st Edition (englisch)"
+  ]
+ },
+ {
+  "host": "laescotillajuegos.com",
+  "base": "https://laescotillajuegos.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (588 collections)"
+ },
+ {
+  "host": "labottesecretelarochelle.fr",
+  "base": "https://labottesecretelarochelle.fr",
+  "ok": false,
+  "reason": "not Shopify or unreachable (nitial-scale=1\">\n\t<link rel=\"profile\" href=\"https://gmpg.org/xfn/11\">\n\t<meta nam)"
+ },
+ {
+  "host": "laconteacardsandgames.it",
+  "base": "https://laconteacardsandgames.it",
+  "market": "EU",
+  "ok": false,
+  "name": "La Contea Cards and Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "la-guilde.be",
+  "base": "https://la-guilde.be",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (13 collections)"
+ },
+ {
+  "host": "lagildastore.it",
+  "base": "https://lagildastore.it",
+  "market": "EU",
+  "ok": false,
+  "name": "La Gilda Store",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(43):1/9"
+  ],
+  "samples": [
+   "World Championship 2026 - Limited Pack ENG"
+  ]
+ },
+ {
+  "host": "laliane.com",
+  "base": "https://laliane.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (57 collections)"
+ },
+ {
+  "host": "laroccadelwargaming.it",
+  "base": "https://laroccadelwargaming.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "legacy-tcg.com",
+  "base": "https://legacy-tcg.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (8 collections)"
+ },
+ {
+  "host": "loopgamestcg.com",
+  "base": "https://loopgamestcg.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (7 collections)"
+ },
+ {
+  "host": "kartenbasis.de",
+  "base": "https://kartenbasis.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Kartenbasis",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-displays(32):0/32",
+   "yu-gi-oh-sonderkollektionen(8):0/8",
+   "yu-gi-oh-structure-decks(8):0/8",
+   "yu-gi-oh(1):0/1",
+   "yu-gi-oh-mystery-boxen(1):0/1",
+   "yu-gi-oh-einzelkarten(0):0/0",
+   "special-collections(0):0/0",
+   "vorbestellungen-yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "lepotoryko.fr",
+  "base": "https://lepotoryko.fr",
+  "market": "EU",
+  "ok": false,
+  "name": "Le Poto Ryko",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(42):0/24"
+  ],
+  "samples": []
+ },
+ {
+  "host": "lootstore.de",
+  "base": "https://lootstore.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (16 collections)"
+ },
+ {
+  "host": "luckydice.it",
+  "base": "https://luckydice.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (57 collections)"
+ },
+ {
+  "host": "lootboxjeux.fr",
+  "base": "https://lootboxjeux.fr",
+  "market": "EU",
+  "ok": false,
+  "name": "Lootbox",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(9):0/9"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ludusbelli.com",
+  "base": "https://ludusbelli.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (428 collections)"
+ },
+ {
+  "host": "shop.loufoque.fr",
+  "base": "https://shop.loufoque.fr",
+  "market": "EU",
+  "ok": false,
+  "name": "Boutique Loufoque",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-cartes(2):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "manaforge.fr",
+  "base": "https://manaforge.fr",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "mabasso.com",
+  "base": "https://mabasso.com",
+  "market": "EU",
+  "ok": false,
+  "name": "MaBasso",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 4,
+  "inStock": 2,
+  "currency": "EUR",
+  "reason": "matched 4, in stock 2",
+  "tried": [
+   "yu-gi-oh(15):4/15"
+  ],
+  "samples": [
+   "[DE] Yu-Gi-Oh - Retro Pack 2 - Booster Display",
+   "[DE] Magnificent Monsters Box",
+   "[EN] Yu-Gi-Oh - World Championship 2025 - Limited Pack",
+   "[EN] Yu-Gi-Oh - Blue Eyes White Destiny - Structure Deck"
+  ]
+ },
+ {
+  "host": "magicomens.com",
+  "base": "https://magicomens.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Magic Omens - TCG & Accessories store",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 59,
+  "inStock": 2,
+  "currency": "EUR",
+  "reason": "matched 59, in stock 2",
+  "tried": [
+   "yu-gi-oh(169):59/169"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Rarity Collection V - Booster Pack (5 cards)",
+   "Yu-Gi-Oh! The Chronicles Deck: Spirit Charmers (All-Foil Edition)",
+   "Yu-Gi-Oh! 2025 Mega Pack Bundle",
+   "Yu-Gi-Oh! 2025 Mega Pack Tin",
+   "Yu-Gi-Oh! Quarter Century Stampede - Booster Pack (5 cards)",
+   "Yu-Gi-Oh! Quarter Century Stampede - Booster Box (24 packs)"
+  ]
+ },
+ {
+  "host": "manamecha.fr",
+  "base": "https://manamecha.fr",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (51 collections)"
+ },
+ {
+  "host": "manatorsk.com",
+  "base": "https://manatorsk.com",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "manatrust.com",
+  "base": "https://manatrust.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (99 collections)"
+ },
+ {
+  "host": "manaquelle.de",
+  "base": "https://manaquelle.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Manaquelle",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(12):0/4"
+  ],
+  "samples": []
+ },
+ {
+  "host": "lespatioportboutique.com",
+  "base": "https://lespatioportboutique.com",
+  "market": "EU",
+  "ok": false,
+  "name": "LeSpatioport",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(6):0/0",
+   "boosters-ygo(3):0/0",
+   "yu-gi-oh-boite-de-booster(2):0/0",
+   "boite-de-boosters-ygo(1):0/0",
+   "coffrets-ygo(0):0/0",
+   "decks-ygo(0):0/0",
+   "yu-gi-oh-coffret(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "manuelpoke3.it",
+  "base": "https://manuelpoke3.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (11 collections)"
+ },
+ {
+  "host": "mistcards.nl",
+  "base": "https://mistcards.nl",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (6 collections)"
+ },
+ {
+  "host": "mocards.de",
+  "base": "https://mocards.de",
+  "market": "EU",
+  "ok": false,
+  "name": "MoCards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "konami-yu-gi-oh-1(16):1/5"
+  ],
+  "samples": [
+   "The Chronicles Deck: The Fallen & The Virtuous (All-Foil Edition) - EN"
+  ]
+ },
+ {
+  "host": "mulligantcg.it",
+  "base": "https://mulligantcg.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (44 collections)"
+ },
+ {
+  "host": "moon-shadow.de",
+  "base": "https://moon-shadow.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Moon-Shadow Store",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(2):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "mulligantcg.com",
+  "base": "https://mulligantcg.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Mulligan TCG Shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "ygo(11):0/8"
+  ],
+  "samples": []
+ },
+ {
+  "host": "mythgames.eu",
+  "base": "https://mythgames.eu",
+  "ok": false,
+  "reason": "currency HUF"
+ },
+ {
+  "host": "mythicyourshop.com",
+  "base": "https://mythicyourshop.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (42 collections)"
+ },
+ {
+  "host": "guiiguiixshop.com",
+  "base": "https://guiiguiixshop.com",
+  "market": "EU",
+  "ok": false,
+  "name": "GuiiguiixShop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ohanagiochi.com",
+  "base": "https://ohanagiochi.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Ohana",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 2,
+  "inStock": 1,
+  "currency": "EUR",
+  "reason": "matched 2, in stock 1",
+  "tried": [
+   "yu-gi-oh(3):2/3"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - Tin Mega-Pack 2025 (3 Mega Pack) (ITA)",
+   "Yu-Gi-Oh! - Tuckbox Mega-Pack 2025 (3 Mega Pack) (ITA)"
+  ]
+ },
+ {
+  "host": "panterland.be",
+  "base": "https://panterland.be",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (51 collections)"
+ },
+ {
+  "host": "nerdpug.it",
+  "base": "https://nerdpug.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Nerd Pug",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(6):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "phoboscards.de",
+  "base": "https://phoboscards.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (12 collections)"
+ },
+ {
+  "host": "ruhrpottspiele.de",
+  "base": "https://ruhrpottspiele.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (7 collections)"
+ },
+ {
+  "host": "pokeka.hu",
+  "base": "https://pokeka.hu",
+  "ok": false,
+  "reason": "currency HUF"
+ },
+ {
+  "host": "qubimon.dk",
+  "base": "https://qubimon.dk",
+  "ok": false,
+  "reason": "currency DKK"
+ },
+ {
+  "host": "pokeminati.de",
+  "base": "https://pokeminati.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (33 collections)"
+ },
+ {
+  "host": "rgbkingz.com",
+  "base": "https://rgbkingz.com",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "olli-baba.de",
+  "base": "https://olli-baba.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Olli-Baba Sammelkarten",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-produkte(48):2/48",
+   "yu-gi-oh-giant-card-kollektion(73):1/73"
+  ],
+  "samples": [
+   "Giant Card Marincess Blue Tang - CHIM-EN004",
+   "Yu-Gi-Oh! Trading Card Game – 2025 Mega-Pack Bundle - 1. Edition, englisch",
+   "Yu-Gi-Oh! Trading Card Game – The Chronicles Deck: Spirit Charmers (All-Foil Edition) - englisch"
+  ]
+ },
+ {
+  "host": "ricciostore.it",
+  "base": "https://ricciostore.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (18 collections)"
+ },
+ {
+  "host": "miraicards.pt",
+  "base": "https://miraicards.pt",
+  "market": "EU",
+  "ok": false,
+  "name": "Mirai Cards Portugal",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 17,
+  "inStock": 1,
+  "currency": "EUR",
+  "reason": "matched 17, in stock 1",
+  "tried": [
+   "yu-gi-oh(71):17/71",
+   "sets-yu-gi-oh(61):11/61",
+   "yu-gi-oh-booster-boxes(30):4/30",
+   "yu-gi-oh-decks(8):4/8",
+   "yu-gi-oh-booster-packs(22):2/22",
+   "yu-gi-oh-acessorios(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - Quarter Century Stampede Booster Box",
+   "Yu-Gi-Oh! - Quarter Century Bonanza Booster Box",
+   "Yu-Gi-Oh! - Crossover Breakers Booster Box",
+   "Yu-Gi-Oh! - Blue-Eyes White Destiny Structure Deck",
+   "Yu-Gi-Oh! - Battles of Legend: Terminal Revenge Booster Pack",
+   "Yu-Gi-Oh! - Battles of Legend: Terminal Revenge Booster Box"
+  ]
+ },
+ {
+  "host": "goblinen.com",
+  "base": "https://goblinen.com",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "rogerz.dk",
+  "base": "https://rogerz.dk",
+  "ok": false,
+  "reason": "currency DKK"
+ },
+ {
+  "host": "relictcg.com",
+  "base": "https://relictcg.com",
+  "market": "EU",
+  "ok": false,
+  "name": "RelicTCG",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "riftbound-league-of-legends-copie(25):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ronintcg.it",
+  "base": "https://ronintcg.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Ronin il Covo dei Samurai",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(27):0/3"
+  ],
+  "samples": []
+ },
+ {
+  "host": "pokeca.nl",
+  "base": "https://pokeca.nl",
+  "market": "EU",
+  "ok": true,
+  "name": "Pokeca.NL",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh"
+  ],
+  "kind": "sealed",
+  "matched": 17,
+  "inStock": 8,
+  "currency": "EUR",
+  "reason": null,
+  "tried": [
+   "yu-gi-oh(75):17/72",
+   "yu-gi-oh-booster-boxen(49):8/47",
+   "yu-gi-oh-tin(12):8/11",
+   "yu-gi-oh-deck(6):0/6",
+   "yu-gi-oh-beyond-the-brave-booster(2):0/2"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Magnificent Maestros Box",
+   "Yu-Gi-Oh! Darkwing Blast Booster Box",
+   "Yu-Gi-Oh! Magnificent Monsters Box",
+   "Yu-Gi-Oh! Burst Protocol Sleeved Booster Pack",
+   "Yu-Gi-Oh! Mega-Pack Tin 2025",
+   "Yu-Gi-Oh! Mega-Pack Bundle 2025 (1 stuk)"
+  ]
+ },
+ {
+  "host": "sarumangames.es",
+  "base": "https://sarumangames.es",
+  "market": "EU",
+  "ok": false,
+  "name": "Saruman Games",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-juego-de-cartas-coleccionables(33):0/33"
+  ],
+  "samples": []
+ },
+ {
+  "host": "ildojo.store",
+  "base": "https://ildojo.store",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (0 collections)"
+ },
+ {
+  "host": "sharkgames.es",
+  "base": "https://sharkgames.es",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (177 collections)"
+ },
+ {
+  "host": "secretwonderscollectibles.be",
+  "base": "https://secretwonderscollectibles.be",
+  "market": "EU",
+  "ok": false,
+  "name": "Secret Wonders Collectibles",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(37):7/37"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Magnificent Monsters Box",
+   "Yu gi oh 2025 mega pack bundle",
+   "2-Player Starter Set yu-gi-oh",
+   "Yu-Gi-Oh! - 25th Anniversary Rarity Collection II 2-Pack Tuckbox",
+   "Metal Raiders 25th Anniversary Edition Booster Box",
+   "Invasion of Chaos 25th Anniversary Edition Booster Box"
+  ]
+ },
+ {
+  "host": "side7.nl",
+  "base": "https://side7.nl",
+  "market": "EU",
+  "ok": false,
+  "name": "Side7",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-tcg(21):0/2"
+  ],
+  "samples": []
+ },
+ {
+  "host": "skladgier.pl",
+  "base": "https://skladgier.pl",
+  "ok": false,
+  "reason": "currency PLN"
+ },
+ {
+  "host": "my-tradingcards.de",
+  "base": "https://my-tradingcards.de",
+  "market": "EU",
+  "ok": false,
+  "name": "mytradingcards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "skartahus.at",
+  "base": "https://skartahus.at",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "retro-empire.nl",
+  "base": "https://retro-empire.nl",
+  "market": "EU",
+  "ok": false,
+  "name": "Retro Empire Gaming",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(1044):2/21",
+   "yu-gi-oh-tcg(19):2/12",
+   "yugioh-single(1028):0/9",
+   "yu-gi-oh-the-movie(2):0/0"
+  ],
+  "samples": [
+   "Magnificent Monsters Pack - Yu-Gi-Oh!",
+   "Mega Pack Tin 2025 - Yu-Gi-Oh",
+   "Magnificent Monsters Pack - Yu-Gi-Oh!",
+   "Mega Pack Tin 2025 - Yu-Gi-Oh"
+  ]
+ },
+ {
+  "host": "snapkeep.se",
+  "base": "https://snapkeep.se",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "solosealed.it",
+  "base": "https://solosealed.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (17 collections)"
+ },
+ {
+  "host": "speltrollet.se",
+  "base": "https://speltrollet.se",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "spelgalaxen.se",
+  "base": "https://spelgalaxen.se",
+  "ok": false,
+  "reason": "currency SEK"
+ },
+ {
+  "host": "spilforsyningen.dk",
+  "base": "https://spilforsyningen.dk",
+  "ok": false,
+  "reason": "currency DKK"
+ },
+ {
+  "host": "skupisve.hr",
+  "base": "https://skupisve.hr",
+  "market": "EU",
+  "ok": false,
+  "name": "Skupi sve",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(12):1/8"
+  ],
+  "samples": [
+   "Booster Display - Yu-Gi-Oh! - 25th Anniversary Rarity Collection II (24 boostera)"
+  ]
+ },
+ {
+  "host": "tcgarena.ro",
+  "base": "https://tcgarena.ro",
+  "ok": false,
+  "reason": "currency RON"
+ },
+ {
+  "host": "tablerazemontpellier.com",
+  "base": "https://tablerazemontpellier.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (270 collections)"
+ },
+ {
+  "host": "superelf-cards.de",
+  "base": "https://superelf-cards.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (86 collections)"
+ },
+ {
+  "host": "tavernadelgargoyle.it",
+  "base": "https://tavernadelgargoyle.it",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (104 collections)"
+ },
+ {
+  "host": "tcgfamily.nl",
+  "base": "https://tcgfamily.nl",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (52 collections)"
+ },
+ {
+  "host": "tcg-garden.com",
+  "base": "https://tcg-garden.com",
+  "market": "EU",
+  "ok": false,
+  "name": "TCG Garden",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):1/1"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! – Magnificent Monsters Box - Englisch"
+  ]
+ },
+ {
+  "host": "tcgstar.eu",
+  "base": "https://tcgstar.eu",
+  "market": "EU",
+  "ok": false,
+  "name": "TCG STAR",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(2):0/1"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tcgshops.com",
+  "base": "https://tcgshops.com",
+  "market": "US",
+  "ok": false,
+  "name": "TCG Shops",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "USD",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(1):0/1",
+   "yu-gi-oh-tcg(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "tcg-siegburg.de",
+  "base": "https://tcg-siegburg.de",
+  "market": "EU",
+  "ok": false,
+  "name": "TCG-Siegburg",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh-locals(39):0/35",
+   "yu-gi-oh-produkte(2):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "teamlunti.de",
+  "base": "https://teamlunti.de",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (14 collections)"
+ },
+ {
+  "host": "tcgtavern.de",
+  "base": "https://tcgtavern.de",
+  "market": "EU",
+  "ok": true,
+  "name": "TCG Tavern",
+  "existingKey": null,
+  "collections": [
+   "yugioh-tcg-booster-packs-sets-neuheiten"
+  ],
+  "kind": "sealed",
+  "matched": 5,
+  "inStock": 4,
+  "currency": "EUR",
+  "reason": null,
+  "tried": [
+   "yugioh-tcg-booster-packs-sets-neuheiten(18):5/18"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Rarity Collection 5 Booster Pack (DE)",
+   "Yu-Gi-Oh! Magnificent Monsters Box (DE)",
+   "Yu-Gi-Oh! Magnificent Monsters Box (EN)",
+   "Yu-Gi-Oh! 2-Player Starter Set 2023 (EN)",
+   "Yu-Gi-Oh! Blue-Eyes White Destiny - Structure Deck (EN) - Reprint!"
+  ]
+ },
+ {
+  "host": "threestonesgames.com",
+  "base": "https://threestonesgames.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (28 collections)"
+ },
+ {
+  "host": "tcgplatform.nl",
+  "base": "https://tcgplatform.nl",
+  "market": "EU",
+  "ok": false,
+  "name": "TCG Platform",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(2):1/2",
+   "yu-gi-oh-collectie-boxen(1):1/1",
+   "yu-gi-oh-booster-box(1):0/1",
+   "yu-gi-oh-decks(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh!: Magnificent Monsters - Box",
+   "Yu-Gi-Oh!: Magnificent Monsters - Box"
+  ]
+ },
+ {
+  "host": "tierra616.es",
+  "base": "https://tierra616.es",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (55 collections)"
+ },
+ {
+  "host": "treasurehubtcg.com",
+  "base": "https://treasurehubtcg.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (9 collections)"
+ },
+ {
+  "host": "underworldgaming.ie",
+  "base": "https://underworldgaming.ie",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (102 collections)"
+ },
+ {
+  "host": "vaultofdelights.com",
+  "base": "https://vaultofdelights.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Vault of Delights",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh-starter-kit(21):1/16",
+   "yugioh-cards(8):1/4"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Magnificent Monsters 3-Booster Pack — English",
+   "Yu-Gi-Oh! Magnificent Monsters 3-Booster Pack — English"
+  ]
+ },
+ {
+  "host": "versusgamecenter.pt",
+  "base": "https://versusgamecenter.pt",
+  "market": "EU",
+  "ok": false,
+  "name": "Versus Gamecenter",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(177):5/33"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! - Limited Pack World Championship 2026 Booster - EN",
+   "Yu-Gi-Oh! - Limited Pack World Championship 2026 (10 Boosters) - EN",
+   "Yu-Gi-Oh! - 2025 Mega Pack Bundle - EN",
+   "Yu-Gi-Oh! - 2025 Mega Pack Tin - EN",
+   "Yu-Gi-Oh! - 25th Anniversary Rarity Collection II Booster Display (24 Packs)"
+  ]
+ },
+ {
+  "host": "spielewelt.de",
+  "base": "https://spielewelt.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Spielewelt",
+  "existingKey": null,
+  "collections": [
+   "yu-gi-oh-decks"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 3,
+  "currency": "EUR",
+  "reason": "matched 3, in stock 3",
+  "tried": [
+   "yu-gi-oh(210):8/89",
+   "yu-gi-oh-kopie(33):4/26",
+   "yu-gi-oh-decks(21):3/10",
+   "yu-gi-oh-box(17):2/9",
+   "yu-gi-oh-tins(11):2/2",
+   "yu-gi-oh-displays(85):1/30",
+   "yu-gi-oh-blue-eyes-white-destiny(2):1/1",
+   "yu-gi-oh-booster(77):0/42",
+   "yu-gi-oh-alliance-insight(4):0/3",
+   "yu-gi-oh-supreme-darkness(4):0/3"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Magnificent Monsters Box - EN",
+   "Yu-Gi-Oh! Magnificent Monsters Box - DE",
+   "Yu-Gi-Oh! The Chronicles Deck: Spirit Charmers (All-Foil Edition) Structure Deck - EN",
+   "Yu-Gi-Oh! The Chronicles Deck: Spirit Charmers (All-Foil Edition) Structure Deck - DE",
+   "Yu-Gi-Oh! 2025 Mega-Pack Tin - DE",
+   "Yu-Gi-Oh! 2025 Mega-Pack Tin - EN"
+  ]
+ },
+ {
+  "host": "yvolve.shop",
+  "base": "https://yvolve.shop",
+  "market": "EU",
+  "ok": false,
+  "name": "yvolve Shop",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(131):0/8"
+  ],
+  "samples": []
+ },
+ {
+  "host": "zukacards.com",
+  "base": "https://zukacards.com",
+  "market": "EU",
+  "ok": false,
+  "reason": "no ygo collection (58 collections)"
+ },
+ {
+  "host": "venturacardgames.com",
+  "base": "https://venturacardgames.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Ventura Games",
+  "existingKey": null,
+  "collections": [
+   "ygo-starter-decks"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 1,
+  "currency": "EUR",
+  "reason": "matched 3, in stock 1",
+  "tried": [
+   "ygo-starter-decks(5):3/5",
+   "ygo-structure-decks(2):2/2",
+   "ygo-tins(1):1/1",
+   "ygo-booster-boxes(0):0/0",
+   "ygo-booster-packs(0):0/0",
+   "ygo-sets-box(0):0/0"
+  ],
+  "samples": [
+   "YGO - Blue-Eyes White Destiny Structure Deck - EN",
+   "YGO 2022 Tin Of The Pharaoh's Gods - Limited Edition Collectible Tin",
+   "YGO - Realm Of Light (Reprint) Structure Deck",
+   "YGO - Blue-Eyes White Destiny Structure Deck - EN",
+   "YGO - Realm Of Light (Reprint) Structure Deck",
+   "YGO 2022 Tin Of The Pharaoh's Gods - Limited Edition Collectible Tin"
+  ]
+ },
+ {
+  "host": "ztcards.de",
+  "base": "https://ztcards.de",
+  "market": "EU",
+  "ok": false,
+  "name": "ZTCards",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yugioh(5):1/1"
+  ],
+  "samples": [
+   "YuGiOh - THE CHRONICLES DECK: Spirit Charmers (All-Foil Edition)"
+  ]
+ },
+ {
+  "host": "racoon-rises.com",
+  "base": "https://racoon-rises.com",
+  "market": "EU",
+  "ok": false,
+  "name": "Racoon Cave",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(0):0/0"
+  ],
+  "samples": []
+ },
+ {
+  "host": "zzgames.dk",
+  "base": "https://zzgames.dk",
+  "ok": false,
+  "reason": "currency DKK"
+ },
+ {
+  "host": "yugi-oase.de",
+  "base": "https://yugi-oase.de",
+  "market": "EU",
+  "ok": false,
+  "name": "Yugi-Oase",
+  "existingKey": null,
+  "collections": [
+   "ygo-speed-duel"
+  ],
+  "kind": "sealed",
+  "matched": 3,
+  "inStock": 1,
+  "currency": "EUR",
+  "reason": "matched 3, in stock 1",
+  "tried": [
+   "ygo-boxen-tins(28):5/28",
+   "ygo-speed-duel(9):3/9",
+   "ygo-decks(29):2/29",
+   "ygo-booster(61):0/61",
+   "ygo-displays(58):0/58",
+   "ygo-zubehor(46):0/46",
+   "ygo-limitierte-produkte(21):0/21",
+   "ygo-tuck-boxen(6):0/6",
+   "ygo-einzelkarten(1):0/1",
+   "frontpage(1):0/1"
+  ],
+  "samples": [
+   "Blue-Eyes White Destiny - Structure Deck - englisch",
+   "Structure Deck: Legend of the Crystal Beasts - englisch",
+   "Magnificent Monsters - Box - englisch",
+   "2022 Tin of the Pharaoh’s Gods - englisch",
+   "Speed Duel: Battle City - Box - englisch",
+   "Speed Duel GX: Duelists of Shadows -  Box - englisch"
+  ]
+ },
+ {
+  "host": "zillerstore.it",
+  "base": "https://zillerstore.it",
+  "market": "EU",
+  "ok": false,
+  "name": "Zillerstore Fumetteria",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(32):1/32",
+   "mazzi-1(16):1/16",
+   "box-1(13):0/13",
+   "edizioni-speciali-1(3):0/3",
+   "law-e-ygo(1):0/1",
+   "buste-singole(0):0/0"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Yuya - Starter Deck (ITA - 1a Edizione) - Mazzo",
+   "Yu-Gi-Oh! Yuya - Starter Deck (ITA - 1a Edizione) - Mazzo"
+  ]
+ },
+ {
+  "host": "tradingcardsxxx.fr",
+  "base": "https://tradingcardsxxx.fr",
+  "market": "EU",
+  "ok": false,
+  "name": "Tradingcardsxxx",
+  "existingKey": null,
+  "collections": [],
+  "kind": "sealed",
+  "matched": 0,
+  "inStock": 0,
+  "currency": "EUR",
+  "reason": "matched 0, in stock 0",
+  "tried": [
+   "yu-gi-oh(343):7/234",
+   "yu-gi-oh-boite-2025-mega-pack(453):3/250",
+   "toutes-nos-cartes-a-lunite(6076):0/250",
+   "yu-gi-oh-collection-rarete-5(704):0/250",
+   "yu-gi-oh-la-ruee-du-quart-de-siecle(516):0/250",
+   "yu-gi-oh-boite-du-25e-anniversaire-les-miroirs-du-duel(404):0/250",
+   "yu-gi-oh-la-bonanza-du-quart-de-siecle(294):0/250",
+   "yu-gi-oh-batailles-de-legende-le-tumulte-des-monstres(214):0/213",
+   "yu-gi-oh-les-monstres-fantastiques(212):0/212",
+   "yu-gi-oh-batailles-de-legende-la-glorieuse-galerie(193):0/192"
+  ],
+  "samples": [
+   "Yu-Gi-Oh! Mega Tin Box 2025 : Boite 2025 Méga-Pack",
+   "Yu-Gi-Oh! Carton de 12 packs de 3 boosters : Ensemble 2025 Méga-Pack",
+   "Yu-Gi-Oh! Pack de 3 boosters : Ensemble 2025 Méga-Pack",
+   "Yu-Gi-Oh! Booster de 4 cartes World Championship 2026 : Limited Pack",
+   "Yu-Gi-Oh! Carton de 24 displays World Championship 2026 : Limited Pack",
+   "Yu-Gi-Oh! Display de 24 boosters : Retro Pack 2"
+  ]
+ }
+]
