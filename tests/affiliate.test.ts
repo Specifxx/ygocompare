@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { amazonSearchUrl, goHref, tagged } from "@/lib/affiliate";
+import { amazonSearchUrl, goHref, subId, tagged } from "@/lib/affiliate";
 
 test("eBay links carry the EPN campaign and a per-site customid", () => {
   const u = new URL(tagged("https://www.ebay.com/itm/123", "home-1"));
@@ -26,4 +26,31 @@ test("buy links route through /go with retailer and market for click events", ()
   assert.equal(q.get("s"), "ebay");
   assert.equal(q.get("m"), "UK");
   assert.equal(q.get("p"), "5");
+});
+
+test("every partner tag starts with the site key, so earnings split by site", () => {
+  const sub = "x-us-card-7";
+  const e = new URL(tagged("https://www.ebay.com/itm/1", sub));
+  assert.equal(e.searchParams.get("customid"), sub);
+  const t = new URL(tagged("https://www.tcgplayer.com/product/1/x", sub));
+  assert.equal(t.searchParams.get("sharedid"), sub);
+  assert.equal(t.searchParams.get("subId1"), sub);
+  const a = new URL(tagged(amazonSearchUrl("booster box")!, sub));
+  assert.equal(a.searchParams.get("ascsubtag"), sub);
+  assert.ok(a.searchParams.get("tag"));
+  assert.match(subId("us", "card_pinned", 12), /^[a-z]+-us-card_pinned-12$/);
+});
+
+test("/go tags with site, market, placement and product", async () => {
+  const { GET } = await import("@/app/go/route");
+  const res = GET(new Request("https://example.test/go?" + new URLSearchParams({ u: "https://www.ebay.com/itm/9", s: "ebay", m: "UK", p: "42", from: "card_top" })));
+  const loc = new URL(res.headers.get("location")!);
+  assert.match(loc.searchParams.get("customid")!, /^[a-z]+-uk-card_top-42$/);
+});
+
+test("store links carry a referral utm_source and keep their own", () => {
+  const s = new URL(tagged("https://shop.example/products/x"));
+  assert.equal(s.searchParams.get("utm_medium"), "referral");
+  assert.ok(s.searchParams.get("utm_source"));
+  assert.equal(new URL(tagged("https://shop.example/p?utm_source=mine")).searchParams.get("utm_source"), "mine");
 });

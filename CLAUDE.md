@@ -55,7 +55,8 @@ lists to a client component, without measuring `data/` first.
 ## eBay
 
 One eBay app (5,000 Browse calls/day) is shared with Gundam Compare and
-Lorcana Compare: 1,500 each (owner, 2026-10-26), counted in
+Lorcana Compare: Lorcana and Gundam 1,150 each, YGO
+2,200 (2026-10-28; 1,500 each from the owner's 2026-10-26 split), counted in
 `data/state/ebay-usage.json`. Cards under $20 get no call; every sealed product
 does. The plan is `planEbayRefresh` in `src/lib/import/ebay.ts`, pinned by
 `tests/ebay-plan.test.ts`. Do not raise `SITE.ebay.dailyBudget` without moving

@@ -43,9 +43,12 @@ export const SITE: SiteConfig = {
     // Yu-Gi-Oh! has thousands of $10 cards: only $20+ cards get a call (every
     // sealed product does), so the 1,500 calls reach the cards buyers check.
     minPriceUsd: 20,
-    // One eBay app, three sites: Lorcana, Gundam and YGO Compare, 1,500 each
-    // (owner, 2026-10-26). Never raise it without lowering another site's.
-    dailyBudget: 1500,
+    // One eBay app, three sites (4,500 of its 5,000 a day): Lorcana 1,150,
+    // Gundam 1,150, YGO 2,200 (2026-10-28; 1,500 each from the owner's
+    // 2026-10-26 split, but Gundam and Lorcana spent ~1,000 a day covering every
+    // eligible product while YGO's 3,400 eligible products hit the cap). Never
+    // raise one without lowering another by the same amount.
+    dailyBudget: 2200,
     // Lorcana runs at 06 UTC and Gundam at 18 UTC on the same app; eBay's
     // day resets at midnight Pacific, so each eBay day holds one run of each.
     runHourUtc: 12,
