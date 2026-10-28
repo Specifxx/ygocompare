@@ -16,6 +16,8 @@ import { TOOLS } from "@/lib/tool-list";
 import type { Metadata } from "next";
 import { fitTitle } from "@/lib/seo-title";
 import { featuredSealed, sealedHubs } from "@/lib/hubs";
+import { gradeHubs, kits, kitsOn, popular } from "@/lib/kits";
+import { KitGrid } from "@/components/KitTile";
 
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
 export function generateMetadata(): Metadata {
@@ -69,6 +71,7 @@ export default function Home() {
           <Link href={sealedLinks.some((h) => h.slug === "booster-box") ? "/sealed/booster-box" : "/sealed"} className="btn-primary">Booster box prices</Link>
           <Link href="/sealed" className="btn-ghost">All sealed products</Link>
           <Link href="/cards" className="btn-ghost">Card prices</Link>
+          {SITE.kits && kitsOn() && <Link href="/kits" className="btn-ghost">{SITE.kits.label} prices</Link>}
         </div>
       </section>
 
@@ -91,6 +94,19 @@ export default function Home() {
               ))}
             </div>
           )}
+        </section>
+      )}
+
+      {/* Model kits (SITE.kits): the kits most shops have in stock. */}
+      {SITE.kits && kitsOn() && (
+        <section>
+          <Header title={`${SITE.kits.label} prices`} href="/kits" sub={`${kits().length.toLocaleString()} ${SITE.kits.noun} across ${SITE.kits.stores.length} hobby shops, matched by barcode.`} />
+          <KitGrid items={popular(kits()).slice(0, 6)} />
+          <div className="mt-3 flex flex-wrap gap-2">
+            {gradeHubs().map((h) => (
+              <Link key={h.slug} href={`/kits/grade/${h.slug}`} className="chip hover:border-brand/60 hover:text-fg">{h.label} ({h.items.length})</Link>
+            ))}
+          </div>
         </section>
       )}
 

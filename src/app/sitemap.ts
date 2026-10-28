@@ -4,6 +4,7 @@ import { posts } from "@/lib/posts";
 import { rarityHubs, sealedHubs } from "@/lib/hubs";
 import { SITE_URL } from "@/lib/site";
 import { SITE } from "@/site.config";
+import { gradeHubs, kits } from "@/lib/kits";
 
 export const revalidate = 86400;
 
@@ -25,5 +26,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...products()
       .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= (SITE.sitemapMinCardCents ?? 50)))
       .map((p) => ({ url: `${SITE_URL}/card/${p.slug}`, lastModified: at, priority: 0.5 })),
+    // Model kits (SITE.kits): the hub, a page per grade and per kit.
+    ...(SITE.kits && kits().length
+      ? [
+          { url: `${SITE_URL}/kits`, lastModified: at, changeFrequency: "daily" as const, priority: 0.8 },
+          ...gradeHubs().map((h) => ({ url: `${SITE_URL}/kits/grade/${h.slug}`, lastModified: at, priority: 0.6 })),
+          ...kits().map((k) => ({ url: `${SITE_URL}/kit/${k.slug}`, lastModified: at, priority: 0.5 })),
+        ]
+      : []),
   ];
 }

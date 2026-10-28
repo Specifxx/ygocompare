@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FamilySearch } from "@/components/FamilySearch";
 
-interface Hit { slug: string; name: string; set: string; image: string | null; price: string; number: string | null; rarity: string | null }
+interface Hit { slug: string; href?: string; name: string; set: string; image: string | null; price: string; number: string | null; rarity: string | null }
 
 export function CardSearch() {
   const q = useSearchParams().get("q") ?? "";
@@ -20,7 +20,7 @@ export function CardSearch() {
       {hits?.length === 0 && <p className="text-muted">No cards match. Try fewer words, or a card number.</p>}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {hits?.map((h) => (
-          <a key={h.slug} href={`/card/${h.slug}`} className="card-surface overflow-hidden hover:border-brand/60">
+          <a key={h.href ?? h.slug} href={h.href ?? `/card/${h.slug}`} className="card-surface overflow-hidden hover:border-brand/60">
             <div className="aspect-[5/7] bg-ink-850">{h.image && <img src={h.image.replace("_200w", "_400w")} alt={h.name} className="h-full w-full object-contain p-1.5" loading="lazy" />}</div>
             <div className="p-2.5">
               <p className="line-clamp-2 text-sm">{h.name}</p>

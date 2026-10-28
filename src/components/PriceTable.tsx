@@ -18,6 +18,7 @@ const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
   ebay: "eBay",
   ...Object.fromEntries(SITE.stores.map((s) => [s.key, s.name])),
+  ...Object.fromEntries((SITE.kits?.stores ?? []).map((s) => [s.key, s.name])),
 };
 
 export function sourceName(o: Offer) {

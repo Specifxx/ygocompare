@@ -129,6 +129,38 @@ export interface SiteConfig {
   stores: StoreConfig[];
   sisterSites: SisterSite[];
   social: { reddit?: string; discord?: string };
+  /** A model-kit section (/kits, /kit/<slug>), off unless set: plastic model
+   *  kits compared across hobby shops by their JAN barcode (lib/kits.ts,
+   *  scripts/import-kits.ts). Gundam Compare's Gunpla. */
+  kits?: KitsConfig;
+}
+
+export interface KitsConfig {
+  /** Nav and heading word: "Gunpla". */
+  label: string;
+  /** What the section is, in a sentence's middle: "Gunpla model kits". */
+  noun: string;
+  /** The kits' maker, for structured data and the disclaimer: "Bandai Spirits". */
+  maker: string;
+  /** JAN prefixes the maker's kits carry (Bandai: 4573102, 4549660, 4543112). */
+  janPrefixes: string[];
+  /** The JAN prefix the maker's own item numbers map to (lib/import/kits.ts
+   *  janFromItemCode), so a shop that keys kits by item number still matches.
+   *  Bandai Spirits: "4573102". */
+  itemCodeJanPrefix?: string;
+  /** eBay and Amazon search words put before a kit's name ("gunpla"). */
+  searchPrefix: string;
+  stores: KitStoreConfig[];
+}
+
+export interface KitStoreConfig {
+  key: string;
+  name: string;
+  base: string;
+  market: Market;
+  /** Shopify collection handles holding the kits. */
+  collections: string[];
+  country?: string;
 }
 
 // ── Public data (data/public/*.json) ────────────────────────────────────────
@@ -223,3 +255,20 @@ export interface EbayPick {
   title: string;
   marketCents: number | null;
 }
+
+// ── Model kits (data/public/kits/*.json) ─────────────────────────────────────
+
+export interface Kit {
+  /** The JAN (EAN-13) barcode, the one key every store shares. */
+  jan: string;
+  slug: string;
+  name: string;
+  /** "HG", "RG", "MG", "PG", "EG", "SD", "MGSD", "MGEX", "RE/100", "FM", or null. */
+  grade: string | null;
+  /** "1/144", "1/100", "1/60", or null. */
+  scale: string | null;
+  image: string | null;
+  /** First day any store listed it (ISO date). */
+  firstSeen: string;
+}
+

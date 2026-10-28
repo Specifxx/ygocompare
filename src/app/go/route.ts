@@ -13,7 +13,7 @@ const ALLOWED = [
   /(^|\.)ebay\.(com|co\.uk|com\.au|ca|de|fr|it|es)$/i,
   /(^|\.)tcgplayer\.com$/i,
   /(^|\.)amazon\.(com|co\.uk|ca|com\.au)$/i,
-  ...SITE.stores.map((s) => new RegExp(`(^|\\.)${new URL(s.base).hostname.replace(/^www\./, "").replace(/\./g, "\\.")}$`, "i")),
+  ...[...SITE.stores, ...(SITE.kits?.stores ?? [])].map((s) => new RegExp(`(^|\\.)${new URL(s.base).hostname.replace(/^www\./, "").replace(/\./g, "\\.")}$`, "i")),
 ];
 
 export function GET(req: Request) {

@@ -15,6 +15,7 @@ export function Footer() {
             <li><Link href="/cards">All cards</Link></li>
             <li><Link href="/sets">Set price guides</Link></li>
             <li><Link href="/sealed">Booster box prices</Link></li>
+            {SITE.kits && <li><Link href="/kits">{SITE.kits.label} prices</Link></li>}
             <li><Link href="/movers">Price movers</Link></li>
             <li><Link href="/tools/deal-finder">Deal Finder</Link></li>
             <li><Link href="/tools/rising">Rising cards</Link></li>
@@ -47,7 +48,7 @@ export function Footer() {
         </div>
       </div>
       <p className="mx-auto max-w-7xl px-4 pb-8 text-xs text-muted">
-        {SITE.name} is an independent price comparison site, not affiliated with or endorsed by the publisher of {SITE.game}. As an eBay Partner, TCGplayer affiliate and Amazon Associate we may earn a commission from qualifying purchases made through links on this site, at no cost to you. Prices change often; the store&apos;s checkout price is final.
+        {SITE.name} is an independent price comparison site, not affiliated with or endorsed by the publisher of {SITE.game}{SITE.kits ? ` or by ${SITE.kits.maker}` : ""}. As an eBay Partner, TCGplayer affiliate and Amazon Associate we may earn a commission from qualifying purchases made through links on this site, at no cost to you. Prices change often; the store&apos;s checkout price is final.
       </p>
     </footer>
   );

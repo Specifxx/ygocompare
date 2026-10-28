@@ -7,6 +7,7 @@ export const NAV = [
   { href: "/cards", label: "Cards" },
   { href: "/sets", label: "Sets" },
   { href: "/sealed", label: "Sealed" },
+  ...(SITE.kits ? [{ href: "/kits", label: SITE.kits.label }] : []),
   { href: "/movers", label: "Movers" },
   { href: "/tools/deal-finder", label: "Deals" },
   { href: "/tools", label: "Tools" },

@@ -4,6 +4,7 @@ import { canon } from "@/lib/site";
 import { meta } from "@/lib/data";
 import { MARKET_LABEL } from "@/lib/site-types";
 import { StaticPage } from "@/components/StaticPage";
+import { kitStoreStatus } from "@/lib/kits";
 
 export const revalidate = 86400;
 export const metadata: Metadata = { title: `${SITE.gameShort} stores we compare`, description: `Every online ${SITE.game} store ${SITE.name} compares, by country.`, ...canon("/stores") };
@@ -24,6 +25,17 @@ export default function Stores() {
           </ul>
         </section>
       ))}
+      {SITE.kits && (
+        <section>
+          <h2>{SITE.kits.label} shops</h2>
+          <p>For <a href="/kits">{SITE.kits.noun}</a>, matched by the barcode on the box.</p>
+          <ul>
+            {SITE.kits.stores.map((s) => (
+              <li key={s.key}><a href={s.base} rel="noopener nofollow">{s.name}</a> <span className="text-muted">— {MARKET_LABEL[s.market]}{kitStoreStatus()[s.key]?.matched ? `, ${kitStoreStatus()[s.key].matched.toLocaleString()} kits matched` : ""}</span></li>
+            ))}
+          </ul>
+        </section>
+      )}
     </StaticPage>
   );
 }
