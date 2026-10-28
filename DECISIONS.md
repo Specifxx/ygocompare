@@ -660,3 +660,25 @@ What shipped instead, at no cost:
   and is linked from RiftCompare's "Compare other TCGs" footer heading. One page
   on the strongest domain, never a copy per site, so the family never competes
   with itself for the generic query.
+## Partner tags by site, eBay calls to YGO, and two price-row bugs — 2026-10-28
+
+**Owner:** "we haven't generated any sales from those tags yet"; every affiliate
+link must say which site it came from.
+
+* **Tags.** `/go` tags `<site>-<market>-<placement>-<product>` in EPN's
+  `customid`, Impact's `sharedid` and `subId1` (Rift Compare's earnings digest
+  reads SharedId first; with only subId1 these sites' TCGplayer sales read as
+  "No tag"), and Amazon's `ascsubtag`. Store links get
+  `utm_source=<domain>&utm_medium=referral` so a store sees what we send it.
+* **eBay budget.** Gundam and Lorcana spent ~1,000 of 1,500 a day covering every
+  eligible product; YGO's 3,407 hit the cap. Lorcana 1,150, Gundam 1,150, YGO
+  2,200: still 4,500 of 5,000.
+* **TCGplayer's "low" is not trusted below half the market price** (US$3+
+  products; `src/lib/import/sanity.ts`). Lorcana's Hyperia City booster box
+  showed TCGplayer at US$1.00, market US$150.67, as the cheapest price.
+* **No eBay row without a reference.** TCGplayer's price, or for a product it
+  doesn't price yet the cheapest in-stock store price; outside 0.25x-4x of it the
+  row is hidden (the store rule). Stardust Trails booster packs showed booster
+  boxes at US$83-129.
+* **Pack inserts out of the index.** Lorcana's 157 puzzle inserts and ink drops
+  (a few cents each) were 12% of its sitemap; now out of it and noindex.

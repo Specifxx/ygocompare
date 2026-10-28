@@ -9,6 +9,9 @@ export const revalidate = 86400;
 // Cards worth listing: anything priced, plus every sealed product. Unpriced
 // commons from old sets stay crawlable through the set pages but out of the
 // sitemap (Rift Compare: thin pages in the sitemap slow indexing of the rest).
+// So are sealed "Insert" products (Lorcana's puzzle inserts and ink drops,
+// a few cents each: 157 of Lorcana's 1,364 sitemap URLs on 2026-10-28); their
+// pages are noindex too (card/[slug]).
 export default function sitemap(): MetadataRoute.Sitemap {
   const at = meta()?.updatedAt ? new Date(meta()!.updatedAt) : new Date();
   const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/tools", "/tools/deal-finder", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores"];
@@ -19,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...sealedHubs().map((h) => ({ url: `${SITE_URL}/sealed/${h.slug}`, lastModified: at, priority: 0.6 })),
     ...sets().filter((s) => s.productCount > 0).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...products()
-      .filter((p) => p.kind === "sealed" || (refCents(p.id) ?? 0) >= 50)
+      .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= 50))
       .map((p) => ({ url: `${SITE_URL}/card/${p.slug}`, lastModified: at, priority: 0.5 })),
   ];
 }

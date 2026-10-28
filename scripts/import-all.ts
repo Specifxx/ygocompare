@@ -26,6 +26,7 @@ import {
   searchLowest,
   type EbayState,
 } from "@/lib/import/ebay";
+import { ebayReferenceUsd, ebayTrusted, tcgplayerOfferCents } from "@/lib/import/sanity";
 import { appendPoint, dayNumber, pctChange, readSetHistory, writeSetHistory } from "@/lib/import/history";
 import { fetchJson } from "@/lib/import/http";
 import { readAllPrices, writePrices } from "@/lib/price-store";
@@ -237,18 +238,21 @@ async function main() {
   for (const p of products) {
     const t = tcg[p.id] ?? {};
     const offers: Offer[] = [...(storeOffers.get(p.id) ?? [])];
-    for (const [market, e] of Object.entries(ebayState[p.id] ?? {}) as [Market, { at: string; offer: Offer | null }][]) {
-      if (e.offer && now.getTime() - new Date(e.at).getTime() < EBAY_MAX_AGE_H * 3_600_000)
-        offers.push({ ...e.offer, market });
-    }
     const ref = refUsd.get(p.id);
+    const ebayRef = ebayReferenceUsd(ref, offers.filter((o) => o.inStock).map((o) => o.cents / (fx[o.currency] ?? 1)));
+    for (const [market, e] of Object.entries(ebayState[p.id] ?? {}) as [Market, { at: string; offer: Offer | null }][]) {
+      if (!e.offer || now.getTime() - new Date(e.at).getTime() >= EBAY_MAX_AGE_H * 3_600_000) continue;
+      if (!ebayTrusted(e.offer.cents / (fx[e.offer.currency] ?? 1), ebayRef)) continue;
+      offers.push({ ...e.offer, market });
+    }
     const tcgLow = Object.values(t).map((x) => x.low).filter((x): x is number => x != null);
-    if (ref != null || tcgLow.length) {
+    const tcgCents = tcgplayerOfferCents(tcgLow, ref);
+    if (tcgCents != null) {
       offers.push({
         source: "tcgplayer",
         market: "US",
         currency: "USD",
-        cents: tcgLow.length ? Math.min(...tcgLow) : ref!,
+        cents: tcgCents,
         inStock: tcgLow.length > 0,
         url: p.tcgUrl,
         title: `${p.name} on TCGplayer`,

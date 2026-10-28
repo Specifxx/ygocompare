@@ -40,6 +40,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: { absolute: title },
     description,
     alternates: { canonical: `/card/${p.slug}` },
+    // Pack inserts (puzzle pieces, ink drops) are worth cents and nobody shops
+    // for them: out of the index, like the sitemap (DECISIONS.md, 2026-10-28).
+    ...(p.sealedType === "Insert" ? { robots: { index: false, follow: true } } : {}),
     openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description, images: p.image ? [imageAt(p.image, "in_1000x1000")!] : [SHARE_IMAGE] },
     twitter: { card: "summary_large_image", images: p.image ? [imageAt(p.image, "in_1000x1000")!] : [SHARE_IMAGE] },
   };
