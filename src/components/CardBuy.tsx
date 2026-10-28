@@ -11,7 +11,7 @@
 // disagree with its "Cheapest" row. Links go through /go like every buy
 // button, so buy_click events count them (from=card_top / card_bar).
 import { useEffect, useState } from "react";
-import { goHref } from "@/lib/affiliate";
+import { ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { ago, money } from "@/lib/format";
 import { priceRows } from "@/lib/price-rows";
 import { MARKET_LABEL, type Offer } from "@/lib/site-types";
@@ -29,10 +29,13 @@ function buyClass(o: Offer) {
   return o.source === "ebay" ? "btn bg-[#0064d2] px-4 py-2 text-white hover:bg-[#0053ad]" : "btn-buy px-4 py-2";
 }
 
-export function CardTopBuy({ offers, productId }: { offers: Offer[]; productId: number }) {
+export function CardTopBuy({ offers, productId, ebayQuery }: { offers: Offer[]; productId: number; ebayQuery?: string }) {
   const { market } = useMarket();
   const { cheapest: best, paidAlternative: alt } = priceRows(offers, market);
   if (!best) return null;
+  // No eBay or TCGplayer row close enough: a labelled eBay search instead (owner, 2026-10-28: push eBay harder). Never a price.
+  const searchMarket = market === "UK" || market === "AU" || market === "CA" ? market : "US";
+  const search = !alt && ebayQuery && best.source !== "ebay" && best.source !== "tcgplayer" ? goHref({ url: ebaySearchUrl(ebayQuery, searchMarket), source: "ebay", market: searchMarket }, productId, "card_top_ebay_search") : null;
   return (
     <div {...{ [TOP_BUY_ATTR]: "" }} className="mt-3 rounded-lg border border-brand/30 bg-brand/[0.06] p-3 md:hidden">
       <div className="flex items-center justify-between gap-3">
@@ -46,7 +49,7 @@ export function CardTopBuy({ offers, productId }: { offers: Offer[]; productId: 
         </a>
       </div>
       {/* A store that pays nothing is cheapest: name eBay or TCGplayer when
-          within 20% (lib/price-rows.ts paidAlternative). */}
+          within 50% (lib/price-rows.ts paidAlternative), else an eBay search. */}
       {alt && (
         <div className="mt-2 flex items-center gap-2 border-t border-ink-700/60 pt-1 text-xs text-muted">
           <a
@@ -57,6 +60,14 @@ export function CardTopBuy({ offers, productId }: { offers: Offer[]; productId: 
           >
             or <span className="tabular-nums">{money(alt.offer.cents, alt.offer.currency)}</span> on {alt.offer.source === "ebay" ? "eBay" : "TCGplayer"}
             {alt.pctMore > 0 ? ` (+${alt.pctMore}%)` : ""} →
+          </a>
+          <span className="shrink-0 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] text-muted">Paid link</span>
+        </div>
+      )}
+      {search && (
+        <div className="mt-2 flex items-center gap-2 border-t border-ink-700/60 pt-1 text-xs text-muted" data-ebay-search="">
+          <a href={search} rel="sponsored nofollow noopener" target="_blank" className="block min-w-0 flex-1 truncate py-2 font-semibold text-brand-400 hover:underline">
+            or check listings on eBay →
           </a>
           <span className="shrink-0 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] text-muted">Paid link</span>
         </div>
