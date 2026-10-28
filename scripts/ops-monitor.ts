@@ -6,6 +6,7 @@ import path from "node:path";
 import { SITE } from "@/site.config";
 import type { Meta } from "@/lib/site-types";
 import { SITE_HOST } from "@/lib/site";
+import { readKitFile } from "@/lib/kit-store";
 
 type Result = { name: string; status: "ok" | "warn" | "fail"; detail: string };
 const site = (process.env.NEXT_PUBLIC_SITE_URL || `https://${SITE_HOST}`).replace(/\/$/, "");
@@ -49,6 +50,23 @@ async function main() {
       if (age > 30) return { status: "warn", detail: `last eBay run ${age.toFixed(0)}h ago` };
       return { status: "ok", detail: `${meta.ebay.calls}/${meta.ebay.budget} calls on ${meta.ebay.day}, ${meta.ebay.eligible} eligible` };
     }),
+    // The model-kit import (SITE.kits, scripts/import-kits.ts): its own file,
+    // its own stores.
+    ...(SITE.kits
+      ? [
+          check("Model kit import", async () => {
+            const f = readKitFile();
+            if (!f.generatedAt) return { status: "fail", detail: "data/public/kits.json missing — check the Refresh prices workflow's kit step" };
+            const age = (Date.now() - new Date(f.generatedAt).getTime()) / 3_600_000;
+            const bad = Object.entries(f.stores).filter(([, s]) => !s.ok || s.matched === 0);
+            const total = SITE.kits!.stores.length;
+            if (age > 54) return { status: "fail", detail: `kit data is ${age.toFixed(0)}h old` };
+            if (f.kits.length < 100) return { status: "fail", detail: `only ${f.kits.length} kits` };
+            if (bad.length) return { status: bad.length > total / 3 ? "fail" : "warn", detail: bad.map(([k, s]) => `${k}: ${s.error ?? "0 matched"}`).join("; ") };
+            return { status: age > 30 ? "warn" : "ok", detail: `${f.kits.length} kits from ${total} stores, ${age.toFixed(1)}h old` };
+          }),
+        ]
+      : []),
   ]);
   for (const r of results) console.log(`${r.status.toUpperCase().padEnd(4)} ${r.name}: ${r.detail}`);
   const bad = results.filter((r) => r.status === "fail" || (r.status === "warn" && !/not set/.test(r.detail)));
