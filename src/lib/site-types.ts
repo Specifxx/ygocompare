@@ -91,6 +91,11 @@ export interface SiteConfig {
    *  this many US cents, except in sets released in the last 120 days.
    *  For games with tens of thousands of printings (data size, build size). */
   catalogMinCardCents?: number;
+  /** Cards under this TCGplayer price (US cents) stay out of the sitemap but
+   *  remain crawlable through set pages. Default 50. A new domain with tens of
+   *  thousands of card URLs gets few of them crawled; this points Google at
+   *  the ones people search for. */
+  sitemapMinCardCents?: number;
   /** TCGplayer extended fields shown on card pages, besides the engine's own. */
   extraAttrs?: string[];
   /** Game-specific sealed types, checked before the engine's defaults.
