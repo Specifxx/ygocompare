@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { FamilySearch } from "@/components/FamilySearch";
 
 interface Hit { slug: string; name: string; set: string; image: string | null; price: string; number: string | null; rarity: string | null }
 
@@ -29,6 +30,8 @@ export function CardSearch() {
           </a>
         ))}
       </div>
+      {/* The same words on the other card-game sites (2026-10-28). */}
+      {hits !== null && <FamilySearch q={q} className="mt-4" />}
     </section>
   );
 }
