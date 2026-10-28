@@ -37,7 +37,7 @@ export function SearchBox({ big = false, placeholder }: { big?: boolean; placeho
         onChange={(e) => setQ(e.target.value)}
         onFocus={() => setOpen(true)}
         onBlur={() => setTimeout(() => setOpen(false), 150)}
-        placeholder={placeholder ?? "Search any card or product…"}
+        placeholder={placeholder ?? "Search any card or sealed product…"}
         aria-label="Search cards"
         className={`w-full rounded-lg border border-ink-700 bg-ink-900 text-fg placeholder:text-muted focus:border-brand focus:outline-none ${big ? "px-5 py-4 text-lg" : "px-3 py-1.5 text-sm"}`}
       />
