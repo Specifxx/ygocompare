@@ -735,3 +735,24 @@ TCGplayer is back in Australia.
   Magic, Pokémon and Yu-Gi-Oh! singles to Australia. `tcgplayerDirectMarkets`
   (site config, off by default) lets the strip say so: YGO Compare sets `AU`;
   Gundam and Lorcana say "US marketplace · prices in US$" outside the US.
+
+## Store audit: 47 stores added, 76 that matched nothing out — 2026-10-28
+
+**Owner:** check every site's store health and make sure the latest stores
+are on it.
+
+* **Health.** Every store the last import read with two or fewer matches, or
+  none in stock, was re-probed from a GitHub runner in its market with the real
+  matcher on page one of each Yu-Gi-Oh! collection. The 76 that still matched
+  nothing are removed. gsgameon, burbankcards, playntradewpg read again from new collections. Obsession Gaming and Kuma Cards started
+  blocking on 2026-10-27 on every sister site and stay for now.
+  Most of the YGO removals were stores added on 2026-10-27 from the sister
+  sites' lists that turned out to carry no Yu-Gi-Oh! printing the catalogue
+  holds (`catalogMinCardCents` keeps sub-dollar cards out), so they never
+  matched a product.
+* **New stores (515 → 486)** come from every store on the
+  eight sister sites' registries and the official Riftbound store registry's
+  Shopify game stores, probed the same way: added only when at least five
+  products match, three are in stock, the store charges its market's currency,
+  and it is not a second address of a store already listed. Fetch TCG stays
+  out (a marketplace, not a store).
