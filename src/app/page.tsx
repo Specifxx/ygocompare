@@ -14,6 +14,7 @@ import { SITE_URL } from "@/lib/site";
 import { TOOLS } from "@/lib/tool-list";
 import type { Metadata } from "next";
 import { fitTitle } from "@/lib/seo-title";
+import { featuredSealed, sealedHubs } from "@/lib/hubs";
 
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
 export function generateMetadata(): Metadata {
@@ -36,6 +37,8 @@ export default function Home() {
   const chase = latest ? byValue(productsInSet(latest.id).filter((p) => p.kind === "card")).slice(0, 12) : [];
   const mv = movers(7, 300);
   const topDeals = deals(6);
+  const shelf = featuredSealed(6);
+  const sealedLinks = sealedHubs();
   const storeCount = SITE.stores.length;
   const faqs = [
     { q: `What is ${SITE.name}?`, a: `${SITE.name} is a free ${SITE.game} price comparison site. It compares prices for every ${SITE.gameShort} card and sealed product across TCGplayer, eBay and ${storeCount} online game stores in the US, UK, Canada, Australia and Europe, and updates them every day.` },
@@ -61,6 +64,11 @@ export default function Home() {
           {m ? `Prices updated ${ago(m.updatedAt)} · ${m.counts.offers.toLocaleString()} live prices` : "Prices update daily"}
           {upcoming && <> · <Link className="link" href="/preorders">{upcoming.name} pre-orders →</Link></>}
         </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <Link href={sealedLinks.some((h) => h.slug === "booster-box") ? "/sealed/booster-box" : "/sealed"} className="btn-primary">Booster box prices</Link>
+          <Link href="/sealed" className="btn-ghost">All sealed products</Link>
+          <Link href="/cards" className="btn-ghost">Card prices</Link>
+        </div>
       </section>
 
       <HalloweenBanner />
@@ -68,6 +76,21 @@ export default function Home() {
           Picks unit under the hero, then one display slot. */}
       <EbayPicks />
       <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME} />
+
+      {/* Sealed is as big a market as singles: it gets the first shelf. */}
+      {shelf.length > 0 && (
+        <section>
+          <Header title={`${SITE.gameShort} booster boxes and sealed`} href="/sealed" sub="Newest sets first. Open one to compare every store." />
+          <TileGrid items={shelf} />
+          {sealedLinks.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {sealedLinks.map((h) => (
+                <Link key={h.slug} href={`/sealed/${h.slug}`} className="chip hover:border-brand/60 hover:text-fg">{h.label} ({h.items.length})</Link>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
       {topDeals.length > 0 && (
         <section>
