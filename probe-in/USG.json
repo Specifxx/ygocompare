@@ -1,0 +1,47 @@
+[
+{
+"name": "Card Connect",
+"base": "https://cardconnectsg.com",
+"market": "SG"
+},
+{
+"name": "Fyendal Hobby",
+"base": "https://fyendalhobby.com",
+"market": "SG"
+},
+{
+"name": "Games Haven Chinatown",
+"base": "https://gameshaventcg.com",
+"market": "SG"
+},
+{
+"name": "Game Academia",
+"base": "https://game-academia.com",
+"market": "SG"
+},
+{
+"name": "Huattoru",
+"base": "https://huattoru.com",
+"market": "SG"
+},
+{
+"name": "Hideyoshi",
+"base": "https://hideyoshitcg.com",
+"market": "SG"
+},
+{
+"name": "Paint & Play",
+"base": "https://paintandplay.sg",
+"market": "SG"
+},
+{
+"name": "The Imaginarium",
+"base": "https://theimaginariumsg.com",
+"market": "SG"
+},
+{
+"name": "Universe Cards & Games",
+"base": "https://universecards.sg",
+"market": "SG"
+}
+]
