@@ -3,7 +3,7 @@
 // sitemap never lists an empty page.
 import { SITE } from "@/site.config";
 import type { Product } from "@/lib/site-types";
-import { byValue, products } from "@/lib/data";
+import { byValue, products, refCents, setById } from "@/lib/data";
 import { slugify } from "@/lib/slug";
 
 // "LR+" and "LR++" must not share a slug.
@@ -33,3 +33,18 @@ export function sealedHubs(): Hub[] {
 
 export const rarityHref = (r: string | null) => (r ? `/cards/rarity/${raritySlug(r)}` : null);
 export const sealedHref = (t: string | null) => (t && t !== "Other" && t !== "Insert" ? `/sealed/${slugify(t)}` : null);
+
+// The homepage's sealed shelf: booster boxes from the newest released sets
+// first, then other headline sealed (troves, tins, collections, decks) to fill
+// the row. Priced products only; never cases, loose packs, inserts or pre-orders
+// (the pre-order banner has those).
+const SHELF_FILL = ["Illumineer's Trove", "Special Edition", "Tin", "Collection", "Structure Deck", "Starter Deck", "Sleeved Pack", "Booster Pack"];
+export function featuredSealed(limit = 6): Product[] {
+  const released = (p: Product) => { const s = setById(p.setId); return s && !s.upcoming ? s.releasedOn ?? "" : null; };
+  const pool = products().filter((p) => p.kind === "sealed" && released(p) !== null && refCents(p.id) != null);
+  const newest = (a: Product, b: Product) => released(b)!.localeCompare(released(a)!) || (refCents(b.id) ?? 0) - (refCents(a.id) ?? 0);
+  const boxes = pool.filter((p) => p.sealedType === "Booster Box").sort(newest);
+  const rank = (p: Product) => SHELF_FILL.indexOf(p.sealedType ?? "");
+  const fill = pool.filter((p) => rank(p) >= 0).sort((a, b) => newest(a, b) || rank(a) - rank(b));
+  return [...boxes, ...fill].slice(0, limit);
+}
