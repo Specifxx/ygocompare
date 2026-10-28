@@ -9,6 +9,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { TileGrid } from "@/components/ProductTile";
+import { EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
+import { adSearch, cardAds } from "@/lib/card-ads";
 import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
 import { fitTitle, setTitleCandidates } from "@/lib/seo-title";
@@ -70,7 +72,9 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       </header>
       </div>
       {cards.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
+      <EbayCardStrip ads={{ ebay: cardAds({ setId: s.id, fill: true }).ebay }} page="set" query={adSearch(s.name).ebayQuery} title={`${s.name} & more on eBay right now`} />
       {sealed.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
+      <TcgplayerCardStrip ads={{ tcgplayer: cardAds({ setId: s.id, fill: true }).tcgplayer }} page="set" searchUrl={adSearch(s.name).tcgplayerUrl} title={`Shop ${s.name} & more on TCGplayer`} />
       {cards.length > 0 && (
         <section>
           <h2 className="mb-3 text-xl font-bold">Full {s.name} card list with prices</h2>

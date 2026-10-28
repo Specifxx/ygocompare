@@ -692,3 +692,34 @@ searches for. `SITE.sitemapMinCardCents` (engine option, default 50) is 500
 here: about 8,000 URLs, every sealed product, set and guide included. Cheaper
 cards are still linked from their set pages. Revisit once most of the sitemap
 is indexed.
+
+## Card ad strips: real cards on eBay and TCGplayer, on every page — 2026-10-28
+
+**Owner:** "we need more ads everywhere … more TCGplayer ads and more eBay ads",
+like the eBay banner of real cards that earns on Rift Compare, and noted that
+TCGplayer is back in Australia.
+
+* **What.** Two ad strips (`src/components/CardAds.tsx`, tiles chosen in
+  `src/lib/card-ads.ts`): a row of real cards with their photos and the cheapest
+  live eBay Buy It Now in the visitor's market (eBay US where that market has
+  fewer than four), and a row with TCGplayer's market price linking to the
+  product on TCGplayer. Each strip is labelled "Ad", ends in a "Shop eBay" /
+  "Shop TCGplayer" tile, and carries its own disclosure line. Clicks go through
+  `/go` with `from=<page>-ebay-strip` / `<page>-tcg-strip` (and `-all` for the
+  shop links), so they show in the tag reports by placement.
+* **Where.** Homepage (replaces eBay Picks, which was US-only), set pages (eBay
+  after the top cards, TCGplayer after sealed), card pages (eBay below the price
+  history, TCGplayer after "More from"), and every other page above the footer
+  (`FooterCardAds`), except the policy pages. Never above or between price rows,
+  never a pop-up.
+* **No extra eBay calls, no hosted creatives.** The listings are the import's
+  own results: `summary.json` gains `e`, the cheapest in-stock (not pre-order)
+  eBay listing per market. `scripts/rebuild-summary.ts` wrote it from the
+  committed shards so the strips work before the next import. Impact's hosted
+  TCGplayer banners are seasonal and expire; ours are always today's cards.
+* **Ads, not price claims.** A strip's tile never feeds a "cheapest" line, a
+  sort, structured data or the sitemap.
+* **TCGplayer Direct in Australia.** Since 2026-10-07 TCGplayer Direct ships
+  Magic, Pokémon and Yu-Gi-Oh! singles to Australia. `tcgplayerDirectMarkets`
+  (site config, off by default) lets the strip say so: YGO Compare sets `AU`;
+  Gundam and Lorcana say "US marketplace · prices in US$" outside the US.
