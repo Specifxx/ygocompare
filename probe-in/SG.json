@@ -1,0 +1,132 @@
+[
+ {
+  "name": "Hideout",
+  "base": "https://hideoutcg.com",
+  "market": "SG"
+ },
+ {
+  "name": "Action Point Games",
+  "base": "https://actionpoint.sg",
+  "market": "SG"
+ },
+ {
+  "name": "4elements",
+  "base": "https://www.4elements.sg",
+  "market": "SG"
+ },
+ {
+  "name": "Brints Collectibles",
+  "base": "https://brintsco.com",
+  "market": "SG"
+ },
+ {
+  "name": "The TCG Alchemists",
+  "base": "https://thetcgalchemists.com",
+  "market": "SG"
+ },
+ {
+  "name": "GOAT TCG",
+  "base": "https://www.goattcg.com",
+  "market": "SG"
+ },
+ {
+  "name": "Team Card Game",
+  "base": "https://teamcardgame.com",
+  "market": "SG"
+ },
+ {
+  "name": "Apex Player's Guild",
+  "base": "https://apgtcg.com",
+  "market": "SG"
+ },
+ {
+  "name": "TEFUDA",
+  "base": "https://tefudagames.com",
+  "market": "SG"
+ },
+ {
+  "name": "1Collectibles",
+  "base": "https://1collectiblestcg.com",
+  "market": "SG"
+ },
+ {
+  "name": "Mana Pro",
+  "base": "https://sg-manapro.com",
+  "market": "SG"
+ },
+ {
+  "name": "SC Collection",
+  "base": "https://sc-collection.sg",
+  "market": "SG"
+ },
+ {
+  "name": "1Collectibles",
+  "base": "https://www.1collectibles.com",
+  "market": "SG"
+ },
+ {
+  "name": "Cardboard Collectible",
+  "base": "https://cardboardcollectible.com",
+  "market": "SG"
+ },
+ {
+  "name": "Flagship Games",
+  "base": "https://www.flagshipgames.sg",
+  "market": "SG"
+ },
+ {
+  "name": "Grey Ogre Games",
+  "base": "https://www.greyogregames.com",
+  "market": "SG"
+ },
+ {
+  "name": "Humble TCG",
+  "base": "https://humbletcg.com",
+  "market": "SG"
+ },
+ {
+  "name": "Jiggle TCG",
+  "base": "https://jiggletcg.com",
+  "market": "SG"
+ },
+ {
+  "name": "Kenkyo Hobby",
+  "base": "https://kenkyohobby.com",
+  "market": "SG"
+ },
+ {
+  "name": "Pikku Play",
+  "base": "https://pikkuplay.com",
+  "market": "SG"
+ },
+ {
+  "name": "Sawadeekard",
+  "base": "https://sawadeekard.com",
+  "market": "SG"
+ },
+ {
+  "name": "Sentinel Games",
+  "base": "https://sentinelgamessg.com",
+  "market": "SG"
+ },
+ {
+  "name": "Spearing Collectibles",
+  "base": "https://www.spearingcollectibles.com",
+  "market": "SG"
+ },
+ {
+  "name": "The Avid Collectors",
+  "base": "https://theavidcollectors.com",
+  "market": "SG"
+ },
+ {
+  "name": "Toy Space",
+  "base": "https://toyspace.com.sg",
+  "market": "SG"
+ },
+ {
+  "name": "Cards Citadel",
+  "base": "https://cardscitadel.com",
+  "market": "SG"
+ }
+]

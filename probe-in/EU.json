@@ -1,0 +1,197 @@
+[
+ {
+  "name": "Universe TCG",
+  "base": "https://www.universetcg.com",
+  "market": "EU"
+ },
+ {
+  "name": "Trinket Mage",
+  "base": "https://trinket-mage.eu",
+  "market": "EU"
+ },
+ {
+  "name": "T-REX TCG",
+  "base": "https://www.t-rextcg.com",
+  "market": "EU"
+ },
+ {
+  "name": "Timetwister Games",
+  "base": "https://timetwistergames.it",
+  "market": "EU"
+ },
+ {
+  "name": "Cards Beyond",
+  "base": "https://cardsbeyond.com",
+  "market": "EU"
+ },
+ {
+  "name": "SpellNexus",
+  "base": "https://spellnexus.com",
+  "market": "EU"
+ },
+ {
+  "name": "Shopponi Store",
+  "base": "https://shopponistore.com",
+  "market": "EU"
+ },
+ {
+  "name": "Boutique Carte One Piece (onepiece-cards.com)",
+  "base": "https://onepiece-cards.com",
+  "market": "EU"
+ },
+ {
+  "name": "Kai of Cards",
+  "base": "https://kaiofcards.com",
+  "market": "EU"
+ },
+ {
+  "name": "ReCollectibles",
+  "base": "https://recollectibles.de",
+  "market": "EU"
+ },
+ {
+  "name": "TCG King",
+  "base": "https://tcgking.nl",
+  "market": "EU"
+ },
+ {
+  "name": "Duels Point",
+  "base": "https://duelspoint.it",
+  "market": "EU"
+ },
+ {
+  "name": "Biridama TCG",
+  "base": "https://www.biridama.pt",
+  "market": "EU"
+ },
+ {
+  "name": "Card-Binder",
+  "base": "https://card-binder.com",
+  "market": "EU"
+ },
+ {
+  "name": "Card House Of The East",
+  "base": "https://card-house.nl",
+  "market": "EU"
+ },
+ {
+  "name": "CardZone",
+  "base": "https://cardzone.es",
+  "market": "EU"
+ },
+ {
+  "name": "Collection Mania",
+  "base": "https://www.collectionmania.ie",
+  "market": "EU"
+ },
+ {
+  "name": "De Broergrot",
+  "base": "https://www.debroergrot.nl",
+  "market": "EU"
+ },
+ {
+  "name": "Dennis The Ripper",
+  "base": "https://www.dennistheripper.de",
+  "market": "EU"
+ },
+ {
+  "name": "Escamon",
+  "base": "https://www.escamon.de",
+  "market": "EU"
+ },
+ {
+  "name": "God Of Cards",
+  "base": "https://godofcards.com",
+  "market": "EU"
+ },
+ {
+  "name": "Iberian Collect",
+  "base": "https://iberiancollect.com",
+  "market": "EU"
+ },
+ {
+  "name": "Irish Pok\u00e9 Finds",
+  "base": "https://irishpokefinds.ie",
+  "market": "EU"
+ },
+ {
+  "name": "JJ Collection",
+  "base": "https://www.jjcollection.es",
+  "market": "EU"
+ },
+ {
+  "name": "Kardz.eu",
+  "base": "https://kardz.eu",
+  "market": "EU"
+ },
+ {
+  "name": "Kartenmeier",
+  "base": "https://kartenmeier.de",
+  "market": "EU"
+ },
+ {
+  "name": "Lachsnackenshop",
+  "base": "https://lachsnackenshop.de",
+  "market": "EU"
+ },
+ {
+  "name": "LuxCards",
+  "base": "https://luxcards.lu",
+  "market": "EU"
+ },
+ {
+  "name": "Mojo Cards",
+  "base": "https://mojocards.nl",
+  "market": "EU"
+ },
+ {
+  "name": "Poke Planet (Mr Collect)",
+  "base": "https://mr-collect.de",
+  "market": "EU"
+ },
+ {
+  "name": "Otakura",
+  "base": "https://otakura.com",
+  "market": "EU"
+ },
+ {
+  "name": "Pikamon",
+  "base": "https://pikamon.eu",
+  "market": "EU"
+ },
+ {
+  "name": "PKMWinkel",
+  "base": "https://www.pkmwinkel.nl",
+  "market": "EU"
+ },
+ {
+  "name": "PokeFamily",
+  "base": "https://pokefamily.nl",
+  "market": "EU"
+ },
+ {
+  "name": "Pokemon Winkel",
+  "base": "https://pokemonwinkel.nl",
+  "market": "EU"
+ },
+ {
+  "name": "PokePower",
+  "base": "https://poke-power.eu",
+  "market": "EU"
+ },
+ {
+  "name": "Pokestock",
+  "base": "https://pokestock.com",
+  "market": "EU"
+ },
+ {
+  "name": "Psydeck TCG",
+  "base": "https://psydeck.com",
+  "market": "EU"
+ },
+ {
+  "name": "TodoHits",
+  "base": "https://todohits.com",
+  "market": "EU"
+ }
+]

@@ -1,0 +1,332 @@
+[
+ {
+  "name": "The Final Boss Collectables",
+  "base": "https://thefinalbosscollectables.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Adventurers Guild",
+  "base": "https://www.theadventurersguild.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Good Games Adelaide",
+  "base": "https://ggadelaide.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Mint Collectables",
+  "base": "https://mintcollectables.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Card Hub Australia",
+  "base": "https://thecardhubaustralia.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Spellroo Gaming",
+  "base": "https://spellroogaming.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Spindown",
+  "base": "https://spindown.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "88 Games Arena",
+  "base": "https://www.88gamesarena.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Fluke & Box",
+  "base": "https://www.flukeandbox.com",
+  "market": "AU"
+ },
+ {
+  "name": "Troll Australia",
+  "base": "https://www.trollaustralia.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Turn Order Games",
+  "base": "https://turnordergames.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Games District",
+  "base": "https://thegamesdistrict.com",
+  "market": "AU"
+ },
+ {
+  "name": "Troll Aus Melbourne",
+  "base": "https://trollaustraliamelb.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Shuffle n Cut Melbourne",
+  "base": "https://shuffleandcutgames.com",
+  "market": "AU"
+ },
+ {
+  "name": "Reefside Games",
+  "base": "https://reefsidegames.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Ace Collectibles",
+  "base": "https://acecollectibles.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Quack Opens",
+  "base": "https://www.quackopens.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Eternal Magic",
+  "base": "https://eternalmagic.cc",
+  "market": "AU"
+ },
+ {
+  "name": "Turtle TCG",
+  "base": "https://turtletcg.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "BeachesTCG",
+  "base": "https://beachestcg.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Games Corner",
+  "base": "https://www.thegamescorner.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Don Games",
+  "base": "https://dongames.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Games Portal",
+  "base": "https://www.gamesportal.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Gate Keepers TCG & Collectables",
+  "base": "https://www.gatekeeperstcg.com",
+  "market": "AU"
+ },
+ {
+  "name": "Good Games Greensborough",
+  "base": "https://gggreensborough.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Good Games Morley",
+  "base": "https://www.goodgamesmorley.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Horizon Trading Cards",
+  "base": "https://horizontradingcards.com",
+  "market": "AU"
+ },
+ {
+  "name": "Luna Cards",
+  "base": "https://www.lunacards.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Mayhem Collectables",
+  "base": "https://mayhemcollectables.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Shuffled",
+  "base": "https://www.shuffled.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Team Card Titan",
+  "base": "https://teamcardtitan.com",
+  "market": "AU"
+ },
+ {
+  "name": "That Game Store",
+  "base": "https://thatgamestore.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Card Spot",
+  "base": "https://thecardspot.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Cardboard Gamer",
+  "base": "https://cardboardgamer.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The CollectorSmith",
+  "base": "https://www.thecollectorsmith.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Toy Sucker",
+  "base": "https://www.toysucker.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Trading Card Masters",
+  "base": "https://www.tradingcardmasters.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Wonderland Games",
+  "base": "https://www.wonderlandgames.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Card Oni",
+  "base": "https://cardoni.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Dragon's Lair Hobbies and Gaming",
+  "base": "https://dragonslair.au",
+  "market": "AU"
+ },
+ {
+  "name": "HR Games",
+  "base": "https://hrgames.au",
+  "market": "AU"
+ },
+ {
+  "name": "T One Australia",
+  "base": "https://www.toneaus.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Dragon's Beard",
+  "base": "https://thedragonsbeard.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Aussie Hobbies",
+  "base": "https://www.aussiehobbies.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Collectors Colosseum",
+  "base": "https://www.collectorscolosseum.online",
+  "market": "AU"
+ },
+ {
+  "name": "The Games Capital",
+  "base": "https://www.thegamescapital.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "GAP Games",
+  "base": "https://www.gapgames.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Irresistible Force TCG",
+  "base": "https://tcg.irresistibleforce.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Melbemon Trading Cards",
+  "base": "https://www.melbemon.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Metro Hobbies",
+  "base": "https://www.metrohobbies.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "One Stop Poke Shop",
+  "base": "https://onestoppokeshop.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "PokeSource",
+  "base": "https://pokesource.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "PokeTrader",
+  "base": "https://www.poketrader.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Purplish TCG",
+  "base": "https://purplishtcg.com",
+  "market": "AU"
+ },
+ {
+  "name": "The Vault",
+  "base": "https://the-vault-au.com",
+  "market": "AU"
+ },
+ {
+  "name": "Trainer Town",
+  "base": "https://trainertown.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Treasure Vault",
+  "base": "https://treasurevaultau.com",
+  "market": "AU"
+ },
+ {
+  "name": "Area52 Hobart",
+  "base": "https://shop.area52.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Games Empire",
+  "base": "https://www.gamesempire.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Lots Moore",
+  "base": "https://online.lotsmoore.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Playmantis",
+  "base": "https://playmantis.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Tabernacle Games",
+  "base": "https://tcg.tabernaclegames.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Tabletop Commons",
+  "base": "https://tabletopcommons.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "The Hall of Heroes",
+  "base": "https://thehallofheroes.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Vault Games",
+  "base": "https://vaultgames.com.au",
+  "market": "AU"
+ },
+ {
+  "name": "Steel City Games",
+  "base": "https://www.steelcitygames.com.au",
+  "market": "AU"
+ }
+]
