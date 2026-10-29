@@ -27,4 +27,22 @@ export async function fetchJson<T>(url: string, init: RequestInit = {}, tries = 
   throw new Error(`${url}: ${(lastErr as Error)?.message ?? lastErr}`);
 }
 
+/** The same, for an HTML page (a Neto shop's category pages). */
+export async function fetchText(url: string, tries = 3): Promise<string> {
+  let lastErr: unknown;
+  for (let i = 0; i < tries; i++) {
+    try {
+      const res = await fetch(url, { headers: { "User-Agent": UA, Accept: "text/html" }, signal: AbortSignal.timeout(30_000) });
+      if (res.status === 429 || res.status >= 500) throw new Error(`HTTP ${res.status}`);
+      if (!res.ok) throw Object.assign(new Error(`HTTP ${res.status}`), { fatal: true });
+      return await res.text();
+    } catch (e) {
+      lastErr = e;
+      if ((e as { fatal?: boolean }).fatal) break;
+      await sleep(1000 * 2 ** i);
+    }
+  }
+  throw new Error(`${url}: ${(lastErr as Error)?.message ?? lastErr}`);
+}
+
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));

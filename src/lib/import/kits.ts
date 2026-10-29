@@ -127,6 +127,7 @@ export function isKitPreorder(title: string, tags: string[] = []): boolean {
 export function kitCore(title: string): string {
   let t = ` ${title} `;
   t = t.replace(/\[[^\]]*\]|\((?:[^)]*(?:pre-?order|eta|ship|release|arriv|stock|limited|edition|ver)[^)]*)\)/gi, " ");
+  t = t.replace(/\beta\s+[a-z]{3,9}\.?(?:\s*[-–/]\s*[a-z]{3,9}\.?)?\s+\d{4}\b|\(\s*tentative\s*\)/gi, " "); // "ETA June-July 2027", "(Tentative)"
   t = t.replace(/["“”][^"“”]{3,}["“”]/g, " "); // "Mobile Suit Gundam SEED"
   t = t.replace(/\s'[^']{6,}'(?=\s|$)/g, " ");
   t = t.replace(/\b(bandai(\s+(spirits|hobby|namco))?|gunpla|plastic\s+model(\s+kit)?|model\s+kit|kit|pre-?\s*order|preorder|new|in\s+stock|japan(ese)?\s+version|official)\b/gi, " ");

@@ -161,9 +161,13 @@ export interface KitStoreConfig {
   name: string;
   base: string;
   market: Market;
-  /** Shopify collection handles holding the kits. */
+  /** Shopify collection handles holding the kits; for a Neto store, its
+   *  category paths ("model-building/gundam-plastic-models/high-grade"). */
   collections: string[];
   country?: string;
+  /** The shop's platform: Shopify (the default) or Neto/Maropost, read from
+   *  its public category pages (lib/import/kits-neto.ts). */
+  platform?: "shopify" | "neto";
 }
 
 // ── Public data (data/public/*.json) ────────────────────────────────────────
