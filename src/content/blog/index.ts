@@ -5,5 +5,6 @@ import { post as rarities } from "./rarities";
 import { post as editions } from "./editions";
 import { post as cardValue } from "./card-value";
 import { post as whereToBuy } from "./where-to-buy";
+import { SET_POSTS } from "./set-chase";
 
-export const POSTS: Post[] = [schedule, expensive, rarities, editions, cardValue, whereToBuy];
+export const POSTS: Post[] = [schedule, expensive, rarities, editions, cardValue, whereToBuy, ...SET_POSTS];
