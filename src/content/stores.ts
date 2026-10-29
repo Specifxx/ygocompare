@@ -194,6 +194,7 @@ export const STORES: StoreConfig[] = [
   { key: "totalplay", name: "Total Play", base: "https://totalplay.ca", market: "CA", collections: ["yugioh-singles-instock", "yugioh-singles-all"], kind: "singles" },
   { key: "trinityhobby", name: "Trinity Hobby", base: "https://trinityhobby.com", market: "CA", collections: ["yugioh-new-arrivals", "ygo-sealed"], kind: "both" },
   { key: "ubecard", name: "UBECARD.COM", base: "https://ubecard.com", market: "CA", collections: ["yu-gi-oh-singles-in-stock","yu-gi-oh-sealed-in-stock"], kind: "both" },
+  { key: "ultimacards", name: "Ultima Cards", base: "https://ultimacards.ca", market: "CA", collections: ["yugioh-sealed","quarter-century-rares","starlight-rares","ultimate-rares","yugioh-singles"], kind: "both" },
   { key: "untouchables", name: "Untouchables", base: "https://untouchables.ca", market: "CA", collections: ["yu-gi-oh-showcase", "ygo-oos-tax", "yu-gi-oh-tcg-singles-collection", "yu-gi-oh-doom-of-dimensions"], kind: "singles" },
   { key: "vortexgames", name: "Vortex Games", base: "https://vortexgames.ca", market: "CA", collections: ["sealed-yugioh"], kind: "sealed" },
   { key: "wizardtower", name: "Wizard's Tower", base: "https://store.wizardtower.com", market: "CA", collections: ["yu-gi-oh-booster-packs"], kind: "sealed" },
