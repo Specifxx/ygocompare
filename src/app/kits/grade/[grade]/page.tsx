@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon, KITS_SHARE_IMAGE } from "@/lib/site";
-import { gradeHubBySlug, gradeHubs, kitBestByMarket } from "@/lib/kits";
+import { gradeHubBySlug, gradeHubs, kitAdTiles, kitBestByMarket } from "@/lib/kits";
+import { KitEbayStrip } from "@/components/KitAds";
 import { KitGrid } from "@/components/KitTile";
 import { KitPrice } from "@/components/KitPrice";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -42,6 +43,7 @@ export default function GradePage({ params }: { params: { grade: string } }) {
         ))}
       </nav>
       <KitGrid items={h.items.slice(0, TILES)} />
+      <KitEbayStrip tiles={kitAdTiles(h.items, 12)} page="kit-grade" title={`${h.label} ${SITE.kits.label} on eBay`} />
       {rest.length > 0 && (
         <section>
           <h2 className="mb-3 text-xl font-bold">More {h.label} kits</h2>

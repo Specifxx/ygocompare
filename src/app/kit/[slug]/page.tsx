@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
-import { gradeSlug, GRADE_LABEL, kitBySlug, kitImage, kitOffers, kits, kitsUpdatedAt, popular } from "@/lib/kits";
+import { gradeSlug, GRADE_LABEL, kitAdTiles, kitBySlug, kitImage, kitOffers, kits, kitsUpdatedAt, popular } from "@/lib/kits";
 import { money } from "@/lib/format";
 import { PriceTable } from "@/components/PriceTable";
 import { CardStickyBuyBar, CardTopBuy, CheckedAgo } from "@/components/CardBuy";
 import { KitGrid } from "@/components/KitTile";
 import { JsonLd } from "@/components/JsonLd";
-import { CompactCardAds } from "@/components/CardAds";
-import { adSearch, cardAds } from "@/lib/card-ads";
+import { CompactKitAds, KitEbayStrip } from "@/components/KitAds";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { amazonSearchUrl, ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { meta } from "@/lib/data";
@@ -50,7 +49,10 @@ export default function KitPage({ params }: { params: { slug: string } }) {
   const pid = Number(k.jan);
   const search = `${cfg.searchPrefix} ${k.name}`;
   const amazon = amazonSearchUrl(search);
-  const related = popular(kits().filter((x) => x.grade === k.grade && x.jan !== k.jan)).slice(0, 6);
+  const sameGrade = popular(kits().filter((x) => x.grade === k.grade && x.jan !== k.jan));
+  const related = sameGrade.slice(0, 6);
+  // eBay ads of the kit itself first, then its grade's popular kits.
+  const adTiles = kitAdTiles([k, ...sameGrade], 10);
   const markets = [...new Set(inStock.map((o) => o.market))];
   // Offers are sorted in stock first, then by price: the first per market is its cheapest.
   const cheapestByMarket = markets.map((mk) => inStock.find((o) => o.market === mk)!);
@@ -101,9 +103,9 @@ export default function KitPage({ params }: { params: { slug: string } }) {
             </p>
             <CardTopBuy offers={offers} productId={pid} ebayQuery={search} />
           </header>
-          {/* The small eBay + TCGplayer pair of the game's cards (owner,
-              2026-10-29: the Gunpla section gets the ads too). */}
-          <CompactCardAds ads={cardAds({ kind: "card", limit: 10 })} page="kit" {...adSearch()} />
+          {/* The small eBay row of this kit and its grade (2026-10-29: kit
+              ads, not card ads, beside a kit). */}
+          <CompactKitAds tiles={adTiles} page="kit" />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>
@@ -133,6 +135,7 @@ export default function KitPage({ params }: { params: { slug: string } }) {
           <KitGrid items={related} />
         </section>
       )}
+      <KitEbayStrip tiles={adTiles} page="kit" title={`${k.name} and more ${GRADE_LABEL[k.grade ?? ""] ?? cfg.label} kits on eBay`} />
       <CardStickyBuyBar offers={offers} productId={pid} />
     </article>
   );
