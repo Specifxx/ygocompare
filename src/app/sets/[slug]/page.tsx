@@ -3,8 +3,8 @@ import Link from "@/components/Link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
-import { byValue, priceOf, productsInSet, refCents, setBySlug, sets } from "@/lib/data";
-import { preorderSetList, rarityHref } from "@/lib/hubs";
+import { byValue, priceOf, productsInSet, refCents, setBySlug, sets, summaryOf } from "@/lib/data";
+import { preorderSetList, rarityHref, sealedInSet } from "@/lib/hubs";
 import { isPreorder, preorderPath } from "@/lib/preorders";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { money, pct } from "@/lib/format";
@@ -16,6 +16,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
 import { fitTitle, setTitleCandidates } from "@/lib/seo-title";
 import { postsAbout } from "@/lib/posts";
+import { imageAt } from "@/lib/image";
+import { SealedQuickBuy } from "@/components/SealedQuickBuy";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
@@ -75,6 +77,11 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         )}
       </header>
       </div>
+      {/* Booster boxes first with a buy button each (components/SealedQuickBuy.tsx), before the card list. */}
+      <SealedQuickBuy
+        title={`Buy ${s.name} booster boxes and sealed`}
+        items={sealedInSet(s.id).slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
+      />
       {cards.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
       <EbayCardStrip ads={{ ebay: cardAds({ setId: s.id, fill: true }).ebay }} page="set" query={adSearch(s.name).ebayQuery} title={`${s.name} & more on eBay right now`} />
       {sealed.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
