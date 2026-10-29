@@ -8,6 +8,8 @@ import { PriceTable } from "@/components/PriceTable";
 import { CardStickyBuyBar, CardTopBuy, CheckedAgo } from "@/components/CardBuy";
 import { KitGrid } from "@/components/KitTile";
 import { JsonLd } from "@/components/JsonLd";
+import { CompactCardAds } from "@/components/CardAds";
+import { adSearch, cardAds } from "@/lib/card-ads";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { amazonSearchUrl, ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { meta } from "@/lib/data";
@@ -99,6 +101,9 @@ export default function KitPage({ params }: { params: { slug: string } }) {
             </p>
             <CardTopBuy offers={offers} productId={pid} ebayQuery={search} />
           </header>
+          {/* The small eBay + TCGplayer pair of the game's cards (owner,
+              2026-10-29: the Gunpla section gets the ads too). */}
+          <CompactCardAds ads={cardAds({ kind: "card", limit: 10 })} page="kit" {...adSearch()} />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>

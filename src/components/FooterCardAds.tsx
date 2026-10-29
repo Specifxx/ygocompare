@@ -7,8 +7,9 @@ import { usePathname } from "next/navigation";
 import type { CardAds } from "@/lib/card-ads";
 import { CardAdPair } from "./CardAds";
 
-// Model-kit pages (SITE.kits) carry no card ads: a Gunpla buyer isn't shopping for cards.
-const OWN_STRIPS = [/^\/$/, /^\/card\//, /^\/sets\/[^/]+$/, /^\/kits?(\/|$)/];
+// Model-kit pages (SITE.kits) carry the pair too since 2026-10-29 (owner: the
+// Gunpla section gets the ads like every other page).
+const OWN_STRIPS = [/^\/$/, /^\/card\//, /^\/sets\/[^/]+$/];
 const NO_ADS = ["/about", "/privacy", "/terms", "/contact", "/methodology"];
 
 export function footerStripsAllowed(pathname: string | null): boolean {

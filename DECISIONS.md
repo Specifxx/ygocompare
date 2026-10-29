@@ -756,3 +756,8 @@ are on it.
   products match, three are in stock, the store charges its market's currency,
   and it is not a second address of a store already listed. Fetch TCG stays
   out (a marketplace, not a store).
+
+
+## Small eBay + TCGplayer pair near the top, and the Gunpla pages get ads (2026-10-29)
+
+Owner: on card, sealed and other product pages the eBay and TCGplayer strips should "also show up … near the top, but much smaller so it's not intrusive", and the Gunpla section should carry the ads like every other page. `CompactCardAds` (CardAds.tsx) is one slim box of 56px tiles, an eBay row and a TCGplayer row (side by side from `lg`), each with an "All →" link, one "Ad" + disclosure line, placed under the page's price and Buy block: on `/card/[slug]` (singles and sealed, the same tiles as that page's big strips) and `/kit/[slug]` (the game's top cards). Its `/go` tags carry `-mini` (`card-mini-ebay-strip`, `kit-mini-tcg-strip`…) so the two placements are measured apart. The kit pages and hubs now also get the footer pair (`FooterCardAds` no longer skips `/kits` and `/kit/`). The full-size strips stay where they were.
