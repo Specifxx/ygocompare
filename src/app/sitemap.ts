@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { meta, products, refCents, sets } from "@/lib/data";
 import { posts } from "@/lib/posts";
-import { rarityHubs, sealedHubs } from "@/lib/hubs";
+import { preorderSetList, rarityHubs, sealedHubs } from "@/lib/hubs";
+import { preorderPath } from "@/lib/preorders";
 import { SITE_URL } from "@/lib/site";
 import { SITE } from "@/site.config";
 import { gradeHubs, kits } from "@/lib/kits";
@@ -19,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/tools", "/tools/deal-finder", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores"];
   return [
     ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
+    ...preorderSetList().map((s) => ({ url: `${SITE_URL}${preorderPath(s)}`, lastModified: at, changeFrequency: "daily" as const, priority: 0.8 })),
     ...posts().map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.updated ?? p.date), priority: 0.7 })),
     ...rarityHubs().map((h) => ({ url: `${SITE_URL}/cards/rarity/${h.slug}`, lastModified: at, priority: 0.6 })),
     ...sealedHubs().map((h) => ({ url: `${SITE_URL}/sealed/${h.slug}`, lastModified: at, priority: 0.6 })),

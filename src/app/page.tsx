@@ -6,7 +6,7 @@ import { adSearch, cardAds } from "@/lib/card-ads";
 import { AdSlot } from "@/components/AdSlot";
 import { HalloweenBanner } from "@/components/HalloweenDecor";
 import { TileGrid } from "@/components/ProductTile";
-import { byValue, deals, latestReleasedSet, meta, movers, nextUpcomingSet, products, productsInSet, sets } from "@/lib/data";
+import { byValue, deals, latestReleasedSet, meta, movers, products, productsInSet, sets } from "@/lib/data";
 import { ago, money, pct } from "@/lib/format";
 import { posts } from "@/lib/posts";
 import { shortName } from "@/lib/names";
@@ -15,7 +15,8 @@ import { SITE_URL } from "@/lib/site";
 import { TOOLS } from "@/lib/tool-list";
 import type { Metadata } from "next";
 import { fitTitle } from "@/lib/seo-title";
-import { featuredSealed, sealedHubs } from "@/lib/hubs";
+import { featuredSealed, preorderSetList, sealedHubs } from "@/lib/hubs";
+import { isPreorder, longDate, preorderPath } from "@/lib/preorders";
 import { gradeHubs, kits, kitsOn, popular } from "@/lib/kits";
 import { KitGrid } from "@/components/KitTile";
 
@@ -36,7 +37,8 @@ export const revalidate = 21600;
 export default function Home() {
   const m = meta();
   const latest = latestReleasedSet();
-  const upcoming = nextUpcomingSet();
+  const releases = preorderSetList();
+  const upcoming = releases.find((s) => isPreorder(s)) ?? null;
   const chase = latest ? byValue(productsInSet(latest.id).filter((p) => p.kind === "card")).slice(0, 12) : [];
   const mv = movers(7, 300);
   const topDeals = deals(6);
@@ -65,7 +67,7 @@ export default function Home() {
         <div className="mt-6 max-w-2xl"><SearchBox big /></div>
         <p className="mt-3 text-xs text-muted">
           {m ? `Prices updated ${ago(m.updatedAt)} · ${m.counts.offers.toLocaleString()} live prices` : "Prices update daily"}
-          {upcoming && <> · <Link className="link" href="/preorders">{upcoming.name} pre-orders →</Link></>}
+          {upcoming && <> · <Link className="link" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link></>}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
           <Link href={sealedLinks.some((h) => h.slug === "booster-box") ? "/sealed/booster-box" : "/sealed"} className="btn-primary">Booster box prices</Link>
@@ -140,14 +142,18 @@ export default function Home() {
         </div>
       </section>
 
-      {upcoming && (
-        <section className="card-surface flex flex-col items-start gap-3 p-6 md:flex-row md:items-center">
-          <div className="flex-1">
-            <p className="text-xs uppercase tracking-wide text-brand-400">Next set · {upcoming.releasedOn}</p>
-            <h2 className="text-2xl font-bold">{upcoming.name} pre-orders</h2>
-            <p className="text-sm text-muted">Every store taking pre-orders for {upcoming.name} booster boxes and products, cheapest first.</p>
+      {releases.length > 0 && (
+        <section>
+          <Header title="Pre-orders and new releases" href="/preorders" sub="Every store's booster box and sealed price for each new set, cheapest first." />
+          <div className="grid gap-3 md:grid-cols-2">
+            {releases.slice(0, 4).map((s) => (
+              <Link key={s.id} href={preorderPath(s)} className="card-surface flex flex-col gap-1 p-5 hover:border-brand/60">
+                <span className="text-xs uppercase tracking-wide text-brand-400">{isPreorder(s) ? `Out ${longDate(s.releasedOn)}` : `Released ${longDate(s.releasedOn)}`}</span>
+                <span className="text-xl font-bold">{s.name} {isPreorder(s) ? "pre-orders" : "booster box prices"}</span>
+                <span className="text-sm link">Compare every store →</span>
+              </Link>
+            ))}
           </div>
-          <Link href="/preorders" className="btn-primary">Compare pre-order prices</Link>
         </section>
       )}
 

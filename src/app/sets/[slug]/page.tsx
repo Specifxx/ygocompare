@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { byValue, priceOf, productsInSet, refCents, setBySlug, sets } from "@/lib/data";
-import { rarityHref } from "@/lib/hubs";
+import { preorderSetList, rarityHref } from "@/lib/hubs";
+import { isPreorder, preorderPath } from "@/lib/preorders";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
@@ -69,6 +70,9 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         <p className="text-xs uppercase tracking-wide text-brand-400">{s.upcoming ? "Upcoming" : "Released"} {s.releasedOn}</p>
         <h1 className="font-display text-3xl font-black">{s.name} card list &amp; prices</h1>
         <p className="mt-2 text-muted">{cards.length} cards · one of each is worth {money(value)} at TCGplayer market · {sealed.length} sealed products.</p>
+        {preorderSetList().some((x) => x.id === s.id) && (
+          <p className="mt-2"><Link className="link font-semibold" href={preorderPath(s)}>{isPreorder(s) ? `${s.name} pre-order prices at every store →` : `${s.name} booster box prices at every store →`}</Link></p>
+        )}
       </header>
       </div>
       {cards.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}

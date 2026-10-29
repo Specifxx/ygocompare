@@ -3,7 +3,8 @@
 // sitemap never lists an empty page.
 import { SITE } from "@/site.config";
 import type { Product } from "@/lib/site-types";
-import { byValue, products, refCents, setById } from "@/lib/data";
+import { byValue, products, productsInSet, refCents, setById, sets } from "@/lib/data";
+import { preorderSets, todayIso } from "@/lib/preorders";
 import { slugify } from "@/lib/slug";
 
 // "LR+" and "LR++" must not share a slug.
@@ -48,3 +49,16 @@ export function featuredSealed(limit = 6): Product[] {
   const fill = pool.filter((p) => rank(p) >= 0).sort((a, b) => newest(a, b) || rank(a) - rank(b));
   return [...boxes, ...fill].slice(0, limit);
 }
+
+/** A set's sealed products, booster boxes first (SEALED_ORDER), Inserts left out. */
+export function sealedInSet(setId: number): Product[] {
+  const rank = (t: string | null) => {
+    const i = SEALED_ORDER.indexOf(t ?? "Other");
+    return i < 0 ? SEALED_ORDER.length : i;
+  };
+  return byValue(productsInSet(setId).filter((p) => p.kind === "sealed" && p.sealedType !== "Insert")).sort((a, b) => rank(a.sealedType) - rank(b.sealedType));
+}
+
+/** The releases with a pre-order page (lib/preorders.ts), soonest first. */
+export const preorderSetList = (today = todayIso()) =>
+  preorderSets(sets(), (s) => { const list = sealedInSet(s.id); return { products: list.length, boxes: list.filter((p) => p.sealedType === "Booster Box").length }; }, today);

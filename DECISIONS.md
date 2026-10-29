@@ -770,3 +770,25 @@ below the page; `/kits` and each grade page carry the full strip of their popula
 eBay search for that kit's name in the visitor's market (`from=kit-mini-ebay-kit`, `kit-ebay-kit-strip`,
 `kits-…`, `kit-grade-…`), so it costs no eBay API call. The card footer pair no longer shows on kit pages
 (`FooterCardAds` OWN_STRIPS). Engine code: only a site with `SITE.kits` renders it.
+
+## One pre-order page per release — 2026-10-29
+
+Rift Compare's most visited page is a single release's pre-order page
+(/radiance-preorders, 2.2K visitors in 14 days to 29 October); OP Compare's
+/eb05-preorders (593) and MTG Compare's Star Trek page (302) repeat it. This
+engine had one generic /preorders page whose title changed with the next set,
+so it could rank for no release. Each release now has its own page,
+`/preorders/<set slug>` (`lib/preorders.ts`, `app/preorders/[slug]`): "<game>
+<set> Pre-Order Prices: Booster Box Compared", the set's sealed products with
+every store's price, its facts and FAQ (`content/preorders.ts`, keyed by set
+slug; a set without copy still gets a page from its data). /preorders is the
+hub listing them and names no set, so it never competes with them.
+
+A set has a page while upcoming with any sealed product, and for 45 days after
+release if it has a booster box (then "<set> Booster Box Prices"; release week
+is when most people shop for a box). After that its URL 308s to the set page,
+so no stale page competes with the card list. The soonest release is linked
+from a one-line strip under the header on every page, the homepage's
+"Pre-orders and new releases" block, the set page and the sitemap. Six hours,
+nothing prerendered at build. Family links now point at dexcompare.app and
+compareempire.com, the canonical hosts (their www names lost DNS on 2026-10-26).

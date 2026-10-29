@@ -165,14 +165,14 @@ export const SITE: SiteConfig = {
   sisterSites: [
     { name: "Rift Compare", url: "https://riftcompare.com", game: "Riftbound", anchor: "Riftbound card prices", search: "https://riftcompare.com/browse?q={q}" },
     { name: "OP Compare", url: "https://opcompare.app", game: "One Piece", anchor: "One Piece card prices", search: "https://opcompare.app/browse?q={q}" },
-    { name: "DexCompare", url: "https://www.dexcompare.app", game: "Pokémon", anchor: "Pokémon sealed prices", search: "https://www.dexcompare.app/us/sealed?q={q}" },
+    { name: "DexCompare", url: "https://dexcompare.app", game: "Pokémon", anchor: "Pokémon sealed prices", search: "https://dexcompare.app/us/sealed?q={q}" },
     { name: "MTG Compare", url: "https://mtgcompare.app", game: "Magic", anchor: "Magic: The Gathering sealed prices", search: "https://mtgcompare.app/us/sealed?q={q}" },
     { name: "Gundam Compare", url: "https://gundamcompare.com", game: "Gundam", anchor: "Gundam Card Game prices", search: "https://gundamcompare.com/cards?q={q}" },
     { name: "Lorcana Compare", url: "https://lorcanacompare.com", game: "Disney Lorcana", anchor: "Disney Lorcana card prices", search: "https://lorcanacompare.com/cards?q={q}" },
     { name: "WargameCompare", url: "https://wargamecompare.com", game: "Wargames", anchor: "Miniature wargame prices" },
     { name: "FigureCompare", url: "https://figurecompare.com", game: "Anime figures", anchor: "Anime figure prices" },
     { name: "CamCompare", url: "https://www.camcompare.app", game: "Cameras", anchor: "Camera and lens prices" },
-    { name: "Compare Empire", url: "https://www.compareempire.com", game: "Australian tech", anchor: "Australian tech prices" },
+    { name: "Compare Empire", url: "https://compareempire.com", game: "Australian tech", anchor: "Australian tech prices" },
   ],
   social: { reddit: "https://www.reddit.com/r/yugioh/" },
 };
