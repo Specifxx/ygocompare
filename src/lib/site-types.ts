@@ -170,6 +170,27 @@ export interface KitStoreConfig {
   platform?: "shopify" | "neto";
 }
 
+// ── Pre-order pages (src/content/preorders.ts) ──────────────────────────────
+
+export interface QA { q: string; a: string }
+
+/** One release's copy for /preorders/<set slug>. Facts only from a dated source; anything unsure is left out. */
+export interface PreorderSetCopy {
+  /** HTML intro under the heading; a plain generated line when unset. */
+  intro?: string;
+  facts: { label: string; value: string }[];
+  faq: QA[];
+}
+
+export interface PreorderCopy {
+  /** The /preorders hub's intro (HTML). */
+  intro: string;
+  /** The hub's FAQ: questions about pre-ordering in general. */
+  faq: QA[];
+  /** Per release, keyed by the set's slug. A set without copy still gets a page from its data. */
+  sets: Record<string, PreorderSetCopy>;
+}
+
 // ── Public data (data/public/*.json) ────────────────────────────────────────
 
 export interface SetInfo {

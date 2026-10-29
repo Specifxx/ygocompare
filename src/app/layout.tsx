@@ -8,6 +8,7 @@ import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PreorderStrip } from "@/components/PreorderStrip";
 import { PrefsProvider } from "@/components/ClientPrefs";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { FooterCardAds } from "@/components/FooterCardAds";
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <PrefsProvider>
           <Header />
+          <PreorderStrip />
           <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
           <FooterCardAds ads={cardAds({ kind: "card", limit: 8 })} ebayQuery={search.ebayQuery} tcgplayerUrl={search.tcgplayerUrl} />
           <Footer />
