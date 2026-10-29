@@ -14,7 +14,7 @@ import { PriceChart } from "@/components/PriceChart";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
-import { EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
+import { CompactCardAds, EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrl, goHref } from "@/lib/affiliate";
 import { abs, SHARE_IMAGE } from "@/lib/site";
@@ -121,6 +121,9 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               </p>
             )}
           </header>
+          {/* The small eBay + TCGplayer pair near the top, under the price and
+              Buy (owner, 2026-10-29); the full strips stay further down. */}
+          <CompactCardAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true })} page="card" {...adSearch(set?.name)} />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>

@@ -49,6 +49,6 @@ test("eBay item links lose their old tracking; /go tags them again", () => {
 });
 
 test("the footer pair stays off pages with their own strips and off policy pages", () => {
-  for (const path of ["/", "/card/x", "/sets/x", "/privacy", "/terms", "/about", "/kits", "/kit/x", "/kits/grade/hg"]) assert.equal(footerStripsAllowed(path), false, path);
-  for (const path of ["/cards", "/sealed", "/movers", "/blog/x", "/sets", "/tools/deal-finder"]) assert.equal(footerStripsAllowed(path), true, path);
+  for (const path of ["/", "/card/x", "/sets/x", "/privacy", "/terms", "/about"]) assert.equal(footerStripsAllowed(path), false, path);
+  for (const path of ["/cards", "/sealed", "/movers", "/blog/x", "/sets", "/tools/deal-finder", "/kits", "/kit/x", "/kits/grade/hg"]) assert.equal(footerStripsAllowed(path), true, path);
 });
