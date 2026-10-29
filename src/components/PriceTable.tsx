@@ -7,7 +7,7 @@
 // Row order is lib/price-rows.ts, shared with the phone buy block.
 import { useState } from "react";
 import { SITE } from "@/site.config";
-import { CURRENCY, MARKET_LABEL, type Offer } from "@/lib/site-types";
+import { CURRENCY, MARKETS, MARKET_LABEL, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
 import { goHref } from "@/lib/affiliate";
 import { priceRows } from "@/lib/price-rows";
@@ -30,7 +30,7 @@ export function sourceName(o: Offer) {
 export const PRICE_TABLE_ID = "price-comparison";
 
 export function PriceTable({ offers, fx, productId, page, compact = false }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean }) {
-  const { market } = useMarket();
+  const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
   // stays on the real cheapest and a dearer pinned row says by how much.
@@ -38,11 +38,30 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
   const rows = display;
   const cur = CURRENCY[market];
   const conv = (o: Offer) => (o.currency === cur ? null : Math.round((o.cents / (fx[o.currency] ?? 1)) * (fx[cur] ?? 1)));
+  // DexCompare's conversion layout (its buy-click rate is the family's highest, ~44%): the market the prices are for is stated and
+  // switchable right above the rows, the best price is the one loud button, every other row says "View deal".
+  const storesIn = new Set(inStock.filter((o) => o.source !== "tcgplayer" && o.source !== "ebay").map((o) => o.source)).size;
+  const picker = (
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-ink-800 bg-ink-850 px-3 py-2 text-xs text-muted" data-market-bar>
+      <span>
+        Prices for <b className="text-fg">{MARKET_LABEL[market]}</b>
+        {storesIn > 0 && <> · {storesIn} store{storesIn === 1 ? "" : "s"} in stock</>}
+      </span>
+      {!compact && <span className="flex flex-wrap gap-1" role="group" aria-label="Show prices for">
+        {MARKETS.map((m) => (
+          <button key={m} type="button" onClick={() => setMarket(m)} aria-pressed={m === market} className={`min-h-8 rounded-full border px-2.5 text-[11px] font-semibold ${m === market ? "border-brand bg-brand/15 text-fg" : "border-ink-700 hover:border-brand/60 hover:text-fg"}`}>
+            {m}
+          </button>
+        ))}
+      </span>}
+    </div>
+  );
   if (!rows.length)
     return (
-      <p className="rounded-lg border border-dashed border-ink-700 p-4 text-sm text-muted">
-        No live listings in {MARKET_LABEL[market]} right now. Switch market at the top of the page, or check eBay below.
-      </p>
+      <div className="overflow-hidden rounded-xl border border-dashed border-ink-700">
+        {picker}
+        <p className="p-4 text-sm text-muted">No live listings in {MARKET_LABEL[market]} right now. Try another market above, or check eBay below.</p>
+      </div>
     );
   const live = [...inStock, ...refs];
   // Out-of-stock rows show when asked, or when nothing is in stock at all.
@@ -51,6 +70,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
   const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
   return (
     <div id={PRICE_TABLE_ID} className="overflow-hidden rounded-xl border border-ink-700/60">
+      {picker}
       <table className="w-full text-sm">
         <thead className="bg-ink-850 text-left text-xs uppercase tracking-wide text-muted">
           <tr>
@@ -72,7 +92,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
                   ) : (
                     <span className="font-medium text-fg">{sourceName(o)}</span>
                   )}
-                  {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Cheapest</span>}
+                  {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span>}
                   {pinned.includes(o) && (
                     <span data-shown-first title="eBay and TCGplayer are shown first, whatever their price. Stores below are sorted by price." className="ml-2 inline-block whitespace-nowrap rounded bg-sky-500/10 px-1.5 py-0.5 text-[10px] font-semibold text-sky-300">
                       Shown first
@@ -94,8 +114,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
                   )}
                 </td>
                 <td className="px-3 py-2.5 text-right">
-                  <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : "btn-buy"}>
-                    {o.source === "ebay" ? "Buy on eBay" : o.inStock ? "Buy" : "View"}
+                  <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : best ? "btn-buy" : o.inStock ? "btn-ghost px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
+                    {o.source === "ebay" ? "Buy on eBay" : best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
                   </a>
                 </td>
               </tr>
