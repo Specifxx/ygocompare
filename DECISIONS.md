@@ -792,3 +792,14 @@ from a one-line strip under the header on every page, the homepage's
 "Pre-orders and new releases" block, the set page and the sitemap. Six hours,
 nothing prerendered at build. Family links now point at dexcompare.app and
 compareempire.com, the canonical hosts (their www names lost DNS on 2026-10-26).
+
+## 2026-10-29: A "most valuable cards" post for each recent booster set
+
+Owner (29 October): the smaller sites need many more useful posts, and RiftCompare's Google traffic comes from set
+and chase-card searches. `src/content/blog/set-chase.ts` adds one post for each of fourteen recent sets, from
+Rage of the Abyss to Beyond the Brave, the Battles of Legend sets and Rarity Collection 5 included. Every table and
+price is a live token; the counts in the prose were read from the 28 October data and say so, and they count
+printings in our catalogue (which leaves out cards under US$1 in older sets), never "cards in the set". No post is
+called a "card list" (`/sets/<slug>` owns that query), and no post repeats a rarity list: the set posts link
+`/cards/rarity/<slug>`. Magnificent Monsters is left out because its Grand Master Rare prices come from a handful
+of listings (one at US$68,000). Content only, no engine change.
