@@ -761,3 +761,12 @@ are on it.
 ## Small eBay + TCGplayer pair near the top, and the Gunpla pages get ads (2026-10-29)
 
 Owner: on card, sealed and other product pages the eBay and TCGplayer strips should "also show up … near the top, but much smaller so it's not intrusive", and the Gunpla section should carry the ads like every other page. `CompactCardAds` (CardAds.tsx) is one slim box of 56px tiles, an eBay row and a TCGplayer row (side by side from `lg`), each with an "All →" link, one "Ad" + disclosure line, placed under the page's price and Buy block: on `/card/[slug]` (singles and sealed, the same tiles as that page's big strips) and `/kit/[slug]` (the game's top cards). Its `/go` tags carry `-mini` (`card-mini-ebay-strip`, `kit-mini-tcg-strip`…) so the two placements are measured apart. The kit pages and hubs now also get the footer pair (`FooterCardAds` no longer skips `/kits` and `/kit/`). The full-size strips stay where they were.
+
+## Kit pages carry eBay ads of the kits, not card ads (2026-10-29)
+
+The card ads that went onto the Gunpla section earlier today were a poor fit beside a model kit. Kit pages now show the
+kit's own box photo, then its grade's popular kits, as eBay tiles: a slim row under the Buy button and a full strip
+below the page; `/kits` and each grade page carry the full strip of their popular kits. Each tile is a tagged `/go`
+eBay search for that kit's name in the visitor's market (`from=kit-mini-ebay-kit`, `kit-ebay-kit-strip`,
+`kits-…`, `kit-grade-…`), so it costs no eBay API call. The card footer pair no longer shows on kit pages
+(`FooterCardAds` OWN_STRIPS). Engine code: only a site with `SITE.kits` renders it.
