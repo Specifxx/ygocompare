@@ -2,6 +2,7 @@
 // scripts/import-kits.ts and read by lib/kits.ts: one file, data/public/kits.json.
 // Offers are tuples, like the card prices (lib/offer-codec.ts):
 //   [store key, cents, flags (1 in stock, 2 pre-order), "handle?variant=id"]
+// (a Neto store's ref is the product's path)
 import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
@@ -49,7 +50,7 @@ export function decodeKitOffer(t: KitOfferTuple): Offer | null {
     cents: t[1],
     inStock: (t[2] & 1) === 1,
     preorder: (t[2] & 2) === 2 || undefined,
-    url: `${store.base}/products/${t[3]}`,
+    url: store.platform === "neto" ? `${store.base}/${t[3]}` : `${store.base}/products/${t[3]}`,
     title: "",
   };
 }

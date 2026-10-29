@@ -91,3 +91,31 @@ test("two listings far apart: the item-number one goes", () => {
   const ls = [listing({ source: "a", cents: 16000 }), listing({ source: "b", derived: true, cents: 2200 })];
   assert.deepEqual(keepConsistent(ls, { USD: 1 }).map((l) => l.source), ["a"]);
 });
+
+test("a Neto category card: item number, title, price, currency and stock sign", async () => {
+  const { parseNetoCategory } = await import("@/lib/import/kits-neto");
+  const card = (sku: string, title: string, price: string, sign: string) => `<article class="col-8 mm_cate-pro" role="article">
+	<div class="card thumbnail card-body">
+		<meta itemprop="brand" content="Bandai"/>
+		<meta itemprop="mpn" content="${sku}"/>
+		<a href="https://www.frontlinehobbies.com.au/bandai-${sku}" class="thumbnail-image pb-2">
+			<img src="/assets/thumb/${sku}.webp?20260328164827" itemprop="image" class="product-image img-fluid" alt="x">
+		</a>
+		<p class="card-title h4" itemprop="name"><a href="https://www.frontlinehobbies.com.au/bandai-${sku}">${title}</a></p>
+		<p class="price"><span itemprop="price" content="${price}">$${price}</span><meta itemprop="priceCurrency" content="AUD"></p>
+		<!-- In stock / Out of Stock Sign -->
+		<span class="label label-success">${sign}</span>
+	</div></article>`;
+  const html = card("G5066295", "Bandai Gundam HG 1/144 Black Knight Squad Shi-Ve.A", "44.99", "In Stock - Broadmeadow") + card("G5063137", "Bandai Gundam HG 1/144 Full Armor Gundam &amp; Co", "30.00", "Out of Stock") + `<a href="?pgnum=2">2</a><a href="?pgnum=7">7</a>`;
+  const { cards, lastPage } = parseNetoCategory(html);
+  assert.equal(lastPage, 7);
+  assert.deepEqual(cards[0], { sku: "G5066295", title: "Bandai Gundam HG 1/144 Black Knight Squad Shi-Ve.A", cents: 4499, currency: "AUD", inStock: true, path: "bandai-G5066295", image: "/assets/thumb/G5066295.webp" });
+  assert.equal(cards[1].inStock, false);
+  assert.equal(cards[1].title, "Bandai Gundam HG 1/144 Full Armor Gundam & Co");
+  assert.equal(janFromItemCode(cards[0].sku, "4573102"), "4573102662958");
+});
+
+test("a pre-order's ETA and '(Tentative)' stay out of the kit's name", () => {
+  assert.equal(kitCore("(Pre-Order)  ETA Mar-Apr 2027 HG 1/144 STRIKE FREEDOM GUNDAM SEED FREEDOM ZERO Ver. (Tentative)"), "STRIKE FREEDOM GUNDAM SEED FREEDOM ZERO Ver.");
+  assert.equal(kitCore("(Pre-Order)  ETA June-July 2027 HG 1/144 GUNDAM ZERO"), "GUNDAM ZERO");
+});

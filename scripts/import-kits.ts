@@ -2,7 +2,8 @@
 // refresh-prices.yml after import-all.ts:
 //
 //   every kit store's Shopify collections (products.json: each variant's SKU
-//   and the description) → one JAN per listing (lib/import/kits.ts) → kits
+//   and the description) or Neto category pages (each card's maker item
+//   number, lib/import/kits-neto.ts) → one JAN per listing (lib/import/kits.ts) → kits
 //   listed by two or more stores → data/public/kits.json
 //
 // Stores are read two at a time: Shopify answers 429 to a runner that pages
@@ -12,7 +13,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
 import { CURRENCY, type Kit, type KitStoreConfig, type Meta, type StoreConfig, type StoreStatus } from "@/lib/site-types";
-import { fetchJson, sleep } from "@/lib/import/http";
+import { fetchJson, fetchText, sleep } from "@/lib/import/http";
+import { parseNetoCategory } from "@/lib/import/kits-neto";
 import { countryOf, storeCurrency } from "@/lib/import/shopify";
 import { gradeOf, isKitPreorder, isKitTitle, janOf, kitName, kitsEnabled, keepConsistent, type KitListing } from "@/lib/import/kits";
 import { slugify } from "@/lib/slug";
@@ -76,6 +78,45 @@ async function readStore(store: KitStoreConfig, prefixes: string[], itemPrefix: 
   return { listings: out, products: seen.size };
 }
 
+/** A Neto shop: its category pages, 96 cards a page; the robots.txt crawl
+ *  delay is a second, so pages are fetched two seconds apart. */
+async function readNetoStore(store: KitStoreConfig, prefixes: string[], itemPrefix: string | undefined): Promise<{ listings: KitListing[]; products: number }> {
+  const seen = new Set<string>();
+  const out: KitListing[] = [];
+  for (const cat of store.collections) {
+    let last = 1;
+    for (let page = 1; page <= Math.min(last, MAX_PAGES); page++) {
+      const html = await fetchText(`${store.base}/${cat.replace(/^\/|\/$/g, "")}/?pgnum=${page}`);
+      const { cards, lastPage } = parseNetoCategory(html);
+      last = lastPage;
+      for (const c of cards) {
+        if (seen.has(c.sku)) continue;
+        seen.add(c.sku);
+        if (c.currency && c.currency !== CURRENCY[store.market]) throw new Error(`store charges ${c.currency}, configured for ${store.market} (${CURRENCY[store.market]})`);
+        if (!isKitTitle(c.title) || c.cents <= 0) continue;
+        const hit = janOf({ title: c.title, sku: c.sku, barcode: null, body: null }, prefixes, itemPrefix);
+        if (!hit) continue;
+        out.push({
+          jan: hit.jan,
+          derived: hit.derived,
+          title: c.title,
+          grade: gradeOf(c.title),
+          image: c.image ? new URL(c.image, store.base).toString() : null,
+          source: store.key,
+          market: store.market,
+          cents: c.cents,
+          inStock: c.inStock,
+          preorder: isKitPreorder(c.title, []) || undefined,
+          ref: c.path,
+        });
+      }
+      if (!cards.length) break;
+      await sleep(2000);
+    }
+  }
+  return { listings: out, products: seen.size };
+}
+
 async function main() {
   if (!kitsEnabled(SITE.kits)) {
     console.log("[kits] SITE.kits is not set — nothing to do");
@@ -99,9 +140,12 @@ async function main() {
       while (queue.length) {
         const store = queue.shift()!;
         try {
-          const cur = await storeCurrency(store as StoreConfig);
-          if (cur && cur !== CURRENCY[store.market]) throw new Error(`store charges ${cur}, configured for ${store.market} (${CURRENCY[store.market]})`);
-          const { listings: ls, products } = await readStore(store, cfg.janPrefixes, cfg.itemCodeJanPrefix);
+          if (store.platform !== "neto") {
+            const cur = await storeCurrency(store as StoreConfig);
+            if (cur && cur !== CURRENCY[store.market]) throw new Error(`store charges ${cur}, configured for ${store.market} (${CURRENCY[store.market]})`);
+          }
+          const read = store.platform === "neto" ? readNetoStore : readStore;
+          const { listings: ls, products } = await read(store, cfg.janPrefixes, cfg.itemCodeJanPrefix);
           // Several listings of one JAN in one store: the cheapest in stock.
           const best = new Map<string, KitListing>();
           for (const l of ls) {
