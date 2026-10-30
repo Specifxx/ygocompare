@@ -29,11 +29,14 @@ export function sourceName(o: Offer) {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: string | null }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
-  // stays on the real cheapest and a dearer pinned row says by how much.
+  // stays on the real cheapest and a dearer pinned row says by how much. No
+  // wording about the order (owner, 2026-10-30): the paid rows are simply first.
+  // Amazon (a tagged search, amazon.com only, so US) heads them when the page
+  // passes one: no price, never ranked, never the cheapest.
   const { inStock, refs, outOfStock, cheapest, display, pinned } = priceRows(offers, market);
   const rows = display;
   const cur = CURRENCY[market];
@@ -81,6 +84,21 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
           </tr>
         </thead>
         <tbody>
+          {amazon && market === "US" && (
+            <tr data-amazon-row className="border-t border-ink-800 bg-[#ff9900]/[0.08]">
+              <td className="px-3 py-2.5">
+                <span className="font-medium text-fg">Amazon</span>
+                <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>
+              </td>
+              <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">Price shows on Amazon</td>
+              <td className="px-3 py-2.5 text-right text-xs text-muted">See price</td>
+              <td className="px-3 py-2.5 text-right">
+                <a href={goHref({ url: amazon, source: "amazon", market: "US" }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn min-h-10 whitespace-nowrap bg-[#ff9900] px-3 py-1.5 text-black hover:bg-[#e68a00]">
+                  Check Amazon <span aria-hidden="true">↗</span>
+                </a>
+              </td>
+            </tr>
+          )}
           {shown.map((o, i) => {
             const c = conv(o);
             const best = o === cheapest;
@@ -93,11 +111,6 @@ export function PriceTable({ offers, fx, productId, page, compact = false }: { o
                     <span className="font-medium text-fg">{sourceName(o)}</span>
                   )}
                   {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span>}
-                  {pinned.includes(o) && (
-                    <span data-shown-first title="eBay and TCGplayer are shown first, whatever their price. Stores below are sorted by price." className="ml-2 inline-block whitespace-nowrap rounded bg-sky-500/10 px-1.5 py-0.5 text-[10px] font-semibold text-sky-300">
-                      Shown first
-                    </span>
-                  )}
                 </td>
                 <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
                   {o.printing && o.printing !== "Normal" && <span className="chip mr-1">{o.printing}</span>}
