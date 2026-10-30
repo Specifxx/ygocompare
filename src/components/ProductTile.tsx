@@ -10,8 +10,16 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
   const e = summaryOf(p.id);
   const ch = change !== undefined ? change : e.change7d;
   const stores = e.inStockSources;
+  const set = setById(p.setId)?.name;
   return (
-    <Link href={`/card/${p.slug}`} className="group card-surface flex flex-col overflow-hidden transition hover:border-brand/60">
+    <Link
+      href={`/card/${p.slug}`}
+      // A plain click opens the quick view (QuickView.tsx); the link itself stays for crawlers and new tabs.
+      data-qv={p.slug}
+      data-qv-name={shortName(p.name)}
+      data-qv-sub={[set, p.number].filter(Boolean).join(" · ") || undefined}
+      data-qv-img={p.image ? imageAt(p.image, "400w")! : undefined}
+      className="group card-surface flex flex-col overflow-hidden transition hover:border-brand/60">
       <div className="aspect-[5/7] bg-ink-850">
         {p.image ? (
           <img src={imageAt(p.image, "400w")!} alt={`${shortName(p.name)} ${p.kind === "card" ? "card" : ""}`} loading="lazy" className="h-full w-full object-contain p-1.5 transition group-hover:scale-[1.02]" />
@@ -21,7 +29,7 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
       </div>
       <div className="flex flex-1 flex-col gap-1 p-2.5">
         <p className="line-clamp-2 text-sm font-medium text-fg">{shortName(p.name)}</p>
-        <p className="truncate text-xs text-muted">{setById(p.setId)?.name}{p.number ? ` · ${p.number}` : ""}</p>
+        <p className="truncate text-xs text-muted">{set}{p.number ? ` · ${p.number}` : ""}</p>
         <div className="mt-auto flex items-baseline justify-between pt-1">
           <span className="font-bold text-brand-400">{money(ref)}</span>
           {ch != null && <span className={`text-xs ${ch >= 0 ? "text-up" : "text-down"}`}>{pct(ch)}</span>}

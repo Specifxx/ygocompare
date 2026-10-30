@@ -5,7 +5,7 @@
 // Out-of-stock rows fold behind a button, as on RiftCompare: they are the
 // last thing a buyer needs and used to push the live prices off the screen.
 // Row order is lib/price-rows.ts, shared with the phone buy block.
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { SITE } from "@/site.config";
 import { CURRENCY, MARKETS, MARKET_LABEL, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
@@ -29,14 +29,15 @@ export function sourceName(o: Offer) {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: string | null }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: string | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
   // stays on the real cheapest and a dearer pinned row says by how much. No
   // wording about the order (owner, 2026-10-30): the paid rows are simply first.
-  // Amazon (a tagged search, amazon.com only, so US) heads them when the page
-  // passes one: no price, never ranked, never the cheapest.
+  // Amazon (a tagged search, amazon.com only, so US) comes second, right under
+  // the first eBay row (eBay first, Amazon second: owner, 2026-10-30), or first
+  // when there is no eBay row: no price, never ranked, never the cheapest.
   const { inStock, refs, outOfStock, cheapest, display, pinned } = priceRows(offers, market);
   const rows = display;
   const cur = CURRENCY[market];
@@ -71,8 +72,24 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const unfold = showOut || live.length === 0;
   const shown = compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o));
   const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
+  const amazonRow = amazon && market === "US" ? (
+    <tr data-amazon-row className="border-t border-ink-800 bg-[#ff9900]/[0.08]">
+      <td className="px-3 py-2.5">
+        <span className="font-medium text-fg">Amazon</span>
+        <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>
+      </td>
+      <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">Price shows on Amazon</td>
+      <td className="px-3 py-2.5 text-right text-xs text-muted">See price</td>
+      <td className="px-3 py-2.5 text-right">
+        <a href={goHref({ url: amazon, source: "amazon", market: "US" }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn min-h-10 whitespace-nowrap bg-[#ff9900] px-3 py-1.5 text-black hover:bg-[#e68a00]">
+          Check Amazon <span aria-hidden="true">↗</span>
+        </a>
+      </td>
+    </tr>
+  ) : null;
+  const amazonAfter = shown.findIndex((o) => o.source === "ebay");
   return (
-    <div id={PRICE_TABLE_ID} className="overflow-hidden rounded-xl border border-ink-700/60">
+    <div id={tableId ?? undefined} className="overflow-hidden rounded-xl border border-ink-700/60">
       {picker}
       <table className="w-full text-sm">
         <thead className="bg-ink-850 text-left text-xs uppercase tracking-wide text-muted">
@@ -84,54 +101,43 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
           </tr>
         </thead>
         <tbody>
-          {amazon && market === "US" && (
-            <tr data-amazon-row className="border-t border-ink-800 bg-[#ff9900]/[0.08]">
-              <td className="px-3 py-2.5">
-                <span className="font-medium text-fg">Amazon</span>
-                <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>
-              </td>
-              <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">Price shows on Amazon</td>
-              <td className="px-3 py-2.5 text-right text-xs text-muted">See price</td>
-              <td className="px-3 py-2.5 text-right">
-                <a href={goHref({ url: amazon, source: "amazon", market: "US" }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn min-h-10 whitespace-nowrap bg-[#ff9900] px-3 py-1.5 text-black hover:bg-[#e68a00]">
-                  Check Amazon <span aria-hidden="true">↗</span>
-                </a>
-              </td>
-            </tr>
-          )}
+          {amazonAfter < 0 && amazonRow}
           {shown.map((o, i) => {
             const c = conv(o);
             const best = o === cheapest;
             return (
-              <tr key={i} className={`border-t border-ink-800 ${best ? "bg-buy/10" : o.source === "ebay" ? "bg-[#0064d2]/[0.07]" : ""} ${o.inStock ? "" : "opacity-60"}`}>
-                <td className="px-3 py-2.5">
-                  {o.source === "ebay" ? (
-                    <span className="font-medium"><EbayWord className="text-[15px]" />{o.market !== "US" && <span className="ml-1 text-xs text-muted">{o.market}</span>}</span>
-                  ) : (
-                    <span className="font-medium text-fg">{sourceName(o)}</span>
-                  )}
-                  {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span>}
-                </td>
-                <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
-                  {o.printing && o.printing !== "Normal" && <span className="chip mr-1">{o.printing}</span>}
-                  {o.preorder && <span className="chip mr-1 border-brand text-brand-400">Pre-order</span>}
-                  {!o.inStock && <span className="chip mr-1">Out of stock</span>}
-                  {o.source === "tcgplayer" && <span>Lowest listing</span>}
-                  {o.shippingCents != null && <span>+{money(o.shippingCents, o.currency)} shipping</span>}
-                </td>
-                <td className="px-3 py-2.5 text-right font-semibold tabular-nums">
-                  {money(o.cents, o.currency)}
-                  {c != null && <span className="block text-xs font-normal text-muted">≈ {money(c, cur)}</span>}
-                  {pinned.includes(o) && cheapest && o !== cheapest && o.currency === cheapest.currency && cheapest.cents > 0 && o.cents > cheapest.cents && (
-                    <span className="block text-xs font-normal text-muted">+{Math.round(((o.cents - cheapest.cents) / cheapest.cents) * 100)}% vs cheapest</span>
-                  )}
-                </td>
-                <td className="px-3 py-2.5 text-right">
-                  <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : best ? "btn-buy" : o.inStock ? "btn-ghost px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
-                    {o.source === "ebay" ? "Buy on eBay" : best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
-                  </a>
-                </td>
-              </tr>
+              <Fragment key={i}>
+                <tr className={`border-t border-ink-800 ${best ? "bg-buy/10" : o.source === "ebay" ? "bg-[#0064d2]/[0.07]" : ""} ${o.inStock ? "" : "opacity-60"}`}>
+                  <td className="px-3 py-2.5">
+                    {o.source === "ebay" ? (
+                      <span className="font-medium"><EbayWord className="text-[15px]" />{o.market !== "US" && <span className="ml-1 text-xs text-muted">{o.market}</span>}</span>
+                    ) : (
+                      <span className="font-medium text-fg">{sourceName(o)}</span>
+                    )}
+                    {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span>}
+                  </td>
+                  <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
+                    {o.printing && o.printing !== "Normal" && <span className="chip mr-1">{o.printing}</span>}
+                    {o.preorder && <span className="chip mr-1 border-brand text-brand-400">Pre-order</span>}
+                    {!o.inStock && <span className="chip mr-1">Out of stock</span>}
+                    {o.source === "tcgplayer" && <span>Lowest listing</span>}
+                    {o.shippingCents != null && <span>+{money(o.shippingCents, o.currency)} shipping</span>}
+                  </td>
+                  <td className="px-3 py-2.5 text-right font-semibold tabular-nums">
+                    {money(o.cents, o.currency)}
+                    {c != null && <span className="block text-xs font-normal text-muted">≈ {money(c, cur)}</span>}
+                    {pinned.includes(o) && cheapest && o !== cheapest && o.currency === cheapest.currency && cheapest.cents > 0 && o.cents > cheapest.cents && (
+                      <span className="block text-xs font-normal text-muted">+{Math.round(((o.cents - cheapest.cents) / cheapest.cents) * 100)}% vs cheapest</span>
+                    )}
+                  </td>
+                  <td className="px-3 py-2.5 text-right">
+                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : best ? "btn-buy" : o.inStock ? "btn-ghost px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
+                      {o.source === "ebay" ? "Buy on eBay" : best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
+                    </a>
+                  </td>
+                </tr>
+                {i === amazonAfter && amazonRow}
+              </Fragment>
             );
           })}
         </tbody>
