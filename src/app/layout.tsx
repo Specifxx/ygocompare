@@ -10,6 +10,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PreorderStrip } from "@/components/PreorderStrip";
 import { PrefsProvider } from "@/components/ClientPrefs";
+import { QuickView } from "@/components/QuickView";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { FooterCardAds } from "@/components/FooterCardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
           <FooterCardAds ads={cardAds({ kind: "card", limit: 8 })} ebayQuery={search.ebayQuery} tcgplayerUrl={search.tcgplayerUrl} />
           <Footer />
+          <QuickView />
         </PrefsProvider>
         <Analytics />
         <BuyClickTracker />
