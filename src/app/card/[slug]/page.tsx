@@ -16,7 +16,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { CompactCardAds, EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
-import { amazonSearchUrl, goHref } from "@/lib/affiliate";
+import { amazonSearchUrl } from "@/lib/affiliate";
 import { abs, SHARE_IMAGE } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { rarityHref, sealedHref } from "@/lib/hubs";
@@ -130,10 +130,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               <CheckedAgo at={m?.updatedAt} />
             </div>
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
-            <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" />
-            <p className="mt-2 flex flex-wrap gap-3 text-xs text-muted">
-              {amazon && <a className="link" rel="sponsored nofollow noopener" target="_blank" href={goHref({ url: amazon, source: "amazon", market: "US" }, p.id, "card")}>Check Amazon →</a>}
-            </p>
+            <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} />
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
           <section className="card-surface p-4">
