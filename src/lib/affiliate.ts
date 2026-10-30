@@ -12,7 +12,10 @@
 // `ascsubtag`. The site key comes first so the digest groups by it.
 import { SITE } from "@/site.config";
 
-export const EBAY_CAMPAIGN_ID = process.env.EBAY_AFFILIATE_CAMPAIGN || "5339155912";
+// One EPN campaign for every Compare site, hard-coded (owner, 2026-10-30: "make
+// all of them use this exact campaign"); the customid's site key tells the
+// sites apart. No variable overrides it.
+export const EBAY_CAMPAIGN_ID = "5339155912";
 export const TCGPLAYER_IMPACT_LINK =
   process.env.TCGPLAYER_IMPACT_LINK || "https://partner.tcgplayer.com/c/7385758/1780961/21018";
 // Rift Compare's Associates tag until each site has its own (AMAZON_ASSOCIATE_TAG).
