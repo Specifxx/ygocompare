@@ -827,3 +827,12 @@ in every tag; this site's is `ygo-<market>`. The eBay import's affiliate header 
 Replaced: 5339155911 (WargameCompare, FigureCompare, Compare Empire, K Young), 5339231473 (Lorcana),
 5339231474 (Gundam), 5339234013 (YGO). Old secrets/variables (`EBAY_AFFILIATE_CAMPAIGN`,
 `NEXT_PUBLIC_EBAY_CAMPAIGN_ID`, `EBAY_CAMPAIGN_ID`) are no longer read and can be deleted.
+
+## 2026-10-30: three stores out so the ops monitor goes green again
+
+The ops monitor failed every run since 2026-10-27 on three stores, which hid any new problem behind the same daily
+email. Removed: Obsession Gaming (AU, Cloudflare challenge, 403) and Kuma Cards (UK, 401), both blocking every sister
+site since 2026-10-27 (Gundam and Lorcana Compare already list neither), and Rival Cards (CA), whose Yu-Gi-Oh! boxes
+are titled without an edition ("2026 Yu-Gi-Oh! Blazing Dominion Booster Box"), so they never match a `[1st Edition]`
+product and the matcher is not loosened to take them. Re-probe Obsession and Kuma on 2026-11-11; add either back only
+when its feed answers a runner again.
