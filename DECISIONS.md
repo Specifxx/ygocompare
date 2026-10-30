@@ -817,3 +817,13 @@ only the best price gets the solid "Buy now" button and every other row says
 boxes and sealed, each with its cheapest price in the visitor's market and a
 "Buy now" through /go (`SealedQuickBuy`, from=set_quickbuy) before the card
 list. Measure buy_click per visitor again around 12 November.
+
+## 2026-10-30: One eBay campaign for every Compare site, hard-coded
+
+**Decided (owner).** Every Compare site now sends eBay clicks to ONE EPN campaign, 5339155912 (RiftCompare's,
+already set up), hard-coded in the code: no variable overrides it any more, so a forgotten secret or Vercel
+value can't split the sites again. The sites are told apart by the `customid` prefix alone, which comes first
+in every tag; this site's is `ygo-<market>`. The eBay import's affiliate header uses the same constant, and /go re-tags stored listing URLs, so listings saved under the old campaign earn on the new one at once.
+Replaced: 5339155911 (WargameCompare, FigureCompare, Compare Empire, K Young), 5339231473 (Lorcana),
+5339231474 (Gundam), 5339234013 (YGO). Old secrets/variables (`EBAY_AFFILIATE_CAMPAIGN`,
+`NEXT_PUBLIC_EBAY_CAMPAIGN_ID`, `EBAY_CAMPAIGN_ID`) are no longer read and can be deleted.

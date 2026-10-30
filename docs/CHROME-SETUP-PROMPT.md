@@ -18,7 +18,6 @@ You are setting up my new website, YGO Compare (a free Yu-Gi-Oh! card price comp
 1. Vercel → Add New → Project → Import Git Repository → Specifxx/ygocompare (if it isn't listed, use "Adjust GitHub App Permissions" to give Vercel access to that one repository). Framework: Next.js. Leave the build settings at their defaults. Production branch: main.
 2. Before the first deploy, open Environment Variables and add these for Production (and Preview):
    - NEXT_PUBLIC_SITE_URL = https://ygocompare.com
-   - EBAY_AFFILIATE_CAMPAIGN = 5339155912
    - TCGPLAYER_IMPACT_LINK = copy the exact value from the gundamcompare project (Vercel → gundamcompare → Settings → Environment Variables; click the eye icon to read it). If that project doesn't have it, use https://partner.tcgplayer.com/c/7385758/1780961/21018
    - INDEXNOW_KEY = a new random 32-character string of lowercase letters and digits (make one up; write it down for Task 3)
    - AMAZON_ASSOCIATE_TAG = copy from the gundamcompare project if it has one; otherwise skip.
@@ -33,7 +32,6 @@ Open https://github.com/Specifxx/ygocompare/settings/secrets/actions.
 
 1. Secrets tab, New repository secret, for each of these that is missing:
    - EBAY_CLIENT_ID and EBAY_CLIENT_SECRET: the SAME Production keyset that GundamCompare and LorcanaCompare use. GitHub won't show those repos' secret values, so get them from https://developer.ebay.com/my/keys → the Production keyset → App ID (Client ID) and Cert ID (Client Secret). If there is more than one Production keyset, use the one whose App ID matches the one listed for the Gundam/Lorcana app; if you can't tell, stop and ask me.
-   - EBAY_AFFILIATE_CAMPAIGN = 5339155912
    - INDEXNOW_KEY = the same string you put in Vercel in Task 2. If this secret already exists (from an earlier setup), click Update and set it to that same new string.
 2. Variables tab: SITE_URL = https://ygocompare.com. If SITE_URL already exists with another value (for example https://ygocompare.app), edit it to exactly https://ygocompare.com; otherwise create it.
 3. Open https://github.com/Specifxx/ygocompare/settings → General → Default branch. It should be main; if not, switch it to main.

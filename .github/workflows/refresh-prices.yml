@@ -41,7 +41,6 @@ jobs:
         env:
           EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
           EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
-          EBAY_AFFILIATE_CAMPAIGN: ${{ secrets.EBAY_AFFILIATE_CAMPAIGN }}
           EBAY_REFRESH: ${{ github.event_name == 'workflow_dispatch' && !inputs.ebay && 'false' || 'true' }}
         run: npx tsx scripts/import-all.ts
       - name: Commit data (this commit is the daily release)

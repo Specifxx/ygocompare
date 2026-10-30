@@ -1,12 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { amazonSearchUrl, goHref, subId, tagged } from "@/lib/affiliate";
+import { SITE } from "@/site.config";
 
 test("eBay links carry the EPN campaign and a per-site customid", () => {
-  const u = new URL(tagged("https://www.ebay.com/itm/123", "home-1"));
-  assert.equal(u.searchParams.get("campid"), process.env.EBAY_AFFILIATE_CAMPAIGN || "5339155912");
+  const u = new URL(tagged("https://www.ebay.com/itm/123", subId("us", "home", 1)));
+  assert.equal(u.searchParams.get("campid"), "5339155912");
   assert.equal(u.searchParams.get("mkevt"), "1");
-  assert.ok(u.searchParams.get("customid"));
+  assert.match(u.searchParams.get("customid") ?? "", new RegExp(`^${SITE.key}-`));
   assert.ok(new URL(tagged("https://www.ebay.co.uk/itm/1")).searchParams.get("mkrid"));
 });
 

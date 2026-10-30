@@ -26,6 +26,7 @@
 //   4. A share of the budget goes to the UK and Australian eBay sites, for the
 //      highest-ranked products only.
 import { SITE } from "@/site.config";
+import { EBAY_CAMPAIGN_ID } from "@/lib/affiliate";
 import type { Market, Offer, Product } from "@/lib/site-types";
 import { hasEditions, markersAgree, numbersInTitle, printingOf, rarityAgrees, rarityPatterns } from "./match";
 import { tokens } from "@/lib/slug";
@@ -281,12 +282,11 @@ export async function searchLowest(
     sort: "price",
     limit: "25",
   });
-  const campaign = process.env.EBAY_AFFILIATE_CAMPAIGN || "5339155912";
   const res = await fetch(`https://api.ebay.com/buy/browse/v1/item_summary/search?${params}`, {
     headers: {
       Authorization: `Bearer ${token}`,
       "X-EBAY-C-MARKETPLACE-ID": mp.id,
-      "X-EBAY-C-ENDUSERCTX": `affiliateCampaignId=${campaign},affiliateReferenceId=${SITE.key}-${p.id}`,
+      "X-EBAY-C-ENDUSERCTX": `affiliateCampaignId=${EBAY_CAMPAIGN_ID},affiliateReferenceId=${SITE.key}-${p.id}`,
     },
   });
   if (res.status === 429) throw Object.assign(new Error("eBay quota exhausted (429)"), { quota: true });
