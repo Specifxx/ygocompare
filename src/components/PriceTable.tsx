@@ -13,6 +13,7 @@ import { goHref } from "@/lib/affiliate";
 import { priceRows } from "@/lib/price-rows";
 import { useMarket } from "./ClientPrefs";
 import { EbayWord } from "./EbayCallout";
+import { ReportPrice } from "./ReportForms";
 
 const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
@@ -29,7 +30,7 @@ export function sourceName(o: Offer) {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: string | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: string | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
@@ -65,6 +66,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
       <div className="overflow-hidden rounded-xl border border-dashed border-ink-700">
         {picker}
         <p className="p-4 text-sm text-muted">No live listings in {MARKET_LABEL[market]} right now. Try another market above, or check eBay below.</p>
+        {product && <div className="px-4 pb-3"><ReportPrice product={product} region={market} buttonClassName="btn-ghost px-3 py-1.5" /></div>}
       </div>
     );
   const live = [...inStock, ...refs];
@@ -146,6 +148,11 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
         <button type="button" onClick={() => setShowOut(true)} className="w-full border-t border-ink-800 px-3 py-2.5 text-left text-sm text-muted hover:bg-ink-850 hover:text-fg">
           Show {folded} out-of-stock listing{folded === 1 ? "" : "s"} ↓
         </button>
+      )}
+      {product && !compact && (
+        <div className="border-t border-ink-800 px-3 pb-3 text-muted">
+          <ReportPrice product={product} region={market} buttonClassName="btn-ghost px-3 py-1.5" stores={rows.filter((o) => o.source !== "ebay" && o.source !== "tcgplayer").map((o) => ({ name: sourceName(o), price: money(o.cents, o.currency) }))} />
+        </div>
       )}
     </div>
   );

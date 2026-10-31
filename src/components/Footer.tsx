@@ -31,7 +31,8 @@ export function Footer() {
             <li><Link href="/methodology">How prices work</Link></li>
             <li><Link href="/stores">Stores we track</Link></li>
             <li><Link href="/blog">Guides</Link></li>
-            <li><Link href="/contact">Contact / list your store</Link></li>
+            <li><Link href="/contact">Contact</Link></li>
+            <li><Link href="/stores#suggest">Suggest a store</Link></li>
             <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
             <li><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link></li>
           </ul>
