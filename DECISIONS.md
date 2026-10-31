@@ -910,3 +910,13 @@ top ad slot), a footer link and a sitemap entry. A site whose list is empty (Lor
 page (404), no strip and no links. Static data, server HTML, `revalidate = 86400`. Creator links are followed and keep
 the referrer (`rel="noopener"`, no `noreferrer`); nobody pays to be listed and a listing never touches store order.
 Engine change, identical in Gundam, Lorcana and YGO Compare.
+
+## eBay: local sellers and stated postage only (2026-10-31)
+
+A WargameCompare visitor's feedback (the owner passed it on for every sister site): eBay rows from overseas sellers
+carried postage that made "a lot of wasted clicks". The Browse search now asks for items located in and delivered to
+the market's own country (`itemLocationCountry`, `deliveryCountry`) and sends the buyer's country and a central
+postcode as `contextualLocation`, so eBay quotes real postage. `pickBest` keeps only a listing whose postage eBay states,
+in the market's currency, and still picks the cheapest delivered. A stored eBay row without a stated postage (the older
+any-seller search) is no longer shown (`decodeOffer`); the rest are searched again on their usual rotation. Same change
+in Lorcana Compare and YGO Compare (engine).

@@ -33,12 +33,32 @@ import { tokens } from "@/lib/slug";
 import { sealedTypeOf } from "./tcgcsv";
 import { shortName } from "@/lib/names";
 
-export const MARKETPLACE: Partial<Record<Market, { id: string; currency: string }>> = {
-  US: { id: "EBAY_US", currency: "USD" },
-  UK: { id: "EBAY_GB", currency: "GBP" },
-  AU: { id: "EBAY_AU", currency: "AUD" },
-  CA: { id: "EBAY_CA", currency: "CAD" },
+// Local sellers only (visitor feedback on WargameCompare, 2026-10-31: overseas sellers' postage made "a lot of wasted
+// clicks"): `country` limits the search to items located in and delivered to the market's own country, and `zip` (a
+// central postcode) lets eBay quote real postage there. A listing whose postage eBay does not state is never kept.
+export const MARKETPLACE: Partial<Record<Market, { id: string; currency: string; country: string; zip: string }>> = {
+  US: { id: "EBAY_US", currency: "USD", country: "US", zip: "64101" },
+  UK: { id: "EBAY_GB", currency: "GBP", country: "GB", zip: "B1 1AA" },
+  AU: { id: "EBAY_AU", currency: "AUD", country: "AU", zip: "2000" },
+  CA: { id: "EBAY_CA", currency: "CAD", country: "CA", zip: "M5V 2T6" },
 };
+
+/** The Browse filter: Buy It Now, in the price window when there is one, from a seller in the market's own country. */
+export function searchFilter(market: Market, ref: number | null): string {
+  const mp = MARKETPLACE[market]!;
+  return [
+    "buyingOptions:{FIXED_PRICE}",
+    ...(ref == null ? [] : [`price:[${Math.max(1, Math.floor(ref * 0.5))}..${Math.ceil(ref * 3)}]`, `priceCurrency:${mp.currency}`]),
+    `itemLocationCountry:${mp.country}`,
+    `deliveryCountry:${mp.country}`,
+  ].join(",");
+}
+
+/** The end-user context: our campaign and sub-id, and the buyer's location so eBay quotes postage to it. */
+export function endUserContext(market: Market, reference: string): string {
+  const mp = MARKETPLACE[market]!;
+  return `affiliateCampaignId=${EBAY_CAMPAIGN_ID},affiliateReferenceId=${reference},contextualLocation=${encodeURIComponent(`country=${mp.country},zip=${mp.zip}`)}`;
+}
 
 /** Share of the daily budget per eBay site. */
 export const MARKET_SHARE: Partial<Record<Market, number>> = { US: 0.75, UK: 0.125, AU: 0.125 };
@@ -162,10 +182,11 @@ export async function ebayRemaining(token: string): Promise<number | null> {
   }
 }
 
-interface ItemSummary {
+export interface ItemSummary {
   title: string;
   price?: { value: string; currency: string };
-  shippingOptions?: { shippingCost?: { value: string } }[];
+  shippingOptions?: { shippingCost?: { value: string; currency?: string } }[];
+  itemLocation?: { country?: string };
   itemWebUrl: string;
   itemAffiliateWebUrl?: string;
   buyingOptions?: string[];
@@ -269,16 +290,15 @@ export async function searchLowest(
   if (!mp) return null;
   // No market price yet (a pre-order): no price window, the matcher decides.
   const ref = refUsdCents == null ? null : (refUsdCents / 100) * fxUsd; // in the marketplace currency
-  // Under half of market is far likelier a fake, a damaged or foreign copy
-  // than a real bargain on a card this valuable.
-  const priceFilter = ref == null ? "" : `,price:[${Math.max(1, Math.floor(ref * 0.5))}..${Math.ceil(ref * 3)}],priceCurrency:${mp.currency}`;
   const params = new URLSearchParams({
     q: queryFor(p),
     // Sealed searches the whole Collectible Card Games category (2536): cases,
     // decks, tins and gift sets are listed outside "Sealed Booster Boxes", and
     // listingMatches() decides what counts.
     category_ids: p.kind === "card" ? SITE.ebay.singlesCategoryId : "2536",
-    filter: `buyingOptions:{FIXED_PRICE}${priceFilter}`,
+    // Under half of market is far likelier a fake, a damaged or foreign copy
+    // than a real bargain on a card this valuable.
+    filter: searchFilter(market, ref),
     sort: "price",
     limit: "25",
   });
@@ -286,23 +306,36 @@ export async function searchLowest(
     headers: {
       Authorization: `Bearer ${token}`,
       "X-EBAY-C-MARKETPLACE-ID": mp.id,
-      "X-EBAY-C-ENDUSERCTX": `affiliateCampaignId=${EBAY_CAMPAIGN_ID},affiliateReferenceId=${SITE.key}-${p.id}`,
+      "X-EBAY-C-ENDUSERCTX": endUserContext(market, `${SITE.key}-${p.id}`),
     },
   });
   if (res.status === 429) throw Object.assign(new Error("eBay quota exhausted (429)"), { quota: true });
   if (!res.ok) throw new Error(`eBay search ${res.status}`);
   const d = (await res.json()) as { itemSummaries?: ItemSummary[] };
+  return pickBest(p, market, d.itemSummaries ?? []);
+}
+
+/**
+ * The cheapest delivered listing (item + postage) of one search: a local seller's (the search asks for them; a listing
+ * that says it is elsewhere is skipped), and only with postage eBay states, so the row never hides a postage cost.
+ */
+export function pickBest(p: Product, market: Market, items: ItemSummary[]): Offer | null {
+  const mp = MARKETPLACE[market];
+  if (!mp) return null;
   let best: Offer | null = null;
-  for (const it of d.itemSummaries ?? []) {
+  for (const it of items) {
     if (!it.price || it.price.currency !== mp.currency) continue;
+    if (it.itemLocation?.country && it.itemLocation.country !== mp.country) continue;
+    const shipCost = it.shippingOptions?.[0]?.shippingCost;
+    if (!shipCost || shipCost.value == null || (shipCost.currency && shipCost.currency !== mp.currency)) continue;
+    const shippingCents = Math.round(Number(shipCost.value) * 100);
+    if (!Number.isFinite(shippingCents) || shippingCents < 0) continue;
     if (!listingMatches(p, it.title)) continue;
     // A sealed product never comes from the singles category: a pre-order
     // single titled "... Box ..." is still one card.
     if (p.kind === "sealed" && it.categories?.some((c) => c.categoryId === SITE.ebay.singlesCategoryId)) continue;
     const cents = Math.round(Number(it.price.value) * 100);
-    const ship = it.shippingOptions?.[0]?.shippingCost?.value;
-    const shippingCents = ship != null ? Math.round(Number(ship) * 100) : null;
-    const total = cents + (shippingCents ?? 0);
+    const total = cents + shippingCents;
     if (!best || total < best.cents + (best.shippingCents ?? 0)) {
       best = {
         source: "ebay",
