@@ -898,3 +898,15 @@ page. `QuickView.tsx` now opens for any plain click on a link to `/card/<slug>`,
 link has no `data-qv`, and `/api/quick` also returns `name`, `sub` and `img` for those. Links inside the quick view and
 on the product's own page, and modified, middle and new-tab clicks, navigate as before. Engine change, identical in
 Gundam, Lorcana and YGO Compare.
+Gundam, Lorcana and YGO Compare.
+
+## 2026-10-31 — Featured creators page (/creators)
+
+Owner, 2026-10-31: add the Gundam Card Game creator phixtcg (Instagram and YouTube) to "our creators page", as
+MTG Compare has. The engine now carries MTG Compare's `/creators` pattern: types and helpers in `src/lib/creators.ts`,
+each site's hand-curated list in `src/content/creators.ts`, round avatars in `public/img/creators/` (cut to a circle
+from the creator's own profile picture), a spotlight for the newest, a homepage strip (`CreatorsTeaser`, under the
+top ad slot), a footer link and a sitemap entry. A site whose list is empty (Lorcana and YGO Compare for now) has no
+page (404), no strip and no links. Static data, server HTML, `revalidate = 86400`. Creator links are followed and keep
+the referrer (`rel="noopener"`, no `noreferrer`); nobody pays to be listed and a listing never touches store order.
+Engine change, identical in Gundam, Lorcana and YGO Compare.
