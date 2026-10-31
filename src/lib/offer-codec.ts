@@ -36,6 +36,10 @@ export function decodeOffer(t: OfferTuple): Offer | null {
   if (store) {
     market = store.market;
     url = /^https?:\/\//.test(ref) ? ref : `${store.base}/products/${ref}`;
+  } else if (source === "ebay" && ship == null) {
+    // An eBay row without a stated postage (one stored before 2026-10-31, when the search took any seller anywhere): never
+    // shown, as its postage may be an overseas seller's (visitor feedback, 2026-10-31).
+    return null;
   } else if (source === "ebay" || source === "tcgplayer") {
     market = mk ?? "US";
     url = ref;
