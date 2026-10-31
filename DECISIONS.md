@@ -889,3 +889,12 @@ POST only, 503 until the token is set) still holds.
   comment. Those issues are public, so they link to each report's file and never quote a note. It fails (and
   GitHub emails the owner) when a site has no `reports` branch, or the token stops working or expires within 14
   days (checked only when the token is also a TCGEmpire Actions secret). The ops monitor's job list watches it.
+
+## 2026-10-31 — Every card and sealed link opens the quick view
+
+Owner, 2026-10-31: "Whenever I click on any item … I want a quick view open like K Young." Only `ProductTile` carried
+`data-qv`, so the other links to a product (home lists, movers, set tables, blog posts, search) went straight to its
+page. `QuickView.tsx` now opens for any plain click on a link to `/card/<slug>`, reading the slug from the href when the
+link has no `data-qv`, and `/api/quick` also returns `name`, `sub` and `img` for those. Links inside the quick view and
+on the product's own page, and modified, middle and new-tab clicks, navigate as before. Engine change, identical in
+Gundam, Lorcana and YGO Compare.

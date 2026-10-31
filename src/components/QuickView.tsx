@@ -22,6 +22,28 @@ interface Data {
   offers: Offer[];
   fx: Record<string, number>;
   amazon: string | null;
+  name: string;
+  sub: string;
+  img: string | null;
+}
+
+// Every link to a card or sealed page opens it (owner, 2026-10-31: "whenever I
+// click on any item … a quick view open like K Young"): a tile's data-qv
+// attributes when it has them, else the slug read from the href
+// (/card/<slug>), with the link's own picture and text until /api/quick brings
+// the product's own. Links in the quick view, and on the product's own page,
+// navigate as usual.
+const PRODUCT_PATH = /^\/card\/([^/?#]+)\/?$/;
+function headOf(e: Event): Head | null {
+  const a = (e.target as Element | null)?.closest?.("a[href]") as HTMLAnchorElement | null;
+  if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download") || a.closest("[role=dialog]")) return null;
+  if (a.dataset.qv) return { slug: a.dataset.qv, name: a.dataset.qvName || "", sub: a.dataset.qvSub || "", img: a.dataset.qvImg || null };
+  const href = a.getAttribute("href")!;
+  const m = PRODUCT_PATH.exec(href);
+  if (!m || window.location.pathname.replace(/\/$/, "") === href.replace(/\/$/, "")) return null;
+  const img = a.querySelector("img");
+  const text = (a.textContent || "").replace(/\s+/g, " ").trim();
+  return { slug: decodeURIComponent(m[1]), name: img?.alt || (text.length <= 140 ? text : ""), sub: "", img: img?.currentSrc || img?.src || null };
 }
 
 const cache = new Map<string, Promise<Data | null>>();
@@ -48,18 +70,17 @@ export function QuickView() {
     // the click already handled and does not navigate.
     function onClick(e: MouseEvent) {
       if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      const a = (e.target as Element | null)?.closest?.("a[data-qv]") as HTMLAnchorElement | null;
-      if (!a) return;
+      const h = headOf(e);
+      if (!h) return;
       e.preventDefault();
-      const slug = a.dataset.qv!;
-      setHead({ slug, name: a.dataset.qvName || "", sub: a.dataset.qvSub || "", img: a.dataset.qvImg || null });
+      setHead(h);
       setData("loading");
-      load(slug).then((d) => setData((cur) => (cur === "loading" ? d : cur)));
+      load(h.slug).then((d) => setData((cur) => (cur === "loading" ? d : cur)));
     }
     // Warm the response when a mouse rests on a tile, so most opens are instant.
     function onOver(e: PointerEvent) {
-      const a = (e.target as Element | null)?.closest?.("a[data-qv]") as HTMLAnchorElement | null;
-      if (a && e.pointerType === "mouse") load(a.dataset.qv!);
+      const h = e.pointerType === "mouse" ? headOf(e) : null;
+      if (h) load(h.slug);
     }
     document.addEventListener("click", onClick, true);
     document.addEventListener("pointerover", onOver, { passive: true });
@@ -84,17 +105,21 @@ export function QuickView() {
 
   if (!head) return null;
   const href = `/card/${head.slug}`;
+  const got = data && data !== "loading" ? data : null;
+  const name = got?.name || head.name;
+  const sub = got?.sub || head.sub;
+  const img = head.img || got?.img || null;
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-label={head.name}>
+    <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-label={name}>
       <button type="button" aria-label="Close" tabIndex={-1} className="qv-backdrop absolute inset-0 bg-black/50 backdrop-blur-[2px]" onClick={close} />
       <div className="qv-panel relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl border border-ink-700/60 bg-ink-900 shadow-2xl sm:rounded-2xl">
         <div className="flex items-start gap-4 border-b border-ink-800 p-4 sm:p-5">
           <div className="grid h-28 w-20 shrink-0 place-items-center overflow-hidden rounded-lg bg-ink-850">
-            {head.img ? <img src={head.img} alt="" className="h-full w-full object-contain p-1" /> : <span className="p-2 text-center text-[11px] text-muted">No image yet</span>}
+            {img ? <img src={img} alt="" className="h-full w-full object-contain p-1" /> : <span className="p-2 text-center text-[11px] text-muted">No image yet</span>}
           </div>
           <div className="min-w-0 flex-1">
-            <h2 className="text-lg font-bold leading-snug text-fg">{head.name}</h2>
-            {head.sub && <p className="mt-0.5 text-sm text-muted">{head.sub}</p>}
+            <h2 className="text-lg font-bold leading-snug text-fg">{name || <span className="qv-shimmer inline-block h-5 w-48 rounded" />}</h2>
+            {sub && <p className="mt-0.5 text-sm text-muted">{sub}</p>}
           </div>
           <button ref={closeRef} type="button" onClick={close} aria-label="Close" className="-mr-1 -mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted hover:bg-ink-800 hover:text-fg">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
