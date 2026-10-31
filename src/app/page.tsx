@@ -1,6 +1,7 @@
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { SearchBox } from "@/components/SearchBox";
+import { CreatorsTeaser } from "@/components/creators/CreatorsTeaser";
 import { CardAdPair } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { AdSlot } from "@/components/AdSlot";
@@ -83,6 +84,7 @@ export default function Home() {
           then one display slot (lib/card-ads.ts). */}
       <CardAdPair ads={cardAds({ kind: "card", limit: 12 })} page="home" {...adSearch()} ebayTitle={`Chase ${SITE.gameShort} cards on eBay right now`} tcgTitle={`Top ${SITE.gameShort} cards on TCGplayer`} />
       <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_HOME} />
+      <CreatorsTeaser />
 
       {/* Sealed is as big a market as singles: it gets the first shelf. */}
       {shelf.length > 0 && (

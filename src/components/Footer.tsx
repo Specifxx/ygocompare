@@ -1,5 +1,6 @@
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
+import { creatorsOn } from "@/lib/creators";
 
 export function Footer() {
   return (
@@ -31,6 +32,7 @@ export function Footer() {
             <li><Link href="/methodology">How prices work</Link></li>
             <li><Link href="/stores">Stores we track</Link></li>
             <li><Link href="/blog">Guides</Link></li>
+            {creatorsOn() && <li><Link href="/creators">Creators</Link></li>}
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/stores#suggest">Suggest a store</Link></li>
             <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
