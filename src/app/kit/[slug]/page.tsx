@@ -111,7 +111,7 @@ export default function KitPage({ params }: { params: { slug: string } }) {
               <h2 className="text-lg font-bold">Compare prices</h2>
               <CheckedAgo at={kitsUpdatedAt() ?? m?.updatedAt} />
             </div>
-            <PriceTable offers={offers} fx={m?.fx ?? { USD: 1 }} productId={pid} page="kit" />
+            <PriceTable offers={offers} fx={m?.fx ?? { USD: 1 }} productId={pid} page="kit" product={`${k.name} (JAN ${k.jan})`} />
             <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
               <a className="link font-semibold" rel="sponsored nofollow noopener" target="_blank" href={goHref({ url: ebaySearchUrl(search, "US"), source: "ebay", market: "US" }, pid, "kit_ebay_search")}>Check eBay listings →</a>
               {amazon && <a className="link font-semibold" rel="sponsored nofollow noopener" target="_blank" href={goHref({ url: amazon, source: "amazon", market: "US" }, pid, "kit_amazon_search")}>Check Amazon →</a>}

@@ -5,6 +5,7 @@ import { meta } from "@/lib/data";
 import { MARKET_LABEL } from "@/lib/site-types";
 import { StaticPage } from "@/components/StaticPage";
 import { kitStoreStatus } from "@/lib/kits";
+import { SuggestStore } from "@/components/ReportForms";
 
 export const revalidate = 86400;
 export const metadata: Metadata = { title: `${SITE.gameShort} stores we compare`, description: `Every online ${SITE.game} store ${SITE.name} compares, by country.`, ...canon("/stores") };
@@ -14,7 +15,7 @@ export default function Stores() {
   const markets = [...new Set(SITE.stores.map((s) => s.market))];
   return (
     <StaticPage title={`${SITE.gameShort} stores we compare`}>
-      <p>Plus TCGplayer and eBay (US, UK and Australia). Run a store? <a href="/contact">Ask to be listed</a> — it&apos;s free.</p>
+      <p>Plus TCGplayer and eBay (US, UK and Australia). Know a store we should compare, or run one? <a href="#suggest">Suggest it below</a>. Listing is free.</p>
       {markets.map((mk) => (
         <section key={mk}>
           <h2>{MARKET_LABEL[mk]}</h2>
@@ -36,6 +37,11 @@ export default function Stores() {
           </ul>
         </section>
       )}
+      <section id="suggest">
+        <h2>Suggest a store</h2>
+        <p>Tell us about a {SITE.gameShort} store we don&apos;t compare yet. We check every suggestion and add the store if we can read its prices.</p>
+        <SuggestStore regions={markets.map((mk) => [mk, MARKET_LABEL[mk]])} what={`${SITE.gameShort} products`} buttonClassName="btn-buy" />
+      </section>
     </StaticPage>
   );
 }
