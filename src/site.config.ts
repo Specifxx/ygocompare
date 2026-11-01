@@ -104,6 +104,11 @@ export const SITE: SiteConfig = {
   // TCGplayer Direct ships Yu-Gi-Oh! singles to Australia since 2026-10-07
   // (TCGplayer press release); the TCGplayer ad strip says so to AU visitors.
   tcgplayerDirectMarkets: ["AU"],
+  // Crawlable hubs by card attribute (/cards/<facet>/<slug>), 2026-11-01.
+  cardHubs: [
+    { facet: "attribute", attr: "Attribute", noun: ["attribute", "attributes"], titleCase: true, exclude: ["Spell", "Trap"], title: "{v} attribute {game} cards", blurb: "Every Yu-Gi-Oh! monster has one of seven attributes: Dark, Light, Earth, Water, Fire, Wind and Divine." },
+    { facet: "type", attr: "MonsterType", noun: ["monster type", "monster types"], exclude: ["Warior"], title: "{v}-Type {game} cards", blurb: "A monster's type is printed in brackets above its text, such as [Dragon/Effect]." },
+  ],
   rarityOrder: [
     "Quarter Century Secret Rare",
     "Grand Master Rare",

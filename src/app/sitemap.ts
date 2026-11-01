@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { meta, products, refCents, sets } from "@/lib/data";
 import { posts } from "@/lib/posts";
-import { preorderSetList, rarityHubs, sealedHubs } from "@/lib/hubs";
+import { attrFacets, preorderSetList, rarityHubs, sealedHubs } from "@/lib/hubs";
 import { preorderPath } from "@/lib/preorders";
 import { SITE_URL } from "@/lib/site";
 import { creatorsOn } from "@/lib/creators";
@@ -25,6 +25,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...posts().map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.updated ?? p.date), priority: 0.7 })),
     ...rarityHubs().map((h) => ({ url: `${SITE_URL}/cards/rarity/${h.slug}`, lastModified: at, priority: 0.6 })),
     ...sealedHubs().map((h) => ({ url: `${SITE_URL}/sealed/${h.slug}`, lastModified: at, priority: 0.6 })),
+    // Attribute hubs (SITE.cardHubs): each facet's index and every value with enough cards.
+    ...attrFacets().flatMap((f) => [
+      { url: `${SITE_URL}/cards/${f.cfg.facet}`, lastModified: at, priority: 0.6 },
+      ...f.hubs.map((h) => ({ url: `${SITE_URL}/cards/${f.cfg.facet}/${h.slug}`, lastModified: at, priority: 0.6 })),
+    ]),
     ...sets().filter((s) => s.productCount > 0).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...products()
       .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= (SITE.sitemapMinCardCents ?? 50)))
