@@ -8,7 +8,8 @@ make the same change in the other two repos.
 
 ## One engine, three repos
 
-Gundam Compare, Lorcana Compare and YGO Compare run ONE engine. `engine.json`
+Gundam Compare, Lorcana Compare, YGO Compare and Cyberpunk Compare
+(`Specifxx/cyberpunkcompare`, since 2026-11-01) run ONE engine. `engine.json`
 lists its files (the code, tests and build config; never `src/site.config.ts`,
 `src/content/`, icons, share images, workflows or `data/`), and they must be
 byte-identical in all three repos. After an engine change here, copy it with

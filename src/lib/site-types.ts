@@ -1,4 +1,5 @@
 // Types shared by the engine and src/site.config.ts.
+import type { SetEdition } from "@/lib/import/match";
 
 export type Market = "US" | "UK" | "CA" | "AU" | "EU" | "SG";
 export const MARKETS: Market[] = ["US", "UK", "CA", "AU", "EU", "SG"];
@@ -106,6 +107,12 @@ export interface SiteConfig {
   rarityMustAgree?: boolean;
   /** Extra ways sellers write a rarity: { "Quarter Century Secret Rare": ["QCSR", "QCScR"] }. */
   rarityAliases?: Record<string, string[]>;
+  /** TCGplayer's rarity codes spelled out on the site and in matching:
+   *  { C: "Common", IL: "Iconic Legend" }. A code not listed stays as is. */
+  rarityNames?: Record<string, string>;
+  /** One set printed in several editions under the same names (Cyberpunk
+   *  TCG's Beta and Retail): see SetEdition in lib/import/match.ts. Off unless set. */
+  setEditions?: SetEdition[];
   /** Markets outside the US where TCGplayer Direct ships this game's singles
    *  (the TCGplayer ad strip says so there). Off by default: say nothing we
    *  have not checked. TCGplayer Direct: AU since 2026-10-07 for Magic,

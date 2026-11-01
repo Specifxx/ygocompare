@@ -24,6 +24,7 @@ import {
   listingMatches,
   planEbayRefresh,
   searchLowest,
+  useSetEditions,
   type EbayState,
 } from "@/lib/import/ebay";
 import { ebayReferenceUsd, ebayTrusted, tcgplayerOfferCents } from "@/lib/import/sanity";
@@ -81,7 +82,8 @@ async function main() {
   const fx = await fxRates(prevMeta?.fx ?? {});
 
   // 2. Stores
-  const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases });
+  const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases, setEditions: SITE.setEditions });
+  useSetEditions(sets);
   const storeOffers = new Map<number, Offer[]>();
   const storeStatus: Record<string, StoreStatus> = {};
   const addOffer = (id: number, o: Offer) => {

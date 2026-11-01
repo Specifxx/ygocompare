@@ -11,7 +11,7 @@ import path from "node:path";
 import { SITE } from "@/site.config";
 import type { Catalog, Market } from "@/lib/site-types";
 import { CURRENCY } from "@/lib/site-types";
-import { ebayRemaining, ebayToken, MARKET_SHARE, searchLowest, type EbayState } from "@/lib/import/ebay";
+import { ebayRemaining, ebayToken, MARKET_SHARE, searchLowest, useSetEditions, type EbayState } from "@/lib/import/ebay";
 import { readSummary } from "@/lib/price-store";
 import { referenceCents } from "@/lib/import/tcgcsv";
 
@@ -20,6 +20,7 @@ const STATE = path.join(process.cwd(), "data", "state");
 
 async function main() {
   const cat = JSON.parse(fs.readFileSync("data/public/catalog.json", "utf8")) as Catalog;
+  useSetEditions(cat.sets);
   const fx = (JSON.parse(fs.readFileSync("data/public/meta.json", "utf8")) as { fx: Record<string, number> }).fx;
   const sum = readSummary();
   const state = JSON.parse(fs.readFileSync(path.join(STATE, "ebay.json"), "utf8")) as EbayState;

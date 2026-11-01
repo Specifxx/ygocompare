@@ -1014,3 +1014,16 @@ of the day's calls; two gaps remained. Slots the UK and Australia could not use 
 12 hours) were simply not spent, and nothing pinned the US to run first. `planEbayRefresh` (engine, all three sites)
 now plans every US call before any other market's, so a quota stop mid-run cuts the UK and AU, never the US, and hands
 the other markets' unused slots to the US's next-ranked products. Shares, floors and intervals are unchanged.
+
+## A fourth engine site, and two options it needed — 2026-11-01
+
+Cyberpunk Compare (`Specifxx/cyberpunkcompare`, cyberpunkcompare.com) runs this
+engine too; `engine.json` lists four repos and every footer links it. Two
+options were added for it, both off unless a site sets them: `setEditions`
+(one set printed as Beta and Retail under identical names: a title counts for
+an edition only when it names it, the default edition otherwise, and never
+when it names two; store matching and the eBay pass both apply it,
+`tests/set-editions.test.ts`) and `rarityNames` (TCGplayer rarity codes
+spelled out at import). `markersAgree` now also accepts a title word that is
+one word of the product's rarity ("Iconic" for "Iconic Legend"). It uses its
+own eBay app (owner); this site's eBay budget is unchanged.

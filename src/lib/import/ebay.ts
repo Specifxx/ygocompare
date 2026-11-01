@@ -4,7 +4,8 @@
 // THE BUDGET. One eBay developer app (5,000 Browse calls a day) is shared by
 // Lorcana Compare, Gundam Compare and YGO Compare: SITE.ebay.dailyBudget each,
 // 4,500 in all, leaving 500 spare (1,500 each from the owner's 2026-10-26
-// split; since 2026-10-28 Lorcana and Gundam 1,150, YGO 2,200). The
+// split; since 2026-10-28 Lorcana and Gundam 1,150, YGO 2,200). Cyberpunk
+// Compare runs the same code on its own app (owner, 2026-11-01). The
 // app's remaining count (Developer Analytics API, free) is shared too, so each
 // site also keeps ITS OWN count in data/state/ebay-usage.json and stops at its
 // share, whichever limit comes first. The sites run at different hours
@@ -31,8 +32,8 @@
 //      go back to the US's next-ranked products.
 import { SITE } from "@/site.config";
 import { EBAY_CAMPAIGN_ID } from "@/lib/affiliate";
-import type { Market, Offer, Product } from "@/lib/site-types";
-import { hasEditions, markersAgree, numbersInTitle, printingOf, rarityAgrees, rarityPatterns } from "./match";
+import type { Market, Offer, Product, SetInfo } from "@/lib/site-types";
+import { hasEditions, markersAgree, numbersInTitle, printingOf, rarityAgrees, rarityPatterns, titleEdition } from "./match";
 import { tokens } from "@/lib/slug";
 import { sealedTypeOf } from "./tcgcsv";
 import { shortName } from "@/lib/names";
@@ -216,11 +217,31 @@ const GRADED = /\b(p\s?sa|bgs|cgc|tag|ace|sgc|beckett)\s?-?\d{1,2}(\.5)?\b|\b(ps
 // Non-English copies, in the ways sellers write them.
 const FOREIGN_LISTING = /\b(japanese|japan|jpn|jp|ja|chinese|simplified chinese|traditional chinese|korean|french|german|deutsch|italian|italiano|spanish|español|portuguese|asia|asian)\b|\(jp\)|\[jp\]|日本|中文/i;
 
+// SITE.setEditions (Cyberpunk TCG's Beta and Retail): each set's edition
+// word, filled by useSetEditions() before a pass. Empty for other games.
+const setEdition = new Map<number, string>();
+export function useSetEditions(sets: SetInfo[]): void {
+  setEdition.clear();
+  const words = new Set((SITE.setEditions ?? []).map((e) => e.word));
+  if (!words.size) return;
+  for (const s of sets) {
+    const w = tokens(s.name).find((t) => words.has(t));
+    if (w) setEdition.set(s.id, w);
+  }
+}
+export const editionOfProduct = (p: Product): string | null => setEdition.get(p.setId) ?? null;
+
 export function queryFor(p: Product): string {
   // Variant words in parentheses ("(LR+)", "(Enchanted)") are left out: sellers
   // word them differently, and listingMatches() tells the variants apart.
-  const name = shortName(p.name).replace(/\([^)]*\)/g, " ").replace(/[[\]:,]/g, " ").replace(/['’]/g, "");
-  return `${SITE.ebay.query} ${name} ${p.kind === "card" ? p.number ?? "" : ""}`.replace(/\s+/g, " ").trim();
+  let name = shortName(p.name).replace(/\([^)]*\)/g, " ").replace(/[[\]:,]/g, " ").replace(/['’]/g, "");
+  // The default edition goes unnamed by most sellers ("Booster Box", not
+  // "Retail Booster Box"); any other edition is named in the search.
+  const ed = editionOfProduct(p);
+  const def = SITE.setEditions?.find((e) => e.word === ed);
+  if (ed) name = name.replace(new RegExp(`\\b${ed}\\b`, "ig"), " ");
+  const edWord = ed && !def?.default ? ed : "";
+  return `${SITE.ebay.query} ${name} ${edWord} ${p.kind === "card" ? p.number ?? "" : ""}`.replace(/\s+/g, " ").trim();
 }
 
 // Bracketed qualifiers name a specific version: "(Store Tournament Winner
@@ -253,6 +274,9 @@ const sellerRarities = () =>
 /** Does an eBay listing title describe this product? */
 export function listingMatches(p: Product, title: string): boolean {
   if (GRADED.test(title) || FOREIGN_LISTING.test(title)) return false;
+  // A Beta box listing is never a Retail box's price, nor the other way round.
+  const ed = editionOfProduct(p);
+  if (ed && SITE.setEditions && titleEdition(title, SITE.setEditions) !== ed) return false;
   if (JUNK.test(title) && !(p.kind === "sealed" && /\bcase\b/i.test(p.name) && /\bcase\b/i.test(title) && !/sleeve|deck box|playmat/i.test(title)))
     return false;
   const have = new Set(tokens(title));
@@ -291,7 +315,7 @@ export function listingMatches(p: Product, title: string): boolean {
   // "Booster Boxes" / "Packs" / "Decks" count as the singular.
   const sing = (t: string) => t.replace(/xes$/, "x").replace(/s$/, "");
   const haveS = new Set([...have].map(sing));
-  const need = tokens(shortName(p.name)).filter((t) => t.length > 1 && !["disney", "the", "of"].includes(t));
+  const need = tokens(shortName(p.name)).filter((t) => t.length > 1 && !["disney", "the", "of"].includes(t) && t !== ed);
   return need.filter((t) => haveS.has(sing(t))).length / Math.max(1, need.length) >= 0.8;
 }
 
