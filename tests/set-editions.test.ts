@@ -1,13 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Product, SetInfo } from "@/lib/site-types";
-import { buildIndex, matchCard, matchSealed, titleEdition, type SetEdition } from "@/lib/import/match";
+import { buildIndex, matchCard, matchSealed, numbersInTitle, titleEdition, type SetEdition } from "@/lib/import/match";
 
 // SITE.setEditions (2026-11-01, Cyberpunk TCG): one set printed as "Beta"
 // (Kickstarter, 36-pack boxes, ~US$315) and "Retail" (24 packs, ~US$155) under
 // the same names. Store titles are real ones from the store probe.
 const EDITIONS: SetEdition[] = [
-  { word: "beta", implied: /\b36[- ]?(packs?|ct|count)\b|kickstarter|\bbackers?\b/i },
+  { word: "beta", implied: /\b36[- ]?(packs?|ct|count)\b|kickstarter|\bbackers?\b|\bB\d{3}\b/i },
   { word: "retail", default: true },
 ];
 const set = (id: number, name: string): SetInfo => ({ id, name, code: "", slug: String(id), releasedOn: "2026-11-06", productCount: 1, upcoming: false });
@@ -52,4 +52,27 @@ test("games without editions are unchanged", () => {
   // Both editions' boxes fit an unmarked title, and a tie is no match.
   assert.equal(plain.editions, null);
   assert.equal(matchSealed("Welcome to Night City Booster Box", plain), null);
+});
+
+// "plain" numbers (Cyberpunk TCG): "001" in Retail, "B001" in Beta, "006" in
+// Pre-Release Beta. Real store titles from the 2026-11-01 probe.
+test("plain numbers with editions: real store singles", () => {
+  const s2 = [set(1, "Welcome to Night City - Beta"), set(2, "Welcome to Night City - Retail"), set(4, "Pre-Release Beta")];
+  const ps = [
+    card(30, "Adam Smasher - Ender of Legends (Epic)", "B001", 1),
+    card(31, "Adam Smasher - Ender of Legends (Epic)", "001", 2),
+    { ...card(32, "Adam Smasher - Ender of Legends", "001", 4), rarity: "Epic" },
+    card(33, "Detonate", "B031", 1),
+    card(34, "Detonate", "031", 2),
+    card(35, "Goro Takemura - Vengeful Bodyguard", "006", 4),
+  ];
+  const i = buildIndex(ps, s2, "plain", { setEditions: EDITIONS });
+  assert.equal(matchCard("Adam Smasher - Ender of Legends Epic B001 (Welcome to Night City - Beta)  - Foil", i)?.product.id, 30);
+  assert.equal(matchCard("Adam Smasher - Ender of Legends [PRR - 001 - Epic] - Pre-Release Beta", i)?.product.id, 32);
+  // "B031" alone says Beta, even with no edition word.
+  assert.equal(matchCard("Detonate [B031]", i)?.product.id, 33);
+  assert.equal(matchCard("Detonate (031) - Welcome to Night City", i)?.product.id, 34);
+  assert.equal(matchCard("Goro Takemura Vengeful Bodyguard 006 (Pre-Release Beta)  - Foil", i)?.product.id, 35);
+  // Pack counts and years are not card numbers.
+  assert.deepEqual(numbersInTitle("Booster Box (24 Packs) November 6, 2026 ST01", "plain"), []);
 });

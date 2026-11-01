@@ -79,9 +79,10 @@ export interface SiteConfig {
     dailyBudget: number;
     runHourUtc: number;
   };
-  /** "fraction" 42/204 (Lorcana), "code" GD02-048 (Gundam), "ygo" LOB-EN005
+  /** "fraction" 42/204 (Lorcana), "code" GD02-048 (Gundam), "plain" 001 / B001
+   *  (Cyberpunk TCG: three digits, an optional letter, nothing else), "ygo" LOB-EN005
    *  (set code, language, number; the language is part of the key). */
-  numberStyle: "fraction" | "code" | "ygo";
+  numberStyle: "fraction" | "code" | "ygo" | "plain";
   /** "name" (default): the first product of a name keeps the bare slug.
    *  "name-number": every card's slug carries its number ("dark-magician-lob-en005"),
    *  for games that reprint one card in dozens of sets. Slugs are decided

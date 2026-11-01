@@ -74,7 +74,7 @@ test("refresh intervals", () => {
 test("eBay listings: graded, foreign and multi-card titles never match", async () => {
   const { listingMatches } = await import("@/lib/import/ebay");
   const { SITE } = await import("@/site.config");
-  const num = { code: "GD05-102", ygo: "RA01-EN008", fraction: "230/204" }[SITE.numberStyle];
+  const num = { code: "GD05-102", ygo: "RA01-EN008", fraction: "230/204", plain: "B141" }[SITE.numberStyle];
   const card: Product = { ...p(1), name: "Belle - Exceptional Writer (Enchanted)", number: num, rarity: "Enchanted" };
   assert.equal(listingMatches(card, `Belle Exceptional Writer Enchanted ${num} NM`), true);
   const song: Product = { ...p(2), name: "Let It Go", number: num, rarity: "Rare" };

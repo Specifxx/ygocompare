@@ -1024,6 +1024,7 @@ options were added for it, both off unless a site sets them: `setEditions`
 an edition only when it names it, the default edition otherwise, and never
 when it names two; store matching and the eBay pass both apply it,
 `tests/set-editions.test.ts`) and `rarityNames` (TCGplayer rarity codes
-spelled out at import). `markersAgree` now also accepts a title word that is
+spelled out at import). A fourth number style, `plain` ("001", "B001"), is its card numbering.
+`markersAgree` now also accepts a title word that is
 one word of the product's rarity ("Iconic" for "Iconic Legend"). It uses its
 own eBay app (owner); this site's eBay budget is unchanged.

@@ -55,7 +55,7 @@ export interface SetEdition {
   default?: boolean;
 }
 
-export type NumberStyle = "fraction" | "code" | "ygo";
+export type NumberStyle = "fraction" | "code" | "ygo" | "plain";
 
 // Yu-Gi-Oh! numbers: set code, an optional language, the number —
 // "LOB-EN005", "RA01-EN008", "YGLD-ENA01", old "LOB-005" and European
@@ -65,7 +65,16 @@ export type NumberStyle = "fraction" | "code" | "ygo";
 const YGO_NUM = /(?<![A-Z0-9])((?=[A-Z0-9]*[A-Z])[A-Z0-9]{2,5})-(EN|E)?([A-Z]?)(\d{2,3})(?![A-Z0-9])/g;
 const ygoKey = (m: RegExpMatchArray) => `${m[1]}-${m[2] ?? ""}${m[3]}${m[4].padStart(3, "0")}`;
 
+// Plain numbers (Cyberpunk TCG): "001" in the Retail print, "B001" in the
+// Beta one, with no set code or total. The letter stays in the key; three
+// digits only, so "24 packs", "ST01" and years never read as a number.
+const PLAIN_NUM = /(?<![A-Z0-9/])([A-Z]?)(\d{3})(?![A-Z0-9/])/g;
+
 export function numberKey(n: string, style: NumberStyle): string | null {
+  if (style === "plain") {
+    const m = n.trim().toUpperCase().match(/^([A-Z]?)(\d{1,3})$/);
+    return m ? `${m[1]}${m[2].padStart(3, "0")}` : null;
+  }
   if (style === "ygo") {
     const m = [...n.toUpperCase().matchAll(YGO_NUM)][0];
     return m ? ygoKey(m) : null;
@@ -82,7 +91,9 @@ export function numberKey(n: string, style: NumberStyle): string | null {
 /** Every number-looking token in a store title. */
 export function numbersInTitle(title: string, style: NumberStyle): string[] {
   const out = new Set<string>();
-  if (style === "ygo") {
+  if (style === "plain") {
+    for (const m of title.toUpperCase().matchAll(PLAIN_NUM)) out.add(`${m[1]}${m[2]}`);
+  } else if (style === "ygo") {
     for (const m of title.toUpperCase().matchAll(YGO_NUM)) out.add(ygoKey(m));
   } else if (style === "code") {
     for (const m of title.toUpperCase().matchAll(/\b([A-Z]{1,4}\d{0,2}[A-Z]?)-(\d{2,3}[A-Z]?)\b/g))
