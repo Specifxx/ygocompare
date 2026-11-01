@@ -29,7 +29,8 @@ export const forumApiUrl = (repo: string) => `https://api.github.com/repos/${rep
 /**
  * The forum for a page. Never throws: an unreadable file is an empty forum (the
  * browser fetches its own copy anyway). `revalidate` is the page's own cache life
- * (a site's cost rules decide it; false = read once at build).
+ * (a site's cost rules decide it; 0 = every render, for pages the CDN caches;
+ * false = read once at build).
  */
 export async function readForum(site: Pick<ForumSite, "repo">, revalidate: number | false = 21600): Promise<ForumFile> {
   try {
@@ -54,14 +55,14 @@ const gh = (accept = "application/vnd.github+json") => ({
 
 async function readForWrite(repo: string): Promise<{ file: ForumFile; sha: string | null }> {
   const url = `https://api.github.com/repos/${repo}/contents/${FORUM_FILE}?ref=${FORUM_BRANCH}`;
-  const res = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(10_000), headers: gh() });
+  const res = await fetch(url, { next: { revalidate: 0 }, signal: AbortSignal.timeout(10_000), headers: gh() });
   if (res.status === 404) return { file: EMPTY_FORUM, sha: null };
   if (!res.ok) throw new Error(`GitHub said HTTP ${res.status} reading the forum`);
   const j = (await res.json()) as { sha: string; content?: string; encoding?: string };
   let text: string;
   if (j.encoding === "base64" && j.content) text = Buffer.from(j.content, "base64").toString("utf8");
   else {
-    const raw = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(15_000), headers: gh("application/vnd.github.raw") });
+    const raw = await fetch(url, { next: { revalidate: 0 }, signal: AbortSignal.timeout(15_000), headers: gh("application/vnd.github.raw") });
     if (!raw.ok) throw new Error(`GitHub said HTTP ${raw.status} reading the forum`);
     text = await raw.text();
   }
@@ -71,7 +72,6 @@ async function readForWrite(repo: string): Promise<{ file: ForumFile; sha: strin
 async function putFile(repo: string, path: string, content: string, message: string, sha: string | null): Promise<number> {
   const res = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
     method: "PUT",
-    cache: "no-store",
     signal: AbortSignal.timeout(15_000),
     headers: gh(),
     body: JSON.stringify({ message, content: Buffer.from(content).toString("base64"), branch: FORUM_BRANCH, ...(sha ? { sha } : {}) }),
