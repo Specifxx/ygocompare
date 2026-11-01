@@ -991,3 +991,10 @@ so the sitemap never lists a thin hub; catch-alls ("Standard Characters",
 link each attribute to its hub, and the `{{attrstats:FACET}}` blog token draws
 the comparison table, so posts link the hubs instead of repeating them (a post
 never lists the cards a hub lists: [[seo-split-pages]]).
+
+
+## Contact address: compareempire@gmail.com — 2026-11-01
+
+The owner: "the sites that they don't [have their own email], just use compareempire@gmail.com", and visitors "can
+just email us directly". `supportEmail` moves from riftcompare@gmail.com (another brand's inbox) to the Compare Empire
+family inbox, shown in the footer and on `/contact`. No mail service is added.
