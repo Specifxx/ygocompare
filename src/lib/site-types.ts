@@ -135,6 +135,33 @@ export interface SiteConfig {
    *  kits compared across hobby shops by their JAN barcode (lib/kits.ts,
    *  scripts/import-kits.ts). Gundam Compare's Gunpla. */
   kits?: KitsConfig;
+  /** Crawlable card hubs by one card attribute (/cards/<facet>/<slug>, with an
+   *  index at /cards/<facet>): colour, card type, franchise, faction… Off unless
+   *  set. Only values with at least `minItems` cards get a page (thin pages slow
+   *  indexing of the rest), so the sitemap never lists a near-empty hub. */
+  cardHubs?: CardHubConfig[];
+}
+
+export interface CardHubConfig {
+  /** URL segment, e.g. "color". Never "rarity" (that hub is the engine's own). */
+  facet: string;
+  /** The key in Product.attrs, e.g. "Color". */
+  attr: string;
+  /** Singular and plural nouns for headings: ["colour", "colours"]. */
+  noun: [string, string];
+  /** Regex source that splits a multi-valued attribute ("Amethyst;Sapphire"); each
+   *  part is trimmed and loses wrapping parentheses ("(Zeon)" → "Zeon"). */
+  split?: string;
+  /** Show "DARK" as "Dark". */
+  titleCase?: boolean;
+  /** Fewest cards a value needs for its own page (default 12). */
+  minItems?: number;
+  /** Values that never get a page (catch-alls like "Standard Characters"). */
+  exclude?: string[];
+  /** Page title wording, {v} = the value, {game} = SITE.gameShort. Default "{v} {game} cards". */
+  title?: string;
+  /** One sentence for the index page and the hub intro, e.g. "Every card belongs to one of five colours." */
+  blurb?: string;
 }
 
 export interface KitsConfig {

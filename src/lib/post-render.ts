@@ -6,12 +6,14 @@
 //   {{rarity:NAME:N}}        the N most valuable cards of one rarity
 //   {{sealed:SETID}}         the set's sealed products, cheapest in-stock offer
 //   {{card:ID}}              link to a product page with its name
+//   {{attrstats:FACET}}      per value of an attribute hub (SITE.cardHubs): cards, median, $10+, most valuable
 import { byValue, priceOf, productById, products, productsInSet, refCents, setById, summaryOf } from "./data";
 import { money, pct } from "./format";
 import { shortName } from "./names";
 import { escapeHtml } from "./html";
 import { sourceNameServer } from "./sources";
 import type { Product } from "./site-types";
+import { facetStats } from "./hubs";
 
 function table(rows: Product[], withSet: boolean): string {
   const tr = rows
@@ -33,6 +35,12 @@ export function renderPost(html: string): string {
     .replace(/\{\{toplist:(\d+):(\d+)\}\}/g, (_, s, n) => table(byValue(productsInSet(Number(s)).filter((p) => p.kind === "card")).slice(0, Number(n)), false))
     .replace(/\{\{topall:(\d+)\}\}/g, (_, n) => table(byValue(products().filter((p) => p.kind === "card")).slice(0, Number(n)), true))
     .replace(/\{\{rarity:([^:}]+):(\d+)\}\}/g, (_, r, n) => table(byValue(products().filter((p) => p.kind === "card" && p.rarity === r)).slice(0, Number(n)), true))
+    .replace(/\{\{attrstats:([a-z0-9-]+)\}\}/g, (_, f) => {
+      const rows = facetStats(f)
+        .map((r) => `<tr><td><a href="/cards/${f}/${r.hub.slug}">${escapeHtml(r.hub.label)}</a></td><td>${r.count}</td><td>${money(r.median)}</td><td>${r.over10}</td><td>${r.top ? `<a href="/card/${r.top.slug}">${escapeHtml(shortName(r.top.name))}</a> ${money(refCents(r.top.id))}` : "—"}</td></tr>`)
+        .join("");
+      return rows ? `<table><thead><tr><th></th><th>Cards</th><th>Median</th><th>$10+</th><th>Most valuable</th></tr></thead><tbody>${rows}</tbody></table>` : "";
+    })
     .replace(/\{\{sealed:(\d+)\}\}/g, (_, s) => {
       const rows = byValue(productsInSet(Number(s)).filter((p) => p.kind === "sealed"))
         .map((p) => {

@@ -19,7 +19,7 @@ import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrl } from "@/lib/affiliate";
 import { abs, SHARE_IMAGE } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { rarityHref, sealedHref } from "@/lib/hubs";
+import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
 
@@ -98,7 +98,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             {p.number && (<><dt className="text-muted">Number</dt><dd>{p.number}</dd></>)}
             {p.rarity && (<><dt className="text-muted">Rarity</dt><dd>{rarityHref(p.rarity) ? <Link className="link" href={rarityHref(p.rarity)!}>{p.rarity}</Link> : p.rarity}</dd></>)}
             {p.sealedType && (<><dt className="text-muted">Type</dt><dd>{sealedHref(p.sealedType) ? <Link className="link" href={sealedHref(p.sealedType)!}>{p.sealedType}</Link> : p.sealedType}</dd></>)}
-            {Object.entries(p.attrs).slice(0, 8).map(([k, v]) => (<Fragment key={k}><dt className="text-muted">{k.replace(/([a-z])([A-Z])/g, "$1 $2")}</dt><dd>{v}</dd></Fragment>))}
+            {Object.entries(p.attrs).slice(0, 8).map(([k, v]) => { const hubs = attrHref(k, v); return (<Fragment key={k}><dt className="text-muted">{k.replace(/([a-z])([A-Z])/g, "$1 $2")}</dt><dd>{hubs ? hubs.map((l, i) => <Fragment key={l.label}>{i > 0 ? ", " : ""}{l.href ? <Link className="link" href={l.href}>{l.label}</Link> : l.label}</Fragment>) : v}</dd></Fragment>); })}
           </dl>
         </div>
         <div className="order-1 flex min-w-0 flex-col gap-6 md:order-2">

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { byValue, movers, products, sets } from "@/lib/data";
-import { rarityHubs } from "@/lib/hubs";
+import { attrFacets, rarityHubs } from "@/lib/hubs";
 import { TileGrid } from "@/components/ProductTile";
 import { SearchBox } from "@/components/SearchBox";
 import { ChipList } from "@/components/ChipList";
@@ -61,6 +61,16 @@ export default function Cards() {
         <h2 className="mb-3 text-lg font-bold">Browse by rarity</h2>
         <ChipList items={rarityHubs().map((h) => ({ key: h.slug, href: `/cards/rarity/${h.slug}`, label: h.label }))} more="rarities" />
       </section>
+
+      {attrFacets().map((f) => (
+        <section key={f.cfg.facet}>
+          <div className="mb-3 flex items-baseline justify-between gap-3">
+            <h2 className="text-lg font-bold">Browse by {f.cfg.noun[0]}</h2>
+            <Link className="link text-sm" href={`/cards/${f.cfg.facet}`}>All {f.hubs.length} {f.cfg.noun[1]} →</Link>
+          </div>
+          <ChipList items={f.hubs.map((h) => ({ key: h.slug, href: `/cards/${f.cfg.facet}/${h.slug}`, label: h.label }))} more={f.cfg.noun[1]} />
+        </section>
+      ))}
     </div>
   );
 }

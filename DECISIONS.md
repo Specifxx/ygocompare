@@ -976,3 +976,18 @@ walkthrough/review of the site. They call us their **partner**, never
 section asks them to say it's a partnership (FTC/ASA), lightly. The
 owner's ready-to-send replies live in the project's creators playbook, not
 in the repo.
+
+## 2026-11-01 — Attribute hub pages (/cards/<facet>/<slug>)
+
+Bill asked for more SEO-indexable hubs on every site. The engine now builds a
+price list per value of a card attribute named in `SITE.cardHubs` (off by
+default): Gundam's colours, card types and traits; Lorcana's inks, franchises
+(the Disney film), classifications and card types; YGO's attributes and monster
+types. Each facet also gets an index at `/cards/<facet>` with live counts,
+median and top card. Only values with `minItems` cards (default 12) get a page,
+so the sitemap never lists a thin hub; catch-alls ("Standard Characters",
+"Lorcana") and a data typo ("Warior") are excluded. Pages are `revalidate =
+86400` with an empty `generateStaticParams` like the rarity hubs. Card pages
+link each attribute to its hub, and the `{{attrstats:FACET}}` blog token draws
+the comparison table, so posts link the hubs instead of repeating them (a post
+never lists the cards a hub lists: [[seo-split-pages]]).

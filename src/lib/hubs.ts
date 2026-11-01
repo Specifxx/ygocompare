@@ -2,7 +2,7 @@
 // sealed product type (/sealed/<type>). Only hubs with products exist, so the
 // sitemap never lists an empty page.
 import { SITE } from "@/site.config";
-import type { Product } from "@/lib/site-types";
+import type { CardHubConfig, Product } from "@/lib/site-types";
 import { byValue, products, productsInSet, refCents, setById, sets } from "@/lib/data";
 import { preorderSets, todayIso } from "@/lib/preorders";
 import { slugify } from "@/lib/slug";
@@ -62,3 +62,68 @@ export function sealedInSet(setId: number): Product[] {
 /** The releases with a pre-order page (lib/preorders.ts), soonest first. */
 export const preorderSetList = (today = todayIso()) =>
   preorderSets(sets(), (s) => { const list = sealedInSet(s.id); return { products: list.length, boxes: list.filter((p) => p.sealedType === "Booster Box").length }; }, today);
+
+// Attribute hubs (SITE.cardHubs): /cards/<facet>/<slug>, e.g. every Red card or
+// every Frozen card, most valuable first. Built once per process: YGO has
+// fifteen thousand cards and the sitemap, /cards and every hub read this.
+export interface AttrHub extends Hub { facet: string; value: string }
+export interface AttrFacet { cfg: CardHubConfig; hubs: AttrHub[] }
+
+const titleCase = (s: string) => s.toLowerCase().replace(/(^|[\s/-])(\p{L})/gu, (_, a: string, b: string) => a + b.toUpperCase());
+export function attrValues(cfg: CardHubConfig, raw: string | undefined): string[] {
+  if (!raw) return [];
+  const parts = cfg.split ? raw.split(new RegExp(cfg.split)) : [raw];
+  return parts.map((v) => v.trim().replace(/^\(+|\)+$/g, "").trim()).filter(Boolean).map((v) => (cfg.titleCase ? titleCase(v) : v));
+}
+
+let facetCache: { at: unknown; facets: AttrFacet[] } | null = null;
+export function attrFacets(): AttrFacet[] {
+  const all = products();
+  if (facetCache && facetCache.at === all) return facetCache.facets;
+  const cards = all.filter((p) => p.kind === "card");
+  const facets = (SITE.cardHubs ?? [])
+    .filter((cfg) => cfg.facet !== "rarity")
+    .map((cfg) => {
+      const groups = new Map<string, Product[]>();
+      for (const p of cards) for (const v of attrValues(cfg, p.attrs[cfg.attr])) {
+        if (cfg.exclude?.includes(v)) continue;
+        const list = groups.get(v) ?? [];
+        list.push(p);
+        groups.set(v, list);
+      }
+      const hubs = [...groups.entries()]
+        .filter(([, list]) => list.length >= (cfg.minItems ?? 12))
+        .map(([value, list]) => ({ facet: cfg.facet, value, slug: slugify(value), label: value, items: byValue(list) }))
+        .filter((h) => h.slug)
+        .sort((a, b) => b.items.length - a.items.length || a.label.localeCompare(b.label));
+      return { cfg, hubs };
+    })
+    .filter((f) => f.hubs.length > 1);
+  facetCache = { at: all, facets };
+  return facets;
+}
+
+export const attrFacet = (facet: string) => attrFacets().find((f) => f.cfg.facet === facet) ?? null;
+export const attrHub = (facet: string, slug: string) => attrFacet(facet)?.hubs.find((h) => h.slug === slug) ?? null;
+export const attrHubTitle = (cfg: CardHubConfig, value: string) => (cfg.title ?? "{v} {game} cards").replace("{v}", value).replace("{game}", SITE.gameShort);
+
+/** The hub link for one attribute of a card (its card page links it), or null. */
+export function attrHref(attr: string, raw: string): { label: string; href: string }[] | null {
+  const f = attrFacets().find((x) => x.cfg.attr === attr);
+  if (!f) return null;
+  const vals = attrValues(f.cfg, raw);
+  const links = vals.map((v) => ({ label: v, href: f.hubs.some((h) => h.value === v) ? `/cards/${f.cfg.facet}/${slugify(v)}` : "" }));
+  return links.some((l) => l.href) ? links : null;
+}
+
+/** Per value of one facet: card count, median and top card (the {{attrstats}} blog token). */
+export function facetStats(facet: string) {
+  const f = attrFacet(facet);
+  if (!f) return [];
+  return f.hubs.map((h) => {
+    const priced = h.items.map((p) => refCents(p.id)).filter((c): c is number => c != null).sort((a, b) => a - b);
+    const median = priced.length ? priced[Math.floor(priced.length / 2)] : null;
+    const over10 = priced.filter((c) => c >= 1000).length;
+    return { hub: h, cfg: f.cfg, count: h.items.length, median, over10, top: priced.length ? h.items[0] : null };
+  });
+}
