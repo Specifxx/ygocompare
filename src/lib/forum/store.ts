@@ -14,7 +14,8 @@
 //   flagged in the visitor reports (kind "other", issue "forum-held") so the
 //   daily reports triage shows it. Approving one is a moderator's edit.
 // - "Report this post" files a visitor report (issue "forum-post").
-// Commit subjects never carry [deploy] or [preview]; the branch has its own
+// The write path sets no cache option: POST /api/forum is force-dynamic, so its
+// fetches are never cached. Commit subjects never carry [deploy] or [preview]; the branch has its own
 // no-deploy vercel.json and the main vercel.json turns `forum` deploys off.
 import { applyPost, checkPost, EMPTY_FORUM, LIMITS, parseForum, rateProblem, type ForumFile, type ForumSite } from "./core";
 import { cleanReport, overLimit, reportsToken, saveReport } from "../reports-github";
@@ -55,14 +56,14 @@ const gh = (accept = "application/vnd.github+json") => ({
 
 async function readForWrite(repo: string): Promise<{ file: ForumFile; sha: string | null }> {
   const url = `https://api.github.com/repos/${repo}/contents/${FORUM_FILE}?ref=${FORUM_BRANCH}`;
-  const res = await fetch(url, { next: { revalidate: 0 }, signal: AbortSignal.timeout(10_000), headers: gh() });
+  const res = await fetch(url, { signal: AbortSignal.timeout(10_000), headers: gh() });
   if (res.status === 404) return { file: EMPTY_FORUM, sha: null };
   if (!res.ok) throw new Error(`GitHub said HTTP ${res.status} reading the forum`);
   const j = (await res.json()) as { sha: string; content?: string; encoding?: string };
   let text: string;
   if (j.encoding === "base64" && j.content) text = Buffer.from(j.content, "base64").toString("utf8");
   else {
-    const raw = await fetch(url, { next: { revalidate: 0 }, signal: AbortSignal.timeout(15_000), headers: gh("application/vnd.github.raw") });
+    const raw = await fetch(url, { signal: AbortSignal.timeout(15_000), headers: gh("application/vnd.github.raw") });
     if (!raw.ok) throw new Error(`GitHub said HTTP ${raw.status} reading the forum`);
     text = await raw.text();
   }
