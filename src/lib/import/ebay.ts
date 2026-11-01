@@ -25,6 +25,10 @@
 //      not-yet-due products in the same order.
 //   4. A share of the budget goes to the UK and Australian eBay sites, for the
 //      highest-ranked products only.
+//   5. The US comes first (owner, 2026-11-01): its calls are planned and run
+//      before any other market's, so a quota stop mid-run cuts the UK and
+//      Australia, never the US, and any slots the other markets leave unused
+//      go back to the US's next-ranked products.
 import { SITE } from "@/site.config";
 import { EBAY_CAMPAIGN_ID } from "@/lib/affiliate";
 import type { Market, Offer, Product } from "@/lib/site-types";
@@ -119,7 +123,10 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
   ranked.sort((a, b) => b.score - a.score);
 
   const calls: PlannedCall[] = [];
-  for (const [market, share] of Object.entries(MARKET_SHARE) as [Market, number][]) {
+  const usLeft: PlannedCall[] = [];
+  // The US first, whatever order MARKET_SHARE is written in.
+  const markets = (Object.entries(MARKET_SHARE) as [Market, number][]).sort((a, b) => Number(b[0] === "US") - Number(a[0] === "US"));
+  for (const [market, share] of markets) {
     const slots = Math.floor(input.budget * share);
     // Secondary markets only look at the top of the ranking.
     const pool = market === "US" ? ranked : ranked.slice(0, Math.max(slots * 2, 50));
@@ -130,12 +137,21 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
       return { ...r, due: ageH >= r.interval, priority: r.score * (Number.isFinite(overdue) ? overdue : 3) };
     });
     withAge.sort((a, b) => Number(b.due) - Number(a.due) || b.priority - a.priority);
-    for (const r of withAge.slice(0, slots)) {
+    withAge.forEach((r, i) => {
       // A not-due product checked in the last 12 hours is never worth a call.
       const last = input.state[r.product.id]?.[market]?.at;
-      if (!r.due && last && input.now.getTime() - new Date(last).getTime() < 12 * 3_600_000) continue;
-      calls.push({ product: r.product, market, score: r.priority, due: r.due });
-    }
+      if (!r.due && last && input.now.getTime() - new Date(last).getTime() < 12 * 3_600_000) return;
+      const call = { product: r.product, market, score: r.priority, due: r.due };
+      if (i < slots) calls.push(call);
+      else if (market === "US") usLeft.push(call);
+    });
+  }
+  // Slots the other markets could not use go to the US's next-ranked products,
+  // planned right after the US's own share so they run before the UK and AU.
+  const spare = Math.max(0, input.budget - calls.length);
+  if (spare && usLeft.length) {
+    const usCount = calls.filter((c) => c.market === "US").length;
+    calls.splice(usCount, 0, ...usLeft.slice(0, spare));
   }
   return { calls, eligible: ranked.length };
 }

@@ -1006,3 +1006,11 @@ their place and their "Ad"/paid-link label, but lose their brand tints and brand
 and the same button as a store. They are still never counted as a store and never re-ranked by commission. This
 reverses the 2026-10-30 "bright, catchy colour" pinned rows; eBay ad strips and panels outside the price rows keep
 their own look.
+
+## 2026-11-01 — The US comes first in the eBay plan
+
+Owner, 2026-11-01: "the eBay API for all websites should also prioritise the US." The plan already gave the US 75%
+of the day's calls; two gaps remained. Slots the UK and Australia could not use (everything there checked in the last
+12 hours) were simply not spent, and nothing pinned the US to run first. `planEbayRefresh` (engine, all three sites)
+now plans every US call before any other market's, so a quota stop mid-run cuts the UK and AU, never the US, and hands
+the other markets' unused slots to the US's next-ranked products. Shares, floors and intervals are unchanged.
