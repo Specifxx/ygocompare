@@ -13,6 +13,7 @@ export const NAV = [
   { href: "/tools", label: "Tools" },
   { href: "/preorders", label: "Pre-orders" },
   { href: "/blog", label: "Guides" },
+  { href: "/forum", label: "Forum" },
 ];
 
 export function Header() {

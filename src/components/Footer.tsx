@@ -32,6 +32,7 @@ export function Footer() {
             <li><Link href="/methodology">How prices work</Link></li>
             <li><Link href="/stores">Stores we track</Link></li>
             <li><Link href="/blog">Guides</Link></li>
+            <li><Link href="/forum">Community forum</Link> <span className="text-xs">· beta</span></li>
             {creatorsOn() && <li><Link href="/creators">Creators</Link></li>}
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/stores#suggest">Suggest a store</Link></li>

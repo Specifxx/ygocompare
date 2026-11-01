@@ -386,3 +386,16 @@ body { background: var(--page-bg); min-height: 100vh; }
   .hero-band .xmas-corner-r .xmas-tree-sm { display: block; width: 24px; }
 }
 /* xmas-site:end */
+
+/* The beta forum (src/components/forum/forum.css) in this site's colours. */
+.fm {
+  --fm-card: rgb(var(--c-ink-900));
+  --fm-sunk: rgb(var(--c-ink-950));
+  --fm-line: rgb(var(--c-ink-700) / 0.6);
+  --fm-ink: rgb(var(--c-fg));
+  --fm-muted: rgb(var(--c-muted));
+  --fm-accent: rgb(var(--c-brand));
+  --fm-on-accent: rgb(var(--c-ink-950));
+  --fm-accent-soft: rgb(var(--c-brand) / 0.14);
+  --fm-radius: 12px;
+}
