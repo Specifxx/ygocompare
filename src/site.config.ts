@@ -158,6 +158,10 @@ export const SITE: SiteConfig = {
     headline: "Shadow Game: the Graveyard is open until 31 October",
     blurb: "Spooky season in the Shadow Realm: find the cheapest Zombie, Fiend and Ghost Rare cards before the clock strikes midnight.",
   },
+  christmas: {
+    headline: "Holiday Duel",
+    blurb: "tins, booster boxes and structure decks to gift, cheapest store first",
+  },
 
   stores: STORES,
   // The whole Compare Empire family, card games first (2026-10-27, DECISIONS.md

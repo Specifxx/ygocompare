@@ -3,10 +3,10 @@ import assert from "node:assert/strict";
 import vm from "node:vm";
 import { SEASON_BOOT_SCRIPT, seasonAt } from "@/lib/season";
 
-test("Halloween runs through 31 October and is gone on 1 November", () => {
+test("Halloween runs through 31 October and Christmas takes over on 1 November", () => {
   assert.equal(seasonAt(new Date(2026, 9, 24)), "halloween");
   assert.equal(seasonAt(new Date(2026, 9, 31, 23, 59)), "halloween");
-  assert.equal(seasonAt(new Date(2026, 10, 1, 0, 0)), null);
+  assert.equal(seasonAt(new Date(2026, 10, 1, 0, 0)), "christmas");
   assert.equal(seasonAt(new Date(2026, 9, 15)), null);
 });
 

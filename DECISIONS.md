@@ -920,3 +920,17 @@ postcode as `contextualLocation`, so eBay quotes real postage. `pickBest` keeps 
 in the market's currency, and still picks the cheapest delivered. A stored eBay row without a stated postage (the older
 any-seller search) is no longer shown (`decodeOffer`); the rest are searched again on their usual rotation. Same change
 in Lorcana Compare and YGO Compare (engine).
+
+## Christmas theme (engine): 1 November to Boxing Day (2026-11-01)
+
+Owner, 2026-11-01: every Compare site gets a Christmas theme after the Halloween one, each its own take. Engine change, same in Lorcana Compare and YGO Compare: snow over the home hero, the corner art on the right (the hero text is left-aligned), a Santa hat on the header icon, and a gift pill whose words come from `SITE.christmas` (Gundam "Operation Christmas", Lorcana "A Christmas wish upon a star", YGO "Holiday Duel").
+
+The season window is fixed in `src/lib/season.ts`: 1 November to 26 December, every year, by the visitor's own
+date, stamped on `<html data-season>` by an inline boot script before first paint. `?season=christmas` previews it out
+of season and `?season=off` hides it in season. Every decoration is CSS-gated on that attribute, `aria-hidden`,
+`pointer-events: none`, painted under the content (never over a price or a button), animated with `transform`
+only, and stopped under `prefers-reduced-motion`. The page's content and links stay in the server HTML; the season
+adds no request, no script beyond the boot line and no database or data read. The shared rules sit between
+`xmas-common:start` and `xmas-common:end` in `globals.css` (identical on every sister site); this site's colours sit in
+the `xmas-site` block after it. Art is eight small SVGs in `public/xmas/`. To end it early, move the `to` date; after
+Boxing Day it switches itself off.

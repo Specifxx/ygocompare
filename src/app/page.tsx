@@ -6,6 +6,8 @@ import { CardAdPair } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { AdSlot } from "@/components/AdSlot";
 import { HalloweenBanner } from "@/components/HalloweenDecor";
+import { ChristmasDecor } from "@/components/ChristmasDecor";
+import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { TileGrid } from "@/components/ProductTile";
 import { byValue, deals, latestReleasedSet, meta, movers, products, productsInSet, sets } from "@/lib/data";
 import { ago, money, pct } from "@/lib/format";
@@ -58,7 +60,10 @@ export default function Home() {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` }, potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/cards?q={q}`, "query-input": "required name=q" } }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
-      <section className="hero-band -mx-4 rounded-none px-4 py-10 md:rounded-2xl md:py-14">
+      <section className="hero-band relative -mx-4 overflow-hidden rounded-none px-4 py-10 md:rounded-2xl md:py-14">
+        {/* Christmas (1 November to Boxing Day): snow, lights, trees. */}
+        <ChristmasDecor />
+        <ChristmasGifts />
         <h1 className="font-display text-3xl font-black md:text-5xl">
           <span className="wordmark">{SITE.gameShort}</span> card prices, every store, one search
         </h1>
