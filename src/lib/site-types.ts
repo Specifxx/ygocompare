@@ -126,6 +126,8 @@ export interface SiteConfig {
     displayFont: string;
   };
   halloween: { headline: string; blurb: string };
+  /** The Christmas line at the top of the home hero (1 November to Boxing Day): a short headline and the rest of the sentence, to /sealed. */
+  christmas: { headline: string; blurb: string };
   stores: StoreConfig[];
   sisterSites: SisterSite[];
   social: { reddit?: string; discord?: string };

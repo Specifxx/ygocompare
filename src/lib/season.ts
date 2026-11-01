@@ -7,11 +7,17 @@
 //
 // Preview: ?season=halloween forces it on, ?season=off forces it off.
 
-export type Season = "halloween";
+// Christmas (owner, 2026-11-01: "now that it's November, we want to make all of
+// the sites Christmas themed"): 1 November to Boxing Day. To switch it off
+// early, set its `to` to yesterday's date (or delete the entry): no other file
+// decides it. `?season=christmas` previews it, `?season=off` hides any season.
+export type Season = "halloween" | "christmas";
 
 export const SEASONS: Record<Season, { from: [number, number]; to: [number, number] }> = {
   // Through Halloween night; gone on 1 November.
   halloween: { from: [10, 16], to: [10, 31] },
+  // From 1 November through Boxing Day; gone on 27 December.
+  christmas: { from: [11, 1], to: [12, 26] },
 };
 
 const md = (d: Date) => (d.getMonth() + 1) * 100 + d.getDate();
@@ -28,5 +34,9 @@ export function seasonMarkupLive(season: Season, now: Date = new Date()): boolea
   return [now, new Date(now.getTime() - day), new Date(now.getTime() + day)].some((d) => seasonAt(d) === season);
 }
 
-const H = SEASONS.halloween;
-export const SEASON_BOOT_SCRIPT = `(function(){try{var q=(location.search.match(/[?&]season=([a-z]+)/)||[])[1];var s=null;if(q){s=q==="halloween"?"halloween":null}else{var d=new Date(),v=(d.getMonth()+1)*100+d.getDate();if(v>=${H.from[0] * 100 + H.from[1]}&&v<=${H.to[0] * 100 + H.to[1]})s="halloween"}if(s){document.documentElement.setAttribute("data-season",s)}}catch(e){}})();`;
+const WINDOWS = (Object.entries(SEASONS) as [Season, (typeof SEASONS)[Season]][]).map(([n, w]) => [
+  n,
+  w.from[0] * 100 + w.from[1],
+  w.to[0] * 100 + w.to[1],
+]);
+export const SEASON_BOOT_SCRIPT = `(function(){try{var W=${JSON.stringify(WINDOWS)},i,q=(location.search.match(/[?&]season=([a-z]+)/)||[])[1];var s=null;if(q){for(i=0;i<W.length;i++)if(W[i][0]===q)s=q}else{var d=new Date(),v=(d.getMonth()+1)*100+d.getDate();for(i=0;i<W.length;i++)if(v>=W[i][1]&&v<=W[i][2])s=W[i][0]}if(s)document.documentElement.setAttribute("data-season",s)}catch(e){}})();`;
