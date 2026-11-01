@@ -415,9 +415,12 @@ export function isPreorder(title: string, tags: string[] = []): boolean {
 // a sealed product only inside the brackets, so the brackets don't count.
 const SEALED_WORD = /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b|\bkit\b/i;
 
-export function looksSealed(title: string, productType = ""): boolean {
+export function looksSealed(title: string, productType = "", style?: NumberStyle): boolean {
   const single = title.match(/^([^[\]]+)\[[^\]]+\]\s*$/);
   if (single && !SEALED_WORD.test(single[1])) return false;
+  // A "plain" card number is a single, whatever set it came in:
+  // "MT0D12 Flathead [B015 - Uncommon] - The Heist - Beta Starter Deck".
+  if (style === "plain" && numbersInTitle(title, "plain").length) return false;
   return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b/i.test(
     `${title} ${productType}`,
   ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length;

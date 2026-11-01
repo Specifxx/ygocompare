@@ -106,7 +106,7 @@ async function main() {
         const best = new Map<string, Offer>();
         for (const it of items) {
           if (isUnfitListing(it.title)) continue;
-          const sealed = looksSealed(it.title, it.productType);
+          const sealed = looksSealed(it.title, it.productType, SITE.numberStyle);
           const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;
           matched++;

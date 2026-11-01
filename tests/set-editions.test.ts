@@ -81,4 +81,7 @@ test("a single titled \"Card [Set]\" is never sealed, even when the set is a sta
   assert.equal(looksSealed("MT0D12 Flathead [The Heist - Beta Starter Deck]"), false);
   assert.equal(looksSealed("Starter Deck: The Heist - Beta [The Heist - Beta Starter Deck]"), true);
   assert.equal(looksSealed("Cyberpunk TCG: Starter Deck - Embracing Power [Beta]"), true);
+  // Real punkouter.com title, 2026-11-01: the card number makes it a single.
+  assert.equal(looksSealed("MT0D12 Flathead [B015 - Uncommon] - The Heist - Beta Starter Deck", "", "plain"), false);
+  assert.equal(looksSealed("Cyberpunk TCG: Booster Display – Welcome to Night City (24 packs)", "", "plain"), true);
 });
