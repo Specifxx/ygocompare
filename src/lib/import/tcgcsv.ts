@@ -135,7 +135,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
         kind: isCard ? "card" : "sealed",
         setId: g.groupId,
         number: ext.Number ?? null,
-        rarity: ext.Rarity && ext.Rarity !== "None" ? ext.Rarity : null,
+        rarity: ext.Rarity && ext.Rarity !== "None" ? (SITE.rarityNames?.[ext.Rarity] ?? ext.Rarity) : null,
         attrs,
         sealedType: isCard ? null : sealedTypeOf(p.name),
         image: p.imageCount === 0 ? null : p.imageUrl || null,

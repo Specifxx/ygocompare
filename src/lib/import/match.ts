@@ -12,7 +12,7 @@ import { sealedTypeOf } from "./tcgcsv";
 const STOP = new Set([
   "the", "a", "of", "and", "disney", "lorcana", "tcg", "card", "game", "gundam", "single", "singles",
   "english", "en", "nm", "near", "mint", "foil", "holo", "holofoil", "cold", "normal", "non",
-  "booster", "set", "chapter", "yu", "gi", "oh", "yugioh", "konami",
+  "booster", "set", "chapter", "yu", "gi", "oh", "yugioh", "konami", "cyberpunk",
 ]);
 
 // Words that mark a variant printing on the product name itself. A title that
@@ -36,9 +36,26 @@ export interface MatchIndex {
   style: NumberStyle;
   /** Every rarity in the catalogue plus aliases, longest first (rarityMustAgree only). */
   rarities: { name: string; re: RegExp }[] | null;
+  /** SITE.setEditions, or null when the game has none. */
+  editions: SetEdition[] | null;
+  /** set id → the edition word its name carries ("beta"), or null. */
+  setEdition: Map<number, string | null>;
 }
 
-export type NumberStyle = "fraction" | "code" | "ygo";
+/** A game that prints one set in several editions with the same card and
+ *  product names (Cyberpunk TCG's "Welcome to Night City - Beta" and
+ *  "- Retail"). The edition word is taken out of the set's and the sealed
+ *  product's names for matching, and a title must be read as the product's
+ *  own edition: it names the word, or matches `implied` ("36 packs" is the
+ *  Beta box), or names none and the product's edition is the `default` one.
+ *  A title that points at two editions matches neither. */
+export interface SetEdition {
+  word: string;
+  implied?: RegExp;
+  default?: boolean;
+}
+
+export type NumberStyle = "fraction" | "code" | "ygo" | "plain";
 
 // Yu-Gi-Oh! numbers: set code, an optional language, the number —
 // "LOB-EN005", "RA01-EN008", "YGLD-ENA01", old "LOB-005" and European
@@ -48,7 +65,16 @@ export type NumberStyle = "fraction" | "code" | "ygo";
 const YGO_NUM = /(?<![A-Z0-9])((?=[A-Z0-9]*[A-Z])[A-Z0-9]{2,5})-(EN|E)?([A-Z]?)(\d{2,3})(?![A-Z0-9])/g;
 const ygoKey = (m: RegExpMatchArray) => `${m[1]}-${m[2] ?? ""}${m[3]}${m[4].padStart(3, "0")}`;
 
+// Plain numbers (Cyberpunk TCG): "001" in the Retail print, "B001" in the
+// Beta one, with no set code or total. The letter stays in the key; three
+// digits only, so "24 packs", "ST01" and years never read as a number.
+const PLAIN_NUM = /(?<![A-Z0-9/])([A-Z]?)(\d{3})(?![A-Z0-9/])/g;
+
 export function numberKey(n: string, style: NumberStyle): string | null {
+  if (style === "plain") {
+    const m = n.trim().toUpperCase().match(/^([A-Z]?)(\d{1,3})$/);
+    return m ? `${m[1]}${m[2].padStart(3, "0")}` : null;
+  }
   if (style === "ygo") {
     const m = [...n.toUpperCase().matchAll(YGO_NUM)][0];
     return m ? ygoKey(m) : null;
@@ -65,7 +91,9 @@ export function numberKey(n: string, style: NumberStyle): string | null {
 /** Every number-looking token in a store title. */
 export function numbersInTitle(title: string, style: NumberStyle): string[] {
   const out = new Set<string>();
-  if (style === "ygo") {
+  if (style === "plain") {
+    for (const m of title.toUpperCase().matchAll(PLAIN_NUM)) out.add(`${m[1]}${m[2]}`);
+  } else if (style === "ygo") {
     for (const m of title.toUpperCase().matchAll(YGO_NUM)) out.add(ygoKey(m));
   } else if (style === "code") {
     for (const m of title.toUpperCase().matchAll(/\b([A-Z]{1,4}\d{0,2}[A-Z]?)-(\d{2,3}[A-Z]?)\b/g))
@@ -117,7 +145,7 @@ export function markersAgree(productName: string, rarity: string | null, title: 
     return false;
   }
   for (const m of pm) if (!tm.has(m)) return false;
-  for (const m of tm) if (!pm.has(m) && m !== rarityWord) return false;
+  for (const m of tm) if (!pm.has(m) && m !== rarityWord && !rarityWord.split(" ").includes(m)) return false;
   return true;
 }
 
@@ -155,6 +183,26 @@ export function rarityAgrees(p: Product, title: string, rarities: { name: string
 export interface IndexOptions {
   rarityMustAgree?: boolean;
   rarityAliases?: Record<string, string[]>;
+  setEditions?: SetEdition[];
+}
+
+/** The edition a title points at: a word, null (none, and no default), or
+ *  false when it points at more than one. */
+export function titleEdition(title: string, editions: SetEdition[]): string | null | false {
+  const have = new Set(tokens(title));
+  const named = editions.filter((e) => have.has(e.word) || e.implied?.test(title)).map((e) => e.word);
+  if (named.length > 1) return false;
+  if (named.length === 1) return named[0];
+  return editions.find((e) => e.default)?.word ?? null;
+}
+
+/** Is this product in the edition the title points at? Products of a set
+ *  with no edition word always are. */
+export function editionAgrees(p: Product, title: string, idx: MatchIndex): boolean {
+  if (!idx.editions) return true;
+  const own = idx.setEdition.get(p.setId) ?? null;
+  if (own == null) return true;
+  return titleEdition(title, idx.editions) === own;
 }
 
 export function buildIndex(products: Product[], sets: SetInfo[], style: NumberStyle, opts: IndexOptions = {}): MatchIndex {
@@ -181,7 +229,12 @@ export function buildIndex(products: Product[], sets: SetInfo[], style: NumberSt
       bySetNumber.get(sk)!.push(p);
     }
   }
-  const setName = new Map(sets.map((s) => [s.id, tokens(s.name).filter((t) => !STOP.has(t))]));
+  const editions = opts.setEditions?.length ? opts.setEditions : null;
+  const editionWords = new Set((editions ?? []).map((e) => e.word));
+  const setEdition = new Map<number, string | null>(
+    sets.map((s) => [s.id, tokens(s.name).find((t) => editionWords.has(t)) ?? null]),
+  );
+  const setName = new Map(sets.map((s) => [s.id, tokens(s.name).filter((t) => !STOP.has(t) && !editionWords.has(t))]));
   const setByCode = new Map<string, number[]>();
   const addCode = (c: string, id: number) => {
     const k = c.toUpperCase();
@@ -197,7 +250,7 @@ export function buildIndex(products: Product[], sets: SetInfo[], style: NumberSt
   const rarities = opts.rarityMustAgree
     ? rarityPatterns(products.map((p) => p.rarity).filter((r): r is string => !!r), opts.rarityAliases)
     : null;
-  return { byNumber, bySetNumber, bySetName, setByCode, sealed, setName, style, rarities };
+  return { byNumber, bySetNumber, bySetName, setByCode, sealed, setName, style, rarities, editions, setEdition };
 }
 
 function overlap(need: string[], have: Set<string>): number {
@@ -274,7 +327,8 @@ export function matchCard(title: string, idx: MatchIndex, context = ""): MatchRe
     const hits: Product[] = [];
     for (const [setId, setTokens] of idx.setName)
       if (setTokens.length && setTokens.every((t) => ctx.has(t))) hits.push(...(idx.bySetName.get(`${setId}|${want}`) ?? []));
-    return hits.length === 1 ? { product: hits[0], score: 1 } : null;
+    const fit = hits.filter((p) => editionAgrees(p, title, idx));
+    return fit.length === 1 ? { product: fit[0], score: 1 } : null;
   }
   {
     for (const p of candidates) {
@@ -282,6 +336,7 @@ export function matchCard(title: string, idx: MatchIndex, context = ""): MatchRe
       if (nameScore < 0.6) continue;
       if (!markersAgree(p.name, p.rarity, title)) continue;
       if (!rarityAgrees(p, title, idx.rarities)) continue;
+      if (!editionAgrees(p, title, idx)) continue;
       const setScore = overlap(idx.setName.get(p.setId) ?? [], have);
       scored.push({ product: p, score: nameScore + 0.5 * setScore });
     }
@@ -299,18 +354,20 @@ export function matchSealed(title: string, idx: MatchIndex): MatchResult | null 
   const scored: MatchResult[] = [];
   for (const p of idx.sealed) {
     if (sealedTypeOf(p.name) !== type) continue;
+    if (!editionAgrees(p, title, idx)) continue;
     if (isMulti(p.name) !== isMulti(title)) continue;
     // "Pack Bundle Magnificent Maestros" is several packs, not one.
     if (/\bbundle\b/i.test(title) && !/\bbundle\b/i.test(p.name)) continue;
     const setTokens = idx.setName.get(p.setId) ?? [];
     if (setTokens.length && overlap(setTokens, have) < 1) continue;
-    const need = tokens(p.name).filter((t) => !STOP.has(t));
+    const own = idx.editions ? idx.setEdition.get(p.setId) : null;
+    const need = tokens(p.name).filter((t) => !STOP.has(t) && t !== own);
     const s = overlap(need, have);
     // Near-complete: "Collector Booster Display" must not take a plain
     // "Booster Display" (one missing word of four is 0.75).
     if (s < (need.length >= 6 ? 0.8 : 0.99)) continue;
     // Penalise title words the product name lacks (e.g. "case", "bundle of 4").
-    const extra = [...have].filter((t) => !need.includes(t) && !/^\d+$/.test(t) && !STOP.has(t)).length;
+    const extra = [...have].filter((t) => !need.includes(t) && !/^\d+$/.test(t) && !STOP.has(t) && t !== own).length;
     scored.push({ product: p, score: s - 0.05 * extra });
   }
   if (!scored.length) return null;
@@ -353,7 +410,17 @@ export function isPreorder(title: string, tags: string[] = []): boolean {
   return /pre[-\s]?order|presale|pre[-\s]?sale/i.test(`${title} ${tags.join(" ")}`);
 }
 
-export function looksSealed(title: string, productType = ""): boolean {
+// "Card Name [Set Name]" is how TCGplayer-synced stores title a single; a
+// starter-deck card ("MT0D12 Flathead [The Heist - Beta Starter Deck]") names
+// a sealed product only inside the brackets, so the brackets don't count.
+const SEALED_WORD = /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b|\bkit\b/i;
+
+export function looksSealed(title: string, productType = "", style?: NumberStyle): boolean {
+  const single = title.match(/^([^[\]]+)\[[^\]]+\]\s*$/);
+  if (single && !SEALED_WORD.test(single[1])) return false;
+  // A "plain" card number is a single, whatever set it came in:
+  // "MT0D12 Flathead [B015 - Uncommon] - The Heist - Beta Starter Deck".
+  if (style === "plain" && numbersInTitle(title, "plain").length) return false;
   return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b/i.test(
     `${title} ${productType}`,
   ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length;
