@@ -50,6 +50,20 @@ test("expensive and in-demand first; fresh results are not re-checked", () => {
   assert.ok(!us.includes(2));
 });
 
+test("the US first: planned before the UK and AU, and it takes the slots they leave", () => {
+  const products = Array.from({ length: 400 }, (_, i) => p(i + 1));
+  const ref = new Map(products.map((x) => [x.id, 2000 + x.id * 10]));
+  // The UK and AU checked everything an hour ago: their slots are free.
+  const fresh = { at: new Date(now.getTime() - 3_600_000).toISOString(), offer: null };
+  const state = Object.fromEntries(products.map((x) => [x.id, { UK: fresh, AU: fresh }]));
+  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state, budget: 200, now });
+  assert.equal(calls.length, 200, "the spare slots are spent");
+  assert.ok(calls.every((c) => c.market === "US"));
+  const mixed = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 200, now }).calls;
+  const firstOther = mixed.findIndex((c) => c.market !== "US");
+  assert.ok(firstOther > 0 && mixed.slice(firstOther).every((c) => c.market !== "US"), "every US call runs before any other market's");
+});
+
 test("refresh intervals", () => {
   assert.equal(intervalHours(150, 0, false), 24);
   assert.equal(intervalHours(60, 0, false), 48);
