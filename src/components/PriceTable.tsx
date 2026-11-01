@@ -12,7 +12,6 @@ import { money } from "@/lib/format";
 import { goHref } from "@/lib/affiliate";
 import { priceRows } from "@/lib/price-rows";
 import { useMarket } from "./ClientPrefs";
-import { EbayWord } from "./EbayCallout";
 import { ReportPrice } from "./ReportForms";
 
 const NAMES: Record<string, string> = {
@@ -39,6 +38,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   // Amazon (a tagged search, amazon.com only, so US) comes second, right under
   // the first eBay row (eBay first, Amazon second: owner, 2026-10-30), or first
   // when there is no eBay row: no price, never ranked, never the cheapest.
+  // Both are drawn exactly like a store row, tagged "Ad" (owner, 2026-11-01:
+  // "blend in and look exactly the same as the other price rows").
   const { inStock, refs, outOfStock, cheapest, display, pinned } = priceRows(offers, market);
   const rows = display;
   const cur = CURRENCY[market];
@@ -75,7 +76,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const shown = compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o));
   const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
   const amazonRow = amazon && market === "US" ? (
-    <tr data-amazon-row className="border-t border-ink-800 bg-[#ff9900]/[0.08]">
+    <tr data-amazon-row className="border-t border-ink-800">
       <td className="px-3 py-2.5">
         <span className="font-medium text-fg">Amazon</span>
         <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>
@@ -83,8 +84,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
       <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">Price shows on Amazon</td>
       <td className="px-3 py-2.5 text-right text-xs text-muted">See price</td>
       <td className="px-3 py-2.5 text-right">
-        <a href={goHref({ url: amazon, source: "amazon", market: "US" }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn min-h-10 whitespace-nowrap bg-[#ff9900] px-3 py-1.5 text-black hover:bg-[#e68a00]">
-          Check Amazon <span aria-hidden="true">↗</span>
+        <a href={goHref({ url: amazon, source: "amazon", market: "US" }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
+          View deal <span aria-hidden="true">↗</span>
         </a>
       </td>
     </tr>
@@ -109,13 +110,10 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
             const best = o === cheapest;
             return (
               <Fragment key={i}>
-                <tr className={`border-t border-ink-800 ${best ? "bg-buy/10" : o.source === "ebay" ? "bg-[#0064d2]/[0.07]" : ""} ${o.inStock ? "" : "opacity-60"}`}>
+                <tr className={`border-t border-ink-800 ${best ? "bg-buy/10" : ""} ${o.inStock ? "" : "opacity-60"}`}>
                   <td className="px-3 py-2.5">
-                    {o.source === "ebay" ? (
-                      <span className="font-medium"><EbayWord className="text-[15px]" />{o.market !== "US" && <span className="ml-1 text-xs text-muted">{o.market}</span>}</span>
-                    ) : (
-                      <span className="font-medium text-fg">{sourceName(o)}</span>
-                    )}
+                    <span className="font-medium text-fg">{sourceName(o)}</span>
+                    {o.source === "ebay" && <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>}
                     {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span>}
                   </td>
                   <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
@@ -133,8 +131,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                     )}
                   </td>
                   <td className="px-3 py-2.5 text-right">
-                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${o.source === "ebay" ? "btn bg-[#0064d2] px-3 py-1.5 text-white hover:bg-[#0053ad]" : best ? "btn-buy" : o.inStock ? "btn-ghost px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
-                      {o.source === "ebay" ? "Buy on eBay" : best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
+                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${best ? "btn-buy" : o.inStock ? "btn-ghost px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
+                      {best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
                     </a>
                   </td>
                 </tr>
