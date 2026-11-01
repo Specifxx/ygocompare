@@ -410,7 +410,14 @@ export function isPreorder(title: string, tags: string[] = []): boolean {
   return /pre[-\s]?order|presale|pre[-\s]?sale/i.test(`${title} ${tags.join(" ")}`);
 }
 
+// "Card Name [Set Name]" is how TCGplayer-synced stores title a single; a
+// starter-deck card ("MT0D12 Flathead [The Heist - Beta Starter Deck]") names
+// a sealed product only inside the brackets, so the brackets don't count.
+const SEALED_WORD = /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b|\bkit\b/i;
+
 export function looksSealed(title: string, productType = ""): boolean {
+  const single = title.match(/^([^[\]]+)\[[^\]]+\]\s*$/);
+  if (single && !SEALED_WORD.test(single[1])) return false;
   return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b/i.test(
     `${title} ${productType}`,
   ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length;

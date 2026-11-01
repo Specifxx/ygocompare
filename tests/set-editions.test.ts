@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Product, SetInfo } from "@/lib/site-types";
-import { buildIndex, matchCard, matchSealed, numbersInTitle, titleEdition, type SetEdition } from "@/lib/import/match";
+import { buildIndex, looksSealed, matchCard, matchSealed, numbersInTitle, titleEdition, type SetEdition } from "@/lib/import/match";
 
 // SITE.setEditions (2026-11-01, Cyberpunk TCG): one set printed as "Beta"
 // (Kickstarter, 36-pack boxes, ~US$315) and "Retail" (24 packs, ~US$155) under
@@ -75,4 +75,10 @@ test("plain numbers with editions: real store singles", () => {
   assert.equal(matchCard("Goro Takemura Vengeful Bodyguard 006 (Pre-Release Beta)  - Foil", i)?.product.id, 35);
   // Pack counts and years are not card numbers.
   assert.deepEqual(numbersInTitle("Booster Box (24 Packs) November 6, 2026 ST01", "plain"), []);
+});
+
+test("a single titled \"Card [Set]\" is never sealed, even when the set is a starter deck", () => {
+  assert.equal(looksSealed("MT0D12 Flathead [The Heist - Beta Starter Deck]"), false);
+  assert.equal(looksSealed("Starter Deck: The Heist - Beta [The Heist - Beta Starter Deck]"), true);
+  assert.equal(looksSealed("Cyberpunk TCG: Starter Deck - Embracing Power [Beta]"), true);
 });
