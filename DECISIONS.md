@@ -1079,5 +1079,5 @@ that prices it in the visitor's market through `/api/basket`.
 Every shared link carries `utm_source=share&utm_medium=<card|sealed|list>`.
 The button sends a Vercel `share` event and `ShareArrival` one `share_visit`
 event per tab when a shared link brings someone; RiftCompare's growth report
-counts both per site. robots.txt allows `/*?utm_source=share` (it blocks other
+counts both per site. robots.txt allows `/*utm_source=share` (it blocks other
 query strings) because X's and Reddit's preview fetchers obey robots.txt.

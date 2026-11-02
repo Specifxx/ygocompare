@@ -34,7 +34,7 @@ test("a shared list round-trips ids and quantities and refuses junk", () => {
 test("the shared list page stays out of the index and share links stay fetchable", () => {
   assert.match(fs.readFileSync("src/app/list/page.tsx", "utf8"), /robots: \{ index: false/);
   const all = [robots().rules].flat().find((r) => r.userAgent === "*")!;
-  assert.ok([all.allow].flat().includes("/*?utm_source=share"));
+  assert.ok([all.allow].flat().includes("/*utm_source=share"));
 });
 
 test("the share button and the arrival counter are on the card page, the quick view and every page", () => {
