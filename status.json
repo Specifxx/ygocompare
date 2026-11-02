@@ -1,0 +1,33 @@
+{
+ "v": 1,
+ "site": "ygocompare.com",
+ "at": "2026-11-02T03:16:17.635Z",
+ "overall": "warn",
+ "checks": [
+  {
+   "name": "Live site",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "A card page",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "Daily price import",
+   "status": "ok",
+   "detail": "9.3h old"
+  },
+  {
+   "name": "Store imports",
+   "status": "warn",
+   "detail": "millenniumcomics: https://millenniumcomics.com.au/collections/yugioh-singles-instock/products.json?limit=250&page=1&country=AU: HTTP 429; eacollectibles: 0 matched; bluemistcollectibles: 0 matched; jerseyscc: https://jerseyscc.com/collections/yu-gi-oh/products.json?limit=250&page=1&country=US: HTTP 401 "
+  },
+  {
+   "name": "eBay budget",
+   "status": "ok",
+   "detail": "2200/2200 calls on 2026-11-01, 3392 eligible"
+  }
+ ]
+}
