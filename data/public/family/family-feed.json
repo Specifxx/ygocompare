@@ -1,0 +1,120 @@
+{
+ "v": 1,
+ "site": "ygo",
+ "generatedAt": "2026-11-02T02:49:42.544Z",
+ "links": {
+  "US": {
+   "deals": "https://ygocompare.com/black-friday",
+   "preorders": "https://ygocompare.com/preorders"
+  }
+ },
+ "items": [
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Rarity Collection 5 Booster Box",
+   "url": "https://ygocompare.com/card/rarity-collection-5-booster-box",
+   "cents": 5999,
+   "currency": "USD",
+   "store": "Collectors Emporium NY",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
+   "refCents": 12742,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 53
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Fire Kings Structure Deck Display [1st Edition]",
+   "url": "https://ygocompare.com/card/fire-kings-structure-deck-display-1st-edition",
+   "cents": 7500,
+   "currency": "USD",
+   "store": "On-Board Gaming",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/516552_200w.jpg",
+   "refCents": 13995,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 46
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Quarter Century Stampede Booster Box",
+   "url": "https://ygocompare.com/card/quarter-century-stampede-booster-box",
+   "cents": 10999,
+   "currency": "USD",
+   "store": "Paragon City Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
+   "refCents": 16269,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 32
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Hidden Arsenal 6: Omega Xyz - Booster Box [1st Edition]",
+   "url": "https://ygocompare.com/card/hidden-arsenal-6-omega-xyz-booster-box-1st-edition",
+   "cents": 8000,
+   "currency": "USD",
+   "store": "Burbank Cards",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/60112_200w.jpg",
+   "refCents": 11300,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 29
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Fusion Enforcers Booster Box [1st Edition]",
+   "url": "https://ygocompare.com/card/fusion-enforcers-booster-box-1st-edition",
+   "cents": 25000,
+   "currency": "USD",
+   "store": "Burbank Cards",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/127521_200w.jpg",
+   "refCents": 27998,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 11
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "2003 Collectors Tin: Seto Kaiba & Blue-Eyes White Dragon",
+   "url": "https://ygocompare.com/card/2003-collectors-tin-seto-kaiba-and-blue-eyes-white-dragon",
+   "cents": 72000,
+   "currency": "USD",
+   "store": "Papa Joey's Collectibles",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/206884_200w.jpg",
+   "refCents": 80000,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 10
+  },
+  {
+   "kind": "preorder",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Magnificent Maestros Booster Box",
+   "url": "https://ygocompare.com/preorders/magnificent-maestros",
+   "cents": 27999,
+   "currency": "USD",
+   "store": "Gamers Guild AZ",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
+   "releaseDate": "2026-11-13"
+  },
+  {
+   "kind": "preorder",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Glorious Victors Booster Box",
+   "url": "https://ygocompare.com/preorders/glorious-victors",
+   "cents": 7000,
+   "currency": "USD",
+   "store": "Skybox Collectibles",
+   "releaseDate": "2026-12-04"
+  }
+ ]
+}

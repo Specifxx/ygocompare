@@ -1,6 +1,7 @@
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { creatorsOn } from "@/lib/creators";
+import { NETWORK_PAGE, footerSisters } from "@/lib/family-network";
 
 export function Footer() {
   return (
@@ -44,14 +45,15 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="mb-2 font-semibold">The Compare Empire family</p>
-          <ul className="space-y-1 text-muted">
-            {SITE.sisterSites.map((s) => (
-              <li key={s.url}>
-                <a href={s.url} rel="noopener">{s.anchor ?? s.name}</a> <span className="text-xs">· {s.anchor ? s.name : s.game}</span>
-              </li>
+          {/* One short line (owner, 2026-11-02: the old list was "convoluted"): the sites in our own
+              cluster, then one link to the network page that lists every site (DECISIONS.md "Sites that grow each other"). */}
+          <p className="mb-2 font-semibold">Sister sites</p>
+          <p className="text-muted">
+            {footerSisters(SITE.family.id).map((s, i) => (
+              <span key={s.id}>{i ? " · " : ""}<a href={s.url} rel="noopener" title={s.label}>{s.name}</a></span>
             ))}
-          </ul>
+          </p>
+          <p className="mt-2 text-muted"><a href={NETWORK_PAGE} rel="noopener">A Compare Empire site →</a></p>
         </div>
       </div>
       <p className="mx-auto max-w-7xl px-4 pb-8 text-xs text-muted">

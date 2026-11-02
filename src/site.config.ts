@@ -184,5 +184,6 @@ export const SITE: SiteConfig = {
     { name: "CamCompare", url: "https://www.camcompare.app", game: "Cameras", anchor: "Camera and lens prices" },
     { name: "Compare Empire", url: "https://compareempire.com", game: "Tech", anchor: "Tech and appliance prices" },
   ],
+  family: { id: "ygo" },
   social: { reddit: "https://www.reddit.com/r/yugioh/" },
 };

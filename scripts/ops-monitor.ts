@@ -1,6 +1,7 @@
 // Runs in GitHub Actions every three hours (ops-monitor.yml). Each check
 // returns ok / warn / fail; anything not ok is emailed to the owner in one
 // GitHub sends the owner a failed-workflow email. Add a check here for every new scheduled job, API or limit.
+import { FAMILY_DIR, FEED_FILE, familyFeeds } from "@/lib/family";
 import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
@@ -49,6 +50,19 @@ async function main() {
       const age = (Date.now() - new Date(meta.ebay.at).getTime()) / 3_600_000;
       if (age > 30) return { status: "warn", detail: `last eBay run ${age.toFixed(0)}h ago` };
       return { status: "ok", detail: `${meta.ebay.calls}/${meta.ebay.budget} calls on ${meta.ebay.day}, ${meta.ebay.eligible} eligible` };
+    }),
+    // The Compare Empire network feed (scripts/family-sync.ts): sisters' "Also in this cluster"
+    // blocks read it from GitHub, so a stale one silently empties their tiles for this site.
+    check("Family feed", async () => {
+      try {
+        const f = JSON.parse(fs.readFileSync(path.join(FAMILY_DIR, FEED_FILE), "utf8")) as { generatedAt: string; items: unknown[] };
+        const age = (Date.now() - new Date(f.generatedAt).getTime()) / 3_600_000;
+        const sisters = familyFeeds().map((x) => x.site);
+        if (age > 54) return { status: "fail", detail: `family-feed.json is ${age.toFixed(0)}h old — check the Refresh prices workflow's family step` };
+        return { status: age > 30 ? "warn" : "ok", detail: `${f.items.length} items, ${age.toFixed(1)}h old; ${sisters.length} sister feeds (${sisters.join(", ") || "none yet"})` };
+      } catch {
+        return { status: "fail", detail: "data/public/family/family-feed.json missing — check the Refresh prices workflow's family step" };
+      }
     }),
     // The model-kit import (SITE.kits, scripts/import-kits.ts): its own file,
     // its own stores.

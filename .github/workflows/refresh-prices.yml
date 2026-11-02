@@ -43,6 +43,11 @@ jobs:
           EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
           EBAY_REFRESH: ${{ github.event_name == 'workflow_dispatch' && !inputs.ebay && 'false' || 'true' }}
         run: npx tsx scripts/import-all.ts
+      # The Compare Empire network (scripts/family-sync.ts): this site's best deals and pre-orders for
+      # its sisters, and their feeds for this site's "Also in this cluster" blocks. Never fatal.
+      - name: Family feed
+        continue-on-error: true
+        run: npx tsx scripts/family-sync.ts
       - name: Commit data (this commit is the daily release)
         run: |
           set -euo pipefail
