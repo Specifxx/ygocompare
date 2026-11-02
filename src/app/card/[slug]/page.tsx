@@ -16,7 +16,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { CompactCardAds, EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
-import { amazonSearchUrl } from "@/lib/affiliate";
+import { amazonSearchUrls } from "@/lib/affiliate";
 import { abs, SHARE_IMAGE } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
@@ -62,7 +62,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
   const related = byValue(productsInSet(p.setId).filter((x) => x.id !== p.id && x.kind === p.kind)).slice(0, 6);
   const inStock = e.offers.filter((o) => o.inStock);
   const usOffers = inStock.filter((o) => o.currency === "USD");
-  const amazon = p.kind === "sealed" ? amazonSearchUrl(`${SITE.game} ${name}`) : null;
+  const amazon = p.kind === "sealed" ? amazonSearchUrls(`${SITE.game} ${name}`) : null;
   return (
     <article className="flex flex-col gap-8">
       <JsonLd

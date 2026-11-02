@@ -7,7 +7,7 @@
 // Row order is lib/price-rows.ts, shared with the phone buy block.
 import { Fragment, useState } from "react";
 import { SITE } from "@/site.config";
-import { CURRENCY, MARKETS, MARKET_LABEL, type Offer } from "@/lib/site-types";
+import { CURRENCY, MARKETS, MARKET_LABEL, type Market, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
 import { goHref } from "@/lib/affiliate";
 import { priceRows } from "@/lib/price-rows";
@@ -29,13 +29,14 @@ export function sourceName(o: Offer) {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: string | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
   // stays on the real cheapest and a dearer pinned row says by how much. No
   // wording about the order (owner, 2026-10-30): the paid rows are simply first.
-  // Amazon (a tagged search, amazon.com only, so US) comes second, right under
+  // Amazon (a tagged search of the market's own Amazon, only where that store has
+  // our tag: lib/affiliate.ts) comes second, right under
   // the first eBay row (eBay first, Amazon second: owner, 2026-10-30), or first
   // when there is no eBay row: no price, never ranked, never the cheapest.
   // Both are drawn exactly like a store row, tagged "Ad" (owner, 2026-11-01:
@@ -75,7 +76,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const unfold = showOut || live.length === 0;
   const shown = compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o));
   const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
-  const amazonRow = amazon && market === "US" ? (
+  const amazonUrl = amazon?.[market];
+  const amazonRow = amazonUrl ? (
     <tr data-amazon-row className="border-t border-ink-800">
       <td className="px-3 py-2.5">
         <span className="font-medium text-fg">Amazon</span>
@@ -84,7 +86,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
       <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">Price shows on Amazon</td>
       <td className="px-3 py-2.5 text-right text-xs text-muted">See price</td>
       <td className="px-3 py-2.5 text-right">
-        <a href={goHref({ url: amazon, source: "amazon", market: "US" }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
+        <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
           View deal <span aria-hidden="true">↗</span>
         </a>
       </td>

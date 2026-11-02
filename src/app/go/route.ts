@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 const ALLOWED = [
   /(^|\.)ebay\.(com|co\.uk|com\.au|ca|de|fr|it|es)$/i,
   /(^|\.)tcgplayer\.com$/i,
-  /(^|\.)amazon\.(com|co\.uk|ca|com\.au)$/i,
+  /(^|\.)amazon\.(com|co\.uk|ca|com\.au|de)$/i,
   ...[...SITE.stores, ...(SITE.kits?.stores ?? [])].map((s) => new RegExp(`(^|\\.)${new URL(s.base).hostname.replace(/^www\./, "").replace(/\./g, "\\.")}$`, "i")),
 ];
 
