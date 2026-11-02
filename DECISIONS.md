@@ -1093,3 +1093,23 @@ in-stock store at least 10% (and at most 45%: past that it is likelier a wrong m
 the median of three or more stores there, stores only; the US section also keeps the Black Friday
 page's under-TCGplayer `deals()`. Never a "was" price, a countdown or an invented sale. The footer and
 sitemap always link them; the homepage only from a few weeks before each event to two days after.
+
+## 2026-11-02 — Price alerts through RiftCompare's shared service
+
+The owner chose "Yes, one shared service" for email price alerts on the sister sites. This reverses part of
+"No accounts, no database, no email" (2026-10-25): the site still has no accounts, no database and no mail key, but
+the card page now has an "Email me when the price drops" form.
+
+- **The form** (`components/PriceAlertForm.tsx`, the same file on every sister site; `PriceAlert.tsx` picks the
+  visitor's market) posts `{site, productId, region, email, targetCents}` straight to
+  `https://riftcompare.com/api/sister-alerts`. RiftCompare keeps the address (its own Neon project, private tables),
+  sends one confirmation email (double opt-in), then checks daily. This site stores nothing and holds no key.
+- **The prices** come from this site's own static `/alert-feed.json` (`lib/alert-feed.ts`), built with each deploy
+  from the same files the pages read: per product, the lowest in-stock store or TCGplayer offer in each market, in
+  that market's currency, never eBay, never converted; plus up to five of the site's own deals (store price under
+  TCGplayer market) that another card site's alert email may end with. Served from the CDN (`revalidate` 86400),
+  so it costs no function call.
+- **Behind `SITE.priceAlerts`** (on for Gundam, Lorcana, YGO and Cyberpunk); the site's `key` must be registered in
+  RiftCompare's `lib/sister-alerts/sites.ts`. The privacy page says what the form sends and links to RiftCompare's.
+- RiftCompare's `sister-alerts.yml` fails (and its ops monitor reports it) when a site with alerts serves no fresh
+  feed, so a broken feed here shows up there.

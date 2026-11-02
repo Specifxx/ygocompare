@@ -67,6 +67,9 @@ export interface SiteConfig {
   ownerEmail: string;
   /** Impact (affiliate network) site-verification id, rendered in every page's <head>. */
   impactSiteVerification?: string;
+  /** Price alerts through RiftCompare's shared alert service (DECISIONS.md, 2026-11-02): the card page's
+   *  "Email me when the price drops" form and /alert-feed.json. The site's `key` must be registered there. */
+  priceAlerts?: boolean;
   tcgcsvCategoryId: number;
   tcgplayerSlug: string;
   ebay: {
