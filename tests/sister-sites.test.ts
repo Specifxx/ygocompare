@@ -18,3 +18,17 @@ test("sister sites: the eleven others, once each, with descriptive anchors", () 
     assert.doesNotMatch(`${s.anchor} ${s.game}`, /\b(Australian|Aussie|American|British|Canadian|Australia only|AU only)\b/i, `${s.name}: region-neutral`);
   }
 });
+
+// The footer (owner-approved plan, 2026-11-02, "Sites that grow each other"): this site's own
+// clusters in full (lib/family-network.ts), never KaeYoung, plus one "A Compare Empire site" link.
+test("footer: own cluster from the family registry, plus the network page", async () => {
+  const { footerSisters, NETWORK_PAGE } = await import("@/lib/family-network");
+  const list = footerSisters(SITE.family.id);
+  assert.ok(list.length >= 3);
+  assert.ok(list.every((s) => s.clusters.includes("cards") || s.clusters.includes("hobby")));
+  assert.ok(!list.some((s) => /kaeyoung/i.test(s.url)));
+  assert.equal(new URL(NETWORK_PAGE).host, "compareempire.com");
+  const src = (await import("node:fs")).readFileSync("src/components/Footer.tsx", "utf8");
+  assert.match(src, /footerSisters\(SITE\.family\.id\)/);
+  assert.match(src, /A Compare Empire site/);
+});

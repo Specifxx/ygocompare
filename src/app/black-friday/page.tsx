@@ -7,6 +7,7 @@ import { money } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { sourceNameServer } from "@/lib/sources";
 import { blackFriday, cyberMonday, longDate, seasonYear, splitDeals } from "@/lib/black-friday";
+import { FamilyCluster } from "@/components/FamilyCluster";
 
 // The Black Friday page (DECISIONS.md, "Black Friday page", 2026-11-02): one URL kept
 // year after year, so links and rankings it gathers carry over. Rebuilt from the day's
@@ -50,6 +51,7 @@ export default function BlackFridayPage() {
       <Section title="Sealed product under TCGplayer today" rows={sealed} empty="No sealed product is under TCGplayer's market price in a US store today." />
       <Section title="Cards under TCGplayer today" rows={cards} empty="No card worth $5 or more is under TCGplayer's market price in a US store today." />
 
+      <FamilyCluster cluster="cards" kind="deal" />
       <section className="card-surface flex flex-col gap-2 p-4 text-sm">
         <h2 className="text-lg font-bold">How to read this</h2>
         <p>Each row is the cheapest in-stock US store price we found (stores only, never eBay or Amazon), 8% to 60% under TCGplayer&apos;s market price, for products worth $5 or more. Item prices before shipping, in US dollars on both sides.</p>

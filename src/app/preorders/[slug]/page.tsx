@@ -17,6 +17,7 @@ import { money } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { imageAt } from "@/lib/image";
 import type { QA, SetInfo } from "@/lib/site-types";
+import { FamilyCluster } from "@/components/FamilyCluster";
 
 // /preorders/<set slug>: one release's landing page (lib/preorders.ts). Six
 // hours like every page buyers act on; nothing prerendered at build.
@@ -168,6 +169,8 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
           )}
         </section>
       )}
+
+      <FamilyCluster cluster="cards" kind="preorder" />
 
       <section className="max-w-3xl">
         <h2 className="mb-3 text-xl font-bold">{s.name} {pre ? "pre-order" : "price"} FAQ</h2>

@@ -10,6 +10,7 @@ import { KitSearch } from "@/components/KitSearch";
 import { CheckedAgo } from "@/components/CardBuy";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { MARKET_LABEL } from "@/lib/site-types";
+import { FamilyCluster } from "@/components/FamilyCluster";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 
@@ -73,6 +74,7 @@ export default function Kits() {
         ) : null;
       })()}
       <KitEbayStrip tiles={kitAdTiles(popular(all), 12)} page="kits" title={`Popular ${cfg.label} on eBay`} />
+      <FamilyCluster cluster="hobby" kind="deal" />
       <section className="prose-site max-w-3xl text-sm">
         <h2>How {cfg.label} prices are compared</h2>
         <p>

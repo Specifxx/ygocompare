@@ -1,4 +1,5 @@
 // Types shared by the engine and src/site.config.ts.
+import type { FamilySiteId } from "./family-network";
 import type { SetEdition } from "@/lib/import/match";
 
 export type Market = "US" | "UK" | "CA" | "AU" | "EU" | "SG";
@@ -141,6 +142,9 @@ export interface SiteConfig {
   christmas: { headline: string; blurb: string };
   stores: StoreConfig[];
   sisterSites: SisterSite[];
+  /** This site in the Compare Empire network (lib/family-network.ts): which
+   *  clusters its footer and "Also in this cluster" blocks draw from. */
+  family: { id: FamilySiteId };
   social: { reddit?: string; discord?: string };
   /** A model-kit section (/kits, /kit/<slug>), off unless set: plastic model
    *  kits compared across hobby shops by their JAN barcode (lib/kits.ts,

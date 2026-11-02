@@ -11,6 +11,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { money } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { imageAt } from "@/lib/image";
+import { FamilyCluster } from "@/components/FamilyCluster";
 
 export const revalidate = 21600;
 
@@ -71,6 +72,7 @@ export default function Preorders() {
         </section>
       )}
       {!list.length && <p className="text-muted">No set is in pre-order right now. <Link className="link" href="/sealed">Compare sealed prices →</Link></p>}
+      <FamilyCluster cluster="cards" kind="preorder" />
       {PREORDER_COPY.faq.length > 0 && (
         <section className="max-w-3xl">
           <h2 className="mb-3 text-xl font-bold">Pre-order FAQ</h2>
