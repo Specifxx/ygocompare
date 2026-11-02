@@ -27,6 +27,15 @@ test("upcoming releases come first, soonest first; nothing sealed, or released w
   assert.deepEqual(got, ["soon", "packs", "late", "out", "older"]);
 });
 
+test("an upcoming set with written copy has a page before any store lists it; released, it needs a box again", () => {
+  const today = "2026-11-01";
+  const all = [set("announced", "2027-01-29", true), set("promo", "2026-11-20", true), set("gone", "2026-10-20")];
+  const none = () => ({ products: 0, boxes: 0 });
+  const curated = (s: SetInfo) => s.slug === "announced" || s.slug === "gone";
+  assert.deepEqual(preorderSets(all, none, today).map((s) => s.slug), [], "nothing sealed, no copy hook: no page");
+  assert.deepEqual(preorderSets(all, none, today, curated).map((s) => s.slug), ["announced"], "copy opens only the upcoming one");
+});
+
 test("titles say pre-order before release and fit 60 characters", () => {
   const pre = fitTitle(preorderTitleCandidates("Stardust Trails", true)).absolute;
   assert.match(pre, /Pre-Order/);
