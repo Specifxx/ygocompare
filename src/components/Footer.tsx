@@ -20,6 +20,9 @@ export function Footer() {
             <li><Link href="/movers">Price movers</Link></li>
             <li><Link href="/price-report">Monthly price report</Link></li>
             <li><Link href="/black-friday">Black Friday deals</Link></li>
+            <li><Link href="/boxing-day">Boxing Day deals</Link></li>
+            <li><Link href="/january-sales">January sales</Link></li>
+            <li><Link href="/lunar-new-year">Lunar New Year deals</Link></li>
             <li><Link href="/embed">Free price widgets</Link></li>
             <li><Link href="/tools/deal-finder">Deal Finder</Link></li>
             <li><Link href="/tools/rising">Rising cards</Link></li>

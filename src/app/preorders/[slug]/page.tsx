@@ -103,9 +103,9 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
           </p>
         )}
         <p className="mt-3 text-sm text-muted">
-          {sealed.length} sealed product{sealed.length === 1 ? "" : "s"} · {stores} store{stores === 1 ? "" : "s"} listing {pre ? "pre-orders" : "it"}
+          {sealed.length > 0 && <>{sealed.length} sealed product{sealed.length === 1 ? "" : "s"} · {stores} store{stores === 1 ? "" : "s"} listing {pre ? "pre-orders" : "it"}</>}
           {boxRef ? <> · booster box on TCGplayer {money(boxRef)}</> : null}
-          {" · "}
+          {sealed.length > 0 ? " · " : null}
           <Link className="link" href={`/sets/${s.slug}`}>{s.name} card list →</Link>
         </p>
         {copy && copy.facts.length > 0 && (
@@ -119,6 +119,11 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
 
       <section className="flex flex-col gap-6">
         <h2 className="text-2xl font-bold">{pre ? `Where to pre-order ${s.name}` : `Where to buy ${s.name}`}</h2>
+        {sealed.length === 0 && (
+          <div className="card-surface p-5 text-sm text-muted">
+            No store we track lists {s.name} yet. Stores usually open pre-orders six to ten weeks before release; this page adds each one, and TCGplayer and eBay, as soon as its listing appears, refreshed daily. Nothing here is ever an estimate.
+          </div>
+        )}
         {sealed.map((p) => {
           const e = priceOf(p.id);
           return (

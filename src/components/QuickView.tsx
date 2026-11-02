@@ -8,7 +8,7 @@
 // go to the card page, whose server HTML keeps every price.
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "@/components/Link";
-import type { Offer } from "@/lib/site-types";
+import type { Market, Offer } from "@/lib/site-types";
 import { PriceTable } from "./PriceTable";
 import { ShareButton } from "./ShareButton";
 
@@ -22,7 +22,7 @@ interface Data {
   id: number;
   offers: Offer[];
   fx: Record<string, number>;
-  amazon: string | null;
+  amazon: Partial<Record<Market, string>> | null;
   name: string;
   sub: string;
   img: string | null;

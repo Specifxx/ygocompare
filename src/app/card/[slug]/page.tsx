@@ -8,6 +8,8 @@ import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { PriceTable } from "@/components/PriceTable";
+import { PriceAlert } from "@/components/PriceAlert";
+import { lowestByMarket } from "@/lib/alert-feed";
 import { CardStickyBuyBar, CardTopBuy, CheckedAgo } from "@/components/CardBuy";
 import { EbayCallout } from "@/components/EbayCallout";
 import { PriceChart } from "@/components/PriceChart";
@@ -16,7 +18,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { CompactCardAds, EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
-import { amazonSearchUrl } from "@/lib/affiliate";
+import { amazonSearchUrls } from "@/lib/affiliate";
 import { abs } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShareButton } from "@/components/ShareButton";
@@ -64,7 +66,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
   const related = byValue(productsInSet(p.setId).filter((x) => x.id !== p.id && x.kind === p.kind)).slice(0, 6);
   const inStock = e.offers.filter((o) => o.inStock);
   const usOffers = inStock.filter((o) => o.currency === "USD");
-  const amazon = p.kind === "sealed" ? amazonSearchUrl(`${SITE.game} ${name}`) : null;
+  const amazon = p.kind === "sealed" ? amazonSearchUrls(`${SITE.game} ${name}`) : null;
   return (
     <article className="flex flex-col gap-8">
       <JsonLd
@@ -134,6 +136,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             </div>
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
+            {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
           <section className="card-surface p-4">

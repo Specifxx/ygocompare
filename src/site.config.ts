@@ -32,6 +32,7 @@ export const SITE: SiteConfig = {
   ownerEmail: "bill.jyang101@gmail.com",
   impactSiteVerification: "3c00a442-a61e-4003-a422-540b7435b80d",
 
+  priceAlerts: true,
   tcgcsvCategoryId: 2,
   tcgplayerSlug: "yugioh",
   ebay: {
