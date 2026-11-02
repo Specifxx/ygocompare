@@ -19,6 +19,7 @@ export function Footer() {
             {SITE.kits && <li><Link href="/kits">{SITE.kits.label} prices</Link></li>}
             <li><Link href="/movers">Price movers</Link></li>
             <li><Link href="/price-report">Monthly price report</Link></li>
+            <li><Link href="/black-friday">Black Friday deals</Link></li>
             <li><Link href="/tools/deal-finder">Deal Finder</Link></li>
             <li><Link href="/tools/rising">Rising cards</Link></li>
             <li><Link href="/tools/demand">Demand Finder</Link></li>
