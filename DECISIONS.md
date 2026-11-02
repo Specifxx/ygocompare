@@ -1049,3 +1049,13 @@ so it ships now. The homepage links it from 1 November to a week after Cyber Mon
 sitemap always do. Never a "was" price, a countdown, "ends soon" or an invented sale: we only know what a
 store asked when we last read it. Dates and the split are pure (`src/lib/black-friday.ts`, tests in
 `tests/black-friday.test.ts`). Part of the passive-growth plan (owner, 2026-11-02: no daily Reddit posts).
+
+## 2026-11-02 — Free price widgets
+
+`/embed/card/<slug>` is a live price badge any blog, deck guide or store can put in an `<iframe>`: the cheapest in-stock
+store price in the chosen market (`?market=`, US by default; never TCGplayer, eBay, Amazon or a pre-order), else
+TCGplayer's market price labelled as such. `/embed` lists the snippet (the iframe plus one plain text link, the only
+part search engines credit) and a plain-HTML badge for the stores we compare. The daily outreach offers the widget
+instead of asking for a link (owner, 2026-11-02: growth must be passive). The badge is a route handler reading only
+`src/lib/data.ts`, noindex, cached a day by its CDN header; a missing slug answers 404 with a 5-minute cache.
+RiftCompare has had the same widgets since 2026-09.
