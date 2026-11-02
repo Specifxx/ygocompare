@@ -37,3 +37,10 @@ test("llms.txt lists the main sections and every guide", async () => {
   assert.match(body, /\/sets\)/);
   assert.match(body, /## Guides/);
 });
+
+test("an unreleased set with revealed cards is titled for the spoiler search, inside the limit", () => {
+  const t = fitTitle(setTitleCandidates("First Set", 48, true)).absolute;
+  assert.match(t, /Spoilers: 48 Cards Revealed/);
+  assert.ok(t.length <= TITLE_MAX + 20);
+  assert.match(setTitleCandidates("First Set", 0, true)[0], /Card List/);
+});
