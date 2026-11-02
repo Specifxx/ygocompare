@@ -30,9 +30,16 @@ Previews build only with `[preview]` in the subject, when the owner asks.
 
 ## No accounts, no database, no email
 
-The site is price comparison only: no sign-in, no Premium, no alerts, no
+The site is price comparison only: no sign-in, no Premium, no
 email service and no database. Everything it serves is the committed JSON
 under `data/` (`src/lib/data.ts`).
+
+**Price alerts are the one exception (owner, 2026-11-02):** the card page's
+"Email me when the price drops" form (`PriceAlertForm.tsx`, `SITE.priceAlerts`)
+posts to RiftCompare's shared alert service, which keeps the address, emails
+and reads this site's static `/alert-feed.json` (`src/lib/alert-feed.ts`) once
+a day. This site still stores no address and holds no mail key; never add one.
+Keep the feed's price the lowest in-stock store price, never eBay or converted.
 
 ## Size: Yu-Gi-Oh! has tens of thousands of printings
 
