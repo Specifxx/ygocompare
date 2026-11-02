@@ -1113,3 +1113,25 @@ the card page now has an "Email me when the price drops" form.
   RiftCompare's `lib/sister-alerts/sites.ts`. The privacy page says what the form sends and links to RiftCompare's.
 - RiftCompare's `sister-alerts.yml` fails (and its ops monitor reports it) when a site with alerts serves no fresh
   feed, so a broken feed here shows up there.
+
+## Share buttons and shared lists (2026-11-02)
+
+The owner wants word of mouth to drive growth. Every card and sealed page and
+the quick view get a Share button (`components/ShareButton.tsx`): the phone's
+own share sheet, else the link copied, no pop-up, no reward, no account. The
+message names the real price gap in the visitor's market (`priceGap` in
+`lib/share.ts`: cheapest and dearest in-stock item price from two different
+sellers, never converted). The card page's share image
+(`card/[slug]/opengraph-image.tsx`) draws the same gap for the US, the page's
+baseline market; it is drawn on first request and kept a day (empty
+`generateStaticParams`), so only cards someone shares cost a render.
+
+Best Basket results get "Share this list": `/list?i=<id>*<qty>.<id>…` carries
+the list in the URL (nothing stored), and `/list` is one static, noindex shell
+that prices it in the visitor's market through `/api/basket`.
+
+Every shared link carries `utm_source=share&utm_medium=<card|sealed|list>`.
+The button sends a Vercel `share` event and `ShareArrival` one `share_visit`
+event per tab when a shared link brings someone; RiftCompare's growth report
+counts both per site. robots.txt allows `/*utm_source=share` (it blocks other
+query strings) because X's and Reddit's preview fetchers obey robots.txt.

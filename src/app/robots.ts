@@ -14,7 +14,10 @@ const BLOCKED_BOTS = [
 // clean URL, so a crawler walking ?q= / ?sort= / ?utm_ variants only buys
 // requests. The longest matching rule wins, so each Allow beats "/*?": Next's
 // assets (?dpl=; Google needs them to render), share images and icons.
-const QUERY_ALLOWS = ["/_next/", "/*opengraph-image", "/*twitter-image", "/icon", "/apple-icon"];
+// A shared link (?utm_source=share, lib/share.ts) is allowed too, so X's and
+// Reddit's preview fetchers, which obey robots.txt, can draw its card; the page
+// canonicalises to its clean URL.
+const QUERY_ALLOWS = ["/_next/", "/*opengraph-image", "/*twitter-image", "/icon", "/apple-icon", "/*utm_source=share"];
 
 export default function robots(): MetadataRoute.Robots {
   return {

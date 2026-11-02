@@ -12,6 +12,7 @@ import { PreorderStrip } from "@/components/PreorderStrip";
 import { PrefsProvider } from "@/components/ClientPrefs";
 import { QuickView } from "@/components/QuickView";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
+import { ShareArrival } from "@/components/ShareArrival";
 import { FooterCardAds } from "@/components/FooterCardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 
@@ -63,6 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </PrefsProvider>
         <Analytics />
         <BuyClickTracker />
+        <ShareArrival />
       </body>
     </html>
   );

@@ -19,8 +19,9 @@ import { AdSlot } from "@/components/AdSlot";
 import { CompactCardAds, EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrls } from "@/lib/affiliate";
-import { abs, SHARE_IMAGE } from "@/lib/site";
+import { abs } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ShareButton } from "@/components/ShareButton";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
@@ -47,8 +48,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     // Pack inserts (puzzle pieces, ink drops) are worth cents and nobody shops
     // for them: out of the index, like the sitemap (DECISIONS.md, 2026-10-28).
     ...(p.sealedType === "Insert" ? { robots: { index: false, follow: true } } : {}),
-    openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description, images: p.image ? [imageAt(p.image, "in_1000x1000")!] : [SHARE_IMAGE] },
-    twitter: { card: "summary_large_image", images: p.image ? [imageAt(p.image, "in_1000x1000")!] : [SHARE_IMAGE] },
+    // The image is ./opengraph-image.tsx: the card and its real price gap (lib/share.ts).
+    openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description },
+    twitter: { card: "summary_large_image" },
   };
 }
 
@@ -107,7 +109,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           <header>
             <div className="flex items-start gap-3">
               {p.image && <img src={imageAt(p.image, "200w")!} alt="" aria-hidden className="w-20 shrink-0 rounded-md md:hidden" width={80} height={112} />}
-              <h1 className="font-display text-2xl font-black md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
+              <h1 className="min-w-0 flex-1 font-display text-2xl font-black md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
+              <ShareButton path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} medium={p.kind === "sealed" ? "sealed" : "card"} offers={e.offers} compact className="mt-1" />
             </div>
             <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-2">
               <p><span className="text-3xl font-black text-brand-400">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
