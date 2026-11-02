@@ -18,7 +18,7 @@ export const revalidate = 86400;
 // pages are noindex too (card/[slug]).
 export default function sitemap(): MetadataRoute.Sitemap {
   const at = meta()?.updatedAt ? new Date(meta()!.updatedAt) : new Date();
-  const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/tools", "/tools/deal-finder", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores", ...(creatorsOn() ? ["/creators"] : [])];
+  const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/price-report", "/tools", "/tools/deal-finder", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores", ...(creatorsOn() ? ["/creators"] : [])];
   return [
     ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
     ...preorderSetList().map((s) => ({ url: `${SITE_URL}${preorderPath(s)}`, lastModified: at, changeFrequency: "daily" as const, priority: 0.8 })),
