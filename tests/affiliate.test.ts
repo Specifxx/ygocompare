@@ -56,13 +56,20 @@ test("store links carry a referral utm_source and keep their own", () => {
   assert.equal(new URL(tagged("https://shop.example/p?utm_source=mine")).searchParams.get("utm_source"), "mine");
 });
 
-test("each market's Amazon gets its own store's tag, and a market without one gets no Amazon", () => {
+test("each market's Amazon gets its own store's tag, and Singapore gets no Amazon", () => {
   assert.match(amazonSearchUrl("booster box", "AU")!, /^https:\/\/www\.amazon\.com\.au\/s\?k=booster%20box&tag=compareempire-22$/);
-  assert.equal(amazonSearchUrl("booster box", "UK"), null, "no UK Associates tag yet");
+  assert.match(amazonSearchUrl("booster box", "UK")!, /^https:\/\/www\.amazon\.co\.uk\/s\?.*tag=compareempi03-21$/);
+  assert.match(amazonSearchUrl("booster box", "CA")!, /amazon\.ca\/.*tag=compareempire-20$/);
+  assert.match(amazonSearchUrl("booster box", "EU")!, /amazon\.de\/.*tag=compareempire-21$/);
   assert.equal(amazonSearchUrl("booster box", "SG"), null, "amazon.sg has no Associates programme");
   const all = amazonSearchUrls("booster box")!;
-  assert.deepEqual(Object.keys(all).sort(), ["AU", "US"]);
+  assert.deepEqual(Object.keys(all).sort(), ["AU", "CA", "EU", "UK", "US"]);
   // /go re-tags by host: the AU link keeps the AU tag, never the US one.
   assert.equal(new URL(tagged(all.AU!, "s")).searchParams.get("tag"), "compareempire-22");
   assert.notEqual(new URL(tagged(all.US!, "s")).searchParams.get("tag"), "compareempire-22");
+});
+
+test("Amazon tags are hard-coded: no Vercel variable decides one (owner, 2026-11-02)", async () => {
+  const { readFileSync } = await import("node:fs");
+  assert.doesNotMatch(readFileSync(new URL("../src/lib/affiliate.ts", import.meta.url), "utf8"), /process\.env\.AMAZON|AMAZON_TAG_|AMAZON_ASSOCIATE_TAG/);
 });

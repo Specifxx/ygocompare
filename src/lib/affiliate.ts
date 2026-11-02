@@ -19,8 +19,9 @@ import { MARKETS, type Market } from "./site-types";
 export const EBAY_CAMPAIGN_ID = "5339155912";
 export const TCGPLAYER_IMPACT_LINK =
   process.env.TCGPLAYER_IMPACT_LINK || "https://partner.tcgplayer.com/c/7385758/1780961/21018";
-// Rift Compare's Associates tag until each site has its own (AMAZON_ASSOCIATE_TAG).
-export const AMAZON_TAG = process.env.AMAZON_ASSOCIATE_TAG || "riftcompare-20";
+// Amazon US: the site's own tracking ID (site.config `amazonUsTag`), else Rift
+// Compare's. Hard-coded: no Vercel variable decides a tag (owner, 2026-11-02).
+export const AMAZON_TAG = SITE.amazonUsTag ?? "riftcompare-20";
 
 const EBAY_ROTATION: Record<string, string> = {
   "ebay.com": "711-53200-19255-0",
@@ -65,23 +66,21 @@ export function tcgplayerAffiliateUrl(url: string, sub?: string): string {
 
 // Each Amazon store is its own Associates programme, and a tag earns only on the
 // store whose account issued it (a US tag on amazon.com.au earns nothing). The US
-// uses AMAZON_TAG above; Australia the owner's AU account (compareempire-22) until
-// AMAZON_TAG_AU sets the site's own; the UK, Canada and the eurozone (amazon.de)
-// have no account yet, so they show no Amazon row until AMAZON_TAG_UK /
-// AMAZON_TAG_CA / AMAZON_TAG_DE is set. Singapore never (no Associates programme).
-const envTag = (k: string) => (process.env[k] ?? "").trim() || null;
-const AMAZON_STORES: Partial<Record<Market, { host: string; tag: string | null }>> = {
-  US: { host: "www.amazon.com", tag: AMAZON_TAG || null },
-  AU: { host: "www.amazon.com.au", tag: envTag("AMAZON_TAG_AU") ?? "compareempire-22" },
-  UK: { host: "www.amazon.co.uk", tag: envTag("AMAZON_TAG_UK") },
-  CA: { host: "www.amazon.ca", tag: envTag("AMAZON_TAG_CA") },
-  EU: { host: "www.amazon.de", tag: envTag("AMAZON_TAG_DE") },
+// uses AMAZON_TAG above; Australia compareempire-22, the UK compareempi03-21, Canada compareempire-20
+// and the eurozone (amazon.de) compareempire-21: the owner's accounts, hard-coded
+// (2026-11-02). Singapore never (no Associates programme).
+const AMAZON_STORES: Partial<Record<Market, { host: string; tag: string }>> = {
+  US: { host: "www.amazon.com", tag: AMAZON_TAG },
+  AU: { host: "www.amazon.com.au", tag: "compareempire-22" },
+  UK: { host: "www.amazon.co.uk", tag: "compareempi03-21" },
+  CA: { host: "www.amazon.ca", tag: "compareempire-20" },
+  EU: { host: "www.amazon.de", tag: "compareempire-21" },
 };
 
 /** The tag for an amazon.* host: that store's own, else the US tag. */
 function amazonTagFor(host: string): string | null {
   const h = host.toLowerCase().replace(/^(www\.)?/, "www.");
-  return Object.values(AMAZON_STORES).find((s) => s?.host === h)?.tag ?? AMAZON_TAG ?? null;
+  return Object.values(AMAZON_STORES).find((s) => s?.host === h)?.tag ?? AMAZON_TAG;
 }
 
 function amazonAffiliateUrl(url: string, sub?: string): string {
@@ -114,7 +113,7 @@ function storeReferralUrl(url: string): string {
 /** A tagged search of the market's Amazon, or null where the market has no tag. */
 export function amazonSearchUrl(q: string, market: Market = "US"): string | null {
   const s = AMAZON_STORES[market];
-  if (!s?.tag) return null;
+  if (!s) return null;
   return `https://${s.host}/s?k=${encodeURIComponent(q)}&tag=${encodeURIComponent(s.tag)}`;
 }
 
