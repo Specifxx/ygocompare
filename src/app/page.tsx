@@ -21,6 +21,7 @@ import { fitTitle } from "@/lib/seo-title";
 import { featuredSealed, preorderSetList, sealedHubs } from "@/lib/hubs";
 import { isPreorder, longDate, preorderPath } from "@/lib/preorders";
 import { inSeason as bfSeason } from "@/lib/black-friday";
+import { CORE_SALES, salesInSeason } from "@/lib/sale-seasons";
 import { gradeHubs, kits, kitsOn, popular } from "@/lib/kits";
 import { KitGrid } from "@/components/KitTile";
 
@@ -126,6 +127,9 @@ export default function Home() {
           {bfSeason((meta()?.updatedAt ?? new Date().toISOString()).slice(0, 10)) && (
             <p className="mb-3 text-sm"><Link className="link" href="/black-friday">Black Friday and Cyber Monday deals, updated daily →</Link></p>
           )}
+          {salesInSeason(CORE_SALES, (meta()?.updatedAt ?? new Date().toISOString()).slice(0, 10)).map((s) => (
+            <p key={s.slug} className="mb-3 text-sm"><Link className="link" href={`/${s.slug}`}>{s.linkLabel}, updated daily →</Link></p>
+          ))}
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {topDeals.map((d) => (
               <Link key={`${d.p.id}${d.offer.source}`} href={`/card/${d.p.slug}`} className="card-surface flex min-w-0 items-center gap-3 p-3 hover:border-brand/60">

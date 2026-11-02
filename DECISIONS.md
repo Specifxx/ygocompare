@@ -1070,6 +1070,30 @@ the file goes quiet for a day (a stopped monitor cannot mail). Only a FAILED che
 email to the owner; warnings wait for HQ and Monday. The file carries status and the monitor's own sentences only,
 the same as the public Actions log.
 
+
+## 2026-11-02 — An announced set with written copy gets its pre-order page before any store lists it
+
+`/preorders/<slug>` already built itself for every upcoming set with a sealed product. The gap was the months between
+an announcement and the first store listing, when "<set> pre-order" is already searched: Gundam's GD07 Blazing Fist
+had copy in `src/content/preorders.ts` but no page. `preorderSets` now takes a `curated` test, and `preorderSetList`
+passes "has an entry in `PREORDER_COPY.sets`": such a set has its page while upcoming even with nothing sealed, saying
+plainly that no store lists it yet. Promo groups and placeholders have no copy, so they still need a sealed product.
+The header strip ("pre-orders are open") still waits for a real listing. Engine change, the same in all four repos.
+
+## 2026-11-02 — Seasonal sale pages
+
+`/boxing-day`, `/january-sales` and `/lunar-new-year` (owner-approved growth plan, 2026-11-02): one URL
+each, kept every year like `/black-friday`, built weeks ahead so Google has indexed them before the day.
+Dates, the year a page is about (it rolls over a week after the event) and the homepage window are pure
+in `src/lib/sale-seasons.ts` (tests in `tests/sale-seasons.test.ts`); Lunar New Year is a published-date
+table to 2040 (6 February 2027). The site covers several countries, so no page reads as one country's:
+the opening sentence names every market we have stores in, and the page has one section per market,
+in that market's own currency, never converted. Each section lists `storeDealsIn(market)`: the cheapest
+in-stock store at least 10% (and at most 45%: past that it is likelier a wrong match than a sale) under
+the median of three or more stores there, stores only; the US section also keeps the Black Friday
+page's under-TCGplayer `deals()`. Never a "was" price, a countdown or an invented sale. The footer and
+sitemap always link them; the homepage only from a few weeks before each event to two days after.
+
 ## 2026-11-02 — Price alerts through RiftCompare's shared service
 
 The owner chose "Yes, one shared service" for email price alerts on the sister sites. This reverses part of
