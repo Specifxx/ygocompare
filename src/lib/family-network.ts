@@ -76,7 +76,7 @@ export const NETWORK_PAGE = "https://compareempire.com/network";
 export const FEED_FILE = "family-feed.json";
 export const CLUSTER_FILE = "family-cluster.json";
 export const FEED_MAX_AGE_DAYS = 4;
-/** Per cluster, kind and region: the most items a feed carries. */
+/** Per cluster, kind, region (and category, when items name one): the most items a feed carries. */
 export const FEED_ITEMS_PER_GROUP = 6;
 
 export function familySite(id: FamilySiteId): FamilySite {
@@ -118,6 +118,8 @@ export interface FamilyItem {
   savingPct?: number | null;
   /** YYYY-MM-DD (pre-orders). */
   releaseDate?: string | null;
+  /** The publishing site's own category key ("cameras", "laptops"), so a sister can prefer what its readers buy. */
+  category?: string | null;
 }
 
 export interface FamilyFeed {
@@ -127,7 +129,17 @@ export interface FamilyFeed {
   /** Where "more deals" / "more pre-orders" goes, per region (absolute URLs on the site). */
   links: Partial<Record<FamilyRegion, { deals?: string; preorders?: string }>>;
   items: FamilyItem[];
+  /** Hand-offs (tech cluster): every product page the site has, by name, so a sister can link the same product. */
+  products?: FamilyProduct[];
 }
+
+export interface FamilyProduct {
+  name: string;
+  /** Absolute, on the publishing site. */
+  url: string;
+}
+
+export const FEED_MAX_PRODUCTS = 4000;
 
 const REF_LABELS: readonly RefLabel[] = ["median store price", "TCGplayer market price", "RRP", "MSRP", "dearest store"];
 const CURRENCY_OF: Record<FamilyRegion, string> = { US: "USD", UK: "GBP", AU: "AUD", CA: "CAD", NZ: "NZD", EU: "EUR", SG: "SGD" };
@@ -158,6 +170,7 @@ export function validItem(x: unknown, site: FamilySite): FamilyItem | null {
   if (i.currency !== CURRENCY_OF[region]) return null;
   const item: FamilyItem = { kind: i.kind, cluster: i.cluster as ClusterId, region, title: i.title.trim(), url: i.url, cents: i.cents, currency: i.currency, store: i.store.trim() };
   if (typeof i.image === "string" && /^https:\/\//.test(i.image)) item.image = i.image;
+  if (typeof i.category === "string" && /^[a-z0-9-]{1,40}$/.test(i.category)) item.category = i.category;
   if (i.kind === "deal") {
     // A deal states what it is under, and the saving must be the arithmetic of the two prices.
     if (typeof i.refCents !== "number" || !Number.isInteger(i.refCents) || i.refCents <= i.cents) return null;
@@ -196,17 +209,25 @@ export function validFeed(x: unknown, expect: FamilySiteId, now = Date.now()): F
       if (out.deals || out.preorders) links[r as FamilyRegion] = out;
     }
   }
-  return { v: 1, site: expect, generatedAt: f.generatedAt, links, items };
+  const out: FamilyFeed = { v: 1, site: expect, generatedAt: f.generatedAt, links, items };
+  if (Array.isArray(f.products)) {
+    out.products = (f.products as unknown[])
+      .slice(0, FEED_MAX_PRODUCTS)
+      .map((p) => (p && typeof p === "object" ? (p as Record<string, unknown>) : {}))
+      .filter((p) => isText(p.name) && onSite(p.url, site))
+      .map((p) => ({ name: String(p.name).trim(), url: String(p.url) }));
+  }
+  return out;
 }
 
-/** What a site's data job writes: the items capped per (cluster, kind, region), deals biggest saving first, pre-orders soonest first. */
-export function buildFeed(site: FamilySiteId, items: readonly FamilyItem[], links: FamilyFeed["links"], now = new Date()): FamilyFeed {
+/** What a site's data job writes: the items capped per (cluster, kind, region, category), deals biggest saving first, pre-orders soonest first. */
+export function buildFeed(site: FamilySiteId, items: readonly FamilyItem[], links: FamilyFeed["links"], now = new Date(), products?: readonly FamilyProduct[]): FamilyFeed {
   const me = familySite(site);
   const groups = new Map<string, FamilyItem[]>();
   for (const raw of items) {
     const i = validItem(raw, me);
     if (!i) continue;
-    const k = `${i.cluster}|${i.kind}|${i.region}`;
+    const k = `${i.cluster}|${i.kind}|${i.region}|${i.category ?? ""}`;
     const g = groups.get(k) ?? [];
     if (g.some((x) => x.url === i.url)) continue;
     g.push(i);
@@ -219,7 +240,9 @@ export function buildFeed(site: FamilySiteId, items: readonly FamilyItem[], link
     );
     out.push(...g.slice(0, FEED_ITEMS_PER_GROUP));
   }
-  return { v: 1, site, generatedAt: now.toISOString(), links, items: out };
+  const feed: FamilyFeed = { v: 1, site, generatedAt: now.toISOString(), links, items: out };
+  if (products?.length) feed.products = products.filter((p) => isText(p.name) && onSite(p.url, me)).slice(0, FEED_MAX_PRODUCTS).map((p) => ({ name: p.name.trim(), url: p.url }));
+  return feed;
 }
 
 /** Reads sister feeds from GitHub. A feed that fails to load or validate is left out, never retried in a loop. */
@@ -285,9 +308,10 @@ export interface FamilyTile {
  */
 export function pickTiles(
   feeds: readonly FamilyFeed[],
-  opts: { self: FamilySiteId; cluster: ClusterId; kind: "deal" | "preorder"; region: FamilyRegion; max?: number },
+  opts: { self: FamilySiteId; cluster: ClusterId; kind: "deal" | "preorder"; region: FamilyRegion; max?: number; perSite?: number; prefer?: string },
 ): FamilyTile[] {
   const max = opts.max ?? 6;
+  const perSite = opts.perSite ?? 1;
   const tiles: FamilyTile[] = [];
   for (const site of clusterSisters(opts.self, opts.cluster)) {
     const feed = feeds.find((f) => f.site === site.id);
@@ -300,18 +324,22 @@ export function pickTiles(
       [other, opts.region],
       [other, "US"],
     ];
-    let item: FamilyItem | undefined;
+    // The first rung with anything wins; a preferred category goes first inside it (Compare Empire's cameras on CamCompare).
+    let got: FamilyItem[] = [];
     for (const [k, r] of tries) {
-      item = mine.find((i) => i.kind === k && i.region === r);
-      if (item) break;
+      got = mine.filter((i) => i.kind === k && i.region === r);
+      if (got.length) break;
     }
-    if (!item) continue;
-    // A feed's links are its main section's (a Gunpla tile has no "more deals" page on Gundam Compare's card side).
-    const l = item.cluster === site.clusters[0] ? feed.links[item.region] : undefined;
-    tiles.push({ site, item, more: (item.kind === "deal" ? l?.deals : l?.preorders) ?? null });
+    if (opts.prefer) got = [...got.filter((i) => i.category === opts.prefer), ...got.filter((i) => i.category !== opts.prefer)];
+    for (const item of got.slice(0, perSite)) {
+      // A feed's links are its main section's (a Gunpla tile has no "more deals" page on Gundam Compare's card side).
+      const l = item.cluster === site.clusters[0] ? feed.links[item.region] : undefined;
+      tiles.push({ site, item, more: (item.kind === "deal" ? l?.deals : l?.preorders) ?? null });
+    }
   }
   tiles.sort((a, b) => {
     if (a.item.kind !== b.item.kind) return a.item.kind === opts.kind ? -1 : 1;
+    if (opts.prefer && (a.item.category === opts.prefer) !== (b.item.category === opts.prefer)) return a.item.category === opts.prefer ? -1 : 1;
     if (a.item.kind === "deal") return (b.item.savingPct ?? 0) - (a.item.savingPct ?? 0);
     return (a.item.releaseDate ?? "9999").localeCompare(b.item.releaseDate ?? "9999");
   });
@@ -354,4 +382,33 @@ export function toFamilyRegion(code: string | null | undefined): FamilyRegion {
 /** Shared by every data job: write own feed, then copy the cluster's feeds. */
 export function clusterIds(self: FamilySiteId): FamilySiteId[] {
   return footerSisters(self).map((s) => s.id);
+}
+
+// ── Hand-offs: the same product on a sister site ────────────────────────────
+
+/** Words that describe the box, not the model ("Canon EOS R6 Mark III Body" is the "Canon EOS R6 Mark III"). */
+const PACKAGING = /\b(body( only)?|only|mirrorless|interchangeable[- ]lens|digital|compact|medium[- ]format|full[- ]frame|camera|cameras|black|silver)\b/g;
+
+/** A name reduced to its model, or null when it names more than one thing (a kit, a combo, a bundle). */
+export function modelKey(name: string): string | null {
+  const n = name.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "");
+  if (/\b(kit|combo|bundle|with|w\/|pack|set|case|cage|battery|charger|strap|bag|filter|adapter|refurb\w*|used|renewed)\b|\+|&/.test(n)) return null;
+  const k = n.replace(/[()\[\],]/g, " ").replace(PACKAGING, " ").replace(/[^a-z0-9.\/ -]/g, " ").replace(/\s+/g, " ").trim();
+  return k.split(" ").length >= 2 ? k : null;
+}
+
+/**
+ * The sister's page for this product: the one product whose model key equals ours, else null.
+ * Exact only, and two candidates are no match (CLAUDE.md: a wrong match is worse than none).
+ */
+export function sameProduct(name: string, products: readonly FamilyProduct[] | undefined, aliases: readonly string[] = []): FamilyProduct | null {
+  if (!products?.length) return null;
+  const keys = new Set([name, ...aliases].map(modelKey).filter((k): k is string => !!k));
+  if (!keys.size) return null;
+  const hits = new Map<string, FamilyProduct>();
+  for (const p of products) {
+    const k = modelKey(p.name);
+    if (k && keys.has(k)) hits.set(p.url, p);
+  }
+  return hits.size === 1 ? [...hits.values()][0] : null;
 }

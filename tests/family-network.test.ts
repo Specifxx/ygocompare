@@ -7,7 +7,9 @@ import {
   clusterSisters,
   familyMoney,
   footerSisters,
+  modelKey,
   pickTiles,
+  sameProduct,
   tileNote,
   toFamilyRegion,
   validCluster,
@@ -108,4 +110,30 @@ test("money and notes", () => {
   assert.equal(tileNote(validFeed(feed("op", [deal()]), "op", NOW)!.items[0]), "23% under the TCGplayer market price");
   assert.equal(toFamilyRegion("gb"), "UK");
   assert.equal(toFamilyRegion("xx"), "US");
+});
+
+test("hand-offs: same model only, never a kit, never ambiguous", () => {
+  const cam = [
+    { name: "Canon EOS R6 Mark III", url: "https://www.camcompare.app/cameras/canon-eos-r6-mark-iii" },
+    { name: "Nikon Z8", url: "https://www.camcompare.app/cameras/nikon-z8" },
+    { name: "Sony a7 IV", url: "https://www.camcompare.app/cameras/sony-a7-iv" },
+    { name: "Sony a7 IV", url: "https://www.camcompare.app/cameras/sony-a7-iv-dup" },
+  ];
+  assert.equal(sameProduct("Canon EOS R6 Mark III Body", cam)?.url, cam[0].url);
+  assert.equal(sameProduct("Nikon Z8 Mirrorless Camera Body", cam)?.url, cam[1].url);
+  assert.equal(sameProduct("Nikon Z8 Body with 24-120mm Lens Kit", cam), null);
+  assert.equal(sameProduct("Canon EOS R6 Mark II Body", cam), null);
+  assert.equal(sameProduct("Sony a7 IV Body", cam), null, "two candidates is no match");
+  assert.equal(modelKey("DJI Osmo Pocket 4 Creator Combo"), null);
+});
+
+test("pickTiles: several per sister when asked, preferred category first", () => {
+  const items = [
+    deal({ cluster: "tech", url: "https://compareempire.com/laptops/a", category: "laptops", refCents: 20000 }),
+    deal({ cluster: "tech", url: "https://compareempire.com/cameras/b", category: "cameras" }),
+    deal({ cluster: "tech", url: "https://compareempire.com/cameras/c", category: "cameras", refCents: 11000 }),
+  ];
+  const t = pickTiles([feed("empire", items)], { self: "cam", cluster: "tech", kind: "deal", region: "US", perSite: 3, prefer: "cameras" });
+  assert.equal(t.length, 3);
+  assert.deepEqual(t.map((x) => x.item.category), ["cameras", "cameras", "laptops"]);
 });
