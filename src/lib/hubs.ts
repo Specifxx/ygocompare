@@ -5,6 +5,7 @@ import { SITE } from "@/site.config";
 import type { CardHubConfig, Product } from "@/lib/site-types";
 import { byValue, products, productsInSet, refCents, setById, sets } from "@/lib/data";
 import { preorderSets, todayIso } from "@/lib/preorders";
+import { PREORDER_COPY } from "@/content/preorders";
 import { slugify } from "@/lib/slug";
 
 // "LR+" and "LR++" must not share a slug.
@@ -59,9 +60,14 @@ export function sealedInSet(setId: number): Product[] {
   return byValue(productsInSet(setId).filter((p) => p.kind === "sealed" && p.sealedType !== "Insert")).sort((a, b) => rank(a.sealedType) - rank(b.sealedType));
 }
 
-/** The releases with a pre-order page (lib/preorders.ts), soonest first. */
+/** The releases with a pre-order page (lib/preorders.ts), soonest first; an upcoming set with written copy counts before any store lists it. */
 export const preorderSetList = (today = todayIso()) =>
-  preorderSets(sets(), (s) => { const list = sealedInSet(s.id); return { products: list.length, boxes: list.filter((p) => p.sealedType === "Booster Box").length }; }, today);
+  preorderSets(
+    sets(),
+    (s) => { const list = sealedInSet(s.id); return { products: list.length, boxes: list.filter((p) => p.sealedType === "Booster Box").length }; },
+    today,
+    (s) => !!PREORDER_COPY.sets[s.slug],
+  );
 
 // Attribute hubs (SITE.cardHubs): /cards/<facet>/<slug>, e.g. every Red card or
 // every Frozen card, most valuable first. Built once per process: YGO has

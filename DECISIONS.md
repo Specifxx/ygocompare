@@ -1069,3 +1069,13 @@ every three hours for Empire HQ (riftcompare.com/admin/hq) and the one Monday re
 the file goes quiet for a day (a stopped monitor cannot mail). Only a FAILED check fails the run, which is GitHub's
 email to the owner; warnings wait for HQ and Monday. The file carries status and the monitor's own sentences only,
 the same as the public Actions log.
+
+
+## 2026-11-02 — An announced set with written copy gets its pre-order page before any store lists it
+
+`/preorders/<slug>` already built itself for every upcoming set with a sealed product. The gap was the months between
+an announcement and the first store listing, when "<set> pre-order" is already searched: Gundam's GD07 Blazing Fist
+had copy in `src/content/preorders.ts` but no page. `preorderSets` now takes a `curated` test, and `preorderSetList`
+passes "has an entry in `PREORDER_COPY.sets`": such a set has its page while upcoming even with nothing sealed, saying
+plainly that no store lists it yet. Promo groups and placeholders have no copy, so they still need a sealed product.
+The header strip ("pre-orders are open") still waits for a real listing. Engine change, the same in all four repos.

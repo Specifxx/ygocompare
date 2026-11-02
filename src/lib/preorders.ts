@@ -37,10 +37,17 @@ export function inPreorderWindow(s: Pick<SetInfo, "upcoming" | "releasedOn">, to
  * placeholder TCGplayer group) has nothing to compare, and a released set needs
  * a booster box, since its page is then "<set> Booster Box Prices" (a starter
  * deck release is just its product page).
+ *
+ * `curated` (2026-11-02): an UPCOMING set the site has written pre-order copy
+ * for (src/content/preorders.ts) gets its page before any store lists it, so
+ * an announced main set ("GD07 pre-order") has a landing from the day it is
+ * announced; the page says no store lists it yet. Promo groups and
+ * placeholders have no copy, so they still need a sealed product.
  */
-export function preorderSets(all: SetInfo[], sealed: (s: SetInfo) => { products: number; boxes: number }, today = todayIso()): SetInfo[] {
+export function preorderSets(all: SetInfo[], sealed: (s: SetInfo) => { products: number; boxes: number }, today = todayIso(), curated: (s: SetInfo) => boolean = () => false): SetInfo[] {
   const live = all.filter((s) => {
     if (!inPreorderWindow(s, today)) return false;
+    if (isPreorder(s, today) && curated(s)) return true;
     const n = sealed(s);
     return n.products > 0 && (isPreorder(s, today) || n.boxes > 0);
   });
