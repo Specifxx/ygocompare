@@ -87,7 +87,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
       <td className="px-3 py-2.5 text-right text-xs text-muted">See price</td>
       <td className="px-3 py-2.5 text-right">
         <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
-          View deal <span aria-hidden="true">↗</span>
+          Check price <span aria-hidden="true">↗</span>
         </a>
       </td>
     </tr>
