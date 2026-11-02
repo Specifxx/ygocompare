@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { amazonSearchUrl, goHref, subId, tagged } from "@/lib/affiliate";
+import { amazonSearchUrl, amazonSearchUrls, goHref, subId, tagged } from "@/lib/affiliate";
 import { SITE } from "@/site.config";
 
 test("eBay links carry the EPN campaign and a per-site customid", () => {
@@ -54,4 +54,15 @@ test("store links carry a referral utm_source and keep their own", () => {
   assert.equal(s.searchParams.get("utm_medium"), "referral");
   assert.ok(s.searchParams.get("utm_source"));
   assert.equal(new URL(tagged("https://shop.example/p?utm_source=mine")).searchParams.get("utm_source"), "mine");
+});
+
+test("each market's Amazon gets its own store's tag, and a market without one gets no Amazon", () => {
+  assert.match(amazonSearchUrl("booster box", "AU")!, /^https:\/\/www\.amazon\.com\.au\/s\?k=booster%20box&tag=compareempire-22$/);
+  assert.equal(amazonSearchUrl("booster box", "UK"), null, "no UK Associates tag yet");
+  assert.equal(amazonSearchUrl("booster box", "SG"), null, "amazon.sg has no Associates programme");
+  const all = amazonSearchUrls("booster box")!;
+  assert.deepEqual(Object.keys(all).sort(), ["AU", "US"]);
+  // /go re-tags by host: the AU link keeps the AU tag, never the US one.
+  assert.equal(new URL(tagged(all.AU!, "s")).searchParams.get("tag"), "compareempire-22");
+  assert.notEqual(new URL(tagged(all.US!, "s")).searchParams.get("tag"), "compareempire-22");
 });

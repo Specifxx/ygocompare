@@ -11,6 +11,7 @@
 // and Impact's Performance by Sub ID report shows subId1), and in Amazon's
 // `ascsubtag`. The site key comes first so the digest groups by it.
 import { SITE } from "@/site.config";
+import { MARKETS, type Market } from "./site-types";
 
 // One EPN campaign for every Compare site, hard-coded (owner, 2026-10-30: "make
 // all of them use this exact campaign"); the customid's site key tells the
@@ -62,10 +63,32 @@ export function tcgplayerAffiliateUrl(url: string, sub?: string): string {
   return `${TCGPLAYER_IMPACT_LINK}?subId1=${tag}&sharedid=${tag}&u=${encodeURIComponent(url)}`;
 }
 
+// Each Amazon store is its own Associates programme, and a tag earns only on the
+// store whose account issued it (a US tag on amazon.com.au earns nothing). The US
+// uses AMAZON_TAG above; Australia the owner's AU account (compareempire-22) until
+// AMAZON_TAG_AU sets the site's own; the UK, Canada and the eurozone (amazon.de)
+// have no account yet, so they show no Amazon row until AMAZON_TAG_UK /
+// AMAZON_TAG_CA / AMAZON_TAG_DE is set. Singapore never (no Associates programme).
+const envTag = (k: string) => (process.env[k] ?? "").trim() || null;
+const AMAZON_STORES: Partial<Record<Market, { host: string; tag: string | null }>> = {
+  US: { host: "www.amazon.com", tag: AMAZON_TAG || null },
+  AU: { host: "www.amazon.com.au", tag: envTag("AMAZON_TAG_AU") ?? "compareempire-22" },
+  UK: { host: "www.amazon.co.uk", tag: envTag("AMAZON_TAG_UK") },
+  CA: { host: "www.amazon.ca", tag: envTag("AMAZON_TAG_CA") },
+  EU: { host: "www.amazon.de", tag: envTag("AMAZON_TAG_DE") },
+};
+
+/** The tag for an amazon.* host: that store's own, else the US tag. */
+function amazonTagFor(host: string): string | null {
+  const h = host.toLowerCase().replace(/^(www\.)?/, "www.");
+  return Object.values(AMAZON_STORES).find((s) => s?.host === h)?.tag ?? AMAZON_TAG ?? null;
+}
+
 function amazonAffiliateUrl(url: string, sub?: string): string {
   try {
     const u = new URL(url);
-    if (AMAZON_TAG) u.searchParams.set("tag", AMAZON_TAG);
+    const tag = amazonTagFor(u.hostname);
+    if (tag) u.searchParams.set("tag", tag);
     u.searchParams.set("ascsubtag", sub ?? subId());
     return u.toString();
   } catch {
@@ -88,9 +111,21 @@ function storeReferralUrl(url: string): string {
   }
 }
 
-export function amazonSearchUrl(q: string): string | null {
-  if (!AMAZON_TAG) return null;
-  return `https://www.amazon.com/s?k=${encodeURIComponent(q)}&tag=${AMAZON_TAG}`;
+/** A tagged search of the market's Amazon, or null where the market has no tag. */
+export function amazonSearchUrl(q: string, market: Market = "US"): string | null {
+  const s = AMAZON_STORES[market];
+  if (!s?.tag) return null;
+  return `https://${s.host}/s?k=${encodeURIComponent(q)}&tag=${encodeURIComponent(s.tag)}`;
+}
+
+/** The tagged Amazon search for every market that has a tag (the price table picks the visitor's). */
+export function amazonSearchUrls(q: string): Partial<Record<Market, string>> | null {
+  const out: Partial<Record<Market, string>> = {};
+  for (const m of MARKETS) {
+    const url = amazonSearchUrl(q, m);
+    if (url) out[m] = url;
+  }
+  return Object.keys(out).length ? out : null;
 }
 
 /** The tagged destination for any outbound offer URL. */
