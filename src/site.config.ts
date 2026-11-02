@@ -33,6 +33,8 @@ export const SITE: SiteConfig = {
   impactSiteVerification: "3c00a442-a61e-4003-a422-540b7435b80d",
 
   priceAlerts: true,
+  // Amazon US tracking ID in the owner's US Associates account (verified live 2026-10-28).
+  amazonUsTag: "ygocompare-20",
   tcgcsvCategoryId: 2,
   tcgplayerSlug: "yugioh",
   ebay: {
