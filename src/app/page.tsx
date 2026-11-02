@@ -1,6 +1,7 @@
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { SearchBox } from "@/components/SearchBox";
+import { MarketChooser } from "@/components/ClientPrefs";
 import { CreatorsTeaser } from "@/components/creators/CreatorsTeaser";
 import { CardAdPair } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
@@ -72,7 +73,8 @@ export default function Home() {
         <p className="mt-3 max-w-2xl text-muted">
           Compare {m?.counts.cards.toLocaleString() ?? "every"} {SITE.gameShort} cards and {m?.counts.sealed ?? ""} sealed products across TCGplayer, eBay and {storeCount} stores — in your currency, updated daily.
         </p>
-        <div className="mt-6 max-w-2xl"><SearchBox big /></div>
+        <MarketChooser className="mt-5" />
+        <div className="mt-4 max-w-2xl"><SearchBox big /></div>
         <p className="mt-3 text-xs text-muted">
           {m ? `Prices updated ${ago(m.updatedAt)} · ${m.counts.offers.toLocaleString()} live prices` : "Prices update daily"}
           {upcoming && <> · <Link className="link" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link></>}
