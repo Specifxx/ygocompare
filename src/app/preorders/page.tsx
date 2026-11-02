@@ -43,7 +43,7 @@ export default function Preorders() {
           <p className="text-xs uppercase tracking-wide text-brand-400">{isPreorder(s) ? `Out ${longDate(s.releasedOn)}${days != null && days > 0 ? ` · ${days} days` : ""}` : `Released ${longDate(s.releasedOn)}`}</p>
           <h2 className="text-lg font-bold">{s.name} {isPreorder(s) ? "pre-orders" : "prices"}</h2>
           <p className="text-sm text-muted">
-            {sealed.length} sealed product{sealed.length === 1 ? "" : "s"} · {stores} store{stores === 1 ? "" : "s"}
+            {sealed.length ? <>{sealed.length} sealed product{sealed.length === 1 ? "" : "s"} · {stores} store{stores === 1 ? "" : "s"}</> : "No store listings yet"}
             {box && refCents(box.id) ? <> · {shortName(box.name)} {money(refCents(box.id))} on TCGplayer</> : null}
           </p>
           <p className="mt-1 text-sm link">Compare every store →</p>

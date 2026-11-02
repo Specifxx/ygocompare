@@ -4,7 +4,8 @@
 // once per server instance.
 import fs from "node:fs";
 import path from "node:path";
-import type { Catalog, EbayPick, Meta, Offer, PriceEntry, Product, SetInfo } from "./site-types";
+import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Product, SetInfo } from "./site-types";
+import { CURRENCY } from "./site-types";
 import { readSetPrices, readSummary, type SummaryEntry } from "./price-store";
 import { decodeOffer } from "./offer-codec";
 import { referenceCents } from "./import/tcgcsv";
@@ -150,6 +151,43 @@ export interface Deal {
 }
 /** In-stock store/eBay offers below TCGplayer market (USD offers only, so the
  *  comparison is like-for-like). */
+/** A store deal inside one market (the seasonal sale pages): the cheapest in-stock store at least
+ * 10% under the median of that market's in-stock stores (3+ stores), in that market's own currency,
+ * stores only (never eBay, Amazon or TCGplayer). Biggest saving × value first, one row per product. */
+export interface StoreDeal {
+  p: Product;
+  offer: Offer;
+  median: number;
+  stores: number;
+  saving: number; // percent below the median store
+}
+export function storeDealsIn(m: Market, limit = 24, kind?: Product["kind"]): StoreDeal[] {
+  const out: StoreDeal[] = [];
+  const cur = CURRENCY[m];
+  for (const p of products()) {
+    if (kind && p.kind !== kind) continue;
+    const sm = summaryOf(p.id);
+    if (sm.inStockSources < 3 || !sm.best.some((o) => o.market === m && o.source !== "tcgplayer")) continue;
+    const cheapest = new Map<string, Offer>();
+    for (const o of priceOf(p.id).offers) {
+      if (o.market !== m || o.currency !== cur || !o.inStock || o.preorder) continue;
+      if (o.source === "ebay" || o.source === "amazon" || o.source === "tcgplayer") continue;
+      const had = cheapest.get(o.source);
+      if (!had || o.cents < had.cents) cheapest.set(o.source, o);
+    }
+    if (cheapest.size < 3) continue;
+    const list = [...cheapest.values()].sort((a, b) => a.cents - b.cents);
+    const c = list.map((o) => o.cents);
+    const mid = c.length >> 1;
+    const median = c.length % 2 ? c[mid] : Math.round((c[mid - 1] + c[mid]) / 2);
+    if (median < 500) continue;
+    const saving = Math.round((1 - list[0].cents / median) * 100);
+    // Over 45% under the middle store is far likelier a wrong match (a single pack, another language) than a sale.
+    if (saving >= 10 && saving <= 45) out.push({ p, offer: list[0], median, stores: list.length, saving });
+  }
+  return out.sort((a, b) => b.median * b.saving - a.median * a.saving).slice(0, limit);
+}
+
 export function deals(limit = 40): Deal[] {
   const out: Deal[] = [];
   for (const p of products()) {

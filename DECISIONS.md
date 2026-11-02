@@ -1060,6 +1060,82 @@ instead of asking for a link (owner, 2026-11-02: growth must be passive). The ba
 `src/lib/data.ts`, noindex, cached a day by its CDN header; a missing slug answers 404 with a 5-minute cache.
 RiftCompare has had the same widgets since 2026-09.
 
+## 2026-11-02 — The monitor reports to Empire HQ; only red mails
+
+The owner asked for one Monday email instead of a mail per site (the control tower, approved 2026-11-02). The ops
+monitor now writes every result to `ops-status.json`, and its workflow force-pushes it as `status.json`, one orphan
+commit, to this repo's public `ops-status` branch (never deployed, `vercel.json`). RiftCompare's ops monitor reads it
+every three hours for Empire HQ (riftcompare.com/admin/hq) and the one Monday report, and mails the owner itself if
+the file goes quiet for a day (a stopped monitor cannot mail). Only a FAILED check fails the run, which is GitHub's
+email to the owner; warnings wait for HQ and Monday. The file carries status and the monitor's own sentences only,
+the same as the public Actions log.
+
+
+## 2026-11-02 — An announced set with written copy gets its pre-order page before any store lists it
+
+`/preorders/<slug>` already built itself for every upcoming set with a sealed product. The gap was the months between
+an announcement and the first store listing, when "<set> pre-order" is already searched: Gundam's GD07 Blazing Fist
+had copy in `src/content/preorders.ts` but no page. `preorderSets` now takes a `curated` test, and `preorderSetList`
+passes "has an entry in `PREORDER_COPY.sets`": such a set has its page while upcoming even with nothing sealed, saying
+plainly that no store lists it yet. Promo groups and placeholders have no copy, so they still need a sealed product.
+The header strip ("pre-orders are open") still waits for a real listing. Engine change, the same in all four repos.
+
+## 2026-11-02 — Seasonal sale pages
+
+`/boxing-day`, `/january-sales` and `/lunar-new-year` (owner-approved growth plan, 2026-11-02): one URL
+each, kept every year like `/black-friday`, built weeks ahead so Google has indexed them before the day.
+Dates, the year a page is about (it rolls over a week after the event) and the homepage window are pure
+in `src/lib/sale-seasons.ts` (tests in `tests/sale-seasons.test.ts`); Lunar New Year is a published-date
+table to 2040 (6 February 2027). The site covers several countries, so no page reads as one country's:
+the opening sentence names every market we have stores in, and the page has one section per market,
+in that market's own currency, never converted. Each section lists `storeDealsIn(market)`: the cheapest
+in-stock store at least 10% (and at most 45%: past that it is likelier a wrong match than a sale) under
+the median of three or more stores there, stores only; the US section also keeps the Black Friday
+page's under-TCGplayer `deals()`. Never a "was" price, a countdown or an invented sale. The footer and
+sitemap always link them; the homepage only from a few weeks before each event to two days after.
+
+## 2026-11-02 — Price alerts through RiftCompare's shared service
+
+The owner chose "Yes, one shared service" for email price alerts on the sister sites. This reverses part of
+"No accounts, no database, no email" (2026-10-25): the site still has no accounts, no database and no mail key, but
+the card page now has an "Email me when the price drops" form.
+
+- **The form** (`components/PriceAlertForm.tsx`, the same file on every sister site; `PriceAlert.tsx` picks the
+  visitor's market) posts `{site, productId, region, email, targetCents}` straight to
+  `https://riftcompare.com/api/sister-alerts`. RiftCompare keeps the address (its own Neon project, private tables),
+  sends one confirmation email (double opt-in), then checks daily. This site stores nothing and holds no key.
+- **The prices** come from this site's own static `/alert-feed.json` (`lib/alert-feed.ts`), built with each deploy
+  from the same files the pages read: per product, the lowest in-stock store or TCGplayer offer in each market, in
+  that market's currency, never eBay, never converted; plus up to five of the site's own deals (store price under
+  TCGplayer market) that another card site's alert email may end with. Served from the CDN (`revalidate` 86400),
+  so it costs no function call.
+- **Behind `SITE.priceAlerts`** (on for Gundam, Lorcana, YGO and Cyberpunk); the site's `key` must be registered in
+  RiftCompare's `lib/sister-alerts/sites.ts`. The privacy page says what the form sends and links to RiftCompare's.
+- RiftCompare's `sister-alerts.yml` fails (and its ops monitor reports it) when a site with alerts serves no fresh
+  feed, so a broken feed here shows up there.
+
+## Share buttons and shared lists (2026-11-02)
+
+The owner wants word of mouth to drive growth. Every card and sealed page and
+the quick view get a Share button (`components/ShareButton.tsx`): the phone's
+own share sheet, else the link copied, no pop-up, no reward, no account. The
+message names the real price gap in the visitor's market (`priceGap` in
+`lib/share.ts`: cheapest and dearest in-stock item price from two different
+sellers, never converted). The card page's share image
+(`card/[slug]/opengraph-image.tsx`) draws the same gap for the US, the page's
+baseline market; it is drawn on first request and kept a day (empty
+`generateStaticParams`), so only cards someone shares cost a render.
+
+Best Basket results get "Share this list": `/list?i=<id>*<qty>.<id>…` carries
+the list in the URL (nothing stored), and `/list` is one static, noindex shell
+that prices it in the visitor's market through `/api/basket`.
+
+Every shared link carries `utm_source=share&utm_medium=<card|sealed|list>`.
+The button sends a Vercel `share` event and `ShareArrival` one `share_visit`
+event per tab when a shared link brings someone; RiftCompare's growth report
+counts both per site. robots.txt allows `/*utm_source=share` (it blocks other
+query strings) because X's and Reddit's preview fetchers obey robots.txt.
+
 ## Sites that grow each other: the family feed, cluster blocks and short footers (2026-11-02)
 
 Owner, 2026-11-02: "We need each site to help each other grow as a team effort", and the

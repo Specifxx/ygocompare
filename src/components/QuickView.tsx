@@ -10,6 +10,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "@/components/Link";
 import type { Market, Offer } from "@/lib/site-types";
 import { PriceTable } from "./PriceTable";
+import { ShareButton } from "./ShareButton";
 
 interface Head {
   slug: string;
@@ -120,6 +121,7 @@ export function QuickView() {
           <div className="min-w-0 flex-1">
             <h2 className="text-lg font-bold leading-snug text-fg">{name || <span className="qv-shimmer inline-block h-5 w-48 rounded" />}</h2>
             {sub && <p className="mt-0.5 text-sm text-muted">{sub}</p>}
+            {name && <ShareButton path={href} name={name} medium="card" offers={got?.offers} className="mt-2" />}
           </div>
           <button ref={closeRef} type="button" onClick={close} aria-label="Close" className="-mr-1 -mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted hover:bg-ink-800 hover:text-fg">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>

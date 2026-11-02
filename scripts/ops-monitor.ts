@@ -1,6 +1,10 @@
 // Runs in GitHub Actions every three hours (ops-monitor.yml). Each check
-// returns ok / warn / fail; anything not ok is emailed to the owner in one
-// GitHub sends the owner a failed-workflow email. Add a check here for every new scheduled job, API or limit.
+// returns ok / warn / fail. Every result is written to ops-status.json, which the
+// workflow publishes on this repo's `ops-status` branch for Empire HQ
+// (riftcompare.com/admin/hq) and the one Monday report (owner, 2026-11-02:
+// "one Monday email", amber only on the dashboard). Only a FAIL fails the run,
+// and a failed run is GitHub's email to the owner: red is the only thing that
+// mails. Add a check here for every new scheduled job, API or limit.
 import { FAMILY_DIR, FEED_FILE, familyFeeds } from "@/lib/family";
 import fs from "node:fs";
 import path from "node:path";
@@ -83,11 +87,16 @@ async function main() {
       : []),
   ]);
   for (const r of results) console.log(`${r.status.toUpperCase().padEnd(4)} ${r.name}: ${r.detail}`);
-  const bad = results.filter((r) => r.status === "fail" || (r.status === "warn" && !/not set/.test(r.detail)));
+  // Empire HQ's copy (status and our own sentences only: the branch is public, like this log).
+  const overall = results.some((r) => r.status === "fail") ? "fail" : results.some((r) => r.status === "warn") ? "warn" : "ok";
+  const status = { v: 1, site: SITE_HOST, at: new Date().toISOString(), overall, checks: results };
+  fs.writeFileSync(process.env.OPS_STATUS_FILE || "ops-status.json", JSON.stringify(status, null, 1) + "\n");
+  const bad = results.filter((r) => r.status === "fail");
   if (bad.length) {
-    // A failed run makes GitHub email the repo owner (no email service needed).
+    // A failed run makes GitHub email the repo owner (no email service needed). Warnings
+    // wait for Empire HQ and the Monday report.
     console.error(`
-${bad.length} check(s) need a look: ${bad.map((r) => r.name).join(", ")}`);
+${bad.length} check(s) failed: ${bad.map((r) => r.name).join(", ")}`);
     process.exit(1);
   }
 }
