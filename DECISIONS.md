@@ -1028,3 +1028,14 @@ spelled out at import). A fourth number style, `plain` ("001", "B001"), is its c
 `markersAgree` now also accepts a title word that is
 one word of the product's rarity ("Iconic" for "Iconic Legend"). It uses its
 own eBay app (owner); this site's eBay budget is unchanged.
+
+## 2026-11-02 — Self-updating price report
+
+The owner wants growth that runs without him ("a more passive, working in the background solution"): no daily Reddit
+posts. Links are the passive lever, and outreach needs a page worth linking to. `/price-report` is that page: one URL
+for good, rebuilt from the committed data every release (`src/lib/market-report.ts`, pure, tested), so nobody writes
+it. It says how often a US store undercuts TCGplayer's market price on cards from $5 and sealed from $10 (USD against
+USD, never converted), lists the most valuable sealed products a US store has in stock (cases left out: almost none
+are stocked), counts products in stock per market, shows the 30-day movers (7-day until a month of history exists) and
+ends with a citation line. `revalidate = 86400`, in the sitemap and footer. The daily outreach task offers it to
+writers and creators.
