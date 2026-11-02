@@ -15,7 +15,7 @@ export default function Stores() {
   const markets = [...new Set(SITE.stores.map((s) => s.market))];
   return (
     <StaticPage title={`${SITE.gameShort} stores we compare`}>
-      <p>Plus TCGplayer and eBay (US, UK and Australia). Know a store we should compare, or run one? <a href="#suggest">Suggest it below</a>. Listing is free.</p>
+      <p>Plus TCGplayer and eBay (US, UK and Australia). Know a store we should compare, or run one? <a href="#suggest">Suggest it below</a>. Listing is free. Every store is checked before it is listed and every week after: <a href="/how-we-pick-stores">how we pick stores</a>.</p>
       {markets.map((mk) => (
         <section key={mk}>
           <h2>{MARKET_LABEL[mk]}</h2>

@@ -43,6 +43,7 @@ export function Footer() {
             {creatorsOn() && <li><Link href="/creators">Creators</Link></li>}
             <li><Link href="/contact">Contact</Link></li>
             <li><Link href="/stores#suggest">Suggest a store</Link></li>
+            <li><Link href="/how-we-pick-stores">How we pick stores</Link></li>
             <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
             <li><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link></li>
           </ul>
