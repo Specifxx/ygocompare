@@ -1039,3 +1039,13 @@ USD, never converted), lists the most valuable sealed products a US store has in
 are stocked), counts products in stock per market, shows the 30-day movers (7-day until a month of history exists) and
 ends with a citation line. `revalidate = 86400`, in the sitemap and footer. The daily outreach task offers it to
 writers and creators.
+
+## 2026-11-02 — Black Friday page
+
+`/black-friday` lists today's in-stock US store prices 8–60% under TCGplayer's market price (the same
+`deals()` as the homepage and Deal Finder, stores only: eBay and Amazon rows are left out), sealed first, then cards, one row per product. One URL kept
+every year so links and rankings carry over; it must be indexed weeks before the day (27 November 2026),
+so it ships now. The homepage links it from 1 November to a week after Cyber Monday; the footer and
+sitemap always do. Never a "was" price, a countdown, "ends soon" or an invented sale: we only know what a
+store asked when we last read it. Dates and the split are pure (`src/lib/black-friday.ts`, tests in
+`tests/black-friday.test.ts`). Part of the passive-growth plan (owner, 2026-11-02: no daily Reddit posts).
