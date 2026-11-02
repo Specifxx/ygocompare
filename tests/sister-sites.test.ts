@@ -13,5 +13,8 @@ test("sister sites: the eleven others, once each, with descriptive anchors", () 
     assert.equal(new URL(s.url).protocol, "https:", s.name);
     assert.notEqual(s.name, SITE.name, "never this site itself");
     assert.match(s.anchor ?? "", /prices$/, `${s.name}: anchor says what it compares`);
+    // Owner, 2026-11-02: never tie a sister site to one country ("Australian
+    // tech prices" for a site that compares US and UK stores too).
+    assert.doesNotMatch(`${s.anchor} ${s.game}`, /\b(Australian|Aussie|American|British|Canadian|Australia only|AU only)\b/i, `${s.name}: region-neutral`);
   }
 });
