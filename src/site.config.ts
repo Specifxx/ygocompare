@@ -182,7 +182,7 @@ export const SITE: SiteConfig = {
     { name: "WargameCompare", url: "https://wargamecompare.com", game: "Wargames", anchor: "Miniature wargame prices" },
     { name: "FigureCompare", url: "https://figurecompare.com", game: "Anime figures", anchor: "Anime figure prices" },
     { name: "CamCompare", url: "https://www.camcompare.app", game: "Cameras", anchor: "Camera and lens prices" },
-    { name: "Compare Empire", url: "https://compareempire.com", game: "Australian tech", anchor: "Australian tech prices" },
+    { name: "Compare Empire", url: "https://compareempire.com", game: "Tech", anchor: "Tech and appliance prices" },
   ],
   social: { reddit: "https://www.reddit.com/r/yugioh/" },
 };
