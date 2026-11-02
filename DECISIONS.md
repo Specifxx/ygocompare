@@ -1181,3 +1181,17 @@ The rules we keep, on every Compare Empire site:
 - Every link tagged, rel="sponsored nofollow"; no incentive (cashback, discount) for buying through it.
 - Engine: the footer carries the exact statement and trademark line; the quick view API sends no Amazon
   search; the Amazon row's button says "Check price" (not "View deal"); /go answers `no-store`.
+
+## 2026-11-02 — Region switcher in the hero, with drawn flags
+
+Owner: "the region switcher must be more prevalent on all sites, on the main home page hero, and have the
+flags as well". The homepage hero now has a "Prices for" row of every region (flag + name, code on phones;
+`MarketChooser`), the header menu shows the flag and code of the region in use (a native select laid
+invisibly over them, so it stays keyboard- and screen-reader-friendly), and the price table's region pills
+carry flags.
+
+- **Flags are inline SVG (`src/components/Flag.tsx`), not emoji and not image files.** Windows draws a flag
+  emoji as two letters ("US"), and image files would be new requests and hosting. No ids or clip paths, so
+  a flag works inside a closed menu and many times on a page. The same file is in every Compare Empire
+  repo that has a region switcher; keep the copies identical.
+- Wording stays region-neutral: "Prices for", "Choose your region", never one country's spelling or name.

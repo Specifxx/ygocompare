@@ -9,6 +9,7 @@ import { Fragment, useState } from "react";
 import { SITE } from "@/site.config";
 import { CURRENCY, MARKETS, MARKET_LABEL, type Market, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
+import { Flag } from "./Flag";
 import { goHref } from "@/lib/affiliate";
 import { priceRows } from "@/lib/price-rows";
 import { useMarket } from "./ClientPrefs";
@@ -51,13 +52,13 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const picker = (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-ink-800 bg-ink-850 px-3 py-2 text-xs text-muted" data-market-bar>
       <span>
-        Prices for <b className="text-fg">{MARKET_LABEL[market]}</b>
+        Prices for <Flag code={market} /> <b className="text-fg">{MARKET_LABEL[market]}</b>
         {storesIn > 0 && <> · {storesIn} store{storesIn === 1 ? "" : "s"} in stock</>}
       </span>
       {!compact && <span className="flex flex-wrap gap-1" role="group" aria-label="Show prices for">
         {MARKETS.map((m) => (
-          <button key={m} type="button" onClick={() => setMarket(m)} aria-pressed={m === market} className={`min-h-8 rounded-full border px-2.5 text-[11px] font-semibold ${m === market ? "border-brand bg-brand/15 text-fg" : "border-ink-700 hover:border-brand/60 hover:text-fg"}`}>
-            {m}
+          <button key={m} type="button" onClick={() => setMarket(m)} aria-pressed={m === market} className={`inline-flex min-h-8 items-center gap-1 rounded-full border px-2.5 text-[11px] font-semibold ${m === market ? "border-brand bg-brand/15 text-fg" : "border-ink-700 hover:border-brand/60 hover:text-fg"}`}>
+            <Flag code={m} />{m}
           </button>
         ))}
       </span>}
