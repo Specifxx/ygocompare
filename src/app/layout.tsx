@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+// The site's own look on top of the shared one (src/content/site.css; empty
+// on a site that needs none). Game-specific, so it lives outside the engine.
+import "@/content/site.css";
 import { SITE } from "@/site.config";
 import { SITE_URL } from "@/lib/site";
 import { themeCss } from "@/lib/theme-vars";
