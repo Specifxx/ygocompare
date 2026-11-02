@@ -29,5 +29,7 @@ export function GET(req: Request) {
   const market = (u.searchParams.get("m") ?? "").slice(0, 4) || null;
   const res = NextResponse.redirect(tagged(dest, subId(market, page, pid)), 302);
   res.headers.set("X-Robots-Tag", "noindex, nofollow");
+  // Affiliate links must be non-indexed and non-cacheable (Amazon Associates Operating Agreement, 2026-11-02).
+  res.headers.set("Cache-Control", "private, no-store");
   return res;
 }
