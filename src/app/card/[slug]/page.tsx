@@ -108,7 +108,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         <div className="order-1 flex min-w-0 flex-col gap-6 md:order-2">
           <header>
             <div className="flex items-start gap-3">
-              {p.image && <img src={imageAt(p.image, "200w")!} alt="" aria-hidden className="w-20 shrink-0 rounded-md md:hidden" width={80} height={112} />}
+              {p.image && <img src={imageAt(p.image, "200w")!} alt={name} className="w-20 shrink-0 rounded-md md:hidden" width={80} height={112} />}
               <h1 className="min-w-0 flex-1 font-display text-2xl font-black md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
               <ShareButton path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} medium={p.kind === "sealed" ? "sealed" : "card"} offers={e.offers} compact className="mt-1" />
             </div>

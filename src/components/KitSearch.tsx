@@ -34,7 +34,7 @@ export function KitSearch() {
           {hits.map((h) => (
             <li key={h.slug}>
               <a href={h.href} className="flex items-center gap-3 px-3 py-2 hover:bg-ink-800">
-                {h.image ? <img src={h.image} alt="" width={40} height={40} className="h-10 w-10 rounded bg-white object-contain" loading="lazy" /> : <span className="h-10 w-10" />}
+                {h.image ? <img src={h.image} alt={h.name} width={40} height={40} className="h-10 w-10 rounded bg-white object-contain" loading="lazy" /> : <span className="h-10 w-10" />}
                 <span className="min-w-0 flex-1 truncate text-sm text-fg">{h.name}</span>
                 <span className="text-sm font-semibold text-brand-400">{h.price}</span>
               </a>

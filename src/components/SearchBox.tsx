@@ -47,7 +47,7 @@ export function SearchBox({ big = false, placeholder }: { big?: boolean; placeho
           {hits.map((h) => (
             <li key={h.href ?? h.slug}>
               <a href={h.href ?? `/card/${h.slug}`} className="flex items-center gap-3 px-3 py-2 hover:bg-ink-800">
-                {h.image ? <img src={h.image} alt="" width={32} height={44} className="h-11 w-8 rounded object-cover" loading="lazy" /> : <span className="h-11 w-8" />}
+                {h.image ? <img src={h.image} alt={h.name} width={32} height={44} className="h-11 w-8 rounded object-cover" loading="lazy" /> : <span className="h-11 w-8" />}
                 <span className="min-w-0 flex-1">
                   <span className="block truncate text-sm text-fg">{h.name}</span>
                   <span className="block truncate text-xs text-muted">{h.set}</span>
