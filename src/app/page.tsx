@@ -65,8 +65,8 @@ export default function Home() {
   const topDeals = deals(6);
   const shelf = featuredSealed(6);
   const sealedLinks = sealedHubs();
-  // Sealed-led sites (SITE.homeSealedHero) open with the big sealed hero; it replaces the plain shelf below.
-  const hero = SITE.homeSealedHero ? sealedHero() : null;
+  // The sealed shelf: one tabbed, swipeable row (components/SealedHero.tsx) on every site.
+  const hero = sealedHero();
   const storeCount = SITE.stores.length;
   const today = (m?.updatedAt ?? new Date().toISOString()).slice(0, 10);
   const faqs = [
@@ -158,17 +158,11 @@ export default function Home() {
         </section>
       )}
 
-      {hero && hero.featured.length > 0 && (
+      {/* Sealed is as big a market as singles: one section the size of the chase-cards one, tabs for the boxes and each pre-order. */}
+      {hero.featured.length + hero.preorders.length > 0 && (
         <div className="sd">
           <SealedHero data={hero} game={SITE.gameShort} sealedHref={sealedLinks.some((h) => h.slug === "booster-box") ? "/sealed/booster-box" : "/sealed"} />
         </div>
-      )}
-      {/* Sealed is as big a market as singles: it gets a shelf of its own. */}
-      {shelf.length > 0 && !(hero && hero.featured.length > 0) && (
-        <section className="sd">
-          <Header title={`${SITE.gameShort} booster boxes and sealed`} href="/sealed" sub="Newest sets first. Open one to compare every store." />
-          <TileGrid items={shelf} />
-        </section>
       )}
 
       {/* Model kits (SITE.kits): the kits most shops have in stock. */}
