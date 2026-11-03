@@ -153,12 +153,21 @@ export function HeroSparks() {
       raf = requestAnimationFrame(loop);
     };
 
-    const local = (e: PointerEvent | MouseEvent) => {
+    // Pointer events are read on the window and tested against the hero's box,
+    // so the canvas can sit under a pointer-events:none decoration layer and
+    // the content above it still counts (a click on a chip sparks too).
+    const local = (e: PointerEvent) => {
       const rect = host.getBoundingClientRect();
-      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      return x >= 0 && y >= 0 && x <= rect.width && y <= rect.height ? { x, y } : null;
     };
     const onMove = (e: PointerEvent) => {
       const p = local(e);
+      if (!p) {
+        pointer.target = 0;
+        return;
+      }
       pointer.x = p.x;
       pointer.y = p.y;
       pointer.target = 1;
@@ -170,6 +179,7 @@ export function HeroSparks() {
     const onDown = (e: PointerEvent) => {
       if (reduced) return;
       const p = local(e);
+      if (!p) return;
       const n = 18 + Math.floor(Math.random() * 10);
       for (let i = 0; i < n; i++) motes.push(spark(p.x, p.y));
       start();
@@ -190,18 +200,18 @@ export function HeroSparks() {
     resize();
     if (reduced) draw();
     else start();
-    host.addEventListener("pointermove", onMove, { passive: true });
-    host.addEventListener("pointerleave", onLeave);
-    host.addEventListener("pointerdown", onDown, { passive: true });
+    window.addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerleave", onLeave);
+    window.addEventListener("pointerdown", onDown, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
     return () => {
       if (raf) cancelAnimationFrame(raf);
       io.disconnect();
       mo.disconnect();
       ro.disconnect();
-      host.removeEventListener("pointermove", onMove);
-      host.removeEventListener("pointerleave", onLeave);
-      host.removeEventListener("pointerdown", onDown);
+      window.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerleave", onLeave);
+      window.removeEventListener("pointerdown", onDown);
       document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
