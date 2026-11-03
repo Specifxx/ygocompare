@@ -57,7 +57,11 @@ export default function Home() {
   const releases = preorderSetList();
   const upcoming = releases.find((s) => isPreorder(s)) ?? null;
   const chase = latest ? byValue(productsInSet(latest.id).filter((p) => p.kind === "card")).slice(0, 12) : [];
-  const trending = byValue(products().filter((p) => p.kind === "card")).slice(0, 6);
+  // Trending chips: the most valuable chase-rarity cards (SITE.chaseRarities), so a
+  // tokens-and-markers catalogue never fills the row with "Energy Marker" (BandaiCompare).
+  const cards = products().filter((p) => p.kind === "card");
+  const chaseOnly = cards.filter((p) => p.rarity && SITE.chaseRarities.includes(p.rarity));
+  const trending = byValue(chaseOnly.length >= 6 ? chaseOnly : cards.filter((p) => p.rarity)).slice(0, 6);
   const topDeals = deals(6);
   const shelf = featuredSealed(6);
   const sealedLinks = sealedHubs();

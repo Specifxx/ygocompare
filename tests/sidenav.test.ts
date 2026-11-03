@@ -33,7 +33,11 @@ test("every rail link points at a page of the site, and prices come first", () =
     }
     assert.ok(ok, `${h} has no page`);
   }
-  assert.equal(new Set(hrefs).size >= hrefs.length - 8, true);
+  // The rail never repeats a link, and the phone row is a subset of the rail.
+  const rail = groups.flatMap((g) => g.links).map((l) => l.href);
+  assert.equal(new Set(rail).size, rail.length);
+  // (/tools, the index the phone row links, is one page for the rail's whole "Free tools" group.)
+  for (const l of phoneNav()) assert.ok(l.href === "/tools" || rail.includes(l.href), `${l.href} is in the phone row but not the rail`);
 });
 
 test("the homepage is RiftCompare's order: hero, deals, sealed, chase cards, reviews, guides, FAQ, and nothing else", () => {
