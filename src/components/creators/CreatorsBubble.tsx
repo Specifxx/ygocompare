@@ -13,7 +13,7 @@ export function CreatorsBubble() {
   return (
     <Link
       href="/creators"
-      className="group relative z-20 mb-3 inline-flex min-h-9 items-center gap-2 rounded-full border border-brand/40 bg-ink-900/80 py-1 pl-1.5 pr-3.5 text-xs font-bold text-fg shadow-lg shadow-brand/10 backdrop-blur transition-transform hover:scale-[1.04] hover:border-brand sm:absolute sm:right-4 sm:top-4 sm:mb-0 sm:text-sm"
+      className="hero-corner group relative z-20 mb-3 inline-flex min-h-9 items-center gap-2 rounded-full border border-brand/40 bg-ink-900/80 py-1 pl-1.5 pr-3.5 text-xs font-bold text-fg shadow-lg shadow-brand/10 backdrop-blur transition-transform hover:scale-[1.04] hover:border-brand sm:absolute sm:right-4 sm:top-4 sm:mb-0 sm:text-sm"
     >
       <span className="flex -space-x-2" aria-hidden>
         {faces.map((c) => (
