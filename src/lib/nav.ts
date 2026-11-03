@@ -9,6 +9,16 @@ import { SITE } from "@/site.config";
 import { TOOLS } from "@/lib/tool-list";
 import { creatorsOn } from "@/lib/creators";
 
+// Pages that are empty until a week of daily prices exists. The caller (a server
+// component) passes `history` from lib/data.ts historyOn(); this file is also read
+// by the client rail, so it never touches the data files itself.
+const NEEDS_HISTORY = new Set(["/movers", "/tools/rising", "/price-report"]);
+export interface NavOptions {
+  /** False on a site younger than a week: the history pages are left out. */
+  history?: boolean;
+}
+const readyFor = (o: NavOptions) => (l: NavLink) => o.history !== false || !NEEDS_HISTORY.has(l.href);
+
 export interface NavLink {
   href: string;
   label: string;
@@ -18,7 +28,8 @@ export interface NavGroup {
   links: NavLink[];
 }
 
-export function navGroups(): NavGroup[] {
+export function navGroups(o: NavOptions = {}): NavGroup[] {
+  const ready = readyFor(o);
   const prices: NavLink[] = [
     ...(SITE.lines ?? []).map((l) => ({ href: `/games/${l.slug}`, label: l.short })),
     { href: "/cards", label: "Card prices" },
@@ -39,14 +50,15 @@ export function navGroups(): NavGroup[] {
     { href: "/about", label: "About" },
   ];
   return [
-    { title: "Prices", links: prices },
-    { title: "Free tools", links: tools },
-    { title: "Guides & news", links: guides },
+    { title: "Prices", links: prices.filter(ready) },
+    { title: "Free tools", links: tools.filter(ready) },
+    { title: "Guides & news", links: guides.filter(ready) },
   ];
 }
 
 /** The short row for the phone header: the pages most visitors want, in order. */
-export function phoneNav(): NavLink[] {
+export function phoneNav(o: NavOptions = {}): NavLink[] {
+  const ready = readyFor(o);
   return [
     ...(SITE.lines ?? []).map((l) => ({ href: `/games/${l.slug}`, label: l.short })),
     { href: "/cards", label: "Cards" },
@@ -58,5 +70,5 @@ export function phoneNav(): NavLink[] {
     { href: "/tools", label: "Tools" },
     { href: "/blog", label: "Guides" },
     { href: "/forum", label: "Forum" },
-  ];
+  ].filter(ready);
 }

@@ -101,6 +101,14 @@ export function productsInSet(setId: number) {
   return products().filter((p) => p.setId === setId);
 }
 
+/** True once the daily imports have a week of history (any product has a
+ *  7-day change). Until then movers, rising cards and the monthly report are
+ *  empty pages, and the rail does not link them (a new site that advertises six
+ *  tools that say "not enough history yet" looks made up). */
+export function historyOn(): boolean {
+  return Object.values(load().summary).some((e) => e.c7 != null);
+}
+
 export function byValue(list: Product[]) {
   return list
     .map((p) => ({ p, v: refCents(p.id) ?? -1 }))
@@ -195,7 +203,9 @@ export function deals(limit = 40): Deal[] {
     if (!market || market < 500) continue;
     const sm = summaryOf(p.id);
     for (const o of sm.best) {
-      if (o.source === "tcgplayer" || !o.inStock || o.currency !== "USD") continue;
+      // Stores only: an eBay listing is an ad in its own row, never "today's deal" (a
+      // $750 eBay copy "50% under" a $1,488 card is a different card or a damaged one).
+      if (o.source === "tcgplayer" || o.source === "ebay" || !o.inStock || o.currency !== "USD") continue;
       if (o.printing && o.printing !== "Normal" && sm.tcg.Normal) continue;
       const saving = Math.round((1 - o.cents / market) * 100);
       if (saving >= 8 && saving <= 60) out.push({ p, offer: o, market, saving });

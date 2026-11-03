@@ -3,8 +3,10 @@ import { RateUsLink } from "./site-reviews/SiteReviews";
 import { SITE } from "@/site.config";
 import { creatorsOn } from "@/lib/creators";
 import { NETWORK_PAGE, footerSisters } from "@/lib/family-network";
+import { historyOn } from "@/lib/data";
 
 export function Footer() {
+  const history = historyOn();
   return (
     <footer className="mt-16 border-t border-ink-700/60 bg-ink-950">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 text-sm md:grid-cols-4">
@@ -19,15 +21,15 @@ export function Footer() {
             <li><Link href="/sets">Set price guides</Link></li>
             <li><Link href="/sealed">Booster box prices</Link></li>
             {SITE.kits && <li><Link href="/kits">{SITE.kits.label} prices</Link></li>}
-            <li><Link href="/movers">Price movers</Link></li>
-            <li><Link href="/price-report">Monthly price report</Link></li>
+            {history && <li><Link href="/movers">Price movers</Link></li>}
+            {history && <li><Link href="/price-report">Monthly price report</Link></li>}
             <li><Link href="/black-friday">Black Friday deals</Link></li>
             <li><Link href="/boxing-day">Boxing Day deals</Link></li>
             <li><Link href="/january-sales">January sales</Link></li>
             <li><Link href="/lunar-new-year">Lunar New Year deals</Link></li>
             <li><Link href="/embed">Free price widgets</Link></li>
             <li><Link href="/tools/deal-finder">Deal Finder</Link></li>
-            <li><Link href="/tools/rising">Rising cards</Link></li>
+            {history && <li><Link href="/tools/rising">Rising cards</Link></li>}
             <li><Link href="/tools/demand">Demand Finder</Link></li>
             <li><Link href="/tools/best-basket">Best Basket</Link></li>
             <li><Link href="/preorders">Pre-orders</Link></li>
