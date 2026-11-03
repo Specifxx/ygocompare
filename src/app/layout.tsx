@@ -41,7 +41,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: DEFAULT_MODE === "light" ? SITE.theme.pageLight ?? "#f4f5fa" : SITE.theme.pageDark, colorScheme: "dark light" };
 
 const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-const fontHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=${encodeURIComponent(SITE.theme.displayFont)}:wght@700;900&display=swap`;
+// Inter for text and the site's display face for headings (owner, 2026-11-03: the old game-styled
+// display fonts were "way too tacky"; every site now names Plus Jakarta Sans, smooth and inviting,
+// in SITE.theme.displayFont). Weights 700 and 800: Tailwind's font-black falls back to 800.
+const fontHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=${encodeURIComponent(SITE.theme.displayFont)}:wght@700;800&display=swap`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

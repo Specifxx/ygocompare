@@ -65,7 +65,8 @@ body { background: var(--page-bg); min-height: 100vh; }
 }
 .hero-band > :not(.hero-sparks) { position: relative; z-index: 1; }
 .hero-sparks { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.hero-glow { text-shadow: 0 0 40px rgb(var(--c-brand) / 0.35); }
+.hero-glow { text-shadow: 0 0 40px rgb(var(--c-brand) / 0.35); letter-spacing: -0.02em; }
+h1, h2, h3 { letter-spacing: -0.01em; }
 
 /* ── Scroll motion ──────────────────────────────────────────────────────────
    Scroll-driven, never scroll-triggered: a section eases up into place as it
