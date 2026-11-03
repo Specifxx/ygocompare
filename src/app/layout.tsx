@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+import "@/components/site-reviews/site-reviews.css";
 // The site's own look on top of the shared one (src/content/site.css; empty
 // on a site that needs none). Game-specific, so it lives outside the engine.
 import "@/content/site.css";
@@ -14,6 +15,7 @@ import { Footer } from "@/components/Footer";
 import { PreorderStrip } from "@/components/PreorderStrip";
 import { PrefsProvider } from "@/components/ClientPrefs";
 import { QuickView } from "@/components/QuickView";
+import { RateCard } from "@/components/site-reviews/RateCard";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ShareArrival } from "@/components/ShareArrival";
 import { FooterCardAds } from "@/components/FooterCardAds";
@@ -64,6 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <FooterCardAds ads={cardAds({ kind: "card", limit: 8 })} ebayQuery={search.ebayQuery} tcgplayerUrl={search.tcgplayerUrl} />
           <Footer />
           <QuickView />
+          {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
+          <RateCard />
         </PrefsProvider>
         <Analytics />
         <BuyClickTracker />

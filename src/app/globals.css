@@ -399,3 +399,14 @@ body { background: var(--page-bg); min-height: 100vh; }
   --fm-accent-soft: rgb(var(--c-brand) / 0.14);
   --fm-radius: 12px;
 }
+
+/* Rate us card and "What people say" (components/site-reviews): drawn in the site's own theme, light and dark. */
+:root {
+  --srv-bg: rgb(var(--c-ink-900));
+  --srv-fg: rgb(var(--c-fg));
+  --srv-muted: rgb(var(--c-muted));
+  --srv-line: rgb(var(--c-ink-700));
+  --srv-accent: rgb(var(--c-accent));
+  --srv-accent-fg: rgb(var(--c-ink-950));
+  --srv-field: rgb(var(--c-ink-950));
+}
