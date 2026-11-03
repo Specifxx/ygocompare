@@ -70,11 +70,11 @@ export function MarketPicker() {
 
 // The homepage hero's region row (owner, 2026-11-02: make the switcher
 // prominent, with flags). Same choice as the header menu.
-export function MarketChooser({ className = "" }: { className?: string }) {
+export function MarketChooser({ className = "", bare = false }: { className?: string; bare?: boolean }) {
   const { market, setMarket } = useMarket();
   return (
     <div className={`flex flex-wrap items-center gap-2 ${className}`} role="group" aria-label="Choose your region">
-      <span className="text-sm text-muted">Prices for</span>
+      {!bare && <span className="text-sm text-muted">Prices for</span>}
       {MARKETS.map((m) => {
         const on = m === market;
         return (

@@ -22,7 +22,8 @@ export default {
         sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Arial", "sans-serif"],
         display: ["var(--font-display)", "Georgia", "serif"],
       },
-      borderRadius: { md: "4px", lg: "6px", xl: "8px", "2xl": "10px" },
+      // Rounder than before (owner, 2026-11-03: "way too square … more smooth, like OP Compare").
+      borderRadius: { md: "8px", lg: "12px", xl: "16px", "2xl": "20px" },
     },
   },
   plugins: [],
