@@ -1,4 +1,5 @@
 import Link from "@/components/Link";
+import { RateUsLink } from "./site-reviews/SiteReviews";
 import { SITE } from "@/site.config";
 import { creatorsOn } from "@/lib/creators";
 import { NETWORK_PAGE, footerSisters } from "@/lib/family-network";
@@ -42,6 +43,7 @@ export function Footer() {
             <li><Link href="/forum">Community forum</Link> <span className="text-xs">· beta</span></li>
             {creatorsOn() && <li><Link href="/creators">Creators</Link></li>}
             <li><Link href="/contact">Contact</Link></li>
+            <li><RateUsLink className="hover:underline">Rate us</RateUsLink></li>
             <li><Link href="/stores#suggest">Suggest a store</Link></li>
             <li><Link href="/how-we-pick-stores">How we pick stores</Link></li>
             <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>

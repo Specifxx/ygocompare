@@ -1333,3 +1333,15 @@ TCGplayer are never "the cheapest store". A saving is shown only when real: the 
 in-stock store of that market (3+ stores, 5–45%), or in the US against TCGplayer's market price (3–45%).
 `tests/sealed-hero.test.ts` pins it. On for YGO and Cyberpunk (a sealed-first launch); Gundam and Lorcana have no
 affiliate sales yet to say either way, so they keep the shelf. Judge it by `home_sealed_*` tags in the growth report.
+
+## Rate us and "What people say", run by RiftCompare (2026-11-03)
+
+Engine change, in all four repos. The owner wanted RiftCompare's rating pop-up on every site, each site's reviews public, and
+every written review approved in RiftCompare's admin; star ratings count at once. The site stores nothing: the corner card
+(`components/site-reviews/RateCard.tsx`, in the root layout) posts cross-origin to `https://riftcompare.com/api/site-reviews`
+(keyed by `SITE.key`, which must be on RiftCompare's list), and the homepage's "What people say" reads the score and approved
+reviews from `https://riftcompare.com/api/site-reviews/<key>` in the browser (public JSON, CDN six hours): no function, no data
+read, no build step. The card copies RiftCompare's corner card, not its rating drive: never on arrival, after 4 pages and 3
+minutes or on return from a store tab, at most three times 14 days apart, always closable; "Rate us" in the footer opens it.
+While no ad script is on the page it says "We don't run banner ads, so if this helped, please leave us a review." (owner, same
+day). No email asked for, never review markup. RiftCompare's DECISIONS.md, "Every site's reviews, approved in one queue".

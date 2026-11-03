@@ -26,6 +26,7 @@ import { CORE_SALES, salesInSeason } from "@/lib/sale-seasons";
 import { gradeHubs, kits, kitsOn, popular } from "@/lib/kits";
 import { KitGrid } from "@/components/KitTile";
 import { SealedHero } from "@/components/SealedHero";
+import { SiteReviews } from "@/components/site-reviews/SiteReviews";
 import { sealedHero } from "@/lib/sealed-hero";
 
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
@@ -232,6 +233,9 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* The site's own star score and approved reviews (owner, 2026-11-03), loaded in the browser; nothing until there is a rating. */}
+      <SiteReviews />
 
       <section className="max-w-3xl">
         <h2 className="mb-3 text-xl font-bold">Frequently asked questions</h2>
