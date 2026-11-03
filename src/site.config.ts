@@ -117,6 +117,17 @@ export const SITE: SiteConfig = {
     { facet: "attribute", attr: "Attribute", noun: ["attribute", "attributes"], titleCase: true, exclude: ["Spell", "Trap"], title: "{v} attribute {game} cards", blurb: "Every Yu-Gi-Oh! monster has one of seven attributes: Dark, Light, Earth, Water, Fire, Wind and Divine." },
     { facet: "type", attr: "MonsterType", noun: ["monster type", "monster types"], exclude: ["Warior"], title: "{v}-Type {game} cards", blurb: "A monster's type is printed in brackets above its text, such as [Dragon/Effect]." },
   ],
+  // Homepage copy for this game alone (SEO report, 2026-11-03; lib/home-faq.ts adds the live questions).
+  home: {
+    description: "Yu-Gi-Oh! TCG prices for every 1st Edition, Unlimited and Quarter Century printing, plus booster boxes, across TCGplayer, eBay and game stores.",
+    h1: "prices, 1st Edition to Quarter Century, every store",
+    titles: ["Yu-Gi-Oh! Card & Booster Box Prices | YGO Compare"],
+    faqs: [
+      { q: "What's the difference between 1st Edition and Unlimited Yu-Gi-Oh! cards?", a: "A 1st Edition card says \"1st Edition\" below its artwork; an Unlimited printing doesn't. The 1st Edition run comes first and is usually smaller, so for older sets it sells for more, while many modern sets are effectively 1st Edition only. YGO Compare prices the two as separate printings and takes the edition from each store's listing title, never guessing it." },
+      { q: "What is a Quarter Century Secret Rare?", a: "A Secret Rare with a 25th-anniversary stamp, printed from the anniversary sets onward and often the most expensive printing of a staple. The same card number can exist in several rarities, so a store listing that names a rarity is only matched to that rarity: a QCSR price is never compared with a plain Secret Rare's." },
+      { q: "Do you compare Japanese (OCG) Yu-Gi-Oh! cards?", a: "No. YGO Compare covers English-language TCG printings. Japanese and other OCG printings have their own set codes and prices, so their listings are left out rather than matched to the wrong card." },
+    ],
+  },
   rarityOrder: [
     "Quarter Century Secret Rare",
     "Grand Master Rare",

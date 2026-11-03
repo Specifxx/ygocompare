@@ -25,6 +25,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
+import { hasNothingToCompare } from "@/lib/thin";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
@@ -40,14 +41,20 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   // "<card> <number> Price — <game> <set>", stepped down to fit 60 characters (lib/seo-title.ts).
   const title = fitTitle(cardTitleCandidates(name, p.number, set?.name ?? null, p.kind === "sealed")).absolute;
   const stores = new Set(priceOf(p.id).offers.map((o) => o.source)).size;
-  const description = `${name} (${set?.name ?? SITE.gameShort}${p.rarity ? `, ${p.rarity}` : ""}) is worth about ${money(ref)} today. Compare ${stores} live prices from TCGplayer, eBay and ${SITE.gameShort} stores, with price history.`;
+  const what = `${name} (${set?.name ?? SITE.gameShort}${p.rarity ? `, ${p.rarity}` : ""})`;
+  // Never "worth about — … Compare 0 live prices" (SEO report, 2026-11-03): each half says only what we have.
+  const worth = ref ? `${what} is worth about ${money(ref)} today.` : `${what}: no market price yet.`;
+  const compare = stores > 1 ? `Compare ${stores} live prices from TCGplayer, eBay and ${SITE.gameShort} stores, with price history.` : `Prices from TCGplayer, eBay and ${SITE.gameShort} stores, checked daily, with price history.`;
+  const description = `${worth} ${compare}`;
+  // Nothing to compare (no price, no offer, set already out): noindex,follow, and out of the sitemap (lib/thin.ts).
+  const thin = hasNothingToCompare(p);
   return {
     title: { absolute: title },
     description,
     alternates: { canonical: `/card/${p.slug}` },
     // Pack inserts (puzzle pieces, ink drops) are worth cents and nobody shops
     // for them: out of the index, like the sitemap (DECISIONS.md, 2026-10-28).
-    ...(p.sealedType === "Insert" ? { robots: { index: false, follow: true } } : {}),
+    ...(p.sealedType === "Insert" || thin ? { robots: { index: false, follow: true } } : {}),
     // The image is ./opengraph-image.tsx: the card and its real price gap (lib/share.ts).
     openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description },
     twitter: { card: "summary_large_image" },

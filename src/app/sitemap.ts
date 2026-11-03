@@ -7,6 +7,7 @@ import { SITE_URL } from "@/lib/site";
 import { creatorsOn } from "@/lib/creators";
 import { SITE } from "@/site.config";
 import { gradeHubs, kits } from "@/lib/kits";
+import { hasNothingToCompare } from "@/lib/thin";
 
 export const revalidate = 86400;
 
@@ -15,7 +16,8 @@ export const revalidate = 86400;
 // sitemap (Rift Compare: thin pages in the sitemap slow indexing of the rest).
 // So are sealed "Insert" products (Lorcana's puzzle inserts and ink drops,
 // a few cents each: 157 of Lorcana's 1,364 sitemap URLs on 2026-10-28); their
-// pages are noindex too (card/[slug]).
+// pages are noindex too (card/[slug]). So is sealed product with no price and no
+// offer anywhere once its set is out (lib/thin.ts, SEO report 2026-11-03).
 export default function sitemap(): MetadataRoute.Sitemap {
   const at = meta()?.updatedAt ? new Date(meta()!.updatedAt) : new Date();
   const fixed = ["", "/cards", "/sets", "/sealed", "/movers", "/price-report", "/black-friday", "/boxing-day", "/january-sales", "/lunar-new-year", "/embed", "/tools", "/daily", "/tools/deal-finder", "/tools/rising", "/tools/demand", "/tools/best-basket", "/tools/trade", "/tools/selling-fees", "/preorders", "/blog", "/about", "/methodology", "/stores", "/how-we-pick-stores", ...(creatorsOn() ? ["/creators"] : [])];
@@ -32,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ]),
     ...sets().filter((s) => s.productCount > 0).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...products()
-      .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= (SITE.sitemapMinCardCents ?? 50)))
+      .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" && !hasNothingToCompare(p) : (refCents(p.id) ?? 0) >= (SITE.sitemapMinCardCents ?? 50)))
       .map((p) => ({ url: `${SITE_URL}/card/${p.slug}`, lastModified: at, priority: 0.5 })),
     // Model kits (SITE.kits): the hub, a page per grade and per kit.
     ...(SITE.kits && kits().length
