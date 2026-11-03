@@ -49,9 +49,9 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          {/* One short line (owner, 2026-11-02: the old list was "convoluted"): the sites in our own
-              cluster, then one link to the network page that lists every site (DECISIONS.md "Sites that grow each other"). */}
-          <p className="mb-2 font-semibold">Sister sites</p>
+          {/* The other card sites, by brand name only (owner, 2026-11-03: no hobby or tech sites in a card
+              site's footer), then one link to the network page that lists every site (DECISIONS.md). */}
+          <p className="mb-2 font-semibold">Other card games</p>
           <p className="text-muted">
             {footerSisters(SITE.family.id).map((s, i) => (
               <span key={s.id}>{i ? " · " : ""}<a href={s.url} rel="noopener" title={s.label}>{s.name}</a></span>
