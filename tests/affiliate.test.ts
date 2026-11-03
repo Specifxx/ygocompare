@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { amazonSearchUrl, amazonSearchUrls, goHref, subId, tagged } from "@/lib/affiliate";
+import { AMAZON_AU_TAG, amazonSearchUrl, amazonSearchUrls, goHref, subId, tagged } from "@/lib/affiliate";
 import { SITE } from "@/site.config";
 
 test("eBay links carry the EPN campaign and a per-site customid", () => {
@@ -57,7 +57,9 @@ test("store links carry a referral utm_source and keep their own", () => {
 });
 
 test("each market's Amazon gets its own store's tag, and Singapore gets no Amazon", () => {
-  assert.match(amazonSearchUrl("booster box", "AU")!, /^https:\/\/www\.amazon\.com\.au\/s\?k=booster%20box&tag=compareempire-22$/);
+  assert.equal(AMAZON_AU_TAG, SITE.amazonAuTag ?? "compareempire-22");
+  assert.match(AMAZON_AU_TAG, /^[a-z0-9]+-22$/);
+  assert.equal(amazonSearchUrl("booster box", "AU"), `https://www.amazon.com.au/s?k=booster%20box&tag=${AMAZON_AU_TAG}`);
   assert.match(amazonSearchUrl("booster box", "UK")!, /^https:\/\/www\.amazon\.co\.uk\/s\?.*tag=compareempi03-21$/);
   assert.match(amazonSearchUrl("booster box", "CA")!, /amazon\.ca\/.*tag=compareempire-20$/);
   assert.match(amazonSearchUrl("booster box", "EU")!, /amazon\.de\/.*tag=compareempire-21$/);
@@ -65,8 +67,8 @@ test("each market's Amazon gets its own store's tag, and Singapore gets no Amazo
   const all = amazonSearchUrls("booster box")!;
   assert.deepEqual(Object.keys(all).sort(), ["AU", "CA", "EU", "UK", "US"]);
   // /go re-tags by host: the AU link keeps the AU tag, never the US one.
-  assert.equal(new URL(tagged(all.AU!, "s")).searchParams.get("tag"), "compareempire-22");
-  assert.notEqual(new URL(tagged(all.US!, "s")).searchParams.get("tag"), "compareempire-22");
+  assert.equal(new URL(tagged(all.AU!, "s")).searchParams.get("tag"), AMAZON_AU_TAG);
+  assert.notEqual(new URL(tagged(all.US!, "s")).searchParams.get("tag"), AMAZON_AU_TAG);
 });
 
 test("Amazon tags are hard-coded: no Vercel variable decides one (owner, 2026-11-02)", async () => {
