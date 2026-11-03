@@ -165,7 +165,7 @@ export const SITE: SiteConfig = {
     pageDark: "#0d0907",
     inkDark: ["#090605", "#120c0a", "#19110e", "#221813", "#3a2a21", "#574034"],
     wordmarkGradient: "linear-gradient(180deg, #fff1c9 0%, #f2c14e 50%, #c98a1b 100%)",
-    displayFont: "Exo 2",
+    displayFont: "Plus Jakarta Sans",
   },
   halloween: {
     headline: "Shadow Game: the Graveyard is open until 31 October",

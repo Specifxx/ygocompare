@@ -10,6 +10,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "@/components/Link";
 import type { Market, Offer } from "@/lib/site-types";
 import { PriceTable } from "./PriceTable";
+import { CompactCardAds } from "./CardAds";
+import type { CardAds } from "@/lib/card-ads";
 import { ShareButton } from "./ShareButton";
 import { closeQuickViewUrl, onQuickViewHistory, openQuickViewUrl } from "@/lib/quick-view-url";
 
@@ -27,6 +29,8 @@ interface Data {
   name: string;
   sub: string;
   img: string | null;
+  ads?: CardAds;
+  adSearch?: { ebayQuery: string; tcgplayerUrl: string };
 }
 
 // Every link to a card or sealed page opens it (owner, 2026-10-31: "whenever I
@@ -149,7 +153,11 @@ export function QuickView() {
           {data === "loading" ? (
             <Skeleton />
           ) : data ? (
-            <PriceTable offers={data.offers} fx={data.fx} productId={data.id} page="quickview" amazon={data.amazon} tableId={null} />
+            <>
+              <PriceTable offers={data.offers} fx={data.fx} productId={data.id} page="quickview" amazon={data.amazon} tableId={null} />
+              {/* The small eBay + TCGplayer pair, as on the card page (owner, 2026-11-03). Never Amazon here. */}
+              {data.ads && data.adSearch && <div className="mt-4"><CompactCardAds ads={data.ads} page="quickview" limit={6} {...data.adSearch} /></div>}
+            </>
           ) : (
             <p className="rounded-xl border border-ink-700/60 p-4 text-sm text-muted">Prices did not load. The full page has every price.</p>
           )}

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { lineOfSet, setLabel } from "@/lib/lines";
 import Link from "@/components/Link";
 import { notFound } from "next/navigation";
 import { SITE } from "@/site.config";
@@ -11,8 +10,6 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { TileGrid } from "@/components/ProductTile";
-import { EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
-import { adSearch, cardAds } from "@/lib/card-ads";
 import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
 import { fitTitle, setTitleCandidates } from "@/lib/seo-title";
@@ -31,7 +28,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   // List intent first, prices second, as on Rift Compare's set pages ("<set> card list" is the bigger query).
   const count = productsInSet(s.id).filter((p) => p.kind === "card").length;
   const spoilers = !!s.upcoming && count > 0;
-  const title = fitTitle(setTitleCandidates(setLabel(s), count, spoilers));
+  const title = fitTitle(setTitleCandidates(s.name, count, spoilers));
   return {
     title,
     description: spoilers
@@ -51,9 +48,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
   const value = cards.reduce((a, p) => a + (refCents(p.id) ?? 0), 0);
   const rarityOrder = (r: string | null) => { const i = SITE.rarityOrder.indexOf(r ?? ""); return i < 0 ? 99 : i; };
   const byNumber = cards.slice();
-  // A multi-game site walks and suggests sets of the same game.
-  const listed = sets().filter((x) => x.productCount > 0 && x.line === s.line);
-  const game = lineOfSet(s);
+  const listed = sets().filter((x) => x.productCount > 0);
   const i = listed.findIndex((x) => x.id === s.id);
   const newer = i > 0 ? listed[i - 1] : null;
   const older = i >= 0 && i < listed.length - 1 ? listed[i + 1] : null;
@@ -73,9 +68,9 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         />
       )}
       <div>
-      <Breadcrumbs items={game ? [{ name: game.name, href: `/games/${game.slug}` }, { name: s.name }] : [{ name: "Sets", href: "/sets" }, { name: s.name }]} />
+      <Breadcrumbs items={[{ name: "Sets", href: "/sets" }, { name: s.name }]} />
       <header>
-        <p className="text-xs uppercase tracking-wide text-brand-400">{game && <Link href={`/games/${game.slug}`} className="game-chip mr-2" style={{ ["--game" as string]: game.color }}>{game.name}</Link>}{s.upcoming ? "Upcoming" : "Released"} {s.releasedOn}</p>
+        <p className="text-xs uppercase tracking-wide text-brand-400">{s.upcoming ? "Upcoming" : "Released"} {s.releasedOn}</p>
         <h1 className="font-display text-3xl font-black">{s.upcoming && cards.length > 0 ? <>{s.name} spoilers: every card revealed so far</> : <>{s.name} card list &amp; prices</>}</h1>
         <p className="mt-2 text-muted">{cards.length} cards · one of each is worth {money(value)} at TCGplayer market · {sealed.length} sealed products.</p>
         {preorderSetList().some((x) => x.id === s.id) && (
@@ -89,9 +84,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         items={sealedInSet(s.id).slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
       />
       {cards.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">Most valuable {s.name} cards</h2><TileGrid items={cards.slice(0, 18)} /></section>)}
-      <EbayCardStrip ads={{ ebay: cardAds({ setId: s.id, fill: true }).ebay }} page="set" query={adSearch(s.name, s).ebayQuery} title={`${s.name} & more on eBay right now`} />
       {sealed.length > 0 && (<section><h2 className="mb-3 text-xl font-bold">{s.name} booster boxes and sealed</h2><TileGrid items={sealed.slice(0, 12)} /></section>)}
-      <TcgplayerCardStrip ads={{ tcgplayer: cardAds({ setId: s.id, fill: true }).tcgplayer }} page="set" searchUrl={adSearch(s.name, s).tcgplayerUrl} title={`Shop ${s.name} & more on TCGplayer`} />
       {cards.length > 0 && (
         <section>
           <h2 className="mb-3 text-xl font-bold">Full {s.name} card list with prices</h2>

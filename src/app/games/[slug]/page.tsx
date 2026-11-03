@@ -11,8 +11,6 @@ import { money } from "@/lib/format";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { JsonLd } from "@/components/JsonLd";
-import { EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
-import { adSearch, cardAds } from "@/lib/card-ads";
 
 export const revalidate = 86400; // data only changes with a release
 export const generateStaticParams = () => [];
@@ -34,7 +32,6 @@ export default function GamePage({ params }: { params: { slug: string } }) {
   const line = lineBySlug(params.slug);
   if (!line) notFound();
   const v = gameView(line);
-  const search = adSearch(null, { line: line.id });
   return (
     <div className="flex flex-col gap-8" style={{ ["--game" as string]: line.color }}>
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${line.name} sets`, numberOfItems: v.sets.length, itemListElement: v.sets.slice(0, 30).map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name, url: abs(`/sets/${s.slug}`) })) }} />
@@ -62,7 +59,6 @@ export default function GamePage({ params }: { params: { slug: string } }) {
         </section>
       )}
 
-      <EbayCardStrip ads={{ ebay: cardAds({ kind: "card", limit: 12, line: line.id }).ebay }} page="game" query={search.ebayQuery} title={`${line.name} on eBay right now`} />
 
       <section>
         <h2 className="mb-3 text-xl font-bold">Every {line.name} set, newest first</h2>
@@ -89,7 +85,6 @@ export default function GamePage({ params }: { params: { slug: string } }) {
         </div>
       </section>
 
-      <TcgplayerCardStrip ads={{ tcgplayer: cardAds({ kind: "card", limit: 12, line: line.id }).tcgplayer }} page="game" searchUrl={search.tcgplayerUrl} title={`Shop ${line.name} on TCGplayer`} />
     </div>
   );
 }

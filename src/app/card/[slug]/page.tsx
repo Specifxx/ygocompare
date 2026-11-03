@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ebayQueryOf } from "@/lib/lines";
 import Link from "@/components/Link";
 import { Fragment } from "react";
 import { notFound } from "next/navigation";
@@ -17,7 +16,7 @@ import { PriceChart } from "@/components/PriceChart";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
-import { CompactCardAds, EbayCardStrip, TcgplayerCardStrip } from "@/components/CardAds";
+import { CompactCardAds } from "@/components/CardAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrls } from "@/lib/affiliate";
 import { abs } from "@/lib/site";
@@ -118,7 +117,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               <p className="text-sm">7d <span className={(e.change7d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change7d)}</span> · 30d <span className={(e.change30d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change30d)}</span></p>
               <p className="text-sm text-muted">{inStock.length} in-stock listing{inStock.length === 1 ? "" : "s"} worldwide</p>
             </div>
-            <CardTopBuy offers={e.offers} productId={p.id} ebayQuery={`${ebayQueryOf(set)} ${name} ${p.number ?? ""}`.trim()} />
+            <CardTopBuy offers={e.offers} productId={p.id} ebayQuery={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} />
             {Object.keys(e.tcg).length > 1 && (
               <p className="mt-2 flex flex-wrap gap-2 text-xs">
                 {Object.entries(e.tcg).map(([k, v]) => (
@@ -127,15 +126,16 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               </p>
             )}
           </header>
-          {/* The small eBay + TCGplayer pair near the top, under the price and
-              Buy (owner, 2026-10-29); the full strips stay further down. */}
+          {/* The one ad placement on a card page (owner, 2026-11-03): the small
+              eBay + TCGplayer pair under the price and Buy. The full-size strips
+              are gone from every page; the quick view shows the same small pair. */}
           <CompactCardAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true })} page="card" {...adSearch(set?.name, set)} />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>
               <CheckedAgo at={m?.updatedAt} />
             </div>
-            <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${ebayQueryOf(set)} ${name} ${p.number ?? ""}`.trim()} /></div>
+            <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </section>
@@ -144,9 +144,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <h2 className="mb-2 text-lg font-bold">Price history</h2>
             <PriceChart series={series} days={365} />
           </section>
-          {/* Below the comparison and the chart, never between a buyer and the
-              price rows: more of this set on eBay (lib/card-ads.ts). */}
-          <EbayCardStrip ads={{ ebay: cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true }).ebay }} page="card" query={adSearch(set?.name, set).ebayQuery} title={`More ${set?.name ?? SITE.gameShort} & chase cards on eBay`} />
           <section className="prose-site max-w-none text-sm">
             <h2>Is {name} worth it?</h2>
             <p>
@@ -162,7 +159,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           <TileGrid items={related} />
         </section>
       )}
-      <TcgplayerCardStrip ads={{ tcgplayer: cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true }).tcgplayer }} page="card" searchUrl={adSearch(set?.name, set).tcgplayerUrl} title={`Shop ${set?.name ?? SITE.gameShort} & more on TCGplayer`} />
       <CardStickyBuyBar offers={e.offers} productId={p.id} />
     </article>
   );

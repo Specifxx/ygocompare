@@ -16,8 +16,15 @@
   --page-bg: #f4f5fa;
 }
 
-html { background: var(--page-bg); color: rgb(var(--c-fg)); }
+html { background: var(--page-bg); color: rgb(var(--c-fg)); scroll-behavior: smooth; }
 body { background: var(--page-bg); min-height: 100vh; }
+
+/* The left navigation rail (components/SideNav.tsx) from lg (1024px) up: the
+   header, main and footer keep this much room on the left. 0 below lg, where
+   the header carries the navigation. tests/sidenav.test.ts pins the width. */
+:root { --sidenav-w: 0px; }
+@media (min-width: 1024px) { :root { --sidenav-w: 15rem; } }
+.sidenav-scroll { scrollbar-width: thin; scrollbar-color: rgb(var(--c-ink-700)) transparent; }
 
 .wordmark {
   background: var(--wordmark);
@@ -27,12 +34,12 @@ body { background: var(--page-bg); min-height: 100vh; }
   letter-spacing: 0.02em;
 }
 
-.card-surface { @apply rounded-xl border border-ink-700/60 bg-ink-900; }
-.btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition; }
+.card-surface { @apply rounded-2xl border border-ink-700/60 bg-ink-900 shadow-[0_1px_0_rgb(255_255_255/0.03)_inset]; }
+.btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition; }
 .btn-primary { @apply btn bg-brand text-ink-950 hover:bg-brand-400; }
 .btn-buy { @apply btn bg-buy text-white hover:bg-buy-400 px-3 py-1.5; }
 .btn-ghost { @apply btn border border-ink-700 text-fg hover:bg-ink-800; }
-.chip { @apply inline-flex items-center rounded-md border border-ink-700 px-2 py-0.5 text-xs text-muted; }
+.chip { @apply inline-flex items-center rounded-full border border-ink-700 px-2.5 py-0.5 text-xs text-muted; }
 .link { @apply text-brand-400 hover:underline; }
 .prose-site h2 { @apply mt-8 mb-3 text-xl font-bold; }
 .prose-site h3 { @apply mt-6 mb-2 text-lg font-semibold; }
@@ -43,6 +50,46 @@ body { background: var(--page-bg); min-height: 100vh; }
 .prose-site table { @apply my-4 w-full text-sm; }
 .prose-site th { @apply border-b border-ink-700 py-2 text-left; }
 .prose-site td { @apply border-b border-ink-800 py-2 pr-3; }
+
+/* ── The homepage hero (app/page.tsx, components/HeroSparks.tsx) ──────────────
+   Centred, like RiftCompare's: a soft glow of the brand colour behind the
+   headline and a canvas of drifting motes that part around the pointer and
+   burst where it clicks (owner, 2026-11-03: "your cursor movement can make it
+   really cool, or you click somewhere and it sparks"). The canvas is
+   decoration under the content; reduced motion stills it. */
+.hero-band {
+  background:
+    radial-gradient(60rem 24rem at 50% -30%, rgb(var(--c-brand) / 0.28), transparent 60%),
+    radial-gradient(30rem 16rem at 10% 110%, rgb(var(--c-accent) / 0.12), transparent 60%),
+    radial-gradient(30rem 16rem at 90% 110%, rgb(var(--c-brand) / 0.14), transparent 60%);
+}
+.hero-band > :not(.hero-sparks) { position: relative; z-index: 1; }
+.hero-sparks { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hero-glow { text-shadow: 0 0 40px rgb(var(--c-brand) / 0.35); letter-spacing: -0.02em; }
+h1, h2, h3 { letter-spacing: -0.01em; }
+
+/* ── Scroll motion ──────────────────────────────────────────────────────────
+   Scroll-driven, never scroll-triggered: a section eases up into place as it
+   enters the screen, driven by the scroll position itself (CSS view
+   timelines), so there is no script per frame and nothing to lag behind a
+   fling. Transform only, never opacity, so no content is ever hidden from a
+   crawler or a browser without view timelines; reduced motion gets none.
+     .sd          the block eases up as it enters;
+     .sd-stagger  its direct children follow one another in. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .sd, .sd-stagger { view-timeline-name: --sd; }
+    .sd { animation: sd-in linear both; animation-timeline: --sd; animation-range: entry 0% entry 220px; }
+    .sd-stagger > * { animation: sd-in linear both; animation-timeline: --sd; animation-range: entry 0% entry 220px; }
+    .sd-stagger > :nth-child(2) { animation-range: entry 30px entry 250px; }
+    .sd-stagger > :nth-child(3) { animation-range: entry 60px entry 280px; }
+    .sd-stagger > :nth-child(4) { animation-range: entry 90px entry 310px; }
+    .sd-stagger > :nth-child(5) { animation-range: entry 120px entry 340px; }
+    .sd-stagger > :nth-child(n + 6) { animation-range: entry 150px entry 370px; }
+  }
+}
+@keyframes sd-in { from { transform: translate3d(0, 26px, 0); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 /* ── Halloween (lib/season.ts; until 31 October, visitor's local time) ────── */
 .season-only { display: none; }
@@ -357,10 +404,6 @@ body { background: var(--page-bg); min-height: 100vh; }
     radial-gradient(40rem 18rem at 92% 110%, rgba(220, 38, 38, 0.2), transparent 60%),
     radial-gradient(60rem 20rem at 50% -20%, rgba(186, 230, 253, 0.12), transparent 60%);
 }
-:root[data-season="christmas"] .hero-band > :not(.xmas-hero):not(.hero-search) {
-  position: relative;
-  z-index: 1;
-}
 :root[data-season="christmas"] .hero-band {
   padding-top: 3rem;
 }
@@ -375,12 +418,7 @@ body { background: var(--page-bg); min-height: 100vh; }
   --xmas-pill-soft: #1e3a5f;
   --xmas-pill-border: rgb(185 28 28 / 0.4);
 }
-/* The hero's text and buttons are left-aligned, so both groups stand in the
-   right-hand corner, clear of them. */
-.hero-band .xmas-corner-l {
-  left: auto;
-  right: clamp(84px, 9vw, 130px);
-}
+/* The hero's text is centred, so each group keeps its own corner. */
 @media (max-width: 639.98px) {
   .hero-band .xmas-corner-l { display: none; }
   .hero-band .xmas-corner-r .xmas-tree-sm { display: block; width: 24px; }
@@ -410,7 +448,6 @@ body { background: var(--page-bg); min-height: 100vh; }
   --srv-accent-fg: rgb(var(--c-ink-950));
   --srv-field: rgb(var(--c-ink-950));
 }
-
 /* Multi-game sites (SITE.lines): the game tiles, hub header and set chips, each in its game's colour (--game). */
 .game-tile {
   display: block;

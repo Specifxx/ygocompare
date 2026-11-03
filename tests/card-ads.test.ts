@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import type { Offer, Product } from "@/lib/site-types";
 import { cleanEbayUrl, selectCardAds, topUp, type AdRow } from "@/lib/card-ads";
 import { summarize } from "@/lib/price-store";
-import { footerStripsAllowed } from "@/components/FooterCardAds";
+import { readFileSync } from "node:fs";
 
 const p = (id: number, over: Partial<Product> = {}): Product => ({ id, slug: `c-${id}`, name: `Card ${id}`, kind: "card", setId: 1, number: null, rarity: null, attrs: {}, sealedType: null, image: `https://tcgplayer-cdn.tcgplayer.com/product/${id}_200w.jpg`, tcgUrl: "", printings: [], ...over });
 const ebay = (market: "US" | "UK" | "AU", cents: number, extra: Partial<Offer> = {}): Offer => ({ source: "ebay", market, currency: { US: "USD", UK: "GBP", AU: "AUD" }[market], cents, inStock: true, url: `https://www.ebay.com/itm/${cents}?hash=x&customid=old`, title: "", ...extra });
@@ -48,7 +48,10 @@ test("eBay item links lose their old tracking; /go tags them again", () => {
   assert.equal(cleanEbayUrl("https://www.ebay.com/sch/i.html?_nkw=x"), "https://www.ebay.com/sch/i.html?_nkw=x");
 });
 
-test("the footer pair stays off pages with their own strips and off policy pages", () => {
-  for (const path of ["/", "/card/x", "/sets/x", "/kits", "/kit/x", "/kits/grade/hg", "/privacy", "/terms", "/about"]) assert.equal(footerStripsAllowed(path), false, path);
-  for (const path of ["/cards", "/sealed", "/movers", "/blog/x", "/sets", "/tools/deal-finder"]) assert.equal(footerStripsAllowed(path), true, path);
+test("the small eBay + TCGplayer pair is the only card ad: card pages and the quick view, never the homepage, set pages or the layout (owner, 2026-11-03)", () => {
+  const read = (f: string) => readFileSync(f, "utf8");
+  assert.match(read("src/app/card/[slug]/page.tsx"), /<CompactCardAds /);
+  assert.match(read("src/components/QuickView.tsx"), /<CompactCardAds /);
+  for (const f of ["src/app/page.tsx", "src/app/sets/[slug]/page.tsx", "src/app/layout.tsx"]) assert.doesNotMatch(read(f), /CardAd|CardStrip|card-ads/, f);
+  assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
 });
