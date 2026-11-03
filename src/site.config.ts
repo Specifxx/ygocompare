@@ -87,10 +87,11 @@ export const SITE: SiteConfig = {
   // in every printing stay out (except in new sets). Keeps the data, the
   // build and every server function small.
   catalogMinCardCents: 100,
-  // The sitemap lists cards from $5 (about 6,100 of 14,000; 2026-10-28: 28 of
-  // 31 sampled URLs were unknown to Google from a 16,191-URL sitemap). Cheaper
-  // cards stay reachable through their set pages.
-  sitemapMinCardCents: 500,
+  // The sitemap lists cards from $20 (about 2,200 of 15,000, the same floor
+  // eBay uses) beside every sealed product, set and hub: sealed-first
+  // (DECISIONS.md 2026-11-03). Cheaper cards keep their pages, reachable
+  // through set pages and search; only the sitemap leaves them out.
+  sitemapMinCardCents: 2000,
   extraAttrs: ["Attribute", "Card Type", "Monster Type", "MonsterType", "Attack", "Defense", "Link Rating", "LinkRating", "Rank", "Scale", "Pendulum Scale"],
   sealedTypes: [
     // Accessories TCGplayer lists beside the game: not sealed product.
