@@ -38,6 +38,7 @@ export const SITE: SiteConfig = {
   priceAlerts: true,
   // Amazon US tracking ID in the owner's US Associates account (verified live 2026-10-28).
   amazonUsTag: "ygocompare-20",
+  amazonAuTag: "ygocompare-22",
   tcgcsvCategoryId: 2,
   tcgplayerSlug: "yugioh",
   ebay: {

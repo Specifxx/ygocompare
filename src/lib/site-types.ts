@@ -76,6 +76,8 @@ export interface SiteConfig {
   priceAlerts?: boolean;
   /** The site's own Amazon US tracking ID (hard-coded, owner 2026-11-02); riftcompare-20 when unset. */
   amazonUsTag?: string;
+  /** The site's own Amazon AU tracking ID in the owner's AU account (hard-coded, owner 2026-11-03); compareempire-22 when unset. */
+  amazonAuTag?: string;
   tcgcsvCategoryId: number;
   tcgplayerSlug: string;
   ebay: {
