@@ -29,7 +29,11 @@ import { KitGrid } from "@/components/KitTile";
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
 export function generateMetadata(): Metadata {
   const n = SITE.stores.length;
-  const title = fitTitle([`${SITE.gameShort} Card Prices — Compare ${n} Stores`, `${SITE.gameShort} Card Prices`]);
+  // Keyword first, brand last (SEO audit, 2026-11-03: a long game name pushed the brand off Cyberpunk's title). Every
+  // candidate is tried with the brand before any is tried bare.
+  const g = SITE.gameShort;
+  const brand = ` | ${SITE.name}`;
+  const title = fitTitle([`${g} Card Prices — Compare ${n} Stores${brand}`, `${g} Card Prices — ${n} Stores${brand}`, `${g} Card Prices${brand}`, `${g} Card Prices — Compare ${n} Stores`, `${g} Card Prices`]);
   return {
     title,
     description: `Compare ${SITE.game} card and booster box prices across TCGplayer, eBay and ${n} online stores. Cheapest in-stock first, in your currency, updated daily.`,
@@ -61,6 +65,10 @@ export default function Home() {
     <div className="flex flex-col gap-10">
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` }, potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/cards?q={q}`, "query-input": "required name=q" } }} />
+      {/* The products on this page, by their own URLs: the shelf and the newest set's chase cards (SEO audit, 2026-11-03). */}
+      {shelf.length + chase.length > 0 && (
+        <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} sealed and chase card prices`, itemListElement: [...shelf, ...chase].map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}/card/${p.slug}`, name: p.name })) }} />
+      )}
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
       <section className="hero-band relative -mx-4 overflow-hidden rounded-none px-4 py-10 md:rounded-2xl md:py-14">
@@ -135,7 +143,7 @@ export default function Home() {
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {topDeals.map((d) => (
               <Link key={`${d.p.id}${d.offer.source}`} href={`/card/${d.p.slug}`} className="card-surface flex min-w-0 items-center gap-3 p-3 hover:border-brand/60">
-                {d.p.image && <img src={d.p.image} alt="" className="h-20 w-14 object-contain" loading="lazy" />}
+                {d.p.image && <img src={d.p.image} alt={d.p.name} className="h-20 w-14 object-contain" loading="lazy" />}
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium">{shortName(d.p.name)}</p>
                   <p className="text-xs text-muted">Market {money(d.market)}</p>

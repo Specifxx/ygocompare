@@ -95,7 +95,7 @@ export default function KitPage({ params }: { params: { slug: string } }) {
         <div className="order-1 flex min-w-0 flex-col gap-6 md:order-2">
           <header>
             <div className="flex items-start gap-3">
-              {k.image && <img src={kitImage(k.image, 160)} alt="" aria-hidden className="w-20 shrink-0 rounded-md bg-white object-contain md:hidden" width={80} height={80} />}
+              {k.image && <img src={kitImage(k.image, 160)} alt={k.name} className="w-20 shrink-0 rounded-md bg-white object-contain md:hidden" width={80} height={80} />}
               <h1 className="font-display text-2xl font-black md:text-3xl">{k.name} price</h1>
             </div>
             <p className="mt-2 text-sm text-muted">

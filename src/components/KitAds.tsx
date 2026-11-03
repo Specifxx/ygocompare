@@ -48,7 +48,7 @@ export function CompactKitAds({ tiles, page }: { tiles: KitAdTile[]; page: strin
               aria-label={`${t.name} on eBay`}
               className="flex w-[64px] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-ink-700 bg-white transition-colors hover:border-[#0064d2]"
             >
-              <img src={t.image} alt="" loading="lazy" decoding="async" className="aspect-square w-full object-contain p-0.5" />
+              <img src={t.image} alt={t.name} loading="lazy" decoding="async" className="aspect-square w-full object-contain p-0.5" />
               <span className="truncate px-0.5 py-0.5 text-center text-[10px] font-black text-white" style={{ background: ACCENT }}>eBay</span>
             </a>
           ))}

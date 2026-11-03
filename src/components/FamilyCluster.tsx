@@ -18,7 +18,7 @@ export function FamilyCluster({ cluster, kind, region = "US", title }: { cluster
       <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {tiles.map(({ site, item, more }) => (
           <li key={site.id} className="card-surface flex min-w-0 gap-3 p-3">
-            {item.image ? <img src={item.image} alt="" className="h-16 w-14 shrink-0 object-contain" loading="lazy" /> : null}
+            {item.image ? <img src={item.image} alt={item.title} className="h-16 w-14 shrink-0 object-contain" loading="lazy" /> : null}
             <div className="min-w-0 text-sm">
               <p className="text-xs uppercase tracking-wide text-brand-400">{site.topic} · {site.name}</p>
               <a href={item.url} rel="noopener" className="line-clamp-2 font-semibold hover:underline">{item.title}</a>

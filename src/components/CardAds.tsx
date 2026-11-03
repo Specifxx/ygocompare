@@ -179,7 +179,7 @@ function MiniRow({ brand, tiles, href, accent, tileHref, sub }: { brand: React.R
             style={{ ["--ad-accent" as string]: accent }}
           >
             <span className="relative block aspect-[5/7] overflow-hidden bg-ink-850">
-              {t.image && <img src={t.image} alt="" loading="lazy" decoding="async" className="h-full w-full object-contain p-0.5" />}
+              {t.image && <img src={t.image} alt={t.name} loading="lazy" decoding="async" className="h-full w-full object-contain p-0.5" />}
             </span>
             <span className="truncate px-1 py-0.5 text-center text-[10px] font-black text-white" style={{ background: accent }}>
               {money(t.cents, t.currency)}

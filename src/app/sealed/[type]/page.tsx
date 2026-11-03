@@ -1,3 +1,5 @@
+import { abs } from "@/lib/site";
+import { JsonLd } from "@/components/JsonLd";
 import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { notFound } from "next/navigation";
@@ -30,6 +32,9 @@ export default function SealedHub({ params }: { params: { type: string } }) {
   return (
     <div className="flex flex-col gap-6">
       <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, { name: h.label }]} />
+      {items.length > 0 && (
+        <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} ${h.label.toLowerCase()}`, numberOfItems: items.length, itemListElement: items.slice(0, 30).map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.name, url: abs(`/card/${p.slug}`) })) }} />
+      )}
       <header>
         <h1 className="font-display text-3xl font-black">{SITE.gameShort} {h.label.toLowerCase()}</h1>
         <p className="mt-2 text-muted">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>

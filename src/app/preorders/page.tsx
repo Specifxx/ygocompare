@@ -38,7 +38,7 @@ export default function Preorders() {
     const days = daysUntil(s.releasedOn);
     return (
       <Link key={s.id} href={preorderPath(s)} className="card-surface flex min-w-0 gap-4 p-4 hover:border-brand/60">
-        {box?.image ? <img src={imageAt(box.image, "200w")!} alt="" className="h-24 w-20 shrink-0 object-contain" loading="lazy" /> : null}
+        {box?.image ? <img src={imageAt(box.image, "200w")!} alt={box.name} className="h-24 w-20 shrink-0 object-contain" loading="lazy" /> : null}
         <div className="min-w-0">
           <p className="text-xs uppercase tracking-wide text-brand-400">{isPreorder(s) ? `Out ${longDate(s.releasedOn)}${days != null && days > 0 ? ` · ${days} days` : ""}` : `Released ${longDate(s.releasedOn)}`}</p>
           <h2 className="text-lg font-bold">{s.name} {isPreorder(s) ? "pre-orders" : "prices"}</h2>
