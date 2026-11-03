@@ -1365,15 +1365,6 @@ per-game eBay words and TCGplayer links, ad strips that stay inside a game), `Nu
 family registry and in `sisterSites`; the sister-sites test now allows eleven or more. BandaiCompare's
 DECISIONS.md has the reasons.
 
-## Amazon is the third pinned row (2026-11-03)
-
-Engine change, in all four repos. The owner wants Amazon on every site "up there with eBay and TCGplayer", as "the third
-row out of the three". The sealed product table's Amazon row (a tagged search of the visitor's own Amazon, no price) used to
-sit right under the first eBay row, so on a product where eBay led it came before TCGplayer. `PriceTable` now puts it after
-the last pinned row (eBay and TCGplayer, the cheaper first), or first when neither is shown. Still sealed only (a single
-card's Amazon search finds the wrong thing), still product pages only (no Amazon in the quick view), never ranked, never
-the cheapest.
-
 ## The engine looks like RiftCompare: left rail, one concise homepage, one small ad pair (2026-11-03)
 
 Engine change, in all four repos and BandaiCompare. The owner: "I kind of don't like the card engine … way too square …
