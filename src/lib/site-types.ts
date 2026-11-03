@@ -57,6 +57,9 @@ export interface SiteConfig {
   domain: string;
   /** Serve and link the bare domain (no `www.`); the default is www. */
   apexHost?: boolean;
+  /** Open the homepage with the big sealed hero (components/SealedHero.tsx) instead of the plain shelf: for sites whose
+   *  earnings come from sealed and pre-orders. Off by default. */
+  homeSealedHero?: boolean;
   tagline: string;
   description: string;
   keywords: string[];

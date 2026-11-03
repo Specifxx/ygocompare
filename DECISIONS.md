@@ -1313,3 +1313,23 @@ as an ItemList and sealed hubs got one like set pages'. Already in place and kep
 sealed and kit pages, BreadcrumbList on every deep page, Organization/WebSite/FAQPage on the homepage, llms.txt.
 hreflang is deliberately absent: the market is picked in the browser on ONE URL per page, so there are no regional
 alternates to declare. `tests/seo-audit.test.ts` pins it.
+
+## 2026-11-03 Sealed hero on the homepage (engine option `homeSealedHero`)
+
+Bill: "if sealed products are driving most of our sales on some of our websites then for those websites we must make it
+a big part of the home page and attention grab". The growth report for the week to 2026-11-02 says which: YGO Compare
+earned A$39.93, A$38.40 of it from `preorders_pinned` eBay (sealed pre-orders); DexCompare and MTG Compare are
+sealed-only and already open on sealed; OP Compare's money came from the card quick view and RiftCompare's from cards
+and pre-orders together, so neither changes. On YGO the homepage opened with card ad strips and showed sealed fourth.
+
+`SITE.homeSealedHero` (off by default) puts `components/SealedHero.tsx` straight under a shortened title block (on a
+phone the header already has search and market, so the hero's paragraph, market chips, search box and button row are
+hidden there): the newest booster box as a spotlight with its photo, cheapest store price, a Buy button through `/go`
+(`home_sealed_hero`, `home_sealed_preorder`) and a labelled "Ad" eBay line (`home_sealed_hero_ebay`), then six more
+boxes and each set on pre-order with its boxes. It replaces the plain sealed shelf. Built by `lib/sealed-hero.ts` from
+the same committed data (a few set shards, no new read on any other page), every market's prices sent and the
+visitor's picked in the browser like every price island. Store prices only in their own currency; eBay, Amazon and
+TCGplayer are never "the cheapest store". A saving is shown only when real: the cheapest store against the middle
+in-stock store of that market (3+ stores, 5–45%), or in the US against TCGplayer's market price (3–45%).
+`tests/sealed-hero.test.ts` pins it. On for YGO and Cyberpunk (a sealed-first launch); Gundam and Lorcana have no
+affiliate sales yet to say either way, so they keep the shelf. Judge it by `home_sealed_*` tags in the growth report.

@@ -16,6 +16,9 @@ export const SITE: SiteConfig = {
   domain: "ygocompare.com",
   // The bare domain is the address (owner, 2026-10-26: ygocompare.com).
   apexHost: true,
+  // ~96% of YGO Compare's affiliate earnings are sealed and pre-order rows (growth report, week to 2026-11-02): the
+  // homepage opens with the big sealed hero (owner, 2026-11-03).
+  homeSealedHero: true,
   tagline: "Compare Yu-Gi-Oh! card prices across every store",
   description:
     "Free Yu-Gi-Oh! price comparison: live prices for Yu-Gi-Oh! TCG cards, 1st Editions and booster boxes across TCGplayer, eBay and game stores in the US, UK, Canada and Australia.",
