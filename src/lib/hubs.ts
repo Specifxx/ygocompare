@@ -90,17 +90,23 @@ export function attrFacets(): AttrFacet[] {
   const facets = (SITE.cardHubs ?? [])
     .filter((cfg) => cfg.facet !== "rarity")
     .map((cfg) => {
-      const groups = new Map<string, Product[]>();
+      // Grouped by slug, so "BLEACH" and "Bleach" are one hub, named by the spelling most cards use.
+      const groups = new Map<string, { list: Product[]; spell: Map<string, number> }>();
       for (const p of cards) for (const v of attrValues(cfg, p.attrs[cfg.attr])) {
         if (cfg.exclude?.includes(v)) continue;
-        const list = groups.get(v) ?? [];
-        list.push(p);
-        groups.set(v, list);
+        const slug = slugify(v);
+        if (!slug) continue;
+        const g = groups.get(slug) ?? { list: [], spell: new Map<string, number>() };
+        g.list.push(p);
+        g.spell.set(v, (g.spell.get(v) ?? 0) + 1);
+        groups.set(slug, g);
       }
       const hubs = [...groups.entries()]
-        .filter(([, list]) => list.length >= (cfg.minItems ?? 12))
-        .map(([value, list]) => ({ facet: cfg.facet, value, slug: slugify(value), label: value, items: byValue(list) }))
-        .filter((h) => h.slug)
+        .filter(([, g]) => g.list.length >= (cfg.minItems ?? 12))
+        .map(([slug, g]) => {
+          const value = [...g.spell.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0][0];
+          return { facet: cfg.facet, value, slug, label: value, items: byValue(g.list) };
+        })
         .sort((a, b) => b.items.length - a.items.length || a.label.localeCompare(b.label));
       return { cfg, hubs };
     })
@@ -118,7 +124,7 @@ export function attrHref(attr: string, raw: string): { label: string; href: stri
   const f = attrFacets().find((x) => x.cfg.attr === attr);
   if (!f) return null;
   const vals = attrValues(f.cfg, raw);
-  const links = vals.map((v) => ({ label: v, href: f.hubs.some((h) => h.value === v) ? `/cards/${f.cfg.facet}/${slugify(v)}` : "" }));
+  const links = vals.map((v) => ({ label: v, href: f.hubs.some((h) => h.slug === slugify(v)) ? `/cards/${f.cfg.facet}/${slugify(v)}` : "" }));
   return links.some((l) => l.href) ? links : null;
 }
 

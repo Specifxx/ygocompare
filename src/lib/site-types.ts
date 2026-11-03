@@ -171,6 +171,10 @@ export interface SiteConfig {
     wordmarkGradient: string;
     /** Google Fonts family for headings, e.g. "Cinzel". */
     displayFont: string;
+    /** "light" opens the site in the light theme (a visitor's own pick still wins). Off: dark. */
+    defaultMode?: "light" | "dark";
+    /** The light page colour, for the browser bar when defaultMode is "light". */
+    pageLight?: string;
   };
   halloween: { headline: string; blurb: string };
   /** The Christmas line at the top of the home hero (1 November to Boxing Day): a short headline and the rest of the sentence, to /sealed. */

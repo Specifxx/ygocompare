@@ -37,9 +37,9 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   // stays on the real cheapest and a dearer pinned row says by how much. No
   // wording about the order (owner, 2026-10-30): the paid rows are simply first.
   // Amazon (a tagged search of the market's own Amazon, only where that store has
-  // our tag: lib/affiliate.ts) comes second, right under
-  // the first eBay row (eBay first, Amazon second: owner, 2026-10-30), or first
-  // when there is no eBay row: no price, never ranked, never the cheapest.
+  // our tag: lib/affiliate.ts) comes third, right under the pinned eBay and
+  // TCGplayer rows (owner, 2026-11-03: "the third row out of the three"), or
+  // first when neither is shown: no price, never ranked, never the cheapest.
   // Both are drawn exactly like a store row, tagged "Ad" (owner, 2026-11-01:
   // "blend in and look exactly the same as the other price rows").
   const { inStock, refs, outOfStock, cheapest, display, pinned } = priceRows(offers, market);
@@ -93,7 +93,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
       </td>
     </tr>
   ) : null;
-  const amazonAfter = shown.findIndex((o) => o.source === "ebay");
+  const amazonAfter = shown.reduce((last, o, i) => (pinned.includes(o) ? i : last), -1);
   return (
     <div id={tableId ?? undefined} className="overflow-hidden rounded-xl border border-ink-700/60">
       {picker}

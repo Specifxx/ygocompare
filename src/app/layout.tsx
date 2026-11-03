@@ -8,7 +8,7 @@ import "@/content/site.css";
 import { SITE } from "@/site.config";
 import { SITE_URL } from "@/lib/site";
 import { themeCss } from "@/lib/theme-vars";
-import { THEME_BOOT_SCRIPT } from "@/lib/theme";
+import { DEFAULT_MODE, THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: SITE.theme.pageDark, colorScheme: "dark light" };
+export const viewport: Viewport = { themeColor: DEFAULT_MODE === "light" ? SITE.theme.pageLight ?? "#f4f5fa" : SITE.theme.pageDark, colorScheme: "dark light" };
 
 const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 const fontHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=${encodeURIComponent(SITE.theme.displayFont)}:wght@700;900&display=swap`;
@@ -47,7 +47,7 @@ const fontHref = `https://fonts.googleapis.com/css2?family=Inter:wght@400;500;60
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const search = adSearch();
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme={DEFAULT_MODE} suppressHydrationWarning>
       <head>
         <style dangerouslySetInnerHTML={{ __html: themeCss() }} />
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT }} />
