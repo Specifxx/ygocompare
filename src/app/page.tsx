@@ -25,6 +25,8 @@ import { inSeason as bfSeason } from "@/lib/black-friday";
 import { CORE_SALES, salesInSeason } from "@/lib/sale-seasons";
 import { gradeHubs, kits, kitsOn, popular } from "@/lib/kits";
 import { KitGrid } from "@/components/KitTile";
+import { SealedHero } from "@/components/SealedHero";
+import { sealedHero } from "@/lib/sealed-hero";
 
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
 export function generateMetadata(): Metadata {
@@ -54,6 +56,8 @@ export default function Home() {
   const topDeals = deals(6);
   const shelf = featuredSealed(6);
   const sealedLinks = sealedHubs();
+  // Sealed-led sites (SITE.homeSealedHero) open with the big sealed hero; it replaces the plain shelf below.
+  const hero = SITE.homeSealedHero ? sealedHero() : null;
   const storeCount = SITE.stores.length;
   const faqs = [
     { q: `What is ${SITE.name}?`, a: `${SITE.name} is a free ${SITE.game} price comparison site. It compares prices for every ${SITE.gameShort} card and sealed product across TCGplayer, eBay and ${storeCount} online game stores in the US, UK, Canada, Australia and Europe, and updates them every day.` },
@@ -71,29 +75,35 @@ export default function Home() {
       )}
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
-      <section className="hero-band relative -mx-4 overflow-hidden rounded-none px-4 py-10 md:rounded-2xl md:py-14">
+      <section className={`hero-band relative -mx-4 overflow-hidden rounded-none px-4 md:rounded-2xl ${hero ? "py-6 md:py-9" : "py-10 md:py-14"}`}>
         {/* Christmas (1 November to Boxing Day): snow, lights, trees. */}
         <ChristmasDecor />
         <ChristmasGifts />
-        <h1 className="font-display text-3xl font-black md:text-5xl">
+        <h1 className={`font-display font-black ${hero ? "text-2xl md:text-4xl" : "text-3xl md:text-5xl"}`}>
           <span className="wordmark">{SITE.gameShort}</span> card prices, every store, one search
         </h1>
-        <p className="mt-3 max-w-2xl text-muted">
+        {/* With the sealed hero, a phone gets the title and goes straight to the boxes: the header already has the search and the market. */}
+        <p className={`mt-3 max-w-2xl text-muted ${hero ? "hidden sm:block" : ""}`}>
           Compare {m?.counts.cards.toLocaleString() ?? "every"} {SITE.gameShort} cards and {m?.counts.sealed ?? ""} sealed products across TCGplayer, eBay and {storeCount} stores — in your currency, updated daily.
         </p>
-        <MarketChooser className="mt-5" />
-        <div className="mt-4 max-w-2xl"><SearchBox big /></div>
+        <MarketChooser className={hero ? "mt-5 hidden sm:flex" : "mt-5"} />
+        <div className={`mt-4 max-w-2xl ${hero ? "hidden sm:block" : ""}`}><SearchBox big /></div>
         <p className="mt-3 text-xs text-muted">
           {m ? `Prices updated ${ago(m.updatedAt)} · ${m.counts.offers.toLocaleString()} live prices` : "Prices update daily"}
           {upcoming && <> · <Link className="link" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link></>}
         </p>
-        <div className="mt-4 flex flex-wrap gap-2">
+        {/* With the sealed hero right below, its own links replace this row (one screen less to scroll on a phone). */}
+        {!hero && <div className="mt-4 flex flex-wrap gap-2">
           <Link href={sealedLinks.some((h) => h.slug === "booster-box") ? "/sealed/booster-box" : "/sealed"} className="btn-primary">Booster box prices</Link>
           <Link href="/sealed" className="btn-ghost">All sealed products</Link>
           <Link href="/cards" className="btn-ghost">Card prices</Link>
           {SITE.kits && kitsOn() && <Link href="/kits" className="btn-ghost">{SITE.kits.label} prices</Link>}
-        </div>
+        </div>}
       </section>
+
+      {hero && hero.featured.length > 0 && (
+        <SealedHero data={hero} game={SITE.gameShort} sealedHref={sealedLinks.some((h) => h.slug === "booster-box") ? "/sealed/booster-box" : "/sealed"} />
+      )}
 
       <HalloweenBanner />
       {/* Ad banners near the top of the homepage, as on Rift Compare: real
@@ -104,7 +114,7 @@ export default function Home() {
       <CreatorsTeaser />
 
       {/* Sealed is as big a market as singles: it gets the first shelf. */}
-      {shelf.length > 0 && (
+      {shelf.length > 0 && !(hero && hero.featured.length > 0) && (
         <section>
           <Header title={`${SITE.gameShort} booster boxes and sealed`} href="/sealed" sub="Newest sets first. Open one to compare every store." />
           <TileGrid items={shelf} />
