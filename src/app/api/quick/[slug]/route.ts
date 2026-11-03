@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { meta, priceOf, productBySlug, setById } from "@/lib/data";
 import { imageAt } from "@/lib/image";
 import { shortName } from "@/lib/names";
+import { adSearch, cardAds } from "@/lib/card-ads";
 
 export const dynamic = "force-dynamic";
 
@@ -22,6 +23,9 @@ export function GET(_req: Request, { params }: { params: { slug: string } }) {
       name: shortName(p.name),
       sub: [setById(p.setId)?.name, p.number].filter(Boolean).join(" · "),
       img: p.image ? imageAt(p.image, "400w") : null,
+      // The same small eBay + TCGplayer pair the card page shows under its price (owner, 2026-11-03: the ads live on card pages and in the quick view, nowhere else).
+      ads: cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, limit: 6 }),
+      adSearch: adSearch(setById(p.setId)?.name, setById(p.setId)),
     },
     { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" } },
   );

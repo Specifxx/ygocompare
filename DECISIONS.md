@@ -1354,3 +1354,44 @@ sit right under the first eBay row, so on a product where eBay led it came befor
 the last pinned row (eBay and TCGplayer, the cheaper first), or first when neither is shown. Still sealed only (a single
 card's Amazon search finds the wrong thing), still product pages only (no Amazon in the quick view), never ranked, never
 the cheapest.
+## 2026-11-03 — Engine: several games on one site (`SITE.lines`), "series" numbers, BandaiCompare joins
+
+BandaiCompare (`Specifxx/bandaicompare`, bandaicompare.com) runs this engine for three games at once: Union Arena,
+Dragon Ball Super Fusion World and the Digimon Card Game. The engine gained, all off by default: `SITE.lines`
+(several TCGplayer categories in one catalogue, each set tagged with its game, a hub per game at `/games/<slug>`,
+per-game eBay words and TCGplayer links, ad strips that stay inside a game), `NumberStyle` "series" (Union Arena's
+"REZ-1-053" beside the "code" numbers) and `SITE.disclaimer` (a not-affiliated sentence in the footer, /about and
+/terms). This site sets none of them, so its pages, slugs and matching are unchanged. BandaiCompare is in the
+family registry and in `sisterSites`; the sister-sites test now allows eleven or more. BandaiCompare's
+DECISIONS.md has the reasons.
+
+## The engine looks like RiftCompare: left rail, one concise homepage, one small ad pair (2026-11-03)
+
+Engine change, in all four repos and BandaiCompare. The owner: "I kind of don't like the card engine … way too square …
+too many ads … the homepage could be sorted much better … way too convoluted, make it much more concise", with
+RiftCompare's homepage as the gold standard (minus accounts and Pro). What changed, and why each way:
+
+- **A left navigation rail** (`components/SideNav.tsx`, `lib/nav.ts`) from 1024px up, like RiftCompare's, Dex's and OP's:
+  the logo, a feature filter, and every section in three groups (Prices, Free tools, Guides & news). The header keeps the
+  search, region and theme and, below lg, the logo and a scrolling row of the main sections. The page keeps
+  `--sidenav-w` (15rem) of room (`globals.css`, `tests/sidenav.test.ts`). Every link is server HTML.
+- **Rounder** (`tailwind.config.ts`): md 8, lg 12, xl 16, 2xl 20px; pill buttons and chips; cards rounded-2xl. Nothing
+  else about the colours changed, so each site's own `src/content/site.css` still rules its look.
+- **The homepage in RiftCompare's order**: a centred hero (logo, "<game> Card Prices", the promise, the search, region
+  pills, six trending chips, one stat line), then Today's top deals, sealed, the newest set's chase cards, What people say,
+  Guides, the FAQ. Gone from the page: the ad strips under the hero, the AdSense slot, the creators card, the Free tools
+  grid, pre-orders, movers and set grids (all one click away in the rail). Every URL, title, description, H1 phrase,
+  JSON-LD block and FAQ stayed, so nothing indexed moves.
+- **Ads only where a visitor is already looking at a product** (owner: "get rid of the ads under the hero … have them
+  show up on every card page and quick view open … a smaller section"): the small eBay + TCGplayer pair
+  (`CompactCardAds`) under a card page's price and inside the quick view (`/api/quick` now carries six tiles each); the
+  full-size strips, the homepage pair, the set-page pair and the site-wide footer pair are deleted. This overrides the
+  2026-10-28 plan to measure the strips on 11-10. `/go` tags keep the `-mini` names, so the Monday digest still adds up.
+  Never Amazon in the quick view (Amazon's agreement forbids it in a pop-up); nothing here changes that.
+- **A living hero** (`components/HeroSparks.tsx`): drifting motes in the site's own colours that part around the pointer,
+  a soft light under it, and a burst of sparks on a click or tap. One canvas, aria-hidden, under the content; it stops
+  for reduced motion and while the hero is off screen. Sections ease up as they scroll in (`.sd`, `.sd-stagger`):
+  scroll-driven CSS view timelines, transform only, never opacity, so no content is hidden from a crawler or a browser
+  without them.
+- **The creators bubble** (`components/creators/CreatorsBubble.tsx`): a small pill in the hero's corner into `/creators`
+  (RiftCompare's), on sites with creators; the big homepage card is gone.

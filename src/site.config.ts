@@ -165,7 +165,7 @@ export const SITE: SiteConfig = {
     pageDark: "#0d0907",
     inkDark: ["#090605", "#120c0a", "#19110e", "#221813", "#3a2a21", "#574034"],
     wordmarkGradient: "linear-gradient(180deg, #fff1c9 0%, #f2c14e 50%, #c98a1b 100%)",
-    displayFont: "Exo 2",
+    displayFont: "Plus Jakarta Sans",
   },
   halloween: {
     headline: "Shadow Game: the Graveyard is open until 31 October",
@@ -187,6 +187,7 @@ export const SITE: SiteConfig = {
     { name: "Gundam Compare", url: "https://gundamcompare.com", game: "Gundam", anchor: "Gundam Card Game prices", search: "https://gundamcompare.com/cards?q={q}" },
     { name: "Lorcana Compare", url: "https://lorcanacompare.com", game: "Disney Lorcana", anchor: "Disney Lorcana card prices", search: "https://lorcanacompare.com/cards?q={q}" },
     { name: "Cyberpunk Compare", url: "https://cyberpunkcompare.com", game: "Cyberpunk TCG", anchor: "Cyberpunk TCG prices", search: "https://cyberpunkcompare.com/cards?q={q}" },
+    { name: "BandaiCompare", url: "https://bandaicompare.com", game: "Union Arena, Fusion World & Digimon", anchor: "Union Arena, Fusion World and Digimon prices", search: "https://bandaicompare.com/cards?q={q}" },
     { name: "WargameCompare", url: "https://wargamecompare.com", game: "Wargames", anchor: "Miniature wargame prices" },
     { name: "FigureCompare", url: "https://figurecompare.com", game: "Anime figures", anchor: "Anime figure prices" },
     { name: "CamCompare", url: "https://www.camcompare.app", game: "Cameras", anchor: "Camera and lens prices" },

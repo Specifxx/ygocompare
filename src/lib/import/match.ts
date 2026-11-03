@@ -55,7 +55,15 @@ export interface SetEdition {
   default?: boolean;
 }
 
-export type NumberStyle = "fraction" | "code" | "ygo" | "plain";
+export type NumberStyle = "fraction" | "code" | "ygo" | "plain" | "series";
+
+// "series": the "code" numbers ("FB11-084", "BT25-104 SEC") plus series
+// numbers, a title code, a print version and the number: "UE24BT/REZ-1-053",
+// written "REZ-1-053" by stores, keyed without the set prefix ("REZ-1-053";
+// action points "REZ-1-AP05"). The version stays in the key: "-1-" and "-2-"
+// are different sets of one series.
+const SERIES_NUM = /(?<![A-Z0-9])([A-Z]{2,4}\d?)-(\d)-(\d{3}|AP\d{2})(?![A-Z0-9])/g;
+const CODE_NUM = /\b([A-Z]{1,4}\d{0,2}[A-Z]?)-(\d{2,3}[A-Z]?)\b/g;
 
 // Yu-Gi-Oh! numbers: set code, an optional language, the number —
 // "LOB-EN005", "RA01-EN008", "YGLD-ENA01", old "LOB-005" and European
@@ -79,6 +87,13 @@ export function numberKey(n: string, style: NumberStyle): string | null {
     const m = [...n.toUpperCase().matchAll(YGO_NUM)][0];
     return m ? ygoKey(m) : null;
   }
+  if (style === "series") {
+    const u = n.toUpperCase();
+    const s = [...u.matchAll(SERIES_NUM)][0];
+    if (s) return `${s[1]}-${s[2]}-${s[3]}`;
+    const c = [...u.matchAll(CODE_NUM)][0];
+    return c ? `${c[1]}-${c[2].padStart(3, "0")}` : null;
+  }
   if (style === "code") {
     const m = n.toUpperCase().match(/\b([A-Z]{1,4}\d{0,2}[A-Z]?)-(\d{2,3}[A-Z]?)\b/);
     return m ? `${m[1]}-${m[2].padStart(3, "0")}` : null;
@@ -95,6 +110,10 @@ export function numbersInTitle(title: string, style: NumberStyle): string[] {
     for (const m of title.toUpperCase().matchAll(PLAIN_NUM)) out.add(`${m[1]}${m[2]}`);
   } else if (style === "ygo") {
     for (const m of title.toUpperCase().matchAll(YGO_NUM)) out.add(ygoKey(m));
+  } else if (style === "series") {
+    const u = title.toUpperCase();
+    for (const m of u.matchAll(SERIES_NUM)) out.add(`${m[1]}-${m[2]}-${m[3]}`);
+    for (const m of u.matchAll(CODE_NUM)) out.add(`${m[1]}-${m[2].padStart(3, "0")}`);
   } else if (style === "code") {
     for (const m of title.toUpperCase().matchAll(/\b([A-Z]{1,4}\d{0,2}[A-Z]?)-(\d{2,3}[A-Z]?)\b/g))
       out.add(`${m[1]}-${m[2].padStart(3, "0")}`);
@@ -423,5 +442,5 @@ export function looksSealed(title: string, productType = "", style?: NumberStyle
   if (style === "plain" && numbersInTitle(title, "plain").length) return false;
   return /booster|display|\bbox\b|\bcase\b|\bpack\b|starter|deck|trove|gift set|collection|bundle|prerelease|\btin\b/i.test(
     `${title} ${productType}`,
-  ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length;
+  ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length && !numbersInTitle(title, "series").length;
 }
