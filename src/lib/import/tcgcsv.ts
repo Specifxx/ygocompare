@@ -263,11 +263,15 @@ export function applyCatalogFloor(
   });
 }
 
-/** The headline USD price of a product: the lowest printing's market price,
- *  falling back to mid then low. Normal printing first when it is priced. */
+/** The headline USD price of a product: TCGplayer's MARKET price (what the card
+ *  actually sells for), the lowest printing's; Normal printing first when it is
+ *  priced. Never mid or low: with nothing sold those are one seller's asking
+ *  price, and a $28,000 ask on a serial-numbered card topped every "most
+ *  valuable" list, set value and trending row (BandaiCompare, 2026-11-03). A
+ *  product with no market price has no reference and ranks nowhere. */
 export function referenceCents(t: Record<string, TcgPrice> | undefined): number | null {
   if (!t) return null;
-  const pick = (p: TcgPrice) => p.market ?? p.mid ?? p.low;
+  const pick = (p: TcgPrice) => p.market ?? null;
   if (t.Normal && pick(t.Normal) != null) return pick(t.Normal);
   const vals = Object.values(t)
     .map(pick)

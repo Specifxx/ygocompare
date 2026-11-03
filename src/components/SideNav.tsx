@@ -24,9 +24,9 @@ function Chevron({ open }: { open: boolean }) {
   );
 }
 
-export function SideNav() {
+export function SideNav({ groups: given }: { groups?: NavGroup[] }) {
   const pathname = usePathname();
-  const groups = useMemo(() => navGroups(), []);
+  const groups = useMemo(() => given ?? navGroups(), [given]);
   const [q, setQ] = useState("");
   const [closed, setClosed] = useState<Set<string>>(() => new Set());
   const needle = q.trim().toLowerCase();

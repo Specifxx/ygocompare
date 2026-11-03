@@ -19,6 +19,8 @@ import { RateCard } from "@/components/site-reviews/RateCard";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ShareArrival } from "@/components/ShareArrival";
 import { SideNav } from "@/components/SideNav";
+import { navGroups } from "@/lib/nav";
+import { historyOn } from "@/lib/data";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -62,7 +64,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans antialiased">
         <PrefsProvider>
           {/* The left rail from lg up (SideNav.tsx); everything else keeps --sidenav-w of room for it (globals.css). */}
-          <SideNav />
+          <SideNav groups={navGroups({ history: historyOn() })} />
           <div className="lg:pl-[var(--sidenav-w)]">
             <Header />
             <PreorderStrip />

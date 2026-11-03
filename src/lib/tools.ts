@@ -25,7 +25,7 @@ export interface DealRow {
   url: string;
 }
 
-/** Deal Finder: every in-stock store / eBay offer below TCGplayer market, in
+/** Deal Finder: every in-stock store offer below TCGplayer market, in
  *  every market (converted to USD for the comparison). Same sanity window as
  *  the importer: 8–60% under. */
 export function dealRows(): DealRow[] {
@@ -36,7 +36,8 @@ export function dealRows(): DealRow[] {
     if (!market || market < 300) continue;
     const sm = summaryOf(p.id);
     for (const o of sm.best) {
-      if (o.source === "tcgplayer" || !o.inStock) continue;
+      // Stores only, like the homepage's deals: eBay rows are ads, never deals.
+      if (o.source === "tcgplayer" || o.source === "ebay" || !o.inStock) continue;
       if (o.printing && o.printing !== "Normal" && sm.tcg.Normal) continue;
       const usd = toUsd(o, fx);
       const saving = Math.round((1 - usd / market) * 100);

@@ -1395,3 +1395,12 @@ RiftCompare's homepage as the gold standard (minus accounts and Pro). What chang
   without them.
 - **The creators bubble** (`components/creators/CreatorsBubble.tsx`): a small pill in the hero's corner into `/creators`
   (RiftCompare's), on sites with creators; the big homepage card is gone.
+
+## A card's headline price is what it sells for; empty tools stay off the rail (2026-11-03)
+
+Engine change from BandaiCompare (its DECISIONS.md, same date): `referenceCents` is TCGplayer's market
+price only, never its mid or low (a product nobody has sold has only one seller's ask, and a $28,000
+ask topped every "most valuable" list there). A product without a market price has no headline price
+and ranks nowhere. Deals come from stores only, never an eBay row. Movers, Rising Cards and the monthly
+report leave the rail, phone row, footer and tools hub until a week of history exists (`historyOn()`).
+`tests/reference-price.test.ts`.
