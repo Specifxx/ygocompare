@@ -18,7 +18,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { SITE_URL } from "@/lib/site";
 import { TOOLS } from "@/lib/tool-list";
 import type { Metadata } from "next";
-import { fitTitle } from "@/lib/seo-title";
+import { TITLE_MAX, fitTitle } from "@/lib/seo-title";
 import { featuredSealed, preorderSetList, sealedHubs } from "@/lib/hubs";
 import { isPreorder, longDate, preorderPath } from "@/lib/preorders";
 import { inSeason as bfSeason } from "@/lib/black-friday";
@@ -28,6 +28,7 @@ import { KitGrid } from "@/components/KitTile";
 import { SealedHero } from "@/components/SealedHero";
 import { SiteReviews } from "@/components/site-reviews/SiteReviews";
 import { sealedHero } from "@/lib/sealed-hero";
+import { homeFaqs } from "@/lib/home-faq";
 
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
 export function generateMetadata(): Metadata {
@@ -36,10 +37,12 @@ export function generateMetadata(): Metadata {
   // candidate is tried with the brand before any is tried bare.
   const g = SITE.gameShort;
   const brand = ` | ${SITE.name}`;
-  const title = fitTitle([`${g} Card Prices — Compare ${n} Stores${brand}`, `${g} Card Prices — ${n} Stores${brand}`, `${g} Card Prices${brand}`, `${g} Card Prices — Compare ${n} Stores`, `${g} Card Prices`]);
+  // A site's own title (SITE.home.titles, brand included) comes first (SEO report, 2026-11-03: four sites, one title pattern).
+  const own = (SITE.home?.titles ?? []).find((t) => t.length <= TITLE_MAX);
+  const title = own ? { absolute: own } : fitTitle([`${g} Card Prices — Compare ${n} Stores${brand}`, `${g} Card Prices — ${n} Stores${brand}`, `${g} Card Prices${brand}`, `${g} Card Prices — Compare ${n} Stores`, `${g} Card Prices`]);
   return {
     title,
-    description: `Compare ${SITE.game} card and booster box prices across TCGplayer, eBay and ${n} online stores. Cheapest in-stock first, in your currency, updated daily.`,
+    description: SITE.home?.description ?? `Compare ${SITE.game} card and booster box prices across TCGplayer, eBay and ${n} online stores. Cheapest in-stock first, in your currency, updated daily.`,
     alternates: { canonical: "/", types: { "application/rss+xml": "/feed.xml" } },
     openGraph: { type: "website", siteName: SITE.name, url: "/", title: title.absolute },
   };
@@ -60,12 +63,8 @@ export default function Home() {
   // Sealed-led sites (SITE.homeSealedHero) open with the big sealed hero; it replaces the plain shelf below.
   const hero = SITE.homeSealedHero ? sealedHero() : null;
   const storeCount = SITE.stores.length;
-  const faqs = [
-    { q: `What is ${SITE.name}?`, a: `${SITE.name} is a free ${SITE.game} price comparison site. It compares prices for every ${SITE.gameShort} card and sealed product across TCGplayer, eBay and ${storeCount} online game stores in the US, UK, Canada, Australia and Europe, and updates them every day.` },
-    { q: `Where is the cheapest place to buy ${SITE.gameShort} cards?`, a: `It changes card by card. Search a card on ${SITE.name} to see every store's price for it, cheapest in-stock first, in your own currency, with a direct link to buy.` },
-    { q: `How often are ${SITE.gameShort} prices updated?`, a: `Every day. TCGplayer prices and store listings refresh daily; eBay listings for cards worth $20 or more are re-checked every one to four days depending on value and demand.` },
-    { q: `Is ${SITE.name} free?`, a: `Yes, completely, and you don't need an account. ${SITE.name} is paid for by affiliate commissions: when you buy through some links, the store may pay us a small fee at no cost to you.` },
-  ];
+  // This game's own questions, then ones answered from live data, then the engine's (lib/home-faq.ts).
+  const faqs = homeFaqs(storeCount);
   return (
     <div className="flex flex-col gap-10">
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
@@ -81,7 +80,7 @@ export default function Home() {
         <ChristmasDecor />
         <ChristmasGifts />
         <h1 className={`font-display font-black ${hero ? "text-2xl md:text-4xl" : "text-3xl md:text-5xl"}`}>
-          <span className="wordmark">{SITE.gameShort}</span> card prices, every store, one search
+          <span className="wordmark">{SITE.gameShort}</span> {SITE.home?.h1 ?? "card prices, every store, one search"}
         </h1>
         {/* With the sealed hero, a phone gets the title and goes straight to the boxes: the header already has the search and the market. */}
         <p className={`mt-3 max-w-2xl text-muted ${hero ? "hidden sm:block" : ""}`}>

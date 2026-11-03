@@ -130,6 +130,21 @@ export interface SiteConfig {
    *  have not checked. TCGplayer Direct: AU since 2026-10-07 for Magic,
    *  Pokémon and Yu-Gi-Oh! singles. */
   tcgplayerDirectMarkets?: Market[];
+  /** Homepage copy written for this game alone (SEO report, 2026-11-03: the
+   *  engine sites shared one title, H1, description and FAQ word for word,
+   *  the templated-sibling profile Google's scaled-content policy targets).
+   *  Every field falls back to the engine's own wording. Facts only: a claim
+   *  we are not sure of is left out (lib/home-faq.ts adds the live ones). */
+  home?: {
+    /** The search description, at most ~155 characters. */
+    description?: string;
+    /** The H1 after the wordmark ("<gameShort> ..."). */
+    h1?: string;
+    /** Title candidates tried before the engine's ladder; fitTitle keeps the first within 60 characters. */
+    titles?: string[];
+    /** Questions this game's players ask, answered first in the homepage FAQ. */
+    faqs?: { q: string; a: string }[];
+  };
   rarityOrder: string[];
   chaseRarities: string[];
   theme: {

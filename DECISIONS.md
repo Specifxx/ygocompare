@@ -1345,3 +1345,19 @@ read, no build step. The card copies RiftCompare's corner card, not its rating d
 minutes or on return from a store tab, at most three times 14 days apart, always closable; "Rate us" in the footer opens it.
 While no ad script is on the page it says "We don't run banner ads, so if this helped, please leave us a review." (owner, same
 day). No email asked for, never review markup. RiftCompare's DECISIONS.md, "Every site's reviews, approved in one queue".
+
+## Each site's own homepage copy; nothing-to-compare pages out of the index (2026-11-03)
+
+Engine change, in all four repos. The owner's all-sites SEO report (Bing) found the four engine homepages shared one title
+pattern, H1, description and FAQ word for word, the templated-sibling profile Google's scaled-content policy targets, and a
+YGO card page whose description read "worth about — today. Compare 0 live prices". Now:
+
+- `SITE.home` (site.config.ts) holds each game's own description (≤155 characters), H1 tail, title (brand last, ≤60) and
+  two or three questions its players ask, answered from facts we already publish (the blog's rarity and edition posts).
+  `tests/home-copy.test.ts` fails a site without them.
+- The FAQ (`lib/home-faq.ts`) adds questions answered from that day's data: the newest set's three most valuable cards,
+  the week's risers (only rises up to 200% on things worth $5+, since a thin market jumps 2,000% on one sale) and the next
+  release the hero links. Real prices only; a question without the data to answer it is left out.
+- `lib/thin.ts`: a product with no TCGplayer price and no offer anywhere, from a set already out, is noindex,follow and
+  out of the sitemap (~150 of YGO's 16,500 products, ~10 to 40 on the others). Unreleased sets always stay indexable
+  (spoiler and pre-order searches). The card description says only what we have: no dash, no "0 live prices".
