@@ -49,8 +49,8 @@ export default function GradePage({ params }: { params: { grade: string } }) {
           <h2 className="mb-3 text-xl font-bold">More {h.label} kits</h2>
           <ul className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {rest.map((k) => (
-              <li key={k.jan} className="flex items-baseline justify-between gap-3 border-b border-ink-800 py-1.5">
-                <Link href={`/kit/${k.slug}`} className="truncate hover:underline">{k.name}</Link>
+              <li key={k.jan} className="flex min-w-0 items-baseline justify-between gap-3 border-b border-ink-800 py-1.5">
+                <Link href={`/kit/${k.slug}`} className="min-w-0 truncate hover:underline">{k.name}</Link>
                 <span className="shrink-0 tabular-nums text-brand-400"><KitPrice best={kitBestByMarket(k.jan)} /></span>
               </li>
             ))}

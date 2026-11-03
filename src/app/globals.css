@@ -17,7 +17,9 @@
 }
 
 html { background: var(--page-bg); color: rgb(var(--c-fg)); scroll-behavior: smooth; }
-body { background: var(--page-bg); min-height: 100vh; }
+/* overflow-x: clip (not hidden, so position: sticky keeps working): an element wider than the screen is clipped instead of
+   laying the whole page out wider and zoomed out, with a sideways scroll into dead space (2026-11-03 phone audit). */
+body { background: var(--page-bg); min-height: 100vh; overflow-x: clip; }
 
 /* The left navigation rail (components/SideNav.tsx) from lg (1024px) up: the
    header, main and footer keep this much room on the left. 0 below lg, where

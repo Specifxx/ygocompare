@@ -33,7 +33,9 @@ function AdLabel() {
 
 function MiniRow({ brand, tiles, href, accent, tileHref, sub }: { brand: React.ReactNode; tiles: AdTile[]; href: string; accent: string; tileHref: (t: AdTile) => string; sub?: string }) {
   return (
-    <div className="flex items-stretch gap-2">
+    // min-w-0: the row is a grid item, whose min-width is auto, so without it the row grew to the rail's content width (688px on
+    // a 390px phone), the rail never scrolled and the card page laid out 713px wide (2026-11-03 phone audit).
+    <div className="flex min-w-0 items-stretch gap-2">
       <a href={href} rel="sponsored nofollow noopener" target="_blank" className="flex w-12 shrink-0 flex-col items-center justify-center gap-1 rounded-md text-center" aria-label="See all">
         {brand}
         <span className="text-[10px] font-bold" style={{ color: accent }}>All →</span>
