@@ -30,6 +30,7 @@
 //      before any other market's, so a quota stop mid-run cuts the UK and
 //      Australia, never the US, and any slots the other markets leave unused
 //      go back to the US's next-ranked products.
+import { ebayQueryOf } from "@/lib/lines";
 import { SITE } from "@/site.config";
 import { EBAY_CAMPAIGN_ID } from "@/lib/affiliate";
 import type { Market, Offer, Product, SetInfo } from "@/lib/site-types";
@@ -220,8 +221,12 @@ const FOREIGN_LISTING = /\b(japanese|japan|jpn|jp|ja|chinese|simplified chinese|
 // SITE.setEditions (Cyberpunk TCG's Beta and Retail): each set's edition
 // word, filled by useSetEditions() before a pass. Empty for other games.
 const setEdition = new Map<number, string>();
+// Multi-game sites (SITE.lines): each set's game, for its eBay search words.
+const setLine = new Map<number, SetInfo>();
 export function useSetEditions(sets: SetInfo[]): void {
   setEdition.clear();
+  setLine.clear();
+  for (const s of sets) if (s.line) setLine.set(s.id, s);
   const words = new Set((SITE.setEditions ?? []).map((e) => e.word));
   if (!words.size) return;
   for (const s of sets) {
@@ -241,7 +246,7 @@ export function queryFor(p: Product): string {
   const def = SITE.setEditions?.find((e) => e.word === ed);
   if (ed) name = name.replace(new RegExp(`\\b${ed}\\b`, "ig"), " ");
   const edWord = ed && !def?.default ? ed : "";
-  return `${SITE.ebay.query} ${name} ${edWord} ${p.kind === "card" ? p.number ?? "" : ""}`.replace(/\s+/g, " ").trim();
+  return `${ebayQueryOf(setLine.get(p.setId))} ${name} ${edWord} ${p.kind === "card" ? p.number ?? "" : ""}`.replace(/\s+/g, " ").trim();
 }
 
 // Bracketed qualifiers name a specific version: "(Store Tournament Winner

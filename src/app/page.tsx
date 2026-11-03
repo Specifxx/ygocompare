@@ -28,6 +28,7 @@ import { KitGrid } from "@/components/KitTile";
 import { SealedHero } from "@/components/SealedHero";
 import { SiteReviews } from "@/components/site-reviews/SiteReviews";
 import { sealedHero } from "@/lib/sealed-hero";
+import { GameTiles } from "@/components/GameTiles";
 
 // The homepage leads with "<game> Card Prices" and the number of stores compared, as Rift Compare's does.
 export function generateMetadata(): Metadata {
@@ -103,6 +104,9 @@ export default function Home() {
           {SITE.kits && kitsOn() && <Link href="/kits" className="btn-ghost">{SITE.kits.label} prices</Link>}
         </div>}
       </section>
+
+      {/* Multi-game sites (SITE.lines): one tile per game, straight under the hero. */}
+      <GameTiles />
 
       {hero && hero.featured.length > 0 && (
         <SealedHero data={hero} game={SITE.gameShort} sealedHref={sealedLinks.some((h) => h.slug === "booster-box") ? "/sealed/booster-box" : "/sealed"} />

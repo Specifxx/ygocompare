@@ -8,8 +8,9 @@
 // Ads, not price claims: a tile never feeds a "cheapest" line, a sort or
 // structured data, and the strips sit below the price comparison, never
 // between a visitor and the price rows.
+import { ebayQueryOf, tcgplayerSlugOf } from "@/lib/lines";
 import { SITE } from "@/site.config";
-import type { Market, Offer, Product } from "./site-types";
+import type { Market, Offer, Product, SetInfo } from "./site-types";
 import { products, refCents, sets, summaryOf } from "./data";
 import { imageAt } from "./image";
 import { shortName } from "./names";
@@ -40,6 +41,10 @@ export interface AdScope {
   limit?: number;
   /** Top a thin set up with the newest sets' cards, so a small set still gets a full strip. */
   fill?: boolean;
+  /** Multi-game sites (SITE.lines): only this game's products; a set's top-up stays in its game. */
+  line?: string;
+  /** Only these sets (filled from `line` by cardAds). */
+  setIds?: number[];
 }
 
 export interface AdRow {
@@ -77,7 +82,7 @@ const tile = (p: Product, o: Offer, ref: number | null, url = o.url): AdTile => 
 export function selectCardAds(rows: AdRow[], scope: AdScope = {}): CardAds {
   const limit = scope.limit ?? 10;
   const pool = rows
-    .filter((r) => r.p.image && r.p.id !== scope.exclude && (!scope.kind || r.p.kind === scope.kind) && (scope.setId == null || r.p.setId === scope.setId))
+    .filter((r) => r.p.image && r.p.id !== scope.exclude && (!scope.kind || r.p.kind === scope.kind) && (scope.setId == null || r.p.setId === scope.setId) && (scope.setIds == null || scope.setIds.includes(r.p.setId)))
     .filter((r) => r.p.sealedType !== "Insert")
     .sort((a, b) => (scope.setId == null ? Number(a.setRank > 2) - Number(b.setRank > 2) : 0) || (b.ref ?? 0) - (a.ref ?? 0));
   const ebay: Partial<Record<Market, AdTile[]>> = {};
@@ -126,18 +131,23 @@ export function cardAds(scope: AdScope = {}): CardAds {
   const key = JSON.stringify(scope);
   const hit = memo.get(key);
   if (hit) return hit;
+  // A set's strip on a multi-game site tops up from its own game only.
+  const line = scope.line ?? (scope.setId != null ? sets().find((s) => s.id === scope.setId)?.line : undefined);
+  if (line && !scope.setIds) scope = { ...scope, line, setIds: sets().filter((s) => s.line === line).map((s) => s.id) };
   let ads = selectCardAds(rows(), scope);
-  if (scope.fill && scope.setId != null) ads = topUp(ads, selectCardAds(rows(), { kind: scope.kind, exclude: scope.exclude, limit: scope.limit }), scope.limit ?? 10);
+  if (scope.fill && scope.setId != null) ads = topUp(ads, selectCardAds(rows(), { kind: scope.kind, exclude: scope.exclude, limit: scope.limit, setIds: scope.setIds }), scope.limit ?? 10);
   memo.set(key, ads);
   return ads;
 }
 
-/** "See all" destinations: the game (or one set) on eBay and on TCGplayer. */
-export function adSearch(setName?: string | null): { ebayQuery: string; tcgplayerUrl: string } {
+/** "See all" destinations: the game (or one set) on eBay and on TCGplayer.
+ *  On a multi-game site, a set's own game ("set" given) or one game ("line"). */
+export function adSearch(setName?: string | null, set?: Pick<SetInfo, "line"> | null): { ebayQuery: string; tcgplayerUrl: string } {
+  const slug = tcgplayerSlugOf(set);
   return {
-    ebayQuery: `${SITE.ebay.query} ${setName ?? "card"}`.trim(),
+    ebayQuery: `${ebayQueryOf(set)} ${setName ?? "card"}`.trim(),
     tcgplayerUrl: setName
-      ? `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&q=${encodeURIComponent(setName)}&view=grid`
-      : `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&view=grid`,
+      ? `https://www.tcgplayer.com/search/${slug}/product?productLineName=${slug}&q=${encodeURIComponent(setName)}&view=grid`
+      : `https://www.tcgplayer.com/search/${slug}/product?productLineName=${slug}&view=grid`,
   };
 }

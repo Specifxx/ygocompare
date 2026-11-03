@@ -3,17 +3,22 @@ import { SITE } from "@/site.config";
 import { SearchBox } from "./SearchBox";
 import { MarketPicker, ThemeToggle } from "./ClientPrefs";
 
+// A multi-game site leads with its games, so its bar leaves out Cards, Movers
+// and Forum (still linked from each game hub, the footer and the sitemap) to fit one row.
+const MULTI = (SITE.lines?.length ?? 0) > 0;
 export const NAV = [
-  { href: "/cards", label: "Cards" },
+  // Multi-game sites (SITE.lines): each game first, by its short name.
+  ...(SITE.lines ?? []).map((l) => ({ href: `/games/${l.slug}`, label: l.short })),
+  ...(MULTI ? [] : [{ href: "/cards", label: "Cards" }]),
   { href: "/sets", label: "Sets" },
   { href: "/sealed", label: "Sealed" },
   ...(SITE.kits ? [{ href: "/kits", label: SITE.kits.label }] : []),
-  { href: "/movers", label: "Movers" },
+  ...(MULTI ? [] : [{ href: "/movers", label: "Movers" }]),
   { href: "/tools/deal-finder", label: "Deals" },
   { href: "/tools", label: "Tools" },
   { href: "/preorders", label: "Pre-orders" },
   { href: "/blog", label: "Guides" },
-  { href: "/forum", label: "Forum" },
+  ...(MULTI ? [] : [{ href: "/forum", label: "Forum" }]),
 ];
 
 export function Header() {

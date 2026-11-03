@@ -1354,3 +1354,13 @@ sit right under the first eBay row, so on a product where eBay led it came befor
 the last pinned row (eBay and TCGplayer, the cheaper first), or first when neither is shown. Still sealed only (a single
 card's Amazon search finds the wrong thing), still product pages only (no Amazon in the quick view), never ranked, never
 the cheapest.
+## 2026-11-03 — Engine: several games on one site (`SITE.lines`), "series" numbers, BandaiCompare joins
+
+BandaiCompare (`Specifxx/bandaicompare`, bandaicompare.com) runs this engine for three games at once: Union Arena,
+Dragon Ball Super Fusion World and the Digimon Card Game. The engine gained, all off by default: `SITE.lines`
+(several TCGplayer categories in one catalogue, each set tagged with its game, a hub per game at `/games/<slug>`,
+per-game eBay words and TCGplayer links, ad strips that stay inside a game), `NumberStyle` "series" (Union Arena's
+"REZ-1-053" beside the "code" numbers) and `SITE.disclaimer` (a not-affiliated sentence in the footer, /about and
+/terms). This site sets none of them, so its pages, slugs and matching are unchanged. BandaiCompare is in the
+family registry and in `sisterSites`; the sister-sites test now allows eleven or more. BandaiCompare's
+DECISIONS.md has the reasons.

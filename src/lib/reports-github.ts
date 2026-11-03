@@ -67,6 +67,7 @@ export const SITE_REPOS: Record<string, string> = {
   lorcanacompare: "Specifxx/lorcanacompare",
   ygocompare: "Specifxx/ygocompare",
   cyberpunkcompare: "Specifxx/cyberpunkcompare",
+  bandaicompare: "Specifxx/bandaicompare",
   compareempire: "Specifxx/compareempiretake2",
   camcompare: "Specifxx/Camcompare",
   wargamecompare: "Specifxx/wargamecompare",
