@@ -5,7 +5,7 @@ import { canon, SITE_URL } from "@/lib/site";
 import { byValue, products, summaryOf } from "@/lib/data";
 import { shortName } from "@/lib/names";
 import { MARKETS } from "@/lib/site-types";
-import { badgeOffer, embedSnippet, storeBadge } from "@/lib/embed";
+import { badgeOffer, dailySnippet, embedSnippet, storeBadge } from "@/lib/embed";
 
 // The free widgets directory (DECISIONS.md, "Free price widgets", 2026-11-02): the page outreach points at instead of
 // asking for a link. Shows code, never live iframes of our own widgets.
@@ -26,6 +26,7 @@ export default function EmbedPage() {
   const name = example ? shortName(example.name) : "CARD NAME";
   const snippet = embedSnippet(SITE_URL, SITE.name, slug, name, `${SITE.gameShort} card price`);
   const badge = storeBadge(SITE_URL, SITE.name, SITE.gameShort);
+  const daily = dailySnippet(SITE_URL, SITE.name, SITE.gameShort);
   return (
     <article className="flex max-w-3xl flex-col gap-8">
       <header className="flex flex-col gap-2">
@@ -48,6 +49,15 @@ export default function EmbedPage() {
           <li>Add <code>?market=UK</code> to the widget address for another market: {MARKETS.join(", ")}. The US is the default.</li>
           <li>The plain link under the widget is optional, and it is the part that tells search engines where the price comes from.</li>
         </ul>
+      </section>
+
+      <section className="card-surface flex flex-col gap-3 p-4">
+        <h2 className="text-lg font-bold">Daily price game</h2>
+        <p className="text-sm text-muted">
+          For creators, clubs and Discord-linked sites: today&apos;s {SITE.gameShort} Price Duel, two cards and &ldquo;which is worth more?&rdquo;. It changes by itself
+          every day at midnight UTC, so your page has something new daily. <Link className="link" href="/embed/daily">See it running →</Link>
+        </p>
+        <pre className="overflow-x-auto rounded bg-ink-900 p-3 text-xs"><code>{daily}</code></pre>
       </section>
 
       <section className="card-surface flex flex-col gap-3 p-4">
