@@ -16,8 +16,8 @@ test("only the US compares against TCGplayer's (USD) market price", () => {
   assert.equal(storeSaving(9000, [9000], 10000, "CA"), null);
 });
 
-test("the hero never calls eBay, Amazon or TCGplayer the cheapest store, and is off unless a site turns it on", () => {
+test("the hero never calls eBay, Amazon or TCGplayer the cheapest store, and every site's homepage shows it", () => {
   const lib = readFileSync("src/lib/sealed-hero.ts", "utf8");
   assert.match(lib, /NOT_A_STORE = new Set\(\["ebay", "amazon", "tcgplayer"\]\)/);
-  assert.match(readFileSync("src/app/page.tsx", "utf8"), /SITE\.homeSealedHero \? sealedHero\(\) : null/);
+  assert.match(readFileSync("src/app/page.tsx", "utf8"), /const hero = sealedHero\(\);/);
 });
