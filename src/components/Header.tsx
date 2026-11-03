@@ -4,6 +4,8 @@ import { SearchBox } from "./SearchBox";
 import { MarketPicker, ThemeToggle } from "./ClientPrefs";
 
 export const NAV = [
+  // Multi-game sites (SITE.lines): each game first, by its short name.
+  ...(SITE.lines ?? []).map((l) => ({ href: `/games/${l.slug}`, label: l.short })),
   { href: "/cards", label: "Cards" },
   { href: "/sets", label: "Sets" },
   { href: "/sealed", label: "Sealed" },

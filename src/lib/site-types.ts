@@ -47,6 +47,25 @@ export interface SisterSite {
   search?: string;
 }
 
+export interface GameLine {
+  /** Short stable id, stored on each set ("ua"). */
+  id: string;
+  /** Display name ("Dragon Ball Super Fusion World"). */
+  name: string;
+  /** Menu label ("Fusion World"). */
+  short: string;
+  /** URL segment of its hub: /games/<slug>. */
+  slug: string;
+  tcgcsvCategoryId: number;
+  tcgplayerSlug: string;
+  /** Words every eBay search for this game starts with. */
+  ebayQuery: string;
+  /** One or two sentences for the hub and the homepage tile. */
+  blurb: string;
+  /** Accent colour of the game's tile and chips. */
+  color: string;
+}
+
 export interface SiteConfig {
   key: string;
   name: string;
@@ -93,7 +112,16 @@ export interface SiteConfig {
   /** "fraction" 42/204 (Lorcana), "code" GD02-048 (Gundam), "plain" 001 / B001
    *  (Cyberpunk TCG: three digits, an optional letter, nothing else), "ygo" LOB-EN005
    *  (set code, language, number; the language is part of the key). */
-  numberStyle: "fraction" | "code" | "ygo" | "plain";
+  numberStyle: "fraction" | "code" | "ygo" | "plain" | "series";
+  /** Several games on one site (off by default): each is its own TCGplayer
+   *  category, imported together into one catalogue. A set carries its game's
+   *  `id` (SetInfo.line); each game gets a hub at /games/<slug>, and eBay
+   *  searches and TCGplayer links use the game's own words. When set,
+   *  `tcgcsvCategoryId`, `tcgplayerSlug` and `ebay.query` are only defaults. */
+  lines?: GameLine[];
+  /** A sentence naming the rights holder ("BandaiCompare is not affiliated with…"), shown in
+   *  the footer, /about and /terms when the brand names a company (WargameCompare's rule). Off by default. */
+  disclaimer?: string;
   /** "name" (default): the first product of a name keeps the bare slug.
    *  "name-number": every card's slug carries its number ("dark-magician-lob-en005"),
    *  for games that reprint one card in dozens of sets. Slugs are decided
@@ -252,6 +280,8 @@ export interface SetInfo {
   releasedOn: string | null; // ISO date
   productCount: number;
   upcoming: boolean;
+  /** SITE.lines id of the set's game, on multi-game sites only. */
+  line?: string;
 }
 
 export interface Product {

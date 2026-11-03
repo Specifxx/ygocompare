@@ -81,19 +81,26 @@ export async function loadTcgcsv(now = new Date()): Promise<{
   products: Product[];
   tcg: Record<number, Record<string, TcgPrice>>;
 }> {
-  const cat = SITE.tcgcsvCategoryId;
-  const groups = (await fetchJson<{ results: Group[] }>(`${BASE}/${cat}/groups`, TCGCSV_INIT)).results;
+  // One TCGplayer category, or one per game on a multi-game site (SITE.lines).
+  const cats: { cat: number; line?: string }[] = SITE.lines?.length
+    ? SITE.lines.map((l) => ({ cat: l.tcgcsvCategoryId, line: l.id }))
+    : [{ cat: SITE.tcgcsvCategoryId }];
+  const groups: (Group & { cat: number; line?: string })[] = [];
+  for (const c of cats)
+    for (const g of (await fetchJson<{ results: Group[] }>(`${BASE}/${c.cat}/groups`, TCGCSV_INIT)).results) groups.push({ ...g, ...c });
   const sets: SetInfo[] = [];
   const products: Product[] = [];
   const tcg: Record<number, Record<string, TcgPrice>> = {};
   const usedSlugs = new Set<string>();
+  const usedSetSlugs = new Set<string>();
 
   for (const g of groups) {
+    const cat = g.cat;
     const [prods, prices] = await Promise.all([
       fetchJson<{ results: RawProduct[] }>(`${BASE}/${cat}/${g.groupId}/products`, TCGCSV_INIT),
       fetchJson<{ results: RawPrice[] }>(`${BASE}/${cat}/${g.groupId}/prices`, TCGCSV_INIT),
     ]);
-    const setSlug = slugify(g.name);
+    const setSlug = uniqueSetSlug(g.name, g.line, usedSetSlugs);
     const released = g.publishedOn ? g.publishedOn.slice(0, 10) : null;
     sets.push({
       id: g.groupId,
@@ -103,6 +110,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
       releasedOn: released,
       productCount: prods.results.length,
       upcoming: !!released && new Date(released) > now,
+      ...(g.line ? { line: g.line } : {}),
     });
     const printings = new Map<number, Set<string>>();
     for (const p of prices.results) {
@@ -155,6 +163,20 @@ export async function loadTcgcsv(now = new Date()): Promise<{
     return { sets, products: kept, tcg };
   }
   return { sets, products, tcg };
+}
+
+/** A set's URL slug: its name, and on a multi-game site the game's slug
+ *  before it when two games share a set name ("promotion-cards"). */
+export function uniqueSetSlug(name: string, line: string | undefined, used: Set<string>): string {
+  let slug = slugify(name);
+  // Single-game sites keep the plain name, exactly as before.
+  if (!line) return slug;
+  if (used.has(slug) && line) slug = `${slugify(SITE.lines?.find((l) => l.id === line)?.slug ?? line)}-${slug}`;
+  let n = 2;
+  const base = slug;
+  while (used.has(slug)) slug = `${base}-${n++}`;
+  used.add(slug);
+  return slug;
 }
 
 /** TCGplayer sometimes moves an old group's publishedOn to today (18 Yu-Gi-Oh!

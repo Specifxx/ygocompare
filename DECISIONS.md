@@ -1345,3 +1345,14 @@ read, no build step. The card copies RiftCompare's corner card, not its rating d
 minutes or on return from a store tab, at most three times 14 days apart, always closable; "Rate us" in the footer opens it.
 While no ad script is on the page it says "We don't run banner ads, so if this helped, please leave us a review." (owner, same
 day). No email asked for, never review markup. RiftCompare's DECISIONS.md, "Every site's reviews, approved in one queue".
+
+## 2026-11-03 — Engine: several games on one site (`SITE.lines`), "series" numbers, BandaiCompare joins
+
+BandaiCompare (`Specifxx/bandaicompare`, bandaicompare.com) runs this engine for three games at once: Union Arena,
+Dragon Ball Super Fusion World and the Digimon Card Game. The engine gained, all off by default: `SITE.lines`
+(several TCGplayer categories in one catalogue, each set tagged with its game, a hub per game at `/games/<slug>`,
+per-game eBay words and TCGplayer links, ad strips that stay inside a game), `NumberStyle` "series" (Union Arena's
+"REZ-1-053" beside the "code" numbers) and `SITE.disclaimer` (a not-affiliated sentence in the footer, /about and
+/terms). This site sets none of them, so its pages, slugs and matching are unchanged. BandaiCompare is in the
+family registry and in `sisterSites`; the sister-sites test now allows eleven or more. BandaiCompare's
+DECISIONS.md has the reasons.

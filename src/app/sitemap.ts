@@ -1,3 +1,4 @@
+import { LINES } from "@/lib/lines";
 import type { MetadataRoute } from "next";
 import { meta, products, refCents, sets } from "@/lib/data";
 import { posts } from "@/lib/posts";
@@ -30,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { url: `${SITE_URL}/cards/${f.cfg.facet}`, lastModified: at, priority: 0.6 },
       ...f.hubs.map((h) => ({ url: `${SITE_URL}/cards/${f.cfg.facet}/${h.slug}`, lastModified: at, priority: 0.6 })),
     ]),
+    // Multi-game sites (SITE.lines): the games index and one hub per game.
+    ...(LINES.length ? ["/games", ...LINES.map((l) => `/games/${l.slug}`)].map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: 0.9 })) : []),
     ...sets().filter((s) => s.productCount > 0).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...products()
       .filter((p) => (p.kind === "sealed" ? p.sealedType !== "Insert" : (refCents(p.id) ?? 0) >= (SITE.sitemapMinCardCents ?? 50)))

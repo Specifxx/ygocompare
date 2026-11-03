@@ -10,7 +10,7 @@ export default function Terms() {
   return (
     <StaticPage title="Terms of use">
       <p>{SITE.name} shows prices collected from third-party stores for information. Prices and stock change; the store&apos;s own checkout is final and we are not a party to any purchase.</p>
-      <p>{SITE.game} and all related names and images are trademarks of their owners; {SITE.name} is not affiliated with or endorsed by them.</p>
+      <p>{SITE.game} and all related names and images are trademarks of their owners; {SITE.name} is not affiliated with or endorsed by them.{SITE.disclaimer ? ` ${SITE.disclaimer}` : ""}</p>
     </StaticPage>
   );
 }
