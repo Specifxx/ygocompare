@@ -65,7 +65,25 @@ body { background: var(--page-bg); min-height: 100vh; overflow-x: clip; }
     radial-gradient(30rem 16rem at 10% 110%, rgb(var(--c-accent) / 0.12), transparent 60%),
     radial-gradient(30rem 16rem at 90% 110%, rgb(var(--c-brand) / 0.14), transparent 60%);
 }
-.hero-band > :not(.hero-sparks) { position: relative; z-index: 1; }
+/* The content sits above the canvas; the two absolute layers (the Christmas
+   set and the creators bubble in the corner) keep their own position. */
+.hero-band > :not(.hero-sparks):not(.xmas-hero):not(.hero-corner) { position: relative; z-index: 1; }
+@media (min-width: 640px) {
+  .hero-band > .hero-corner { position: absolute; }
+}
+/* Full-bleed (owner, 2026-11-03: "everything should be fill"): the band runs
+   from the rail to the window's right edge, out of the page container, and is
+   tall enough to fill the first screen under the header on a laptop. The
+   container is centred in the column beside the rail, so half the rail's
+   width comes off each margin (the 50% is the content box, which the
+   container's own padding has already narrowed by the same amount). */
+.hero-bleed {
+  margin-left: calc(50% - 50vw + var(--sidenav-w) / 2);
+  margin-right: calc(50% - 50vw + var(--sidenav-w) / 2);
+}
+@media (min-width: 1024px) {
+  .hero-bleed { min-height: calc(100svh - 8rem); }
+}
 .hero-sparks { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
 .hero-glow { text-shadow: 0 0 40px rgb(var(--c-brand) / 0.35); letter-spacing: -0.02em; }
 h1, h2, h3 { letter-spacing: -0.01em; }

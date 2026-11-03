@@ -85,10 +85,13 @@ export default function Home() {
       )}
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
-      {/* The hero: centred, the search as its one action, the living background
-          behind it (HeroSparks) and the creators bubble in its corner. The
-          `hero-search` class keeps the suggestions above what follows. */}
-      <section className="hero-band relative -mx-4 -mt-6 overflow-x-clip px-4 pb-10 pt-8 text-center sm:pb-14 sm:pt-12 lg:-mx-4 lg:rounded-b-3xl">
+      {/* The hero: full-bleed across the content column and tall enough to fill
+          the first screen, like RiftCompare's (owner, 2026-11-03: "the hero can
+          fit more like riftcompare … everything should be fill"); the search as
+          its one action, the living background behind it (HeroSparks) and the
+          creators bubble in its corner. `hero-bleed` (globals.css) breaks out of
+          the page container; `hero-search` keeps the suggestions above what follows. */}
+      <section className="hero-band hero-bleed relative -mt-6 flex flex-col items-center justify-center overflow-x-clip px-4 pb-10 pt-8 text-center sm:px-8 sm:pb-14 sm:pt-12">
         <HeroSparks />
         {/* Christmas (1 November to Boxing Day): snow, lights, trees. */}
         <ChristmasDecor />
@@ -99,23 +102,23 @@ export default function Home() {
           <span className="wordmark">{SITE.wordmark[0]}</span>
           <span className="text-fg">{SITE.wordmark[1]}</span>
         </p>
-        <h1 className="hero-glow mx-auto mt-3 max-w-4xl font-display text-3xl font-black leading-[1.1] sm:text-5xl">
+        <h1 className="hero-glow mx-auto mt-3 max-w-4xl font-display text-3xl font-black leading-[1.1] sm:text-5xl lg:text-6xl">
           <span className="wordmark">{SITE.gameShort}</span> Card Prices
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-base text-muted sm:text-lg">
+        <p className="mx-auto mt-4 max-w-3xl text-base text-muted sm:text-lg">
           <strong className="block text-fg">Buy {SITE.gameShort} cards at the best price</strong>
           Price check any card or sealed product and find the cheapest place to buy: live prices from TCGplayer, eBay and {storeCount} stores in the US, UK, Canada, Australia and Europe, in your own currency, updated daily.
         </p>
-        <div className="hero-search relative z-30 mx-auto mt-6 hidden max-w-2xl sm:block"><SearchBox big /></div>
+        <div className="hero-search relative z-30 mx-auto mt-6 hidden w-full max-w-3xl sm:block"><SearchBox big /></div>
         <p className="mt-6 text-[11px] font-bold uppercase tracking-widest text-muted">Shopping from</p>
         <MarketChooser className="mt-2 justify-center" bare />
         {trending.length > 0 && (
-          <div className="mx-auto mt-5 max-w-2xl">
+          <div className="mx-auto mt-5 w-full max-w-3xl">
             <p className="text-[11px] font-bold uppercase tracking-widest text-muted">Trending</p>
-            <ul className="mt-2 grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+            <ul className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
               {trending.map((p) => (
                 <li key={p.id}>
-                  <Link href={`/card/${p.slug}`} className="block truncate rounded-full border border-ink-700 bg-ink-900/70 px-3 py-2 text-sm text-fg/85 transition-colors hover:border-brand hover:text-fg">
+                  <Link href={`/card/${p.slug}`} className="block truncate rounded-xl border border-ink-700 bg-ink-900/70 px-3 py-2.5 text-sm text-fg/85 transition-colors hover:border-brand hover:text-fg">
                     {shortName(p.name)}
                   </Link>
                 </li>
