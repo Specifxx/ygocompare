@@ -1,5 +1,6 @@
 // The free tools, for the /tools hub and the homepage band.
 export const TOOLS = [
+  { href: "/daily", name: "Daily Price Duel", text: "Ten pairs of cards a day: pick the one worth more. Same puzzle for everyone; keep your streak and share your score." },
   { href: "/tools/deal-finder", name: "Deal Finder", text: "Every in-stock card and box selling below TCGplayer market, in every market we track." },
   { href: "/tools/rising", name: "Rising Cards", text: "Cards climbing this week whose stock is thinning — the moves before they're obvious." },
   { href: "/tools/demand", name: "Demand Finder", text: "What players are buying out: cards most stores list but few still have in stock." },
