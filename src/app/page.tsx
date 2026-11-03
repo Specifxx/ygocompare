@@ -76,7 +76,7 @@ export default function Home() {
       )}
       <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />
 
-      <section className={`hero-band relative -mx-4 overflow-hidden rounded-none px-4 md:rounded-2xl ${hero ? "py-6 md:py-9" : "py-10 md:py-14"}`}>
+      <section className={`hero-band relative -mx-4 overflow-x-clip rounded-none px-4 md:rounded-2xl ${hero ? "py-6 md:py-9" : "py-10 md:py-14"}`}>
         {/* Christmas (1 November to Boxing Day): snow, lights, trees. */}
         <ChristmasDecor />
         <ChristmasGifts />
@@ -88,7 +88,9 @@ export default function Home() {
           Compare {m?.counts.cards.toLocaleString() ?? "every"} {SITE.gameShort} cards and {m?.counts.sealed ?? ""} sealed products across TCGplayer, eBay and {storeCount} stores — in your currency, updated daily.
         </p>
         <MarketChooser className={hero ? "mt-5 hidden sm:flex" : "mt-5"} />
-        <div className={`mt-4 max-w-2xl ${hero ? "hidden sm:block" : ""}`}><SearchBox big /></div>
+        {/* The search sits above everything after it in the hero, and the hero clips only sideways, so its
+            suggestions drop over the buttons below instead of under them (Bill, 2026-11-03). */}
+        <div className={`hero-search relative z-30 mt-4 max-w-2xl ${hero ? "hidden sm:block" : ""}`}><SearchBox big /></div>
         <p className="mt-3 text-xs text-muted">
           {m ? `Prices updated ${ago(m.updatedAt)} · ${m.counts.offers.toLocaleString()} live prices` : "Prices update daily"}
           {upcoming && <> · <Link className="link" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link></>}

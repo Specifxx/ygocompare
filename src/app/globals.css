@@ -357,7 +357,7 @@ body { background: var(--page-bg); min-height: 100vh; }
     radial-gradient(40rem 18rem at 92% 110%, rgba(220, 38, 38, 0.2), transparent 60%),
     radial-gradient(60rem 20rem at 50% -20%, rgba(186, 230, 253, 0.12), transparent 60%);
 }
-:root[data-season="christmas"] .hero-band > :not(.xmas-hero) {
+:root[data-season="christmas"] .hero-band > :not(.xmas-hero):not(.hero-search) {
   position: relative;
   z-index: 1;
 }
