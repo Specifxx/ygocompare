@@ -273,7 +273,7 @@ function MoverList({ title, rows }: { title: string; rows: ReturnType<typeof mov
       <ul>
         {rows.map((r) => (
           <li key={r.p.id} className="flex items-center justify-between border-t border-ink-800 py-1.5 text-sm">
-            <Link href={`/card/${r.p.slug}`} className="truncate hover:underline">{shortName(r.p.name)}</Link>
+            <Link href={`/card/${r.p.slug}`} className="min-w-0 truncate hover:underline">{shortName(r.p.name)}</Link>
             <span className="ml-2 shrink-0 tabular-nums">{money(r.cents)} <span className={r.change >= 0 ? "text-up" : "text-down"}>{pct(r.change)}</span></span>
           </li>
         ))}
