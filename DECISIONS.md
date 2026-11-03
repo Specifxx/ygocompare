@@ -1267,3 +1267,22 @@ so it grows with their traffic. Creators want something that changes daily more 
 prices hidden) and one link to `/daily?utm_source=embed&utm_medium=daily`. A route handler reading the date, so
 its only cache is the CDN header, held until midnight UTC (`secondsToUtcMidnight`). It reads the same pool as
 `/daily` (`src/lib/daily-data.ts`). The snippet is on `/embed` with the iframe and one plain text link.
+
+## 2026-11-03 — Sealed-first, on this engine: the sitemap lists cards from $20
+
+**Why.** The owner asked whether YGO Compare should move to DexCompare's and MTG Compare's sealed-only model,
+since most old Yu-Gi-Oh! cards have no demand and seemed to be costing money. Measured that day:
+- **Cost:** Vercel charged this project A$4.59 in the week to 2 November (RiftCompare's growth report).
+  Card pages are never prebuilt (empty `generateStaticParams`), so an unvisited card costs nothing; the
+  catalogue is not the bill.
+- **Money:** A$39.93 earned that week, A$38.40 of it eBay sales from the pinned pre-order rows (sealed).
+- **Google, 90 days:** 7 clicks and 562 impressions in all. Card pages took 3 of the clicks (a A$1.35 card,
+  an unpriced qualifier stamp and a US$94 Starlight Rare); 60 card pages had any impression, none ten.
+  Google has crawled little of the 6,100-card sitemap.
+
+**What.** No engine change: this engine already has sealed pages, the pre-order pages that earned, and the
+homepage sealed shelf. Removing singles would delete pages that brought half the Google clicks and save
+almost nothing. Instead the sitemap points Google at sealed first: every sealed product, set and hub, and
+cards from US$20 (`sitemapMinCardCents` 2000, about 2,200 cards, the floor eBay already uses) instead of $5
+(6,100). Every card page stays live, indexable and linked from its set. Widen it again once Search Console
+shows the sitemap mostly indexed. Recheck with the 2026-11-25 review.
