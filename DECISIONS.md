@@ -1345,3 +1345,12 @@ read, no build step. The card copies RiftCompare's corner card, not its rating d
 minutes or on return from a store tab, at most three times 14 days apart, always closable; "Rate us" in the footer opens it.
 While no ad script is on the page it says "We don't run banner ads, so if this helped, please leave us a review." (owner, same
 day). No email asked for, never review markup. RiftCompare's DECISIONS.md, "Every site's reviews, approved in one queue".
+
+## Amazon is the third pinned row (2026-11-03)
+
+Engine change, in all four repos. The owner wants Amazon on every site "up there with eBay and TCGplayer", as "the third
+row out of the three". The sealed product table's Amazon row (a tagged search of the visitor's own Amazon, no price) used to
+sit right under the first eBay row, so on a product where eBay led it came before TCGplayer. `PriceTable` now puts it after
+the last pinned row (eBay and TCGplayer, the cheaper first), or first when neither is shown. Still sealed only (a single
+card's Amazon search finds the wrong thing), still product pages only (no Amazon in the quick view), never ranked, never
+the cheapest.
