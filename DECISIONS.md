@@ -1286,3 +1286,19 @@ almost nothing. Instead the sitemap points Google at sealed first: every sealed 
 cards from US$20 (`sitemapMinCardCents` 2000, about 2,200 cards, the floor eBay already uses) instead of $5
 (6,100). Every card page stays live, indexable and linked from its set. Widen it again once Search Console
 shows the sitemap mostly indexed. Recheck with the 2026-11-25 review.
+
+## 2026-11-03 — The quick view shows the product's own link
+
+**Why.** Owner: "quickview popup should have a link change as well for all sites, instead of using the same link". The
+pop-up kept the list page's URL, so a copied or bookmarked link lost the product, and Back left the page instead of
+closing the pop-up.
+
+**What.** Opening a quick view pushes the product page's own existing URL (/card/<slug>) with `history.pushState`
+(`src/lib/quick-view-url.ts`, the same file on every site). Back closes it and restores the list's URL, Forward reopens it,
+closing it (×, Escape, the backdrop) steps back, so the history never fills with pop-ups. "See price history and details"
+only hides the pop-up and navigates to the URL already shown, which Next turns into a replace: Back from the product page
+goes to the list. The entry copies Next's own history state (`__NA` and the router tree), so the app router passes the
+push through and the page under the pop-up never re-renders.
+
+**SEO.** No new URL exists: the link is the canonical product page, which a reload, a share or a crawler gets in full
+server HTML. Never a `?view=` or `#` variant (duplicate URLs, extra CDN copies). Pinned by `tests/quick-view-url.test.ts`.
