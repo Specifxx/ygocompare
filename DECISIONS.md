@@ -1419,3 +1419,14 @@ plan was already in place (Product + AggregateOffer, set hubs with set value, `/
 with lastmod, "Prices checked" times, llms.txt, no sister footers) or declined: EV calculators (no verified
 pull rates, and we never invent a number), graded-tier pages (no graded data), footprint "isolation" (one
 engine on purpose), /de and /ja editions (not yet). `tests/seo-audit.test.ts`.
+
+## 2026-11-04 — No Product markup without an offer
+
+Search Console (owner, 4 Nov) showed gundamcompare.com with 20 invalid Product
+snippets, all "Either offers, review, or aggregateRating should be specified":
+cards with a TCGplayer reference price (so indexed) but no in-stock US store
+listing, for which the card page emitted a Product with `offers` undefined.
+Google treats that as an error, not a thin item. The card page now renders the
+Product block only when at least one in-stock US offer backs it (engine change,
+synced from Gundam Compare); a card with only a reference price has no Product
+markup rather than an invalid one. `tests/seo-audit.test.ts` pins it.
