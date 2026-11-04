@@ -1430,3 +1430,11 @@ Google treats that as an error, not a thin item. The card page now renders the
 Product block only when at least one in-stock US offer backs it (engine change,
 synced from Gundam Compare); a card with only a reference price has no Product
 markup rather than an invalid one. `tests/seo-audit.test.ts` pins it.
+
+## 2026-11-04 — Big-store gap: stores from the per-region research
+
+The owner asked for every big store captured with no gaps, on every site. Research per region named 16 readable TCG
+hosts not in `src/content/stores.ts`; `scripts/probe-stores.ts` on a runner read each. Added: **Eclipse Games** (AU, `english-yu-gi-oh-tcg`), **Hobbyco** (AU, `yugioh`: 34 products), **Eclipse TCG** (EU, `yu-gi-oh-1`) and **Magic Traders** (EU, `yu-gi-oh`: 24), all sealed. Card Giants (US) was read but its Yu-Gi-Oh! collection is repacks and mystery boxes, never a real product; the other
+candidates (Cura Cards, Games Paradise, Gumnut, Jenes, Card Chasers, Capybara, Card Arena, Games Haven, Jeux Kingdom,
+OBO, Leisure Games) have no collection for this game. Site content only: nothing in `engine.json` changed.
+Not addable, and why (the same list every card site hit): the biggest US and UK names run platforms with no public feed or a robots.txt that forbids reading — BigCommerce (Star City Games, Game Nerdz, Game Goblins, ToyWiz, Magic Madhouse), CrystalCommerce stores whose robots.txt disallows everything (Three Kings Loot, Carta Magica, Gamekeeper, The Connection, Card Titan, Collector's Cache, Nerd Rage, Pastimes), bot walls that answer 403 or a Cloudflare challenge (Chaos Cards, Big Orbit, Wayland, Firestorm, Mighty Ape AU and NZ, Gamesmen, EB Games, MTG Mate, Imaginaire, Le Valet, Bazaar of Magic, FantasyWelt, Keepseven, Nedgame, Poromagia, Dave & Adam's, Pro-Play, Pokémon Center, Red Hobby) and custom storefronts (Card Kingdom, CoolStuffInc, ABUGames, CoreTCG, Ideal808, Noble Knight, Miniature Market, Play-in, Parkage, Agora Hobby, Hobby Master NZ). A bot wall is never worked around. A BigCommerce reader would unlock the most (Star City Games, Miniature Market, Game Nerdz, Magic Madhouse, Game Goblins) and is the next adapter worth writing.
