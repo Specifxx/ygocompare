@@ -1404,3 +1404,18 @@ ask topped every "most valuable" list there). A product without a market price h
 and ranks nowhere. Deals come from stores only, never an eBay row. Movers, Rising Cards and the monthly
 report leave the rail, phone row, footer and tools hub until a week of history exists (`historyOn()`).
 `tests/reference-price.test.ts`.
+
+## Zero-data card pages are noindex; a schema price is good until tomorrow (2026-11-04)
+
+From the owner's Gemini SEO research (the 20-action plan, 2026-11-04): a programmatic page with nothing of its
+own is what Google's scaled-content and soft-404 rules describe. A card page with no TCGplayer market price AND
+no store or eBay listing now carries `noindex, follow` (`src/lib/indexing.ts` `cardIndexable`, used by
+`/card/[slug]`): still reachable and still passing links, out of the index. Cards of an upcoming set are kept
+(no price because the set is not out; reveal-week searches are theirs), pack inserts stay out as before, and
+nothing is deleted or moved (owner, 2026-11-03: narrow, never delete). The sitemap rule (`sitemapMinCardCents`)
+is unchanged and stricter, so no sitemap URL is noindex. The card page's `AggregateOffer` also carries
+`priceValidUntil` = tomorrow, as RiftCompare's does: prices refresh with the daily import. The rest of the
+plan was already in place (Product + AggregateOffer, set hubs with set value, `/methodology`, tiered sitemaps
+with lastmod, "Prices checked" times, llms.txt, no sister footers) or declined: EV calculators (no verified
+pull rates, and we never invent a number), graded-tier pages (no graded data), footprint "isolation" (one
+engine on purpose), /de and /ja editions (not yet). `tests/seo-audit.test.ts`.

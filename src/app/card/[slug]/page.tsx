@@ -25,6 +25,7 @@ import { ShareButton } from "@/components/ShareButton";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
+import { cardIndexable, priceValidUntil } from "@/lib/indexing";
 
 export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
 // Empty list = nothing prerendered at build, but each page is cached (ISR)
@@ -45,9 +46,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: { absolute: title },
     description,
     alternates: { canonical: `/card/${p.slug}` },
-    // Pack inserts (puzzle pieces, ink drops) are worth cents and nobody shops
-    // for them: out of the index, like the sitemap (DECISIONS.md, 2026-10-28).
-    ...(p.sealedType === "Insert" ? { robots: { index: false, follow: true } } : {}),
+    // Pack inserts (worth cents, DECISIONS.md 2026-10-28) and cards with no
+    // price and no listing at all (lib/indexing.ts) stay out of the index.
+    ...(cardIndexable(p, ref, priceOf(p.id).offers.length, set) ? {} : { robots: { index: false, follow: true } }),
     // The image is ./opengraph-image.tsx: the card and its real price gap (lib/share.ts).
     openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description },
     twitter: { card: "summary_large_image" },
@@ -87,6 +88,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
                 highPrice: (Math.max(...usOffers.map((o) => o.cents)) / 100).toFixed(2),
                 offerCount: usOffers.length,
                 availability: "https://schema.org/InStock",
+                priceValidUntil: priceValidUntil(),
               }
             : undefined,
         }}
