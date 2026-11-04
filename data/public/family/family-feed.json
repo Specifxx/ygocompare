@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-03T19:50:58.583Z",
+ "generatedAt": "2026-11-04T20:07:44.988Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12747,
+   "refCents": 12647,
    "refLabel": "TCGplayer market price",
    "savingPct": 53
   },
@@ -55,43 +55,43 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Hidden Arsenal 6: Omega Xyz - Booster Box [1st Edition]",
-   "url": "https://ygocompare.com/card/hidden-arsenal-6-omega-xyz-booster-box-1st-edition",
-   "cents": 8000,
+   "title": "Master of Pendulum Structure Deck",
+   "url": "https://ygocompare.com/card/master-of-pendulum-structure-deck",
+   "cents": 4449,
    "currency": "USD",
-   "store": "Burbank Cards",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/60112_200w.jpg",
-   "refCents": 11300,
+   "store": "Realgoodeal",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/108780_200w.jpg",
+   "refCents": 5999,
    "refLabel": "TCGplayer market price",
-   "savingPct": 29
+   "savingPct": 26
   },
   {
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Fusion Enforcers Booster Box [1st Edition]",
-   "url": "https://ygocompare.com/card/fusion-enforcers-booster-box-1st-edition",
-   "cents": 25000,
+   "title": "Spell Ruler Booster Box (25th Anniversary Edition)",
+   "url": "https://ygocompare.com/card/spell-ruler-booster-box-25th-anniversary-edition",
+   "cents": 7999,
    "currency": "USD",
-   "store": "Burbank Cards",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/127521_200w.jpg",
-   "refCents": 27998,
+   "store": "Collectors Emporium NY",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/488582_200w.jpg",
+   "refCents": 9883,
    "refLabel": "TCGplayer market price",
-   "savingPct": 11
+   "savingPct": 19
   },
   {
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "2003 Collectors Tin: Seto Kaiba & Blue-Eyes White Dragon",
-   "url": "https://ygocompare.com/card/2003-collectors-tin-seto-kaiba-and-blue-eyes-white-dragon",
-   "cents": 72000,
+   "title": "Invasion of Chaos Booster Box (25th Anniversary Edition)",
+   "url": "https://ygocompare.com/card/invasion-of-chaos-booster-box-25th-anniversary-edition",
+   "cents": 7999,
    "currency": "USD",
-   "store": "Papa Joey's Collectibles",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/206884_200w.jpg",
-   "refCents": 80000,
+   "store": "Collectors Emporium NY",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/488583_200w.jpg",
+   "refCents": 9632,
    "refLabel": "TCGplayer market price",
-   "savingPct": 10
+   "savingPct": 17
   },
   {
    "kind": "preorder",
