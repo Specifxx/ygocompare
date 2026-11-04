@@ -1,20 +1,22 @@
 # Working in this repo
 
-Read `README.md` first. This is YGO Compare (Yu-Gi-Oh! TCG); Gundam Compare and
-Lorcana Compare run the same engine. Engine code (`src/lib`, `src/app`,
+Read `README.md` first. This is YGO Compare (Yu-Gi-Oh! TCG); Lorcana Compare,
+Cyberpunk Compare and BandaiCompare run the same engine (Gundam Compare left it
+for the Dex / MTG Compare engine on 2026-11-04). Engine code (`src/lib`, `src/app`,
 `src/components`, `scripts`) must stay game-agnostic: anything game-specific
 goes in `src/site.config.ts` or `src/content/`. When you change the engine,
-make the same change in the other two repos.
+make the same change in the other three repos.
 
-## One engine, three repos
+## One engine, four repos
 
-Gundam Compare, Lorcana Compare, YGO Compare and Cyberpunk Compare
-(`Specifxx/cyberpunkcompare`, since 2026-11-01) run ONE engine. `engine.json`
-lists its files (the code, tests and build config; never `src/site.config.ts`,
-`src/content/`, icons, share images, workflows or `data/`), and they must be
-byte-identical in all three repos. After an engine change here, copy it with
-`scripts/engine-sync.sh ../<sister> ../<sister>`, run the checks in each and
-open the three PRs together; `npx tsx scripts/engine-drift.ts ../<sister>…`
+Lorcana Compare, YGO Compare, Cyberpunk Compare and BandaiCompare run ONE
+engine (Gundam Compare ran it until 2026-11-04, when the owner moved it onto
+the Dex / MTG Compare engine; `Specifxx/GundamCompare` is no longer a sister).
+`engine.json` lists its files (the code, tests and build config; never
+`src/site.config.ts`, `src/content/`, icons, share images, workflows or
+`data/`), and they must be byte-identical in all four repos. After an engine
+change here, copy it with `scripts/engine-sync.sh ../<sister> ../<sister> ../<sister>`,
+run the checks in each and open the PRs together; `npx tsx scripts/engine-drift.ts ../<sister>…`
 shows what still differs. The weekly *Engine drift* workflow fails (and
 emails the owner) if `main` differs from a sister's `main`. Anything one game
 needs is an option in `site.config.ts`, off by default.
