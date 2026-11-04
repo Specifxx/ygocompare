@@ -70,29 +70,33 @@ export default function CardPage({ params }: { params: { slug: string } }) {
   const amazon = p.kind === "sealed" ? amazonSearchUrls(`${SITE.game} ${name}`) : null;
   return (
     <article className="flex flex-col gap-8">
-      <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Product",
-          name: p.name,
-          image: p.image ? imageAt(p.image, "in_1000x1000") : undefined,
-          sku: String(p.id),
-          brand: { "@type": "Brand", name: SITE.game },
-          category: p.kind === "card" ? "Trading card" : "Sealed trading card product",
-          url: abs(`/card/${p.slug}`),
-          offers: usOffers.length
-            ? {
-                "@type": "AggregateOffer",
-                priceCurrency: "USD",
-                lowPrice: (Math.min(...usOffers.map((o) => o.cents)) / 100).toFixed(2),
-                highPrice: (Math.max(...usOffers.map((o) => o.cents)) / 100).toFixed(2),
-                offerCount: usOffers.length,
-                availability: "https://schema.org/InStock",
-                priceValidUntil: priceValidUntil(),
-              }
-            : undefined,
-        }}
-      />
+      {/* Product markup only when a real in-stock US offer backs it (2026-11-04,
+          DECISIONS.md): Google treats a Product with none of offers, review or
+          aggregateRating as an error, so a card with only a reference price
+          emits no Product rather than an invalid one. */}
+      {usOffers.length > 0 && (
+        <JsonLd
+          data={{
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: p.name,
+            image: p.image ? imageAt(p.image, "in_1000x1000") : undefined,
+            sku: String(p.id),
+            brand: { "@type": "Brand", name: SITE.game },
+            category: p.kind === "card" ? "Trading card" : "Sealed trading card product",
+            url: abs(`/card/${p.slug}`),
+            offers: {
+              "@type": "AggregateOffer",
+              priceCurrency: "USD",
+              lowPrice: (Math.min(...usOffers.map((o) => o.cents)) / 100).toFixed(2),
+              highPrice: (Math.max(...usOffers.map((o) => o.cents)) / 100).toFixed(2),
+              offerCount: usOffers.length,
+              availability: "https://schema.org/InStock",
+              priceValidUntil: priceValidUntil(),
+            },
+          }}
+        />
+      )}
       <Breadcrumbs items={[{ name: p.kind === "sealed" ? "Sealed" : "Cards", href: p.kind === "sealed" ? "/sealed" : "/cards" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         {/* Phones: the name, price and Buy come first; the big image and the

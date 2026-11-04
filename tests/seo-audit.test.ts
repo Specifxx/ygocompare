@@ -39,4 +39,8 @@ test("card pages with no price and no listing are kept out of the index", async 
   const src = read("src/app/card/[slug]/page.tsx");
   assert.match(src, /cardIndexable\(/);
   assert.match(src, /priceValidUntil: priceValidUntil\(\)/);
+  // A Product with no offers is a Search Console error (Gundam, 20 pages, 2026-11-04):
+  // the block is rendered only when an in-stock US offer backs it.
+  assert.match(src, /\{usOffers\.length > 0 && \(\s*<JsonLd/);
+  assert.doesNotMatch(src, /offers: usOffers\.length\s*\?/);
 });
