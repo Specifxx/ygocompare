@@ -18,6 +18,12 @@ export default function Blog() {
       <ul className="flex flex-col gap-4">
         {posts().map((p) => (
           <li key={p.slug} className="card-surface p-5">
+            {p.image && (
+              <Link href={`/blog/${p.slug}`} className="mb-4 block" tabIndex={-1}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={p.image.src} alt={p.image.alt} width={1200} height={630} loading="lazy" decoding="async" className="aspect-[1200/630] w-full rounded-lg object-cover" />
+              </Link>
+            )}
             <Link href={`/blog/${p.slug}`} className="text-lg font-semibold hover:underline">{p.title}</Link>
             <p className="mt-1 text-sm text-muted">{p.description}</p>
             <p className="mt-2 text-xs text-muted">{p.updated ?? p.date}</p>

@@ -17,7 +17,8 @@ export const generateStaticParams = () => posts().map((p) => ({ slug: p.slug }))
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = postBySlug(params.slug);
   if (!p) return {};
-  return { title: p.title, description: p.description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", siteName: SITE.name, url: `/blog/${p.slug}`, title: p.title, description: p.description, publishedTime: p.date, images: ["/opengraph-image.jpg"] }, twitter: { card: "summary_large_image", images: ["/opengraph-image.jpg"] } };
+  const image = p.image?.src ?? "/opengraph-image.jpg";
+  return { title: p.title, description: p.description, keywords: p.keywords, alternates: { canonical: `/blog/${p.slug}` }, openGraph: { type: "article", siteName: SITE.name, url: `/blog/${p.slug}`, title: p.title, description: p.description, publishedTime: p.date, images: [{ url: image, width: 1200, height: 630, alt: p.image?.alt ?? p.title }] }, twitter: { card: "summary_large_image", images: [image] } };
 }
 
 export default function PostPage({ params }: { params: { slug: string } }) {
@@ -25,12 +26,17 @@ export default function PostPage({ params }: { params: { slug: string } }) {
   if (!p) notFound();
   return (
     <article className="mx-auto max-w-3xl">
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: p.title, description: p.description, datePublished: p.date, dateModified: p.updated ?? p.date, image: abs("/opengraph-image.jpg"), author: { "@type": "Organization", name: SITE.name, url: abs("/about") }, publisher: { "@type": "Organization", name: SITE.name, url: abs("/"), logo: { "@type": "ImageObject", url: abs("/icon.svg") } }, mainEntityOfPage: abs(`/blog/${p.slug}`) }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: p.title, description: p.description, datePublished: p.date, dateModified: p.updated ?? p.date, image: abs(p.image?.src ?? "/opengraph-image.jpg"), author: { "@type": "Organization", name: SITE.name, url: abs("/about") }, publisher: { "@type": "Organization", name: SITE.name, url: abs("/"), logo: { "@type": "ImageObject", url: abs("/icon.svg") } }, mainEntityOfPage: abs(`/blog/${p.slug}`) }} />
       {p.faq && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: p.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />}
       <Breadcrumbs items={[{ name: "Guides", href: "/blog" }, { name: p.title }]} />
       <p className="text-xs text-muted">{p.updated ? `Updated ${p.updated}` : p.date}</p>
       <h1 className="mt-2 font-display text-3xl font-black md:text-4xl">{p.title}</h1>
       <p className="mt-3 text-lg text-muted">{p.description}</p>
+      {p.image && (
+        // The post's own thumbnail, a static file in public/blog: no optimiser, no function.
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={p.image.src} alt={p.image.alt} width={1200} height={630} className="mt-6 aspect-[1200/630] w-full rounded-xl border border-ink-800 object-cover" />
+      )}
       <div className="prose-site mt-6 overflow-x-auto" dangerouslySetInnerHTML={{ __html: renderPost(p.html) }} />
       <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_ARTICLE} className="my-6" />
       {p.faq && (
