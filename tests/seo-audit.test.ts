@@ -24,3 +24,19 @@ test("the homepage title tries every candidate with the brand before any without
 test("homepage, set and sealed hubs list their products as an ItemList", () => {
   for (const f of ["src/app/page.tsx", "src/app/sets/[slug]/page.tsx", "src/app/sealed/[type]/page.tsx"]) assert.match(read(f), /"ItemList"/, f);
 });
+
+// Zero-data card pages are noindex,follow; priced or listed ones (and every card of an
+// upcoming set) are indexed; JSON-LD prices carry a priceValidUntil of tomorrow.
+test("card pages with no price and no listing are kept out of the index", async () => {
+  const { cardIndexable, priceValidUntil } = await import("../src/lib/indexing");
+  const card = { kind: "card" as const, sealedType: null };
+  assert.equal(cardIndexable(card, null, 0, { upcoming: false }), false);
+  assert.equal(cardIndexable(card, 250, 0, { upcoming: false }), true);
+  assert.equal(cardIndexable(card, null, 1, { upcoming: false }), true);
+  assert.equal(cardIndexable(card, null, 0, { upcoming: true }), true);
+  assert.equal(cardIndexable({ kind: "sealed", sealedType: "Insert" }, 5000, 3, { upcoming: false }), false);
+  assert.equal(priceValidUntil(Date.UTC(2026, 10, 4, 12)), "2026-11-05");
+  const src = read("src/app/card/[slug]/page.tsx");
+  assert.match(src, /cardIndexable\(/);
+  assert.match(src, /priceValidUntil: priceValidUntil\(\)/);
+});
