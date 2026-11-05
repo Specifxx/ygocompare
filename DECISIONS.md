@@ -1450,3 +1450,34 @@ The request is filed as a `suggest-store` report with `issue: "owner"`; RiftComp
 those first and asks for a reply within two days. No email is asked for (the reports branch is public); no pop-up,
 no cold email. RiftCompare and OP Compare keep their `/stores/suggest` page (now the owner pitch) and redirect
 `/list-your-store` to it.
+
+## 2026-11-05: Amazon's own price on the sealed pages' Amazon row, from the Creators API
+
+The owner's US Associates account was approved today and he asked for Amazon's API prices as price rows on every site.
+In this engine (sealed products only; singles keep no Amazon row), two script-side steps and one reader:
+
+- `scripts/amazon-asins.ts` runs in the daily refresh after the import (`refresh-prices.yml`), in every market with its
+  own Amazon and our tag (US, UK, CA, AU, DE for the eurozone; Singapore has none). It searches Amazon for each sealed
+  product with an in-stock store offer (most stores first, `AMAZON_SEARCH_BUDGET` a market a day) and keeps a result ONLY
+  when the store matcher (`lib/import/match.ts` `matchSealed`) lands on that product: the rule that matches the stores
+  matches Amazon, a wrong merge being worse than a missing price. ASINs and misses go in `data/amazon/asins-<MARKET>.json`
+  (keyed by product id; ASINs may be stored; a miss is retried after 30 days) and ride the data commit;
+  `status-<MARKET>.json` says what the last run did, and the ops monitor reads it ("Amazon ASIN finder": informational
+  until access, a warning once a market's finder stops running).
+- `scripts/fetch-amazon-prices.ts` runs first in every Vercel build, fetches today's prices for those ASINs (`getItems`,
+  ten a call, one a second, `AMAZON_BUILD_CALLS` a market, 30 by default) into the git-ignored `data/amazon-live/`, and
+  drops a price under 60% or over 160% of the product's in-stock store median. Prices are never committed: Amazon's
+  licence lets a price be kept 24 hours and shown with its time.
+- `lib/amazon-live.ts` `amazonCells` upgrades the card page's per-market Amazon searches to the item's own tagged page
+  and, while under 24 hours old, its price; `PriceTable` shows it in the Amazon row (still third, under eBay and
+  TCGplayer) with "as of <time> <market clock>" and the licence's disclaimer, and the browser hides the price after 24
+  hours (`AmazonPrice.tsx`) because the page sits in the CDN for hours. The row stays an ad outside the store order:
+  never ranked, never the cheapest, never in deals, movers, alerts, history, the feed, metadata or the quick view
+  (`tests/amazon-api.test.ts` pins the reader to the card page and the client to the scripts). Both files are traced into
+  the functions (`next.config.js`).
+
+One credential serves every store: `AMAZON_CREATORS_AU_CLIENT_ID` / `_CLIENT_SECRET` / `_VERSION` as GitHub secrets and
+Vercel Production variables (the same values on every site; `AMAZON_CREATORS_<MARKET>_*` would override for one store).
+Access is per marketplace and opens by itself once that store's account has qualifying sales (about 10 in 30 days); a
+refused store is skipped, so the feature costs nothing until then and switches on without a code change. Engine code, landed from
+Lorcana Compare the same day.

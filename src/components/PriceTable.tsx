@@ -6,6 +6,8 @@
 // last thing a buyer needs and used to push the live prices off the screen.
 // Row order is lib/price-rows.ts, shared with the phone buy block.
 import { Fragment, useState } from "react";
+import { AmazonPrice, AMAZON_PRICE_DISCLAIMER } from "./AmazonPrice";
+import type { AmazonCell } from "@/lib/amazon-live";
 import { SITE } from "@/site.config";
 import { CURRENCY, MARKETS, MARKET_LABEL, type Market, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
@@ -30,7 +32,7 @@ export function sourceName(o: Offer) {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product }: { offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string | AmazonCell>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
@@ -77,18 +79,21 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const unfold = showOut || live.length === 0;
   const shown = compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o));
   const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
-  const amazonUrl = amazon?.[market];
+  // A string is the tagged search; a cell (lib/amazon-live.ts) is the item's own page, with this build's price while under 24 hours old.
+  const amazonCell = amazon?.[market];
+  const amazonUrl = typeof amazonCell === "string" ? amazonCell : amazonCell?.url;
+  const amazonLive = typeof amazonCell === "object" ? amazonCell.live : undefined;
   const amazonRow = amazonUrl ? (
     <tr data-amazon-row className="border-t border-ink-800">
       <td className="px-3 py-2.5">
         <span className="font-medium text-fg">Amazon</span>
         <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>
       </td>
-      <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">Price shows on Amazon</td>
-      <td className="px-3 py-2.5 text-right text-xs text-muted">See price</td>
+      <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">{amazonLive ? "New, Amazon's listing of this product" : "Price shows on Amazon"}</td>
+      <td className="px-3 py-2.5 text-right text-xs text-muted">{amazonLive ? <AmazonPrice {...amazonLive} /> : "See price"}</td>
       <td className="px-3 py-2.5 text-right">
         <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
-          Check price <span aria-hidden="true">↗</span>
+          {amazonLive ? "View" : "Check price"} <span aria-hidden="true">↗</span>
         </a>
       </td>
     </tr>
@@ -145,6 +150,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
           })}
         </tbody>
       </table>
+      {amazonLive && <p className="border-t border-ink-800 px-3 py-2 text-[11px] text-muted">* Amazon price: {AMAZON_PRICE_DISCLAIMER}</p>}
       {folded > 0 && (
         <button type="button" onClick={() => setShowOut(true)} className="w-full border-t border-ink-800 px-3 py-2.5 text-left text-sm text-muted hover:bg-ink-850 hover:text-fg">
           Show {folded} out-of-stock listing{folded === 1 ? "" : "s"} ↓
