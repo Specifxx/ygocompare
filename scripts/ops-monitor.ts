@@ -68,6 +68,22 @@ async function main() {
         return { status: "fail", detail: "data/public/family/family-feed.json missing — check the Refresh prices workflow's family step" };
       }
     }),
+    // Amazon's Creators API (scripts/amazon-asins.ts, daily): informational until Amazon grants access ("off" without
+    // secrets, "refused" until the store's account qualifies), then a warning if a market's finder stops running.
+    check("Amazon ASIN finder", async () => {
+      const dir = path.join(process.cwd(), "data/amazon");
+      const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /^status-[A-Z]+\.json$/.test(f)) : [];
+      if (!files.length) return { status: "ok", detail: "not run yet (no AMAZON_CREATORS_* secrets, or no sealed products)" };
+      const parts: string[] = [];
+      let stale = 0;
+      for (const f of files) {
+        const s = JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")) as { at: string; state: string; known?: number; found?: number };
+        const age = (Date.now() - new Date(s.at).getTime()) / 3_600_000;
+        if (s.state === "ok" && age > 54) stale++;
+        parts.push(`${f.slice(7, -5)}: ${s.state}${s.known != null ? `, ${s.known} ASINs` : ""}, ${age.toFixed(0)}h ago`);
+      }
+      return { status: stale ? "warn" : "ok", detail: parts.join("; ") };
+    }),
     // The model-kit import (SITE.kits, scripts/import-kits.ts): its own file,
     // its own stores.
     ...(SITE.kits

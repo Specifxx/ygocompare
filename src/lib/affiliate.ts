@@ -72,7 +72,7 @@ export function tcgplayerAffiliateUrl(url: string, sub?: string): string {
 // uses AMAZON_TAG above; Australia AMAZON_AU_TAG, the UK compareempi03-21, Canada compareempire-20
 // and the eurozone (amazon.de) compareempire-21: the owner's accounts, hard-coded
 // (2026-11-02). Singapore never (no Associates programme).
-const AMAZON_STORES: Partial<Record<Market, { host: string; tag: string }>> = {
+export const AMAZON_STORES: Partial<Record<Market, { host: string; tag: string }>> = {
   US: { host: "www.amazon.com", tag: AMAZON_TAG },
   AU: { host: "www.amazon.com.au", tag: AMAZON_AU_TAG },
   UK: { host: "www.amazon.co.uk", tag: "compareempi03-21" },
@@ -114,6 +114,13 @@ function storeReferralUrl(url: string): string {
 }
 
 /** A tagged search of the market's Amazon, or null where the market has no tag. */
+/** Amazon's own page of an item the Creators API matched (lib/amazon-live.ts), with the market's tag; null without a tag or for a bad ASIN. */
+export function amazonItemUrl(asin: string, market: Market): string | null {
+  const s = AMAZON_STORES[market];
+  if (!s || !/^[A-Z0-9]{10}$/.test(asin)) return null;
+  return `https://${s.host}/dp/${asin}?tag=${encodeURIComponent(s.tag)}`;
+}
+
 export function amazonSearchUrl(q: string, market: Market = "US"): string | null {
   const s = AMAZON_STORES[market];
   if (!s) return null;
