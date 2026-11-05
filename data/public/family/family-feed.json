@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-04T20:07:44.988Z",
+ "generatedAt": "2026-11-05T20:23:37.611Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,9 +19,9 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12647,
+   "refCents": 12567,
    "refLabel": "TCGplayer market price",
-   "savingPct": 53
+   "savingPct": 52
   },
   {
    "kind": "deal",
