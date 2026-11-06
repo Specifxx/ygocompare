@@ -12,6 +12,7 @@
 // `ascsubtag`. The site key comes first so the digest groups by it.
 import { SITE } from "@/site.config";
 import { MARKETS, type Market } from "./site-types";
+import { shopifyCartUrl } from "./checkout-link";
 import { awinUrl, clickref } from "./awin";
 
 // One EPN campaign for every Compare site, hard-coded (owner, 2026-10-30: "make
@@ -139,13 +140,26 @@ export function amazonSearchUrls(q: string): Partial<Record<Market, string>> | n
 }
 
 /** The tagged destination for any outbound offer URL. */
-export function tagged(url: string, sub?: string): string {
+export function tagged(url: string, sub?: string, opts: { checkout?: boolean } = {}): string {
   if (/(^|\.)ebay\./i.test(safeHost(url))) return ebayAffiliateUrl(url, sub);
   if (/tcgplayer\.com$/i.test(safeHost(url))) return tcgplayerAffiliateUrl(url, sub);
   if (/(^|\.)amazon\./i.test(safeHost(url))) return amazonAffiliateUrl(url, sub);
   // A store that accepted the family on Awin (src/lib/awin.ts): the same page through its tracked deep link.
   const plain = storeReferralUrl(url);
-  return awinUrl(plain, clickref(SITE.key, sub)) ?? plain;
+  const awin = awinUrl(plain, clickref(SITE.key, sub));
+  if (awin) return awin;
+  // Straight to checkout (lib/checkout-link.ts, owner 2026-11-06): an in-stock Shopify store
+  // row (goHref's `c=1`) opens the store's cart with the priced variant in it. After Awin, whose
+  // tracking runs on the store's own pages.
+  if (opts.checkout) {
+    const cart = shopifyCartUrl(plain);
+    if (cart) {
+      const c = new URL(cart);
+      c.searchParams.set("utm_content", "checkout");
+      return c.toString();
+    }
+  }
+  return plain;
 }
 
 function safeHost(url: string): string {
@@ -157,8 +171,10 @@ function safeHost(url: string): string {
 }
 
 /** The /go link a buy button renders: logs the click, then redirects. */
-export function goHref(o: { url: string; source: string; market: string }, productId?: number, page?: string): string {
+export function goHref(o: { url: string; source: string; market: string; inStock?: boolean }, productId?: number, page?: string): string {
   const q = new URLSearchParams({ u: o.url, s: o.source, m: o.market });
+  // An in-stock store row whose URL names its Shopify variant: /go opens the store's checkout.
+  if (o.inStock && !/^(ebay|tcgplayer|amazon)/.test(o.source) && shopifyCartUrl(o.url)) q.set("c", "1");
   if (productId) q.set("p", String(productId));
   if (page) q.set("from", page);
   return `/go?${q}`;

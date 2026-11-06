@@ -36,6 +36,7 @@ export function BuyClickTracker() {
           product: q.get("p") ?? "",
           page: q.get("from") ?? location.pathname,
           host,
+          link_type: q.get("c") === "1" ? "checkout" : "product",
         });
       } catch {}
     };

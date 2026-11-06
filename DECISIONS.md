@@ -1570,3 +1570,15 @@ sites shares its thumbs; this site stores nothing and fetches the tally in the b
 step). One vote per browser per store, a few per network, marketplaces (eBay, Amazon, TCGplayer…) get none. Votes never
 order prices, hide a store or decide the cheapest. RiftCompare's DECISIONS.md, 2026-11-06, has the rules; change the
 component there first and copy it.
+
+## 2026-11-06 — Buy links open the store's checkout
+
+**Decision (owner: "for all the sites that we can, send them directly to the checkout page, with the item in the
+basket"):** an in-stock Shopify store row opens that store's checkout with the priced item in the cart, through
+Shopify's cart permalink (`/cart/<variant id>:1`), as RiftCompare (#340) and OP Compare (#99) do. The engine's Shopify
+reader has always stored `?variant=<id>` on every offer URL, so no import change is needed: `goHref` adds `c=1` to an
+in-stock store row's `/go` link whose URL names a variant, and `/go` → `tagged(…, { checkout: true })` returns the cart
+link with the usual referral tags plus `utm_content=checkout`. Awin stores keep their tracked product link (Awin is
+asked first); eBay, TCGplayer, Amazon, sold-out rows and non-Shopify stores keep product pages. `buy_click` carries
+`link_type`. `lib/checkout-link.ts`, `tests/checkout-link.test.ts`. Revert by
+dropping the `c` flag in `goHref`.
