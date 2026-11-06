@@ -124,6 +124,10 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                   <td className="px-3 py-2.5">
                     <span className="font-medium text-ink">{sourceName(o)}</span>
                     <StoreVote url={o.url} name={sourceName(o)} className="ml-2 text-muted" />
+                    {/* Phones: the cart list's add button as a line under the store, where the row has no width to spare. */}
+                    {!compact && o.inStock && !/^(ebay|tcgplayer|amazon)/.test(o.source) && (
+                      <span className="block sm:hidden"><CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} inline className="text-xs" /></span>
+                    )}
                     {o.source === "ebay" && <span className="ad-pill ml-2">Ad</span>}
                     {best && <span className="ml-2 rounded-full bg-open-soft px-2 py-0.5 text-[10px] font-bold uppercase text-open">Best price</span>}
                   </td>
@@ -145,7 +149,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                     {/* The cart list (components/cart, owner 2026-11-06): an in-stock store row, beside its button. */}
                     <span className="inline-flex items-center justify-end gap-2">
                     {!compact && o.inStock && !/^(ebay|tcgplayer|amazon)/.test(o.source) && (
-                      <CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} className="text-muted" />
+                      <CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} className="hidden text-muted sm:inline-flex" />
                     )}
                     <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${best ? "btn-primary px-3 py-1.5" : o.source === "ebay" && o.inStock ? "btn-ad px-3 py-1.5" : o.inStock ? "btn-soft px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
                       {best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
