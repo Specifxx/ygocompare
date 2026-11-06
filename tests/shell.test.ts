@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { navGroups, phoneNav } from "@/lib/nav";
 import { isActivePath } from "@/components/NavLink";
-import { tilesThatFit, MIN_WIDTH, MAX_TILES, ebayTilesFor } from "@/components/SideAds";
+import { railFits, MIN_WIDTH, MAX_TILES, ebayTilesFor } from "@/components/SideAds";
 import type { CardAds } from "@/lib/card-ads";
 
 // The engine's shell (2026-11-04: Gundam Compare runs the Dex / MTG Compare engine's look): one sticky header row, the
@@ -30,11 +30,17 @@ test("the current section is marked by whole path segments", () => {
   assert.ok(!isActivePath("/", "/cards"));
 });
 
-test("the side rails fit only a wide, tall window and never a clipped tile", () => {
-  assert.equal(MIN_WIDTH, 1864);
-  assert.equal(tilesThatFit(300), 0);
-  assert.ok(tilesThatFit(900) >= 2);
-  assert.equal(tilesThatFit(5000), MAX_TILES);
+test("the side rails show on every regular 16:9 and 16:10 screen and scroll through up to ten tiles", () => {
+  assert.equal(MIN_WIDTH, 1280, "owner, 2026-11-06");
+  assert.equal(MAX_TILES, 10);
+  assert.ok(!railFits(300), "too short for one whole tile: no rail");
+  assert.ok(railFits(720), "a 1280×720 window has rails");
+  const src = readFileSync(new URL("../src/components/SideAds.tsx", import.meta.url), "utf8");
+  assert.match(src, /min-\[1280px\]:flex/);
+  assert.match(src, /overflow-y-auto/, "the list scrolls inside the rail");
+  const css = readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /max-width: min\(1480px, calc\(100vw - 320px\)\)/, "the shell leaves the rails their room");
+  assert.match(readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8"), /cardAds\(\{ limit: 10 \}\)/);
   const t = (id: number) => ({ id, slug: `s${id}`, name: "x", image: null, cents: 100, currency: "USD", url: "https://www.ebay.com/itm/1", ref: null });
   const ads: CardAds = { ebay: { US: [t(1), t(2), t(3)], UK: [t(4)] }, tcgplayer: [] };
   assert.equal(ebayTilesFor(ads, "UK").market, "US");
