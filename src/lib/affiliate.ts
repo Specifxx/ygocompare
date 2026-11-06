@@ -12,6 +12,7 @@
 // `ascsubtag`. The site key comes first so the digest groups by it.
 import { SITE } from "@/site.config";
 import { MARKETS, type Market } from "./site-types";
+import { awinUrl, clickref } from "./awin";
 
 // One EPN campaign for every Compare site, hard-coded (owner, 2026-10-30: "make
 // all of them use this exact campaign"); the customid's site key tells the
@@ -142,7 +143,9 @@ export function tagged(url: string, sub?: string): string {
   if (/(^|\.)ebay\./i.test(safeHost(url))) return ebayAffiliateUrl(url, sub);
   if (/tcgplayer\.com$/i.test(safeHost(url))) return tcgplayerAffiliateUrl(url, sub);
   if (/(^|\.)amazon\./i.test(safeHost(url))) return amazonAffiliateUrl(url, sub);
-  return storeReferralUrl(url);
+  // A store that accepted the family on Awin (src/lib/awin.ts): the same page through its tracked deep link.
+  const plain = storeReferralUrl(url);
+  return awinUrl(plain, clickref(SITE.key, sub)) ?? plain;
 }
 
 function safeHost(url: string): string {
