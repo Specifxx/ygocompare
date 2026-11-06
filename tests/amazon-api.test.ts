@@ -74,15 +74,22 @@ test("an item link goes to the market's own Amazon with its tag", () => {
 
 const walk = (d: string): string[] => readdirSync(d).flatMap((f) => (statSync(path.join(d, f)).isDirectory() ? walk(path.join(d, f)) : [path.join(d, f)]));
 
-test("the Creators API client stays script-side; only the card page reads live Amazon prices; prices are never committed", () => {
+test("the Creators API client stays script-side; only the card page reads live Amazon prices (the quick view takes its links); prices are never committed", () => {
   for (const f of [...walk("src/app"), ...walk("src/components"), ...walk("src/lib")].filter((f) => /\.tsx?$/.test(f))) {
     const s = readFileSync(f, "utf8");
     if (f !== "src/lib/amazon-creators.ts") assert.ok(!/amazon-creators/.test(s), `${f} imports the Creators API client`);
-    if (/import \{[^}]*\} from "@\/lib\/amazon-live"/.test(s)) assert.equal(f, "src/app/card/[slug]/page.tsx", `${f} reads live Amazon prices`);
+    if (/import \{[^}]*\} from "@\/lib\/amazon-live"/.test(s)) assert.ok(["src/app/card/[slug]/page.tsx", "src/app/api/quick/[slug]/route.ts"].includes(f), `${f} reads live Amazon prices`);
     assert.ok(!/AMAZON_CREATORS/.test(s) || f === "src/lib/amazon-creators.ts", `${f} names the credentials`);
   }
   assert.match(readFileSync(".gitignore", "utf8"), /^data\/amazon-live\/$/m);
   assert.match(JSON.parse(readFileSync("package.json", "utf8")).scripts.build, /^\(tsx scripts\/fetch-amazon-prices\.ts \|\| true\) && (\(tsx scripts\/fetch-awin\.ts \|\| true\) && )?next build/);
   assert.match(readFileSync("next.config.js", "utf8"), /data\/amazon-live\/\*\.json/);
   assert.match(readFileSync(".github/workflows/refresh-prices.yml", "utf8"), /scripts\/amazon-asins\.ts/);
+});
+
+test("the quick view's Amazon row is the card page's tagged link, never Amazon's price (owner, 2026-11-06)", () => {
+  const src = readFileSync("src/app/api/quick/[slug]/route.ts", "utf8");
+  assert.doesNotMatch(src, /amazon: null,/, "the quick view keeps the Amazon link");
+  assert.match(src, /amazonCells\(id, amazonSearchUrls\(`\$\{SITE\.game\} \$\{name\}`\)\)/, "the same links as the card page");
+  assert.match(src, /c\.url\]/, "the link only: the price stays on the card page");
 });
