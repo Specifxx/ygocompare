@@ -113,7 +113,7 @@ export function DailyGame({ puzzles, game }: { puzzles: DailyPuzzle[]; game: str
           <p className="mt-3 text-sm text-muted">A new puzzle at midnight UTC.</p>
         </div>
         <div>
-          <h2 className="text-lg font-bold">Today&apos;s cards</h2>
+          <h2 className="text-lg font-bold">Today&apos;s products</h2>
           <ul className="mt-2 divide-y divide-ink-800 text-sm">
             {p.rounds.flat().sort((a, b) => b.cents - a.cents).map((c) => (
               <li key={c.id} className="flex items-center justify-between gap-3 py-2">
@@ -122,7 +122,7 @@ export function DailyGame({ puzzles, game }: { puzzles: DailyPuzzle[]; game: str
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-xs text-muted">TCGplayer US market price when the puzzle was built. Tap a card for every store&apos;s price.</p>
+          <p className="mt-2 text-xs text-muted">TCGplayer US market price when the puzzle was built. Tap a product for every store&apos;s price.</p>
         </div>
       </div>
     );

@@ -7,7 +7,7 @@ export const abs = (p: string) => `${SITE_URL}${p.startsWith("/") ? p : `/${p}`}
 /** The site's share image (src/app/opengraph-image.jpg). A page that sets
  *  its own `openGraph` loses the root file's og:image, so every page names it
  *  again: without it Reddit, Discord and iMessage show no thumbnail. */
-export const SHARE_IMAGE = { url: "/opengraph-image.jpg", width: 2400, height: 1260, alt: `${SITE.name}: compare ${SITE.gameShort} card and booster box prices across stores` };
+export const SHARE_IMAGE = { url: "/opengraph-image.jpg", width: 2400, height: 1260, alt: `${SITE.name}: compare ${SITE.gameShort} booster box and sealed prices across stores` };
 
 /** The model-kit section's own share image (SITE.kits.shareImage), else the site's. */
 export const KITS_SHARE_IMAGE = SITE.kits?.shareImage ? { width: 2400, height: 1260, ...SITE.kits.shareImage } : SHARE_IMAGE;

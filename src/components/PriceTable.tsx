@@ -52,14 +52,14 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   // switchable right above the rows, the best price is the one loud button, every other row says "View deal".
   const storesIn = new Set(inStock.filter((o) => o.source !== "tcgplayer" && o.source !== "ebay").map((o) => o.source)).size;
   const picker = (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-ink-800 bg-ink-850 px-3 py-2 text-xs text-muted" data-market-bar>
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b border-line bg-raised px-3 py-2 text-xs text-muted" data-market-bar>
       <span>
-        Prices for <Flag code={market} /> <b className="text-fg">{MARKET_LABEL[market]}</b>
+        Prices for <Flag code={market} /> <b className="text-ink">{MARKET_LABEL[market]}</b>
         {storesIn > 0 && <> · {storesIn} store{storesIn === 1 ? "" : "s"} in stock</>}
       </span>
       {!compact && <span className="flex flex-wrap gap-1" role="group" aria-label="Show prices for">
         {MARKETS.map((m) => (
-          <button key={m} type="button" onClick={() => setMarket(m)} aria-pressed={m === market} className={`inline-flex min-h-8 items-center gap-1 rounded-full border px-2.5 text-[11px] font-semibold ${m === market ? "border-brand bg-brand/15 text-fg" : "border-ink-700 hover:border-brand/60 hover:text-fg"}`}>
+          <button key={m} type="button" onClick={() => setMarket(m)} aria-pressed={m === market} className={`inline-flex min-h-8 items-center gap-1 rounded-full border px-2.5 text-[11px] font-semibold transition-colors ${m === market ? "border-ink bg-ink text-surface" : "border-line bg-surface text-ink hover:border-ink/30"}`}>
             <Flag code={m} />{m}
           </button>
         ))}
@@ -68,7 +68,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   );
   if (!rows.length)
     return (
-      <div className="overflow-hidden rounded-xl border border-dashed border-ink-700">
+      <div className="overflow-hidden rounded-xl border border-dashed border-line">
         {picker}
         <p className="p-4 text-sm text-muted">No live listings in {MARKET_LABEL[market]} right now. Try another market above, or check eBay below.</p>
         {product && <div className="px-4 pb-3"><ReportPrice product={product} region={market} buttonClassName="btn-ghost px-3 py-1.5" /></div>}
@@ -84,15 +84,15 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const amazonUrl = typeof amazonCell === "string" ? amazonCell : amazonCell?.url;
   const amazonLive = typeof amazonCell === "object" ? amazonCell.live : undefined;
   const amazonRow = amazonUrl ? (
-    <tr data-amazon-row className="border-t border-ink-800">
+    <tr data-amazon-row className="border-t border-line">
       <td className="px-3 py-2.5">
-        <span className="font-medium text-fg">Amazon</span>
-        <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>
+        <span className="font-medium text-ink">Amazon</span>
+        <span className="ad-pill ml-2">Ad</span>
       </td>
       <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">{amazonLive ? "New, Amazon's listing of this product" : "Price shows on Amazon"}</td>
       <td className="px-3 py-2.5 text-right text-xs text-muted">{amazonLive ? <AmazonPrice {...amazonLive} /> : "See price"}</td>
       <td className="px-3 py-2.5 text-right">
-        <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-ghost min-h-10 whitespace-nowrap px-3 py-1.5">
+        <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-amazon min-h-10 whitespace-nowrap px-3 py-1.5">
           {amazonLive ? "View" : "Check price"} <span aria-hidden="true">↗</span>
         </a>
       </td>
@@ -100,10 +100,10 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   ) : null;
   const amazonAfter = shown.reduce((last, o, i) => (pinned.includes(o) ? i : last), -1);
   return (
-    <div id={tableId ?? undefined} className="overflow-hidden rounded-xl border border-ink-700/60">
+    <div id={tableId ?? undefined} className="card overflow-hidden">
       {picker}
       <table className="w-full text-sm">
-        <thead className="bg-ink-850 text-left text-xs uppercase tracking-wide text-muted">
+        <thead className="bg-raised text-left text-xs uppercase tracking-wide text-muted">
           <tr>
             <th className="px-3 py-2">Store</th>
             <th className="hidden px-3 py-2 sm:table-cell">Details</th>
@@ -118,16 +118,16 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
             const best = o === cheapest;
             return (
               <Fragment key={i}>
-                <tr className={`border-t border-ink-800 ${best ? "bg-buy/10" : ""} ${o.inStock ? "" : "opacity-60"}`}>
+                <tr className={`border-t border-line ${best ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"}`}>
                   <td className="px-3 py-2.5">
-                    <span className="font-medium text-fg">{sourceName(o)}</span>
-                    {o.source === "ebay" && <span className="ml-2 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] font-semibold text-muted">Ad</span>}
-                    {best && <span className="ml-2 rounded bg-buy px-1.5 py-0.5 text-[10px] font-bold uppercase text-white">Best price</span>}
+                    <span className="font-medium text-ink">{sourceName(o)}</span>
+                    {o.source === "ebay" && <span className="ad-pill ml-2">Ad</span>}
+                    {best && <span className="ml-2 rounded-full bg-open-soft px-2 py-0.5 text-[10px] font-bold uppercase text-open">Best price</span>}
                   </td>
                   <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
-                    {o.printing && o.printing !== "Normal" && <span className="chip mr-1">{o.printing}</span>}
-                    {o.preorder && <span className="chip mr-1 border-brand text-brand-400">Pre-order</span>}
-                    {!o.inStock && <span className="chip mr-1">Out of stock</span>}
+                    {o.printing && o.printing !== "Normal" && <span className="tag mr-1">{o.printing}</span>}
+                    {o.preorder && <span className="tag mr-1 border-pre text-pre">Pre-order</span>}
+                    {!o.inStock && <span className="tag mr-1">Out of stock</span>}
                     {o.source === "tcgplayer" && <span>Lowest listing</span>}
                     {o.shippingCents != null && <span>+{money(o.shippingCents, o.currency)} shipping</span>}
                   </td>
@@ -139,7 +139,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                     )}
                   </td>
                   <td className="px-3 py-2.5 text-right">
-                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${best ? "btn-buy" : o.inStock ? "btn-ghost px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
+                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${best ? "btn-primary px-3 py-1.5" : o.source === "ebay" && o.inStock ? "btn-ad px-3 py-1.5" : o.inStock ? "btn-soft px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
                       {best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
                     </a>
                   </td>
@@ -152,12 +152,12 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
       </table>
       {amazonLive && <p className="border-t border-ink-800 px-3 py-2 text-[11px] text-muted">* Amazon price: {AMAZON_PRICE_DISCLAIMER}</p>}
       {folded > 0 && (
-        <button type="button" onClick={() => setShowOut(true)} className="w-full border-t border-ink-800 px-3 py-2.5 text-left text-sm text-muted hover:bg-ink-850 hover:text-fg">
+        <button type="button" onClick={() => setShowOut(true)} className="w-full border-t border-line px-3 py-2.5 text-left text-sm text-muted hover:bg-raised hover:text-ink">
           Show {folded} out-of-stock listing{folded === 1 ? "" : "s"} ↓
         </button>
       )}
       {product && !compact && (
-        <div className="border-t border-ink-800 px-3 pb-3 text-muted">
+        <div className="border-t border-line px-3 pb-3 text-muted">
           <ReportPrice product={product} region={market} buttonClassName="btn-ghost px-3 py-1.5" stores={rows.filter((o) => o.source !== "ebay" && o.source !== "tcgplayer").map((o) => ({ name: sourceName(o), price: money(o.cents, o.currency) }))} />
         </div>
       )}

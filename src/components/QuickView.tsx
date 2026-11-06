@@ -132,9 +132,9 @@ export function QuickView() {
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6" role="dialog" aria-modal="true" aria-label={name}>
       <button type="button" aria-label="Close" tabIndex={-1} className="qv-backdrop absolute inset-0 bg-black/50 backdrop-blur-[2px]" onClick={close} />
-      <div className="qv-panel relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl border border-ink-700/60 bg-ink-900 shadow-2xl sm:rounded-2xl">
-        <div className="flex items-start gap-4 border-b border-ink-800 p-4 sm:p-5">
-          <div className="grid h-28 w-20 shrink-0 place-items-center overflow-hidden rounded-lg bg-ink-850">
+      <div className="qv-panel relative flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl border border-line bg-surface shadow-lift sm:rounded-2xl">
+        <div className="flex items-start gap-4 border-b border-line p-4 sm:p-5">
+          <div className="grid h-28 w-20 shrink-0 place-items-center plate overflow-hidden rounded-lg">
             {img ? <img src={img} alt="" className="h-full w-full object-contain p-1" /> : <span className="p-2 text-center text-[11px] text-muted">No image yet</span>}
           </div>
           <div className="min-w-0 flex-1">
@@ -142,7 +142,7 @@ export function QuickView() {
             {sub && <p className="mt-0.5 text-sm text-muted">{sub}</p>}
             {name && <ShareButton path={href} name={name} medium="card" offers={got?.offers} className="mt-2" />}
           </div>
-          <button ref={closeRef} type="button" onClick={close} aria-label="Close" className="-mr-1 -mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted hover:bg-ink-800 hover:text-fg">
+          <button ref={closeRef} type="button" onClick={close} aria-label="Close" className="-mr-1 -mt-1 grid h-9 w-9 shrink-0 place-items-center rounded-full text-muted hover:bg-raised hover:text-ink">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
               <path d="M6 6l12 12M18 6 6 18" />
             </svg>
@@ -159,10 +159,10 @@ export function QuickView() {
               {data.ads && data.adSearch && <div className="mt-4"><CompactCardAds ads={data.ads} page="quickview" limit={6} {...data.adSearch} /></div>}
             </>
           ) : (
-            <p className="rounded-xl border border-ink-700/60 p-4 text-sm text-muted">Prices did not load. The full page has every price.</p>
+            <p className="rounded-xl border border-line p-4 text-sm text-muted">Prices did not load. The full page has every price.</p>
           )}
         </div>
-        <div className="border-t border-ink-800 p-4 sm:px-5">
+        <div className="border-t border-line p-4 sm:px-5">
           <Link href={href} onClick={hide} className="btn-primary flex w-full justify-center px-5 py-2.5 text-[15px]">
             See price history and details <span aria-hidden>→</span>
           </Link>
@@ -174,7 +174,7 @@ export function QuickView() {
 
 function Skeleton() {
   return (
-    <div className="divide-y divide-ink-800 overflow-hidden rounded-xl border border-ink-700/60" aria-label="Loading prices" aria-busy="true">
+    <div className="divide-y divide-line overflow-hidden rounded-xl border border-line" aria-label="Loading prices" aria-busy="true">
       {[0, 1, 2, 3, 4].map((i) => (
         <div key={i} className="flex items-center gap-3 px-3 py-3">
           <div className="flex-1 space-y-1.5">

@@ -132,6 +132,9 @@ export interface SiteConfig {
    *  this many US cents, except in sets released in the last 120 days.
    *  For games with tens of thousands of printings (data size, build size). */
   catalogMinCardCents?: number;
+  /** Sealed product only (YGO Compare, owner 2026-11-06): the import keeps no single cards, every old card URL 301s
+   *  to its set or /sealed (data/redirects/cards.json), and the card hubs and card tools are retired. */
+  sealedOnly?: boolean;
   /** Cards under this TCGplayer price (US cents) stay out of the sitemap but
    *  remain crawlable through set pages. Default 50. A new domain with tens of
    *  thousands of card URLs gets few of them crawled; this points Google at

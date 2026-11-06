@@ -16,9 +16,7 @@ import { abs, KITS_SHARE_IMAGE } from "@/lib/site";
 import { MARKET_LABEL } from "@/lib/site-types";
 import { sourceNameServer } from "@/lib/sources";
 
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-// Empty list = nothing prerendered at build; each page is cached after its first visit.
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const k = SITE.kits ? kitBySlug(params.slug) : null;

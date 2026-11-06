@@ -22,7 +22,7 @@ export const post: Post = {
 <p>Our prices are for near-mint copies. Whitening on the edges, scratches, creases or a curled card all lower what a buyer pays. Graded copies are a separate market.</p>
 
 <h2>5. Compare before you sell or buy</h2>
-<p>Each card page shows TCGplayer's market price, the cheapest eBay listing and every store we track. Before you sell, put the price into the <a href="/tools/selling-fees">selling fee calculator</a> to see what you keep. To sort a big pile, start with the rarest cards: our <a href="/cards">card list</a> and <a href="/blog/most-expensive-yu-gi-oh-cards">most expensive cards</a> show where the money is.</p>
+<p>Each card page shows TCGplayer's market price, the cheapest eBay listing and every store we track. Before you sell, put the price into the <a href="/tools/selling-fees">selling fee calculator</a> to see what you keep. To sort a big pile, start with the rarest cards.</p>
 `,
   faq: [
     { q: "Are old Yu-Gi-Oh! cards worth money?", a: "Some are, especially near-mint 1st Edition copies of rare cards from the first sets. Most commons from any era are worth very little." },

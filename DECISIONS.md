@@ -1481,3 +1481,54 @@ Vercel Production variables (the same values on every site; `AMAZON_CREATORS_<MA
 Access is per marketplace and opens by itself once that store's account has qualifying sales (about 10 in 30 days); a
 refused store is skipped, so the feature costs nothing until then and switches on without a code change. Engine code, landed from
 Lorcana Compare the same day.
+
+## 2026-11-06 — Sealed only, on the Dex / MTG Compare engine's look
+
+**Owner:** "why is ygocompare using so much of our costs? … I'm not seeing many people buy single Yu-Gi-Oh cards,
+so there's actually no point having our website for singles … have YGOcompare just for sealed … we only have a
+certain amount of eBay API … we can just cover more of that product … convert it to the same engine as dexcompare
+and mtgcompare, and try to get as much of the coverage of the eBay API and affiliates." This reverses the
+2026-11-03 entry ("Sealed-first, on this engine"), which kept every card page.
+
+**Why it cost what it did.** Vercel charged this project A$4.59 in the week to 2 November (growth report), above
+Gundam (A$2.42) and Lorcana (A$3.43) on the same engine, while singles earned A$1.53 of its A$39.93 (the rest was
+eBay sales from the sealed pre-order rows). The code shows where it went:
+- ~16,500 product URLs (15,129 single cards), each an ISR page (`revalidate = 86400`) with its own share image.
+  Every daily release empties the ISR cache, so every URL a crawler reached was rendered and written again, and
+  the share image with it. Gundam has a third as many URLs.
+- Every server function shipped all of `data/`: ~49 MB, 7.8 MB of catalogue and 7.6 MB of summary parsed on each
+  cold start, 29 MB of per-set price shards. Slow, memory-heavy renders on a long tail nobody bought from.
+Vercel's own usage lines were not readable from this session; the share between ISR writes and function time is
+inferred from the code, not measured.
+
+**What.**
+- **The engine's look** (Gundam Compare's port of 2026-11-04, applied here): the tokens, one-row header with the
+  Browse menu, `<dialog>` phone menu, xl sidebar, engine tiles, quick view and price rows, the eBay + TCGplayer
+  banner under the hero and the two side rails from 1864px. Product, set, sealed-type, game and pre-order pages are
+  `force-dynamic` with a one-day Vercel CDN header (`CDN_PAGES`): no ISR write, nothing prerendered.
+- **Out of the card-engine family:** `engine.json` and the drift/sync scripts are gone here, and lorcanacompare,
+  cyberpunkcompare and bandaicompare drop `Specifxx/ygocompare` from theirs.
+- **No single cards** (`SITE.sealedOnly`): the import keeps sealed products only, dropping cards after every slug
+  is settled so no sealed slug changes (and `keepSlugs` keeps yesterday's slug per product id). `lib/data.ts`
+  ignores any card still in a data file. Expect `data/public` to shrink from ~49 MB to a few MB on the first import.
+- **No 404s.** Every card URL that existed today is frozen in `data/redirects/cards.json` by set; `/card/<slug>`
+  still serves sealed products and gives a card slug a permanent redirect (Next's 308, which Google treats as a
+  301) to its set's page, or `/sealed` when the set has no sealed product. `/cards`, `/cards/*` (rarity and
+  attribute hubs), `/tools/rising`, `/tools/demand`, `/tools/best-basket`, `/tools/trade` and `/list` 301 from
+  `next.config.js`, and so do the 17 guides that were card price tables (each set's "most valuable cards" post to
+  that set, the rest to `/sealed`). The ops monitor checks that an old card URL still redirects.
+- **Set pages** are the set's booster boxes and sealed ("<set> Booster Box & Sealed Prices"); a set with no sealed
+  product 301s to `/sealed`. The home page leads with "Yu-Gi-Oh! Booster Box Prices", trending boxes and the newest
+  set's sealed. The Price Duel duels sealed products.
+- **Sitemap:** strong pages only. Home, the sealed hubs, the sets with sealed product, pre-orders, guides, the
+  seasonal pages and each sealed product page that asks to be indexed (no pack inserts). About 1,600 URLs, down from about
+  4,100 (2,200 of them cards from $20).
+- **eBay:** the whole 2,200-call share of the app shared with Lorcana and Gundam goes to sealed product in all four
+  eBay markets (`planSealedCoverage`): ~1,200 products × US, UK, Canada, Australia. US booster boxes, cases and new
+  sets every 24 h, the rest every 48 h; other markets 48 h and 72 h; ~2,000 calls a day, the spare re-checking the
+  most overdue. Before, 75% went to the US and Canada got none. The budget itself is unchanged.
+- **Affiliates** were already wired and are kept: EPN campaign 5339155912 with `ygo-` customids, TCGplayer through
+  Impact, Amazon (`ygocompare-20` / `-22` and the Creators API price row on sealed pages).
+
+**Measure:** the growth report's YGO Compare cost and earnings for the weeks of 9 and 16 November against A$4.59
+and A$39.93, and Search Console clicks (the 2026-11-25 review).

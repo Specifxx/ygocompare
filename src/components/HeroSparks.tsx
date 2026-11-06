@@ -40,7 +40,7 @@ export function HeroSparks() {
     let light = false;
     const readTheme = () => {
       light = root.getAttribute("data-theme") === "light";
-      palette = [rgbVar("--c-brand", "61,123,255"), rgbVar("--c-brand-light", "122,165,255"), rgbVar("--c-accent", "229,48,63"), light ? "40,50,80" : "255,255,255"];
+      palette = [rgbVar("--brand", "122,165,255"), rgbVar("--brand-strong", "170,198,255"), rgbVar("--accent", "255,102,118"), light ? "40,50,80" : "255,255,255"];
     };
     readTheme();
 

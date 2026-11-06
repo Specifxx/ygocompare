@@ -1,4 +1,5 @@
 import { test } from "node:test";
+const NEXT_CONFIG = "../next.config.js";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { attrFacets, attrValues } from "@/lib/hubs";
@@ -28,10 +29,10 @@ test("every hub has enough cards, a slug, and never takes the rarity segment", (
   assert.ok((SITE.cardHubs ?? []).every((c) => /^[a-z-]+$/.test(c.facet)));
 });
 
-test("hub pages are cached a day and never prerendered", () => {
-  for (const f of ["src/app/cards/[facet]/page.tsx", "src/app/cards/[facet]/[slug]/page.tsx"]) {
-    const src = fs.readFileSync(f, "utf8");
-    assert.match(src, /revalidate = 86400/, f);
-    assert.match(src, /generateStaticParams = \(\) => \[\]/, f);
-  }
+test("sealed only: the card hub pages are gone and every /cards URL 301s to /sealed", async () => {
+  assert.ok(!fs.existsSync("src/app/cards"));
+  const config = (await import(NEXT_CONFIG as string)).default as { redirects: () => Promise<{ source: string; destination: string; statusCode?: number }[]> };
+  const rules = await config.redirects();
+  for (const source of ["/cards", "/cards/:path*"]) assert.deepEqual(rules.find((r) => r.source === source), { source, destination: "/sealed", statusCode: 301 });
+  assert.equal(attrFacets().length, 0, "a sealed-only catalogue has no attribute hubs");
 });

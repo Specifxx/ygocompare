@@ -157,6 +157,13 @@ export async function loadTcgcsv(now = new Date()): Promise<{
   sets.sort((a, b) => (b.releasedOn ?? "").localeCompare(a.releasedOn ?? ""));
   borrowImages(products);
   if (SITE.slugStyle === "name-number") settleSlugs(products, sets);
+  // Sealed only (owner, 2026-11-06): cards are dropped AFTER every slug is settled, so a sealed product's slug is
+  // exactly the one it had beside the cards (a slug never changes).
+  if (SITE.sealedOnly) {
+    const kept = products.filter((p) => p.kind === "sealed");
+    for (const s of sets) s.productCount = kept.filter((p) => p.setId === s.id).length;
+    return { sets, products: kept, tcg };
+  }
   if (SITE.catalogMinCardCents) {
     const kept = applyCatalogFloor(products, sets, tcg, SITE.catalogMinCardCents, now);
     for (const s of sets) s.productCount = kept.filter((p) => p.setId === s.id).length;

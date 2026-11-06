@@ -9,7 +9,7 @@ export const metadata: Metadata = { title: `About ${SITE.name}`, description: `$
 export default function About() {
   return (
     <StaticPage title={`About ${SITE.name}`}>
-      <p>{SITE.name} is a free price comparison site for {SITE.game}. Every day it collects the price of every {SITE.gameShort} card and sealed product from TCGplayer, eBay and {SITE.stores.length} online game stores in the US, UK, Canada, Australia and Europe, and puts them side by side, cheapest first.</p>
+      <p>{SITE.name} is a free price comparison site for {SITE.game}. Every day it collects the price of every {SITE.gameShort} booster box, pack, tin, structure deck and collection from TCGplayer, eBay, Amazon and {SITE.stores.length} online game stores in the US, UK, Canada and Australia, and puts them side by side, cheapest first.</p>
       <p>It is built by the team behind <a href="https://riftcompare.com" rel="noopener">Rift Compare</a> (Riftbound) and <a href="https://opcompare.app" rel="noopener">OP Compare</a> (One Piece), with the same rule: comparing prices is free for everyone, and we never hide a cheaper store.</p>
       {SITE.disclaimer && <p>{SITE.disclaimer}</p>}
       <h2>How we make money</h2>
