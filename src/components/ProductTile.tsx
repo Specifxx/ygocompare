@@ -5,6 +5,7 @@ import { money, pct } from "@/lib/format";
 import { refCents, setById, summaryOf } from "@/lib/data";
 import { shortName } from "@/lib/names";
 import { StockPill } from "./StockPill";
+import { isPreorder } from "@/lib/preorders";
 
 /**
  * A product card (the engine's ProductCard, from MTG Compare): the art on a plate, the name, the set and number, the stock pill,
@@ -16,7 +17,10 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
   const e = summaryOf(p.id);
   const ch = change !== undefined ? change : e.change7d;
   const stores = e.inStockSources;
-  const set = setById(p.setId)?.name;
+  const setInfo = setById(p.setId);
+  const set = setInfo?.name;
+  // Not out yet: a store "in stock" is taking pre-orders (2026-11-06, a box out 13 Nov showed "In stock").
+  const pre = !!setInfo && isPreorder(setInfo);
   const name = shortName(p.name);
   return (
     <Link
@@ -38,10 +42,10 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
         <p className="line-clamp-2 text-sm font-semibold leading-5 text-ink group-hover:text-brand">{name}</p>
         <p className="truncate text-xs text-muted">{set}{p.number ? ` · ${p.number}` : ""}</p>
         <div className="mt-auto flex items-center justify-between gap-2 pt-1.5">
-          <StockPill state={stores > 0 ? "open" : "soldout"} size="sm">
+          <StockPill state={stores > 0 ? (pre ? "pre" : "open") : "soldout"} size="sm">
             {stores > 0 ? (
               <>
-                In stock<span className="stock-unit"> · {stores} store{stores === 1 ? "" : "s"}</span>
+                {pre ? "Pre-order" : "In stock"}<span className="stock-unit"> · {stores} store{stores === 1 ? "" : "s"}</span>
               </>
             ) : (
               "Sold out"
@@ -50,7 +54,7 @@ export function ProductTile({ p, change }: { p: Product; change?: number | null 
           {ch != null && <span className={`tabular text-xs font-semibold ${ch >= 0 ? "text-up" : "text-down"}`}>{pct(ch)}</span>}
         </div>
         <div className="flex flex-col gap-0.5">
-          <span className="tabular text-base font-bold text-ink">{money(ref)}</span>
+          <span className="tabular text-base font-bold text-ink">{money(ref)}<span className="ml-1 text-[10px] font-medium text-muted">market</span></span>
           <span className="text-[11px] font-semibold text-brand">Compare {e.listedSources} price{e.listedSources === 1 ? "" : "s"} →</span>
         </div>
       </div>
