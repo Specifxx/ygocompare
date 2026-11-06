@@ -9,6 +9,7 @@ import { MarketPicker } from "./ClientPrefs";
 import { HeaderNavItems, type HeaderNavItem } from "./HeaderNav";
 import { ThemeToggle } from "./ThemeToggle";
 import { SearchBox } from "./SearchBox";
+import { CartHeaderLink } from "@/components/cart/CartHeaderLink";
 
 /**
  * The desktop nav (lg and up), in order: Cards, Sealed, Kits (SITE.kits), Deals, Browse (the dropdown: every section of the site,
@@ -62,6 +63,8 @@ export function Header() {
         </div>
         <ThemeToggle className="hidden sm:inline-flex" />
         <MarketPicker />
+        {/* The cart list (components/cart, owner 2026-11-06): every width, with its count. */}
+        <CartHeaderLink />
         <MobileMenu groups={groups} className="lg:hidden" />
       </div>
     </header>
