@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-05T20:23:37.611Z",
+ "generatedAt": "2026-11-06T19:44:07.646Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -22,6 +22,20 @@
    "refCents": 12567,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Order of the Spellcasters Structure Deck",
+   "url": "https://ygocompare.com/card/order-of-the-spellcasters-structure-deck",
+   "cents": 1999,
+   "currency": "USD",
+   "store": "Collector Store LLC",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/184344_200w.jpg",
+   "refCents": 4039,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 51
   },
   {
    "kind": "deal",
@@ -55,20 +69,6 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Master of Pendulum Structure Deck",
-   "url": "https://ygocompare.com/card/master-of-pendulum-structure-deck",
-   "cents": 4449,
-   "currency": "USD",
-   "store": "Realgoodeal",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/108780_200w.jpg",
-   "refCents": 5999,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 26
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
    "title": "Spell Ruler Booster Box (25th Anniversary Edition)",
    "url": "https://ygocompare.com/card/spell-ruler-booster-box-25th-anniversary-edition",
    "cents": 7999,
@@ -83,15 +83,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Invasion of Chaos Booster Box (25th Anniversary Edition)",
-   "url": "https://ygocompare.com/card/invasion-of-chaos-booster-box-25th-anniversary-edition",
-   "cents": 7999,
+   "title": "Magnificent Maestros Display",
+   "url": "https://ygocompare.com/card/magnificent-maestros-display",
+   "cents": 29999,
    "currency": "USD",
-   "store": "Collectors Emporium NY",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/488583_200w.jpg",
-   "refCents": 9632,
+   "store": "Gamers Guild AZ",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
+   "refCents": 33137,
    "refLabel": "TCGplayer market price",
-   "savingPct": 17
+   "savingPct": 9
   },
   {
    "kind": "preorder",
@@ -99,7 +99,7 @@
    "region": "US",
    "title": "Magnificent Maestros Booster Box",
    "url": "https://ygocompare.com/preorders/magnificent-maestros",
-   "cents": 27999,
+   "cents": 29999,
    "currency": "USD",
    "store": "Gamers Guild AZ",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
