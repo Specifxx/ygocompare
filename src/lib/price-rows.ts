@@ -29,7 +29,7 @@ export interface PriceRows {
    * The table's display order (owner, 2026-10-27: "the top rows should be eBay
    * and TCGplayer, even if they are not the cheapest"): the market's cheapest
    * eBay offer and its cheapest TCGplayer offer (a local row, else the US
-   * reference), the cheaper on top (`pinnedOrder`), then every other live row (in stock, then references), then
+   * reference), eBay on top (`pinnedOrder`), then every other live row (in stock, then references), then
    * out of stock. `pinned` holds the two moved rows. `cheapest` is unchanged.
    */
   display: Offer[];
@@ -64,15 +64,11 @@ export function priceRows(offers: Offer[], market: Market): PriceRows {
 }
 
 /**
- * The two pinned rows in display order (2026-10-27): the cheaper on top,
- * TCGplayer on a tie, when both are this market's own rows; a local TCGplayer
- * row above a US eBay reference; otherwise eBay first, as before. eBay always
- * led until then, above a cheaper TCGplayer row on most US products, and
- * TCGplayer pays about 2.5 times more per click.
+ * The two pinned rows in display order: eBay always first, then TCGplayer
+ * (owner, 2026-11-06: eBay and Amazon "sit on the very top", eBay first and
+ * Amazon second; the price table draws Amazon right under eBay). From
+ * 2026-10-27 to 2026-11-06 the cheaper of the two led, TCGplayer on a tie.
  */
-export function pinnedOrder(ebay: Offer | null, tcgplayer: Offer | null, market: Market): Offer[] {
-  const local = (o: Offer | null) => o != null && o.market === market;
-  const tcgFirst =
-    local(tcgplayer) && (!local(ebay) || (ebay!.currency === tcgplayer!.currency && tcgplayer!.cents <= ebay!.cents));
-  return (tcgFirst ? [tcgplayer, ebay] : [ebay, tcgplayer]).filter((o): o is Offer => o != null);
+export function pinnedOrder(ebay: Offer | null, tcgplayer: Offer | null, _market?: Market): Offer[] {
+  return [ebay, tcgplayer].filter((o): o is Offer => o != null);
 }

@@ -14,7 +14,8 @@ import { CURRENCY, MARKETS, type Market } from "./site-types";
 /** One market's Amazon row: the link (the item's own page, else the tagged search) and this build's price while fresh. */
 export interface AmazonCell {
   url: string;
-  live?: { price: string; at: string; timeZone: string; zoneLabel: string };
+  /** `cents`/`currency`: for the cart list's line (lib/cart-list.ts drops an Amazon line's price after 24 hours). */
+  live?: { price: string; at: string; timeZone: string; zoneLabel: string; cents?: number; currency?: string };
 }
 export type AsinFile = Record<string, { asin: string | null; checked: string }>;
 export type LiveFile = { fetchedAt: string; prices: Record<string, { asin: string; cents: number }> };
@@ -68,7 +69,7 @@ export function amazonCells(productId: number, searches: Partial<Record<Market, 
     const url = (asin && amazonItemUrl(asin, m)) || search;
     const l = asin && live && isFreshAmazonPrice(live.fetchedAt, now) ? live.prices[String(productId)] : undefined;
     const clock = AMAZON_CLOCK[m];
-    out[m] = l && l.asin === asin && clock ? { url, live: { price: money(l.cents, CURRENCY[m]), at: live!.fetchedAt, timeZone: clock.timeZone, zoneLabel: clock.label } } : { url };
+    out[m] = l && l.asin === asin && clock ? { url, live: { price: money(l.cents, CURRENCY[m]), at: live!.fetchedAt, timeZone: clock.timeZone, zoneLabel: clock.label, cents: l.cents, currency: CURRENCY[m] } } : { url };
   }
   return out;
 }
