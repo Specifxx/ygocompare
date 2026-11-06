@@ -18,7 +18,7 @@ test("sealed: plurals match, cases match, pack inserts are never eligible", asyn
   assert.equal(listingMatches(bonus, "DECK ONLY - Gundam TCG Starter Deck 13: Silent Barrage ST13 - NO BONUS PACK"), false);
   const insert: Product = { ...p(10, "Rare", "sealed"), name: "Ink Drop", sealedType: "Insert" };
   assert.equal(listingMatches({ ...insert, name: "Azurite Sea Puzzle Insert (Top Middle)" }, "Disney Lorcana Azurite Sea Puzzle Insert (Top Middle) NM"), false);
-  const { calls } = planEbayRefresh({ products: [insert], refUsdCents: new Map([[10, 5000]]), clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 10, now });
+  const { calls } = planEbayRefresh({ products: [insert], refUsdCents: new Map([[10, 5000]]), clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 10, now, sealedOnly: false });
   assert.equal(calls.length, 0);
 });
 
@@ -27,7 +27,7 @@ test("cards under the floor get no call; every sealed product does, priced or no
   const floor = SITE.ebay.minPriceUsd * 100;
   const products = [p(1), p(2), p(3), p(4, "Rare", "sealed"), p(5, "Rare", "sealed")];
   const ref = new Map<number, number | null>([[1, floor - 1], [2, floor], [3, 50], [4, 800], [5, null]]);
-  const { calls, eligible } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 100, now });
+  const { calls, eligible } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 100, now, sealedOnly: false });
   assert.equal(eligible, 3);
   assert.deepEqual([...new Set(calls.map((c) => c.product.id))].sort(), [2, 4, 5]);
 });
@@ -35,7 +35,7 @@ test("cards under the floor get no call; every sealed product does, priced or no
 test("stays inside the budget", () => {
   const products = Array.from({ length: 5000 }, (_, i) => p(i + 1));
   const ref = new Map(products.map((x) => [x.id, 2000 + x.id * 10]));
-  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 2500, now });
+  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 2500, now, sealedOnly: false });
   assert.ok(calls.length <= 2500, `${calls.length} calls`);
   assert.ok(calls.length >= 2400);
 });
@@ -44,7 +44,7 @@ test("expensive and in-demand first; fresh results are not re-checked", () => {
   const products = [p(1), p(2), p(3)];
   const ref = new Map([[1, 3000], [2, 50000], [3, 3000]]);
   const state = { 2: { US: { at: new Date(now.getTime() - 3_600_000).toISOString(), offer: null } } };
-  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map([[3, 40]]), newSetIds: new Set(), state, budget: 4, now });
+  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map([[3, 40]]), newSetIds: new Set(), state, budget: 4, now, sealedOnly: false });
   const us = calls.filter((c) => c.market === "US").map((c) => c.product.id);
   assert.equal(us[0], 3); // demand beats value when value is checked an hour ago
   assert.ok(!us.includes(2));
@@ -56,10 +56,10 @@ test("the US first: planned before the UK and AU, and it takes the slots they le
   // The UK and AU checked everything an hour ago: their slots are free.
   const fresh = { at: new Date(now.getTime() - 3_600_000).toISOString(), offer: null };
   const state = Object.fromEntries(products.map((x) => [x.id, { UK: fresh, AU: fresh }]));
-  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state, budget: 200, now });
+  const { calls } = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state, budget: 200, now, sealedOnly: false });
   assert.equal(calls.length, 200, "the spare slots are spent");
   assert.ok(calls.every((c) => c.market === "US"));
-  const mixed = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 200, now }).calls;
+  const mixed = planEbayRefresh({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 200, now, sealedOnly: false }).calls;
   const firstOther = mixed.findIndex((c) => c.market !== "US");
   assert.ok(firstOther > 0 && mixed.slice(firstOther).every((c) => c.market !== "US"), "every US call runs before any other market's");
 });
@@ -165,4 +165,40 @@ test("sealed: a single titled like a box never matches (live, 2026-10-27)", asyn
   assert.equal(listingMatches(box, "Yugioh! Evil Box Magnificent Maestros MAMS-EN PREORDER"), false);
   const orcs: Product = { ...box, id: 12, name: "Order of Chaos - Booster Box [1st Edition]", sealedType: "Booster Box" };
   assert.equal(listingMatches(orcs, "Yu-Gi-Oh! Order Of Chaos English Booster Box : ORCS-EN 1st edition"), true);
+});
+
+// Sealed coverage (owner, 2026-11-06): a sealed-only site spends every call on sealed product, in every eBay market.
+test("sealed coverage: every sealed product in every eBay market, inserts and cards never", async () => {
+  const { planSealedCoverage } = await import("@/lib/import/ebay");
+  const products = [p(1, "Rare", "sealed"), p(2, "Rare", "sealed"), p(3), { ...p(4, "Rare", "sealed"), sealedType: "Insert" }];
+  const { calls, eligible } = planSealedCoverage({ products, refUsdCents: new Map([[1, 9000], [2, null], [3, 90000], [4, 5000]]), clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 100, now });
+  assert.equal(eligible, 2);
+  assert.deepEqual([...new Set(calls.map((c) => c.product.id))].sort(), [1, 2]);
+  assert.deepEqual([...new Set(calls.map((c) => c.market))].sort(), ["AU", "CA", "UK", "US"]);
+  assert.equal(calls.length, 8);
+});
+
+test("sealed coverage: inside the budget, US first, nothing checked in the last 12 hours", async () => {
+  const { planSealedCoverage, sealedIntervalHours } = await import("@/lib/import/ebay");
+  const products = Array.from({ length: 1200 }, (_, i) => p(i + 1, "Rare", "sealed"));
+  const ref = new Map(products.map((x) => [x.id, 3000 + x.id * 10]));
+  const recent = { at: new Date(now.getTime() - 6 * 3_600_000).toISOString(), offer: null };
+  const state = { 1: { US: recent, UK: recent, CA: recent, AU: recent } };
+  const { calls } = planSealedCoverage({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state, budget: 2200, now });
+  assert.equal(calls.length, 2200);
+  assert.ok(!calls.some((c) => c.product.id === 1));
+  const firstOther = calls.findIndex((c) => c.market !== "US");
+  assert.ok(calls.slice(firstOther).every((c) => c.market !== "US"), "every US call runs before the other markets");
+  assert.equal(sealedIntervalHours("US", true), 24);
+  assert.equal(sealedIntervalHours("UK", false), 72);
+});
+
+test("sealed coverage: a due pair beats a fresher, more valuable one", async () => {
+  const { planSealedCoverage } = await import("@/lib/import/ebay");
+  const tin = (id: number): Product => ({ ...p(id, "Rare", "sealed"), sealedType: "Tin" });
+  const at = (h: number) => ({ at: new Date(now.getTime() - h * 3_600_000).toISOString(), offer: null });
+  // Elsewhere both were checked 13 hours ago (not due); in the US the valuable tin 30 hours ago (48 h interval), the cheap one 100.
+  const state = { 1: { US: at(30), UK: at(13), CA: at(13), AU: at(13) }, 2: { US: at(100), UK: at(13), CA: at(13), AU: at(13) } };
+  const { calls } = planSealedCoverage({ products: [tin(1), tin(2)], refUsdCents: new Map([[1, 90000], [2, 2000]]), clicks30d: new Map(), newSetIds: new Set(), state, budget: 1, now });
+  assert.deepEqual([calls[0].product.id, calls[0].market], [2, "US"]);
 });

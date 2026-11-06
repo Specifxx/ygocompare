@@ -36,10 +36,21 @@ async function main() {
       const r = await fetch(site, { signal: AbortSignal.timeout(20000) });
       return r.ok ? { status: "ok", detail: `${r.status}` } : { status: "fail", detail: `HTTP ${r.status}` };
     }),
-    check("A card page", async () => {
+    check("The sealed hub", async () => {
       if (!live) return { status: "warn", detail: "SITE_URL repository variable not set — live checks skipped" };
-      const r = await fetch(`${site}/cards`, { signal: AbortSignal.timeout(20000) });
+      const r = await fetch(`${site}/sealed`, { signal: AbortSignal.timeout(20000) });
       return r.ok ? { status: "ok", detail: `${r.status}` } : { status: "fail", detail: `HTTP ${r.status}` };
+    }),
+    // Sealed only (2026-11-06): every old single-card URL must keep redirecting to its set, never 404.
+    check("Retired card URLs redirect", async () => {
+      if (!live) return { status: "warn", detail: "SITE_URL repository variable not set — live checks skipped" };
+      const map = JSON.parse(fs.readFileSync(path.join(process.cwd(), "data/redirects/cards.json"), "utf8")) as { bySet: Record<string, string[]> };
+      const [, slugs] = Object.entries(map.bySet).find(([s, l]) => s && l.length)!;
+      const r = await fetch(`${site}/card/${slugs[0]}`, { redirect: "manual", signal: AbortSignal.timeout(20000) });
+      const to = r.headers.get("location") ?? "";
+      return (r.status === 301 || r.status === 308) && /\/(sets\/|sealed)/.test(to)
+        ? { status: "ok", detail: `${r.status} → ${to.replace(site, "")}` }
+        : { status: "fail", detail: `/card/${slugs[0]} answered HTTP ${r.status}${to ? ` → ${to}` : ""}, not a permanent redirect to its set` };
     }),
     check("Daily price import", async () =>
       ageH < 30 ? { status: "ok", detail: `${ageH.toFixed(1)}h old` } : { status: ageH < 54 ? "warn" : "fail", detail: `data is ${ageH.toFixed(0)}h old — check the Refresh prices workflow` },

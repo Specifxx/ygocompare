@@ -1,1 +1,1 @@
-YGOCompare: compare Yu-Gi-Oh! card and booster box prices across TCGplayer, eBay and game stores, cheapest first
+YGOCompare: compare Yu-Gi-Oh! booster box and sealed prices across TCGplayer, eBay, Amazon and game stores, cheapest first

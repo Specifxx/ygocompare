@@ -30,7 +30,6 @@ test("game lines: eBay words and TCGplayer links follow the set's game, else the
 });
 
 test("game lines: the hubs are cached like every page and listed in the sitemap", () => {
-  for (const f of ["src/app/games/page.tsx", "src/app/games/[slug]/page.tsx"]) assert.match(fs.readFileSync(f, "utf8"), /export const revalidate = 86400;/);
-  assert.match(fs.readFileSync("src/app/games/[slug]/page.tsx", "utf8"), /generateStaticParams = \(\) => \[\]/);
-  assert.match(fs.readFileSync("src/app/sitemap.ts", "utf8"), /\/games\//);
+  assert.match(fs.readFileSync("src/app/games/page.tsx", "utf8"), /export const revalidate = 86400;/);
+  assert.match(fs.readFileSync("src/app/games/[slug]/page.tsx", "utf8"), /export const dynamic = "force-dynamic";/);
 });

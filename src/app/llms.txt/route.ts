@@ -1,3 +1,4 @@
+import { sealedSets } from "@/lib/hubs";
 import { SITE } from "@/site.config";
 import { SITE_URL } from "@/lib/site";
 import { sets } from "@/lib/data";
@@ -13,19 +14,18 @@ export function GET() {
   const md = [
     `# ${SITE.name}`,
     "",
-    `> ${SITE.name} is a free ${SITE.game} price comparison site. It compares every ${SITE.gameShort} card and sealed product across TCGplayer, eBay and ${SITE.stores.length} online stores, cheapest in-stock first, and updates prices daily. No account needed.`,
+    `> ${SITE.name} is a free ${SITE.game} price comparison site. It compares every ${SITE.gameShort} booster box, pack, tin, structure deck and collection (sealed product only, no single cards) across TCGplayer, eBay, Amazon and ${SITE.stores.length} online stores, cheapest in-stock first, and updates prices daily. No account needed.`,
     "",
     "## Main pages",
-    `- [Card prices](${SITE_URL}/cards): every card, searchable, cheapest first`,
-    `- [Sets in order](${SITE_URL}/sets): every set's card list with prices`,
     `- [Booster box and sealed prices](${SITE_URL}/sealed)`,
+    `- [Sets in order](${SITE_URL}/sets): every set's booster boxes and sealed with prices`,
     `- [Price movers](${SITE_URL}/movers): biggest risers and fallers this week`,
     `- [Pre-orders](${SITE_URL}/preorders)`,
     `- [Stores compared](${SITE_URL}/stores)`,
     `- [How prices work](${SITE_URL}/methodology)`,
     "",
-    "## Set card lists",
-    ...sets().filter((s) => s.productCount > 0).slice(0, 40).map((s) => `- [${s.name} card list and prices](${SITE_URL}/sets/${s.slug})`),
+    "## Sets",
+    ...sealedSets().slice(0, 40).map((s) => `- [${s.name} booster box and sealed prices](${SITE_URL}/sets/${s.slug})`),
     "",
     "## Tools",
     ...TOOLS.map((t) => `- [${t.name}](${SITE_URL}${t.href}): ${t.text}`),

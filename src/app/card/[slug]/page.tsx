@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { Fragment } from "react";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { retiredCardTarget } from "@/lib/card-redirects";
 import { SITE } from "@/site.config";
-import { byValue, historyOf, meta, priceOf, productBySlug, productsInSet, refCents, setById } from "@/lib/data";
+import { byValue, historyOf, meta, priceOf, productBySlug, productsInSet, refCents, setById, setBySlug } from "@/lib/data";
 import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
@@ -28,10 +29,7 @@ import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
 import { cardIndexable, priceValidUntil } from "@/lib/indexing";
 
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-// Empty list = nothing prerendered at build, but each page is cached (ISR)
-// after its first visit instead of rendering on every request.
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = productBySlug(params.slug);
@@ -58,7 +56,12 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 
 export default function CardPage({ params }: { params: { slug: string } }) {
   const p = productBySlug(params.slug);
-  if (!p) notFound();
+  if (!p) {
+    // A single card from before the site went sealed-only: a permanent redirect to its set (lib/card-redirects.ts).
+    const to = retiredCardTarget(params.slug, (s) => (setBySlug(s)?.productCount ?? 0) > 0);
+    if (to) permanentRedirect(to);
+    notFound();
+  }
   const set = setById(p.setId);
   const e = priceOf(p.id);
   const ref = refCents(p.id);
@@ -99,7 +102,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           }}
         />
       )}
-      <Breadcrumbs items={[{ name: p.kind === "sealed" ? "Sealed" : "Cards", href: p.kind === "sealed" ? "/sealed" : "/cards" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
+      <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         {/* Phones: the name, price and Buy come first; the big image and the
             details follow the prices (RiftCompare's card page, 2026-09-26). */}
@@ -117,11 +120,11 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           <header>
             <div className="flex items-start gap-3">
               {p.image && <img src={imageAt(p.image, "200w")!} alt={name} className="w-20 shrink-0 rounded-md md:hidden" width={80} height={112} />}
-              <h1 className="min-w-0 flex-1 font-display text-2xl font-black md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
+              <h1 className="min-w-0 flex-1 font-display text-2xl font-bold tracking-tight md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
               <ShareButton path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} medium={p.kind === "sealed" ? "sealed" : "card"} offers={e.offers} compact className="mt-1" />
             </div>
             <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-2">
-              <p><span className="text-3xl font-black text-brand-400">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
+              <p><span className="tabular font-display text-3xl font-bold text-ink">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
               <p className="text-sm">7d <span className={(e.change7d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change7d)}</span> · 30d <span className={(e.change30d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change30d)}</span></p>
               <p className="text-sm text-muted">{inStock.length} in-stock listing{inStock.length === 1 ? "" : "s"} worldwide</p>
             </div>
@@ -129,7 +132,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             {Object.keys(e.tcg).length > 1 && (
               <p className="mt-2 flex flex-wrap gap-2 text-xs">
                 {Object.entries(e.tcg).map(([k, v]) => (
-                  <span key={k} className="chip">{k}: {money(v.market ?? v.mid ?? v.low)}</span>
+                  <span key={k} className="tag">{k}: {money(v.market ?? v.mid ?? v.low)}</span>
                 ))}
               </p>
             )}

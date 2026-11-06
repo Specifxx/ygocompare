@@ -21,8 +21,7 @@ import { FamilyCluster } from "@/components/FamilyCluster";
 
 // /preorders/<set slug>: one release's landing page (lib/preorders.ts). Six
 // hours like every page buyers act on; nothing prerendered at build.
-export const revalidate = 21600;
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 /** The set, if it has a page today; a set past its window goes to its card list. */
 function release(slug: string): SetInfo {

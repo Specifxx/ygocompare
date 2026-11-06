@@ -2,100 +2,313 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme variables (--c-*) are written by app/layout.tsx from SITE.theme for
-   the dark default; the light theme and Halloween override them here. */
-:root[data-theme="light"] {
-  --c-ink-950: 255 255 255;
-  --c-ink-900: 248 249 252;
-  --c-ink-850: 241 243 248;
-  --c-ink-800: 230 233 241;
-  --c-ink-700: 210 215 228;
-  --c-ink-600: 180 187 205;
-  --c-fg: 17 20 36;
-  --c-muted: 82 90 112;
-  --page-bg: #f4f5fa;
+/* The Dex / MTG Compare engine's design system (owner, 2026-11-04: Gundam Compare
+   moves onto the same engine as DexCompare and MTG Compare, as WargameCompare did
+   on 2026-11-03): one set of tokens, light and dark, read by tailwind.config.ts.
+   Only the brand accent is this site's: Gundam Compare's blue (src/site.config.ts
+   keeps the hex for the icon and share images). Dark is the default
+   (lib/theme.ts THEME_BOOT_SCRIPT), decided before first paint from the visitor's
+   saved choice, so one CDN copy of each page serves everyone. */
+:root {
+  --bg: 246 246 243;
+  --surface: 255 255 255;
+  --raised: 250 250 248;
+  --line: 228 227 222;
+  --ink: 21 23 28;
+  --muted: 92 96 108;
+  --faint: 100 104 115; /* 5.2:1 on --bg, 5.6:1 on --surface (WCAG AA for small text) */
+  --brand: 37 87 201; /* Gundam Compare blue (#2557c9); white on it is 6.4:1 */
+  --brand-ink: 255 255 255;
+  --brand-soft: 229 237 255;
+  --brand-strong: 26 64 160; /* brand as TEXT on --brand-soft and on --surface: chips and .btn-soft */
+  --accent: 229 48 63; /* the red of the mobile suit's chest: highlights only */
+  --spark: 229 48 63;
+  --open: 20 118 56; /* 5.0:1 on --open-soft, 5.7:1 on --surface: the 12px stock pill is AA */
+  --open-soft: 226 245 232;
+  --sold: 100 104 115;
+  --sold-soft: 238 238 240;
+  --stale: 143 88 0;
+  --stale-soft: 253 243 219;
+  --pre: 88 76 214;
+  --pre-soft: 236 234 252;
+  --up: 20 118 56;
+  --down: 196 40 70;
+  --ad: 243 246 252; /* sponsored units: a cool tint no store row or product card uses */
+  --ad-line: 120 128 148;
+  --shadow: 24 22 18;
+  --wordmark: linear-gradient(180deg, #1a40a0 0%, #2557c9 60%, #3d7bff 100%);
+  /* The sticky header's height: sticky offsets (top-[var(--hdr)]) and anchor jumps (scroll-padding-top below) follow it. */
+  --hdr: 60px;
+  color-scheme: light;
 }
 
-html { background: var(--page-bg); color: rgb(var(--c-fg)); scroll-behavior: smooth; }
-/* overflow-x: clip (not hidden, so position: sticky keeps working): an element wider than the screen is clipped instead of
-   laying the whole page out wider and zoomed out, with a sideways scroll into dead space (2026-11-03 phone audit). */
-body { background: var(--page-bg); min-height: 100vh; overflow-x: clip; }
-
-/* The left navigation rail (components/SideNav.tsx) from lg (1024px) up: the
-   header, main and footer keep this much room on the left. 0 below lg, where
-   the header carries the navigation. tests/sidenav.test.ts pins the width. */
-:root { --sidenav-w: 0px; }
-@media (min-width: 1024px) { :root { --sidenav-w: 15rem; } }
-.sidenav-scroll { scrollbar-width: thin; scrollbar-color: rgb(var(--c-ink-700)) transparent; }
-
-.wordmark {
-  background: var(--wordmark);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: 0.02em;
+@media (min-width: 1024px) {
+  :root {
+    --hdr: 64px;
+  }
 }
 
-.card-surface { @apply rounded-2xl border border-ink-700/60 bg-ink-900 shadow-[0_1px_0_rgb(255_255_255/0.03)_inset]; }
-.btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition; }
-.btn-primary { @apply btn bg-brand text-ink-950 hover:bg-brand-400; }
-.btn-buy { @apply btn bg-buy text-white hover:bg-buy-400 px-3 py-1.5; }
-.btn-ghost { @apply btn border border-ink-700 text-fg hover:bg-ink-800; }
-.chip { @apply inline-flex items-center rounded-full border border-ink-700 px-2.5 py-0.5 text-xs text-muted; }
-.link { @apply text-brand-400 hover:underline; }
-.prose-site h2 { @apply mt-8 mb-3 text-xl font-bold; }
-.prose-site h3 { @apply mt-6 mb-2 text-lg font-semibold; }
-.prose-site p { @apply my-3 leading-relaxed text-fg/90; }
-.prose-site ul { @apply my-3 list-disc pl-6 space-y-1; }
-.prose-site ol { @apply my-3 list-decimal pl-6 space-y-1; }
-.prose-site a { @apply text-brand-400 underline; }
-.prose-site table { @apply my-4 w-full text-sm; }
-.prose-site th { @apply border-b border-ink-700 py-2 text-left; }
-.prose-site td { @apply border-b border-ink-800 py-2 pr-3; }
+:root:not([data-theme="light"]) {
+  --bg: 15 16 19;
+  --surface: 23 24 29;
+  --raised: 29 31 37;
+  --line: 45 47 55;
+  --ink: 238 238 241;
+  --muted: 166 170 181;
+  --faint: 140 144 156; /* 6.0:1 on --bg, 5.6:1 on --surface */
+  --brand: 122 165 255; /* #7aa5ff: 7.8:1 on --bg */
+  --brand-ink: 10 20 44;
+  --brand-soft: 26 40 76;
+  --brand-strong: 170 198 255; /* on --brand-soft and on --surface */
+  --accent: 255 102 118;
+  --spark: 255 102 118;
+  --open: 74 206 120;
+  --open-soft: 20 48 30;
+  --sold: 150 154 164;
+  --sold-soft: 38 40 46;
+  --stale: 240 180 60;
+  --stale-soft: 52 40 14;
+  --pre: 160 150 255;
+  --pre-soft: 36 32 70;
+  --up: 74 206 120;
+  --down: 255 112 140;
+  --ad: 26 31 45;
+  --ad-line: 120 130 156;
+  --shadow: 0 0 0;
+  --wordmark: linear-gradient(180deg, #ffffff 0%, #b9ceff 45%, #7aa5ff 100%);
+  color-scheme: dark;
+}
+
+/* The old names (--c-*), for the few places that still read a raw variable
+   (HeroSparks reads the palette for its canvas). Aliases of the tokens above. */
+:root {
+  --c-brand: var(--brand);
+  --c-brand-light: var(--brand-strong);
+  --c-brand-dark: var(--brand);
+  --c-accent: var(--accent);
+  --c-ink-950: var(--bg);
+  --c-ink-900: var(--surface);
+  --c-ink-850: var(--raised);
+  --c-ink-800: var(--line);
+  --c-ink-700: var(--line);
+  --c-ink-600: var(--faint);
+  --c-fg: var(--ink);
+  --c-muted: var(--muted);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  /* An in-page link (#prices) or a focused element lands below the sticky header, not under it. */
+  scroll-padding-top: calc(var(--hdr) + 8px);
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-bg text-ink antialiased;
+  font-feature-settings: "ss01", "cv11";
+  /* A safety net for phones: an element wider than the screen is clipped instead of laying the whole page out wider and
+     zoomed out, with a sideways scroll into dead space (2026-11-03 phone audit). `clip`, not `hidden`, so sticky keeps working. */
+  overflow-x: clip;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--brand));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+h1, h2, h3 { letter-spacing: -0.01em; }
+
+@layer components {
+  .page {
+    @apply mx-auto w-full max-w-page px-4 sm:px-6;
+  }
+  .card {
+    @apply rounded-xl border border-line bg-surface shadow-card;
+  }
+  /* The old name for a card (72 files still use it): the same surface. */
+  .card-surface {
+    @apply rounded-xl border border-line bg-surface shadow-card;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-colors disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-brand-ink hover:brightness-110;
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-surface text-ink hover:bg-raised;
+  }
+  /* A secondary action that is still a buy action (an in-stock store that is not the cheapest). */
+  .btn-soft {
+    @apply btn bg-brand-soft text-brand-strong hover:bg-brand/15;
+  }
+  /* The buy button (the old name, kept): green, white text. */
+  .btn-buy {
+    @apply btn bg-open px-3 py-1.5 text-white hover:brightness-110;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:border-ink/30;
+  }
+  .chip-on {
+    @apply border-ink bg-ink text-surface hover:border-ink;
+  }
+  /* A small tag beside a name (rarity, printing, set): the old .chip, renamed so it never passes for a nav chip. */
+  .tag {
+    @apply inline-flex items-center rounded-full border border-line px-2.5 py-0.5 text-xs text-muted;
+  }
+  /* A sponsored unit: dashed, cool-tinted, always with an .ad-pill. Never a card, never a row. */
+  .ad-box {
+    @apply rounded-xl border border-dashed border-ad-line bg-ad;
+  }
+  /* An ad's own button: eBay's button blue, never the site's own .btn-primary. */
+  .btn-ad {
+    @apply btn border border-transparent bg-[#3665f3] text-white hover:bg-[#2a50c8];
+  }
+  /* Never Amazon's own orange: the Associates Operating Agreement forbids styling that could pass for Amazon's site. */
+  .btn-amazon {
+    @apply btn bg-brand-soft text-brand-strong hover:brightness-105;
+  }
+  .ad-chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-dashed border-ad-line bg-surface px-3 py-1 text-xs font-medium text-ink transition-colors hover:border-ink;
+  }
+  .ad-pill {
+    @apply inline-flex shrink-0 items-center rounded border border-ad-line px-1.5 text-[11px] font-bold leading-[18px] text-muted;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.12em] text-muted;
+  }
+  /* What a product photo sits on: white, rounded, a hairline ring; in dark mode the plate stays light. */
+  .plate {
+    @apply isolate overflow-hidden rounded-lg bg-white ring-1 ring-line;
+  }
+  :root:not([data-theme="light"]) .plate {
+    background-color: #f3f3f1;
+  }
+  .scroller {
+    display: flex;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-block: 4px;
+    margin-block: -4px;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 2rem), transparent);
+  }
+  .scroller::-webkit-scrollbar {
+    display: none;
+  }
+  .scroller > * {
+    flex: none;
+    scroll-snap-align: start;
+  }
+  .link {
+    @apply font-medium text-brand hover:underline;
+  }
+  .wordmark {
+    background: var(--wordmark);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0.02em;
+  }
+  .prose-site h2 { @apply mb-3 mt-8 font-display text-xl font-bold text-ink; }
+  .prose-site h3 { @apply mb-1 mt-6 text-lg font-semibold text-ink; }
+  .prose-site p { @apply my-3 leading-7 text-muted; }
+  .prose-site ul { @apply my-3 list-disc space-y-1 pl-6 text-muted; }
+  .prose-site ol { @apply my-3 list-decimal space-y-1 pl-6 text-muted; }
+  .prose-site a { @apply font-medium text-brand underline underline-offset-2; }
+  .prose-site table { @apply my-4 w-full text-sm; }
+  .prose-site th { @apply border-b border-line py-2 text-left; }
+  .prose-site td { @apply border-b border-line py-2 pr-3; }
+}
+
+/* ── The shell (components/Header.tsx, MobileMenu.tsx, Section.tsx) ─────────────────────────────────────────────── */
+
+/* The header's search box (components/SearchBox.tsx) fits its one row: a 44px target below lg (40px from lg), and 16px text on
+   a phone, where anything smaller makes iOS zoom the page on focus. */
+.hdr-search form[role="search"] {
+  min-height: 2.75rem;
+}
+@media (max-width: 639.98px) {
+  .hdr-search input {
+    font-size: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .hdr-search form[role="search"] {
+    min-height: 2.5rem;
+  }
+}
+
+/* The phone menu: a native modal <dialog> drawn as a sheet from the top. */
+.menu-sheet[open] {
+  animation: menu-sheet-in 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.menu-sheet::backdrop {
+  background: rgb(15 16 19 / 0.45);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+@keyframes menu-sheet-in {
+  from {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu-sheet[open] {
+    animation: none;
+  }
+}
+html:has(.menu-sheet[open]) {
+  overflow: hidden;
+  scrollbar-gutter: stable;
+}
+
+/* A product card's body is a size container: on a card too narrow for "In stock · 12 stores" the pill drops the unit. */
+.card-body {
+  container-type: inline-size;
+}
+@container (max-width: 127.98px) {
+  .stock-unit {
+    display: none;
+  }
+}
+
+/* ThemeToggle: the icon for the theme you would switch TO. */
+.theme-icon-dark { display: none; }
+:root[data-theme="light"] .theme-icon-dark { display: block; }
+:root[data-theme="light"] .theme-icon-light { display: none; }
 
 /* ── The homepage hero (app/page.tsx, components/HeroSparks.tsx) ──────────────
-   Centred, like RiftCompare's: a soft glow of the brand colour behind the
-   headline and a canvas of drifting motes that part around the pointer and
-   burst where it clicks (owner, 2026-11-03: "your cursor movement can make it
-   really cool, or you click somewhere and it sparks"). The canvas is
-   decoration under the content; reduced motion stills it. */
+   The engine's band (a surface with a hairline under it) with a soft glow of the
+   brand colour behind the headline and the canvas of drifting motes that part
+   around the pointer (HeroSparks; also on DexCompare and OP Compare). The canvas
+   is decoration under the content; reduced motion stills it. */
 .hero-band {
   background:
-    radial-gradient(60rem 24rem at 50% -30%, rgb(var(--c-brand) / 0.28), transparent 60%),
-    radial-gradient(30rem 16rem at 10% 110%, rgb(var(--c-accent) / 0.12), transparent 60%),
-    radial-gradient(30rem 16rem at 90% 110%, rgb(var(--c-brand) / 0.14), transparent 60%);
+    radial-gradient(60rem 24rem at 50% -30%, rgb(var(--brand) / 0.22), transparent 60%),
+    radial-gradient(30rem 16rem at 10% 110%, rgb(var(--accent) / 0.08), transparent 60%),
+    radial-gradient(30rem 16rem at 90% 110%, rgb(var(--brand) / 0.1), transparent 60%),
+    rgb(var(--surface));
 }
-/* The content sits above the canvas; the two absolute layers (the Christmas
-   set and the creators bubble in the corner) keep their own position. */
 .hero-band > :not(.hero-sparks):not(.xmas-hero):not(.hero-corner) { position: relative; z-index: 1; }
 @media (min-width: 640px) {
   .hero-band > .hero-corner { position: absolute; }
 }
-/* Full-bleed (owner, 2026-11-03: "everything should be fill"): the band runs
-   from the rail to the window's right edge, out of the page container, and is
-   tall enough to fill the first screen under the header on a laptop. The
-   container is centred in the column beside the rail, so half the rail's
-   width comes off each margin (the 50% is the content box, which the
-   container's own padding has already narrowed by the same amount). */
-.hero-bleed {
-  margin-left: calc(50% - 50vw + var(--sidenav-w) / 2);
-  margin-right: calc(50% - 50vw + var(--sidenav-w) / 2);
-}
-@media (min-width: 1024px) {
-  .hero-bleed { min-height: calc(100svh - 8rem); }
-}
 .hero-sparks { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-.hero-glow { text-shadow: 0 0 40px rgb(var(--c-brand) / 0.35); letter-spacing: -0.02em; }
-h1, h2, h3 { letter-spacing: -0.01em; }
+.hero-glow { text-shadow: 0 0 40px rgb(var(--brand) / 0.25); letter-spacing: -0.02em; }
 
 /* ── Scroll motion ──────────────────────────────────────────────────────────
-   Scroll-driven, never scroll-triggered: a section eases up into place as it
-   enters the screen, driven by the scroll position itself (CSS view
-   timelines), so there is no script per frame and nothing to lag behind a
-   fling. Transform only, never opacity, so no content is ever hidden from a
-   crawler or a browser without view timelines; reduced motion gets none.
-     .sd          the block eases up as it enters;
-     .sd-stagger  its direct children follow one another in. */
+   Scroll-driven, never scroll-triggered (CSS view timelines): transform only,
+   never opacity, so nothing is hidden from a crawler; reduced motion gets none. */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .sd, .sd-stagger { view-timeline-name: --sd; }
@@ -114,19 +327,15 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 /* ── Halloween (lib/season.ts; until 31 October, visitor's local time) ────── */
 .season-only { display: none; }
 :root[data-season="halloween"] .season-only { display: block; }
-:root[data-season="halloween"]:not([data-theme="light"]) {
-  --page-bg: #0d0716;
-  --c-ink-950: 10 5 20;
-  --c-ink-900: 20 10 34;
-  --c-ink-850: 28 14 46;
-  --c-ink-800: 38 20 60;
-  --c-ink-700: 66 36 98;
-  --c-accent: 255 122 26;
+:root[data-season="halloween"] {
+  --accent: 255 122 26;
+  --spark: 255 122 26;
 }
 :root[data-season="halloween"] .hero-band {
   background:
-    radial-gradient(60rem 20rem at 80% -10%, rgba(255, 122, 26, 0.25), transparent 60%),
-    radial-gradient(40rem 18rem at 10% 110%, rgba(124, 58, 237, 0.3), transparent 60%);
+    radial-gradient(60rem 20rem at 80% -10%, rgba(255, 122, 26, 0.22), transparent 60%),
+    radial-gradient(40rem 18rem at 10% 110%, rgba(124, 58, 237, 0.25), transparent 60%),
+    rgb(var(--surface));
 }
 .bat { position: absolute; width: 28px; height: 14px; opacity: 0.7; animation: bat-fly 14s linear infinite; }
 @keyframes bat-fly {
@@ -136,10 +345,9 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 }
 @media (prefers-reduced-motion: reduce) { .bat { animation: none; display: none; } }
 
-
 /* Quick view (components/QuickView.tsx): opens at once, prices shimmer in. */
 .qv-shimmer {
-  background: linear-gradient(90deg, rgb(var(--c-ink-850)) 0%, rgb(var(--c-ink-700)) 50%, rgb(var(--c-ink-850)) 100%);
+  background: linear-gradient(90deg, rgb(var(--raised)) 0%, rgb(var(--line)) 50%, rgb(var(--raised)) 100%);
   background-size: 200% 100%;
   animation: qv-shimmer 1.1s linear infinite;
 }
@@ -411,20 +619,88 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   aspect-ratio: 100 / 90;
   background: url(/xmas/gift.svg) center / contain no-repeat;
 }
+/* The festive card (ChristmasBanner) for sites without a hero band: a
+   winter-night panel with its own snow and lights, the text on the left and a
+   tree and presents on the right. The link is the only thing that takes a tap. */
+.xmas-banner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  padding: 46px 20px 20px;
+  background:
+    radial-gradient(30rem 14rem at 100% 110%, rgb(220 38 38 / 0.28), transparent 60%),
+    radial-gradient(30rem 14rem at 0% 110%, rgb(22 163 74 / 0.28), transparent 60%),
+    linear-gradient(160deg, #0d1f35 0%, #10233d 55%, #0b1a2c 100%);
+  color: #f1f5f9;
+  box-shadow: 0 10px 30px -18px rgb(15 23 42 / 0.6);
+}
+.xmas-banner > .xmas-banner-body {
+  position: relative;
+  z-index: 1;
+  max-width: 34rem;
+}
+.xmas-banner-title {
+  font-weight: 800;
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: #fff;
+}
+.xmas-banner-text {
+  margin-top: 0.25rem;
+  font-size: 0.92rem;
+  color: #cbd5e1;
+}
+.xmas-banner-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.8rem;
+  border-radius: 9999px;
+  background: #dc2626;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+.xmas-banner-link:hover,
+.xmas-banner-link:focus-visible {
+  background: #b91c1c;
+}
+.xmas-banner-art {
+  position: absolute;
+  right: 18px;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  pointer-events: none;
+}
+.xmas-banner-art .xmas-art {
+  position: relative;
+}
+.xmas-banner-art .xmas-tree { width: 74px; }
+.xmas-banner-art .xmas-gift { width: 44px; }
+.xmas-banner-art .xmas-cane { width: 22px; }
+@media (max-width: 639.98px) {
+  .xmas-banner { padding-right: 76px; }
+  .xmas-banner-art { right: 8px; }
+  .xmas-banner-art .xmas-tree { width: 52px; }
+  .xmas-banner-art .xmas-gift,
+  .xmas-banner-art .xmas-cane { display: none; }
+}
 /* xmas-common:end */
 
-/* xmas-site:start — the engine's Christmas (1 November to Boxing Day): the
-   home hero keeps the game's own colours and adds red and green glows, snow,
+/* xmas-site:start — Gundam Compare's Christmas (1 November to Boxing Day): the
+   home hero keeps the site's own colours and adds red and green glows, snow,
    lights, trees and a candy cane (ChristmasDecor), a line in the game's own
    words (ChristmasGifts, SITE.christmas) and Santa's hat on the header icon.
    The hero's content sits above the decoration. */
 :root[data-season="christmas"] .hero-band {
   background:
-    radial-gradient(40rem 18rem at 8% 110%, rgba(22, 163, 74, 0.22), transparent 60%),
-    radial-gradient(40rem 18rem at 92% 110%, rgba(220, 38, 38, 0.2), transparent 60%),
-    radial-gradient(60rem 20rem at 50% -20%, rgba(186, 230, 253, 0.12), transparent 60%);
-}
-:root[data-season="christmas"] .hero-band {
+    radial-gradient(40rem 18rem at 8% 110%, rgba(22, 163, 74, 0.2), transparent 60%),
+    radial-gradient(40rem 18rem at 92% 110%, rgba(220, 38, 38, 0.18), transparent 60%),
+    radial-gradient(60rem 20rem at 50% -20%, rgba(186, 230, 253, 0.1), transparent 60%),
+    rgb(var(--surface));
   padding-top: 3rem;
 }
 :root[data-theme="light"] .xmas-hero .xmas-snow::before,
@@ -447,45 +723,47 @@ h1, h2, h3 { letter-spacing: -0.01em; }
 
 /* The beta forum (src/components/forum/forum.css) in this site's colours. */
 .fm {
-  --fm-card: rgb(var(--c-ink-900));
-  --fm-sunk: rgb(var(--c-ink-950));
-  --fm-line: rgb(var(--c-ink-700) / 0.6);
-  --fm-ink: rgb(var(--c-fg));
-  --fm-muted: rgb(var(--c-muted));
-  --fm-accent: rgb(var(--c-brand));
-  --fm-on-accent: rgb(var(--c-ink-950));
-  --fm-accent-soft: rgb(var(--c-brand) / 0.14);
-  --fm-radius: 12px;
+  --fm-card: rgb(var(--surface));
+  --fm-sunk: rgb(var(--raised));
+  --fm-line: rgb(var(--line));
+  --fm-ink: rgb(var(--ink));
+  --fm-muted: rgb(var(--muted));
+  --fm-accent: rgb(var(--brand));
+  --fm-on-accent: rgb(var(--brand-ink));
+  --fm-accent-soft: rgb(var(--brand-soft));
+  --fm-radius: 14px;
+  --fm-head: var(--font-display), var(--font-sans), system-ui, sans-serif;
 }
 
 /* Rate us card and "What people say" (components/site-reviews): drawn in the site's own theme, light and dark. */
 :root {
-  --srv-bg: rgb(var(--c-ink-900));
-  --srv-fg: rgb(var(--c-fg));
-  --srv-muted: rgb(var(--c-muted));
-  --srv-line: rgb(var(--c-ink-700));
-  --srv-accent: rgb(var(--c-accent));
-  --srv-accent-fg: rgb(var(--c-ink-950));
-  --srv-field: rgb(var(--c-ink-950));
+  --srv-bg: rgb(var(--surface));
+  --srv-fg: rgb(var(--ink));
+  --srv-muted: rgb(var(--muted));
+  --srv-line: rgb(var(--line));
+  --srv-accent: rgb(var(--brand));
+  --srv-accent-fg: rgb(var(--brand-ink));
+  --srv-field: rgb(var(--raised));
 }
+
 /* Multi-game sites (SITE.lines): the game tiles, hub header and set chips, each in its game's colour (--game). */
 .game-tile {
   display: block;
+  position: relative;
+  overflow: hidden;
   border-radius: 14px;
-  border: 1px solid rgb(var(--c-ink-700) / 0.6);
-  border-top: 4px solid var(--game, rgb(var(--c-brand)));
-  background: rgb(var(--c-ink-900));
+  border: 1px solid rgb(var(--line));
+  border-top: 4px solid var(--game, rgb(var(--brand)));
+  background: rgb(var(--surface));
   padding: 16px;
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
-.game-tile:hover { border-color: var(--game, rgb(var(--c-brand))); transform: translateY(-2px); }
-.game-tile-name { display: block; font-family: var(--font-display, inherit); font-size: 1.25rem; font-weight: 900; color: var(--game, rgb(var(--c-brand))); }
-.game-hero { border-left: 4px solid var(--game, rgb(var(--c-brand))); padding-left: 16px; margin-top: 8px; }
-.game-chip { display: inline-block; border-radius: 999px; padding: 1px 8px; font-weight: 700; color: rgb(var(--c-ink-950)); background: var(--game, rgb(var(--c-brand))); }
-.game-tile { position: relative; overflow: hidden; }
-.game-tile-stats > span { border-radius: 999px; border: 1px solid rgb(var(--c-ink-700)); padding: 1px 8px; }
-.game-tile-go { color: var(--game, rgb(var(--c-brand))); }
-/* The fan of a game's top three cards, top right of its tile; text keeps clear of it. */
+.game-tile:hover { border-color: var(--game, rgb(var(--brand))); transform: translateY(-2px); }
+.game-tile-name { display: block; font-family: var(--font-display, inherit); font-size: 1.25rem; font-weight: 800; color: var(--game, rgb(var(--brand))); }
+.game-hero { border-left: 4px solid var(--game, rgb(var(--brand))); padding-left: 16px; margin-top: 8px; }
+.game-chip { display: inline-block; border-radius: 999px; padding: 1px 8px; font-weight: 700; color: rgb(var(--brand-ink)); background: var(--game, rgb(var(--brand))); }
+.game-tile-stats > span { border-radius: 999px; border: 1px solid rgb(var(--line)); padding: 1px 8px; }
+.game-tile-go { color: var(--game, rgb(var(--brand))); }
 .game-fan { position: absolute; top: 14px; right: 10px; width: 132px; height: 120px; pointer-events: none; }
 .game-fan-card { position: absolute; top: 0; width: 70px; height: auto; border-radius: 5px; box-shadow: 0 6px 16px rgb(0 0 0 / 0.35); transition: transform 0.2s ease; }
 .game-fan-0 { right: 44px; transform: rotate(-12deg); }

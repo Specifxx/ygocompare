@@ -17,10 +17,11 @@ async function main() {
   const fresh = new Set(
     cat.sets.filter((s) => s.upcoming || (s.releasedOn && now - new Date(s.releasedOn).getTime() < 45 * 86_400_000)).map((s) => s.id),
   );
-  const hubs = ["", "/cards", "/sets", "/sealed", "/movers", "/preorders", "/tools/deal-finder", "/tools/rising", "/blog"].map((p) => `${site}${p}`);
+  const hubs = ["", "/sealed", "/sealed/booster-box", "/sets", "/preorders", "/tools/deal-finder", "/blog"].map((p) => `${site}${p}`);
   const recent = cat.sets.filter((s) => s.productCount > 0).slice(0, 6).map((s) => `${site}/sets/${s.slug}`);
   const guides = posts().map((p) => `${site}/blog/${p.slug}`);
-  const newCards = cat.products.filter((p) => fresh.has(p.setId)).map((p) => `${site}/card/${p.slug}`);
+  // Sealed only (2026-11-06): the catalogue holds sealed products, so these are the new sets' boxes, packs and decks.
+  const newCards = cat.products.filter((p) => p.kind === "sealed" && p.sealedType !== "Insert" && fresh.has(p.setId)).map((p) => `${site}/card/${p.slug}`);
   const urls = [...new Set([...hubs, ...recent, ...guides, ...newCards])].slice(0, 1000);
   const res = await fetch("https://api.indexnow.org/indexnow", {
     method: "POST",

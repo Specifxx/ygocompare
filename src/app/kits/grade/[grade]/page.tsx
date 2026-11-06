@@ -9,8 +9,7 @@ import { KitGrid } from "@/components/KitTile";
 import { KitPrice } from "@/components/KitPrice";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 // Tiles for the first kits, a plain list for the rest: an HG hub holds
 // hundreds of kits, and a tile each is hundreds of store photos.
@@ -39,7 +38,7 @@ export default function GradePage({ params }: { params: { grade: string } }) {
       </header>
       <nav aria-label="Grades" className="flex flex-wrap gap-2">
         {gradeHubs().map((g) => (
-          <Link key={g.slug} href={`/kits/grade/${g.slug}`} className={`chip text-sm ${g.slug === h.slug ? "border-brand text-brand-400" : "hover:border-brand"}`}>{g.label}</Link>
+          <Link key={g.slug} href={`/kits/grade/${g.slug}`} className={`chip ${g.slug === h.slug ? "chip-on" : ""}`}>{g.label}</Link>
         ))}
       </nav>
       <KitGrid items={h.items.slice(0, TILES)} />

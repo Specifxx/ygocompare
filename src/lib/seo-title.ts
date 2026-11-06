@@ -19,19 +19,14 @@ export function fitTitle(candidates: string[], max = TITLE_MAX): { absolute: str
 }
 
 /** "Card List: All 120 Cards + Prices" for a set page, the phrase Rift Compare's set pages rank for. */
-export function setTitleCandidates(setName: string, cardCount: number, upcoming = false): string[] {
+export function setTitleCandidates(setName: string, count: number, upcoming = false): string[] {
   const g = SITE.gameShort;
   const named = setName.toLowerCase().includes(g.toLowerCase()) ? setName : `${g} ${setName}`;
-  // Spoiler season (Rift Compare's best non-brand searches, "riftbound legacy spoilers"): until release day a set with
-  // revealed cards is titled for the spoiler search; release day turns it back into the card list at the same URL.
-  if (upcoming && cardCount > 0)
-    return [`${named} Spoilers: ${cardCount} Cards Revealed + Prices`, `${named} Spoilers: ${cardCount} Cards Revealed`, `${setName} Spoilers: ${cardCount} Cards Revealed`, `${setName} Spoilers`];
-  return [
-    ...(cardCount > 0 ? [`${named} Card List: All ${cardCount} Cards + Prices`, `${setName} Card List: All ${cardCount} Cards + Prices`] : []),
-    `${named} Card List & Prices`,
-    `${setName} Card List & Prices`,
-    `${setName} Card List`,
-  ];
+  // Sealed only (2026-11-06): a set page is its booster boxes and sealed; before release, its pre-orders.
+  // The pre-order page (/preorders/<set>) owns the pre-order search, so an upcoming set keeps the same title.
+  void count;
+  void upcoming;
+  return [`${named} Booster Box & Sealed Prices`, `${setName} Booster Box & Sealed Prices`, `${setName} Booster Box Prices`, `${setName} Prices`];
 }
 
 /** "<Card> <number> Price — <game> <set>", stepping down to the card and its number. */

@@ -36,7 +36,7 @@ export const post: Post = {
 <li>{{card:711263}}: {{price:711263}}</li>
 <li>{{card:668522}}: {{price:668522}}, a premium set where every card is a high rarity</li>
 </ul>
-<p>Box prices move week to week, and stores often sit under TCGplayer's market price. Our <a href="/sealed/booster-box">booster box price list</a> shows the cheapest store for each, and the <a href="/tools/best-basket">best basket</a> tool prices several items in one order, shipping included.</p>
+<p>Box prices move week to week, and stores often sit under TCGplayer's market price. Our <a href="/sealed/booster-box">booster box price list</a> shows the cheapest store for each.</p>
 
 <h2>For the collector</h2>
 <p>Vintage sealed product, such as early 1st Edition boxes, Starter Decks and Collectors Tins, sells for hundreds or thousands. If that's the plan, buy from a seller you trust and read our guide to <a href="/blog/yu-gi-oh-1st-edition-vs-unlimited">1st Edition vs Unlimited</a> first. The <a href="/sealed/tin">tin price list</a> and <a href="/sealed/starter-deck">starter deck price list</a> show what each sells for today.</p>
@@ -45,7 +45,6 @@ export const post: Post = {
 <ol>
 <li><b>Order early.</b> Tins and new sets sell out in December, and prices climb when they do.</li>
 <li><b>Watch the release calendar.</b> Our <a href="/blog/yu-gi-oh-tcg-release-schedule-late-2026">release schedule</a> lists what lands before Christmas, and <a href="/preorders">pre-orders</a> shows every store's price.</li>
-<li><b>Want a particular card instead?</b> A single staple a player needs is often a better present than packs. Look it up on the <a href="/cards">card price list</a>.</li>
 <li><b>Outside the US?</b> Switch the market at the top of any page for stores in your country.</li>
 </ol>
 `,

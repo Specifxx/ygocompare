@@ -39,25 +39,16 @@ export function PrefsProvider({ children }: { children: React.ReactNode }) {
   return <Ctx.Provider value={{ market, setMarket }}>{children}</Ctx.Provider>;
 }
 
-// The header's region menu: the flag and code of the region in use, with a
-// native select laid invisibly over them (cheap, keyboard- and
-// screen-reader-friendly; the open list names every region in full).
+// The header's market button (the engine's chip): the flag and code of the market in use, with a native select laid
+// invisibly over them (cheap, keyboard- and screen-reader-friendly; the open list names every market in full).
 export function MarketPicker() {
   const { market, setMarket } = useMarket();
   return (
-    <label
-      title={`Prices for ${MARKET_LABEL[market]}: change region`}
-      className="relative flex items-center gap-1.5 rounded-md border border-ink-700 bg-ink-900 px-2 py-1 text-xs font-semibold text-fg focus-within:ring-2 focus-within:ring-brand/60 hover:border-brand/60"
-    >
+    <label title={`Prices for ${MARKET_LABEL[market]}: change region`} className="chip relative h-11 shrink-0 cursor-pointer px-2.5 focus-within:border-brand lg:h-10">
       <Flag code={market} />
-      <span>{market}</span>
+      <span className="text-sm font-semibold">{market}</span>
       <span aria-hidden className="text-[10px] text-muted">▾</span>
-      <select
-        aria-label="Your region"
-        value={market}
-        onChange={(e) => setMarket(e.target.value as Market)}
-        className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-      >
+      <select aria-label="Your region" value={market} onChange={(e) => setMarket(e.target.value as Market)} className="absolute inset-0 h-full w-full cursor-pointer opacity-0">
         {MARKETS.map((m) => (
           <option key={m} value={m}>
             {MARKET_LABEL[m]}
@@ -68,8 +59,8 @@ export function MarketPicker() {
   );
 }
 
-// The homepage hero's region row (owner, 2026-11-02: make the switcher
-// prominent, with flags). Same choice as the header menu.
+// The homepage hero's region row (owner, 2026-11-02: make the switcher prominent, with flags), and the phone menu's. Same choice
+// as the header menu. The engine's chips: the chosen one is .chip-on.
 export function MarketChooser({ className = "", bare = false }: { className?: string; bare?: boolean }) {
   const { market, setMarket } = useMarket();
   return (
@@ -78,16 +69,7 @@ export function MarketChooser({ className = "", bare = false }: { className?: st
       {MARKETS.map((m) => {
         const on = m === market;
         return (
-          <button
-            key={m}
-            type="button"
-            aria-pressed={on}
-            onClick={() => setMarket(m)}
-            title={MARKET_LABEL[m]}
-            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm transition-colors ${
-              on ? "border-brand bg-brand/15 font-semibold text-fg" : "border-ink-700 bg-ink-900/60 text-fg/80 hover:border-brand/60 hover:text-fg"
-            }`}
-          >
+          <button key={m} type="button" aria-pressed={on} onClick={() => setMarket(m)} title={MARKET_LABEL[m]} className={`chip ${on ? "chip-on" : ""}`}>
             <Flag code={m} />
             <span className="sm:hidden">{m}</span>
             <span className="hidden sm:inline">{MARKET_LABEL[m]}</span>
@@ -98,24 +80,5 @@ export function MarketChooser({ className = "", bare = false }: { className?: st
   );
 }
 
-export function ThemeToggle() {
-  const [light, setLight] = useState(false);
-  useEffect(() => setLight(document.documentElement.getAttribute("data-theme") === "light"), []);
-  return (
-    <button
-      type="button"
-      aria-label="Toggle light and dark theme"
-      className="rounded-md border border-ink-700 px-2 py-1 text-xs"
-      onClick={() => {
-        const next = light ? "dark" : "light";
-        document.documentElement.setAttribute("data-theme", next);
-        try {
-          localStorage.setItem("theme", next);
-        } catch {}
-        setLight(!light);
-      }}
-    >
-      {light ? "☾" : "☀"}<span className="hidden sm:inline">{light ? " Dark" : " Light"}</span>
-    </button>
-  );
-}
+// The light/dark switch moved to its own file (components/ThemeToggle.tsx); re-exported for the pages that import it from here.
+export { ThemeToggle } from "./ThemeToggle";

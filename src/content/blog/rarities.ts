@@ -29,9 +29,7 @@ export const post: Post = {
 <p>Sets like the Rarity Collections print each card in several rarities with the same set number (for example RA01-EN008). On TCGplayer and on our card pages each rarity is its own product, so the page you open is for one exact printing. Our store matching works the same way: a store listing that names a different rarity is never shown as a price for this one.</p>
 
 <h2>Prices by rarity</h2>
-<p>Browse every card of a rarity, most valuable first: <a href="/cards/rarity/quarter-century-secret-rare">Quarter Century Secret Rare</a>, <a href="/cards/rarity/starlight-rare">Starlight Rare</a>, <a href="/cards/rarity/ghost-rare">Ghost Rare</a>, <a href="/cards/rarity/collectors-rare">Collector's Rare</a>, <a href="/cards/rarity/secret-rare">Secret Rare</a> and <a href="/cards/rarity/ultra-rare">Ultra Rare</a>.</p>
 <h3>The five most valuable Ghost Rares today</h3>
-{{rarity:Ghost Rare:5}}
 `,
   faq: [
     { q: "What is the rarest Yu-Gi-Oh! rarity?", a: "In modern booster sets, Starlight Rares and Quarter Century Secret Rares are the hardest to pull. Older Ghost Rares and tournament prize cards are scarce too." },

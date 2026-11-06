@@ -96,14 +96,15 @@ export function SaleSeasonPage({ slug }: { slug: SaleSlug }) {
 
 function MarketSection({ m, us }: { m: Market; us: { sealed: Deal[]; cards: Deal[] } | null }) {
   const sealed = storeDealsIn(m, 16, "sealed");
-  const cards = storeDealsIn(m, 16, "card");
+  // A sealed-only site (SITE.sealedOnly) has no card rows to show.
+  const cards = SITE.sealedOnly ? [] : storeDealsIn(m, 16, "card");
   return (
     <section id={m.toLowerCase()} className="flex flex-col gap-4 scroll-mt-20">
       <h2 className="text-2xl font-bold">Deals in {ADJ[m]} stores</h2>
       {us && <UnderTcg title="Sealed product under TCGplayer today" rows={us.sealed} />}
-      {us && <UnderTcg title="Cards under TCGplayer today" rows={us.cards} />}
+      {us && !SITE.sealedOnly && <UnderTcg title="Cards under TCGplayer today" rows={us.cards} />}
       <UnderStores title={`Sealed product under other ${ADJ[m]} stores`} rows={sealed} m={m} />
-      <UnderStores title={`Cards under other ${ADJ[m]} stores`} rows={cards} m={m} />
+      {!SITE.sealedOnly && <UnderStores title={`Cards under other ${ADJ[m]} stores`} rows={cards} m={m} />}
     </section>
   );
 }

@@ -10,6 +10,7 @@ import { readSetPrices, readSummary, type SummaryEntry } from "./price-store";
 import { decodeOffer } from "./offer-codec";
 import { referenceCents } from "./import/tcgcsv";
 import type { Series } from "./series";
+import { SITE } from "@/site.config";
 
 const DIR = path.join(process.cwd(), "data");
 
@@ -19,6 +20,16 @@ function read<T>(rel: string, fallback: T): T {
   } catch {
     return fallback;
   }
+}
+
+/** A sealed-only site (SITE.sealedOnly) never shows a single card, even from a catalogue written before the import
+ *  dropped them: cards are left out here and each set's count is its sealed products. */
+export function sealedOnlyCatalog(c: Catalog, on = !!SITE.sealedOnly): Catalog {
+  if (!on || !c.products.some((p) => p.kind === "card")) return c;
+  const products = c.products.filter((p) => p.kind === "sealed");
+  const count = new Map<number, number>();
+  for (const p of products) count.set(p.setId, (count.get(p.setId) ?? 0) + 1);
+  return { ...c, products, sets: c.sets.map((s) => ({ ...s, productCount: count.get(s.id) ?? 0 })) };
 }
 
 let cache: {
@@ -34,7 +45,7 @@ let cache: {
 
 function load() {
   if (cache) return cache;
-  const catalog = read<Catalog>("public/catalog.json", { generatedAt: "", sets: [], products: [] });
+  const catalog = sealedOnlyCatalog(read<Catalog>("public/catalog.json", { generatedAt: "", sets: [], products: [] }));
   cache = {
     catalog,
     summary: readSummary(),
@@ -123,7 +134,12 @@ export function mainSets() {
 
 export function latestReleasedSet(): SetInfo | null {
   return (
-    sets().find((s) => !s.upcoming && productsInSet(s.id).filter((p) => p.kind === "card").length > 60) ?? null
+    sets().find((s) =>
+      !s.upcoming &&
+      (SITE.sealedOnly
+        ? productsInSet(s.id).some((p) => p.sealedType === "Booster Box")
+        : productsInSet(s.id).filter((p) => p.kind === "card").length > 60),
+    ) ?? null
   );
 }
 export function nextUpcomingSet(): SetInfo | null {
