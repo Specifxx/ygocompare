@@ -775,3 +775,18 @@ html:has(.menu-sheet[open]) {
 @media (min-width: 768px) and (max-width: 1100px) { .game-fan { display: none; } .game-tile-name, .game-tile-blurb { padding-right: 0; } }
 @media (max-width: 480px) { .game-fan { width: 96px; height: 90px; top: 12px; right: 8px; } .game-fan-card { width: 52px; } .game-fan-0 { right: 32px; } .game-fan-1 { right: 16px; } .game-tile-name, .game-tile-blurb { padding-right: 100px; } }
 @media (prefers-reduced-motion: reduce) { .game-tile { transition: none; } .game-tile:hover { transform: none; } .game-fan-card { transition: none; } }
+
+/* The side rails (components/SideAds.tsx; owner 2026-11-06: "it should appear on regular 16:9 screens … 16:10 even"). From 1280px
+   the shell leaves 160px (a 136px rail and two 12px gutters) free on each side for them; from 1864px it is its full 1480px again
+   and the rails sit just outside it. Pure CSS, the same on the server and in the browser: no layout shift when the rails mount. */
+@media (min-width: 1280px) {
+  .max-w-shell,
+  .xl\:max-w-shell {
+    max-width: min(1480px, calc(100vw - 320px));
+  }
+}
+/* A rail's list scrolls inside it (up to ten tiles): a thin bar, and the page does not scroll on past the list's end. */
+.rail-scroll {
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}

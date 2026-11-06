@@ -63,5 +63,5 @@ test("the card ads are the engine's (owner, 2026-11-04): the small pair on card 
     assert.match(read(f), /rel="sponsored nofollow noopener"/, f);
     assert.doesNotMatch(read(f), /amazon/i, f);
   }
-  assert.match(read("src/components/SideAds.tsx"), /min-\[1864px\]:flex/);
+  assert.match(read("src/components/SideAds.tsx"), /min-\[1280px\]:flex/);
 });
