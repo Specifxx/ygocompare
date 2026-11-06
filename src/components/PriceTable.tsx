@@ -16,6 +16,7 @@ import { goHref } from "@/lib/affiliate";
 import { priceRows } from "@/lib/price-rows";
 import { useMarket } from "./ClientPrefs";
 import { ReportPrice } from "./ReportForms";
+import { StoreVote } from "./StoreVote";
 
 const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
@@ -121,6 +122,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                 <tr className={`border-t border-line ${best ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"}`}>
                   <td className="px-3 py-2.5">
                     <span className="font-medium text-ink">{sourceName(o)}</span>
+                    <StoreVote url={o.url} name={sourceName(o)} className="ml-2 text-muted" />
                     {o.source === "ebay" && <span className="ad-pill ml-2">Ad</span>}
                     {best && <span className="ml-2 rounded-full bg-open-soft px-2 py-0.5 text-[10px] font-bold uppercase text-open">Best price</span>}
                   </td>
