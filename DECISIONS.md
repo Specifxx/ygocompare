@@ -1481,3 +1481,12 @@ Vercel Production variables (the same values on every site; `AMAZON_CREATORS_<MA
 Access is per marketplace and opens by itself once that store's account has qualifying sales (about 10 in 30 days); a
 refused store is skipped, so the feature costs nothing until then and switches on without a code change. Engine code, landed from
 Lorcana Compare the same day.
+
+## 2026-11-06 — Awin: a store that accepts the family pays from the next build, with no step by hand (engine)
+
+**Decision (owner: "check if we are making the most of Awin, and if it's not there, just do it"):** the family's Awin
+account (Compare Empire, publisher 3144410) is read each morning by Compare Empire's `scripts/awin-sync.ts`, which
+publishes the programmes that accepted us, with their tracked domains, in its public `data/awin/programmes.json`. Each
+engine site copies it in its build (`scripts/fetch-awin.ts` → `src/lib/awin-programmes.json`; the committed copy is an
+empty list). The `/go` redirect's `tagged()` sends a link to a joined advertiser's own domain through its Awin deep link
+(`clickref=<site>-<sub>`); every other store keeps its utm-tagged link. Order and prices never change.
