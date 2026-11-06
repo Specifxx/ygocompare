@@ -8,6 +8,7 @@ import { money } from "@/lib/format";
 import type { Market } from "@/lib/site-types";
 import { useMarket } from "./ClientPrefs";
 import { EbayWord } from "./EbayCallout";
+import { AdDock, DockGate, DockTile, DOCK_LINK, type DockSide } from "./AdDock";
 
 // The two side rails (the Dex / MTG Compare engine's, owner 2026-11-03: "the left side could be eBay and the right side
 // TCGplayer … only if you can fit it"): real eBay Buy It Now listings for the newest sets' chase cards stacked down the far left
@@ -64,17 +65,26 @@ export interface AdSearch {
 
 export function SideAds({ ads, search }: { ads: CardAds; search: AdSearch }) {
   const [fit, setFit] = useState(false);
+  const [narrow, setNarrow] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia(`(min-width: ${MIN_WIDTH}px)`);
-    const update = () => setFit(mq.matches && railFits(window.innerHeight));
+    const phone = window.matchMedia(`(min-width: ${DOCK_BELOW}px)`);
+    const update = () => {
+      setFit(mq.matches && railFits(window.innerHeight));
+      setNarrow(!phone.matches);
+    };
     update();
     mq.addEventListener("change", update);
+    phone.addEventListener("change", update);
     window.addEventListener("resize", update, { passive: true });
     return () => {
       mq.removeEventListener("change", update);
+      phone.removeEventListener("change", update);
       window.removeEventListener("resize", update);
     };
   }, []);
+  // Too narrow for the rails (phones, tablets, a small window): the same tiles in the phone dock (AdDock.tsx).
+  if (narrow) return <PhoneDock ads={ads} />;
   if (!fit) return null;
   return (
     <>
@@ -166,5 +176,54 @@ function Note({ href, label, note }: { href: string; label: string; note: string
       </a>
       <span className="truncate">{note}</span>
     </p>
+  );
+}
+
+/** The dock shows below the common laptop width (1280px), where no rail ever does. */
+const DOCK_BELOW = Math.min(MIN_WIDTH, 1280);
+
+/**
+ * The phone dock (owner, 2026-11-06: the rails "on mobile … in the best way that doesn't interrupt user experience"): the rails'
+ * own tiles, eBay and TCGplayer taking turns, in one bar along the foot of a narrow screen. AdDock.tsx has the rules; it yields to
+ * every ad unit on the page (.ad-box, [data-ad]) and never shows on a card page (its buy bar, CardBuy's data-buybar).
+ */
+function PhoneDock({ ads }: { ads: CardAds }) {
+  const { market } = useMarket();
+  const { tiles, market: ebayMarket } = ebayTilesFor(ads, market);
+  const us = market === "US";
+  const tcgPrice = (t: AdTile) => (us ? money(t.cents, t.currency) : `US${money(t.cents, t.currency)}`);
+  const tcgBrand = (
+    <span className="font-black tracking-tight text-ink" aria-label="TCGplayer">
+      TCG<span className="text-[#1f6fe5]">player</span>
+    </span>
+  );
+  const sides: DockSide[] = [];
+  const ebay = tiles.filter((t) => t.image).slice(0, MAX_TILES);
+  if (ebay.length >= MIN_TILES)
+    sides.push({
+      key: "ebay",
+      items: ebay.map((t) => (
+        <a key={t.id} href={goHref({ url: t.url, source: "ebay", market: ebayMarket }, t.id, "dock-ebay")} rel="sponsored nofollow noopener" target="_blank" className={DOCK_LINK} title={`${t.name} · ${money(t.cents, t.currency)}`}>
+          <DockTile img={t.image!} alt={t.name} brand={<EbayWord className="text-[11px]" />} title={t.name} price={money(t.cents, t.currency)} cta="View" />
+          <span className="sr-only">, on eBay</span>
+        </a>
+      )),
+    });
+  const tcg = ads.tcgplayer.filter((t) => t.image).slice(0, MAX_TILES);
+  if (tcg.length >= MIN_TILES)
+    sides.push({
+      key: "tcgplayer",
+      items: tcg.map((t) => (
+        <a key={t.id} href={goHref({ url: t.url, source: "tcgplayer", market: "US" }, t.id, "dock-tcg")} rel="sponsored nofollow noopener" target="_blank" className={DOCK_LINK} title={`${t.name} · ${tcgPrice(t)}`}>
+          <DockTile img={t.image!} alt={t.name} brand={tcgBrand} title={t.name} price={tcgPrice(t)} cta="View" plate />
+          <span className="sr-only">, on TCGplayer</span>
+        </a>
+      )),
+    });
+  if (sides.length === 0) return null;
+  return (
+    <DockGate minWidth={DOCK_BELOW}>
+      <AdDock label={`Sponsored: ${SITE.gameShort} on eBay and TCGplayer`} sides={sides} placement="dock" minWidth={DOCK_BELOW} yieldTo=".ad-box, [data-ad]" />
+    </DockGate>
   );
 }

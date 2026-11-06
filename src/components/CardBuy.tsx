@@ -105,6 +105,7 @@ export function CardStickyBuyBar({ offers, productId }: { offers: Offer[]; produ
   return (
     <div
       aria-hidden={!show}
+      data-buybar=""
       className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 px-4 py-2 backdrop-blur transition-transform duration-200 md:hidden ${show ? "translate-y-0" : "pointer-events-none translate-y-[120%]"}`}
     >
       <div className="mx-auto flex max-w-xl items-center gap-2">
