@@ -31,5 +31,6 @@ test("the committed Awin list is an empty, public-only default and the build fet
 
 test("the /go redirect sends a store that accepted us on Awin through its deep link", () => {
   const src = readFileSync("src/lib/affiliate.ts", "utf8");
-  assert.match(src, /return awinUrl\(plain, clickref\(SITE\.key, sub\)\) \?\? plain;/);
+  // Awin is asked first; only a store it does not cover can go straight to checkout.
+  assert.match(src, /const awin = awinUrl\(plain, clickref\(SITE\.key, sub\)\);\n  if \(awin\) return awin;/);
 });
