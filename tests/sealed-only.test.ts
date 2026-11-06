@@ -74,3 +74,21 @@ test("retired guides 301 and the kept ones still render", async () => {
     for (const m of p.html.matchAll(/\{\{(?:card|price):(\d+)\}\}/g)) assert.ok(ids.has(m[1]), `${p.slug} names product ${m[1]}, not a sealed product`);
   }
 });
+
+// Real catalogue rows, 2026-11-06: TCGplayer files oversized cards, tokens and single promo cards under "sealed".
+test("a single card TCGplayer files as sealed is not a sealed product", () => {
+  const box = { id: 2, slug: "x-booster-box", name: "X Booster Box", kind: "sealed" as const, setId: 7, number: null, rarity: null, attrs: {}, sealedType: "Booster Box", image: null, tcgUrl: "", printings: [] };
+  const oversized = { ...box, id: 3, slug: "blue-eyes-oversized", name: "Blue-Eyes White Dragon (Oversized)", sealedType: null, attrs: { Attack: "3000" } };
+  const promo = { ...box, id: 4, slug: "black-luster-soldier", name: "Black Luster Soldier", sealedType: null, rarity: "Secret Rare" };
+  const c = sealedOnlyCatalog({ generatedAt: "", sets: [{ id: 7, name: "X", code: "X", slug: "x", releasedOn: null, productCount: 3, upcoming: false }], products: [box, oversized, promo] }, true);
+  assert.deepEqual(c.products.map((p) => p.id), [2]);
+  assert.ok(products().every((p) => !p.rarity));
+});
+
+test("the old rarity hub goes to the rarity guide", () => {
+  const src = fs.readFileSync("next.config.js", "utf8");
+  const i = src.indexOf('"/cards/rarity/:path*"');
+  assert.ok(i > 0 && i < src.indexOf('"/cards/:path*"'));
+  assert.ok(src.includes('destination: "/blog/yu-gi-oh-rarities-explained"'));
+  assert.ok(POSTS.some((p) => p.slug === "yu-gi-oh-rarities-explained"));
+});

@@ -15,6 +15,7 @@ const CDN_PAGES = ["/card/:slug", "/kit/:slug", "/sets/:slug", "/sealed/:type", 
 // (lib/card-redirects.ts), because the same route still serves every sealed product.
 const RETIRED = [
   { source: "/cards", destination: "/sealed" },
+  { source: "/cards/rarity/:path*", destination: "/blog/yu-gi-oh-rarities-explained" },
   { source: "/cards/:path*", destination: "/sealed" },
   { source: "/tools/rising", destination: "/tools" },
   { source: "/tools/demand", destination: "/tools" },

@@ -1637,3 +1637,12 @@ see today's price on Amazon. With no Amazon price the row reads "Also check on A
 is counted as a store, "Best price", a deal, an alert price or the reference price; TCGplayer and Cardmarket stay
 references (no thumbs, no cart line); no Amazon link in a pop-up.
 Here the eBay and Amazon buttons also become the store rows' own `btn-soft` (they had `btn-ad` / `btn-amazon` since the 2026-11-04 port): the outline is what sets them apart now. `pinnedOrder` puts eBay first always (TCGplayer follows).
+
+## 2026-11-06: Loose singles out of "sealed", pre-order set offers, eBay floor 60%
+
+Underperformer review (owner: "fix everything"). TCGplayer files 122 single cards under sealed (oversized cards, field
+centre tokens, promo Secret Rares); a product with a rarity or card stats is a single, so `sealedOnlyCatalog` drops it
+and its old URL 301s to its set (or `/sealed`). A store listing in stock for a set still on pre-order is labelled
+pre-order (tiles and rows), so a launch box never reads "in stock" before release. The eBay search floor rises from 50%
+to 60% of the reference: a $29.99 listing on a $57.90 box was a wrong product. Tiles label the headline as "market".
+The rarity guide lost its empty "Prices by rarity" heading (a sealed-only leftover), and `/cards/rarity/*` now 301s to it.

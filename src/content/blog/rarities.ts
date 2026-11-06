@@ -26,10 +26,10 @@ export const post: Post = {
 </ul>
 
 <h2>The same number, several rarities</h2>
-<p>Sets like the Rarity Collections print each card in several rarities with the same set number (for example RA01-EN008). On TCGplayer and on our card pages each rarity is its own product, so the page you open is for one exact printing. Our store matching works the same way: a store listing that names a different rarity is never shown as a price for this one.</p>
+<p>Sets like the Rarity Collections print each card in several rarities with the same set number (for example RA01-EN008). On TCGplayer each rarity is its own product, so check the rarity before you buy a single.</p>
 
-<h2>Prices by rarity</h2>
-<h3>The five most valuable Ghost Rares today</h3>
+<h2>What this means for sealed product</h2>
+<p>YGO Compare compares sealed product only: booster boxes, tins, decks and collections. A box's price follows the rarities it can pull, which is why sets with Starlight and Quarter Century Secret Rares cost more sealed. <a href="/sealed">Compare sealed prices across stores</a>.</p>
 `,
   faq: [
     { q: "What is the rarest Yu-Gi-Oh! rarity?", a: "In modern booster sets, Starlight Rares and Quarter Century Secret Rares are the hardest to pull. Older Ghost Rares and tournament prize cards are scarce too." },

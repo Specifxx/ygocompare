@@ -9,7 +9,7 @@ import { decodeOffer } from "@/lib/offer-codec";
 const product: Product = { id: 1, slug: "x", name: "Card 1", kind: "card", setId: 1, number: "1/204", rarity: "Rare", attrs: {}, sealedType: null, image: null, tcgUrl: "", printings: [] };
 
 test("the search asks for local sellers and gives eBay the buyer's location", () => {
-  assert.equal(searchFilter("AU", 40), "buyingOptions:{FIXED_PRICE},price:[20..120],priceCurrency:AUD,itemLocationCountry:AU,deliveryCountry:AU");
+  assert.equal(searchFilter("AU", 40), "buyingOptions:{FIXED_PRICE},price:[24..120],priceCurrency:AUD,itemLocationCountry:AU,deliveryCountry:AU");
   assert.equal(searchFilter("UK", null), "buyingOptions:{FIXED_PRICE},itemLocationCountry:GB,deliveryCountry:GB");
   assert.match(endUserContext("US", "site-1"), /^affiliateCampaignId=\d+,affiliateReferenceId=site-1,contextualLocation=country%3DUS%2Czip%3D64101$/);
 });

@@ -49,12 +49,14 @@ export const MARKETPLACE: Partial<Record<Market, { id: string; currency: string;
   CA: { id: "EBAY_CA", currency: "CAD", country: "CA", zip: "M5V 2T6" },
 };
 
-/** The Browse filter: Buy It Now, in the price window when there is one, from a seller in the market's own country. */
+/** The Browse filter: Buy It Now, in the price window when there is one, from a seller in the market's own country.
+ *  The floor is 60% of the market price (2026-11-06: a $29.99 listing passed under the old 50% floor on a $57.90 booster
+ *  box; sealed product that cheap is a single pack, a mini box or not real). */
 export function searchFilter(market: Market, ref: number | null): string {
   const mp = MARKETPLACE[market]!;
   return [
     "buyingOptions:{FIXED_PRICE}",
-    ...(ref == null ? [] : [`price:[${Math.max(1, Math.floor(ref * 0.5))}..${Math.ceil(ref * 3)}]`, `priceCurrency:${mp.currency}`]),
+    ...(ref == null ? [] : [`price:[${Math.max(1, Math.floor(ref * 0.6))}..${Math.ceil(ref * 3)}]`, `priceCurrency:${mp.currency}`]),
     `itemLocationCountry:${mp.country}`,
     `deliveryCountry:${mp.country}`,
   ].join(",");

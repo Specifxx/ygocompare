@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
 import { retiredCardTarget } from "@/lib/card-redirects";
 import { SITE } from "@/site.config";
-import { byValue, historyOf, meta, priceOf, productBySlug, productsInSet, refCents, setById, setBySlug } from "@/lib/data";
+import { byValue, historyOf, looseSingleSetId, meta, priceOf, productBySlug, productsInSet, refCents, setById, setBySlug } from "@/lib/data";
 import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
@@ -60,6 +60,12 @@ export default function CardPage({ params }: { params: { slug: string } }) {
     // A single card from before the site went sealed-only: a permanent redirect to its set (lib/card-redirects.ts).
     const to = retiredCardTarget(params.slug, (s) => (setBySlug(s)?.productCount ?? 0) > 0);
     if (to) permanentRedirect(to);
+    // A single that TCGplayer filed as sealed (lib/data.ts isLooseSingle): its set, or the sealed hub.
+    const loose = looseSingleSetId(params.slug);
+    if (loose != null) {
+      const set = setById(loose);
+      permanentRedirect(set && set.productCount > 0 ? `/sets/${set.slug}` : "/sealed");
+    }
     notFound();
   }
   const set = setById(p.setId);
