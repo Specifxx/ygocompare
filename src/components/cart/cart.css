@@ -28,6 +28,7 @@
 .ce-cart-add:focus-visible, .ce-cart-link:focus-visible { outline: 2px solid var(--cart-accent); outline-offset: 2px; }
 
 :where(.ce-cart-inline) { display: inline-flex; align-items: center; min-height: 1.75rem; padding: 0 0.1rem; border: 0; background: none; color: var(--cart-accent); font: inherit; font-weight: 700; cursor: pointer; }
+.ce-cart-inline { color: var(--cart-accent); }
 .ce-cart-inline.is-in { opacity: 0.85; }
 :where(.ce-cart-link) {
   position: relative;
