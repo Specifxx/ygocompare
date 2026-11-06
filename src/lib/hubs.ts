@@ -33,7 +33,7 @@ export function sealedHubs(): Hub[] {
     .filter((h) => h.items.length);
 }
 
-export const rarityHref = (r: string | null) => (r ? `/cards/rarity/${raritySlug(r)}` : null);
+export const rarityHref = (r: string | null) => (r && !SITE.sealedOnly ? `/cards/rarity/${raritySlug(r)}` : null);
 export const sealedHref = (t: string | null) => (t && t !== "Other" && t !== "Insert" ? `/sealed/${slugify(t)}` : null);
 
 // The homepage's sealed shelf: booster boxes from the newest released sets
@@ -59,6 +59,9 @@ export function sealedInSet(setId: number): Product[] {
   };
   return byValue(productsInSet(setId).filter((p) => p.kind === "sealed" && p.sealedType !== "Insert")).sort((a, b) => rank(a.sealedType) - rank(b.sealedType));
 }
+
+/** Sets with at least one sealed product (not counting inserts): the only sets with a page on a sealed-only site, newest first. */
+export const sealedSets = () => sets().filter((s) => s.productCount > 0 && sealedInSet(s.id).length > 0);
 
 /** The releases with a pre-order page (lib/preorders.ts), soonest first; an upcoming set with written copy counts before any store lists it. */
 export const preorderSetList = (today = todayIso()) =>

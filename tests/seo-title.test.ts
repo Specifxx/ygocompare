@@ -19,15 +19,15 @@ test("a card's number appears once", () => {
 test("every title fits in 60 characters when any candidate does", () => {
   const set = fitTitle(setTitleCandidates("A Very Long Expansion Name Indeed", 214)).absolute;
   assert.ok(set.length <= TITLE_MAX, set);
-  assert.match(set, /Card List/);
+  assert.match(set, /Booster Box/);
   const card = fitTitle(cardTitleCandidates("Some Card", "AB01-001", "First Set", false)).absolute;
   assert.ok(card.length <= TITLE_MAX, card);
   assert.match(card, /^Some Card AB01-001 Price/);
 });
 
-test("a set page leads with the card list and its count", () => {
-  assert.match(setTitleCandidates("First Set", 120)[0], /Card List: All 120 Cards \+ Prices$/);
-  assert.ok(!setTitleCandidates("First Set", 0).some((t) => t.includes("All 0")));
+test("a set page is titled for its booster boxes and sealed (sealed only, 2026-11-06)", () => {
+  assert.equal(setTitleCandidates("First Set", 12)[0], `${SITE.gameShort} First Set Booster Box & Sealed Prices`);
+  assert.ok(!setTitleCandidates("First Set", 12).some((t) => /Card List|Cards/.test(t)));
 });
 
 test("llms.txt lists the main sections and every guide", async () => {
@@ -38,9 +38,8 @@ test("llms.txt lists the main sections and every guide", async () => {
   assert.match(body, /## Guides/);
 });
 
-test("an unreleased set with revealed cards is titled for the spoiler search, inside the limit", () => {
-  const t = fitTitle(setTitleCandidates("First Set", 48, true)).absolute;
-  assert.match(t, /Spoilers: 48 Cards Revealed/);
-  assert.ok(t.length <= TITLE_MAX + 20);
-  assert.match(setTitleCandidates("First Set", 0, true)[0], /Card List/);
+test("an unreleased set keeps the sealed title: its pre-order page owns the pre-order search", () => {
+  const t = fitTitle(setTitleCandidates("First Set", 4, true)).absolute;
+  assert.match(t, /Booster Box & Sealed Prices/);
+  assert.ok(t.length <= TITLE_MAX);
 });

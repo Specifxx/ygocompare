@@ -37,10 +37,10 @@ export function CardTopBuy({ offers, productId, ebayQuery }: { offers: Offer[]; 
   const searchMarket = market === "UK" || market === "AU" || market === "CA" ? market : "US";
   const search = !alt && ebayQuery && best.source !== "ebay" && best.source !== "tcgplayer" ? goHref({ url: ebaySearchUrl(ebayQuery, searchMarket), source: "ebay", market: searchMarket }, productId, "card_top_ebay_search") : null;
   return (
-    <div {...{ [TOP_BUY_ATTR]: "" }} className="mt-3 rounded-lg border border-brand/30 bg-brand/[0.06] p-3 md:hidden">
+    <div {...{ [TOP_BUY_ATTR]: "" }} className="mt-3 card p-3 md:hidden">
       <div className="flex items-center justify-between gap-3">
         <div className="min-w-0">
-          <div className="text-[11px] font-semibold uppercase tracking-wide text-muted">Cheapest in {MARKET_LABEL[market]}</div>
+          <div className="eyebrow">Cheapest in {MARKET_LABEL[market]}</div>
           <div className="text-lg font-bold tabular-nums text-fg">{money(best.cents, best.currency)}</div>
           <div className="truncate text-xs text-muted">at {sourceName(best)}{postage(best)}</div>
         </div>
@@ -51,7 +51,7 @@ export function CardTopBuy({ offers, productId, ebayQuery }: { offers: Offer[]; 
       {/* A store that pays nothing is cheapest: name eBay or TCGplayer when
           within 50% (lib/price-rows.ts paidAlternative), else an eBay search. */}
       {alt && (
-        <div className="mt-2 flex items-center gap-2 border-t border-ink-700/60 pt-1 text-xs text-muted">
+        <div className="mt-2 flex items-center gap-2 border-t border-line pt-1 text-xs text-muted">
           <a
             href={goHref(alt.offer, productId, "card_top_alt")}
             rel="sponsored nofollow noopener"
@@ -61,15 +61,15 @@ export function CardTopBuy({ offers, productId, ebayQuery }: { offers: Offer[]; 
             or <span className="tabular-nums">{money(alt.offer.cents, alt.offer.currency)}</span> on {alt.offer.source === "ebay" ? "eBay" : "TCGplayer"}
             {alt.pctMore > 0 ? ` (+${alt.pctMore}%)` : ""} →
           </a>
-          <span className="shrink-0 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] text-muted">Paid link</span>
+          <span className="shrink-0 ad-pill">Paid link</span>
         </div>
       )}
       {search && (
-        <div className="mt-2 flex items-center gap-2 border-t border-ink-700/60 pt-1 text-xs text-muted" data-ebay-search="">
+        <div className="mt-2 flex items-center gap-2 border-t border-line pt-1 text-xs text-muted" data-ebay-search="">
           <a href={search} rel="sponsored nofollow noopener" target="_blank" className="block min-w-0 flex-1 truncate py-2 font-semibold text-brand-400 hover:underline">
             or check listings on eBay →
           </a>
-          <span className="shrink-0 rounded bg-ink-800 px-1.5 py-0.5 text-[10px] text-muted">Paid link</span>
+          <span className="shrink-0 ad-pill">Paid link</span>
         </div>
       )}
     </div>
@@ -105,7 +105,7 @@ export function CardStickyBuyBar({ offers, productId }: { offers: Offer[]; produ
   return (
     <div
       aria-hidden={!show}
-      className={`fixed inset-x-0 bottom-0 z-40 border-t border-ink-700 bg-ink-950/95 px-4 py-2 backdrop-blur transition-transform duration-200 md:hidden ${show ? "translate-y-0" : "pointer-events-none translate-y-[120%]"}`}
+      className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 px-4 py-2 backdrop-blur transition-transform duration-200 md:hidden ${show ? "translate-y-0" : "pointer-events-none translate-y-[120%]"}`}
     >
       <div className="mx-auto flex max-w-xl items-center gap-2">
         <div className="min-w-0 flex-1 truncate text-sm">

@@ -16,6 +16,8 @@ import type { Product } from "./site-types";
 import { facetStats } from "./hubs";
 
 function table(rows: Product[], withSet: boolean): string {
+  // A sealed-only catalogue has no cards: the table is left out rather than drawn empty.
+  if (!rows.length) return "";
   const tr = rows
     .map((p, i) => {
       const e = summaryOf(p.id);

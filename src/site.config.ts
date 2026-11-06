@@ -19,16 +19,16 @@ export const SITE: SiteConfig = {
   // ~96% of YGO Compare's affiliate earnings are sealed and pre-order rows (growth report, week to 2026-11-02): the
   // homepage opens with the big sealed hero (owner, 2026-11-03).
   homeSealedHero: true,
-  tagline: "Compare Yu-Gi-Oh! card prices across every store",
+  tagline: "Compare Yu-Gi-Oh! booster box and sealed prices across every store",
   description:
-    "Free Yu-Gi-Oh! price comparison: live prices for Yu-Gi-Oh! TCG cards, 1st Editions and booster boxes across TCGplayer, eBay and game stores in the US, UK, Canada and Australia.",
+    "Free Yu-Gi-Oh! sealed price comparison: live prices for booster boxes, tins, structure decks and collections across TCGplayer, eBay, Amazon and game stores in the US, UK, Canada and Australia.",
   keywords: [
-    "yugioh card prices",
-    "yu-gi-oh card prices",
-    "yugioh price guide",
     "yugioh booster box price",
-    "yugioh card value",
-    "quarter century secret rare prices",
+    "yugioh booster box prices",
+    "yugioh sealed prices",
+    "yugioh tin price",
+    "yugioh structure deck price",
+    "yugioh pre-order",
   ],
   adminEmails: ["bill.jyang101@gmail.com"],
   supportEmail: "compareempire@gmail.com",
@@ -91,6 +91,9 @@ export const SITE: SiteConfig = {
   // in every printing stay out (except in new sets). Keeps the data, the
   // build and every server function small.
   catalogMinCardCents: 100,
+  // Sealed only (owner, 2026-11-06: "I'm not seeing many people buy single Yu-Gi-Oh cards … have YGOcompare just for
+  // sealed"): no single cards in the catalogue; old card URLs 301 to their set (DECISIONS.md 2026-11-06).
+  sealedOnly: true,
   // The sitemap lists cards from $20 (about 2,200 of 15,000, the same floor
   // eBay uses) beside every sealed product, set and hub: sealed-first
   // (DECISIONS.md 2026-11-03). Cheaper cards keep their pages, reachable

@@ -74,8 +74,8 @@ test("an item number that lands on another grade, or a wild price, is dropped", 
 test("kit pages cache a day and prerender nothing", () => {
   for (const f of ["src/app/kit/[slug]/page.tsx", "src/app/kits/grade/[grade]/page.tsx", "src/app/kits/page.tsx"]) {
     const src = fs.readFileSync(f, "utf8");
-    assert.match(src, /export const revalidate = 86400;/, f);
-    if (f.includes("[")) assert.match(src, /export const generateStaticParams = \(\) => \[\];/, f);
+    if (f.includes("[")) assert.match(src, /export const dynamic = "force-dynamic";/, f);
+    else assert.match(src, /export const revalidate = 86400;/, f);
   }
 });
 

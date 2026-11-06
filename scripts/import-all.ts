@@ -61,6 +61,21 @@ async function fxRates(prev: Record<string, number>): Promise<Record<string, num
   }
 }
 
+/** A product keeps yesterday's slug (its URL never changes), unless another product now holds that slug. */
+function keepSlugs(products: Catalog["products"], prev: Catalog | null) {
+  if (!prev) return;
+  const was = new Map(prev.products.map((p) => [p.id, p.slug]));
+  const taken = new Set(products.map((p) => p.slug));
+  for (const p of products) {
+    const old = was.get(p.id);
+    if (!old || old === p.slug || taken.has(old)) continue;
+    console.log(`[slug] ${p.id} keeps ${old} (today's listing reads ${p.slug})`);
+    taken.delete(p.slug);
+    p.slug = old;
+    taken.add(old);
+  }
+}
+
 async function main() {
   const now = new Date();
   const today = dayNumber(now);
@@ -71,6 +86,7 @@ async function main() {
   console.log(`[tcgcsv] category ${SITE.tcgcsvCategoryId}`);
   const { sets, products, tcg } = await loadTcgcsv(now);
   console.log(`[tcgcsv] ${sets.length} sets, ${products.length} products`);
+  keepSlugs(products, readJson<Catalog | null>(path.join(PUBLIC, "catalog.json"), null));
   // Before release TCGplayer carries placeholder listings ($9,999 boxes) with
   // no market price. For upcoming sets, only a real market price counts.
   const upcomingIds = new Set(sets.filter((s) => s.upcoming).map((s) => s.id));
@@ -276,11 +292,11 @@ async function main() {
   }
   for (const [setId, h] of histories) writeSetHistory(setId, h);
 
-  // 5. eBay Picks (the homepage banner): the most valuable cards with a fresh
+  // 5. eBay Picks (the homepage banner): the most valuable cards (sealed products on a sealed-only site) with a fresh
   // US listing, newest sets first. No extra calls: reuses step 3's results.
   const setRank = new Map(sets.map((s, i) => [s.id, i]));
   const picks: EbayPick[] = products
-    .filter((p) => p.kind === "card")
+    .filter((p) => (SITE.sealedOnly ? p.kind === "sealed" && p.sealedType !== "Insert" : p.kind === "card"))
     .map((p) => ({ p, e: prices.byId[p.id].offers.find((o) => o.source === "ebay" && o.market === "US") }))
     .filter((x) => x.e)
     .sort(

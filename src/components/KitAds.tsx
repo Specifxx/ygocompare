@@ -22,7 +22,7 @@ function useSearch() {
 }
 
 function AdLabel() {
-  return <span className="rounded bg-ink-950/70 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted">Ad</span>;
+  return <span className="ad-pill">Ad</span>;
 }
 
 /** The slim row for the top of a kit page, under its price and Buy button. */
@@ -31,7 +31,7 @@ export function CompactKitAds({ tiles, page }: { tiles: KitAdTile[]; page: strin
   if (tiles.length < MIN_TILES) return null;
   const tag = `${page}-mini-ebay-kit`;
   return (
-    <aside data-ad aria-label="Sponsored: these kits on eBay" className="flex flex-col gap-1.5 rounded-lg border border-ink-700 bg-ink-900/60 p-2">
+    <aside data-ad aria-label="Sponsored: these kits on eBay" className="ad-box flex flex-col gap-1.5 p-2">
       <div className="flex items-stretch gap-2">
         <a href={href("", undefined, `${tag}-all`)} rel="sponsored nofollow noopener" target="_blank" className="flex w-12 shrink-0 flex-col items-center justify-center gap-1 text-center">
           <EbayWord className="text-base" />
@@ -46,7 +46,7 @@ export function CompactKitAds({ tiles, page }: { tiles: KitAdTile[]; page: strin
               target="_blank"
               title={`${t.name} on eBay`}
               aria-label={`${t.name} on eBay`}
-              className="flex w-[64px] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-ink-700 bg-white transition-colors hover:border-[#0064d2]"
+              className="flex w-[64px] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-line bg-white transition-colors hover:border-[#0064d2]"
             >
               <img src={t.image} alt={t.name} loading="lazy" decoding="async" className="aspect-square w-full object-contain p-0.5" />
               <span className="truncate px-0.5 py-0.5 text-center text-[10px] font-black text-white" style={{ background: ACCENT }}>eBay</span>
@@ -69,7 +69,7 @@ export function KitEbayStrip({ tiles, page, title }: { tiles: KitAdTile[]; page:
   const tag = `${page}-ebay-kit-strip`;
   const all = href("", undefined, `${tag}-all`);
   return (
-    <section data-ad className="overflow-hidden rounded-xl border bg-ink-900/60" style={{ borderColor: `${ACCENT}55`, backgroundImage: `linear-gradient(135deg, ${ACCENT}14, transparent 55%)` }}>
+    <section data-ad className="ad-box overflow-hidden" style={{ borderColor: `${ACCENT}55`, backgroundImage: `linear-gradient(135deg, ${ACCENT}14, transparent 55%)` }}>
       <div className="flex items-center gap-3 px-4 pt-3">
         <EbayWord className="text-2xl" />
         <div className="min-w-0 flex-1">
@@ -83,7 +83,7 @@ export function KitEbayStrip({ tiles, page, title }: { tiles: KitAdTile[]; page:
       </div>
       <div className="flex snap-x gap-3 overflow-x-auto px-4 pb-2 pt-3">
         {tiles.map((t) => (
-          <a key={t.jan} href={href(t.name, t.jan, tag)} rel="sponsored nofollow noopener" target="_blank" className="group flex w-[136px] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-ink-700 bg-ink-900 transition hover:-translate-y-0.5 hover:border-[#0064d2]">
+          <a key={t.jan} href={href(t.name, t.jan, tag)} rel="sponsored nofollow noopener" target="_blank" className="group flex w-[136px] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-line bg-surface transition hover:-translate-y-0.5 hover:border-[#0064d2]">
             <div className="relative aspect-square bg-white">
               <img src={t.image} alt={t.name} loading="lazy" decoding="async" className="h-full w-full object-contain p-1.5 transition group-hover:scale-[1.03]" />
               <span className="absolute bottom-1.5 right-1.5 rounded-md px-1.5 py-0.5 text-xs font-black text-white shadow" style={{ background: ACCENT }}>eBay</span>

@@ -1,25 +1,25 @@
 # Working in this repo
 
-Read `README.md` first. This is YGO Compare (Yu-Gi-Oh! TCG); Lorcana Compare,
-Cyberpunk Compare and BandaiCompare run the same engine (Gundam Compare left it
-for the Dex / MTG Compare engine on 2026-11-04). Engine code (`src/lib`, `src/app`,
-`src/components`, `scripts`) must stay game-agnostic: anything game-specific
-goes in `src/site.config.ts` or `src/content/`. When you change the engine,
-make the same change in the other three repos.
+Read `README.md` first. This is YGO Compare (Yu-Gi-Oh! TCG), **sealed only** since
+2026-11-06 (owner): booster boxes, packs, tins, decks and collections, no single cards.
+It runs the **Dex / MTG Compare engine's look** on its own data layer, as Gundam Compare
+(2026-11-04) and WargameCompare do. It is NO LONGER a sister of the Lorcana /
+Cyberpunk / Bandai card engine: there is no `engine.json`, no engine-drift check and
+nothing to sync. Change this repo on its own; port engine presentation changes by hand.
+Game-specific facts still live in `src/site.config.ts` and `src/content/`.
 
-## One engine, four repos
+## Sealed only (owner, 2026-11-06; DECISIONS.md)
 
-Lorcana Compare, YGO Compare, Cyberpunk Compare and BandaiCompare run ONE
-engine (Gundam Compare ran it until 2026-11-04, when the owner moved it onto
-the Dex / MTG Compare engine; `Specifxx/GundamCompare` is no longer a sister).
-`engine.json` lists its files (the code, tests and build config; never
-`src/site.config.ts`, `src/content/`, icons, share images, workflows or
-`data/`), and they must be byte-identical in all four repos. After an engine
-change here, copy it with `scripts/engine-sync.sh ../<sister> ../<sister> ../<sister>`,
-run the checks in each and open the PRs together; `npx tsx scripts/engine-drift.ts ../<sister>…`
-shows what still differs. The weekly *Engine drift* workflow fails (and
-emails the owner) if `main` differs from a sister's `main`. Anything one game
-needs is an option in `site.config.ts`, off by default.
+- `SITE.sealedOnly`: the import drops cards after every slug is settled (a sealed slug never
+  changes; `keepSlugs` in `scripts/import-all.ts` keeps yesterday's slug by product id), and
+  `sealedOnlyCatalog` in `lib/data.ts` drops any card a data file still holds.
+- Every single-card URL the site had is in `data/redirects/cards.json` (frozen; never edit,
+  never grow). `/card/<slug>` is still the sealed product page; a card slug found there gets a
+  permanent redirect to its set, or `/sealed` (`lib/card-redirects.ts`). `/cards/*`, the card
+  tools, `/list` and the card-table guides 301 from `next.config.js` (`RETIRED`). Never let an
+  old URL 404, and never put a card, a card hub or a retired page back in the sitemap
+  (`tests/sealed-only.test.ts`). The ops monitor checks one old card URL redirects.
+- A set page exists only for a set with sealed product (`sealedSets()`); others 301 to `/sealed`.
 
 ## Deploys are gated — do not add `[deploy]` to commit subjects
 
@@ -49,13 +49,12 @@ and reads this site's static `/alert-feed.json` (`src/lib/alert-feed.ts`) once
 a day. This site still stores no address and holds no mail key; never add one.
 Keep the feed's price the lowest in-stock store price, never eBay or converted.
 
-## Size: Yu-Gi-Oh! has tens of thousands of printings
+## Size
 
-`SITE.catalogMinCardCents` (US$1) keeps cards worth under a dollar in every
-printing out of the catalogue, except in sets released in the last 120 days.
-Every server function bundles `data/`, so lowering the floor grows every
-function and every cold start. Don't lower it, and don't pass catalogue-sized
-lists to a client component, without measuring `data/` first.
+Every server function bundles `data/`. Before sealed-only, ~15,000 cards made it ~49 MB
+(7.8 MB catalogue, 7.6 MB summary, 29 MB price shards), and every one of ~16,500 product
+URLs was an ISR render and write after each release. Don't add cards back, and don't pass catalogue-sized lists to a
+client component, without measuring `data/` first.
 
 ## Cost rules (from Rift Compare, where breaking them exhausted Neon projects)
 
@@ -73,8 +72,10 @@ lists to a client component, without measuring `data/` first.
 One eBay app (5,000 Browse calls/day) is shared with Gundam Compare and
 Lorcana Compare: Lorcana and Gundam 1,150 each, YGO
 2,200 (2026-10-28; 1,500 each from the owner's 2026-10-26 split), counted in
-`data/state/ebay-usage.json`. Cards under $20 get no call; every sealed product
-does. The plan is `planEbayRefresh` in `src/lib/import/ebay.ts`, pinned by
+`data/state/ebay-usage.json`. Every sealed product
+gets calls; there are no cards. Sealed only (2026-11-06): the plan is `planSealedCoverage` in
+`src/lib/import/ebay.ts` (every sealed product except inserts, in the US, UK, Canada and
+Australia; US boxes and new sets every 24 h, the rest 48 h, other markets 48/72 h), pinned by
 `tests/ebay-plan.test.ts`. Do not raise `SITE.ebay.dailyBudget` without moving
 another site's down by the same amount; the three must total 4,500 or less.
 
@@ -88,11 +89,9 @@ serve every store; a store without API access is skipped. `tests/amazon-api.test
 
 ## Matching
 
-`src/lib/import/match.ts`: a wrong match is worse than none. Every card match
-needs the number AND the name (or an exact name inside a named set); ties are
-no match; a title that names a rarity must name the product's own (one
-Yu-Gi-Oh! number exists in several rarities); the edition (1st / Unlimited) is
-taken from the title, never guessed; foreign-language products are never matched; a store price under a
+`src/lib/import/match.ts`: a wrong match is worse than none. Sealed titles match by set,
+product type and edition (`matchSealed`); the edition (1st / Unlimited) is taken from the
+title, never guessed; foreign-language products are never matched; a store price under a
 quarter or over four times TCGplayer's is dropped. Add a test in
 `tests/match.test.ts` for every new title format.
 

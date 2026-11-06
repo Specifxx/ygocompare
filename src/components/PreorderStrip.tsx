@@ -10,8 +10,8 @@ export function PreorderStrip() {
   const next = preorderSetList().find((s) => isPreorder(s) && sealedInSet(s.id).length > 0);
   if (!next) return null;
   return (
-    <div className="border-b border-ink-700/60 bg-ink-900/70">
-      <p className="mx-auto max-w-7xl truncate px-4 py-1.5 text-center text-xs text-muted sm:text-sm">
+    <div className="border-b border-line bg-surface">
+      <p className="truncate py-1.5 page text-center text-xs text-muted sm:text-sm">
         <Link href={preorderPath(next)} className="hover:text-fg">
           <b className="text-fg">{next.name}</b> pre-orders are open · out {longDate(next.releasedOn)} · <span className="link">compare every store →</span>
         </Link>

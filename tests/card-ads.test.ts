@@ -48,10 +48,20 @@ test("eBay item links lose their old tracking; /go tags them again", () => {
   assert.equal(cleanEbayUrl("https://www.ebay.com/sch/i.html?_nkw=x"), "https://www.ebay.com/sch/i.html?_nkw=x");
 });
 
-test("the small eBay + TCGplayer pair is the only card ad: card pages and the quick view, never the homepage, set pages or the layout (owner, 2026-11-03)", () => {
+test("the card ads are the engine's (owner, 2026-11-04): the small pair on card pages and in the quick view, the eBay + TCGplayer banner under the home hero, the side rails from the layout, and nothing on set pages", () => {
   const read = (f: string) => readFileSync(f, "utf8");
   assert.match(read("src/app/card/[slug]/page.tsx"), /<CompactCardAds /);
   assert.match(read("src/components/QuickView.tsx"), /<CompactCardAds /);
-  for (const f of ["src/app/page.tsx", "src/app/sets/[slug]/page.tsx", "src/app/layout.tsx"]) assert.doesNotMatch(read(f), /CardAd|CardStrip|card-ads/, f);
+  assert.match(read("src/app/page.tsx"), /<LandingAds ads=\{cardAds\(/);
+  assert.match(read("src/app/layout.tsx"), /<SideAds ads=\{cardAds\(/);
+  assert.doesNotMatch(read("src/app/sets/[slug]/page.tsx"), /CardAd|CardStrip|card-ads|LandingAds|SideAds/);
   assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
+  // The rails and the banner are labelled ads behind /go, and the rails are browser-only (nothing in the server HTML).
+  for (const f of ["src/components/SideAds.tsx", "src/components/LandingAds.tsx"]) {
+    assert.match(read(f), /"use client"/, f);
+    assert.match(read(f), /ad-pill/, f);
+    assert.match(read(f), /rel="sponsored nofollow noopener"/, f);
+    assert.doesNotMatch(read(f), /amazon/i, f);
+  }
+  assert.match(read("src/components/SideAds.tsx"), /min-\[1864px\]:flex/);
 });

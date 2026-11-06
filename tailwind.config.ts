@@ -1,30 +1,50 @@
 import type { Config } from "tailwindcss";
 
-// Colours are CSS variables set from SITE.theme in app/layout.tsx, so the two
-// sites share every class name and differ only in src/site.config.ts.
-const v = (name: string) => `rgb(var(--c-${name}) / <alpha-value>)`;
+// Colours are CSS variables (src/app/globals.css) so light and dark themes
+// share one set of class names: bg-surface, text-ink, border-line, …
+// The engine's tokens first; then the old names (ink-*, fg, brand-400, buy…)
+// as aliases of them, so a page not yet rewritten for the engine still draws
+// in the right colours.
+const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
 
-export default {
+const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        ink: { 950: v("ink-950"), 900: v("ink-900"), 850: v("ink-850"), 800: v("ink-800"), 700: v("ink-700"), 600: v("ink-600") },
-        brand: { DEFAULT: v("brand"), 400: v("brand-light"), 500: v("brand"), 600: v("brand-dark") },
-        accent: v("accent"),
-        fg: v("fg"),
+        bg: v("bg"),
+        surface: v("surface"),
+        raised: v("raised"),
+        line: v("line"),
+        ink: { DEFAULT: v("ink"), 950: v("bg"), 900: v("surface"), 850: v("raised"), 800: v("line"), 700: v("line"), 600: v("faint") },
         muted: v("muted"),
-        up: "#3fb950",
-        down: "#f0506e",
-        buy: { DEFAULT: "#1ea65c", 400: "#34d17e" },
+        faint: v("faint"),
+        fg: v("ink"),
+        brand: { DEFAULT: v("brand"), ink: v("brand-ink"), soft: v("brand-soft"), strong: v("brand-strong"), 400: v("brand-strong"), 500: v("brand"), 600: v("brand") },
+        accent: v("accent"),
+        spark: v("spark"),
+        open: { DEFAULT: v("open"), soft: v("open-soft") },
+        sold: { DEFAULT: v("sold"), soft: v("sold-soft") },
+        stale: { DEFAULT: v("stale"), soft: v("stale-soft") },
+        pre: { DEFAULT: v("pre"), soft: v("pre-soft") },
+        ad: { DEFAULT: v("ad"), line: v("ad-line") },
+        up: v("up"),
+        down: v("down"),
+        buy: { DEFAULT: v("open"), 400: v("open") },
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Arial", "sans-serif"],
-        display: ["var(--font-display)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
-      // Rounder than before (owner, 2026-11-03: "way too square … more smooth, like OP Compare").
-      borderRadius: { md: "8px", lg: "12px", xl: "16px", "2xl": "20px" },
+      borderRadius: { xl: "14px", "2xl": "20px" },
+      boxShadow: {
+        card: "0 1px 2px rgb(var(--shadow) / 0.06), 0 1px 0 rgb(var(--shadow) / 0.02)",
+        lift: "0 10px 30px -12px rgb(var(--shadow) / 0.25), 0 2px 6px rgb(var(--shadow) / 0.06)",
+      },
+      maxWidth: { page: "1200px", shell: "1480px" },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;

@@ -31,8 +31,8 @@ test("a shared list round-trips ids and quantities and refuses junk", () => {
   assert.equal(decodeList(Array.from({ length: 500 }, (_, i) => i + 1).join(".")).length, 100);
 });
 
-test("the shared list page stays out of the index and share links stay fetchable", () => {
-  assert.match(fs.readFileSync("src/app/list/page.tsx", "utf8"), /robots: \{ index: false/);
+test("share links stay fetchable (the shared card list is retired with the singles, 2026-11-06)", () => {
+  assert.ok(!fs.existsSync("src/app/list/page.tsx"));
   const all = [robots().rules].flat().find((r) => r.userAgent === "*")!;
   assert.ok([all.allow].flat().includes("/*utm_source=share"));
 });

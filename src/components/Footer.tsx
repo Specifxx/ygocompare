@@ -4,69 +4,131 @@ import { SITE } from "@/site.config";
 import { creatorsOn } from "@/lib/creators";
 import { NETWORK_PAGE, footerSisters } from "@/lib/family-network";
 import { historyOn } from "@/lib/data";
+import { LogoMark } from "./Logo";
 
+type FooterLink = { href: string; label: string };
+
+/** The footer's link columns (the same links as before the engine port, so every crawled link set is unchanged). */
+export function footerColumns(history: boolean): { title: string; links: FooterLink[] }[] {
+  return [
+    {
+      title: "Prices",
+      links: [
+        { href: "/sealed", label: "Sealed prices" },
+        { href: "/sealed/booster-box", label: "Booster box prices" },
+        { href: "/sets", label: "Sets" },
+        ...(SITE.kits ? [{ href: "/kits", label: `${SITE.kits.label} prices` }] : []),
+        ...(history ? [{ href: "/movers", label: "Price movers" }, { href: "/price-report", label: "Monthly price report" }] : []),
+        { href: "/black-friday", label: "Black Friday deals" },
+        { href: "/boxing-day", label: "Boxing Day deals" },
+        { href: "/january-sales", label: "January sales" },
+        { href: "/lunar-new-year", label: "Lunar New Year deals" },
+        { href: "/embed", label: "Free price widgets" },
+        { href: "/tools/deal-finder", label: "Deal Finder" },
+        { href: "/preorders", label: "Pre-orders" },
+      ],
+    },
+    {
+      title: SITE.name,
+      links: [
+        { href: "/about", label: "About" },
+        { href: "/methodology", label: "How prices work" },
+        { href: "/stores", label: "Stores we track" },
+        { href: "/blog", label: "Guides" },
+        { href: "/forum", label: "Community forum · beta" },
+        ...(creatorsOn() ? [{ href: "/creators", label: "Creators" }] : []),
+        { href: "/contact", label: "Contact" },
+        { href: "/list-your-store", label: "List your store" },
+        { href: "/how-we-pick-stores", label: "How we pick stores" },
+        { href: "/privacy", label: "Privacy" },
+        { href: "/terms", label: "Terms" },
+      ],
+    },
+  ];
+}
+
+/**
+ * The engine's footer (from MTG Compare): a brand column (mark, one line on what the site is, the money and contact lines), then
+ * the link columns, the other card sites (brand names only, owner 2026-11-03) and the one Compare Empire network link, then the
+ * disclaimers. Same links as the old footer.
+ */
 export function Footer() {
-  const history = historyOn();
+  const cols = footerColumns(historyOn());
+  const year = new Date().getUTCFullYear();
   return (
-    <footer className="mt-16 border-t border-ink-700/60 bg-ink-950">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 text-sm md:grid-cols-4">
-        <div>
-          <p className="flex items-center gap-2 font-display font-black"><img src="/icon.svg" alt={`${SITE.name} logo`} width={24} height={24} className="h-6 w-6 rounded-md" /><span className="wordmark">{SITE.wordmark[0]}</span> {SITE.wordmark[1]}</p>
-          <p className="mt-2 text-muted">{SITE.tagline}. Free, no account needed.</p>
-        </div>
-        <div>
-          <p className="mb-2 font-semibold">Prices</p>
-          <ul className="space-y-1 text-muted">
-            <li><Link href="/cards">All cards</Link></li>
-            <li><Link href="/sets">Set price guides</Link></li>
-            <li><Link href="/sealed">Booster box prices</Link></li>
-            {SITE.kits && <li><Link href="/kits">{SITE.kits.label} prices</Link></li>}
-            {history && <li><Link href="/movers">Price movers</Link></li>}
-            {history && <li><Link href="/price-report">Monthly price report</Link></li>}
-            <li><Link href="/black-friday">Black Friday deals</Link></li>
-            <li><Link href="/boxing-day">Boxing Day deals</Link></li>
-            <li><Link href="/january-sales">January sales</Link></li>
-            <li><Link href="/lunar-new-year">Lunar New Year deals</Link></li>
-            <li><Link href="/embed">Free price widgets</Link></li>
-            <li><Link href="/tools/deal-finder">Deal Finder</Link></li>
-            {history && <li><Link href="/tools/rising">Rising cards</Link></li>}
-            <li><Link href="/tools/demand">Demand Finder</Link></li>
-            <li><Link href="/tools/best-basket">Best Basket</Link></li>
-            <li><Link href="/preorders">Pre-orders</Link></li>
-          </ul>
-        </div>
-        <div>
-          <p className="mb-2 font-semibold">{SITE.name}</p>
-          <ul className="space-y-1 text-muted">
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/methodology">How prices work</Link></li>
-            <li><Link href="/stores">Stores we track</Link></li>
-            <li><Link href="/blog">Guides</Link></li>
-            <li><Link href="/forum">Community forum</Link> <span className="text-xs">· beta</span></li>
-            {creatorsOn() && <li><Link href="/creators">Creators</Link></li>}
-            <li><Link href="/contact">Contact</Link></li>
-            <li><RateUsLink className="hover:underline">Rate us</RateUsLink></li>
-            <li><Link href="/list-your-store">List your store</Link></li>
-            <li><Link href="/how-we-pick-stores">How we pick stores</Link></li>
-            <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
-            <li><Link href="/privacy">Privacy</Link> · <Link href="/terms">Terms</Link></li>
-          </ul>
-        </div>
-        <div>
-          {/* The other card sites, by brand name only (owner, 2026-11-03: no hobby or tech sites in a card
-              site's footer), then one link to the network page that lists every site (DECISIONS.md). */}
-          <p className="mb-2 font-semibold">Other card games</p>
-          <p className="text-muted">
-            {footerSisters(SITE.family.id).map((s, i) => (
-              <span key={s.id}>{i ? " · " : ""}<a href={s.url} rel="noopener" title={s.label}>{s.name}</a></span>
-            ))}
+    <footer className="mt-20 border-t border-line bg-surface">
+      <div className="page grid gap-x-6 gap-y-10 py-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,3fr)]">
+        <div className="max-w-sm">
+          <Link href="/" className="inline-flex min-h-10 items-center gap-2 font-display text-lg font-extrabold tracking-tight">
+            <LogoMark className="h-7 w-7" />
+            <span>
+              <span className="wordmark">{SITE.wordmark[0]}</span> {SITE.wordmark[1]}
+            </span>
+          </Link>
+          <p className="mt-3 text-sm leading-6 text-muted">{SITE.tagline}. Free, no account needed.</p>
+          <p className="mt-4 text-xs leading-5 text-muted">
+            eBay, TCGplayer and Amazon links are affiliate links and are marked where they appear.
+            <br />
+            No store pays to be listed or to rank.{" "}
+            <Link href="/methodology" className="whitespace-nowrap font-semibold text-ink underline decoration-line underline-offset-2 hover:decoration-ink">
+              How prices work&nbsp;→
+            </Link>
           </p>
-          <p className="mt-2 text-muted"><a href={NETWORK_PAGE} rel="noopener">A Compare Empire site →</a></p>
+          <p className="mt-3 text-xs text-muted">
+            <Link href="/contact" className="font-semibold text-ink underline decoration-line underline-offset-2 hover:decoration-ink">
+              Contact us
+            </Link>
+            :{" "}
+            <a href={`mailto:${SITE.supportEmail}`} className="underline decoration-line underline-offset-2 hover:decoration-ink">
+              {SITE.supportEmail}
+            </a>
+          </p>
+          <p className="mt-3 text-xs text-muted">
+            <RateUsLink className="font-semibold text-ink underline decoration-line underline-offset-2 hover:decoration-ink">Rate us</RateUsLink>
+            {" · "}
+            <a href={NETWORK_PAGE} rel="noopener" className="underline decoration-line underline-offset-2 hover:decoration-ink">
+              A Compare Empire site →
+            </a>
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
+          {cols.map((c) => (
+            <nav key={c.title} aria-label={`Footer: ${c.title}`}>
+              <p className="eyebrow mb-2">{c.title}</p>
+              <ul className="text-sm">
+                {c.links.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href} className="flex min-h-10 items-center text-muted transition-colors hover:text-ink sm:min-h-8">
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+          <nav aria-label="Footer: Other card games">
+            {/* The other card sites, by brand name only (owner, 2026-11-03: no hobby or tech sites in a card site's footer). */}
+            <p className="eyebrow mb-2">Other card games</p>
+            <ul className="text-sm">
+              {footerSisters(SITE.family.id).map((s) => (
+                <li key={s.id}>
+                  <a href={s.url} rel="noopener" title={s.label} className="flex min-h-10 items-center text-muted transition-colors hover:text-ink sm:min-h-8">
+                    {s.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
-      <p className="mx-auto max-w-7xl px-4 pb-8 text-xs text-muted">
-        {SITE.name} is an independent price comparison site, not affiliated with or endorsed by the publisher of {SITE.game}{SITE.kits ? ` or by ${SITE.kits.maker}` : ""}. As an eBay Partner and TCGplayer affiliate we may earn a commission from qualifying purchases made through links on this site, at no cost to you.{SITE.disclaimer ? ` ${SITE.disclaimer}` : ""} As an Amazon Associate we earn from qualifying purchases. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. Prices change often; the store&apos;s checkout price is final.
-      </p>
+      <div className="border-t border-line">
+        <div className="page space-y-2 py-6 text-xs leading-5 text-faint">
+          <p>
+            {SITE.name} is an independent price comparison site, not affiliated with or endorsed by the publisher of {SITE.game}{SITE.kits ? ` or by ${SITE.kits.maker}` : ""}. As an eBay Partner and TCGplayer affiliate we may earn a commission from qualifying purchases made through links on this site, at no cost to you.{SITE.disclaimer ? ` ${SITE.disclaimer}` : ""} As an Amazon Associate we earn from qualifying purchases. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. Prices change often; the store&apos;s checkout price is final.
+          </p>
+          <p>© {year} {SITE.name}</p>
+        </div>
+      </div>
     </footer>
   );
 }

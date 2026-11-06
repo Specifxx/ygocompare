@@ -22,9 +22,9 @@ test("deals come from stores, never eBay rows, and history pages hide until ther
   const tools = readFileSync("src/lib/tools.ts", "utf8");
   assert.match(tools, /o\.source === "ebay"/, "dealRows() must skip eBay offers");
   const nav = readFileSync("src/lib/nav.ts", "utf8");
-  for (const h of ["/movers", "/tools/rising", "/price-report"]) assert.ok(nav.includes(`"${h}"`), `${h} is gated on history in nav.ts`);
+  for (const h of ["/movers", "/price-report"]) assert.ok(nav.includes(`"${h}"`), `${h} is gated on history in nav.ts`);
   const { navGroups, phoneNav } = await import("@/lib/nav");
   const links = (o: { history?: boolean }) => [...navGroups(o).flatMap((g) => g.links), ...phoneNav(o)].map((l) => l.href);
-  assert.ok(!links({ history: false }).some((h) => h === "/movers" || h === "/tools/rising" || h === "/price-report"));
+  assert.ok(!links({ history: false }).some((h) => h === "/movers" || h === "/price-report"));
   assert.ok(links({ history: true }).includes("/movers"));
 });

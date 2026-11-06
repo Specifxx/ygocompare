@@ -21,7 +21,7 @@ export function EbayCallout({ offers, productId, query }: { offers: Offer[]; pro
   const pick = ebay.filter((o) => o.market === market).sort((a, b) => a.cents - b.cents)[0] ?? ebay.filter((o) => o.market === "US").sort((a, b) => a.cents - b.cents)[0];
   const searchMarket = market === "UK" || market === "AU" || market === "CA" ? market : "US";
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-xl border border-[#0064d2]/40 bg-[#0064d2]/10 px-4 py-3">
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-2 ad-box px-4 py-3">
       <EbayWord className="text-2xl" />
       {pick ? (
         <p className="flex-1 text-sm">
@@ -32,11 +32,11 @@ export function EbayCallout({ offers, productId, query }: { offers: Offer[]; pro
         <p className="flex-1 text-sm text-muted">No matching Buy It Now listing on our last check.</p>
       )}
       {pick && (
-        <a href={goHref(pick, productId, "card-ebay")} rel="sponsored nofollow noopener" target="_blank" className="btn bg-[#0064d2] px-4 py-2 text-white hover:bg-[#0053ad]">
+        <a href={goHref(pick, productId, "card-ebay")} rel="sponsored nofollow noopener" target="_blank" className="btn-ad">
           Buy on eBay
         </a>
       )}
-      <a href={goHref({ url: ebaySearchUrl(query, searchMarket), source: "ebay", market: searchMarket }, productId, "card-ebay-search")} rel="sponsored nofollow noopener" target="_blank" className="text-sm text-[#4f9bff] hover:underline">
+      <a href={goHref({ url: ebaySearchUrl(query, searchMarket), source: "ebay", market: searchMarket }, productId, "card-ebay-search")} rel="sponsored nofollow noopener" target="_blank" className="text-sm font-semibold text-brand hover:underline">
         All eBay listings →
       </a>
     </div>

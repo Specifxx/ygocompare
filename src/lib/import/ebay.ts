@@ -84,6 +84,8 @@ export interface PlanInput {
   state: EbayState;
   budget: number;
   now: Date;
+  /** The sealed coverage plan (planSealedCoverage); defaults to SITE.sealedOnly. */
+  sealedOnly?: boolean;
 }
 
 export interface PlannedCall {
@@ -102,6 +104,7 @@ export function intervalHours(usd: number, clicks: number, boosted: boolean): nu
 }
 
 export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligible: number } {
+  if (input.sealedOnly ?? SITE.sealedOnly) return planSealedCoverage(input);
   const minCents = SITE.ebay.minPriceUsd * 100;
   const ranked: { product: Product; score: number; interval: number }[] = [];
   for (const p of input.products) {
@@ -156,6 +159,52 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
     calls.splice(usCount, 0, ...usLeft.slice(0, spare));
   }
   return { calls, eligible: ranked.length };
+}
+
+// ── Sealed coverage (owner, 2026-11-06) ─────────────────────────────────────
+// A sealed-only site spends its whole budget on sealed product, in EVERY eBay market it has (US, UK, Canada and
+// Australia), not the US first with a small share left for two others: "we can just cover more of that product".
+// About 1,200 sealed products × 4 markets = 4,800 pairs against 2,200 calls a day, so each pair has an interval: in
+// the US booster boxes, cases and new sets every 24 h and the rest every 48 h; elsewhere 48 h and 72 h. That comes to
+// roughly 2,000 calls a day, so every pair is fresh and the spare calls re-check the most overdue pairs early (never
+// one checked in the last 12 hours). Due pairs go first, then by value × demand × how overdue × the market's weight.
+
+/** A sealed product's re-check interval in one market, in hours. */
+export function sealedIntervalHours(market: Market, boosted: boolean): number {
+  if (market === "US") return boosted ? 24 : 48;
+  return boosted ? 48 : 72;
+}
+
+/** How much a market's visitors weigh against the US's, for the order in which due pairs are spent. */
+export const SEALED_MARKET_WEIGHT: Partial<Record<Market, number>> = { US: 1, UK: 0.6, CA: 0.5, AU: 0.5 };
+
+export function planSealedCoverage(input: PlanInput): { calls: PlannedCall[]; eligible: number } {
+  const markets = (Object.keys(SEALED_MARKET_WEIGHT) as Market[]).filter((m) => MARKETPLACE[m]);
+  const pairs: (PlannedCall & { priority: number })[] = [];
+  let eligible = 0;
+  for (const p of input.products) {
+    if (p.kind !== "sealed" || p.sealedType === "Insert") continue;
+    eligible++;
+    const ref = input.refUsdCents.get(p.id) ?? 5000; // a pre-order with no market price ranks as a $50 product
+    const clicks = input.clicks30d.get(p.id) ?? 0;
+    const box = /Booster Box|Case|Trove/.test(p.sealedType ?? "");
+    const fresh = input.newSetIds.has(p.setId);
+    const score = Math.max(0.5, Math.log10(ref / 100)) * (1 + Math.log2(1 + clicks)) * (box ? 1.4 : 1) * (fresh ? 1.5 : 1);
+    for (const market of markets) {
+      const interval = sealedIntervalHours(market, box || fresh);
+      const last = input.state[p.id]?.[market]?.at;
+      const ageH = last ? (input.now.getTime() - new Date(last).getTime()) / 3_600_000 : Infinity;
+      if (ageH < 12) continue; // checked in the last 12 hours: never worth a call
+      const overdue = Number.isFinite(ageH) ? Math.min(3, ageH / interval) : 3;
+      const priority = score * overdue * (SEALED_MARKET_WEIGHT[market] ?? 0.5);
+      pairs.push({ product: p, market, score: priority, due: ageH >= interval, priority });
+    }
+  }
+  pairs.sort((a, b) => Number(b.due) - Number(a.due) || b.priority - a.priority);
+  const calls = pairs.slice(0, Math.max(0, input.budget)).map(({ priority: _p, ...c }) => c);
+  // Keep the run's order US-first among the chosen calls, so a quota stop mid-run costs the smaller markets first.
+  calls.sort((a, b) => Number(b.market === "US") - Number(a.market === "US"));
+  return { calls, eligible };
 }
 
 // ── API ─────────────────────────────────────────────────────────────────────

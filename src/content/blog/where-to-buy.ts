@@ -25,7 +25,6 @@ export const post: Post = {
 <h2>Tips</h2>
 <ol>
 <li>Count postage. One order from one store often beats the cheapest price on every card.</li>
-<li>Paste your deck list into <a href="/tools/best-basket">Best Basket</a> to price it across stores.</li>
 <li>Check the edition and rarity in the listing: the same card name can cover very different printings.</li>
 </ol>
 `,

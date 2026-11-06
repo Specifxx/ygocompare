@@ -13,8 +13,7 @@ export const post: Post = {
 
 <h2>Which cards get faked</h2>
 <p>The expensive ones, and the current top of the market is here, rebuilt every morning from TCGplayer's market price. A listing for any of these at a fraction of the Market figure is a fake until proven otherwise.</p>
-{{topall:10}}
-<p>The longer list is on <a href="/blog/most-expensive-yu-gi-oh-cards">the most expensive Yu-Gi-Oh! cards</a>. Counterfeiters also target mid-priced staples in Secret and Ultra Rare, because a US$40 card sells with less scrutiny than a US$400 one.</p>
+<p>Counterfeiters also target mid-priced staples in Secret and Ultra Rare, because a US$40 card sells with less scrutiny than a US$400 one.</p>
 
 <h2>1. The Eye of Anubis hologram</h2>
 <p>Every real card printed for the TCG has a small square holographic foil stamp in the bottom-right corner of the front: the Eye of Anubis. It is <b>silver</b> on 1st Edition and Unlimited cards and <b>gold</b> on Limited Edition cards (promos and some special sets). Tilt it: the image inside the square shifts and shows depth. On a fake the square is often printed flat, a plain silver blob with no image, or a sticker with a visible edge, or the wrong colour for the edition printed on the card. A card with no stamp at all is either a fake or a very old Japanese OCG card, which has different anti-counterfeit features and is a different product.</p>

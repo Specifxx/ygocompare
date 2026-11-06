@@ -21,14 +21,14 @@ const MIN_TILES = 4;
 function TcgWord({ className = "" }: { className?: string }) {
   return (
     <span className={`font-black tracking-tight ${className}`} aria-label="TCGplayer">
-      <span className="text-fg">TCG</span>
+      <span className="text-ink">TCG</span>
       <span style={{ color: "#4fa3ff" }}>player</span>
     </span>
   );
 }
 
 function AdLabel() {
-  return <span className="rounded bg-ink-950/70 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted">Ad</span>;
+  return <span className="ad-pill">Ad</span>;
 }
 
 function MiniRow({ brand, tiles, href, accent, tileHref, sub }: { brand: React.ReactNode; tiles: AdTile[]; href: string; accent: string; tileHref: (t: AdTile) => string; sub?: string }) {
@@ -49,10 +49,10 @@ function MiniRow({ brand, tiles, href, accent, tileHref, sub }: { brand: React.R
             target="_blank"
             title={`${t.name} · ${money(t.cents, t.currency)}${sub ? ` · ${sub}` : ""}`}
             aria-label={`${t.name}, ${money(t.cents, t.currency)}${sub ? `, ${sub}` : ""}`}
-            className="group flex w-[56px] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-ink-700 bg-ink-900 hover:border-[var(--ad-accent)]"
+            className="group flex w-[56px] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-line bg-surface hover:border-[var(--ad-accent)]"
             style={{ ["--ad-accent" as string]: accent }}
           >
-            <span className="relative block aspect-[5/7] overflow-hidden bg-ink-850">
+            <span className="relative block aspect-[5/7] overflow-hidden bg-raised">
               {t.image && <img src={t.image} alt={t.name} loading="lazy" decoding="async" className="h-full w-full object-contain p-0.5" />}
             </span>
             <span className="truncate px-1 py-0.5 text-center text-[10px] font-black text-white" style={{ background: accent }}>
@@ -84,7 +84,7 @@ export function CompactCardAds({ ads, page, ebayQuery, tcgplayerUrl, limit = 10 
   const searchMarket = (EBAY_SEARCH_MARKETS as readonly string[]).includes(market) ? (market as (typeof EBAY_SEARCH_MARKETS)[number]) : "US";
   const tag = `${page}-mini`;
   return (
-    <aside data-ad aria-label="Sponsored listings on eBay and TCGplayer" className="grid gap-2 rounded-lg border border-ink-700 bg-ink-900/60 p-2 lg:grid-cols-2">
+    <aside data-ad aria-label="Sponsored listings on eBay and TCGplayer" className="ad-box grid gap-2 p-2 lg:grid-cols-2">
       {showEbay && (
         <MiniRow
           brand={<EbayWord className="text-base" />}

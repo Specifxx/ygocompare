@@ -10,8 +10,7 @@ import { sealedHubs } from "@/lib/hubs";
 import { TileGrid } from "@/components/ProductTile";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 
-export const revalidate = 86400; // data only changes with a release (DECISIONS.md, "Vercel cost")
-export const generateStaticParams = () => [];
+export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
 const hub = (slug: string) => sealedHubs().find((h) => h.slug === slug) ?? null;
 
@@ -43,7 +42,7 @@ export default function SealedHub({ params }: { params: { type: string } }) {
       <section>
         <h2 className="mb-3 text-lg font-bold">Other sealed products</h2>
         <div className="flex flex-wrap gap-2">
-          {sealedHubs().filter((x) => x.slug !== h.slug).map((x) => <Link key={x.slug} href={`/sealed/${x.slug}`} className="chip hover:border-brand">{x.label}</Link>)}
+          {sealedHubs().filter((x) => x.slug !== h.slug).map((x) => <Link key={x.slug} href={`/sealed/${x.slug}`} className="chip">{x.label}</Link>)}
         </div>
       </section>
     </div>

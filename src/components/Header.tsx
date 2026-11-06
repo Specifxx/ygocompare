@@ -1,50 +1,69 @@
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
-import { SearchBox } from "./SearchBox";
-import { MarketPicker, ThemeToggle } from "./ClientPrefs";
-import { phoneNav } from "@/lib/nav";
+import { ebaySearchUrl, goHref } from "@/lib/affiliate";
+import { navGroups, type NavGroup } from "@/lib/nav";
 import { historyOn } from "@/lib/data";
+import { Logo } from "./Logo";
+import { MobileMenu } from "./MobileMenu";
+import { MarketPicker } from "./ClientPrefs";
+import { HeaderNavItems, type HeaderNavItem } from "./HeaderNav";
+import { ThemeToggle } from "./ThemeToggle";
+import { SearchBox } from "./SearchBox";
 
-// The top bar: the search, the region and the theme. From lg up the logo and
-// the navigation live in the left rail (SideNav.tsx), and this bar sits to the
-// right of it; below lg it carries the logo, a search row and a scrolling row
-// of the main sections (lib/nav.ts).
+/**
+ * The desktop nav (lg and up), in order: Cards, Sealed, Kits (SITE.kits), Deals, Browse (the dropdown: every section of the site,
+ * lib/nav.ts groups), Guides. `also`: other paths that count as the section, for its current state.
+ */
+export function headerNavItems(groups: NavGroup[]): HeaderNavItem[] {
+  return [
+    { href: "/sealed", label: "Sealed", also: ["/card"] },
+    { href: "/sets", label: "Sets" },
+    { href: "/preorders", label: "Pre-orders" },
+    ...(SITE.kits ? [{ href: "/kits", label: SITE.kits.label, also: ["/kit"] }] : []),
+    { href: "/tools/deal-finder", label: "Deals", also: ["/black-friday", "/boxing-day", "/january-sales", "/lunar-new-year", "/movers"] },
+    { href: "/tools", label: "Browse", also: ["/stores", "/price-report", "/forum"], menu: groups },
+    { href: "/blog", label: "Guides", xl: true },
+  ];
+}
+
+/**
+ * The site header (the Dex / MTG Compare engine's): ONE row, var(--hdr) tall (60px; 64px from lg), sticky. Everything a page needs
+ * to go somewhere else is in it at every width, so nothing below it has to repeat it. From xl it spans the shell (the sidebar's
+ * column and the page's). No cookie, header or session is read: one CDN copy per URL; the visitor's market is a browser preference
+ * (ClientPrefs.tsx).
+ *
+ * - Below lg: the logo mark (the word from sm), the search box filling the row, the market button and the menu button
+ *   (components/MobileMenu.tsx: every section, then the markets).
+ * - lg and up: logo, the sections (NavLink marks the current one), eBay's labelled search link (xl), search, market, theme.
+ */
 export function Header() {
-  const nav = phoneNav({ history: historyOn() });
+  const groups = navGroups({ history: historyOn() });
+  const items = headerNavItems(groups);
   return (
-    <header className="sticky top-0 z-30 border-b border-ink-800/70 bg-ink-950/85 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-2.5 sm:gap-4">
-        <Link href="/" className="flex min-w-0 shrink items-center gap-2 overflow-x-clip whitespace-nowrap font-display text-base font-black leading-none sm:shrink-0 sm:overflow-visible sm:text-lg lg:hidden" aria-label={`${SITE.name} home`}>
-          {/* In a host span so the Christmas Santa hat (globals.css .xmas-logo-hat) can sit on the icon. */}
-          <span className="xmas-hat-host">
-            <img src="/icon.svg" alt={`${SITE.name} logo`} width={34} height={34} className="h-[30px] w-[30px] shrink-0 rounded-xl sm:h-[34px] sm:w-[34px]" />
-            <span aria-hidden="true" className="xmas-logo-hat" />
-          </span>
-          <span className="wordmark">{SITE.wordmark[0]}</span> <span className="text-fg">{SITE.wordmark[1]}</span>
-          <span className="season-only ml-1 inline" aria-hidden>🎃</span>
+    <header className="sticky top-0 z-40 h-[var(--hdr)] border-b border-line bg-surface/90 backdrop-blur-md">
+      <div className="page flex h-full items-center gap-2 sm:gap-3 lg:gap-4 xl:max-w-shell">
+        <Link href="/" className="flex h-11 shrink-0 items-center rounded-lg" aria-label={`${SITE.name} home`}>
+          <Logo wordmark="hidden sm:inline" />
         </Link>
-        <div className="hidden min-w-0 flex-1 md:block lg:max-w-xl">
-          <SearchBox />
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main">
+          <HeaderNavItems items={items} />
+          {/* A discreet, labelled sponsored item (xl and up only): eBay's search for the game, tagged. Not a section of the site. */}
+          <a
+            href={goHref({ url: ebaySearchUrl(SITE.ebay.query, "US"), source: "ebay", market: "US" }, undefined, "header-ebay")}
+            rel="sponsored nofollow noopener"
+            target="_blank"
+            className="hidden items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium text-muted transition-colors hover:bg-raised hover:text-ink xl:inline-flex"
+          >
+            <span className="ad-pill">Ad</span> eBay
+          </a>
+        </nav>
+        <div className="hdr-search min-w-0 flex-1 lg:ml-auto lg:w-56 lg:flex-none xl:w-64">
+          <SearchBox size="sm" />
         </div>
-        <div className="ml-auto flex shrink-0 items-center gap-2">
-          <Link href="/sealed" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Sealed</Link>
-          <Link href="/blog" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Guides</Link>
-          <Link href="/tools" className="hidden rounded-full px-3 py-1.5 text-sm text-fg/85 hover:bg-ink-800 lg:inline-block">Tools</Link>
-          <MarketPicker />
-          <ThemeToggle />
-        </div>
+        <ThemeToggle className="hidden sm:inline-flex" />
+        <MarketPicker />
+        <MobileMenu groups={groups} className="lg:hidden" />
       </div>
-      {/* Phones search too: on RiftCompare search is the most-used control. */}
-      <div className="px-4 pb-2 md:hidden">
-        <SearchBox />
-      </div>
-      <nav className="flex gap-1 overflow-x-auto px-4 pb-2 lg:hidden" aria-label="Main">
-        {nav.map((n) => (
-          <Link key={n.href} href={n.href} className="shrink-0 rounded-full px-3 py-1 text-sm text-fg/85 hover:bg-ink-800">
-            {n.label}
-          </Link>
-        ))}
-      </nav>
     </header>
   );
 }
