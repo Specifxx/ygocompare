@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-06T19:44:07.646Z",
+ "generatedAt": "2026-11-07T18:01:44.950Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12567,
+   "refCents": 12512,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
   },
@@ -61,7 +61,7 @@
    "currency": "USD",
    "store": "Paragon City Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16269,
+   "refCents": 16292,
    "refLabel": "TCGplayer market price",
    "savingPct": 32
   },
@@ -75,7 +75,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/488582_200w.jpg",
-   "refCents": 9883,
+   "refCents": 9894,
    "refLabel": "TCGplayer market price",
    "savingPct": 19
   },
@@ -85,13 +85,13 @@
    "region": "US",
    "title": "Magnificent Maestros Display",
    "url": "https://ygocompare.com/card/magnificent-maestros-display",
-   "cents": 29999,
+   "cents": 25999,
    "currency": "USD",
    "store": "Gamers Guild AZ",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
-   "refCents": 33137,
+   "refCents": 32190,
    "refLabel": "TCGplayer market price",
-   "savingPct": 9
+   "savingPct": 19
   },
   {
    "kind": "preorder",
@@ -99,7 +99,7 @@
    "region": "US",
    "title": "Magnificent Maestros Booster Box",
    "url": "https://ygocompare.com/preorders/magnificent-maestros",
-   "cents": 29999,
+   "cents": 25999,
    "currency": "USD",
    "store": "Gamers Guild AZ",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
