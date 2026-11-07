@@ -26,8 +26,8 @@ const ORDER: Record<SaleSlug, Market[]> = {
   "lunar-new-year": ["SG", "AU", "CA", "US", "UK", "EU"],
   "valentines-day": ["US", "UK", "CA", "AU", "EU", "SG"],
 };
-const IN: Record<Market, string> = { US: "the US", UK: "the UK", CA: "Canada", AU: "Australia", EU: "Europe", SG: "Singapore" };
-const ADJ: Record<Market, string> = { US: "US", UK: "UK", CA: "Canadian", AU: "Australian", EU: "European", SG: "Singapore" };
+export const IN: Record<Market, string> = { US: "the US", UK: "the UK", CA: "Canada", AU: "Australia", EU: "Europe", SG: "Singapore" };
+export const ADJ: Record<Market, string> = { US: "US", UK: "UK", CA: "Canadian", AU: "Australian", EU: "European", SG: "Singapore" };
 
 function marketsFor(slug: SaleSlug): Market[] {
   const have = new Set(SITE.stores.map((s) => s.market));
@@ -109,7 +109,7 @@ function MarketSection({ m, us }: { m: Market; us: { sealed: Deal[]; cards: Deal
   );
 }
 
-function UnderStores({ title, rows, m }: { title: string; rows: StoreDeal[]; m: Market }) {
+export function UnderStores({ title, rows, m }: { title: string; rows: StoreDeal[]; m: Market }) {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="text-lg font-bold">{title}</h3>

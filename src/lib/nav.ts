@@ -16,6 +16,8 @@ const NEEDS_HISTORY = new Set(["/movers", "/price-report"]);
 export interface NavOptions {
   /** False on a site younger than a week: the history pages are left out. */
   history?: boolean;
+  /** In season, the Black Friday or Cyber Monday page (lib/black-friday.ts saleStrip): first in Prices. */
+  sale?: NavLink | null;
 }
 const readyFor = (o: NavOptions) => (l: NavLink) => o.history !== false || !NEEDS_HISTORY.has(l.href);
 
@@ -31,6 +33,7 @@ export interface NavGroup {
 export function navGroups(o: NavOptions = {}): NavGroup[] {
   const ready = readyFor(o);
   const prices: NavLink[] = [
+    ...(o.sale ? [o.sale] : []),
     ...(SITE.lines ?? []).map((l) => ({ href: `/games/${l.slug}`, label: l.short })),
     { href: "/sealed", label: "Sealed products" },
     { href: "/sealed/booster-box", label: "Booster boxes" },

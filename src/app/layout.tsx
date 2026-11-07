@@ -14,6 +14,8 @@ import { SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PreorderStrip } from "@/components/PreorderStrip";
+import { HolidayStrip } from "@/components/HolidayStrip";
+import { holidayNav } from "@/lib/holiday-nav";
 import { PrefsProvider } from "@/components/ClientPrefs";
 import { QuickView } from "@/components/QuickView";
 import { RateCard } from "@/components/site-reviews/RateCard";
@@ -81,10 +83,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <PrefsProvider>
           <Header />
+          <HolidayStrip />
           <PreorderStrip />
           {/* The engine's shell: from xl the sidebar sits in the flow beside <main>, both inside the 1480px shell. */}
           <div className="mx-auto flex w-full max-w-shell flex-1">
-            <SideNav groups={navGroups({ history })} />
+            <SideNav groups={navGroups({ history, sale: holidayNav() })} />
             <main id="main" className="min-w-0 flex-1">
               <div className="page py-6">{children}</div>
             </main>

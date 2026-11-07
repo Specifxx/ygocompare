@@ -135,7 +135,7 @@ export default function Home() {
 
       {topDeals.length > 0 && (
         <Section className="sd" title="Today's top deals" href="/tools/deal-finder" sub="In-stock listings below TCGplayer market, refreshed daily." linkLabel="Browse all deals">
-          {bfSeason(today) && <p className="mb-3 text-sm"><Link className="link" href="/black-friday">Black Friday and Cyber Monday deals, updated daily →</Link></p>}
+          {bfSeason(today) && <p className="mb-3 text-sm"><Link className="link" href="/black-friday">Black Friday deals</Link> · <Link className="link" href="/cyber-monday">Cyber Monday deals</Link>, updated daily →</p>}
           {salesInSeason(CORE_SALES, today).map((s) => (
             <p key={s.slug} className="mb-3 text-sm"><Link className="link" href={`/${s.slug}`}>{s.linkLabel}, updated daily →</Link></p>
           ))}

@@ -54,3 +54,50 @@ export function splitDeals<T extends { p: { id: number; kind: string } }>(list: 
   }
   return { sealed, cards };
 }
+
+export type HolidayEvent = "black-friday" | "cyber-monday";
+
+/** "Black Friday" / "Cyber Monday" */
+export const EVENT_NAME: Record<HolidayEvent, string> = { "black-friday": "Black Friday", "cyber-monday": "Cyber Monday" };
+
+/**
+ * The one-line strip under the header on every page, and the nav link beside it (DECISIONS.md, "Black Friday
+ * strip", 2026-11-07): Black Friday from 1 November to the Saturday after it, then Cyber Monday to the day
+ * after Cyber Monday, then nothing (the homepage keeps linking both until a week after). A link in the server
+ * HTML, never a pop-up, a countdown or "ends soon".
+ */
+export function saleStrip(today: string): { event: HolidayEvent; href: string; name: string } | null {
+  const y = Number(today.slice(0, 4));
+  const bf = blackFriday(y);
+  if (today < `${y}-11-01`) return null;
+  if (today <= addDays(bf, 1)) return { event: "black-friday", href: "/black-friday", name: "Black Friday" };
+  if (today <= addDays(cyberMonday(y), 1)) return { event: "cyber-monday", href: "/cyber-monday", name: "Cyber Monday" };
+  return null;
+}
+
+/** The questions both holiday pages answer in visible text: the dates, where the prices come from, and how to use the page. */
+export function holidayFaq(event: HolidayEvent, year: number, o: { game: string; stores: number; regions: string }): { q: string; a: string }[] {
+  const bf = longDate(blackFriday(year));
+  const cm = longDate(cyberMonday(year));
+  const name = EVENT_NAME[event];
+  return [
+    {
+      q: `When is ${name} ${year}?`,
+      a: event === "black-friday"
+        ? `Black Friday ${year} is ${bf}, the day after US Thanksgiving. Cyber Monday follows on ${cm}. Many stores start their sales the week before and run them through the weekend.`
+        : `Cyber Monday ${year} is ${cm}, the Monday after Black Friday (${bf}). Online stores often run their Black Friday prices through the weekend and end them on Cyber Monday night.`,
+    },
+    {
+      q: `Do ${o.game} stores have ${name} sales?`,
+      a: `Some do, some don't, and some sell under the market price all year. That is why this page lists prices, not promises: every row is a real in-stock price from one of the ${o.stores} stores we compare across ${o.regions}, read that day.`,
+    },
+    {
+      q: "Are these prices shown before or after shipping?",
+      a: "Item prices, before shipping. A cheap price at a store with expensive postage can still lose, so open the product page to compare every store side by side, and check the store's own page before you buy.",
+    },
+    {
+      q: "How often does this page update?",
+      a: "Every day, from that day's store prices, through the sales and after them. Bookmark it: the URL stays the same every year.",
+    },
+  ];
+}

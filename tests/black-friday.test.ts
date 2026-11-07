@@ -24,3 +24,16 @@ test("splitDeals keeps one row per product, sealed apart from cards", () => {
   assert.deepEqual(out.sealed.map((x) => x.p.id), [1]);
   assert.deepEqual(out.cards.map((x) => x.p.id), [2]);
 });
+
+test("the strip shows Black Friday from 1 November, then Cyber Monday, then nothing", async () => {
+  const { saleStrip, holidayFaq } = await import("../src/lib/black-friday");
+  assert.equal(saleStrip("2026-10-31"), null);
+  assert.equal(saleStrip("2026-11-01")?.href, "/black-friday");
+  assert.equal(saleStrip("2026-11-28")?.href, "/black-friday");
+  assert.equal(saleStrip("2026-11-29")?.href, "/cyber-monday");
+  assert.equal(saleStrip("2026-12-01")?.href, "/cyber-monday");
+  assert.equal(saleStrip("2026-12-02"), null);
+  const faq = holidayFaq("cyber-monday", 2026, { game: "Lorcana", stores: 10, regions: "the US and the UK" });
+  assert.match(faq[0].a, /Monday 30 November/);
+  for (const f of faq) assert.doesNotMatch(f.q + f.a, /was \$|ends soon|limited time/i);
+});
