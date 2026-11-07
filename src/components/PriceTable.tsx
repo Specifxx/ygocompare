@@ -35,6 +35,9 @@ export function sourceName(o: Offer) {
 export const PIN_OUTLINE = {
   ebay: "outline outline-2 -outline-offset-2 outline-[#16a34a]",
   amazon: "outline outline-2 -outline-offset-2 outline-[#f59e0b]",
+  /** The cheapest row (owner, 2026-11-07: "the cheapest listing should also have an outline too"): sky blue, never
+   *  read as eBay's green or Amazon's amber; it wins over eBay's when eBay is itself the cheapest. */
+  cheapest: "outline outline-2 -outline-offset-2 outline-[#0ea5e9]",
 } as const;
 
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
@@ -139,7 +142,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
             const best = o === cheapest;
             return (
               <Fragment key={i}>
-                <tr className={`border-t border-line ${best ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"} ${o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
+                <tr className={`border-t border-line ${best ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
                   <td className="px-3 py-2.5">
                     <span className="font-medium text-ink">{sourceName(o)}</span>
                     <StoreVote url={o.url} name={sourceName(o)} className="ml-2 text-muted" />
