@@ -156,6 +156,15 @@ export interface SiteConfig {
   /** One set printed in several editions under the same names (Cyberpunk
    *  TCG's Beta and Retail): see SetEdition in lib/import/match.ts. Off unless set. */
   setEditions?: SetEdition[];
+  /** Booster boxes in one Booster Box Case (Lorcana 4, Cyberpunk 6), or per
+   *  game on a multi-game site ({ ua: 16, fw: 12, dg: 12 }). An eBay listing of
+   *  a Booster Box Case whose stated box counts are none of it ("Half Case (6
+   *  boxes)" on a 12-box case) is another product. Off unless set. */
+  caseUnits?: number | Record<string, number>;
+  /** Booster packs in that case (Lorcana 96), the same shape: a case listing
+   *  stating 40+ packs, none of them this ("Booster Case (48 Packs)": sleeved
+   *  packs), is another product. Off unless set. */
+  casePacks?: number | Record<string, number>;
   /** Markets outside the US where TCGplayer Direct ships this game's singles
    *  (the TCGplayer ad strip says so there). Off by default: say nothing we
    *  have not checked. TCGplayer Direct: AU since 2026-10-07 for Magic,

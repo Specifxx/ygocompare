@@ -1674,3 +1674,15 @@ Black Friday is 27 November 2026 and Cyber Monday 30 November. Three additions, 
   existing rows come each other market's own store deals (its currency, never converted) and four visible
   questions (the dates, whether stores have sales, shipping, how often it updates). No FAQ rich-result markup:
   Google shows those only for government and health sites since 2023, so the text is what ranks.
+
+## 2026-11-07: A case listing must be the case (from the card engine)
+
+An eBay seller wrote to MTG Compare that a 120-pack sleeved case was a six-box case's "best price, 26% below the median"
+(mtgcompare #94). The engine audit found the same shape here: an acrylic case for one box, a "Sealed W/ Case" box, a
+"Half Case (6 boxes)", an "Open case of 4 … Illumineers Trove" and 48 sleeved packs, each filed as a Booster Box Case.
+`wrongCase` (`lib/import/ebay.ts`, inside `listingMatches`, so the next import also purges stored offers without a call)
+refuses on any case product: an item in or with a case, a half or open case, sleeved packs unless the product is
+sleeved, a case of another product type, and, where `SITE.caseUnits` / `SITE.casePacks` give the count (Lorcana 4 boxes
+/ 96 packs, Gundam and Yu-Gi-Oh! 12 boxes: the counts sellers and stores state), a
+title whose stated counts are none of it. Only stated counts are read; no count configured means no opinion. The
+eBay price never sets a deal or the headline price here (TCGplayer market does), so no outlier guard was needed.

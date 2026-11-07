@@ -327,6 +327,50 @@ let rarities: ReturnType<typeof rarityPatterns> | null | undefined;
 const sellerRarities = () =>
   rarities === undefined ? (rarities = SITE.rarityMustAgree ? rarityPatterns(SITE.rarityOrder, SITE.rarityAliases) : null) : rarities;
 
+// ─── Cases (visitor feedback 2026-11-07, an eBay seller, on MTG Compare) ─────
+// A 120-pack sleeved case was a six-box case's cheapest offer there, "26% below
+// the median". A case listing is refused when it is a single item in a case
+// ("Acrylic Case", "Sealed W/ Case", "Display Case for …"), part of a case
+// ("Half Case", "Open Case"), sleeved packs on a box case, another product's
+// case (a Trove case on a Booster Box Case page), or states box counts none of
+// which is the case's (SITE.caseUnits).
+const CASE_ITEM = /\bacrylic\b|\bprotector\b|\b(?:w\/|with)\s*(?:an?\s+)?(?:acrylic\s+|protective\s+|magnetic\s+)?case\b|\bdisplay\s+case\s+for\b|\bhalf\s+case\b|\bopen(?:ed)?\s+case\b/i;
+const CASE_X = /(?<![\d.])\b(\d{1,2})\s*x\b(?!\s*\d)|\bx\s*(\d{1,2})\b/gi;
+const CASE_NAMED = /\bcase\s+of\s+(?:x\s*)?(\d{1,2})\b|(?<![\d.])\b(\d{1,2})\s*(?:(?:booster|sealed)\s+){0,2}(?:boxes|displays)\b|(?<![\d.])\b(\d{1,2})[\s-]box\b|\bcase\s*\((\d{1,2})\)/gi;
+
+const CASE_PACKS = /\b(\d{2,3})\s*(?:x\s*)?(?:(?:sleeved|booster)\s*)*(?:packs?|boosters)\b/gi;
+
+/** A Booster Box Case's boxes (SITE.caseUnits) or packs (SITE.casePacks), or null when not known. */
+export function caseUnitsOf(p: Product, c: number | Record<string, number> | undefined = SITE.caseUnits): number | null {
+  if (c == null || !/\bbooster\s+(?:box|display)\s+case\b|\bbooster\s+case\b/i.test(p.name)) return null;
+  if (typeof c === "number") return c;
+  const line = setLine.get(p.setId)?.line;
+  return line ? c[line] ?? null : null;
+}
+
+/** Is this listing, for a case product, not that case? */
+export function wrongCase(p: Product, title: string, units = caseUnitsOf(p), packs = caseUnitsOf(p, SITE.casePacks)): boolean {
+  if (p.kind !== "sealed" || !/\bcase\b/i.test(p.name)) return false;
+  if (CASE_ITEM.test(title)) return true;
+  if (/\bsleeved\b/i.test(title) && !/\bsleeved\b/i.test(p.name)) return true;
+  // "36x … Booster Pack (Case)" on a tin or box case: loose packs, not the case.
+  if (/\b\d{1,3}\s*x\s.*\bbooster\s+packs?\b/i.test(title) && !/\bpacks?\b/i.test(p.name)) return true;
+  // The case's contents must be the product's: "Case of 4 Boxes … Illumineers Trove" is not a Booster Box Case.
+  const inner = (s: string) => sealedTypeOf(s.replace(/\bcases?\b/gi, " "));
+  const want = inner(p.name);
+  const got = inner(title);
+  if (want !== "Other" && got !== "Other" && got !== "Collection" && got !== want) return true;
+  if (units) {
+    const stated = [...title.matchAll(CASE_X), ...title.matchAll(CASE_NAMED)].map((m) => Number(m.slice(1).find((g) => g !== undefined))).filter((n) => n > 1);
+    if (stated.length && !stated.includes(units)) return true;
+  }
+  if (packs) {
+    const stated = [...title.matchAll(CASE_PACKS)].map((m) => Number(m[1])).filter((n) => n >= 40);
+    if (stated.length && !stated.includes(packs)) return true;
+  }
+  return false;
+}
+
 /** Does an eBay listing title describe this product? */
 export function listingMatches(p: Product, title: string): boolean {
   if (GRADED.test(title) || FOREIGN_LISTING.test(title)) return false;
@@ -366,6 +410,7 @@ export function listingMatches(p: Product, title: string): boolean {
   if (numbersInTitle(title, SITE.numberStyle).length) return false;
   if (/\b[A-Z0-9]{2,5}-EN(?![A-Z0-9])/.test(title) && !/booster|display|\btins?\b|deck|\bcase\b|\bpacks?\b/i.test(title)) return false;
   if (sealedTypeOf(title) !== sealedTypeOf(p.name)) return false;
+  if (wrongCase(p, title)) return false;
   // "Deck ONLY - no bonus pack" is the opposite of a bonus-pack product.
   if (/bonus/i.test(p.name) && /\b(no|without|minus)\s+bonus|deck only|only deck/i.test(title)) return false;
   // "Booster Boxes" / "Packs" / "Decks" count as the singular.
