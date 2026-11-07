@@ -41,6 +41,8 @@ export const SITE: SiteConfig = {
   amazonAuTag: "ygocompare-22",
   tcgcsvCategoryId: 2,
   tcgplayerSlug: "yugioh",
+  // Booster boxes in one Booster Box Case (eBay titles and store listings, 2026-11-07): a listing stating another count is another product.
+  caseUnits: 12,
   ebay: {
     // The card number ("RA01-EN008") or the product name is specific enough;
     // sellers spell the game "Yu-Gi-Oh!", "Yugioh" and "YGO", so no game word.

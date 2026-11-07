@@ -202,3 +202,30 @@ test("sealed coverage: a due pair beats a fresher, more valuable one", async () 
   const { calls } = planSealedCoverage({ products: [tin(1), tin(2)], refUsdCents: new Map([[1, 90000], [2, 2000]]), clicks30d: new Map(), newSetIds: new Set(), state, budget: 1, now });
   assert.deepEqual([calls[0].product.id, calls[0].market], [2, "US"]);
 });
+
+// Visitor feedback 2026-11-07 (an eBay seller, on MTG Compare): a 120-pack sleeved case was a six-box case's best price.
+// Real eBay titles read 2026-11-07; the counts are passed in, since each game's case holds its own (SITE.caseUnits).
+test("cases: an item in a case, part of a case, another product's case or another count is not the case", async () => {
+  const { wrongCase } = await import("@/lib/import/ebay");
+  const box: Product = { ...p(9, "Rare", "sealed"), name: "Wilds Unknown Booster Box Case", number: null, rarity: null, sealedType: "Case" };
+  for (const t of [
+    "The First Chapter Booster Box CM1 050223 2023 Acrylic Case",
+    "Digimon Card Game Release Special Booster Box Ver.1.0 (BT01-BT03) Sealed W/ Case",
+    "NEW AWAKENING BOOSTER BOX lot - Half Case (6 boxes)",
+    "OPEN CASE OF 4 BOXES Wilds Unknown Illumineers Trove - NEW",
+    "Attack of the Vine S13 - 48 Sleeved Booster Packs Case",
+    "36x Wilds Unknown Booster Pack (Case)",
+  ]) assert.equal(wrongCase(box, t, 4, 96), true, t);
+  assert.equal(wrongCase(box, "Wilds Unknown Booster Box Case (48 Packs)", 4, 96), true);
+  assert.equal(wrongCase(box, "Great Legend Booster Box Case 6 Boxes Sealed", 12, null), true);
+  for (const t of [
+    "Wilds Unknown Booster Box Case (4x)",
+    "SEALED CASE! 4x Wilds Unknown Booster Box Factory Sealed",
+    "Wilds Unknown Sealed Case - 4 Booster Boxes",
+    "Wilds Unknown Booster Box Sealed Case Unopened",
+    "Wilds Unknown English Booster Box Sealed Case (4)",
+  ]) assert.equal(wrongCase(box, t, 4, 96), false, t);
+  assert.equal(wrongCase(box, "Wilds Unknown Booster Box Case 12 Boxes", null, null), false, "no count configured: no opinion");
+  const sleeved: Product = { ...box, name: "Fabled Sleeved Booster Pack Case" };
+  assert.equal(wrongCase(sleeved, "Fabled Sleeved Booster Pack Case (48 Packs) Sealed Set 9 New"), false);
+});
