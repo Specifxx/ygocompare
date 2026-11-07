@@ -10,6 +10,7 @@ import { blackFriday, cyberMonday, EVENT_NAME, holidayFaq, longDate, seasonYear,
 import { listRegions } from "@/lib/sale-seasons";
 import { FamilyCluster } from "@/components/FamilyCluster";
 import { ADJ, IN, UnderStores } from "@/components/SaleSeasonPage";
+import { postsAbout } from "@/lib/posts";
 import type { Market } from "@/lib/site-types";
 
 // The Black Friday and Cyber Monday pages (DECISIONS.md, "Black Friday page", 2026-11-02, and "Cyber Monday
@@ -54,6 +55,8 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
   const have = new Set(SITE.stores.map((s) => s.market));
   const others = OTHER.filter((m) => have.has(m));
   const faq = holidayFaq(event, year, { game: SITE.gameShort, stores: SITE.stores.length, regions: regions() });
+  // The blog's Black Friday guides, linked from the hub so the two are crawled together (2026-11-07).
+  const guides = postsAbout(["Black Friday", "Cyber Monday"]).slice(0, 3);
   const sister = event === "black-friday" ? { href: "/cyber-monday", label: "Cyber Monday deals" } : { href: "/black-friday", label: "Black Friday deals" };
 
   return (
@@ -88,6 +91,11 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
           <Link className="link" href={sister.href}>{sister.label} →</Link> · <Link className="link" href="/tools/deal-finder">Deal Finder, with filters →</Link> ·{" "}
           <Link className="link" href="/price-report">Monthly price report →</Link> · <Link className="link" href="/sealed">Every sealed product →</Link>
         </p>
+        {guides.map((g) => (
+          <p key={g.slug}>
+            Read: <Link className="link" href={`/blog/${g.slug}`}>{g.title}</Link>
+          </p>
+        ))}
       </section>
 
       <section className="flex flex-col gap-3">

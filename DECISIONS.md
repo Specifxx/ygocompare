@@ -1686,3 +1686,12 @@ sleeved, a case of another product type, and, where `SITE.caseUnits` / `SITE.cas
 / 96 packs, Gundam and Yu-Gi-Oh! 12 boxes: the counts sellers and stores state), a
 title whose stated counts are none of it. Only stated counts are read; no count configured means no opinion. The
 eBay price never sets a deal or the headline price here (TCGplayer market does), so no outlier guard was needed.
+
+## Black Friday indexing push (2026-11-07)
+
+Owner: get every Black Friday page indexed. The sale pages (`/black-friday`, `/cyber-monday` and the other seasonal
+pages) were in the sitemap but not in the daily IndexNow list, which sends only the hubs it names: they are named now.
+A blog post, `<game>-black-friday-2026`, lists the newest sets' sealed product with today's prices (`{{sealed:SETID}}`
+tokens, so the "prices to beat" stay live) and five checks for a real deal, and links to both pages; the pages link
+back to every post whose title or keywords say Black Friday or Cyber Monday (`postsAbout`). No FAQ schema, no
+countdown, no "was" price.
