@@ -26,28 +26,26 @@ import { AdDock, DockGate, DockTile, DOCK_LINK, type DockSide } from "./AdDock";
 
 /**
  * From MIN_WIDTH (1280px: every common 16:9 and 16:10 laptop and monitor, owner 2026-11-06: "it should appear on regular 16:9
- * screens … 16:10 even") a rail RAIL_W wide sits on each side of the shell, GUTTER from the window's edge and GUTTER from the
+ * screens … 16:10 even") a rail RAIL_W wide sits on each side of the shell, flush against the window's edge (2026-11-07), outside the
  * shell. Below 1864px the shell gives up that room (globals.css: max-width min(1480px, 100vw - 320px)); from 1864px it is its full
  * 1480px and the rails sit just outside it.
  */
-const SHELL_W = 1480;
 export const RAIL_W = 136;
-const GUTTER = 12;
 export const MIN_WIDTH = 1280; // the RAIL class below and the globals.css shell rule say the same
 /** Vertical budget: the sticky header (--hdr, 64px from lg) and a gutter above, a gutter below, the rail's own top line and note. */
-const TOP = 64 + GUTTER;
+const TOP = 64;
 const HEAD = 30;
 const NOTE = 34;
-const PAD = 2 * 8;
+const PAD = 0;
 /** One tile: 8px padding, a (RAIL_W - 16 - 16)px square picture, two title lines (36px) and a price line (20px). */
-export const TILE_H = 8 + (RAIL_W - PAD - 16) + 6 + 36 + 20 + 8;
+export const TILE_H = 8 + (RAIL_W - 1 - 16) + 6 + 36 + 20 + 8;
 /** Up to ten tiles, popular first; the list scrolls inside the rail (owner, 2026-11-06: "scrollable … up to 10 products"). */
 export const MAX_TILES = 10;
 const MIN_TILES = 2;
 
 /** Whether a window this tall holds a rail with at least one whole tile in view (the rest scroll). Pure, for the tests. */
 export function railFits(innerHeight: number): boolean {
-  return innerHeight - TOP - GUTTER - HEAD - NOTE - PAD >= TILE_H;
+  return innerHeight - TOP - HEAD - NOTE - PAD >= TILE_H;
 }
 
 /** The eBay tiles for a market, or eBay US where the market is thin. Pure, for the tests. */
@@ -94,10 +92,11 @@ export function SideAds({ ads, search }: { ads: CardAds; search: AdSearch }) {
   );
 }
 
-const RAIL = "fixed z-30 hidden flex-col rounded-xl border border-line bg-surface p-2 shadow-card min-[1280px]:flex";
-const TILE = "group flex flex-col rounded-lg border border-line bg-surface p-2 transition-colors hover:border-ink/40";
-const EDGE = `max(${GUTTER}px, calc(50% - ${SHELL_W / 2 + GUTTER + RAIL_W}px))`;
-const railStyle = (side: "left" | "right"): CSSProperties => ({ top: `calc(var(--hdr) + ${GUTTER}px)`, bottom: GUTTER, width: RAIL_W, ...(side === "left" ? { left: EDGE } : { right: EDGE }) });
+const RAIL = "fixed z-30 hidden flex-col border-line bg-surface min-[1280px]:flex";
+const TILE = "group flex flex-col border-b border-line bg-surface p-2 transition-colors hover:bg-raised";
+// Flush (owner, 2026-11-07: "I don't like how it's floating … no gap"): from the header to the window's foot, against the window's
+// edge, square, one hairline facing the page; tiles stack edge to edge with hairline dividers.
+const railStyle = (side: "left" | "right"): CSSProperties => ({ top: "var(--hdr)", bottom: 0, width: RAIL_W, ...(side === "left" ? { left: 0, borderRightWidth: 1 } : { right: 0, borderLeftWidth: 1 }) });
 const SEARCH_MARKETS = ["US", "UK", "AU", "CA"] as const;
 
 function EbayRail({ ads, query }: { ads: CardAds; query: string }) {
@@ -108,7 +107,7 @@ function EbayRail({ ads, query }: { ads: CardAds; query: string }) {
   return (
     <div role="group" data-ad="side-ebay" aria-label={`Sponsored: ${SITE.gameShort} cards on eBay`} className={RAIL} style={railStyle("left")}>
       <Head brand={<EbayWord className="text-lg" />} />
-      <ul role="list" className="rail-scroll grid min-h-0 flex-1 content-start gap-2 overflow-y-auto overscroll-contain">
+      <ul role="list" className="rail-scroll grid min-h-0 flex-1 content-start overflow-y-auto overscroll-contain border-t border-line">
         {tiles.slice(0).map((t) => (
           <li key={t.id}>
             <a href={goHref({ url: t.url, source: "ebay", market: ebayMarket }, t.id, "side-ebay")} rel="sponsored nofollow noopener" target="_blank" className={TILE} title={`${t.name} · ${money(t.cents, t.currency)}`}>
@@ -140,7 +139,7 @@ function TcgRail({ tiles, all }: { tiles: AdTile[]; all: string }) {
           </span>
         }
       />
-      <ul role="list" className="rail-scroll grid min-h-0 flex-1 content-start gap-2 overflow-y-auto overscroll-contain">
+      <ul role="list" className="rail-scroll grid min-h-0 flex-1 content-start overflow-y-auto overscroll-contain border-t border-line">
         {tiles.slice(0).map((t) => (
           <li key={t.id}>
             <a href={goHref({ url: t.url, source: "tcgplayer", market: "US" }, t.id, "side-tcg")} rel="sponsored nofollow noopener" target="_blank" className={TILE} title={`${t.name} · ${price(t)}`}>
@@ -161,7 +160,7 @@ function TcgRail({ tiles, all }: { tiles: AdTile[]; all: string }) {
 
 function Head({ brand }: { brand: ReactNode }) {
   return (
-    <div className="mb-2 flex h-[22px] shrink-0 items-center justify-between px-1">
+    <div className="flex h-[30px] shrink-0 items-center justify-between px-2">
       {brand}
       <span className="ad-pill">Ad</span>
     </div>
@@ -170,7 +169,7 @@ function Head({ brand }: { brand: ReactNode }) {
 
 function Note({ href, label, note }: { href: string; label: string; note: string }) {
   return (
-    <p className="mt-2 flex h-[26px] shrink-0 flex-col justify-center px-1 text-[10px] leading-[13px] text-muted">
+    <p className="flex h-[34px] shrink-0 flex-col justify-center px-2 text-[10px] leading-[13px] text-muted">
       <a href={href} rel="sponsored nofollow noopener" target="_blank" className="truncate font-bold text-brand">
         {label}
       </a>
