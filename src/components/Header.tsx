@@ -3,6 +3,7 @@ import { SITE } from "@/site.config";
 import { ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { navGroups, type NavGroup } from "@/lib/nav";
 import { historyOn } from "@/lib/data";
+import { holidayNav } from "@/lib/holiday-nav";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { MarketPicker } from "./ClientPrefs";
@@ -15,13 +16,14 @@ import { CartHeaderLink } from "@/components/cart/CartHeaderLink";
  * The desktop nav (lg and up), in order: Cards, Sealed, Kits (SITE.kits), Deals, Browse (the dropdown: every section of the site,
  * lib/nav.ts groups), Guides. `also`: other paths that count as the section, for its current state.
  */
-export function headerNavItems(groups: NavGroup[]): HeaderNavItem[] {
+export function headerNavItems(groups: NavGroup[], sale: { href: string; label: string } | null = null): HeaderNavItem[] {
   return [
+    ...(sale ? [{ href: sale.href, label: sale.label, also: [] as string[] }] : []),
     { href: "/sealed", label: "Sealed", also: ["/card"] },
     { href: "/sets", label: "Sets" },
     { href: "/preorders", label: "Pre-orders" },
     ...(SITE.kits ? [{ href: "/kits", label: SITE.kits.label, also: ["/kit"] }] : []),
-    { href: "/tools/deal-finder", label: "Deals", also: ["/black-friday", "/boxing-day", "/january-sales", "/lunar-new-year", "/movers"] },
+    { href: "/tools/deal-finder", label: "Deals", also: ["/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/movers"] },
     { href: "/tools", label: "Browse", also: ["/stores", "/price-report", "/forum"], menu: groups },
     { href: "/blog", label: "Guides", xl: true },
   ];
@@ -38,8 +40,9 @@ export function headerNavItems(groups: NavGroup[]): HeaderNavItem[] {
  * - lg and up: logo, the sections (NavLink marks the current one), eBay's labelled search link (xl), search, market, theme.
  */
 export function Header() {
-  const groups = navGroups({ history: historyOn() });
-  const items = headerNavItems(groups);
+  const sale = holidayNav();
+  const groups = navGroups({ history: historyOn(), sale });
+  const items = headerNavItems(groups, sale);
   return (
     <header className="sticky top-0 z-40 h-[var(--hdr)] border-b border-line bg-surface/90 backdrop-blur-md">
       <div className="page flex h-full items-center gap-2 sm:gap-3 lg:gap-4 xl:max-w-shell">

@@ -20,6 +20,7 @@ export function footerColumns(history: boolean): { title: string; links: FooterL
         ...(SITE.kits ? [{ href: "/kits", label: `${SITE.kits.label} prices` }] : []),
         ...(history ? [{ href: "/movers", label: "Price movers" }, { href: "/price-report", label: "Monthly price report" }] : []),
         { href: "/black-friday", label: "Black Friday deals" },
+        { href: "/cyber-monday", label: "Cyber Monday deals" },
         { href: "/boxing-day", label: "Boxing Day deals" },
         { href: "/january-sales", label: "January sales" },
         { href: "/lunar-new-year", label: "Lunar New Year deals" },
