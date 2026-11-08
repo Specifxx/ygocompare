@@ -6,6 +6,7 @@ import { byValue, products, summaryOf } from "@/lib/data";
 import { shortName } from "@/lib/names";
 import { MARKETS } from "@/lib/site-types";
 import { badgeOffer, dailySnippet, embedSnippet, storeBadge } from "@/lib/embed";
+import { attributionHtml, PRICE_API_PATH } from "@/lib/price-api";
 
 // The free widgets directory (DECISIONS.md, "Free price widgets", 2026-11-02): the page outreach points at instead of
 // asking for a link. Shows code, never live iframes of our own widgets.
@@ -68,6 +69,20 @@ export default function EmbedPage() {
         </p>
         <div dangerouslySetInnerHTML={{ __html: badge }} />
         <pre className="overflow-x-auto rounded bg-ink-900 p-3 text-xs"><code>{badge}</code></pre>
+      </section>
+      <section className="card-surface flex flex-col gap-3 p-4" id="price-data">
+        <h2 className="text-lg font-bold">Free price data</h2>
+        <p className="text-sm text-muted">
+          Building a Discord bot, a deck or collection tool, a spreadsheet or a blog? Every product&apos;s cheapest in-stock price in each market is in one
+          JSON file: <a className="link" href={PRICE_API_PATH}>{SITE_URL}{PRICE_API_PATH}</a>. Free, no key, no signup, open to every origin, and
+          refreshed with each daily release.
+        </p>
+        <ul className="list-disc pl-5 text-sm text-muted">
+          <li>Each product has an <code>id</code>, a <code>name</code> and, per market, <code>cents</code> in that market&apos;s <code>currency</code> with a <code>url</code> to its comparison.</li>
+          <li>Prices from stores and TCGplayer only: never eBay, and never converted between currencies.</li>
+          <li>Free for any use, including commercial. The one condition: a visible link back wherever the prices appear, for example:</li>
+        </ul>
+        <pre className="overflow-x-auto rounded bg-ink-900 p-3 text-xs"><code>{attributionHtml()}</code></pre>
       </section>
     </article>
   );

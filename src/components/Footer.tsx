@@ -32,6 +32,7 @@ export function footerColumns(history: boolean): { title: string; links: FooterL
       title: SITE.name,
       links: [
         { href: "/about", label: "About" },
+        { href: "/collection", label: "My collection" },
         { href: "/methodology", label: "How prices work" },
         { href: "/stores", label: "Stores we track" },
         { href: "/blog", label: "Guides" },

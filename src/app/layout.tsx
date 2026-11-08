@@ -4,6 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 // The cart list's styles (components/cart): imported here, never from a component, so node tests can load them.
 import "@/components/cart/cart.css";
+import "@/components/vault/vault.css";
 import "@/components/site-reviews/site-reviews.css";
 // The site's own look on top of the shared one (src/content/site.css; empty on a site that needs none).
 import "@/content/site.css";
