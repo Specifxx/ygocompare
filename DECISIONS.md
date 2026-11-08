@@ -1727,6 +1727,25 @@ engine family (DexCompare #154, MTG Compare #104), ported by hand:
   shelf's first two with a photo, `featuredSealed`, with TCGplayer's market price and the in-stock store count, as on the tiles).
   Nothing in the cards is a heading; URLs, titles and metadata unchanged. Seasonal decor unchanged.
 
+## 2026-11-08 — The card share image is text only (Vercel cost cap)
+
+Vercel's billing (owner's team, 2026-11-08) showed ISR writes as the biggest line on the team after Compare Empire's
+CPU, and Observability put ~90% of this engine family's ISR write units on one route: `/card/[slug]/opengraph-image`.
+Each image carried the card's art and came out at ~580 KB, and Vercel bills every cached copy by the 8 KB write unit
+(~72 units per image, written again each day and after every deploy as crawlers fetch `og:image`). The image keeps
+everything that makes it worth sharing (name, set and number, the US price gap or TCGplayer market) and drops the art:
+flat colour and text render at ~49 KB, about a twelfth. `tests/share.test.ts` fails if `<img>` or `imageAt` comes back.
+The page itself still shows the art; only the link thumbnail lost it.
+
+## 2026-11-08 — The alert form asks, unticked, for a weekly price drops email
+
+Owner, on the 2026-11-08 competitor scan: "implement all of this" (gap #5, a weekly email of the biggest price drops).
+The shared `PriceAlertForm.tsx` (byte-identical on every sister site) gains one UNTICKED box, "Also email me this site's
+biggest price drops once a week", sent as `weekly` beside the alert. RiftCompare's alert service does the rest
+(TCGEmpire DECISIONS.md, "A weekly biggest-drops email for the sister sites"): it rides the same double opt-in, builds
+one edition a week from this site's own `/alert-feed.json`, links only to this site's pages (no eBay or Amazon), and
+every email has a one-click stop. This site still stores no address and holds no mail key, and nothing new pops up.
+
 ## 2026-11-08 — Store badges, free price data and My collection (competitor scan)
 
 The owner approved the competitor scan's ideas (Collectr and PriceCharting keep people coming back with "what is my

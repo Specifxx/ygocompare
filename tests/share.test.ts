@@ -42,4 +42,6 @@ test("the share button and the arrival counter are on the card page, the quick v
   assert.match(fs.readFileSync("src/components/QuickView.tsx", "utf8"), /<ShareButton /);
   assert.match(fs.readFileSync("src/app/layout.tsx", "utf8"), /<ShareArrival \/>/);
   assert.match(fs.readFileSync("src/app/card/[slug]/opengraph-image.tsx", "utf8"), /export const generateStaticParams = \(\) => \[\];/);
+  // Text only: card art made each PNG ~580 KB of ISR writes (DECISIONS.md, 2026-11-08).
+  assert.doesNotMatch(fs.readFileSync("src/app/card/[slug]/opengraph-image.tsx", "utf8"), /<img|imageAt/);
 });
