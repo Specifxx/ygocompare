@@ -51,6 +51,9 @@ jobs:
           AMAZON_CREATORS_AU_CLIENT_ID: ${{ secrets.AMAZON_CREATORS_AU_CLIENT_ID }}
           AMAZON_CREATORS_AU_CLIENT_SECRET: ${{ secrets.AMAZON_CREATORS_AU_CLIENT_SECRET }}
           AMAZON_CREATORS_AU_VERSION: ${{ secrets.AMAZON_CREATORS_AU_VERSION }}
+          AMAZON_CREATORS_US_CLIENT_ID: ${{ secrets.AMAZON_CREATORS_US_CLIENT_ID }}
+          AMAZON_CREATORS_US_CLIENT_SECRET: ${{ secrets.AMAZON_CREATORS_US_CLIENT_SECRET }}
+          AMAZON_CREATORS_US_VERSION: ${{ secrets.AMAZON_CREATORS_US_VERSION }}
         run: npx tsx scripts/amazon-asins.ts
       # The Compare Empire network (scripts/family-sync.ts): this site's best deals and pre-orders for
       # its sisters, and their feeds for this site's "Also in this cluster" blocks. Never fatal.
