@@ -27,6 +27,7 @@ import { GameTiles } from "@/components/GameTiles";
 import { LandingAds } from "@/components/LandingAds";
 import { Section } from "@/components/Section";
 import { cardAds } from "@/lib/card-ads";
+import { HeroCards } from "@/components/home/HeroCards";
 
 // The homepage leads with "<game> Booster Box Prices" (sealed only since 2026-11-06) and the number of stores compared.
 export function generateMetadata(): Metadata {
@@ -63,6 +64,8 @@ export default function Home() {
   const trending = byValue(products().filter((p) => p.sealedType === "Booster Box")).slice(0, 6);
   const topDeals = deals(6);
   const shelf = featuredSealed(6);
+  // The hero's two featured boxes: the shelf's first two with a photo (the newest released sets' booster boxes).
+  const heroPicks = shelf.filter((p) => p.image).slice(0, 2);
   const sealedLinks = sealedHubs();
   // The sealed shelf: one tabbed, swipeable row (components/SealedHero.tsx) on every site.
   const hero = sealedHero();
@@ -88,40 +91,61 @@ export default function Home() {
       {/* The hero: the engine's band (a surface with a hairline under it, full width of the column), the search as its one
           action, the living background behind it (HeroSparks) and the creators bubble in its corner. The words, the h1 and the
           links are the ones the old hero carried. */}
-      <section className="hero-band relative -mx-4 -mt-6 flex flex-col items-center justify-center overflow-x-clip border-b border-line px-4 pb-10 pt-10 text-center sm:-mx-6 sm:px-8 sm:pb-14 sm:pt-14">
+      <section className="hero-band relative -mx-4 -mt-6 overflow-x-clip border-b border-line px-4 pb-10 pt-8 sm:-mx-6 sm:px-8 sm:pb-14 sm:pt-12">
         <HeroSparks />
         <CreatorsBubble />
-        <ChristmasGifts />
-        <p className="eyebrow">{SITE.gameShort} price comparison</p>
-        <h1 className="hero-glow mx-auto mt-3 max-w-4xl font-display text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-          <span className="text-brand">{SITE.gameShort}</span> Booster Box Prices
-        </h1>
-        <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-muted sm:text-lg">
-          <strong className="block text-ink">Buy {SITE.gameShort} sealed at the best price</strong>
-          Price check any booster box, tin, structure deck or pre-order and find the cheapest place to buy: live prices from TCGplayer, eBay, Amazon and {storeCount} stores in the US, UK, Canada and Australia, in your own currency, updated daily.
-        </p>
-        <div className="hero-search relative z-30 mx-auto mt-6 hidden w-full max-w-3xl sm:block"><SearchBox big /></div>
-        <p className="eyebrow mt-6">Shopping from</p>
-        <MarketChooser className="mt-2 justify-center" bare />
-        {trending.length > 0 && (
-          <div className="mx-auto mt-5 w-full max-w-3xl">
-            <p className="eyebrow">Trending</p>
-            <ul className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
-              {trending.map((p) => (
-                <li key={p.id}>
-                  <Link href={`/card/${p.slug}`} className="chip w-full justify-center truncate">
-                    <span className="truncate">{shortName(p.name)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        {/* Two columns from lg (owner, 2026-11-08: KaeYoung and ScentCompare's hero, "feature some products on the hero"): the words,
+            search, region row and trending chips on the left, two featured boxes on the right (under the words on a phone). The
+            words, the h1 and the links are the ones the centred hero carried. */}
+        <div className="mx-auto grid w-full max-w-[1440px] gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(340px,480px)] lg:items-center lg:gap-10">
+          <div className="min-w-0">
+            <ChristmasGifts />
+            <p className="eyebrow">{SITE.gameShort} price comparison</p>
+            <h1 className="hero-glow mt-3 max-w-4xl font-display text-3xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+              <span className="text-brand">{SITE.gameShort}</span> Booster Box Prices
+            </h1>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-muted sm:text-lg">
+              <strong className="block text-ink">Buy {SITE.gameShort} sealed at the best price</strong>
+              Price check any booster box, tin, structure deck or pre-order and find the cheapest place to buy: live prices from TCGplayer, eBay, Amazon and {storeCount} stores in the US, UK, Canada and Australia, in your own currency, updated daily.
+            </p>
+            <div className="hero-search relative z-30 mt-6 hidden w-full max-w-2xl sm:block"><SearchBox big /></div>
+            <p className="eyebrow mt-6">Shopping from</p>
+            <MarketChooser className="mt-2" bare />
+            {trending.length > 0 && (
+              <div className="mt-5 w-full max-w-2xl">
+                <p className="eyebrow">Trending</p>
+                <ul className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  {trending.map((p) => (
+                    <li key={p.id}>
+                      <Link href={`/card/${p.slug}`} className="chip w-full justify-center truncate">
+                        <span className="truncate">{shortName(p.name)}</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="mt-5 flex flex-wrap items-center gap-2 text-sm">
+              {m ? (
+                <>
+                  <span className="hero-stat"><b className="tabular">{products().length.toLocaleString()}</b> sealed products</span>
+                  <span className="hero-stat"><b className="tabular">{storeCount}</b> stores</span>
+                  <span className="hero-stat">prices updated {ago(m.updatedAt)}</span>
+                </>
+              ) : (
+                <span className="hero-stat">Prices update daily</span>
+              )}
+              {upcoming && <Link className="hero-stat hover:border-ink/40" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link>}
+            </p>
+            <p className="mt-3 text-sm"><Link href="/sealed" className="link font-semibold">Every {SITE.gameShort} sealed product →</Link></p>
           </div>
-        )}
-        <p className="mt-5 text-xs text-muted">
-          {m ? `${products().length.toLocaleString()} sealed products · ${storeCount} stores · prices updated ${ago(m.updatedAt)}` : "Prices update daily"}
-          {upcoming && <> · <Link className="link" href={preorderPath(upcoming)}>{upcoming.name} pre-orders →</Link></>}
-        </p>
-        <p className="mt-3 text-sm"><Link href="/sealed" className="link font-semibold">Every {SITE.gameShort} sealed product →</Link></p>
+          {heroPicks.length > 0 && (
+            <div className="min-w-0">
+              <p className="eyebrow mb-3">Newest booster boxes · TCGplayer market</p>
+              <HeroCards items={heroPicks} />
+            </div>
+          )}
+        </div>
       </section>
 
       {/* The engine's ad banner (DexCompare / MTG Compare, owner 2026-11-03): eBay beside TCGplayer, real cards and today's prices. */}
