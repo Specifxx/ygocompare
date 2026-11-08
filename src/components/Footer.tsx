@@ -2,7 +2,6 @@ import Link from "@/components/Link";
 import { RateUsLink } from "./site-reviews/SiteReviews";
 import { SITE } from "@/site.config";
 import { creatorsOn } from "@/lib/creators";
-import { NETWORK_PAGE, footerSisters } from "@/lib/family-network";
 import { historyOn } from "@/lib/data";
 import { LogoMark } from "./Logo";
 
@@ -87,9 +86,11 @@ export function Footer() {
           <p className="mt-3 text-xs text-muted">
             <RateUsLink className="font-semibold text-ink underline decoration-line underline-offset-2 hover:decoration-ink">Rate us</RateUsLink>
             {" · "}
-            <a href={NETWORK_PAGE} rel="noopener" className="underline decoration-line underline-offset-2 hover:decoration-ink">
-              A Compare Empire site →
-            </a>
+            {/* One link to the page that lists our other sites (2026-11-08): the other card sites named on every page were
+                thousands of site-wide links between our own sites, the pattern Google's link-spam policy warns about. */}
+            <Link href="/our-sites" className="underline decoration-line underline-offset-2 hover:decoration-ink">
+              Our other price comparison sites →
+            </Link>
           </p>
         </div>
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
@@ -107,19 +108,6 @@ export function Footer() {
               </ul>
             </nav>
           ))}
-          <nav aria-label="Footer: Other card games">
-            {/* The other card sites, by brand name only (owner, 2026-11-03: no hobby or tech sites in a card site's footer). */}
-            <p className="eyebrow mb-2">Other card games</p>
-            <ul className="text-sm">
-              {footerSisters(SITE.family.id).map((s) => (
-                <li key={s.id}>
-                  <a href={s.url} rel="noopener" title={s.label} className="flex min-h-10 items-center text-muted transition-colors hover:text-ink sm:min-h-8">
-                    {s.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
       </div>
       <div className="border-t border-line">
