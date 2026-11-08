@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-07T18:01:44.950Z",
+ "generatedAt": "2026-11-08T18:30:42.315Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12512,
+   "refCents": 12555,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
   },
@@ -61,9 +61,23 @@
    "currency": "USD",
    "store": "Paragon City Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16292,
+   "refCents": 16283,
    "refLabel": "TCGplayer market price",
    "savingPct": 32
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Darkwing Blast Booster Box",
+   "url": "https://ygocompare.com/card/darkwing-blast-booster-box",
+   "cents": 5499,
+   "currency": "USD",
+   "store": "Collector Store LLC",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/276698_200w.jpg",
+   "refCents": 7313,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 25
   },
   {
    "kind": "deal",
@@ -76,20 +90,6 @@
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/488582_200w.jpg",
    "refCents": 9894,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 19
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Magnificent Maestros Display",
-   "url": "https://ygocompare.com/card/magnificent-maestros-display",
-   "cents": 25999,
-   "currency": "USD",
-   "store": "Gamers Guild AZ",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
-   "refCents": 32190,
    "refLabel": "TCGplayer market price",
    "savingPct": 19
   },
