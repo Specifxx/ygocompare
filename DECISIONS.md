@@ -1779,3 +1779,18 @@ and sees whether it is a good price.
   above it "you can pay less", with the saving. A listing that was out of stock says so instead. eBay, Amazon, marketplaces, stores
   we don't read and unmatched pages fall back to a search from the link's words, each linking to its price table.
 - Pasting a link into the header search opens the checker (`#link=` in the fragment, so the CDN keeps one copy of the page).
+
+
+## 2026-11-08 — Foreign products found by their handle, and a title naming another set's code
+
+Gundam Compare had a store's Japanese Stardust Trails box ("...-gd06-jpn", S$70) on the English box's page:
+`isForeign` knew "jp" and "japanese" but not "JPN", and many stores say the language only in the URL handle. The same
+matcher runs here, so the fix is ported (Gundam Compare DECISIONS.md, 2026-11-08).
+
+- `isForeign` (`lib/import/match.ts`) also refuses JPN, JAP, CHN, KOR, Thai, Indonesian, "(kr)" and Japanese, Chinese or
+  Korean script; the importer checks the listing's URL handle for the same words (`handleOf`). The handle is read for the
+  language only, never the set: stores duplicate a listing and retitle it, leaving the old set in the handle.
+- A sealed title that names a release code (letters + two digits the catalogue knows: "[GD05]", "FB-10", "MP23") must
+  name the product's own set, or a set whose name the product's set carries. A store's typo loses a row rather than a
+  guess putting it on the wrong page.
+- ygocompare: replaying the stored rows, 9 German ("deutsch" handle) sealed rows from Card Cosmos stop matching, and 7 single cards that sat on a pack's page ("...-mp23-...", "...-op01-en004-...").
