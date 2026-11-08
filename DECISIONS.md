@@ -1764,3 +1764,18 @@ collection worth"; Scryfall grew on free data credited with a link; price sites 
   worth today, the change since the items were added, the change since the last look (one total per market and day in
   `ce_vault_days_v1`), and a share line with the real totals (`utm_medium=collection`). Values are the price to buy it again
   at a store, and the page says so. Linked from the footer.
+## 2026-11-08 — "Is this a good price?": paste a store link
+
+Owner, 2026-11-08 (the competitor scan's gap #7, "implement all of this"), ported from MTG Compare (mtgcompare #106): a visitor
+pastes a store's product link at `/tools/is-this-a-good-price` (`components/LinkChecker.tsx`, `lib/link-check.ts`)
+and sees whether it is a good price.
+
+- The browser asks `/api/check/<host>` for that store's listings: our own stored rows, only for a store in `SITE.stores`
+  (anything else is a 404), force-dynamic and kept by the CDN for a day, never ISR, built from the committed price files (every shard read once per instance). It never fetches the pasted
+  page. Each listed product comes with its cheapest and median in-stock STORE price in the store's market (eBay and TCGplayer never count).
+- A link is keyed by host and path (`linkPath`: a Shopify product is `/products/<handle>` from any collection or market prefix); two
+  products under one path need the `?variant=` to tell them apart, or there is no answer (a wrong product is worse than none).
+- Verdict (`priceVerdict`): within 1% of the cheapest in stock is the best price; under the median fair; within 3% of it typical;
+  above it "you can pay less", with the saving. A listing that was out of stock says so instead. eBay, Amazon, marketplaces, stores
+  we don't read and unmatched pages fall back to a search from the link's words, each linking to its price table.
+- Pasting a link into the header search opens the checker (`#link=` in the fragment, so the CDN keeps one copy of the page).
