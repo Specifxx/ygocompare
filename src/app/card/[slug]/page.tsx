@@ -9,6 +9,7 @@ import { imageAt } from "@/lib/image";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { PriceTable } from "@/components/PriceTable";
+import { VaultOwn } from "@/components/vault/VaultOwn";
 import { PriceAlert } from "@/components/PriceAlert";
 import { lowestByMarket } from "@/lib/alert-feed";
 import { CardStickyBuyBar, CardTopBuy, CheckedAgo } from "@/components/CardBuy";
@@ -135,6 +136,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               <p className="text-sm text-muted">{inStock.length} in-stock listing{inStock.length === 1 ? "" : "s"} worldwide</p>
             </div>
             <CardTopBuy offers={e.offers} productId={p.id} ebayQuery={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} />
+            <VaultOwn id={p.id} name={`${name}${p.number ? ` ${p.number}` : ""}`} href={`/card/${p.slug}`} image={p.image ? imageAt(p.image, "200w") : null} prices={lowestByMarket(e.offers)} className="mt-3" />
             {Object.keys(e.tcg).length > 1 && (
               <p className="mt-2 flex flex-wrap gap-2 text-xs">
                 {Object.entries(e.tcg).map(([k, v]) => (

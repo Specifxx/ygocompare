@@ -1745,3 +1745,22 @@ biggest price drops once a week", sent as `weekly` beside the alert. RiftCompare
 (TCGEmpire DECISIONS.md, "A weekly biggest-drops email for the sister sites"): it rides the same double opt-in, builds
 one edition a week from this site's own `/alert-feed.json`, links only to this site's pages (no eBay or Amazon), and
 every email has a one-click stop. This site still stores no address and holds no mail key, and nothing new pops up.
+
+## 2026-11-08 — Store badges, free price data and My collection (competitor scan)
+
+The owner approved the competitor scan's ideas (Collectr and PriceCharting keep people coming back with "what is my
+collection worth"; Scryfall grew on free data credited with a link; price sites earn links from the stores they list).
+- **Store badge.** `/list-your-store` ends with "Already listed? Add our badge": the site's plain-HTML "prices compared on"
+  badge (an ordinary link: no iframe, script, image or tracking) and its code to copy. `ListYourStore.tsx` takes it as the
+  optional `badge` prop and stays the same file in every site. Stores see it when they come to us; nobody is emailed about it
+  (cold outreach stays stopped).
+- **Free price data.** `/prices.json` (`lib/price-api.ts`): every product's cheapest in-stock price per market, in that
+  market's currency, with an absolute link to its comparison; never eBay, never converted. Free for any use with a visible
+  link back (the licence and an attribution snippet are in the file and on the widgets page). Built from the same numbers as
+  `/alert-feed.json` and served as a static file: no function runs for it and only a release changes it. Open CORS.
+- **My collection.** "I own this" on the card page (`VaultOwn`, in the visitor's market like the rest of the page) (`components/vault`, `lib/vault.ts`, the same files in every site)
+  keeps a list in the browser only (`ce_vault_v1`: no account, no database, nothing sent to us). `/collection` (a static,
+  noindex shell) values it from `/prices.json` in the market each item was added in, one total per market (never converted):
+  worth today, the change since the items were added, the change since the last look (one total per market and day in
+  `ce_vault_days_v1`), and a share line with the real totals (`utm_medium=collection`). Values are the price to buy it again
+  at a store, and the page says so. Linked from the footer.

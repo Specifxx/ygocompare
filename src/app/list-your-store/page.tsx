@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
-import { canon } from "@/lib/site";
+import { canon, SITE_URL } from "@/lib/site";
 import { MARKET_LABEL } from "@/lib/site-types";
 import { StaticPage } from "@/components/StaticPage";
 import { ListYourStore } from "@/components/ListYourStore";
+import { storeBadge } from "@/lib/embed";
 
 // The store-owner page every Compare Empire site shares (owner, 2026-11-04).
 export const revalidate = 86400;
@@ -23,6 +24,7 @@ export default function ListYourStorePage() {
   return (
     <StaticPage title={`List your store on ${SITE.name}`}>
       <ListYourStore
+        badge={storeBadge(SITE_URL, SITE.name, SITE.gameShort)}
         showTitle={false}
         site={SITE.name}
         what={`${SITE.gameShort} products`}
