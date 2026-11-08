@@ -16,7 +16,7 @@ export const revalidate = 86400;
 // lib/card-redirects.ts).
 export default function sitemap(): MetadataRoute.Sitemap {
   const at = meta()?.updatedAt ? new Date(meta()!.updatedAt) : new Date();
-  const fixed = ["", "/sealed", "/sets", "/preorders", "/tools/deal-finder", "/price-report", "/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/daily", "/blog", "/stores", "/about", "/methodology", "/list-your-store", ...(creatorsOn() ? ["/creators"] : [])];
+  const fixed = ["", "/sealed", "/sets", "/preorders", "/tools/deal-finder", "/tools/is-this-a-good-price", "/price-report", "/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/daily", "/blog", "/stores", "/about", "/methodology", "/list-your-store", ...(creatorsOn() ? ["/creators"] : [])];
   return [
     ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
     ...sealedHubs().map((h) => ({ url: `${SITE_URL}/sealed/${h.slug}`, lastModified: at, changeFrequency: "daily" as const, priority: 0.8 })),
