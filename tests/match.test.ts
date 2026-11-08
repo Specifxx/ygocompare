@@ -148,3 +148,34 @@ test("ygo: real store title formats from the 2026-10-26 probe", () => {
   assert.equal(matchCard("Fiendsmith in Paradise [INFO-EN072] Super Rare", i)?.product.id, 304);
   assert.equal(matchCard("Yu-Gi-Oh! Crackle Blitzclique CORI-EN012 1st Edition NM", i), null);
 });
+
+test("Japanese boxes and wrong set codes never match (Gundam Compare, live 2026-11-08)", async () => {
+  const { handleOf, isForeign } = await import("@/lib/import/match");
+  const gsets: SetInfo[] = [
+    { ...set(24804, "Stardust Trails"), code: "GD06" },
+    { ...set(24699, "Freedom Ascension"), code: "GD05" },
+    { ...set(24767, "Deck Build Box Freedom Ascension"), code: "SC01" },
+  ];
+  const gidx = buildIndex(
+    [sealed(710652, "Stardust Trails Booster Box", 24804), sealed(693621, "Freedom Ascension Booster Box", 24699), sealed(693625, "Freedom Ascension Deck Build Box", 24767)],
+    gsets,
+    "code",
+  );
+  // The Avid Collectors (SG): S$70 for the Japanese box on the English box's page.
+  assert.equal(matchSealed("Gundam Card Game Booster Box Stardust Trails [GD06] JPN", gidx), null);
+  assert.equal(matchSealed("Gundam Card Game Booster Box Stardust Trails (GD06) - Japanese", gidx), null);
+  assert.equal(matchSealed("ガンダムカードゲーム ブースターパック Stardust Trails Booster Box", gidx), null);
+  assert.ok(isForeign(handleOf("https://theavidcollectors.com/products/gundam-card-game-booster-box-stardust-trails-gd06-jpn?variant=46041928269960")));
+  // A stale handle is read for the language only: these are real GD06 boxes, retitled copies of a GD05 listing.
+  assert.equal(isForeign(handleOf("https://levelupgames.ca/products/gundam-freedom-ascension-booster-box-gd05-copy?variant=67970350645422")), false);
+  assert.equal(isForeign(handleOf("https://northumbriantinsoldier.com/products/gundam-card-game-freedom-ascension-booster-box-gd05-1?variant=1")), false);
+  // English boxes still match, with or without the code.
+  assert.equal(matchSealed("Gundam Card Game GD06 Stardust Trails Booster Box", gidx)?.product.id, 710652);
+  assert.equal(matchSealed("Gundam Card Game: Stardust Trails Booster Box (English)", gidx)?.product.id, 710652);
+  assert.equal(matchSealed("Gundam Card Game - Stardust Trails Booster Box [GD-06]", gidx)?.product.id, 710652);
+  // A title naming another set's code is no match.
+  assert.equal(matchSealed("Gundam Card Game Stardust Trails Booster Box [GD05]", gidx), null);
+  assert.equal(matchSealed("Gundam Freedom Ascension Booster Box GD06", gidx), null);
+  // The deck build box carries its parent set's code.
+  assert.equal(matchSealed("Gundam Freedom Ascension Deck Build Box [GD05]", gidx)?.product.id, 693625);
+});

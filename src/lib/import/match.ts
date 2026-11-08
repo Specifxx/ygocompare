@@ -284,8 +284,21 @@ export interface MatchResult {
 
 // Non-English product. The catalogue (TCGplayer) is English; a Japanese box
 // at a third of the price on an English box's page is the classic bad match.
-const FOREIGN = /\b(japanese|japan|jp|chinese|simplified|traditional|french|fran[cç]ais|german|deutsch|italian|italiano|spanish|espa[nñ]ol|korean|portuguese|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\))\b/i;
-export const isForeign = (title: string) => FOREIGN.test(title);
+// "JPN" was missing until 2026-11-08 (Gundam Compare: a store's "... [GD06]
+// JPN" box at a third of the price sat on the English box's page). Japanese,
+// Chinese and Korean script count too.
+const FOREIGN = /\b(japanese|japan|jpn|jap|jp|chinese|simplified|traditional|chn|french|fran[cç]ais|german|deutsch|italian|italiano|spanish|espa[nñ]ol|korean|kor|portuguese|thai|indonesian|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\)|\(kr\))\b/i;
+const CJK = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
+export const isForeign = (title: string) => FOREIGN.test(title) || CJK.test(title);
+
+/** The listing's own URL slug ("...-gd06-jpn"): a store that keeps the
+ *  language only in the handle is still a foreign product. Read for the
+ *  language only, never for the set: stores duplicate a listing and retitle
+ *  it, so "freedom-ascension-booster-box-gd05-copy" can be a real GD06 box. */
+export const handleOf = (url: string) => {
+  const m = url.match(/\/products\/([^/?#]+)/);
+  return m ? decodeURIComponent(m[1]).replace(/-/g, " ") : "";
+};
 
 // A store listing for a used, damaged or graded copy is not the card's
 // near-mint price ("... - Used Super Rare card", "... PSA 9").
@@ -366,10 +379,38 @@ export function matchCard(title: string, idx: MatchIndex, context = ""): MatchRe
   return scored[0];
 }
 
+// Set codes a sealed title names ("[GD06]", "GD-05", "eb01"), as set ids.
+// Only codes shaped like a release code (letters + two digits) that the
+// catalogue knows; a bare number is never read as a set.
+const TITLE_CODE = /(?<![A-Za-z0-9])([A-Za-z]{2,4})[\s-]?(\d{2})(?![A-Za-z0-9])/g;
+export function setCodesInTitle(title: string, idx: MatchIndex): Set<number> {
+  const out = new Set<number>();
+  for (const m of title.matchAll(TITLE_CODE)) {
+    const code = `${m[1]}${m[2]}`.toUpperCase();
+    if (!/^[A-Z]{2,4}\d{2}$/.test(code)) continue;
+    for (const id of idx.setByCode.get(code) ?? []) out.add(id);
+  }
+  return out;
+}
+
+/** A title that names a set code must name the product's own set, or a set
+ *  whose name the product's set carries (the GD05 code on "Deck Build Box
+ *  Freedom Ascension", SC01). "Stardust Trails Booster Box [GD05]" is no match. */
+function codesAgree(p: Product, codes: Set<number>, idx: MatchIndex): boolean {
+  if (!codes.size || codes.has(p.setId)) return true;
+  const own = new Set(idx.setName.get(p.setId) ?? []);
+  for (const id of codes) {
+    const t = idx.setName.get(id) ?? [];
+    if (t.length && t.every((w) => own.has(w))) return true;
+  }
+  return false;
+}
+
 export function matchSealed(title: string, idx: MatchIndex): MatchResult | null {
   if (isForeign(title)) return null;
   const have = new Set(tokens(title).filter((t) => !STOP.has(t) || t === "booster"));
   const type = sealedTypeOf(title);
+  const codes = setCodesInTitle(title, idx);
   const scored: MatchResult[] = [];
   for (const p of idx.sealed) {
     if (sealedTypeOf(p.name) !== type) continue;
@@ -379,6 +420,7 @@ export function matchSealed(title: string, idx: MatchIndex): MatchResult | null 
     if (/\bbundle\b/i.test(title) && !/\bbundle\b/i.test(p.name)) continue;
     const setTokens = idx.setName.get(p.setId) ?? [];
     if (setTokens.length && overlap(setTokens, have) < 1) continue;
+    if (!codesAgree(p, codes, idx)) continue;
     const own = idx.editions ? idx.setEdition.get(p.setId) : null;
     const need = tokens(p.name).filter((t) => !STOP.has(t) && t !== own);
     const s = overlap(need, have);
