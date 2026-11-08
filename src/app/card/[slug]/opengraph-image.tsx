@@ -1,12 +1,15 @@
-// The card page's share image (owner, 2026-11-02, word of mouth): the card,
-// and the real price gap in the US (the page's baseline market) — cheapest
+// The card page's share image (owner, 2026-11-02, word of mouth): the card's
+// name and the real price gap in the US (the page's baseline market) — cheapest
 // in-stock price, the dearest, and how much less — from lib/share.ts. With no
 // spread it shows the TCGplayer market price. Drawn on first request, kept a
 // day like the page (empty generateStaticParams: nothing drawn at build).
+// Text only, no card art (2026-11-08, the Vercel cost cap): with the art each
+// PNG was ~580 KB, and every one Vercel caches is billed as ISR writes by the
+// 8 KB unit, so these images were most of the sites' ISR bill. Flat colour
+// and text compress to a few dozen KB. Don't put a photo back in.
 import { ImageResponse } from "next/og";
 import { SITE } from "@/site.config";
 import { priceOf, productBySlug, refCents, setById } from "@/lib/data";
-import { imageAt } from "@/lib/image";
 import { money } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { priceGap, storeName } from "@/lib/share";
@@ -23,20 +26,13 @@ export default function Image({ params }: { params: { slug: string } }) {
   const name = p ? shortName(p.name) : SITE.name;
   const gap = p ? priceGap(priceOf(p.id).offers, "US") : null;
   const ref = p ? refCents(p.id) : null;
-  const img = p ? imageAt(p.image, "400w") : null;
   const sub = p ? [setById(p.setId)?.name, p.number].filter(Boolean).join(" · ") : SITE.tagline;
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", background: t.pageDark, color: "#fff", padding: "48px 64px", fontFamily: "sans-serif" }}>
-        {img && (
-          <div style={{ display: "flex", width: 380, height: 534, marginRight: 56, alignItems: "center", justifyContent: "center" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={img} width={380} height={532} style={{ objectFit: "contain", borderRadius: 18 }} alt="" />
-          </div>
-        )}
+      <div style={{ width: "100%", height: "100%", display: "flex", background: t.pageDark, color: "#fff", padding: "48px 88px", fontFamily: "sans-serif" }}>
         <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>
           <div style={{ fontSize: 30, color: t.brandLight, fontWeight: 700 }}>{SITE.name}</div>
-          <div style={{ fontSize: name.length > 34 ? 50 : 62, fontWeight: 800, lineHeight: 1.08, marginTop: 14 }}>{name}</div>
+          <div style={{ fontSize: name.length > 40 ? 58 : 72, fontWeight: 800, lineHeight: 1.08, marginTop: 14 }}>{name}</div>
           {sub && <div style={{ fontSize: 28, color: "#a9b4cc", marginTop: 10 }}>{sub}</div>}
           {gap ? (
             <div style={{ display: "flex", flexDirection: "column", marginTop: 34 }}>
