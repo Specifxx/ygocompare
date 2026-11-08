@@ -11,7 +11,6 @@ export function ChristmasGifts() {
   return (
     <div className="xmas-pill-row mb-4">
       <Link href="/sealed" className="xmas-pill">
-        <span className="xmas-pill-icon" aria-hidden="true" />
         <b>{SITE.christmas.headline}</b>
         <span className="xmas-pill-more hidden sm:inline">· {SITE.christmas.blurb} →</span>
       </Link>
