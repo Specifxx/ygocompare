@@ -4,7 +4,6 @@ import { SearchBox } from "@/components/SearchBox";
 import { MarketChooser } from "@/components/ClientPrefs";
 import { CreatorsBubble } from "@/components/creators/CreatorsBubble";
 import { HeroSparks } from "@/components/HeroSparks";
-import { ChristmasDecor } from "@/components/ChristmasDecor";
 import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { TileGrid } from "@/components/ProductTile";
 import { byValue, deals, latestReleasedSet, meta, products } from "@/lib/data";
@@ -91,8 +90,6 @@ export default function Home() {
           links are the ones the old hero carried. */}
       <section className="hero-band relative -mx-4 -mt-6 flex flex-col items-center justify-center overflow-x-clip border-b border-line px-4 pb-10 pt-10 text-center sm:-mx-6 sm:px-8 sm:pb-14 sm:pt-14">
         <HeroSparks />
-        {/* Christmas (1 November to Boxing Day): snow, lights, trees. */}
-        <ChristmasDecor />
         <CreatorsBubble />
         <ChristmasGifts />
         <p className="eyebrow">{SITE.gameShort} price comparison</p>
