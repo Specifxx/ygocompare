@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-08T18:30:42.315Z",
+ "generatedAt": "2026-11-09T22:55:29.218Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12555,
+   "refCents": 12540,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
   },
@@ -33,9 +33,9 @@
    "currency": "USD",
    "store": "Collector Store LLC",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/184344_200w.jpg",
-   "refCents": 4039,
+   "refCents": 4033,
    "refLabel": "TCGplayer market price",
-   "savingPct": 51
+   "savingPct": 50
   },
   {
    "kind": "deal",
@@ -99,9 +99,9 @@
    "region": "US",
    "title": "Magnificent Maestros Booster Box",
    "url": "https://ygocompare.com/preorders/magnificent-maestros",
-   "cents": 25999,
+   "cents": 23999,
    "currency": "USD",
-   "store": "Gamers Guild AZ",
+   "store": "GuuBuu Hobby",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
    "releaseDate": "2026-11-13"
   },
