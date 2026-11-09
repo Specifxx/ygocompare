@@ -299,6 +299,7 @@ export const STORES: StoreConfig[] = [
   { key: "totalcards", name: "Total Cards", base: "https://totalcards.net", market: "UK", collections: ["new-yugioh", "all-yugioh", "featured-yugioh"], kind: "both" },
   { key: "ultimatetcg", name: "Ultimate TCG Limited", base: "https://ultimatetcg.co.uk", market: "UK", collections: ["yu-gi-oh"], kind: "sealed" },
   { key: "zatu", name: "Zatu Games", base: "https://zatu.com", market: "UK", collections: ["best-sellers-yu-gi-oh"], kind: "sealed" },
+  { key: "tokyotoys", name: "TokyoToys", base: "https://tokyotoys.com", market: "UK", collections: ["yu-gi-oh-tcg"], kind: "sealed" },
   { key: "151collectables", name: "151Collectables", base: "https://151collectables.com", market: "US", collections: ["yugioh-sealed"], kind: "sealed" },
   { key: "1stcapitalgaming", name: "1st Capital Gaming", base: "https://1stcapitalgaming.com", market: "US", collections: ["yu-gi-oh-legendary-duelists-soulburning-volcano"], kind: "sealed" },
   { key: "4horsemencomics", name: "Four Horsemen Comics and Gaming of Robinson Township", base: "https://4horsemencomics.com", market: "US", collections: ["yu-gi-oh-sealed-product"], kind: "sealed" },
