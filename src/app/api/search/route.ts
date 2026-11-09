@@ -14,7 +14,7 @@ export const dynamic = "force-dynamic";
 let index: { hay: string[]; set: Set<string> }[] | null = null;
 function haystacks() {
   return (index ??= products().map((p) => {
-    const hay = tokens(`${p.name} ${setById(p.setId)?.name ?? ""} ${p.number ?? ""}`);
+    const hay = tokens(`${p.name} ${setById(p.setId)?.name ?? ""} ${setById(p.setId)?.code ?? ""} ${p.number ?? ""}`);
     return { hay, set: new Set(hay) };
   }));
 }

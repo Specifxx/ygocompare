@@ -18,6 +18,8 @@ export interface NavOptions {
   history?: boolean;
   /** In season, the Black Friday or Cyber Monday page (lib/black-friday.ts saleStrip): first in Prices. */
   sale?: NavLink | null;
+  /** The shopping groups (lib/shop-nav.ts: sealed by type, sets); the layout and header pass them. Without them the rail keeps one flat "Prices" list. */
+  shop?: NavGroup[];
 }
 const readyFor = (o: NavOptions) => (l: NavLink) => o.history !== false || !NEEDS_HISTORY.has(l.href);
 
@@ -52,6 +54,12 @@ export function navGroups(o: NavOptions = {}): NavGroup[] {
     ...(creatorsOn() ? [{ href: "/creators", label: `${SITE.gameShort} creators` }] : []),
     { href: "/about", label: "About" },
   ];
+  if (o.shop) {
+    // The product types and sets come first (owner, 2026-11-09), so the flat list keeps only what they do not cover.
+    const covered = new Set(["/sealed", "/sealed/booster-box", "/sets"]);
+    const rest = prices.filter((l) => !covered.has(l.href));
+    return [...o.shop, { title: "Deals & stock", links: rest.filter(ready) }, { title: "Free tools", links: tools.filter(ready) }, { title: "Guides & news", links: guides.filter(ready) }];
+  }
   return [
     { title: "Prices", links: prices.filter(ready) },
     { title: "Free tools", links: tools.filter(ready) },
