@@ -18,16 +18,17 @@ import { CartHeaderLink } from "@/components/cart/CartHeaderLink";
  * first) open a dropdown (lib/shop-nav.ts); More opens the rest of the site (deals, tools, guides). `also`: other paths that count
  * as the section, for its current state.
  */
-export function headerNavItems(more: NavGroup[], shop: ShopMenus, sale: { href: string; label: string } | null = null): HeaderNavItem[] {
+export function headerNavItems(all: NavGroup[], shop: ShopMenus, sale: { href: string; label: string } | null = null): HeaderNavItem[] {
+  // Deals & stock gets its own dropdown (owner, 2026-11-09), pre-orders and the stores with it; "More" keeps the tools, the guides and the rest.
+  const deals = all.filter((g) => g.title === "Deals & stock");
+  const more = all.filter((g) => g.title !== "Deals & stock");
   return [
     ...(sale ? [{ href: sale.href, label: sale.label, also: [] as string[] }] : []),
     { href: "/sealed", label: "Sealed", also: ["/card"], menu: shop.sealed.length ? shop.sealed : undefined },
     { href: "/sets", label: "Sets", menu: shop.sets },
-    { href: "/preorders", label: "Pre-orders" },
     ...(SITE.kits ? [{ href: "/kits", label: SITE.kits.label, also: ["/kit"] }] : []),
-    { href: "/tools/deal-finder", label: "Deals", also: ["/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/movers"] },
-    { href: "/tools", label: "More", also: ["/stores", "/price-report", "/forum"], menu: more },
-    { href: "/blog", label: "Guides", xl: true },
+    { href: "/tools/deal-finder", label: "Deals", also: ["/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/movers", "/preorders", "/stores"], menu: deals.length ? deals : undefined },
+    { href: "/tools", label: "More", also: ["/price-report", "/forum", "/blog"], menu: more },
   ];
 }
 
