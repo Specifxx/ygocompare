@@ -1799,3 +1799,17 @@ matcher runs here, so the fix is ported (Gundam Compare DECISIONS.md, 2026-11-08
 ## 2026-11-09 — TokyoToys (UK) added for Yu-Gi-Oh!
 
 TokyoToys (tokyotoys.com, Shopify, GBP, UK mainland delivery only; vetted for Cyberpunk Compare, see its DECISIONS.md) lists Yu-Gi-Oh! sealed through its `yu-gi-oh-tcg` collection (read by hand 2026-11-09, items in stock with tracked inventory). UK market only. Its titles carry a "RELEASE <date>:" prefix. Dex and MTG Compare already list it; One Piece, Pokemon (English) and Union Arena / Digimon / Fusion World sealed are not stocked, so those sites do not.
+
+
+## 2026-11-09 — Navigation by product type and set (owner: "navigation is very, very important")
+
+A Yu-Gi-Oh! sealed buyer picks a product type (booster box, structure deck, tin, collection) and then a set; the header listed Sealed
+and Sets as plain links, so the type hubs and the newest sets were two clicks away and the sidebar was one flat "Prices" list.
+Audit: `/mnt/project-files/nav-audit/ygo.json`.
+
+- `lib/shop-nav.ts` builds one list from the hubs that already exist (`sealedHubs`, `sealedSets`): the header's Sealed (by product
+  type) and Sets (newest first, then every set) dropdowns (`HeaderNav.tsx`, CSS-only, plain links in the server HTML, the panel sized to
+  its columns), the sidebar's "Sealed by type" and "Sets" groups first, and the phone menu. "Browse" became "More".
+- The header search says what it finds ("Search sealed or set code…") and now finds a product by its set code (`api/search`).
+- Not done: edition (1st / Unlimited) and era hubs; the edition is only in the product name, not a field, and a hub from a name
+  regex would be a guess. Existing URLs, titles, canonicals and JSON-LD unchanged; the footer's single /our-sites link stays.

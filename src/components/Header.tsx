@@ -2,6 +2,7 @@ import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { navGroups, type NavGroup } from "@/lib/nav";
+import { shopNav, type ShopMenus } from "@/lib/shop-nav";
 import { historyOn } from "@/lib/data";
 import { holidayNav } from "@/lib/holiday-nav";
 import { Logo } from "./Logo";
@@ -13,18 +14,19 @@ import { SearchBox } from "./SearchBox";
 import { CartHeaderLink } from "@/components/cart/CartHeaderLink";
 
 /**
- * The desktop nav (lg and up), in order: Cards, Sealed, Kits (SITE.kits), Deals, Browse (the dropdown: every section of the site,
- * lib/nav.ts groups), Guides. `also`: other paths that count as the section, for its current state.
+ * The desktop nav (lg and up), in order: Sealed, Sets, Pre-orders, Deals, More, Guides. Sealed (by product type) and Sets (newest
+ * first) open a dropdown (lib/shop-nav.ts); More opens the rest of the site (deals, tools, guides). `also`: other paths that count
+ * as the section, for its current state.
  */
-export function headerNavItems(groups: NavGroup[], sale: { href: string; label: string } | null = null): HeaderNavItem[] {
+export function headerNavItems(more: NavGroup[], shop: ShopMenus, sale: { href: string; label: string } | null = null): HeaderNavItem[] {
   return [
     ...(sale ? [{ href: sale.href, label: sale.label, also: [] as string[] }] : []),
-    { href: "/sealed", label: "Sealed", also: ["/card"] },
-    { href: "/sets", label: "Sets" },
+    { href: "/sealed", label: "Sealed", also: ["/card"], menu: shop.sealed.length ? shop.sealed : undefined },
+    { href: "/sets", label: "Sets", menu: shop.sets },
     { href: "/preorders", label: "Pre-orders" },
     ...(SITE.kits ? [{ href: "/kits", label: SITE.kits.label, also: ["/kit"] }] : []),
     { href: "/tools/deal-finder", label: "Deals", also: ["/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/movers"] },
-    { href: "/tools", label: "Browse", also: ["/stores", "/price-report", "/forum"], menu: groups },
+    { href: "/tools", label: "More", also: ["/stores", "/price-report", "/forum"], menu: more },
     { href: "/blog", label: "Guides", xl: true },
   ];
 }
@@ -41,8 +43,11 @@ export function headerNavItems(groups: NavGroup[], sale: { href: string; label: 
  */
 export function Header() {
   const sale = holidayNav();
-  const groups = navGroups({ history: historyOn(), sale });
-  const items = headerNavItems(groups, sale);
+  const history = historyOn();
+  const shop = shopNav();
+  const groups = navGroups({ history, sale, shop: shop.groups });
+  // The "More" dropdown is everything the shopping dropdowns do not already list.
+  const items = headerNavItems(navGroups({ history, sale, shop: [] }), shop.menus, sale);
   return (
     <header className="sticky top-0 z-40 h-[var(--hdr)] border-b border-line bg-surface/90 backdrop-blur-md">
       <div className="page flex h-full items-center gap-2 sm:gap-3 lg:gap-4 xl:max-w-shell">

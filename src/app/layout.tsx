@@ -25,6 +25,7 @@ import { ShareArrival } from "@/components/ShareArrival";
 import { SideNav } from "@/components/SideNav";
 import { SideAds } from "@/components/SideAds";
 import { navGroups } from "@/lib/nav";
+import { shopNav } from "@/lib/shop-nav";
 import { historyOn } from "@/lib/data";
 import { adSearch, cardAds } from "@/lib/card-ads";
 
@@ -88,7 +89,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <PreorderStrip />
           {/* The engine's shell: from xl the sidebar sits in the flow beside <main>, both inside the 1480px shell. */}
           <div className="mx-auto flex w-full max-w-shell flex-1">
-            <SideNav groups={navGroups({ history, sale: holidayNav() })} />
+            <SideNav groups={navGroups({ history, sale: holidayNav(), shop: shopNav().groups })} />
             <main id="main" className="min-w-0 flex-1">
               <div className="page py-6">{children}</div>
             </main>

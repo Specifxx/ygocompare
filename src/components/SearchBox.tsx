@@ -71,7 +71,7 @@ export function SearchBox({ big = false, size, placeholder }: { big?: boolean; s
         }}
         type="search"
         autoComplete="off"
-        placeholder={placeholder ?? (SITE.sealedOnly ? (size === "sm" ? "Search sealed…" : "Search any booster box, tin or deck…") : size === "sm" ? "Search cards…" : SITE.kits ? `Search any card, sealed product or ${SITE.kits.label} kit…` : "Search any card or sealed product…")}
+        placeholder={placeholder ?? (SITE.sealedOnly ? (size === "sm" ? "Search sealed or set code…" : "Search any booster box, tin or deck…") : size === "sm" ? "Search cards…" : SITE.kits ? `Search any card, sealed product or ${SITE.kits.label} kit…` : "Search any card or sealed product…")}
         aria-label={SITE.sealedOnly ? "Search sealed products" : "Search cards"}
         role="combobox"
         aria-expanded={listed}
