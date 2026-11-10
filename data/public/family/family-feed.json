@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-09T22:55:29.218Z",
+ "generatedAt": "2026-11-10T20:16:53.904Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -69,20 +69,6 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Darkwing Blast Booster Box",
-   "url": "https://ygocompare.com/card/darkwing-blast-booster-box",
-   "cents": 5499,
-   "currency": "USD",
-   "store": "Collector Store LLC",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/276698_200w.jpg",
-   "refCents": 7313,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 25
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
    "title": "Spell Ruler Booster Box (25th Anniversary Edition)",
    "url": "https://ygocompare.com/card/spell-ruler-booster-box-25th-anniversary-edition",
    "cents": 7999,
@@ -94,14 +80,28 @@
    "savingPct": 19
   },
   {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Magnificent Maestros Display",
+   "url": "https://ygocompare.com/card/magnificent-maestros-display",
+   "cents": 21499,
+   "currency": "USD",
+   "store": "Double Infinity Gaming",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
+   "refCents": 23958,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 10
+  },
+  {
    "kind": "preorder",
    "cluster": "cards",
    "region": "US",
    "title": "Magnificent Maestros Booster Box",
    "url": "https://ygocompare.com/preorders/magnificent-maestros",
-   "cents": 23999,
+   "cents": 21499,
    "currency": "USD",
-   "store": "GuuBuu Hobby",
+   "store": "Double Infinity Gaming",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
    "releaseDate": "2026-11-13"
   },
