@@ -1828,3 +1828,18 @@ Audit: `/mnt/project-files/nav-audit/ygo.json`.
 - Not done: removing the side panel (the menus do not yet cover its deep groups, and it carries the current-section state for the
   deep levels; revisit once the menus have been in use), a phone bottom sheet (the `<dialog>` menu stays), and the side rails and
   footer links, which are the owner's own decisions. Deals is a hover menu: nothing is added to the deploy cadence.
+
+## 2026-11-10: eBay calls follow the visitors: every US product daily, Canada 400, the UK 300, Australia 277
+
+**Why.** The 30 days to 11 Nov (`/mnt/project-files/strategy/ebay-site-region-split-2026-11-10.html`): the US had 77% of
+visitors (681) and every eBay dollar (A$44.24) on 765 calls a day; Canada 58 visitors on 481, the UK 25 on 396, Australia
+26 on 558 with no sale. Bill approved the recommended split the same day ("whatever you recommend"). The site's 2,200 a day
+and the keyset are unchanged.
+
+**What.** `planSealedCoverage`: every US sealed product (about 1,223) is searched every day, first and with no ceiling (a
+pair checked 12 hours or more ago counts, so a run a little early still covers it). The other markets then take due pairs
+up to a daily ceiling each (`SEALED_MARKET_CEILING`: Canada 400, UK 300, Australia 277 of a full 2,200, scaled to a
+smaller budget), boxes and new sets every 48 h and the rest 72 h; market weights US 1, Canada 0.6, UK 0.5, Australia 0.3.
+Calls a ceiling leaves unspent go to the most overdue remaining pairs. A dry run on today's catalogue and state plans US
+1,223 / CA 400 / UK 300 / AU 277 for the next two runs. `tests/ebay-plan.test.ts` pins it; the methodology copy says
+"every product daily in the US". Recheck about 24 Nov against the 30 days to 11 Nov.

@@ -75,7 +75,8 @@ Lorcana Compare: Lorcana and Gundam 1,150 each, YGO
 `data/state/ebay-usage.json`. Every sealed product
 gets calls; there are no cards. Sealed only (2026-11-06): the plan is `planSealedCoverage` in
 `src/lib/import/ebay.ts` (every sealed product except inserts, in the US, UK, Canada and
-Australia; US boxes and new sets every 24 h, the rest 48 h, other markets 48/72 h), pinned by
+Australia; every US product every 24 h, first and uncapped, then daily ceilings of Canada 400, UK 300,
+Australia 277 at 48/72 h, spare calls spent on the most overdue pairs; owner's region split 2026-11-10), pinned by
 `tests/ebay-plan.test.ts`. Do not raise `SITE.ebay.dailyBudget` without moving
 another site's down by the same amount; the three must total 4,500 or less.
 

@@ -190,14 +190,39 @@ test("sealed coverage: inside the budget, US first, nothing checked in the last 
   const firstOther = calls.findIndex((c) => c.market !== "US");
   assert.ok(calls.slice(firstOther).every((c) => c.market !== "US"), "every US call runs before the other markets");
   assert.equal(sealedIntervalHours("US", true), 24);
+  assert.equal(sealedIntervalHours("US", false), 24);
   assert.equal(sealedIntervalHours("UK", false), 72);
+});
+
+// The region split (owner, 2026-11-10): every US product daily, then Canada 400, the UK 300, Australia 277.
+test("sealed coverage: every US product daily, then each market up to its ceiling", async () => {
+  const { planSealedCoverage } = await import("@/lib/import/ebay");
+  const products = Array.from({ length: 1223 }, (_, i) => p(i + 1, "Rare", "sealed"));
+  const ref = new Map(products.map((x) => [x.id, 3000 + x.id * 10]));
+  const count = (calls: { market: string }[]) => calls.reduce<Record<string, number>>((o, c) => ((o[c.market] = (o[c.market] ?? 0) + 1), o), {});
+  const { calls } = planSealedCoverage({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 2200, now });
+  assert.deepEqual(count(calls), { US: 1223, CA: 400, UK: 300, AU: 277 });
+  // A US product checked yesterday (23 hours ago, a run a little early) is still searched today.
+  const at = (h: number) => ({ at: new Date(now.getTime() - h * 3_600_000).toISOString(), offer: null });
+  const yesterday = Object.fromEntries(products.map((x) => [x.id, { US: at(23) }]));
+  assert.equal(count(planSealedCoverage({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: yesterday, budget: 2200, now }).calls).US, 1223);
+  // A day the US needs fewer, the ceilings' spare calls are still spent; a smaller budget scales the ceilings.
+  const few = planSealedCoverage({ products: products.slice(0, 600), refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 2200, now }).calls;
+  assert.equal(few.length, 2200);
+  const half = count(planSealedCoverage({ products, refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 1100, now }).calls);
+  assert.deepEqual(half, { US: 1100 });
+  const small = count(planSealedCoverage({ products: products.slice(0, 100), refUsdCents: ref, clicks30d: new Map(), newSetIds: new Set(), state: {}, budget: 220, now }).calls);
+  // 220 calls: the US's 100, each ceiling scaled (CA 40, UK 30, AU 28), then the 22 left by priority.
+  assert.equal(small.US + small.CA + small.UK + small.AU, 220);
+  assert.equal(small.US, 100);
+  assert.ok(small.CA >= 40 && small.UK >= 30 && small.AU >= 28, JSON.stringify(small));
 });
 
 test("sealed coverage: a due pair beats a fresher, more valuable one", async () => {
   const { planSealedCoverage } = await import("@/lib/import/ebay");
   const tin = (id: number): Product => ({ ...p(id, "Rare", "sealed"), sealedType: "Tin" });
   const at = (h: number) => ({ at: new Date(now.getTime() - h * 3_600_000).toISOString(), offer: null });
-  // Elsewhere both were checked 13 hours ago (not due); in the US the valuable tin 30 hours ago (48 h interval), the cheap one 100.
+  // Elsewhere both were checked 13 hours ago (not due); in the US the valuable tin 30 hours ago, the cheap one 100.
   const state = { 1: { US: at(30), UK: at(13), CA: at(13), AU: at(13) }, 2: { US: at(100), UK: at(13), CA: at(13), AU: at(13) } };
   const { calls } = planSealedCoverage({ products: [tin(1), tin(2)], refUsdCents: new Map([[1, 90000], [2, 2000]]), clicks30d: new Map(), newSetIds: new Set(), state, budget: 1, now });
   assert.deepEqual([calls[0].product.id, calls[0].market], [2, "US"]);
