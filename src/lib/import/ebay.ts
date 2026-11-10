@@ -163,22 +163,31 @@ export function planEbayRefresh(input: PlanInput): { calls: PlannedCall[]; eligi
   return { calls, eligible: ranked.length };
 }
 
-// ── Sealed coverage (owner, 2026-11-06) ─────────────────────────────────────
+// ── Sealed coverage (owner, 2026-11-06; region split 2026-11-10) ─────────────
 // A sealed-only site spends its whole budget on sealed product, in EVERY eBay market it has (US, UK, Canada and
 // Australia), not the US first with a small share left for two others: "we can just cover more of that product".
-// About 1,200 sealed products × 4 markets = 4,800 pairs against 2,200 calls a day, so each pair has an interval: in
-// the US booster boxes, cases and new sets every 24 h and the rest every 48 h; elsewhere 48 h and 72 h. That comes to
-// roughly 2,000 calls a day, so every pair is fresh and the spare calls re-check the most overdue pairs early (never
-// one checked in the last 12 hours). Due pairs go first, then by value × demand × how overdue × the market's weight.
+// About 1,200 sealed products × 4 markets = 4,800 pairs against 2,200 calls a day.
+//
+// The region split (owner, 2026-11-10: "whatever you recommend"): the US has 77% of visitors and every eBay dollar
+// (A$44.24 in the 30 days to 11 Nov), Australia 26 visitors on 558 calls a day. So EVERY US product is searched every
+// day (about 1,223 calls), first, with no ceiling; the other markets get at most a daily ceiling each
+// (SEALED_MARKET_CEILING: Canada 400, the UK 300, Australia 277 of 2,200), booster boxes, cases and new sets every
+// 48 h and the rest every 72 h, due pairs first by value × demand × how overdue × the market's weight. Calls a ceiling
+// leaves unspent (a day the US needs fewer) go to the most overdue remaining pairs, so none is wasted. Never a pair
+// checked in the last 12 hours.
 
-/** A sealed product's re-check interval in one market, in hours. */
+/** A sealed product's re-check interval in one market, in hours. The US: every product, every day. */
 export function sealedIntervalHours(market: Market, boosted: boolean): number {
-  if (market === "US") return boosted ? 24 : 48;
+  if (market === "US") return 24;
   return boosted ? 48 : 72;
 }
 
 /** How much a market's visitors weigh against the US's, for the order in which due pairs are spent. */
-export const SEALED_MARKET_WEIGHT: Partial<Record<Market, number>> = { US: 1, UK: 0.6, CA: 0.5, AU: 0.5 };
+export const SEALED_MARKET_WEIGHT: Partial<Record<Market, number>> = { US: 1, CA: 0.6, UK: 0.5, AU: 0.3 };
+
+/** Each non-US market's daily ceiling in calls out of a full 2,200 budget (scaled to a smaller one). The US has none. */
+export const SEALED_MARKET_CEILING: Partial<Record<Market, number>> = { CA: 400, UK: 300, AU: 277 };
+const CEILING_OF = 2200;
 
 export function planSealedCoverage(input: PlanInput): { calls: PlannedCall[]; eligible: number } {
   const markets = (Object.keys(SEALED_MARKET_WEIGHT) as Market[]).filter((m) => MARKETPLACE[m]);
@@ -202,11 +211,30 @@ export function planSealedCoverage(input: PlanInput): { calls: PlannedCall[]; el
       pairs.push({ product: p, market, score: priority, due: ageH >= interval, priority });
     }
   }
-  pairs.sort((a, b) => Number(b.due) - Number(a.due) || b.priority - a.priority);
-  const calls = pairs.slice(0, Math.max(0, input.budget)).map(({ priority: _p, ...c }) => c);
-  // Keep the run's order US-first among the chosen calls, so a quota stop mid-run costs the smaller markets first.
-  calls.sort((a, b) => Number(b.market === "US") - Number(a.market === "US"));
-  return { calls, eligible };
+  const budget = Math.max(0, input.budget);
+  // The US first, every product (a run a few minutes early still counts: 12 hours or more is due enough).
+  const us = pairs.filter((c) => c.market === "US").sort((a, b) => Number(b.due) - Number(a.due) || b.priority - a.priority);
+  const chosen = us.slice(0, budget);
+  // Then the other markets, due first, each up to its ceiling; then anything left, most overdue first.
+  const rest = pairs.filter((c) => c.market !== "US").sort((a, b) => Number(b.due) - Number(a.due) || b.priority - a.priority);
+  const used: Partial<Record<Market, number>> = {};
+  const over: typeof rest = [];
+  for (const c of rest) {
+    if (chosen.length >= budget) break;
+    const ceiling = Math.round((budget * (SEALED_MARKET_CEILING[c.market] ?? 0)) / CEILING_OF);
+    if ((used[c.market] ?? 0) >= ceiling) {
+      over.push(c);
+      continue;
+    }
+    used[c.market] = (used[c.market] ?? 0) + 1;
+    chosen.push(c);
+  }
+  for (const c of over) {
+    if (chosen.length >= budget) break;
+    chosen.push(c);
+  }
+  // US calls run first, so a quota stop mid-run costs the smaller markets, never the US.
+  return { calls: chosen.map(({ priority: _p, ...c }) => c), eligible };
 }
 
 // ── API ─────────────────────────────────────────────────────────────────────
