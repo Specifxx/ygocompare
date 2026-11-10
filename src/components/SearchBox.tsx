@@ -2,7 +2,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SITE } from "@/site.config";
-import { compareSearchHref } from "@/lib/compare-search";
 import { Icon } from "./Icon";
 
 interface Hit { slug: string; href?: string; name: string; set: string; image: string | null; price: string; kind: string }
@@ -15,8 +14,6 @@ interface Hit { slug: string; href?: string; name: string; set: string; image: s
 export function SearchBox({ big = false, size, placeholder }: { big?: boolean; size?: "sm"; placeholder?: string }) {
   const [q, setQ] = useState("");
   const [hits, setHits] = useState<Hit[]>([]);
-  /** The words a finished search found nothing for (the "search every Compare Empire site" line shows only then). */
-  const [emptyFor, setEmptyFor] = useState("");
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(-1);
   const router = useRouter();
@@ -25,15 +22,12 @@ export function SearchBox({ big = false, size, placeholder }: { big?: boolean; s
   useEffect(() => {
     clearTimeout(t.current);
     setActive(-1);
-    setEmptyFor("");
     if (q.trim().length < 2) return setHits([]);
     t.current = setTimeout(async () => {
       try {
         // Lower-cased so "Dark Magician" and "dark magician" share one CDN entry.
         const r = await fetch(`/api/search?q=${encodeURIComponent(q.trim().toLowerCase())}`);
-        const found = ((await r.json()) as { hits: Hit[] }).hits;
-        setHits(found);
-        setEmptyFor(found.length ? "" : q.trim());
+        setHits(((await r.json()) as { hits: Hit[] }).hits);
         setOpen(true);
       } catch {}
     }, 250);
@@ -101,14 +95,6 @@ export function SearchBox({ big = false, size, placeholder }: { big?: boolean; s
             </li>
           ))}
         </ul>
-      )}
-      {open && !hits.length && emptyFor && emptyFor === q.trim() && (
-        <div className="absolute left-0 right-0 z-50 mt-2 rounded-2xl border border-line bg-surface p-3 text-left text-sm shadow-lift">
-          <p className="text-muted">Nothing here matches &ldquo;{emptyFor}&rdquo;.</p>
-          <a href={compareSearchHref(emptyFor, SITE.key)} rel="nofollow" className="mt-1 block font-semibold text-brand hover:underline">
-            Search every Compare Empire site for &ldquo;{emptyFor}&rdquo; &rarr;
-          </a>
-        </div>
       )}
     </form>
   );
