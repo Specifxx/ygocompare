@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-10T20:16:53.904Z",
+ "generatedAt": "2026-11-11T20:07:20.484Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -27,20 +27,6 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Order of the Spellcasters Structure Deck",
-   "url": "https://ygocompare.com/card/order-of-the-spellcasters-structure-deck",
-   "cents": 1999,
-   "currency": "USD",
-   "store": "Collector Store LLC",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/184344_200w.jpg",
-   "refCents": 4033,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 50
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
    "title": "Fire Kings Structure Deck Display [1st Edition]",
    "url": "https://ygocompare.com/card/fire-kings-structure-deck-display-1st-edition",
    "cents": 7500,
@@ -55,15 +41,43 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
+   "title": "25th Anniversary Rarity Collection Booster Box",
+   "url": "https://ygocompare.com/card/25th-anniversary-rarity-collection-booster-box",
+   "cents": 7499,
+   "currency": "USD",
+   "store": "Key Items Collectibles",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/501748_200w.jpg",
+   "refCents": 13011,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 42
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
    "title": "Quarter Century Stampede Booster Box",
    "url": "https://ygocompare.com/card/quarter-century-stampede-booster-box",
    "cents": 10999,
    "currency": "USD",
    "store": "Paragon City Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16283,
+   "refCents": 16274,
    "refLabel": "TCGplayer market price",
    "savingPct": 32
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Darkwing Blast Booster Box",
+   "url": "https://ygocompare.com/card/darkwing-blast-booster-box",
+   "cents": 5499,
+   "currency": "USD",
+   "store": "Collector Store LLC",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/276698_200w.jpg",
+   "refCents": 7313,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 25
   },
   {
    "kind": "deal",
@@ -78,20 +92,6 @@
    "refCents": 9894,
    "refLabel": "TCGplayer market price",
    "savingPct": 19
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Magnificent Maestros Display",
-   "url": "https://ygocompare.com/card/magnificent-maestros-display",
-   "cents": 21499,
-   "currency": "USD",
-   "store": "Double Infinity Gaming",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
-   "refCents": 23958,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 10
   },
   {
    "kind": "preorder",
