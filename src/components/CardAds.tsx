@@ -10,13 +10,15 @@
 import { SITE } from "@/site.config";
 import type { Market } from "@/lib/site-types";
 import type { AdTile, CardAds } from "@/lib/card-ads";
-import { ebaySearchUrl, goHref } from "@/lib/affiliate";
+import { amazonSearchUrl, ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { money } from "@/lib/format";
 import { useMarket } from "./ClientPrefs";
 import { EbayWord } from "./EbayCallout";
 
 const EBAY_SEARCH_MARKETS = ["US", "UK", "AU", "CA"] as const;
 const MIN_TILES = 4;
+/** Amazon tiles are products with a real ASIN, shown without a price (Amazon's licence), to US visitors (the tag that earns on amazon.com). */
+const MIN_AMAZON = 3;
 
 function TcgWord({ className = "" }: { className?: string }) {
   return (
@@ -27,11 +29,20 @@ function TcgWord({ className = "" }: { className?: string }) {
   );
 }
 
+function AmazonWord({ className = "" }: { className?: string }) {
+  // Plain text: no Amazon logo or orange (Associates rule 2).
+  return (
+    <span className={`font-black tracking-tight text-ink ${className}`} aria-label="Amazon">
+      amazon
+    </span>
+  );
+}
+
 function AdLabel() {
   return <span className="ad-pill">Ad</span>;
 }
 
-function MiniRow({ brand, tiles, href, accent, tileHref, sub }: { brand: React.ReactNode; tiles: AdTile[]; href: string; accent: string; tileHref: (t: AdTile) => string; sub?: string }) {
+function MiniRow({ brand, tiles, href, accent, tileHref, sub, noPrice }: { brand: React.ReactNode; tiles: AdTile[]; href: string; accent: string; tileHref: (t: AdTile) => string; sub?: string; noPrice?: boolean }) {
   return (
     // min-w-0: the row is a grid item, whose min-width is auto, so without it the row grew to the rail's content width (688px on
     // a 390px phone), the rail never scrolled and the card page laid out 713px wide (2026-11-03 phone audit).
@@ -47,8 +58,8 @@ function MiniRow({ brand, tiles, href, accent, tileHref, sub }: { brand: React.R
             href={tileHref(t)}
             rel="sponsored nofollow noopener"
             target="_blank"
-            title={`${t.name} · ${money(t.cents, t.currency)}${sub ? ` · ${sub}` : ""}`}
-            aria-label={`${t.name}, ${money(t.cents, t.currency)}${sub ? `, ${sub}` : ""}`}
+            title={`${t.name}${noPrice ? "" : ` · ${money(t.cents, t.currency)}`}${sub ? ` · ${sub}` : ""}`}
+            aria-label={`${t.name}${noPrice ? "" : `, ${money(t.cents, t.currency)}`}${sub ? `, ${sub}` : ""}`}
             className="group flex w-[56px] shrink-0 snap-start flex-col overflow-hidden rounded-md border border-line bg-surface hover:border-[var(--ad-accent)]"
             style={{ ["--ad-accent" as string]: accent }}
           >
@@ -56,7 +67,7 @@ function MiniRow({ brand, tiles, href, accent, tileHref, sub }: { brand: React.R
               {t.image && <img src={t.image} alt={t.name} loading="lazy" decoding="async" className="h-full w-full object-contain p-0.5" />}
             </span>
             <span className="truncate px-1 py-0.5 text-center text-[10px] font-black text-white" style={{ background: accent }}>
-              {money(t.cents, t.currency)}
+              {noPrice ? "View" : money(t.cents, t.currency)}
             </span>
           </a>
         ))}
@@ -80,11 +91,13 @@ export function CompactCardAds({ ads, page, ebayQuery, tcgplayerUrl, limit = 10 
   const tcgTiles = ads.tcgplayer.slice(0, limit);
   const showEbay = ebayTiles.length >= MIN_TILES;
   const showTcg = tcgTiles.length >= MIN_TILES;
-  if (!showEbay && !showTcg) return null;
+  const amazonTiles = (ads.amazon ?? []).slice(0, limit);
+  const showAmazon = market === "US" && amazonTiles.length >= MIN_AMAZON;
+  if (!showEbay && !showTcg && !showAmazon) return null;
   const searchMarket = (EBAY_SEARCH_MARKETS as readonly string[]).includes(market) ? (market as (typeof EBAY_SEARCH_MARKETS)[number]) : "US";
   const tag = `${page}-mini`;
   return (
-    <aside data-ad aria-label="Sponsored listings on eBay and TCGplayer" className="ad-box grid gap-2 p-2 lg:grid-cols-2">
+    <aside data-ad aria-label={showAmazon ? "Sponsored listings on eBay, TCGplayer and Amazon" : "Sponsored listings on eBay and TCGplayer"} className="ad-box grid gap-2 p-2 lg:grid-cols-2">
       {showEbay && (
         <MiniRow
           brand={<EbayWord className="text-base" />}
@@ -105,9 +118,20 @@ export function CompactCardAds({ ads, page, ebayQuery, tcgplayerUrl, limit = 10 
           sub="TCGplayer market"
         />
       )}
+      {showAmazon && (
+        <MiniRow
+          brand={<AmazonWord className="text-[11px]" />}
+          tiles={amazonTiles}
+          accent="#475569"
+          noPrice
+          href={goHref({ url: amazonSearchUrl(ebayQuery, "US") ?? tcgplayerUrl, source: "amazon", market: "US" }, undefined, `${tag}-amazon-strip-all`)}
+          tileHref={(t) => goHref({ url: t.url, source: "amazon", market: "US" }, t.id, `${tag}-amazon-strip`)}
+          sub="on Amazon"
+        />
+      )}
       <p className="flex items-center gap-2 text-[10px] leading-tight text-muted lg:col-span-2">
         <AdLabel />
-        <span>Sponsored: {SITE.name} may earn a commission from eBay and TCGplayer purchases, at no cost to you.{ebayMarket !== market && showEbay ? " eBay tiles from eBay US." : ""}{market !== "US" && showTcg ? " TCGplayer prices in US$." : ""}</span>
+        <span>Sponsored: {SITE.name} may earn a commission from eBay{showAmazon ? ", Amazon" : ""} and TCGplayer purchases, at no cost to you.{showAmazon ? " As an Amazon Associate we earn from qualifying purchases." : ""}{ebayMarket !== market && showEbay ? " eBay tiles from eBay US." : ""}{market !== "US" && showTcg ? " TCGplayer prices in US$." : ""}</span>
       </p>
     </aside>
   );

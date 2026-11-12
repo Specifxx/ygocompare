@@ -65,3 +65,20 @@ test("the card ads are the engine's (owner, 2026-11-04): the small pair on card 
   }
   assert.match(read("src/components/SideAds.tsx"), /min-\[1280px\]:flex/);
 });
+
+test("the Amazon strip: only when asked, only products with a real ASIN, no price, tagged amazon.com link", () => {
+  const rows = [
+    { ...row(p(1), 5000, [ebay("US", 4500)]), asin: "B012345678" },
+    row(p(2), 9000, [ebay("US", 8000)]),
+    { ...row(p(3), 2000, []), asin: "not-an-asin" },
+  ];
+  assert.equal(selectCardAds(rows).amazon, undefined);
+  const ads = selectCardAds(rows, { amazon: true });
+  assert.deepEqual(ads.amazon!.map((t) => t.id), [1]);
+  assert.equal(ads.amazon![0].cents, 0);
+  assert.match(ads.amazon![0].url, /^https:\/\/www\.amazon\.com\/dp\/B012345678\?tag=/);
+  // The card page asks; the quick view and the rails never do (a pop-up and a fixed overlay).
+  assert.match(readFileSync("src/app/card/[slug]/page.tsx", "utf8"), /amazon: true/);
+  assert.doesNotMatch(readFileSync("src/app/api/quick/[slug]/route.ts", "utf8"), /amazon: true/);
+  assert.doesNotMatch((() => { try { return readFileSync("src/app/api/rails/route.ts", "utf8"); } catch { return ""; } })(), /amazon: true/);
+});
