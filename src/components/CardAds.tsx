@@ -10,7 +10,7 @@
 import { SITE } from "@/site.config";
 import type { Market } from "@/lib/site-types";
 import type { AdTile, CardAds } from "@/lib/card-ads";
-import { amazonSearchUrl, ebaySearchUrl, goHref } from "@/lib/affiliate";
+import { ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { money } from "@/lib/format";
 import { useMarket } from "./ClientPrefs";
 import { EbayWord } from "./EbayCallout";
@@ -124,7 +124,7 @@ export function CompactCardAds({ ads, page, ebayQuery, tcgplayerUrl, limit = 10 
           tiles={amazonTiles}
           accent="#475569"
           noPrice
-          href={goHref({ url: amazonSearchUrl(ebayQuery, "US") ?? tcgplayerUrl, source: "amazon", market: "US" }, undefined, `${tag}-amazon-strip-all`)}
+          href={goHref({ url: amazonTiles[0].url, source: "amazon", market: "US" }, undefined, `${tag}-amazon-strip-all`)}
           tileHref={(t) => goHref({ url: t.url, source: "amazon", market: "US" }, t.id, `${tag}-amazon-strip`)}
           sub="on Amazon"
         />

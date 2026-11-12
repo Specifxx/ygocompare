@@ -61,7 +61,7 @@ test("the card ads are the engine's (owner, 2026-11-04): the small pair on card 
     assert.match(read(f), /"use client"/, f);
     assert.match(read(f), /ad-pill/, f);
     assert.match(read(f), /rel="sponsored nofollow noopener"/, f);
-    assert.doesNotMatch(read(f), /amazon/i, f);
+    if (!f.endsWith("SideAds.tsx")) assert.doesNotMatch(read(f), /amazon/i, f);
   }
   assert.match(read("src/components/SideAds.tsx"), /min-\[1280px\]:flex/);
 });
@@ -80,5 +80,6 @@ test("the Amazon strip: only when asked, only products with a real ASIN, no pric
   // The card page asks; the quick view and the rails never do (a pop-up and a fixed overlay).
   assert.match(readFileSync("src/app/card/[slug]/page.tsx", "utf8"), /amazon: true/);
   assert.doesNotMatch(readFileSync("src/app/api/quick/[slug]/route.ts", "utf8"), /amazon: true/);
-  assert.doesNotMatch((() => { try { return readFileSync("src/app/api/rails/route.ts", "utf8"); } catch { return ""; } })(), /amazon: true/);
+  // The side rail asks too (a fixed column on a wide screen, not an overlay): the layout's cardAds call.
+  assert.match(readFileSync("src/app/layout.tsx", "utf8"), /amazon: true/);
 });

@@ -1894,3 +1894,7 @@ on the product page only, for US visitors, from products with a real ASIN in `da
 tiles. Tiles carry NO price ("View"): Amazon's licence. The link is the item's own tagged `/dp/` page, rel sponsored, through /go (`source=amazon`),
 with the disclosure and Associate line. Plain text word, no Amazon logo or orange. Never in the quick view or the rails or the dock (the quick view
 and rails call `cardAds` without the flag; `tests/card-ads.test.ts` pins it). Markets other than the US have no ASIN data yet, so they see no strip.
+
+**Right side rail (owner, 2026-11-12: "just go ahead").** On a wide screen the right-hand rail shows the same Amazon tiles (no price, "View", tagged
+/dp/ links, "Ad · Amazon Associate", plain "amazon" word) to US visitors when at least two products have an ASIN; every other visitor, and a site
+without ASINs, keeps the TCGplayer rail. The phone dock never carries Amazon. The "All" link goes to the first tile's own page, never a category search.

@@ -30,5 +30,5 @@ test("the phone dock: narrow screens only, never on the first screen, never besi
   assert.match(s, /"dock-ebay"\)[\s\S]*"dock-tcg"\)/, "its own page tags");
   assert.match(s, /yieldTo="\.ad-box, \[data-ad\]"/, "yields to every ad unit");
   assert.match(src("components/CardBuy.tsx"), /data-buybar=""/, "never on a card page (the buy bar)");
-  assert.doesNotMatch(d + s, /amazon/i, "no Amazon in the dock");
+  assert.doesNotMatch(d + s.slice(s.indexOf("function PhoneDock")), /amazon/i, "no Amazon in the dock (the rail's Amazon column is a fixed rail, not an overlay)");
 });

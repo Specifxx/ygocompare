@@ -99,7 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
           <RateCard />
           {/* The two side rails on a wide screen (eBay left, TCGplayer right), beside the shell, from 1280px (every regular 16:9 and 16:10 screen); ten tiles that scroll. */}
-          <SideAds ads={cardAds({ limit: 10 })} search={adSearch()} />
+          <SideAds ads={cardAds({ limit: 10, amazon: true })} search={adSearch()} />
         </PrefsProvider>
         <Analytics />
         <BuyClickTracker />
