@@ -10,7 +10,7 @@ import { imageAt } from "@/lib/image";
 import { shortName } from "@/lib/names";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrls } from "@/lib/affiliate";
-import { amazonCells } from "@/lib/amazon-live";
+import { amazonCarries, amazonCells } from "@/lib/amazon-live";
 import { SITE } from "@/site.config";
 
 /** The card page's Amazon links (the item's own page where the ASIN is known, else the tagged search), without a price. */
@@ -29,7 +29,7 @@ export function GET(_req: Request, { params }: { params: { slug: string } }) {
       id: p.id,
       offers: priceOf(p.id).offers,
       fx: meta()?.fx ?? { USD: 1 },
-      amazon: p.kind === "sealed" ? amazonLinks(p.id, shortName(p.name)) : null,
+      amazon: p.kind === "sealed" && amazonCarries(p) ? amazonLinks(p.id, shortName(p.name)) : null,
       // As the tile sends them (ProductTile.tsx), for a quick view opened from a plain link.
       name: shortName(p.name),
       sub: [setById(p.setId)?.name, p.number].filter(Boolean).join(" · "),
