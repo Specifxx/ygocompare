@@ -63,7 +63,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   // the very top. And it has a different colored outline"): eBay is always the first
   // row with a green outline, Amazon the second with an amber one, and both carry the
   // store row's thumbs and cart button (lib/cart-list.ts: manual lines on their tagged
-  // links). With no Amazon price the row is "Also check on Amazon", a tagged link.
+  // links). With no Amazon price there is no row (owner, 2026-11-12).
   const { inStock, refs, outOfStock, cheapest, display, pinned } = priceRows(offers, market);
   const rows = display;
   const cur = CURRENCY[market];
@@ -104,7 +104,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const amazonUrl = typeof amazonCell === "string" ? amazonCell : amazonCell?.url;
   const amazonLive = typeof amazonCell === "object" ? amazonCell.live : undefined;
   const amazonCart = amazonUrl && amazonLive?.cents ? { href: tagged(amazonUrl, subId(market, `${page}_cart`, productId)), productUrl: amazonUrl, storeName: "Amazon", title: product ?? "", priceCents: amazonLive.cents, currency: amazonLive.currency ?? cur, image } : null;
-  const amazonRow = amazonUrl ? (
+  const amazonRow = amazonUrl && amazonLive ? (
     <tr data-amazon-row className={`border-t border-line ${PIN_OUTLINE.amazon}`}>
       <td className="px-3 py-2.5">
         <span className="font-medium text-ink">Amazon</span>
@@ -112,13 +112,13 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
         {!compact && amazonCart && <span className="block sm:hidden"><CartAddButton {...amazonCart} inline className="text-xs" /></span>}
         <span className="ad-pill ml-2">Ad</span>
       </td>
-      <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">{amazonLive ? "New, in stock on Amazon" : "Also check the price on Amazon"}</td>
-      <td className="px-3 py-2.5 text-right font-semibold tabular-nums">{amazonLive ? <AmazonPrice {...amazonLive} fallback="Also check on Amazon" /> : <span className="text-xs font-normal text-muted">Also check on Amazon</span>}</td>
+      <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">New, in stock on Amazon</td>
+      <td className="px-3 py-2.5 text-right font-semibold tabular-nums"><AmazonPrice {...amazonLive} /></td>
       <td className="px-3 py-2.5 text-right">
         <span className="inline-flex items-center justify-end gap-2">
           {!compact && amazonCart && <CartAddButton {...amazonCart} className="hidden text-muted sm:inline-flex" />}
           <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-soft min-h-10 whitespace-nowrap px-3 py-1.5">
-            {amazonLive ? "View deal" : "Check Amazon"} <span aria-hidden="true">↗</span>
+            View deal <span aria-hidden="true">↗</span>
           </a>
         </span>
       </td>
@@ -176,7 +176,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                     {!compact && o.inStock && o.source !== "tcgplayer" && (
                       <CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} className="hidden text-muted sm:inline-flex" />
                     )}
-                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${best ? "btn-primary px-3 py-1.5" : o.inStock ? "btn-soft px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
+                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${best || (pinned.includes(o) && o.inStock) ? "btn-primary px-3 py-1.5" : o.inStock ? "btn-soft px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
                       {best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
                     </a>
                     </span>
