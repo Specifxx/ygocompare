@@ -40,7 +40,7 @@ test("the side rails show on every regular 16:9 and 16:10 screen and scroll thro
   assert.match(src, /overflow-y-auto/, "the list scrolls inside the rail");
   const css = readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.max-w-shell \{\s*max-width: none;\s*width: auto;\s*margin-left: 136px;\s*margin-right: 136px;/, "the shell leaves the rails their room");
-  assert.match(readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8"), /cardAds\(\{ limit: 10 \}\)/);
+  assert.match(readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8"), /cardAds\(\{ limit: 10, amazon: true \}\)/);
   const t = (id: number) => ({ id, slug: `s${id}`, name: "x", image: null, cents: 100, currency: "USD", url: "https://www.ebay.com/itm/1", ref: null });
   const ads: CardAds = { ebay: { US: [t(1), t(2), t(3)], UK: [t(4)] }, tcgplayer: [] };
   assert.equal(ebayTilesFor(ads, "UK").market, "US");

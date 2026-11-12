@@ -87,7 +87,7 @@ export function SideAds({ ads, search }: { ads: CardAds; search: AdSearch }) {
   return (
     <>
       <EbayRail ads={ads} query={search.ebayQuery} />
-      {ads.tcgplayer.length >= MIN_TILES && <TcgRail tiles={ads.tcgplayer} all={search.tcgplayerUrl} />}
+      <RightRail ads={ads} search={search} />
     </>
   );
 }
@@ -126,6 +126,13 @@ function EbayRail({ ads, query }: { ads: CardAds; query: string }) {
   );
 }
 
+function RightRail({ ads, search }: { ads: CardAds; search: AdSearch }) {
+  const { market } = useMarket();
+  const amazon = ads.amazon ?? [];
+  if (market === "US" && amazon.length >= MIN_TILES) return <AmazonRail tiles={amazon} all={amazon[0].url} />;
+  return ads.tcgplayer.length >= MIN_TILES ? <TcgRail tiles={ads.tcgplayer} all={search.tcgplayerUrl} /> : null;
+}
+
 function TcgRail({ tiles, all }: { tiles: AdTile[]; all: string }) {
   const { market } = useMarket();
   const us = market === "US";
@@ -154,6 +161,36 @@ function TcgRail({ tiles, all }: { tiles: AdTile[]; all: string }) {
         ))}
       </ul>
       <Note href={goHref({ url: all, source: "tcgplayer", market: "US" }, undefined, "side-tcg-all")} label="All on TCGplayer →" note={us ? "Affiliate links · we may earn" : "Affiliate links · in US$"} />
+    </div>
+  );
+}
+
+/** Amazon's tiles: products with a real ASIN, no price (its licence). Shown to US visitors in the right rail in place of TCGplayer. */
+function AmazonRail({ tiles, all }: { tiles: AdTile[]; all: string }) {
+  return (
+    <div role="group" data-ad="side-amazon" aria-label={`Sponsored: ${SITE.gameShort} cards on Amazon`} className={RAIL} style={railStyle("right")}>
+      <Head
+        brand={
+          <span className="text-[15px] font-black tracking-tight" aria-label="Amazon">
+            amazon
+          </span>
+        }
+      />
+      <ul role="list" className="rail-scroll grid min-h-0 flex-1 content-start overflow-y-auto overscroll-contain border-t border-line">
+        {tiles.slice(0).map((t) => (
+          <li key={t.id}>
+            <a href={goHref({ url: t.url, source: "amazon", market: "US" }, t.id, "side-amazon")} rel="sponsored nofollow noopener" target="_blank" className={TILE} title={t.name}>
+              <span className="plate relative block aspect-square w-full overflow-hidden rounded-md">
+                {t.image && <img src={t.image} alt={t.name} width={128} height={128} loading="lazy" decoding="async" className="absolute inset-0 h-full w-full object-contain p-1" />}
+              </span>
+              <span className="mt-1.5 line-clamp-2 h-9 text-xs font-semibold leading-[18px] group-hover:text-ink">{t.name}</span>
+              <span className="tabular block h-5 truncate text-[15px] font-bold leading-5">View</span>
+              <span className="sr-only">, on Amazon</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <Note href={goHref({ url: all, source: "amazon", market: "US" }, undefined, "side-amazon-all")} label="Top pick on Amazon →" note="Paid links · Amazon Associate" />
     </div>
   );
 }
