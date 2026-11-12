@@ -1843,3 +1843,19 @@ smaller budget), boxes and new sets every 48 h and the rest 72 h; market weights
 Calls a ceiling leaves unspent go to the most overdue remaining pairs. A dry run on today's catalogue and state plans US
 1,223 / CA 400 / UK 300 / AU 277 for the next two runs. `tests/ebay-plan.test.ts` pins it; the methodology copy says
 "every product daily in the US". Recheck about 24 Nov against the 30 days to 11 Nov.
+
+## 2026-11-12: the front page features the pricier items (owner)
+
+**Ask.** Bill: promote the more expensive items, so a sale earns more commission; the cheap ones should not be advertised on the
+front page. For the TCG sites that means sealed: booster boxes and the like.
+
+**What.** `SITE.featureMinCents` = 4000 ($40). The home page's sealed shelf (`featuredSealed`), today's top deals (`deals()`: the
+reference price must clear it, not just 500), the pre-order boxes in the shelf's tabs and the newest set's grid carry only products at or
+above it (TCGplayer market; `worthFeaturing` in `lib/data.ts`). Cheaper products keep their page, their set and hub listings, search,
+alerts and the sitemap; only the front page's selection changed, so URLs, titles, metadata and JSON-LD structure are as before.
+Starter Deck Display joins the shelf's fill types. A pre-order with no TCGplayer price yet is still shown. Store rows within a
+product are still sorted by price, never by commission; the reference price is TCGplayer's market and eBay is never a deal.
+
+
+**Why this floor.** From the day's data (TCGplayer market, sealed): booster boxes p25 $50.51, median $80.79; booster packs median $7.08; structure decks median $38.15; tins median $39.99. The floor keeps the real
+earners and drops packs and the cheapest decks. Revisit with the click-to-sale numbers (which placements earn) in the Monday report.

@@ -160,6 +160,7 @@ export const SITE: SiteConfig = {
     "Promo",
     "Common",
   ],
+  featureMinCents: 4000,
   chaseRarities: ["Quarter Century Secret Rare", "Grand Master Rare", "Starlight Rare", "Ghost Rare", "Platinum Secret Rare", "Prismatic Secret Rare", "Prismatic Collector's Rare", "Prismatic Ultimate Rare", "Collector's Rare", "Ultimate Rare"],
 
   theme: {

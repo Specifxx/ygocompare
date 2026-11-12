@@ -126,6 +126,9 @@ export function summaryOf(id: number): Summary {
   decoded.set(id, s);
   return s;
 }
+/** The featuring floor (SITE.featureMinCents) and whether a product clears it: front-page placements only, never a listing. */
+export const featureMin = (): number => SITE.featureMinCents ?? 0;
+export const worthFeaturing = (id: number): boolean => (refCents(id) ?? 0) >= featureMin();
 export const refCents = (id: number): number | null => referenceCents(summaryOf(id).tcg);
 
 export function historyOf(p: Product): Series {
@@ -241,7 +244,7 @@ export function deals(limit = 40): Deal[] {
   const out: Deal[] = [];
   for (const p of products()) {
     const market = refCents(p.id);
-    if (!market || market < 500) continue;
+    if (!market || market < Math.max(500, featureMin())) continue;
     const sm = summaryOf(p.id);
     for (const o of sm.best) {
       // Stores only: an eBay listing is an ad in its own row, never "today's deal" (a
