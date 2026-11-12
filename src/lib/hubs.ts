@@ -3,7 +3,7 @@
 // sitemap never lists an empty page.
 import { SITE } from "@/site.config";
 import type { CardHubConfig, Product } from "@/lib/site-types";
-import { byValue, products, productsInSet, refCents, setById, sets } from "@/lib/data";
+import { byValue, products, productsInSet, refCents, setById, sets, worthFeaturing } from "@/lib/data";
 import { preorderSets, todayIso } from "@/lib/preorders";
 import { PREORDER_COPY } from "@/content/preorders";
 import { slugify } from "@/lib/slug";
@@ -38,12 +38,12 @@ export const sealedHref = (t: string | null) => (t && t !== "Other" && t !== "In
 
 // The homepage's sealed shelf: booster boxes from the newest released sets
 // first, then other headline sealed (troves, tins, collections, decks) to fill
-// the row. Priced products only; never cases, loose packs, inserts or pre-orders
+// the row. Priced products at or above SITE.featureMinCents only; never cases, loose packs, inserts or pre-orders
 // (the pre-order banner has those).
-const SHELF_FILL = ["Illumineer's Trove", "Special Edition", "Tin", "Collection", "Structure Deck", "Starter Deck", "Sleeved Pack", "Booster Pack"];
+const SHELF_FILL = ["Illumineer's Trove", "Special Edition", "Tin", "Collection", "Structure Deck", "Starter Deck Display", "Starter Deck", "Sleeved Pack", "Booster Pack"];
 export function featuredSealed(limit = 6): Product[] {
   const released = (p: Product) => { const s = setById(p.setId); return s && !s.upcoming ? s.releasedOn ?? "" : null; };
-  const pool = products().filter((p) => p.kind === "sealed" && released(p) !== null && refCents(p.id) != null);
+  const pool = products().filter((p) => p.kind === "sealed" && released(p) !== null && refCents(p.id) != null && worthFeaturing(p.id));
   const newest = (a: Product, b: Product) => released(b)!.localeCompare(released(a)!) || (refCents(b.id) ?? 0) - (refCents(a.id) ?? 0);
   const boxes = pool.filter((p) => p.sealedType === "Booster Box").sort(newest);
   const rank = (p: Product) => SHELF_FILL.indexOf(p.sealedType ?? "");

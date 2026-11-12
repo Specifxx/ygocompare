@@ -12,7 +12,7 @@
 // price, inside bounds that rule out a wrong match.
 import { SITE } from "@/site.config";
 import { CURRENCY, MARKETS, type Market, type Product } from "@/lib/site-types";
-import { priceOf, refCents, setById, summaryOf } from "@/lib/data";
+import { featureMin, priceOf, refCents, setById, summaryOf } from "@/lib/data";
 import { featuredSealed, preorderSetList, sealedInSet } from "@/lib/hubs";
 import { imageAt } from "@/lib/image";
 import { isPreorder, preorderPath } from "@/lib/preorders";
@@ -127,6 +127,7 @@ export function sealedHero(featuredCount = 7, preorderSetsMax = 2, perSet = 3): 
       releasesOn: s.releasedOn ?? null,
       items: sealedInSet(s.id)
         .filter((p) => p.sealedType !== "Booster Pack" && p.sealedType !== "Case" && (PREORDER_TYPES.has(p.sealedType ?? "") || /box|display/i.test(p.name)))
+        .filter((p) => { const r = refCents(p.id); return r == null || r >= featureMin(); })
         .map(heroItem)
         .filter(sold)
         .slice(0, perSet),

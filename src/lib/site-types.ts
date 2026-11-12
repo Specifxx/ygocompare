@@ -79,6 +79,10 @@ export interface SiteConfig {
   /** No longer read (owner, 2026-11-03): every homepage shows the one tabbed sealed shelf (components/SealedHero.tsx). Kept so
    *  a site config that still sets it type-checks. */
   homeSealedHero?: boolean;
+  /** The home page features only products worth at least this much (TCGplayer market, or a kit's median in-stock price), in
+   *  cents: the shelf, the deals, the newest set's grid and the kits. Cheaper ones stay listed, searchable and linkable.
+   *  Owner, 2026-11-12: feature the pricier items. DECISIONS.md. */
+  featureMinCents?: number;
   tagline: string;
   description: string;
   keywords: string[];

@@ -6,7 +6,7 @@ import { CreatorsBubble } from "@/components/creators/CreatorsBubble";
 import { HeroSparks } from "@/components/HeroSparks";
 import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { TileGrid } from "@/components/ProductTile";
-import { byValue, deals, latestReleasedSet, meta, products } from "@/lib/data";
+import { byValue, deals, latestReleasedSet, meta, products, worthFeaturing } from "@/lib/data";
 import { ago, money } from "@/lib/format";
 import { posts } from "@/lib/posts";
 import { shortName } from "@/lib/names";
@@ -60,7 +60,7 @@ export default function Home() {
   const releases = preorderSetList();
   const upcoming = releases.find((s) => isPreorder(s)) ?? null;
   // Sealed only (2026-11-06): the newest set's sealed products, and the most valuable booster boxes as trending chips.
-  const chase = latest ? sealedInSet(latest.id).slice(0, 12) : [];
+  const chase = latest ? sealedInSet(latest.id).filter((p) => worthFeaturing(p.id)).slice(0, 12) : [];
   const trending = byValue(products().filter((p) => p.sealedType === "Booster Box")).slice(0, 6);
   const topDeals = deals(6);
   const shelf = featuredSealed(6);
