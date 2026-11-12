@@ -8,7 +8,10 @@
 // Ads, not price claims: a tile never feeds a "cheapest" line, a sort or
 // structured data, and the strips sit below the price comparison, never
 // between a visitor and the price rows.
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { ebayQueryOf, tcgplayerSlugOf } from "@/lib/lines";
+import { amazonItemUrl } from "./affiliate";
 import { SITE } from "@/site.config";
 import type { Market, Offer, Product, SetInfo } from "./site-types";
 import { products, refCents, sets, summaryOf } from "./data";
@@ -31,6 +34,8 @@ export interface CardAds {
   /** Per eBay market; the strip falls back to eBay US where a market is thin. */
   ebay: Partial<Record<Market, AdTile[]>>;
   tcgplayer: AdTile[];
+  /** Products with a real ASIN on amazon.com (data/amazon/asins-US.json), only when the scope asks (the card page). No price: Amazon's licence. */
+  amazon?: AdTile[];
 }
 
 export interface AdScope {
@@ -39,6 +44,8 @@ export interface AdScope {
   /** The product the page is about (its own listings are above already). */
   exclude?: number;
   limit?: number;
+  /** Also pick the Amazon strip (card page only: never the quick view or the rails). */
+  amazon?: boolean;
   /** Top a thin set up with the newest sets' cards, so a small set still gets a full strip. */
   fill?: boolean;
   /** Multi-game sites (SITE.lines): only this game's products; a set's top-up stays in its game. */
@@ -52,6 +59,8 @@ export interface AdRow {
   ref: number | null;
   ebay: Offer[];
   tcgplayer: Offer | null;
+  /** The product's amazon.com ASIN when the daily import found one. */
+  asin?: string | null;
   /** Position among released sets, newest first (0–2 lead the site-wide strips). */
   setRank: number;
 }
@@ -96,7 +105,13 @@ export function selectCardAds(rows: AdRow[], scope: AdScope = {}): CardAds {
     .filter((r) => r.tcgplayer && (r.ref ?? 0) >= 100)
     .slice(0, limit)
     .map((r) => tile(r.p, { ...r.tcgplayer!, cents: r.ref ?? r.tcgplayer!.cents }, r.ref));
-  return { ebay, tcgplayer };
+  const amazon = scope.amazon
+    ? pool
+        .filter((r) => r.asin && amazonItemUrl(r.asin, "US"))
+        .slice(0, limit)
+        .map((r) => ({ id: r.p.id, slug: r.p.slug, name: shortName(r.p.name), image: imageAt(r.p.image, "200w"), cents: 0, currency: "USD", url: amazonItemUrl(r.asin!, "US")!, ref: r.ref }))
+    : undefined;
+  return amazon ? { ebay, tcgplayer, amazon } : { ebay, tcgplayer };
 }
 
 /** Each list of `a`, filled to `limit` from `b` (no product twice). */
@@ -104,7 +119,19 @@ export function topUp(a: CardAds, b: CardAds, limit: number): CardAds {
   const fill = (x: AdTile[] = [], y: AdTile[] = []) => [...x, ...y.filter((t) => !x.some((s) => s.id === t.id))].slice(0, limit);
   const ebay: Partial<Record<Market, AdTile[]>> = {};
   for (const m of new Set([...Object.keys(a.ebay), ...Object.keys(b.ebay)]) as Set<Market>) ebay[m] = fill(a.ebay[m], b.ebay[m]);
-  return { ebay, tcgplayer: fill(a.tcgplayer, b.tcgplayer) };
+  return a.amazon || b.amazon ? { ebay, tcgplayer: fill(a.tcgplayer, b.tcgplayer), amazon: fill(a.amazon, b.amazon) } : { ebay, tcgplayer: fill(a.tcgplayer, b.tcgplayer) };
+}
+
+let usAsins: Record<string, { asin: string | null }> | null = null;
+function usAsin(id: number): string | null {
+  if (!usAsins) {
+    try {
+      usAsins = JSON.parse(readFileSync(path.join(process.cwd(), "data", "amazon", "asins-US.json"), "utf8"));
+    } catch {
+      usAsins = {};
+    }
+  }
+  return usAsins?.[String(id)]?.asin ?? null;
 }
 
 let rowsMemo: AdRow[] | null = null;
@@ -119,6 +146,7 @@ function rows(): AdRow[] {
       ref: refCents(p.id),
       ebay: s.ebay.filter((o) => o.inStock),
       tcgplayer: s.best.find((o) => o.source === "tcgplayer" && o.inStock) ?? null,
+      asin: usAsin(p.id),
       setRank: rank.get(p.setId) ?? 99,
     };
   });
@@ -135,7 +163,7 @@ export function cardAds(scope: AdScope = {}): CardAds {
   const line = scope.line ?? (scope.setId != null ? sets().find((s) => s.id === scope.setId)?.line : undefined);
   if (line && !scope.setIds) scope = { ...scope, line, setIds: sets().filter((s) => s.line === line).map((s) => s.id) };
   let ads = selectCardAds(rows(), scope);
-  if (scope.fill && scope.setId != null) ads = topUp(ads, selectCardAds(rows(), { kind: scope.kind, exclude: scope.exclude, limit: scope.limit, setIds: scope.setIds }), scope.limit ?? 10);
+  if (scope.fill && scope.setId != null) ads = topUp(ads, selectCardAds(rows(), { kind: scope.kind, exclude: scope.exclude, limit: scope.limit, setIds: scope.setIds, amazon: scope.amazon }), scope.limit ?? 10);
   memo.set(key, ads);
   return ads;
 }

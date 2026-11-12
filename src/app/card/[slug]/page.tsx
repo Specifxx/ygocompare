@@ -148,7 +148,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           {/* The one ad placement on a card page (owner, 2026-11-03): the small
               eBay + TCGplayer pair under the price and Buy. The full-size strips
               are gone from every page; the quick view shows the same small pair. */}
-          <CompactCardAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true })} page="card" {...adSearch(set?.name, set)} />
+          <CompactCardAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, amazon: true })} page="card" {...adSearch(set?.name, set)} />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>
