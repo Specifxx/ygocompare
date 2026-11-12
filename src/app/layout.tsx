@@ -11,7 +11,7 @@ import "@/content/site.css";
 import { SITE } from "@/site.config";
 import { SITE_URL } from "@/lib/site";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
-import { SEASON_BOOT_SCRIPT } from "@/lib/season";
+import { CHRISTMAS_FESTIVE_LAYER, SEASON_BOOT_SCRIPT } from "@/lib/season";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PreorderStrip } from "@/components/PreorderStrip";
@@ -71,7 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const history = historyOn();
   return (
     // The boot scripts stamp data-theme and data-season on this element before React hydrates; React must not report that.
-    <html lang="en" className={`${display.variable} ${sans.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${sans.variable}`} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT + SEASON_BOOT_SCRIPT }} />
         <link rel="preconnect" href="https://tcgplayer-cdn.tcgplayer.com" />
