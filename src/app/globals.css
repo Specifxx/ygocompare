@@ -141,6 +141,10 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   .btn-primary {
     @apply btn bg-brand text-brand-ink hover:brightness-110;
   }
+  /* TCGplayer\'s button (owner, 2026-11-12): blue. */
+  .btn-tcg {
+    @apply btn bg-[#1d4ed8] text-white hover:bg-[#2563eb];
+  }
   .btn-ghost {
     @apply btn border border-line bg-surface text-ink hover:bg-raised;
   }
