@@ -23,3 +23,8 @@ test("the side rails and photo strip carry eBay and TCGplayer only, never Amazon
   assert.doesNotMatch(read("SideAds.tsx"), /source: "amazon"/);
   assert.match(read("CardAds.tsx"), /const showAmazon = false as boolean;/);
 });
+
+test("TCGplayer's pinned button is blue (owner, 2026-11-12)", () => {
+  const src = readFileSync(new URL("../src/components/PriceTable.tsx", import.meta.url), "utf8");
+  assert.match(src, /"btn-tcg px-3 py-1\.5"/);
+});
