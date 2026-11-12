@@ -11,6 +11,16 @@ import { amazonItemUrl } from "./affiliate";
 import { money } from "./format";
 import { CURRENCY, MARKETS, type Market } from "./site-types";
 
+/**
+ * Whether Amazon carries a sealed product (owner, 2026-11-12: no Amazon where Amazon doesn't sell the item). A real ASIN on amazon.com
+ * says yes; without one, only the mainstream retail types Amazon stocks (boxes, packs, decks, tins, collections), never a case,
+ * prerelease or promo kit, a display, an insert or an "Other".
+ */
+export const AMAZON_SEALED_TYPES: ReadonlySet<string> = new Set(["Booster Box", "Booster Pack", "Sleeved Pack", "Starter Deck", "Deck", "Structure Deck", "Tin", "Collection", "Illumineer's Trove"]);
+export function amazonCarries(p: { id: number; sealedType: string | null }): boolean {
+  return !!files("US").asins[String(p.id)]?.asin || (p.sealedType != null && AMAZON_SEALED_TYPES.has(p.sealedType));
+}
+
 /** One market's Amazon row: the link (the item's own page, else the tagged search) and this build's price while fresh. */
 export interface AmazonCell {
   url: string;

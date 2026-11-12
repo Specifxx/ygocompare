@@ -1898,3 +1898,9 @@ and rails call `cardAds` without the flag; `tests/card-ads.test.ts` pins it). Ma
 **Right side rail (owner, 2026-11-12: "just go ahead").** On a wide screen the right-hand rail shows the same Amazon tiles (no price, "View", tagged
 /dp/ links, "Ad · Amazon Associate", plain "amazon" word) to US visitors when at least two products have an ASIN; every other visitor, and a site
 without ASINs, keeps the TCGplayer rail. The phone dock never carries Amazon. The "All" link goes to the first tile's own page, never a category search.
+
+## 2026-11-12 — Amazon only where Amazon carries the product (owner)
+
+The owner: no Amazon links where Amazon doesn't sell the item (RiftCompare first). `amazonCarries` (lib/amazon-live.ts) gates the sealed page's and the quick
+view's Amazon row: a real amazon.com ASIN, or else a mainstream retail type (booster box and pack, sleeved pack, starter, structure or other deck, tin,
+collection, Illumineer's Trove). Cases, prerelease kits, displays, inserts and "Other" get no Amazon row.
