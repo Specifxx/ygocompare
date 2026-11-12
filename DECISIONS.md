@@ -1904,3 +1904,12 @@ without ASINs, keeps the TCGplayer rail. The phone dock never carries Amazon. Th
 The owner: no Amazon links where Amazon doesn't sell the item (RiftCompare first). `amazonCarries` (lib/amazon-live.ts) gates the sealed page's and the quick
 view's Amazon row: a real amazon.com ASIN, or else a mainstream retail type (booster box and pack, sleeved pack, starter, structure or other deck, tin,
 collection, Illumineer's Trove). Cases, prerelease kits, displays, inserts and "Other" get no Amazon row.
+
+## 2026-11-12 — A calmer price table (owner left the design to us; DexCompare's rule)
+
+The owner found DexCompare's quick view too busy ("all the colored rows … a bit much") and left the redesign to us (CompareEmpire #196). The same
+rows are here, so the same rule: a price table has ONE filled button, the best price's. The pinned rows' outlines of 2026-11-06 and 11-07 (eBay
+green, Amazon amber, Fetch violet, the cheapest sky blue) are gone (`PIN_OUTLINE` keeps its keys and draws nothing); eBay's blue, Amazon's and
+Fetch's filled buttons are the other rows' neutral button; the quick view's "See price history and details" is a ghost button. The cheapest row
+keeps its tint and "Best price" badge. Rows keep their order, "Ad" / "Marketplace" tags and links; no URL, title, heading or text changed.
+Measure outbound clicks per placement on 19 Nov against the week before.

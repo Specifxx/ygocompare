@@ -31,13 +31,16 @@ export function sourceName(o: Offer) {
   return NAMES[o.source] ?? o.source;
 }
 
-/** The pinned rows' outlines (owner, 2026-11-06): eBay green, Amazon amber, so each reads as a real price row of its own. */
+/**
+ * The pinned rows' classes. Until 2026-11-12 each drew an outline (eBay green, Amazon amber, the cheapest sky blue; owner, 2026-11-06
+ * and 11-07). The owner then found "all the colored rows" too much and left the design to us (DECISIONS.md, "A calmer price table"):
+ * the rows are plain rows again, in the same order with the same tags and links. The keys stay as hooks and draw nothing; the cheapest
+ * row is marked by its tint, its "Best price" badge and the table's one filled button.
+ */
 export const PIN_OUTLINE = {
-  ebay: "outline outline-2 -outline-offset-2 outline-[#16a34a]",
-  amazon: "outline outline-2 -outline-offset-2 outline-[#f59e0b]",
-  /** The cheapest row (owner, 2026-11-07: "the cheapest listing should also have an outline too"): sky blue, never
-   *  read as eBay's green or Amazon's amber; it wins over eBay's when eBay is itself the cheapest. */
-  cheapest: "outline outline-2 -outline-offset-2 outline-[#0ea5e9]",
+  ebay: "",
+  amazon: "",
+  cheapest: "",
 } as const;
 
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */

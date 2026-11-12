@@ -146,7 +146,7 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   }
   /* A secondary action that is still a buy action (an in-stock store that is not the cheapest). */
   .btn-soft {
-    @apply btn bg-brand-soft text-brand-strong hover:bg-brand/15;
+    @apply btn border border-line bg-raised text-ink hover:border-ink/40; /* calm palette, 2026-11-12: neutral, so a table has one coloured button */
   }
   /* The buy button (the old name, kept): green, white text. */
   .btn-buy {
@@ -168,7 +168,7 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   }
   /* An ad's own button: eBay's button blue, never the site's own .btn-primary. */
   .btn-ad {
-    @apply btn border border-transparent bg-[#3665f3] text-white hover:bg-[#2a50c8];
+    @apply btn border border-transparent bg-ink text-surface hover:bg-ink/85; /* calm palette, 2026-11-12: ink, not eBay blue */
   }
   /* Never Amazon's own orange: the Associates Operating Agreement forbids styling that could pass for Amazon's site. */
   .btn-amazon {
