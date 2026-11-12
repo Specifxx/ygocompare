@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-11T20:07:20.484Z",
+ "generatedAt": "2026-11-12T20:30:46.630Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12540,
+   "refCents": 12556,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
   },
@@ -69,15 +69,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Darkwing Blast Booster Box",
-   "url": "https://ygocompare.com/card/darkwing-blast-booster-box",
-   "cents": 5499,
+   "title": "Master of Pendulum Structure Deck",
+   "url": "https://ygocompare.com/card/master-of-pendulum-structure-deck",
+   "cents": 4449,
    "currency": "USD",
-   "store": "Collector Store LLC",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/276698_200w.jpg",
-   "refCents": 7313,
+   "store": "Realgoodeal",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/108780_200w.jpg",
+   "refCents": 5999,
    "refLabel": "TCGplayer market price",
-   "savingPct": 25
+   "savingPct": 26
   },
   {
    "kind": "deal",
