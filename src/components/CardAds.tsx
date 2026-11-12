@@ -17,8 +17,6 @@ import { EbayWord } from "./EbayCallout";
 
 const EBAY_SEARCH_MARKETS = ["US", "UK", "AU", "CA"] as const;
 const MIN_TILES = 4;
-/** Amazon tiles are products with a real ASIN, shown without a price (Amazon's licence), to US visitors (the tag that earns on amazon.com). */
-const MIN_AMAZON = 3;
 
 function TcgWord({ className = "" }: { className?: string }) {
   return (
@@ -92,7 +90,8 @@ export function CompactCardAds({ ads, page, ebayQuery, tcgplayerUrl, limit = 10 
   const showEbay = ebayTiles.length >= MIN_TILES;
   const showTcg = tcgTiles.length >= MIN_TILES;
   const amazonTiles = (ads.amazon ?? []).slice(0, limit);
-  const showAmazon = market === "US" && amazonTiles.length >= MIN_AMAZON;
+  // Amazon is not a top paid placement (owner, 2026-11-12): eBay and TCGplayer only.
+  const showAmazon = false as boolean;
   if (!showEbay && !showTcg && !showAmazon) return null;
   const searchMarket = (EBAY_SEARCH_MARKETS as readonly string[]).includes(market) ? (market as (typeof EBAY_SEARCH_MARKETS)[number]) : "US";
   const tag = `${page}-mini`;

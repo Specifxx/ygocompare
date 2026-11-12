@@ -1913,3 +1913,10 @@ green, Amazon amber, Fetch violet, the cheapest sky blue) are gone (`PIN_OUTLINE
 Fetch's filled buttons are the other rows' neutral button; the quick view's "See price history and details" is a ghost button. The cheapest row
 keeps its tint and "Best price" badge. Rows keep their order, "Ad" / "Marketplace" tags and links; no URL, title, heading or text changed.
 Measure outbound clicks per placement on 19 Nov against the week before.
+
+## 2026-11-12: Only eBay and TCGplayer are paid placements
+
+Owner: "we just want eBay and TCGplayer as the paid links at the top. That is why our revenue is declining." The Amazon row now
+draws only with a real Creators API price (no "Also check on Amazon" search row), the Amazon side rail and photo strip added earlier
+today are removed (the right rail is TCGplayer again), Fetch TCG (AU) is an ordinary store row ranked by price (no pin, no Ad or
+Marketplace tag), and the pinned eBay and TCGplayer buttons are filled so they stand out. `tests/paid-rows.test.ts` pins it.
