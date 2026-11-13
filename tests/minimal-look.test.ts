@@ -15,6 +15,7 @@ import { deals, products } from "../src/lib/data";
 import { navGroups } from "../src/lib/nav";
 import { shopNav } from "../src/lib/shop-nav";
 import { headerNavItems } from "../src/components/Header";
+import { HeaderNavItems } from "../src/components/HeaderNav";
 import { Fold, Folds } from "../src/components/Fold";
 import { Tabs } from "../src/components/Tabs";
 import { DealGrid, TileGrid } from "../src/components/ProductTile";
@@ -67,6 +68,19 @@ test("one navigation: no sidebar, five sections at most, no ad in it, and every 
   assert.ok(hrefsIn(items[0].menu).some((h) => h.startsWith("/sealed/")), "Sealed opens the product types");
   assert.ok(hrefsIn(items[1].menu).some((h) => h.startsWith("/sets/")), "Sets opens the sets");
   assert.match(readFileSync(new URL("../tailwind.config.ts", import.meta.url), "utf8"), /maxWidth: \{ page: "1200px" \}/, "one centred column");
+});
+
+// Lighthouse's SEO check ("Links do not have descriptive text") and a screen reader's list of links both read a link's text alone.
+// "More" → /tools failed it on every page until 2026-11-13: the label stays, and words that are read but never drawn finish it.
+test("every header link says where it goes: a label that says nothing alone is finished in words that are read, never drawn", () => {
+  const SAYS_NOTHING = new Set(["click here", "click this", "go", "here", "information", "learn more", "more", "more info", "more information", "right here", "read more", "see more", "start", "this"]);
+  const items = headerNavItems(navGroups({ shop: [] }), shopNav().menus);
+  const html = render(React.createElement(HeaderNavItems, { items }));
+  const links = [...html.matchAll(/<a\b[^>]*>([\s\S]*?)<\/a>/g)].map((m) => text(m[1]));
+  assert.ok(links.length > items.length, `${links.length} links: the sections and what their menus hold`);
+  for (const l of links) assert.ok(l && !SAYS_NOTHING.has(l.toLowerCase()), `a header link reads "${l}"`);
+  assert.match(html, />More<span class="sr-only"> tools and guides<\/span><\/a>/, "the label is still More to the eye");
+  assert.ok(links.includes("More tools and guides"));
 });
 
 test("the hero: a section of words, a pill, a search and ways in; server markup, no script of its own", () => {

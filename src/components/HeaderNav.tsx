@@ -7,6 +7,9 @@ import { NavMenu } from "./NavMenu";
 export interface HeaderNavItem {
   href: string;
   label: string;
+  /** The words that finish a label that says nothing alone ("More" → "More tools and guides"). Never drawn: a screen reader and a
+   *  crawler read them as the link's text, and Lighthouse's SEO check stops counting "More" as a link that says nothing. */
+  rest?: string;
   also?: string[];
   xl?: boolean;
   menu?: NavGroup[];
@@ -52,6 +55,7 @@ export function HeaderNavItems({ items }: { items: HeaderNavItem[] }) {
         const link = (
           <NavLink key={n.label} href={n.href} also={n.also} className={`${n.xl ? "hidden xl:inline-flex" : "inline-flex"} ${n.menu ? "pr-6" : ""} whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors`}>
             {n.label}
+            {n.rest && <span className="sr-only"> {n.rest}</span>}
           </NavLink>
         );
         return n.menu ? (

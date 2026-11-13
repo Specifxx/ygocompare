@@ -146,9 +146,11 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   .btn-soft {
     @apply btn border border-line bg-raised text-ink hover:border-ink/40; /* calm palette, 2026-11-12: neutral, so a table has one coloured button */
   }
-  /* The buy button (the old name, kept): green, white text. */
+  /* The buy button (the old name, kept): the money green, written in the surface colour like .pc-badge on the same green.
+     White on the light theme's dark green (5.7:1); on the dark theme's bright green, the default, white read 2.0:1, so the
+     words are the dark surface there (8.8:1). tests/contrast.test.ts measures every filled control from the tokens. */
   .btn-buy {
-    @apply btn bg-open px-3 py-1.5 text-white hover:brightness-110;
+    @apply btn bg-open px-3 py-1.5 text-surface hover:brightness-110;
   }
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:border-ink/30;

@@ -32,7 +32,7 @@ export function headerNavItems(all: NavGroup[], shop: ShopMenus): HeaderNavItem[
     { href: "/sets", label: "Sets", menu: shop.sets },
     ...(SITE.kits ? [{ href: "/kits", label: SITE.kits.label, also: ["/kit"] }] : []),
     { href: "/tools/deal-finder", label: "Deals", also: ["/black-friday", "/cyber-monday", "/boxing-day", "/january-sales", "/lunar-new-year", "/movers", "/preorders", "/stores"], menu: deals.length ? deals : undefined },
-    { href: "/tools", label: "More", also: ["/price-report", "/forum", "/blog"], menu: more },
+    { href: "/tools", label: "More", rest: "tools and guides", also: ["/price-report", "/forum", "/blog"], menu: more },
   ];
 }
 
