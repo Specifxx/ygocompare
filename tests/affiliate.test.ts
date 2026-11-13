@@ -3,6 +3,9 @@ import assert from "node:assert/strict";
 import { AMAZON_AU_TAG, amazonSearchUrl, amazonSearchUrls, goHref, subId, tagged } from "@/lib/affiliate";
 import { SITE } from "@/site.config";
 
+// A person's browser: /go sends anything else untagged (lib/bot-click.ts).
+const BROWSER = { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36", "accept-language": "en-GB", "sec-fetch-mode": "navigate" };
+
 test("eBay links carry the EPN campaign and a per-site customid", () => {
   const u = new URL(tagged("https://www.ebay.com/itm/123", subId("us", "home", 1)));
   assert.equal(u.searchParams.get("campid"), "5339155912");
@@ -44,7 +47,7 @@ test("every partner tag starts with the site key, so earnings split by site", ()
 
 test("/go tags with site, market, placement and product", async () => {
   const { GET } = await import("@/app/go/route");
-  const res = GET(new Request("https://example.test/go?" + new URLSearchParams({ u: "https://www.ebay.com/itm/9", s: "ebay", m: "UK", p: "42", from: "card_top" })));
+  const res = GET(new Request("https://example.test/go?" + new URLSearchParams({ u: "https://www.ebay.com/itm/9", s: "ebay", m: "UK", p: "42", from: "card_top" }), { headers: BROWSER }));
   const loc = new URL(res.headers.get("location")!);
   assert.match(loc.searchParams.get("customid")!, /^[a-z]+-uk-card_top-42$/);
 });
