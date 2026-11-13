@@ -1924,3 +1924,13 @@ Marketplace tag), and the pinned eBay and TCGplayer buttons are filled so they s
 ## 2026-11-13: urgent release
 
 Owner asked for every site to be released now: the unpriced-Amazon fix, Fetch as an ordinary store row and the blue TCGplayer button had been merged without a deploy marker. One build, via this commit's subject.
+
+## 2026-11-13: Bots get the shop link untagged
+
+A crawler that ignores robots.txt opened about 10,000 TCGplayer buy links on YGO, Gundam, Lorcana and Cyberpunk
+Compare over 11–13 Nov (one or two per product, 8,183 sub-IDs, no sales), tripling the clicks Impact counted for us.
+That costs no commission, but a flood of clicks that never buy is what gets a partner account reviewed. `/go` now
+asks `looksLikeBot` (`src/lib/bot-click.ts`): no User-Agent, a crawler's or script's User-Agent, no Accept-Language
+or no Sec-Fetch-Mode (every current browser sends it on a navigation) means a bot. A bot is still redirected to the
+shop, just without our tracking, so no person is ever refused a link; at worst a very old browser goes untagged.
+The rules may only mark more obvious bots, each with a test in `tests/bot-click.test.ts`.
