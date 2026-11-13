@@ -26,28 +26,40 @@ export function generateMetadata({ params }: { params: { type: string } }): Meta
   };
 }
 
+// The minimal look (2026-11-13): the headline, one line, the other product types as a row of chips (the page's filters; they were
+// a section under the grid), then every product of the type.
 export default function SealedHub({ params }: { params: { type: string } }) {
   const h = hub(params.type);
   if (!h) notFound();
   const items = h.items.slice().sort((a, b) => (setById(b.setId)?.releasedOn ?? "").localeCompare(setById(a.setId)?.releasedOn ?? ""));
+  const others = sealedHubs().filter((x) => x.slug !== h.slug);
   return (
-    <div className="flex flex-col gap-6">
-      <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, { name: h.label }]} />
+    <div className="flex flex-col gap-8 sm:gap-10">
+      <header>
+        <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, { name: h.label }]} />
+        <h1 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">{SITE.gameShort} {h.label.toLowerCase()}</h1>
+        <p className="mt-3 text-sm text-muted">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>
+        {others.length > 0 && (
+          <nav aria-label="Other product types" className="mt-5">
+            {/* One row that scrolls sideways at every width: a wrapping row changes its line count when the web font arrives. */}
+            <ul className="scroller -mx-4 scroll-px-4 gap-2 px-4 sm:mx-0 sm:px-0">
+              <li>
+                <Link href="/sealed" className="chip min-h-10 whitespace-nowrap">All sealed</Link>
+              </li>
+              {others.map((x) => (
+                <li key={x.slug}>
+                  <Link href={`/sealed/${x.slug}`} className="chip min-h-10 whitespace-nowrap">{x.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
+      </header>
       {items.length > 0 && (
         <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} ${h.label.toLowerCase()}`, numberOfItems: items.length, itemListElement: items.slice(0, 30).map((p, i) => ({ "@type": "ListItem", position: i + 1, name: p.name, url: abs(`/card/${p.slug}`) })) }} />
       )}
-      <header>
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} {h.label.toLowerCase()}</h1>
-        <p className="mt-2 text-muted">{h.items.length} products, newest set first. Open any one to compare every store and eBay.</p>
-      </header>
       <TileGrid items={items} />
       <InlineAds ads={cardAds({ kind: "sealed", limit: 10 })} search={adSearch()} page="sealed-type" />
-      <section>
-        <h2 className="mb-3 text-lg font-bold">Other sealed products</h2>
-        <div className="flex flex-wrap gap-2">
-          {sealedHubs().filter((x) => x.slug !== h.slug).map((x) => <Link key={x.slug} href={`/sealed/${x.slug}`} className="chip">{x.label}</Link>)}
-        </div>
-      </section>
     </div>
   );
 }

@@ -1,24 +1,27 @@
-// The site's navigation, once: the left rail (components/SideNav.tsx, from lg
-// up), the phone menu row in the header and the footer columns all read these
-// groups, like RiftCompare's and OP Compare's rails (owner, 2026-11-03: "on the
-// very, very left we need a side navigation bar, just like Rift Compare, Dex
-// Compare, OP Compare"). Prices first, tools next, guides and news last; every
-// link a real <a> in the server HTML. Game-specific entries come from
-// src/site.config.ts (kits, lines, creators), never from here.
+// The site's navigation, once: the header's dropdowns (components/Header.tsx)
+// and the phone menu's sheet (components/MobileMenu.tsx) read these groups.
+// They were also the left rail's (owner, 2026-11-03), until the header became
+// the ONE navigation (owner, 2026-11-13: "we're making things too complicated";
+// DECISIONS.md): every link the rail had is in a dropdown, so still a real <a>
+// in every page's server HTML. Prices first, tools next, guides and news last.
+// Game-specific entries come from src/site.config.ts (kits, lines, creators),
+// never from here.
 import { SITE } from "@/site.config";
 import { TOOLS } from "@/lib/tool-list";
 import { creatorsOn } from "@/lib/creators";
 
 // Pages that are empty until a week of daily prices exists. The caller (a server
 // component) passes `history` from lib/data.ts historyOn(); this file is also read
-// by the client rail, so it never touches the data files itself.
+// by the client menu, so it never touches the data files itself.
 const NEEDS_HISTORY = new Set(["/movers", "/price-report"]);
 export interface NavOptions {
   /** False on a site younger than a week: the history pages are left out. */
   history?: boolean;
   /** In season, the Black Friday or Cyber Monday page (lib/black-friday.ts saleStrip): first in Prices. */
   sale?: NavLink | null;
-  /** The shopping groups (lib/shop-nav.ts: sealed by type, sets); the layout and header pass them. Without them the rail keeps one flat "Prices" list. */
+  /** The release on pre-order right now (lib/preorder-nav.ts), before the pre-order hub: its page keeps a link on every page while the sale has the strip. */
+  preorder?: NavLink | null;
+  /** The shopping groups (lib/shop-nav.ts: sealed by type, sets); the header passes them. Without them there is one flat "Prices" list. */
   shop?: NavGroup[];
 }
 const readyFor = (o: NavOptions) => (l: NavLink) => o.history !== false || !NEEDS_HISTORY.has(l.href);
@@ -41,6 +44,7 @@ export function navGroups(o: NavOptions = {}): NavGroup[] {
     { href: "/sealed/booster-box", label: "Booster boxes" },
     { href: "/sets", label: "Sets" },
     ...(SITE.kits ? [{ href: "/kits", label: `${SITE.kits.label} kits` }] : []),
+    ...(o.preorder ? [o.preorder] : []),
     { href: "/preorders", label: "Pre-orders" },
     { href: "/tools/deal-finder", label: "Today's deals" },
     { href: "/movers", label: "Price movers" },

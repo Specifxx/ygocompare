@@ -1,6 +1,6 @@
 // The shopping half of the navigation (owner, 2026-11-09: "a collector or someone deep in a space wants to navigate it fast").
 // A Yu-Gi-Oh! sealed buyer thinks product type (booster box, structure deck, tin, collection) and then which set. The header
-// dropdowns (components/Header.tsx), the sidebar's shop groups (lib/nav.ts navGroups `shop`) and the phone menu all read this ONE
+// dropdowns (components/Header.tsx) and the phone menu's shop groups (lib/nav.ts navGroups `shop`) both read this ONE
 // list. It reads only the loaders the hub pages already read, and every link is a hub that exists (a hub exists only with products),
 // so there is no dead end and no new query. Server-side: lib/nav.ts stays free of data.
 import { products } from "@/lib/data";
@@ -13,7 +13,7 @@ export interface ShopMenus {
 }
 export interface ShopNav {
   menus: ShopMenus;
-  /** The sidebar and phone menu groups, before "Deals & stock". */
+  /** The phone menu's groups, before "Deals & stock" (they were the sidebar's too, until 2026-11-13). */
   groups: NavGroup[];
 }
 

@@ -19,7 +19,7 @@ export default function Movers() {
   return (
     <div className="flex flex-col gap-8">
       <h1 className="font-display text-3xl font-black">{SITE.gameShort} price movers</h1>
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <List title="Risers this week" rows={w.up} />
         <List title="Fallers this week" rows={w.down} />
         <List title="Risers this month" rows={mo.up} />

@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 import { SITE } from "@/site.config";
-import { ebaySearchUrl, goHref } from "@/lib/affiliate";
 import type { NavGroup } from "@/lib/nav";
 import { Icon } from "./Icon";
 import { LogoMark } from "./Logo";
@@ -17,7 +16,7 @@ import { ThemeToggle } from "./ThemeToggle";
  * The menu button and its sheet (the engine's phone menu, from MTG Compare): a native modal <dialog> (showModal: the page behind is
  * inert, focus stays inside, Escape closes it, and focus returns to the button), drawn as a full-width sheet from the top of the
  * screen. It closes on any link (the pathname effect catches back/forward too). The sheet's contents are rendered on the first open,
- * not in the server's HTML: every link in it is in the sidebar, the header or the footer already. Never opens by itself (pop-up
+ * not in the server's HTML: every link in it is in the header's dropdowns (server HTML at every width) or the footer already. Never opens by itself (pop-up
  * policy). `groups`: lib/nav.ts navGroups, built on the server.
  */
 export function MobileMenu({ groups, className = "" }: { groups: NavGroup[]; className?: string }) {
@@ -64,7 +63,8 @@ export function MobileMenu({ groups, className = "" }: { groups: NavGroup[]; cla
   );
 }
 
-/** The sheet: everything the site has, grouped as the desktop sidebar is (lib/nav.ts), the markets, the eBay search (a labelled ad), About and Contact. */
+/** The sheet: everything the site has, in lib/nav.ts's groups (product types, sets, deals and stock, the rest), the markets, About and Contact. No ad: the
+ *  navigation carries none since 2026-11-13 (the eBay search button is gone with the header's eBay link). */
 export function MenuSheet({ groups, pathname, onClose: close }: { groups: NavGroup[]; pathname: string; onClose: () => void }) {
   return (
     <div className="page pb-5">
@@ -106,10 +106,6 @@ export function MenuSheet({ groups, pathname, onClose: close }: { groups: NavGro
         <p className="eyebrow mb-2.5 px-2">Prices for</p>
         <MarketChooser bare className="px-2" />
       </div>
-
-      <a href={goHref({ url: ebaySearchUrl(SITE.ebay.query, "US"), source: "ebay", market: "US" }, undefined, "menu-ebay")} rel="sponsored nofollow noopener" target="_blank" className="btn-ad mt-4 w-full">
-        <span className="ad-pill">Ad</span> Search eBay
-      </a>
 
       <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1 px-2 text-sm">
         <Link href="/about" onClick={close} className="inline-flex min-h-10 items-center text-muted hover:text-ink">

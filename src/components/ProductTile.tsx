@@ -1,71 +1,102 @@
 import Link from "@/components/Link";
+import { SITE } from "@/site.config";
 import type { Product } from "@/lib/site-types";
 import { imageAt } from "@/lib/image";
-import { money, pct } from "@/lib/format";
-import { refCents, setById, summaryOf } from "@/lib/data";
+import { money } from "@/lib/format";
+import { refCents, setById, summaryOf, type Deal } from "@/lib/data";
 import { shortName } from "@/lib/names";
-import { StockPill } from "./StockPill";
 import { isPreorder } from "@/lib/preorders";
 
+const STORE_NAME = new Map(SITE.stores.map((s) => [s.key as string, s.name]));
+
 /**
- * A product card (the engine's ProductCard, from MTG Compare): the art on a plate, the name, the set and number, the stock pill,
- * the headline price (TCGplayer market, lib/data.ts refCents) and "Compare N prices →". A plain click opens the quick view
- * (QuickView.tsx); the link itself stays for crawlers and new tabs.
+ * A product, as little as says it (owner, 2026-11-13: "cull … all the display aesthetics"): its photo on a plate, its name, one
+ * muted stock line and the headline price (TCGplayer market, lib/data.ts refCents). No frame around the card (the plate is the
+ * card), no set line (the name says the set), no 7-day figure and no "Compare N prices" cue: the whole card is the link. A plain
+ * click opens the quick view (QuickView.tsx reads the data-qv attributes); the link itself stays for crawlers and new tabs.
+ * Short classes from globals.css (.pc-*): a type page repeats the card hundreds of times, in the HTML and the payload.
+ *
+ * `deal` (the home page's deals, lib/data.ts deals): the same card with the store's price as the headline, TCGplayer's market
+ * price beside it and the one badge a photo may carry, the saving. Never a badge without a saving.
  */
-export function ProductTile({ p, change }: { p: Product; change?: number | null }) {
+export function ProductTile({ p, deal }: { p: Product; deal?: Deal }) {
   const ref = refCents(p.id);
   const e = summaryOf(p.id);
-  const ch = change !== undefined ? change : e.change7d;
   const stores = e.inStockSources;
   const setInfo = setById(p.setId);
   const set = setInfo?.name;
   // Not out yet: a store "in stock" is taking pre-orders (2026-11-06, a box out 13 Nov showed "In stock").
   const pre = !!setInfo && isPreorder(setInfo);
   const name = shortName(p.name);
+  const img = p.image ? imageAt(p.image, "400w") : null;
+  const unit = deal ? STORE_NAME.get(deal.offer.source) ?? deal.offer.source : `${stores} store${stores === 1 ? "" : "s"}`;
+  const open = deal ? true : stores > 0;
+  const state = pre ? "Pre-order" : "In stock";
   return (
     <Link
       href={`/card/${p.slug}`}
       data-qv={p.slug}
       data-qv-name={name}
       data-qv-sub={[set, p.number].filter(Boolean).join(" · ") || undefined}
-      data-qv-img={p.image ? imageAt(p.image, "400w")! : undefined}
-      className="group card flex flex-col overflow-hidden p-2 transition-colors hover:border-ink/40"
+      data-qv-img={img ?? undefined}
+      className="group pc-link"
     >
-      <div className="plate aspect-[5/7]">
-        {p.image ? (
-          <img src={imageAt(p.image, "400w")!} alt={`${name} ${p.kind === "card" ? "card" : ""}`} loading="lazy" decoding="async" className="h-full w-full object-contain p-1.5 transition-transform group-hover:scale-[1.02]" />
-        ) : (
-          <div className="flex h-full items-center justify-center p-3 text-center text-xs text-neutral-500">No image yet</div>
+      {/* The photo on its plate (globals.css .plate): white in light mode, a light plate in dark mode, so a store's white-backed
+          photo is never a glaring square on a dark page. */}
+      <div className="plate pc-plate">
+        {img ? <img src={img} alt={p.kind === "card" ? `${name} card` : name} loading="lazy" decoding="async" className="pc-img" /> : <div className="pc-noimg">No image yet</div>}
+        {deal && (
+          <span className="pc-badge" title={`${deal.saving}% under TCGplayer's market price`}>
+            −{deal.saving}%
+          </span>
         )}
       </div>
-      <div className="card-body flex flex-1 flex-col gap-1 px-1 pb-1 pt-2.5">
-        <p className="line-clamp-2 text-sm font-semibold leading-5 text-ink group-hover:text-brand">{name}</p>
-        <p className="truncate text-xs text-muted">{set}{p.number ? ` · ${p.number}` : ""}</p>
-        <div className="mt-auto flex items-center justify-between gap-2 pt-1.5">
-          <StockPill state={stores > 0 ? (pre ? "pre" : "open") : "soldout"} size="sm">
-            {stores > 0 ? (
+      <div className="card-body pc-body">
+        <p className="pc-name">{name}</p>
+        <div className="mt-auto">
+          {/* Where it can be bought, in one quiet line: only the dot carries the state's colour (calm palette). A card too narrow
+              for the count drops it (globals.css .card-body); the line's title keeps the whole sentence. */}
+          <p className={`pc-stock ${open ? (pre ? "pc-pre" : "pc-open") : "pc-sold"}`} title={open ? `${state} at ${unit}` : "Sold out at every store we track"}>
+            {open ? (
               <>
-                {pre ? "Pre-order" : "In stock"}<span className="stock-unit"> · {stores} store{stores === 1 ? "" : "s"}</span>
+                {state}
+                <span className="stock-unit"> · {unit}</span>
               </>
             ) : (
               "Sold out"
             )}
-          </StockPill>
-          {ch != null && <span className={`tabular text-xs font-semibold ${ch >= 0 ? "text-up" : "text-down"}`}>{pct(ch)}</span>}
-        </div>
-        <div className="flex flex-col gap-0.5">
-          <span className="tabular text-base font-bold text-ink">{money(ref)}<span className="ml-1 text-[10px] font-medium text-muted">market</span></span>
-          <span className="text-[11px] font-semibold text-brand">Compare {e.listedSources} price{e.listedSources === 1 ? "" : "s"} →</span>
+          </p>
+          <p className="pc-row">
+            <span className="pc-price">{deal ? money(deal.offer.cents, deal.offer.currency) : money(ref)}</span>
+            <span className="pc-per">{deal ? `market ${money(deal.market)}` : "market"}</span>
+          </p>
         </div>
       </div>
     </Link>
   );
 }
 
-export function TileGrid({ items }: { items: Product[] }) {
+/**
+ * A grid of products: two across on a phone, five on a desktop's 1200px column (a type page lists every product of its type, so
+ * its cards are a size down from the home page's). `roomy`: the home shelf's four across.
+ */
+export function TileGrid({ items, roomy = false }: { items: Product[]; roomy?: boolean }) {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-      {items.map((p) => <ProductTile key={p.id} p={p} />)}
+    <div className={roomy ? "pc-grid pc-grid-4" : "pc-grid"}>
+      {items.map((p) => (
+        <ProductTile key={p.id} p={p} />
+      ))}
+    </div>
+  );
+}
+
+/** The home page's deals: one card a product, the store's price against TCGplayer's market price. */
+export function DealGrid({ items }: { items: Deal[] }) {
+  return (
+    <div className="pc-grid pc-grid-4">
+      {items.map((d) => (
+        <ProductTile key={d.p.id} p={d.p} deal={d} />
+      ))}
     </div>
   );
 }

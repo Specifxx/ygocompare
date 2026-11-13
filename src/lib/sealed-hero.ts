@@ -4,7 +4,7 @@
 // and pre-order rows). DECISIONS.md, "Sealed hero on the homepage".
 //
 // Pages are cached for everyone, so this sends every market's cheapest store
-// and the visitor's market is picked in the browser (components/SealedHero.tsx).
+// and the visitor's market is picked in the browser (components/home/SealedShelf.tsx).
 // Prices are each market's own stores in its own currency, never converted;
 // eBay, Amazon and TCGplayer are never "the cheapest store" here. A saving is
 // shown only when it is real: the cheapest store against the middle in-stock
@@ -12,7 +12,7 @@
 // price, inside bounds that rule out a wrong match.
 import { SITE } from "@/site.config";
 import { CURRENCY, MARKETS, type Market, type Product } from "@/lib/site-types";
-import { featureMin, priceOf, refCents, setById, summaryOf } from "@/lib/data";
+import { featureMin, priceOf, refCents, setById } from "@/lib/data";
 import { featuredSealed, preorderSetList, sealedInSet } from "@/lib/hubs";
 import { imageAt } from "@/lib/image";
 import { isPreorder, preorderPath } from "@/lib/preorders";
@@ -21,12 +21,13 @@ import { shortName } from "@/lib/names";
 const NOT_A_STORE = new Set(["ebay", "amazon", "tcgplayer"]);
 const STORE_NAME: Record<string, string> = Object.fromEntries(SITE.stores.map((s) => [s.key, s.name]));
 
+// Only what a card draws (2026-11-13): every field here is sent to every visitor, once in the HTML's data and once per market. The
+// store's link, the eBay listing and the store count were sent and never read (a card is one link to the product, where the price
+// table has them), about 1.2 kB a product.
 export interface HeroPrice {
   cents: number;
   currency: string;
-  source: string;
   store: string;
-  url: string;
   /** In-stock (or pre-order) stores in this market. */
   stores: number;
   /** Percent saved, and against what; null when no honest comparison exists. */
@@ -42,11 +43,7 @@ export interface HeroItem {
   image: string | null;
   /** The release date when the product's set is still on pre-order. */
   releasesOn: string | null;
-  preorderHref: string | null;
-  totalStores: number;
   prices: Partial<Record<Market, HeroPrice>>;
-  /** The cheapest in-stock eBay listing per market: a labelled "Ad" line beside the store price, never "the cheapest". */
-  ebay: Partial<Record<Market, { cents: number; currency: string; url: string }>>;
 }
 
 export interface SealedHeroData {
@@ -76,12 +73,12 @@ export function heroItem(p: Product): HeroItem {
   const tcg = refCents(p.id);
   const prices: HeroItem["prices"] = {};
   for (const m of MARKETS) {
-    const best = new Map<string, { cents: number; url: string; preorder: boolean }>();
+    const best = new Map<string, { cents: number; preorder: boolean }>();
     for (const o of priceOf(p.id).offers) {
       if (o.market !== m || o.currency !== CURRENCY[m] || NOT_A_STORE.has(o.source)) continue;
       if (!o.inStock && !o.preorder) continue;
       const had = best.get(o.source);
-      if (!had || o.cents < had.cents) best.set(o.source, { cents: o.cents, url: o.url, preorder: !!o.preorder });
+      if (!had || o.cents < had.cents) best.set(o.source, { cents: o.cents, preorder: !!o.preorder });
     }
     if (!best.size) continue;
     const list = [...best.entries()].sort((a, b) => a[1].cents - b[1].cents);
@@ -89,16 +86,12 @@ export function heroItem(p: Product): HeroItem {
     prices[m] = {
       cents: top.cents,
       currency: CURRENCY[m],
-      source,
       store: STORE_NAME[source] ?? source,
-      url: top.url,
       stores: list.length,
       saving: storeSaving(top.cents, list.map(([, o]) => o.cents), tcg, m),
       preorder: top.preorder || pre,
     };
   }
-  const ebay: HeroItem["ebay"] = {};
-  for (const o of summaryOf(p.id).ebay) if (o.inStock && !ebay[o.market]) ebay[o.market] = { cents: o.cents, currency: o.currency, url: o.url };
   return {
     id: p.id,
     slug: p.slug,
@@ -106,17 +99,15 @@ export function heroItem(p: Product): HeroItem {
     set: set?.name ?? null,
     image: imageAt(p.image, "400w"),
     releasesOn: pre ? set?.releasedOn ?? null : null,
-    preorderHref: pre && set ? preorderPath(set) : null,
-    totalStores: summaryOf(p.id).listedSources,
     prices,
-    ebay,
   };
 }
 
 const PREORDER_TYPES = new Set(["Booster Box", "Display", "Collection", "Special Edition", "Tin", "Box"]);
 
 /** The hero's products: the homepage shelf, then each set on pre-order with its boxes. Only products some store sells. */
-export function sealedHero(featuredCount = 7, preorderSetsMax = 2, perSet = 3): SealedHeroData {
+// Eight boxes: two full rows of the home shelf's four-across grid (it was seven in a swipeable row until 2026-11-13).
+export function sealedHero(featuredCount = 8, preorderSetsMax = 2, perSet = 4): SealedHeroData {
   const sold = (i: HeroItem) => Object.keys(i.prices).length > 0;
   const featured = featuredSealed(featuredCount + 4).map(heroItem).filter(sold).slice(0, featuredCount);
   const preorders = preorderSetList()

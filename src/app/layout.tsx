@@ -22,11 +22,7 @@ import { QuickView } from "@/components/QuickView";
 import { RateCard } from "@/components/site-reviews/RateCard";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ShareArrival } from "@/components/ShareArrival";
-import { SideNav } from "@/components/SideNav";
 import { DockAds } from "@/components/DockAds";
-import { navGroups } from "@/lib/nav";
-import { shopNav } from "@/lib/shop-nav";
-import { historyOn } from "@/lib/data";
 import { cardAds } from "@/lib/card-ads";
 
 // The engine's two faces (DexCompare and MTG Compare: Bricolage Grotesque for headings, Inter for text), bundled as the latin
@@ -68,7 +64,6 @@ export const viewport: Viewport = { themeColor: "#0f1013", colorScheme: "dark li
 const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const history = historyOn();
   return (
     // The boot scripts stamp data-theme and data-season on this element before React hydrates; React must not report that.
     <html lang="en" className={`${display.variable} ${sans.variable}`} data-festive={CHRISTMAS_FESTIVE_LAYER ? "on" : undefined} suppressHydrationWarning>
@@ -85,15 +80,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <PrefsProvider>
           <Header />
-          <HolidayStrip />
-          <PreorderStrip />
-          {/* The engine's shell: from xl the sidebar sits in the flow beside <main>, both inside the 1480px shell. */}
-          <div className="mx-auto flex w-full max-w-shell flex-1">
-            <SideNav groups={navGroups({ history, sale: holidayNav(), shop: shopNav().groups })} />
-            <main id="main" className="min-w-0 flex-1">
-              <div className="page py-6">{children}</div>
-            </main>
-          </div>
+          {/* ONE line under the header at most (the minimal look, 2026-11-13: two promo bars sat above every headline): the sale's
+              in season, else the open pre-order's. The other keeps its link on every page in the header's Deals menu (lib/nav.ts). */}
+          {holidayNav() ? <HolidayStrip /> : <PreorderStrip />}
+          {/* ONE navigation since 2026-11-13 (owner: "we're making things too complicated"): the header. The sidebar that repeated
+              its menus down the left of every desktop page is gone; the page is one centred column (tailwind.config.ts max-w-page). */}
+          <main id="main" className="min-w-0 flex-1">
+            <div className="page py-6">{children}</div>
+          </main>
           <Footer />
           <QuickView />
           {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
