@@ -1,19 +1,20 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { navGroups, phoneNav } from "@/lib/nav";
 import { isActivePath } from "@/components/NavLink";
-import { railFits, MIN_WIDTH, MAX_TILES, ebayTilesFor } from "@/components/SideAds";
+import { MIN_WIDTH, MAX_TILES } from "@/components/DockAds";
+import { ebayTilesFor } from "@/lib/inline-ads";
 import type { CardAds } from "@/lib/card-ads";
 
 // The engine's shell (2026-11-04: Gundam Compare runs the Dex / MTG Compare engine's look): one sticky header row, the
-// sidebar in the flow beside <main> from xl, the phone menu a <dialog>, and the side rails outside the shell only on a wide screen.
+// sidebar in the flow beside <main> from xl, the phone menu a <dialog>, and no side rails (owner, 2026-11-13).
 test("the shell is the engine's: header, sidebar beside main, no fixed rail variable", () => {
   const layout = readFileSync("src/app/layout.tsx", "utf8");
   assert.match(layout, /max-w-shell/);
   assert.match(layout, /<SideNav /);
   assert.match(layout, /<main id="main" className="min-w-0 flex-1">/);
-  assert.match(layout, /<SideAds /);
+  assert.match(layout, /<DockAds /);
   assert.doesNotMatch(layout, /sidenav-w|fonts\.googleapis/);
   assert.match(readFileSync("src/components/SideNav.tsx", "utf8"), /hidden w-60 shrink-0 xl:block/);
   assert.match(readFileSync("src/components/Header.tsx", "utf8"), /h-\[var\(--hdr\)\]/);
@@ -30,17 +31,13 @@ test("the current section is marked by whole path segments", () => {
   assert.ok(!isActivePath("/", "/cards"));
 });
 
-test("the side rails show on every regular 16:9 and 16:10 screen and scroll through up to ten tiles", () => {
-  assert.equal(MIN_WIDTH, 1280, "owner, 2026-11-06");
+test("no side rails: the dock is the only fixed ad, below 1280px, and the page column keeps the whole width", () => {
+  assert.equal(MIN_WIDTH, 1280);
   assert.equal(MAX_TILES, 10);
-  assert.ok(!railFits(300), "too short for one whole tile: no rail");
-  assert.ok(railFits(720), "a 1280×720 window has rails");
-  const src = readFileSync(new URL("../src/components/SideAds.tsx", import.meta.url), "utf8");
-  assert.match(src, /min-\[1280px\]:flex/);
-  assert.match(src, /overflow-y-auto/, "the list scrolls inside the rail");
+  assert.ok(!existsSync("src/components/SideAds.tsx"), "the rail code is deleted");
+  assert.doesNotMatch(readFileSync("src/app/globals.css", "utf8"), /rail-scroll/);
   const css = readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.max-w-shell \{\s*max-width: none;\s*width: auto;\s*margin-left: 0;\s*margin-right: 0;/, "the page column keeps the whole width: no rails (owner, 2026-11-13)");
-  assert.match(readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8"), /cardAds\(\{ limit: 10, amazon: true \}\)/);
   const t = (id: number) => ({ id, slug: `s${id}`, name: "x", image: null, cents: 100, currency: "USD", url: "https://www.ebay.com/itm/1", ref: null });
   const ads: CardAds = { ebay: { US: [t(1), t(2), t(3)], UK: [t(4)] }, tcgplayer: [] };
   assert.equal(ebayTilesFor(ads, "UK").market, "US");
@@ -71,9 +68,9 @@ test("every rail link points at a page of the site, and prices come first", () =
   for (const l of phoneNav()) assert.ok(l.href === "/tools" || rail.includes(l.href), `${l.href} is in the phone row but not the rail`);
 });
 
-test("the homepage is RiftCompare's order: hero, ads, deals, sealed, the newest set's sealed, reviews, guides, FAQ, and nothing else", () => {
+test("the homepage is RiftCompare's order: hero, deals, the one ad block, sealed, the newest set's sealed, reviews, guides, FAQ, and nothing else", () => {
   const src = readFileSync("src/app/page.tsx", "utf8");
-  const order = ["<HeroSparks />", "<CreatorsBubble />", "<LandingAds ", "Today's top deals", "<SealedHero", "booster boxes and sealed`}", "<SiteReviews />", 'title="Guides"', "Frequently asked questions"];
+  const order = ["<HeroSparks />", "<CreatorsBubble />", "Today's top deals", "<InlineAds ", "<SealedHero", "booster boxes and sealed`}", "<SiteReviews />", 'title="Guides"', "Frequently asked questions"];
   let at = -1;
   for (const o of order) {
     const i = src.indexOf(o, at + 1);

@@ -108,7 +108,7 @@ export function kitImage(url: string, width: number): string {
   }
 }
 
-/** A model kit as an eBay ad tile (components/KitAds.tsx): the kit's own box
+/** A model kit as an eBay ad tile (components/InlineAds.tsx): the kit's own box
  *  photo and name; the link is an eBay search for it, so no eBay API call. */
 export interface KitAdTile {
   jan: string;

@@ -2,9 +2,7 @@
 // The small card ad pair (lib/card-ads.ts): a slim box of real cards with
 // their photos and today's prices, eBay (live Buy It Now in the visitor's
 // market) beside TCGplayer (market price). Labelled "Ad" and disclosed. Since
-// 2026-11-03 (owner: "get rid of the ads under the hero … have them show up on
-// every card page and quick view open … a smaller section") this pair is the
-// only card ad on the site: under a card page's price and in the quick view.
+// 2026-11-13 (owner) it draws ONLY in the quick view: the pages carry the one native block (InlineAds.tsx) instead.
 // Pages are cached for everyone, so the server sends every market's tiles and
 // the visitor's market is picked here.
 import { SITE } from "@/site.config";

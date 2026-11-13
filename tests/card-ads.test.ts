@@ -48,22 +48,27 @@ test("eBay item links lose their old tracking; /go tags them again", () => {
   assert.equal(cleanEbayUrl("https://www.ebay.com/sch/i.html?_nkw=x"), "https://www.ebay.com/sch/i.html?_nkw=x");
 });
 
-test("the card ads are the engine's (owner, 2026-11-04): the small pair on card pages and in the quick view, the eBay + TCGplayer banner under the home hero, the side rails from the layout, and nothing on set pages", () => {
+test("the ads are ONE native horizontal block per page (owner, 2026-11-13); the quick view keeps its small pair; no rails, no strips", () => {
   const read = (f: string) => readFileSync(f, "utf8");
-  assert.match(read("src/app/card/[slug]/page.tsx"), /<CompactCardAds /);
   assert.match(read("src/components/QuickView.tsx"), /<CompactCardAds /);
-  assert.match(read("src/app/page.tsx"), /<LandingAds ads=\{cardAds\(/);
-  assert.match(read("src/app/layout.tsx"), /<SideAds ads=\{cardAds\(/);
-  assert.doesNotMatch(read("src/app/sets/[slug]/page.tsx"), /CardAd|CardStrip|card-ads|LandingAds|SideAds/);
-  assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
-  // The rails and the banner are labelled ads behind /go, and the rails are browser-only (nothing in the server HTML).
-  for (const f of ["src/components/SideAds.tsx", "src/components/LandingAds.tsx"]) {
-    assert.match(read(f), /"use client"/, f);
-    assert.match(read(f), /ad-pill/, f);
-    assert.match(read(f), /rel="sponsored nofollow noopener"/, f);
-    if (!f.endsWith("SideAds.tsx")) assert.doesNotMatch(read(f), /amazon/i, f);
+  assert.match(read("src/app/layout.tsx"), /<DockAds ads=\{cardAds\(/);
+  assert.doesNotMatch(read("src/app/layout.tsx"), /SideAds/);
+  for (const [f, page] of [["src/app/page.tsx", "home"], ["src/app/card/[slug]/page.tsx", "card"], ["src/app/sets/[slug]/page.tsx", "set"], ["src/app/sealed/page.tsx", "sealed"], ["src/app/sealed/[type]/page.tsx", "sealed-type"], ["src/app/kit/[slug]/page.tsx", "kit"], ["src/app/kits/page.tsx", "kits"], ["src/app/kits/grade/[grade]/page.tsx", "kit-grade"]] as const) {
+    const src = read(f);
+    assert.equal(src.match(/<InlineAds /g)?.length, 1, `${f}: exactly one block`);
+    assert.match(src, new RegExp(`page="${page}"`), f);
+    assert.doesNotMatch(src, /CompactCardAds|CompactKitAds|KitEbayStrip|LandingAds|SideAds/, f);
   }
-  assert.match(read("src/components/SideAds.tsx"), /min-\[1280px\]:flex/);
+  // Below the price table, never above a price: after the "Compare prices" section on a card and a kit page.
+  for (const f of ["src/app/card/[slug]/page.tsx", "src/app/kit/[slug]/page.tsx"]) {
+    const src = read(f);
+    assert.ok(src.indexOf("<InlineAds ") > src.indexOf("<PriceTable"), `${f}: below the price table`);
+  }
+  // Not in the hero: after the deals on the home page.
+  const home = read("src/app/page.tsx");
+  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("Today's top deals"));
+  assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
+  for (const f of ["src/components/InlineAds.tsx", "src/components/DockAds.tsx"]) assert.match(read(f), /"use client"/, f);
 });
 
 test("the Amazon strip: only when asked, only products with a real ASIN, no price, tagged amazon.com link", () => {
@@ -77,11 +82,8 @@ test("the Amazon strip: only when asked, only products with a real ASIN, no pric
   assert.deepEqual(ads.amazon!.map((t) => t.id), [1]);
   assert.equal(ads.amazon![0].cents, 0);
   assert.match(ads.amazon![0].url, /^https:\/\/www\.amazon\.com\/dp\/B012345678\?tag=/);
-  // The card page asks; the quick view and the rails never do (a pop-up and a fixed overlay).
-  assert.match(readFileSync("src/app/card/[slug]/page.tsx", "utf8"), /amazon: true/);
-  assert.doesNotMatch(readFileSync("src/app/api/quick/[slug]/route.ts", "utf8"), /amazon: true/);
-  // The side rail asks too (a fixed column on a wide screen, not an overlay): the layout's cardAds call.
-  assert.match(readFileSync("src/app/layout.tsx", "utf8"), /amazon: true/);
+  // Nothing asks for it any more (owner, 2026-11-12/13): not the card page, the quick view, the layout or the inline block.
+  for (const f of ["src/app/card/[slug]/page.tsx", "src/app/api/quick/[slug]/route.ts", "src/app/layout.tsx"]) assert.doesNotMatch(readFileSync(f, "utf8"), /amazon: true/, f);
 });
 
 test("Amazon's row only for products Amazon carries (owner, 2026-11-12)", async () => {

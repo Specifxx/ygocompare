@@ -5,7 +5,7 @@ import { SITE } from "@/site.config";
 import { canon, KITS_SHARE_IMAGE } from "@/lib/site";
 import { gradeHubs, kitAdTiles, kits, kitsOn, kitsUpdatedAt, newKits, popular } from "@/lib/kits";
 import { KitGrid } from "@/components/KitTile";
-import { KitEbayStrip } from "@/components/KitAds";
+import { InlineAds } from "@/components/InlineAds";
 import { KitSearch } from "@/components/KitSearch";
 import { CheckedAgo } from "@/components/CardBuy";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -73,7 +73,7 @@ export default function Kits() {
           </section>
         ) : null;
       })()}
-      <KitEbayStrip tiles={kitAdTiles(popular(all), 12)} page="kits" title={`Popular ${cfg.label} on eBay`} />
+      <InlineAds kit={kitAdTiles(popular(all), 12)} page="kits" />
       <FamilyCluster cluster="hobby" kind="deal" />
       <section className="prose-site max-w-3xl text-sm">
         <h2>How {cfg.label} prices are compared</h2>
