@@ -8,7 +8,7 @@ import { PriceTable } from "@/components/PriceTable";
 import { CardStickyBuyBar, CardTopBuy, CheckedAgo } from "@/components/CardBuy";
 import { KitGrid } from "@/components/KitTile";
 import { JsonLd } from "@/components/JsonLd";
-import { CompactKitAds, KitEbayStrip } from "@/components/KitAds";
+import { InlineAds } from "@/components/InlineAds";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { amazonSearchUrl, ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { meta } from "@/lib/data";
@@ -101,9 +101,6 @@ export default function KitPage({ params }: { params: { slug: string } }) {
             </p>
             <CardTopBuy offers={offers} productId={pid} ebayQuery={search} />
           </header>
-          {/* The small eBay row of this kit and its grade (2026-10-29: kit
-              ads, not card ads, beside a kit). */}
-          <CompactKitAds tiles={adTiles} page="kit" />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>
@@ -133,7 +130,7 @@ export default function KitPage({ params }: { params: { slug: string } }) {
           <KitGrid items={related} />
         </section>
       )}
-      <KitEbayStrip tiles={adTiles} page="kit" title={`${k.name} and more ${GRADE_LABEL[k.grade ?? ""] ?? cfg.label} kits on eBay`} />
+      <InlineAds kit={adTiles} page="kit" />
       <CardStickyBuyBar offers={offers} productId={pid} />
     </article>
   );

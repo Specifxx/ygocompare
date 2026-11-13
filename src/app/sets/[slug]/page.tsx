@@ -15,6 +15,8 @@ import { fitTitle, setTitleCandidates } from "@/lib/seo-title";
 import { postsAbout } from "@/lib/posts";
 import { imageAt } from "@/lib/image";
 import { SealedQuickBuy } from "@/components/SealedQuickBuy";
+import { InlineAds } from "@/components/InlineAds";
+import { adSearch, cardAds } from "@/lib/card-ads";
 import { sealedSets } from "@/lib/hubs";
 
 export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
@@ -76,6 +78,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         items={sealed.slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
       />
       <section><h2 className="mb-3 text-xl font-bold">Every {s.name} sealed product</h2><TileGrid items={sealed} /></section>
+      <InlineAds ads={cardAds({ setId: s.id, fill: true, limit: 10 })} search={adSearch(s.name, s)} page="set" />
       {guides.length > 0 && (
         <section>
           <h2 className="mb-3 text-lg font-bold">{s.name} guides</h2>

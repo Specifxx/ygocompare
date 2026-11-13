@@ -1937,3 +1937,22 @@ asks `looksLikeBot` (`src/lib/bot-click.ts`): no User-Agent, a crawler's or scri
 or no Sec-Fetch-Mode (every current browser sends it on a navigation) means a bot. A bot is still redirected to the
 shop, just without our tracking, so no person is ever refused a link; at worst a very old browser goes untagged.
 The rules may only mark more obvious bots, each with a test in `tests/bot-click.test.ts`.
+
+## 2026-11-13: one native horizontal ad block inside the page, in place of the side rails and the strips
+
+Owner: with the side rails off, replace them with ONE bigger, subtler horizontal ad that sits in the page content and looks like the
+site: the site's own card, border and surface tokens, a small muted "Ad" pill, no loud colours, nothing floating, no side space.
+`components/InlineAds.tsx` (picked by `lib/inline-ads.ts`) is that block: a full-column-width card of up to six larger tiles (172px,
+a 154px photo, two title lines, the price and a plain "eBay · Buy It Now" or "TCGplayer · market" line), eBay and TCGplayer taking
+turns with eBay first, scrolling sideways on a narrow column (`.scroller`). Only eBay and TCGplayer, never Amazon (owner, 2026-11-12);
+the kit pages (`SITE.kits`) show their eBay kit tiles alone. Every link is rel sponsored through /go under `<page>-inline-ebay`,
+`<page>-inline-tcg` and their `-all` twins (page: home, card, set, sealed, sealed-type, kit, kits, kit-grade), so the Monday digest
+counts it apart from the old `home-ebay`, `side-ebay`, `-mini` and `kit-ebay-kit-strip` tags.
+
+It is browser-only like the rails were: the server sends an empty box of the block's exact height (`INLINE_H`) and the tiles draw
+after hydration, only when `inlineReady` finds three, judged on the baseline market so the server and the browser agree: no SEO
+change and CLS 0. ONE per page, never in the hero or above a first product list, below the price table on card and kit pages, after
+the grid on lists, never beside a buy button and never in the quick view (which keeps its small pair). The home banner (`LandingAds`),
+the card page's small pair, the kit page's two strips and the rail code (`SideAds`: both rails, `rail-scroll`) are deleted; the phone
+dock stays (`DockAds.tsx`, the rails' old file trimmed to it) and yields to the block. `tests/inline-ads.test.ts`,
+`tests/card-ads.test.ts` and `tests/shell.test.ts` pin it. Measure clicks per `*-inline-*` placement against the old strips on 20 Nov.

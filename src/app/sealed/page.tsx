@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { byValue, products, setById } from "@/lib/data";
+import { InlineAds } from "@/components/InlineAds";
+import { adSearch, cardAds } from "@/lib/card-ads";
 import { SEALED_ORDER as ORDER, SEALED_PLURAL as PLURAL, sealedHref } from "@/lib/hubs";
 import Link from "@/components/Link";
 import { TileGrid } from "@/components/ProductTile";
@@ -29,6 +31,7 @@ export default function Sealed() {
           <TileGrid items={g.items.sort((a, b) => (setById(b.setId)?.releasedOn ?? "").localeCompare(setById(a.setId)?.releasedOn ?? "")).slice(0, 24)} />
         </section>
       ))}
+      <InlineAds ads={cardAds({ kind: "sealed", limit: 10 })} search={adSearch()} page="sealed" />
     </div>
   );
 }

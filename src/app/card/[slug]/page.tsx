@@ -18,7 +18,7 @@ import { PriceChart } from "@/components/PriceChart";
 import { TileGrid } from "@/components/ProductTile";
 import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
-import { CompactCardAds } from "@/components/CardAds";
+import { InlineAds } from "@/components/InlineAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { amazonSearchUrls } from "@/lib/affiliate";
 import { amazonCarries, amazonCells } from "@/lib/amazon-live";
@@ -145,10 +145,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               </p>
             )}
           </header>
-          {/* The one ad placement on a card page (owner, 2026-11-03): the small
-              eBay + TCGplayer pair under the price and Buy. The full-size strips
-              are gone from every page; the quick view shows the same small pair. */}
-          <CompactCardAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, amazon: true })} page="card" {...adSearch(set?.name, set)} />
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="text-lg font-bold">Compare prices</h2>
@@ -178,6 +174,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           <TileGrid items={related} />
         </section>
       )}
+      {/* The page's one ad block (owner, 2026-11-13): native and horizontal, below the price table and everything else; never beside a buy button. */}
+      <InlineAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, limit: 10 })} search={adSearch(set?.name, set)} page="card" />
       <CardStickyBuyBar offers={e.offers} productId={p.id} />
     </article>
   );

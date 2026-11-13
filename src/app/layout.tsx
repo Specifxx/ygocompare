@@ -23,11 +23,11 @@ import { RateCard } from "@/components/site-reviews/RateCard";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ShareArrival } from "@/components/ShareArrival";
 import { SideNav } from "@/components/SideNav";
-import { SideAds } from "@/components/SideAds";
+import { DockAds } from "@/components/DockAds";
 import { navGroups } from "@/lib/nav";
 import { shopNav } from "@/lib/shop-nav";
 import { historyOn } from "@/lib/data";
-import { adSearch, cardAds } from "@/lib/card-ads";
+import { cardAds } from "@/lib/card-ads";
 
 // The engine's two faces (DexCompare and MTG Compare: Bricolage Grotesque for headings, Inter for text), bundled as the latin
 // subsets of the variable fonts (OFL, src/app/fonts): no font request at build or at runtime. Display is optional, not swap:
@@ -98,8 +98,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <QuickView />
           {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
           <RateCard />
-          {/* The two side rails on a wide screen (eBay left, TCGplayer right), beside the shell, from 1280px (every regular 16:9 and 16:10 screen); ten tiles that scroll. */}
-          <SideAds ads={cardAds({ limit: 10, amazon: true })} search={adSearch()} />
+          {/* The phone dock (the side rails are gone, owner 2026-11-13): eBay and TCGplayer tiles along the foot of a narrow screen, after a scroll. */}
+          <DockAds ads={cardAds({ limit: 10 })} />
         </PrefsProvider>
         <Analytics />
         <BuyClickTracker />

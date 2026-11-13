@@ -539,12 +539,6 @@ html:has(.menu-sheet[open]) {
 @media (max-width: 480px) { .game-fan { width: 96px; height: 90px; top: 12px; right: 8px; } .game-fan-card { width: 52px; } .game-fan-0 { right: 32px; } .game-fan-1 { right: 16px; } .game-tile-name, .game-tile-blurb { padding-right: 100px; } }
 @media (prefers-reduced-motion: reduce) { .game-tile { transition: none; } .game-tile:hover { transform: none; } .game-fan-card { transition: none; } }
 
-/* A rail's list scrolls inside it (up to ten tiles): a thin bar, and the page does not scroll on past the list's end. */
-.rail-scroll {
-  scrollbar-width: thin;
-  scrollbar-gutter: stable;
-}
-
 /* ── The full-width layout and the featured-product hero (owner, 2026-11-08: "how they feature some products on the hero and how it
    uses the full screen", KaeYoung and ScentCompare's) ─────────────────────────────────────────────────────────────────────────────
    From 1280px the shell runs from the eBay rail's edge to the TCGplayer rail's at every width, so the sidebar sits flush against the
