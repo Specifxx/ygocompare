@@ -2029,3 +2029,36 @@ take the same look the same day; YGO Compare runs their engine's look on its own
 
 URLs, titles, metadata, h1s and JSON-LD are unchanged (17 pages compared field by field against the build before). Released with
 `[deploy] [urgent]` in the merge subject, as the owner asked.
+
+## 2026-11-13: three older faults the checks found after the minimal look: the buy button, "+ I own this" and the "More" link
+
+After the minimal look went out, every page type was run through Lighthouse's accessibility and SEO checks, the build before
+against the build after. The redesign lost nothing: the home and list pages went 97 → 100 for accessibility and the product page
+stayed at 94. What was left (the product page's 94, and the 92 every page read for SEO, before and after) was three faults older
+than the redesign, fixed here.
+
+- **The buy button could barely be read in the dark theme, which is the default.** `.btn-buy` wrote white on `--open`, and the dark
+  theme makes `--open` a bright green (#4ace78): 2.02:1. The light theme's dark green hid it (5.71:1). The words are `text-surface`
+  now, like `.pc-badge` on the same green: dark on the bright green (8.77:1), still white on the dark one. `tests/contrast.test.ts`
+  measures every rule in `globals.css` that fills with a colour and writes on it (the buttons, the chips, the card's badge), from
+  the tokens, in both themes, and asks 4.5:1 of each, so a new token value or a new button cannot bring it back. `.btn-buy` was the
+  only one under it.
+- **"+ I own this" drew with its words against its border.** `vault.css` wrote the button as `:where(.ce-vault-btn)`, which weighs
+  nothing, and Tailwind's preflight styles a bare `<button>` (padding 0, the parent's size and weight) and a bare `<a>` (the
+  parent's colour): one element out-weighs a `:where()`. The button had no padding, 16px and weight 400 where the file asks for
+  14.4px, 14px and 700 (91.2px wide; 111.8px now), and "See my collection →" was the text's colour, not the accent. The two rules
+  are written with their class now. `tests/vault.test.ts` reads the reset from `tailwindcss` itself and the elements from the
+  components' markup, and fails on any `:where()` rule in the file that the reset beats. The file is the same one on DexCompare and
+  MTG Compare (fixed the same day) and on Gundam, Bandai, Lorcana, Cyberpunk and SportsCardCompare (not touched here, and
+  reported). `cart.css` is written the same way and is left alone: its add button is an icon, where the lost padding and size show
+  nothing, and its class's weight would out-rank the `text-muted` the price table puts on it; "+ Add to cart" keeps the quiet
+  12px the table gives it.
+- **The header's "More" link said nothing to a crawler or a screen reader.** Lighthouse's SEO check ("Links do not have
+  descriptive text") failed on every page. The label is still "More" to the eye; `HeaderNavItem.rest` ("tools and guides") follows
+  it in `.sr-only`, so the link's text reads "More tools and guides". `tests/minimal-look.test.ts` renders the header and refuses
+  any link whose whole text is one of the words Lighthouse lists.
+
+Measured on a fresh build, on a phone: the product page 94 → 97 for accessibility and 92 → 100 for SEO; the home page and the
+booster box page 100 for accessibility and 92 → 100 for SEO. What is left on the product page is the store thumbs
+(`StoreVote.tsx`: 20×16px buttons, under the 24px the check asks for). That file is the same on every site and is the owner's
+"very tiny area", so it is reported, not changed here. No deploy marker: this rides the next release.
