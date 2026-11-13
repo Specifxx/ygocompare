@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-12T20:30:46.630Z",
+ "generatedAt": "2026-11-13T20:15:46.483Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12556,
+   "refCents": 12575,
    "refLabel": "TCGplayer market price",
    "savingPct": 52
   },
@@ -47,7 +47,7 @@
    "currency": "USD",
    "store": "Key Items Collectibles",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/501748_200w.jpg",
-   "refCents": 13011,
+   "refCents": 12999,
    "refLabel": "TCGplayer market price",
    "savingPct": 42
   },
@@ -61,23 +61,9 @@
    "currency": "USD",
    "store": "Paragon City Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16274,
+   "refCents": 16258,
    "refLabel": "TCGplayer market price",
    "savingPct": 32
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Master of Pendulum Structure Deck",
-   "url": "https://ygocompare.com/card/master-of-pendulum-structure-deck",
-   "cents": 4449,
-   "currency": "USD",
-   "store": "Realgoodeal",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/108780_200w.jpg",
-   "refCents": 5999,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 26
   },
   {
    "kind": "deal",
@@ -94,16 +80,18 @@
    "savingPct": 19
   },
   {
-   "kind": "preorder",
+   "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Magnificent Maestros Booster Box",
-   "url": "https://ygocompare.com/preorders/magnificent-maestros",
-   "cents": 21499,
+   "title": "Magnificent Maestros Display",
+   "url": "https://ygocompare.com/card/magnificent-maestros-display",
+   "cents": 19999,
    "currency": "USD",
-   "store": "Double Infinity Gaming",
+   "store": "Collector Store LLC",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/711214_200w.jpg",
-   "releaseDate": "2026-11-13"
+   "refCents": 22627,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 12
   },
   {
    "kind": "preorder",
@@ -114,6 +102,7 @@
    "cents": 7000,
    "currency": "USD",
    "store": "Skybox Collectibles",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/713238_200w.jpg",
    "releaseDate": "2026-12-04"
   }
  ]
