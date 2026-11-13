@@ -1920,3 +1920,7 @@ Owner: "we just want eBay and TCGplayer as the paid links at the top. That is wh
 draws only with a real Creators API price (no "Also check on Amazon" search row), the Amazon side rail and photo strip added earlier
 today are removed (the right rail is TCGplayer again), Fetch TCG (AU) is an ordinary store row ranked by price (no pin, no Ad or
 Marketplace tag), and the pinned eBay and TCGplayer buttons are filled so they stand out. `tests/paid-rows.test.ts` pins it.
+
+## 2026-11-13: urgent release
+
+Owner asked for every site to be released now: the unpriced-Amazon fix, Fetch as an ordinary store row and the blue TCGplayer button had been merged without a deploy marker. One build, via this commit's subject.
