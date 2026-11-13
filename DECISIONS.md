@@ -1956,3 +1956,76 @@ the grid on lists, never beside a buy button and never in the quick view (which 
 the card page's small pair, the kit page's two strips and the rail code (`SideAds`: both rails, `rail-scroll`) are deleted; the phone
 dock stays (`DockAds.tsx`, the rails' old file trimmed to it) and yields to the block. `tests/inline-ads.test.ts`,
 `tests/card-ads.test.ts` and `tests/shell.test.ts` pin it. Measure clicks per `*-inline-*` placement against the old strips on 20 Nov.
+
+## 2026-11-13: the minimal look: one navigation, a hero of words and a search, products first
+
+Owner: "we're making things too complicated … get rid of the products on the hero … cull the features that we show and all the
+display aesthetics … minimalistic, dynamic, aesthetic and smooth". A review of every page type, then this. DexCompare and MTG Compare
+take the same look the same day; YGO Compare runs their engine's look on its own data, so it is that look ported by hand.
+
+- **One navigation.** The desktop sidebar (`SideNav.tsx`, deleted) repeated the header's menus down the left of every page. The header
+  is the site's only navigation: one row in the page's column with Sealed, Sets, Deals and More (each opens its menu), the search with
+  the row's spare room, theme, market and cart. The row had six entries; the seasonal "Black Friday" entry and eBay's sponsored link
+  are out of it. The sale still leads the Deals menu in its season and keeps its strip; the release on pre-order is a link in the
+  Deals menu (`lib/preorder-nav.ts`, the `preorder` option of `navGroups`), and its strip shows only when no sale strip does, so a
+  page has one line under the header, not two. The phone menu (a `<dialog>` in the server HTML at every width) is handed every group
+  the sidebar listed, so no page lost a site link: compared link by link on 17 pages, the only links a page other than the home page
+  lost are the two eBay ad links. The page is one centred column, 1200px (`max-w-page`; it was 1440px beside the sidebar).
+- **The hero has no product** (`components/home/Hero.tsx`): the same h1, one line under it, the search, the market row, six ways in
+  (the first three product types that exist, today booster boxes, tins and structure decks; then pre-orders, deals and all sets) and
+  one line of facts, centred, on a ground of two CSS gradients and a dot grid. One pill at most: the Christmas gift guide in its
+  season (the owner's 2026-11-12 line, reshaped by rules outside the shared `xmas-common` block), else the set on pre-order.
+  `HeroCards` (two featured boxes), `HeroSparks` (a canvas), `CreatorsBubble`, the eyebrows, the six "Trending" chips and the stat
+  chips are deleted, not hidden. The hero itself never clips, so the search's suggestions open over the tiles and the shelf under it.
+- **The home page under the hero is five blocks.** ONE shelf, "Yu-Gi-Oh! booster boxes and sealed", whose lists sit behind tabs
+  (`components/Tabs.tsx`: every panel is rendered by the server and stays in the HTML, a tab only chooses which shows, no request):
+  eight booster boxes at their cheapest store in the visitor's market (`sealedHero()`; seven before, in a swipeable row), the sets on
+  pre-order in one list, today's eight best deals (one per product), and the newest released set only when it adds a product the
+  shelf does not already show. Then the latest four sets, the page's one ad block, the guides as a closed `<details>` with their
+  `<h2>` in the summary (`components/Fold.tsx`), and the questions as rows. Where the rest went: "Today's top deals" and the newest
+  set's own section are lists of the shelf (their headings are the lists' visually hidden `<h3>`s; "Latest sets" is the one new
+  `<h2>`); the six trending boxes are on `/sealed/booster-box` with every other box; the sale links under the deals are the strip and
+  the Deals menu; the reviews row is the footer's "Rate us"; the creators bubble's page stays in the More menu and the footer. The ad
+  block moved from above the shelf to under the shelf and the sets.
+- **List pages show products first.** `/sealed`: the h1, one line, the product types as chips with their counts, then each type's
+  products. A type page: the other types are chips under the headline (they were a block under 330 products). A set page: the
+  headline, the buy box (unchanged), the grid, the ad block, then its guides folded. Grids are five across on a desktop, the home
+  shelf four.
+- **The product card** (`ProductTile.tsx`, `globals.css` `.pc-*`) is the photo on its plate, the name, one stock line ("In stock · 12
+  stores", "Pre-order", "Sold out") and the price ("market": TCGplayer's), with one badge on the photo only for a real saving. No
+  frame, set line, stock pill, 7-day figure or "Compare N prices" cue. It is still one link with the same `data-qv*`, so the quick
+  view and its buy rows are untouched; the home shelf's cards open it too now (they were plain links to the product page). The shelf
+  sends only what a card draws: each product carried its store link, its eBay listing and a store count that nothing read.
+- **The product page is untouched** apart from the missing sidebar: the price table first, the same pinned rows, no ad unit added or
+  removed.
+- **Ads: the trade-off.** A page keeps ONE in-page block under what the visitor came for (`InlineAds`, unchanged), the phone dock and
+  the product page's and quick view's pinned rows. eBay's link in the header and the "Search eBay" button in the phone menu are gone
+  (the `header-ebay` and `menu-ebay` placements): no ad in the navigation. The revenue check of 13 November: side rails and banners
+  had 163 eBay clicks and no sale last week; the earnings come from the product page's and the quick view's rows, which did not
+  change. Clicks per placement are rechecked on 19 November; if the navigation's links earned, one comes back.
+- **Motion is CSS only** (`globals.css`, "Motion."): the hero's parts rise in turn on load (the h1 moves 10px but is never
+  transparent, so the largest paint is not held back), sections rise as they scroll in only where the browser ties it to the scroll
+  position (`animation-timeline: view()`, behind `@supports`), a changed tab and an opened fold fade in, cards lift on hover, the
+  header takes its line once the page moves under it (`animation-timeline: scroll()`). Transforms and opacity only, nothing in the
+  layout moves, all of it inside `prefers-reduced-motion: no-preference`. No animation library, no scroll listener, no observer. It
+  replaces the 2026-11-03 scroll motion (`.sd`, transform only): a section may now fade as it rises, but only inside that
+  `@supports`, so a browser or a crawler without scroll timelines only ever sees the finished page.
+- **Found on the way, and fixed: most pages were wider than a phone's screen.** A visually hidden label inside a sideways scroller
+  that is not positioned is not clipped by it and counts toward the page's width. On a 390px phone the layout was 962px wide on the
+  home page, `/sealed`, a type page, a set page and a product page (every page that carries the ad block), so the page slid
+  sideways. `:where(.scroller, .overflow-x-auto, .overflow-x-scroll) { position: relative }` in `globals.css`. `/movers` and
+  `/price-report` were 674px wide for another reason: a grid's own column is as wide as its longest unbroken product name until it
+  is told it may shrink (`grid-cols-1`). 40 pages measured after: 390px on every one, at load and after scrolling to the end.
+- **Measured, old build against new, same data** (US market; phone 390px, desktop 1440px; stand-in photos, because the stores' image
+  hosts are blocked where it was measured): the home page's height 6,125px → 5,137px on a phone and 4,324px → 3,933px on a desktop;
+  its HTML 205,540 → 190,336 bytes, its links 147 → 111, its first-load JS 125 → 121 kB. Its elements went 816 → 840: the deals are
+  photo cards now and the sets row is new, and this home page was never the long one. `/sealed`: 966,694 → 583,409 bytes, 3,675 →
+  2,769 elements. The booster box page: 1,413,429 → 839,458 bytes, 5,253 → 3,920 elements; five cards across a 1200px column make
+  it a little taller on a desktop (24,210px → 25,619px) and shorter on a phone (68,067px → 53,491px). A set page 544 → 433
+  elements, the product page 722 → 616. Every other page is about 12 kB lighter (the sidebar).
+- `tests/minimal-look.test.ts` pins the navigation, the hero (no product, no photo, no script), the shelf (every panel in the HTML),
+  the fold, the home page's order and outline, one h1, valid JSON-LD, the card, the list pages' order, the motion rules and both
+  width fixes; `tests/shell.test.ts` and `tests/shop-nav.test.ts` are updated for the new markup. No test was deleted or skipped.
+
+URLs, titles, metadata, h1s and JSON-LD are unchanged (17 pages compared field by field against the build before). Released with
+`[deploy] [urgent]` in the merge subject, as the owner asked.

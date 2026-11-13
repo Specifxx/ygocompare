@@ -76,7 +76,7 @@ export interface SiteConfig {
   domain: string;
   /** Serve and link the bare domain (no `www.`); the default is www. */
   apexHost?: boolean;
-  /** No longer read (owner, 2026-11-03): every homepage shows the one tabbed sealed shelf (components/SealedHero.tsx). Kept so
+  /** No longer read (owner, 2026-11-03): every homepage shows the one tabbed sealed shelf (components/home/SealedShelf.tsx). Kept so
    *  a site config that still sets it type-checks. */
   homeSealedHero?: boolean;
   /** The home page features only products worth at least this much (TCGplayer market, or a kit's median in-stock price), in

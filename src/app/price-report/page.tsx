@@ -111,7 +111,7 @@ export default function PriceReport() {
         </ul>
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {([[`Biggest risers, ${span}`, mo.up], [`Biggest fallers, ${span}`, mo.down]] as const).map(([title, list]) => (
           <div key={title} className="card-surface p-4">
             <h2 className="mb-2 text-lg font-bold">{title}</h2>
