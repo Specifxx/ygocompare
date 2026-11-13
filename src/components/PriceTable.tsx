@@ -165,7 +165,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                   </td>
                   <td className="px-3 py-2.5 text-right font-semibold tabular-nums">
                     {money(o.cents, o.currency)}
-                    {c != null && <span className="block text-xs font-normal text-muted">≈ {money(c, cur)}</span>}
+                    {c != null && <span className="block text-xs font-normal text-muted">{o.source === "tcgplayer" ? "" : "≈ "}{money(c, cur)}</span>}
                     {pinned.includes(o) && cheapest && o !== cheapest && o.currency === cheapest.currency && cheapest.cents > 0 && o.cents > cheapest.cents && (
                       <span className="block text-xs font-normal text-muted">+{Math.round(((o.cents - cheapest.cents) / cheapest.cents) * 100)}% vs cheapest</span>
                     )}

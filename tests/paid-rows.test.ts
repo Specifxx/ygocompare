@@ -28,3 +28,8 @@ test("TCGplayer's pinned button is blue (owner, 2026-11-12)", () => {
   const src = readFileSync(new URL("../src/components/PriceTable.tsx", import.meta.url), "utf8");
   assert.match(src, /"btn-tcg px-3 py-1\.5"/);
 });
+
+test("TCGplayer's converted price carries no ≈ mark (owner, 2026-11-13)", () => {
+  const src = readFileSync(new URL("../src/components/PriceTable.tsx", import.meta.url), "utf8");
+  assert.match(src, /o\.source === "tcgplayer" \? "" : "≈ "/);
+});
