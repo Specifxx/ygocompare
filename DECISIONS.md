@@ -2165,3 +2165,11 @@ text button (`inline`) is drawn as a bordered button (`cart.css`). Neutral, neve
 filled action and the calm three-colour rule holds. Nothing else moved: which rows can be added (open store rows, eBay and
 Amazon with a live price; never a marketplace or a search row), the line's buy link and its affiliate tag, the row order, the
 buy button and every placement are unchanged. A caller can still ask for the bare icon (`label={false}`).
+
+## 2026-11-14: eBay and Amazon are never the cheapest
+
+A product page on a sister engine showed an eBay row badged "Best price" and named eBay in its "Cheapest in" box:
+`priceRows` took the first in-stock row whatever its source, and `summarize` kept eBay as a market's cheapest (so list
+tiles and the quick buy could lead with an eBay price). Both now skip eBay and Amazon (`neverCheapest` in
+`src/lib/price-rows.ts`); eBay keeps its pinned row and its own ad list (`e`), and a paid alternative is never cheaper
+than the cheapest. `tests/never-cheapest.test.ts` pins it. The summary is rebuilt by the next import.
