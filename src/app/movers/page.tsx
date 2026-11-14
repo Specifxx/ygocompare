@@ -18,22 +18,24 @@ export default function Movers() {
   const mo = movers(30, 300);
   return (
     <div className="flex flex-col gap-8">
-      <h1 className="font-display text-3xl font-black">{SITE.gameShort} price movers</h1>
+      <header>
+        <h1 className="page-h1">{SITE.gameShort} price movers</h1>
+        <p className="page-sub">Products worth $3 or more. Based on TCGplayer market price, recorded daily.</p>
+      </header>
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <List title="Risers this week" rows={w.up} />
         <List title="Fallers this week" rows={w.down} />
         <List title="Risers this month" rows={mo.up} />
         <List title="Fallers this month" rows={mo.down} />
       </div>
-      <p className="text-xs text-muted">Cards worth $3 or more. Based on TCGplayer market price, recorded daily.</p>
     </div>
   );
 }
 
 function List({ title, rows }: { title: string; rows: ReturnType<typeof movers>["up"] }) {
   return (
-    <section className="card-surface p-4">
-      <h2 className="mb-2 text-lg font-bold">{title}</h2>
+    <section className="card p-4 sm:p-5">
+      <h2 className="mb-2 font-display text-lg font-bold tracking-tight">{title}</h2>
       {!rows.length && <p className="text-sm text-muted">Not enough history yet — movers appear after the first week of daily prices.</p>}
       <ol>
         {rows.slice(0, 25).map((r, i) => (

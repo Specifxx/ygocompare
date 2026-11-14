@@ -94,7 +94,7 @@ export default function KitPage({ params }: { params: { slug: string } }) {
           <header>
             <div className="flex items-start gap-3">
               {k.image && <img src={kitImage(k.image, 160)} alt={k.name} className="w-20 shrink-0 rounded-md bg-white object-contain md:hidden" width={80} height={80} />}
-              <h1 className="font-display text-2xl font-black md:text-3xl">{k.name} price</h1>
+              <h1 className="font-display text-2xl font-bold tracking-tight md:text-3xl">{k.name} price</h1>
             </div>
             <p className="mt-2 text-sm text-muted">
               {inStock.length} in-stock listing{inStock.length === 1 ? "" : "s"}{markets.length ? ` in ${markets.map((x) => MARKET_LABEL[x]).join(", ")}` : ""}.

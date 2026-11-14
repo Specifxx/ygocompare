@@ -94,7 +94,7 @@ export default function PreorderRelease({ params }: { params: { slug: string } }
         <p className="text-xs uppercase tracking-wide text-brand-400">
           {pre ? `Pre-order · releases ${longDate(s.releasedOn)}${days != null ? (days === 0 ? " · out today" : ` · ${days} day${days === 1 ? "" : "s"} to go`) : ""}` : `Out now · released ${longDate(s.releasedOn)}`}
         </p>
-        <h1 className="font-display text-3xl font-black md:text-4xl">{pre ? `${s.name} pre-order prices` : `${s.name} booster box prices`}</h1>
+        <h1 className="page-h1">{pre ? `${s.name} pre-order prices` : `${s.name} booster box prices`}</h1>
         {copy?.intro ? (
           <p className="mt-3 max-w-3xl text-muted" dangerouslySetInnerHTML={{ __html: copy.intro }} />
         ) : (

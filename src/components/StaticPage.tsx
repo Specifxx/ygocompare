@@ -1,8 +1,11 @@
-export function StaticPage({ title, children }: { title: string; children: React.ReactNode }) {
+import { PageHead } from "@/components/Section";
+
+/** A page of reading (about, stores, terms…): the shared page head, then the text set as an article. */
+export function StaticPage({ title, sub, children }: { title: string; sub?: React.ReactNode; children: React.ReactNode }) {
   return (
     <article className="mx-auto max-w-3xl">
-      <h1 className="font-display text-3xl font-black">{title}</h1>
-      <div className="prose-site mt-4">{children}</div>
+      <PageHead title={title} sub={sub} size="article" />
+      <div className="prose-site mt-8">{children}</div>
     </article>
   );
 }

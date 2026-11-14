@@ -51,7 +51,7 @@ export default function PriceReport() {
   return (
     <article className="flex max-w-4xl flex-col gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} price report, {month}</h1>
+        <h1 className="page-h1">{SITE.gameShort} price report, {month}</h1>
         <p className="text-muted">
           {SITE.game} prices across {SITE.stores.length} stores in {MARKETS.length} markets, compared with TCGplayer. Rebuilt from each day&apos;s prices{asOf ? `; last updated ${asOf}` : ""}.
           Free to quote with a link.

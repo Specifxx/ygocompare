@@ -62,7 +62,7 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
   return (
     <article className="flex max-w-4xl flex-col gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl font-black">{SITE.gameShort} {EVENT_NAME[event]} deals {year}</h1>
+        <h1 className="page-h1">{SITE.gameShort} {EVENT_NAME[event]} deals {year}</h1>
         <p className="text-muted">
           {event === "black-friday" ? <>Black Friday is {longDate(bf)} and Cyber Monday is {longDate(cm)} {year}.{" "}</> : <>Cyber Monday is {longDate(cm)} {year}, the Monday after Black Friday ({longDate(bf)}).{" "}</>}
           {before ? "Stores often start their sales earlier. " : ""}

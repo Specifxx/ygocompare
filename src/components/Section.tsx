@@ -29,3 +29,19 @@ export function Section({ id, title, kicker, sub, href, linkLabel = "See all", c
 export function Empty({ children }: { children: React.ReactNode }) {
   return <div className="card px-6 py-10 text-center text-muted">{children}</div>;
 }
+
+/**
+ * Every page's head, in the home page's words (2026-11-14): an optional small line above (a date, a kind), the h1 in the display
+ * face, one muted line under it, then anything the page puts there (chips, a toolbar). One size for every list, guide and static
+ * page, so a visitor who leaves the home page finds the same voice on the next one. `size="article"`: a long title, a size down.
+ */
+export function PageHead({ eyebrow, title, sub, size = "page", className = "", children }: { eyebrow?: React.ReactNode; title: React.ReactNode; sub?: React.ReactNode; size?: "page" | "article"; className?: string; children?: React.ReactNode }) {
+  return (
+    <header className={`page-head ${className}`}>
+      {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
+      <h1 className={size === "article" ? "page-h1-article" : "page-h1"}>{title}</h1>
+      {sub && <p className={size === "article" ? "page-sub sm:text-[17px] sm:leading-7" : "page-sub"}>{sub}</p>}
+      {children}
+    </header>
+  );
+}

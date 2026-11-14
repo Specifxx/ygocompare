@@ -286,15 +286,31 @@ h1, h2, h3 { letter-spacing: -0.01em; }
     color: transparent;
     letter-spacing: 0.02em;
   }
-  .prose-site h2 { @apply mb-3 mt-8 font-display text-xl font-bold text-ink; }
-  .prose-site h3 { @apply mb-1 mt-6 text-lg font-semibold text-ink; }
-  .prose-site p { @apply my-3 leading-7 text-muted; }
-  .prose-site ul { @apply my-3 list-disc space-y-1 pl-6 text-muted; }
-  .prose-site ol { @apply my-3 list-decimal space-y-1 pl-6 text-muted; }
-  .prose-site a { @apply font-medium text-brand underline underline-offset-2; }
-  .prose-site table { @apply my-4 w-full text-sm; }
-  .prose-site th { @apply border-b border-line py-2 text-left; }
-  .prose-site td { @apply border-b border-line py-2 pr-3; }
+  /* Reading matter (guides, posts, the static pages), set as an article (2026-11-14): a ~68-character measure, the body in ink a
+     step softer than headings, a heading scale with room above, lists with quiet markers, links underlined in a faint brand line
+     that firms up on hover, and a table that scrolls in its own box instead of widening the page. */
+  .prose-site { @apply max-w-[68ch] text-[16px] leading-7 text-ink/85; }
+  .prose-site > :first-child { @apply mt-0; }
+  .prose-site h2 { @apply mb-3 mt-10 scroll-mt-24 font-display text-xl font-bold tracking-tight text-ink sm:text-2xl; }
+  .prose-site h3 { @apply mb-2 mt-7 text-lg font-semibold text-ink; }
+  .prose-site p { @apply my-4 leading-7; }
+  .prose-site ul { @apply my-4 list-disc space-y-2 pl-6 marker:text-faint; }
+  .prose-site ol { @apply my-4 list-decimal space-y-2 pl-6 marker:text-faint marker:tabular-nums; }
+  .prose-site li { @apply pl-1 leading-7; }
+  .prose-site strong, .prose-site b { @apply font-semibold text-ink; }
+  .prose-site a { @apply font-medium text-brand-strong underline decoration-brand/40 decoration-1 underline-offset-[3px] transition-colors hover:decoration-brand; }
+  :root:not([data-theme="light"]) .prose-site a { @apply text-brand; }
+  .prose-site blockquote { @apply my-6 rounded-xl border border-line bg-raised px-5 py-4 text-ink/85; }
+  .prose-site hr { @apply my-10 border-line; }
+  .prose-site table { @apply my-6 block w-full max-w-full overflow-x-auto whitespace-nowrap rounded-xl border border-line text-sm tabular-nums sm:table sm:whitespace-normal; }
+  .prose-site thead { @apply bg-raised; }
+  .prose-site th { @apply border-b border-line px-3 py-2 text-left text-xs font-semibold uppercase tracking-wide text-muted; }
+  .prose-site td { @apply border-b border-line px-3 py-2.5; }
+  .prose-site tr:last-child > td { @apply border-b-0; }
+  /* The page head (components/Section.tsx PageHead): the h1 the list pages already use, one muted line, the same on every page. */
+  .page-h1 { @apply text-balance font-display text-3xl font-bold tracking-tight sm:text-5xl; }
+  .page-h1-article { @apply text-balance font-display text-3xl font-bold leading-tight tracking-tight sm:text-[2.5rem] sm:leading-[1.1]; }
+  .page-sub { @apply mt-3 max-w-2xl text-pretty text-[15px] leading-6 text-muted; }
 }
 
 /* ── The shell (components/Header.tsx, MobileMenu.tsx, Section.tsx) ─────────────────────────────────────────────── */

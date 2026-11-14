@@ -141,9 +141,15 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               <ShareButton path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} medium={p.kind === "sealed" ? "sealed" : "card"} offers={e.offers} compact className="mt-1" />
             </div>
             <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-2">
-              <p><span className="tabular font-display text-3xl font-bold text-ink">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
-              <p className="text-sm">7d <span className={(e.change7d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change7d)}</span> · 30d <span className={(e.change30d ?? 0) >= 0 ? "text-up" : "text-down"}>{pct(e.change30d)}</span></p>
-              <p className="text-sm text-muted">{inStock.length} in-stock listing{inStock.length === 1 ? "" : "s"} worldwide</p>
+              {ref ? (
+                <p><span className="tabular font-display text-3xl font-bold text-ink">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
+              ) : (
+                <p className="text-sm text-muted">No TCGplayer market price yet</p>
+              )}
+              {(e.change7d != null || e.change30d != null) && (
+                <p className="text-sm tabular-nums">7d <span className={e.change7d == null ? "text-muted" : e.change7d >= 0 ? "text-up" : "text-down"}>{pct(e.change7d)}</span> · 30d <span className={e.change30d == null ? "text-muted" : e.change30d >= 0 ? "text-up" : "text-down"}>{pct(e.change30d)}</span></p>
+              )}
+              <p className="text-sm text-muted">{inStock.length ? `${inStock.length} in-stock listing${inStock.length === 1 ? "" : "s"} worldwide` : "No in-stock listings right now"}</p>
             </div>
             <CardTopBuy offers={e.offers} productId={p.id} ebayQuery={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} />
             <VaultOwn id={p.id} name={`${name}${p.number ? ` ${p.number}` : ""}`} href={`/card/${p.slug}`} image={p.image ? imageAt(p.image, "200w") : null} prices={lowestByMarket(e.offers)} className="mt-3" />
@@ -157,7 +163,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           </header>
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
-              <h2 className="text-lg font-bold">Compare prices</h2>
+              <h2 className="font-display text-lg font-bold tracking-tight">Compare prices</h2>
               <CheckedAgo at={m?.updatedAt} />
             </div>
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
@@ -165,8 +171,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
-          <section className="card-surface p-4">
-            <h2 className="mb-2 text-lg font-bold">Price history</h2>
+          <section className="card p-4 sm:p-5">
+            <h2 className="mb-3 font-display text-lg font-bold tracking-tight">Price history</h2>
             <PriceChart series={series} days={365} />
           </section>
           <section className="prose-site max-w-none text-sm">
@@ -180,7 +186,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
       </div>
       {related.length > 0 && (
         <section>
-          <h2 className="mb-3 text-lg font-bold">More from {set?.name}</h2>
+          <h2 className="mb-4 font-display text-lg font-bold tracking-tight sm:text-xl">More from {set?.name}</h2>
           <TileGrid items={related} />
         </section>
       )}

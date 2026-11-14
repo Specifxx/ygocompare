@@ -33,7 +33,7 @@ export default function GradePage({ params }: { params: { grade: string } }) {
     <div className="flex flex-col gap-8">
       <header>
         <Breadcrumbs items={[{ name: SITE.kits.label, href: "/kits" }, { name: h.label }]} />
-        <h1 className="font-display text-3xl font-black">{h.label} {SITE.kits.label} prices</h1>
+        <h1 className="page-h1">{h.label} {SITE.kits.label} prices</h1>
         <p className="mt-2 text-muted">{h.items.length} kits, the ones most shops have in stock first. Open a kit to compare every shop.</p>
       </header>
       <nav aria-label="Grades" className="flex flex-wrap gap-2">

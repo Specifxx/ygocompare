@@ -25,7 +25,7 @@ export function DealFinder({ rows }: { rows: DealRow[] }) {
         (!q || `${r.name} ${r.set}`.toLowerCase().includes(q.toLowerCase())),
     );
   }, [rows, mk, market, kind, min, minPrice, q]);
-  const sel = "rounded-md border border-ink-700 bg-ink-900 px-2 py-1.5 text-sm";
+  const sel = "min-h-10 rounded-lg border border-line bg-surface px-3 py-1.5 text-sm text-ink transition-colors hover:border-ink/30";
   return (
     <div className="mt-5">
       <div className="flex flex-wrap gap-2">
@@ -45,24 +45,24 @@ export function DealFinder({ rows }: { rows: DealRow[] }) {
         </select>
         <input className={`${sel} min-w-48 flex-1`} placeholder="Filter by name or set" value={q} onChange={(e) => setQ(e.target.value)} />
       </div>
-      <p className="mt-3 text-sm text-muted">{shown.length} deals</p>
-      <div className="mt-2 overflow-x-auto rounded-xl border border-ink-700/60">
-        <table className="w-full text-sm">
-          <thead className="bg-ink-850 text-left text-xs uppercase text-muted"><tr><th className="px-3 py-2">Card</th><th className="px-3 py-2">Where</th><th className="px-3 py-2 text-right">Market</th><th className="px-3 py-2 text-right">Price</th><th className="px-3 py-2 text-right">Under</th><th /></tr></thead>
+      <p className="mt-4 text-sm tabular-nums text-muted">{shown.length} {shown.length === 1 ? "deal" : "deals"}</p>
+      <div className="card mt-2 overflow-x-auto">
+        <table className="w-full text-sm tabular-nums">
+          <thead className="bg-raised text-left text-xs uppercase tracking-wide text-muted"><tr><th className="px-3 py-2">Product</th><th className="hidden px-3 py-2 sm:table-cell">Where</th><th className="hidden px-3 py-2 text-right sm:table-cell">Market</th><th className="px-3 py-2 text-right">Price</th><th className="px-3 py-2 text-right">Under</th><th /></tr></thead>
           <tbody>
             {shown.slice(0, 300).map((r) => (
-              <tr key={`${r.id}-${r.source}-${r.offerMarket}`} className="border-t border-ink-800">
-                <td className="px-3 py-2"><a className="hover:underline" href={`/card/${r.slug}`}>{r.name}</a><span className="block text-xs text-muted">{r.set}</span></td>
-                <td className="px-3 py-2 text-muted">{sourceName({ source: r.source, market: r.offerMarket } as never)} <span className="text-xs">{r.offerMarket}</span></td>
-                <td className="px-3 py-2 text-right text-muted">{money(r.market)}</td>
-                <td className="px-3 py-2 text-right font-semibold text-buy-400">{money(r.cents, r.currency)}{r.currency !== "USD" && <span className="block text-xs font-normal text-muted">≈ {money(r.usd)}</span>}</td>
-                <td className="px-3 py-2 text-right">−{r.saving}%</td>
-                <td className="px-3 py-2 text-right"><a className="btn-buy" rel="sponsored nofollow noopener" target="_blank" href={goHref({ url: r.url, source: r.source, market: r.offerMarket }, r.id, "deal-finder")}>Buy</a></td>
+              <tr key={`${r.id}-${r.source}-${r.offerMarket}`} className="border-t border-line">
+                <td className="min-w-[9rem] px-3 py-2.5"><a className="font-medium hover:underline" href={`/card/${r.slug}`}>{r.name}</a><span className="block text-xs text-muted">{r.set}</span><span className="block text-xs text-muted sm:hidden">{sourceName({ source: r.source, market: r.offerMarket } as never)} {r.offerMarket} · market {money(r.market)}</span></td>
+                <td className="hidden px-3 py-2.5 text-muted sm:table-cell">{sourceName({ source: r.source, market: r.offerMarket } as never)} <span className="text-xs">{r.offerMarket}</span></td>
+                <td className="hidden px-3 py-2.5 text-right text-muted sm:table-cell">{money(r.market)}</td>
+                <td className="whitespace-nowrap px-3 py-2.5 text-right font-semibold text-buy-400">{money(r.cents, r.currency)}{r.currency !== "USD" && <span className="block text-xs font-normal text-muted">≈ {money(r.usd)}</span>}</td>
+                <td className="whitespace-nowrap px-3 py-2.5 text-right">−{r.saving}%</td>
+                <td className="py-2.5 pl-1 pr-3 text-right"><a className="btn-buy" rel="sponsored nofollow noopener" target="_blank" href={goHref({ url: r.url, source: r.source, market: r.offerMarket }, r.id, "deal-finder")}>Buy</a></td>
               </tr>
             ))}
           </tbody>
         </table>
-        {!shown.length && <p className="p-4 text-muted">No deals match these filters.</p>}
+        {!shown.length && <p className="p-6 text-center text-muted">No deals match these filters. Try a lower discount or another market.</p>}
       </div>
     </div>
   );

@@ -149,7 +149,7 @@ export default function CreatorsPage() {
 
       <header className="mt-4 max-w-2xl">
         <p className="text-xs font-semibold uppercase tracking-wide text-brand-400">Creators</p>
-        <h1 className="mt-2 font-display text-3xl font-black md:text-5xl">{SITE.gameShort} creators we love</h1>
+        <h1 className="page-h1 mt-2">{SITE.gameShort} creators we love</h1>
         <p className="mt-3 text-lg leading-8 text-muted">
           The players who make {SITE.game} fun to follow. Have a look at their work, follow them, and tell them {SITE.name} sent you.
         </p>
