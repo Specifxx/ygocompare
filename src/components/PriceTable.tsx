@@ -9,7 +9,7 @@ import { Fragment, useState } from "react";
 import { AmazonPrice, AMAZON_PRICE_DISCLAIMER } from "./AmazonPrice";
 import type { AmazonCell } from "@/lib/amazon-live";
 import { SITE } from "@/site.config";
-import { CURRENCY, MARKETS, MARKET_LABEL, type Market, type Offer } from "@/lib/site-types";
+import { CURRENCY, MARKETS, MARKET_LABEL, marketInSentence, type Market, type Offer } from "@/lib/site-types";
 import { money } from "@/lib/format";
 import { Flag } from "./Flag";
 import { goHref, subId, tagged } from "@/lib/affiliate";
@@ -77,9 +77,9 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
         Prices for <Flag code={market} /> <b className="text-ink">{MARKET_LABEL[market]}</b>
         {storesIn > 0 && <> · {storesIn} store{storesIn === 1 ? "" : "s"} in stock</>}
       </span>
-      {!compact && <span className="flex flex-wrap gap-1" role="group" aria-label="Show prices for">
+      {!compact && <span className="grid w-full grid-cols-6 gap-1 sm:flex sm:w-auto sm:flex-wrap" role="group" aria-label="Show prices for">
         {MARKETS.map((m) => (
-          <button key={m} type="button" onClick={() => setMarket(m)} aria-pressed={m === market} className={`inline-flex min-h-8 items-center gap-1 rounded-full border px-2.5 text-[11px] font-semibold transition-colors ${m === market ? "border-ink bg-ink text-surface" : "border-line bg-surface text-ink hover:border-ink/30"}`}>
+          <button key={m} type="button" onClick={() => setMarket(m)} aria-pressed={m === market} className={`inline-flex min-h-9 items-center justify-center gap-1 rounded-full border px-1.5 text-[11px] font-semibold transition-colors sm:min-h-8 sm:px-2.5 ${m === market ? "border-ink bg-ink text-surface" : "border-line bg-surface text-ink hover:border-ink/30"}`}>
             <Flag code={m} />{m}
           </button>
         ))}
@@ -90,7 +90,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
     return (
       <div className="overflow-hidden rounded-xl border border-dashed border-line">
         {picker}
-        <p className="p-4 text-sm text-muted">No live listings in {MARKET_LABEL[market]} right now. Try another market above, or check eBay below.</p>
+        <p className="p-4 text-sm text-muted">No store in {marketInSentence(market)} lists this right now. Pick another region above to see its prices.</p>
         {product && <div className="px-4 pb-3"><ReportPrice product={product} region={market} buttonClassName="btn-ghost px-3 py-1.5" /></div>}
       </div>
     );
@@ -195,7 +195,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
         </button>
       )}
       {product && !compact && (
-        <div className="border-t border-line px-3 pb-3 text-muted">
+        <div className="border-t border-line px-3 pb-1">
           <ReportPrice product={product} region={market} buttonClassName="btn-ghost px-3 py-1.5" stores={rows.filter((o) => o.source !== "ebay" && o.source !== "tcgplayer").map((o) => ({ name: sourceName(o), price: money(o.cents, o.currency) }))} />
         </div>
       )}

@@ -2062,3 +2062,50 @@ Measured on a fresh build, on a phone: the product page 94 → 97 for accessibil
 booster box page 100 for accessibility and 92 → 100 for SEO. What is left on the product page is the store thumbs
 (`StoreVote.tsx`: 20×16px buttons, under the 24px the check asks for). That file is the same on every site and is the owner's
 "very tiny area", so it is reported, not changed here. No deploy marker: this rides the next release.
+
+## 2026-11-14: a polish pass: search that answers, a readable price chart, the 404, tap targets and dates (owner: "significantly better and friendlier")
+
+The owner asked for the site to look better and feel friendlier, without adding anything. Every page type was opened at 390px and
+1440px in both themes, measured (page width, tap targets, contrast) and compared before and after. Nothing was added to a page;
+what changed is what was broken, cramped or robotic.
+
+- **Search answers.** There is no search results page (the site is static), yet Enter sent the typed words to `/cards?q=`, a
+  retired URL that 301s to `/sealed`: the whole sealed hub, unfiltered. And a search with no match showed nothing at all. Now Enter
+  opens the highlighted product, or the only match; with several it marks the first, so a second Enter opens it; with none the
+  panel says "Nothing matches …" and offers All sealed, Sets and Deals (pages that exist). Enter pressed before the suggestions
+  arrive asks at once. In the header on a phone the suggestions were as narrow as the field (about 130px): the panel takes the
+  screen's width under the header. A placeholder too long for the field ends in "…" (it was cut mid-word: "Search se").
+- **The price chart can be read on a phone.** Its figures were drawn inside the SVG and shrank with it: about 5px tall at 390px.
+  The drawing now stretches to a box of fixed height (no layout shift) with a line that keeps its width, and the highest and lowest
+  price and the two dates are page text beside it ("26 Oct 2026"). The line takes the theme's up and down tokens (the fixed green
+  read 2.6:1 on the light theme's white). The scale now runs from the lowest to the highest price in the window, level with the two
+  figures; it used to pad by 5% of the price, so a small move drew as a flat line in the middle of the box.
+- **The 404 page** said "Search for the card instead" on a site with no cards, and offered one link. It says what happened, keeps
+  the search and offers Home, All sealed, Sets and Deals. Its h1 is unchanged.
+- **The product photo sits on the site's plate** on the product page, like every product card: a reserved square (the bare image
+  was laid out as a 400×560 card and jumped to the photo's own shape when it loaded) and white behind a white-backed photo in the
+  dark theme. Same `alt`, same image URL.
+- **The region buttons above the price table fit one row on a phone** (six equal buttons, 36px tall; "SG" used to drop to a row of
+  its own, in the quick view too). The table's empty state says what to do: "No store in the United States lists this right now.
+  Pick another region above to see its prices."
+- **`/sets` on a phone:** the table was wider than its box and cut its last column off; dates broke across two lines
+  ("2026-12-/04"). The booster box count shows from `sm` up, dates read "4 Dec 2026" and do not wrap, numbers are tabular. The set
+  page's eyebrow and the guides' dates read as dates too ("Released 13 November 2026", "7 Nov 2026"). Visible text only: every
+  `datePublished` and JSON-LD date is the ISO string it was.
+- **Tap targets of 40px** where they were 16 to 30px: "All sets →" and "All 330 →" beside a section title, the set page's older
+  and newer set, the share button on a phone, "Report a wrong price", "Email me when the price drops", the set names in `/sets`,
+  the product names in `/movers`.
+- **Small things.** The focus ring no longer sets a 6px radius (a round button or a chip changed shape when the keyboard reached
+  it). The card's stock line is 12px (11px). A latest-set tile's price line fits without cutting "Booster Box" to "Booster …" on a
+  desktop. "in United States" reads "in the United States" in the shelf's line. "1 listings matched" is "1 listing matched". A chip,
+  a way in and a set tile give a little when pressed (transform only, off for reduced motion).
+
+**Not touched, on purpose.** No paid link, ad block, pinned eBay, TCGplayer or Amazon row, buy button, affiliate tag or placement
+name was added, removed, moved, restyled or reworded: the `/go` links of eleven pages are byte-for-byte the same before and after,
+so the 19 November clicks-per-placement recheck is unaffected. No URL, redirect, title, meta description, canonical, robots, Open
+Graph tag, JSON-LD, h1 or h2 changed (the same eleven pages compared field by field against a build of `main`). No new font,
+library, colour, block or section; no `revalidate` or caching change. Two faults sit inside paid rows and are left for the owner:
+the "Best price" badge breaks over two lines in the price table on a phone, and the set page's buy box cuts every product name to
+one line, so its three rows can read alike ("Magnificent Maestr…"). The store thumbs (20×16px) are still his "very tiny area".
+`tests/polish.test.ts` pins the search, the chart, the focus ring, the 404 and the date and market wording. No deploy marker: this
+rides the next release.

@@ -15,7 +15,7 @@ export function Section({ id, title, kicker, sub, href, linkLabel = "See all", c
           {sub && <p className="mt-1 text-sm text-muted">{sub}</p>}
         </div>
         {href && (
-          <Link href={href} className="shrink-0 text-sm font-semibold text-muted transition-colors hover:text-ink">
+          <Link href={href} className="-my-2 inline-flex min-h-10 shrink-0 items-center text-sm font-semibold text-muted transition-colors hover:text-ink">
             {linkLabel} →
           </Link>
         )}

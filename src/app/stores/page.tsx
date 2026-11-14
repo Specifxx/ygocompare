@@ -21,7 +21,7 @@ export default function Stores() {
           <h2>{MARKET_LABEL[mk]}</h2>
           <ul>
             {SITE.stores.filter((s) => s.market === mk).map((s) => (
-              <li key={s.key}><a href={s.base} rel="noopener nofollow">{s.name}</a> {m?.stores[s.key]?.matched ? <span className="text-muted">— {m.stores[s.key].matched.toLocaleString()} listings matched</span> : null}</li>
+              <li key={s.key}><a href={s.base} rel="noopener nofollow">{s.name}</a> {m?.stores[s.key]?.matched ? <span className="text-muted">— {m.stores[s.key].matched.toLocaleString("en-US")} {m.stores[s.key].matched === 1 ? "listing" : "listings"} matched</span> : null}</li>
             ))}
           </ul>
         </section>

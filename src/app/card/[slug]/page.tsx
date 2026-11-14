@@ -114,7 +114,13 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         {/* Phones: the name, price and Buy come first; the big image and the
             details follow the prices (RiftCompare's card page, 2026-09-26). */}
         <div className="order-2 flex flex-col gap-4 md:order-1">
-          {p.image && <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="hidden w-full rounded-xl md:block" width={400} height={560} />}
+          {/* The photo on the site's plate, like every product card: a square that is reserved before the photo arrives (the bare
+              image was laid out as a 400×560 card and jumped to the photo's own shape), white behind a white-backed photo in the dark theme. */}
+          {p.image && (
+            <div className="plate hidden aspect-square rounded-2xl md:block">
+              <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="h-full w-full object-contain p-5 mix-blend-multiply" width={400} height={400} />
+            </div>
+          )}
           <dl className="card-surface grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 text-sm">
             {set && (<><dt className="text-muted">Set</dt><dd><Link className="link" href={`/sets/${set.slug}`}>{set.name}</Link></dd></>)}
             {p.number && (<><dt className="text-muted">Number</dt><dd>{p.number}</dd></>)}
@@ -126,7 +132,11 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         <div className="order-1 flex min-w-0 flex-col gap-6 md:order-2">
           <header>
             <div className="flex items-start gap-3">
-              {p.image && <img src={imageAt(p.image, "200w")!} alt={name} className="w-20 shrink-0 rounded-md md:hidden" width={80} height={112} />}
+              {p.image && (
+                <span className="plate block h-20 w-20 shrink-0 md:hidden">
+                  <img src={imageAt(p.image, "200w")!} alt={name} className="h-full w-full object-contain p-1.5 mix-blend-multiply" width={80} height={80} />
+                </span>
+              )}
               <h1 className="min-w-0 flex-1 font-display text-2xl font-bold tracking-tight md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
               <ShareButton path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} medium={p.kind === "sealed" ? "sealed" : "card"} offers={e.offers} compact className="mt-1" />
             </div>

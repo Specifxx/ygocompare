@@ -49,7 +49,7 @@ export default function Sealed() {
             <div className="mb-6 flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
               <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{PLURAL[g.t] ?? g.t}</h2>
               {href && (
-                <Link href={href} className="shrink-0 text-sm font-semibold text-muted transition-colors hover:text-ink">
+                <Link href={href} className="-my-2 inline-flex min-h-10 shrink-0 items-center text-sm font-semibold text-muted transition-colors hover:text-ink">
                   All {g.items.length} →
                 </Link>
               )}

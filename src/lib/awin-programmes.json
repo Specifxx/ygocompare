@@ -1,5 +1,105 @@
 {
   "publisherId": 3144410,
   "updatedAt": null,
-  "joined": []
+  "joined": [
+    {
+      "id": 25687,
+      "name": "Clifton Cameras",
+      "domains": [
+        "cliftoncameras.co.uk",
+        "dev.cliftoncameras.co.uk"
+      ],
+      "region": "GB",
+      "currency": "GBP"
+    },
+    {
+      "id": 80509,
+      "name": "GL Technologies (Hong Kong) Limited",
+      "domains": [
+        "gl-inet.com",
+        "store-us.gl-inet.com",
+        "store-eu.gl-inet.com",
+        "store-uk.gl-inet.com",
+        "store-ca.gl-inet.com",
+        "store.gl-inet.com"
+      ],
+      "region": "US",
+      "currency": "USD"
+    },
+    {
+      "id": 1205,
+      "name": "Hamleys",
+      "domains": [
+        "hamleys.com",
+        "hamleys.co.uk"
+      ],
+      "region": "GB",
+      "currency": "GBP"
+    },
+    {
+      "id": 69786,
+      "name": "Lunzo DE",
+      "domains": [
+        "lunzo.de"
+      ],
+      "region": "DE",
+      "currency": "EUR"
+    },
+    {
+      "id": 106089,
+      "name": "My Perfume Shop",
+      "domains": [
+        "myperfumeshop.com.au"
+      ],
+      "region": "US",
+      "currency": "USD"
+    },
+    {
+      "id": 123248,
+      "name": "Opulensi Perfumes Lattafa Sapil Anfar",
+      "domains": [
+        "opulensi.com",
+        "opulensi.myshopify.com"
+      ],
+      "region": "GB",
+      "currency": "GBP"
+    },
+    {
+      "id": 21605,
+      "name": "Paco Perfumerias",
+      "domains": [
+        "perfumeprice.co.uk",
+        "pacoperfumerias.co.uk"
+      ],
+      "region": "GB",
+      "currency": "GBP"
+    },
+    {
+      "id": 3326,
+      "name": "Ryman",
+      "domains": [
+        "ryman.co.uk"
+      ],
+      "region": "GB",
+      "currency": "GBP"
+    },
+    {
+      "id": 90791,
+      "name": "Stylevana",
+      "domains": [
+        "stylevana.com"
+      ],
+      "region": "US",
+      "currency": "USD"
+    },
+    {
+      "id": 116255,
+      "name": "The Beauty Store UK",
+      "domains": [
+        "thebeautystore.com"
+      ],
+      "region": "GB",
+      "currency": "GBP"
+    }
+  ]
 }
