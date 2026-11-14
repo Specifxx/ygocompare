@@ -43,16 +43,19 @@ const isPaidSource = (o: Offer) => o.source === "ebay" || o.source === "tcgplaye
 
 const byPrice = (a: Offer, b: Offer) => a.cents - b.cents;
 
+/** eBay and Amazon are never "the cheapest" or "Best price" (owner rule, every Compare site; 2026-11-14 an eBay row was badged Best price). */
+export const neverCheapest = (o: Offer) => o.source === "ebay" || o.source === "amazon";
+
 export function priceRows(offers: Offer[], market: Market): PriceRows {
   const local = offers.filter((o) => o.market === market);
   const inStock = local.filter((o) => o.inStock).sort(byPrice);
   const outOfStock = local.filter((o) => !o.inStock).sort(byPrice);
   const refs = market === "US" ? [] : offers.filter((o) => o.market === "US" && (o.source === "tcgplayer" || o.source === "ebay")).sort(byPrice);
-  const cheapest = inStock[0] ?? null;
+  const cheapest = inStock.find((o) => !neverCheapest(o)) ?? null;
   let paidAlternative: PriceRows["paidAlternative"] = null;
   if (cheapest && !isPaidSource(cheapest)) {
     const alt = inStock.find(isPaidSource);
-    if (alt && alt.cents <= cheapest.cents * PAID_ALTERNATIVE_BAND) {
+    if (alt && alt.cents >= cheapest.cents && alt.cents <= cheapest.cents * PAID_ALTERNATIVE_BAND) {
       paidAlternative = { offer: alt, pctMore: cheapest.cents > 0 ? Math.round(((alt.cents - cheapest.cents) / cheapest.cents) * 100) : 0 };
     }
   }

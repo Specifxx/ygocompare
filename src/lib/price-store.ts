@@ -47,7 +47,8 @@ export function summarize(e: PriceEntry): SummaryEntry {
     if (!o.inStock) continue;
     const k = o.source === "tcgplayer" ? "tcg" : o.market;
     const cur = best.get(k);
-    if (!cur || o.cents < cur.cents) best.set(k, o);
+    // eBay and Amazon are never a market's cheapest (owner rule; eBay keeps its own list in `e` for the ad tiles).
+    if (o.source !== "ebay" && o.source !== "amazon" && (!cur || o.cents < cur.cents)) best.set(k, o);
     if (o.source === "ebay" && !o.preorder && (!ebay.has(o.market) || o.cents < ebay.get(o.market)!.cents)) ebay.set(o.market, o);
   }
   const e8 = [...ebay.values()].map(encodeOffer).filter((x): x is OfferTuple => !!x);

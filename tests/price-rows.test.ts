@@ -9,7 +9,7 @@ test("in-stock rows first, cheapest item price first, and that row is the cheape
   const r = priceRows([o("a", "US", 900, false), o("b", "US", 1500), o("ebay", "US", 1200), o("c", "AU", 100)], "US");
   assert.deepEqual(r.inStock.map((x) => x.source), ["ebay", "b"]);
   assert.deepEqual(r.outOfStock.map((x) => x.source), ["a"]);
-  assert.equal(r.cheapest?.source, "ebay");
+  assert.equal(r.cheapest?.source, "b", "eBay is never the cheapest (owner rule; 2026-11-14 an eBay row was badged Best price)");
   assert.deepEqual(r.refs, []);
 });
 
@@ -26,7 +26,10 @@ test("paidAlternative: eBay or TCGplayer within 50% when a store is cheapest, wi
   assert.equal(r.paidAlternative?.offer.source, "tcgplayer");
   assert.equal(r.paidAlternative?.pctMore, 8);
   assert.equal(priceRows([o("store1", "US", 1000), o("tcgplayer", "US", 1501)], "US").paidAlternative, null, "past the band");
-  assert.equal(priceRows([o("ebay", "US", 900), o("store1", "US", 1000)], "US").paidAlternative, null, "the cheapest already pays");
+  assert.equal(priceRows([o("tcgplayer", "US", 900), o("store1", "US", 1000)], "US").paidAlternative, null, "the cheapest already pays");
+  assert.equal(priceRows([o("ebay", "US", 900), o("store1", "US", 1000)], "US").cheapest?.source, "store1", "eBay is never the cheapest");
+  assert.equal(priceRows([o("ebay", "US", 900), o("store1", "US", 1000)], "US").paidAlternative, null, "never an alternative cheaper than the cheapest");
+  assert.equal(priceRows([o("amazon", "US", 800), o("store1", "US", 1000)], "US").cheapest?.source, "store1", "Amazon is never the cheapest");
   assert.equal(priceRows([o("tcgplayer", "US", 1000), o("au1", "AU", 1000)], "AU").paidAlternative, null, "a US reference is never a local alternative");
 });
 
