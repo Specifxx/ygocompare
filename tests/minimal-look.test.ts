@@ -147,7 +147,7 @@ test("Fold: reading matter stays in the HTML as a closed <details>, its heading 
 
 test("the home page in order: hero, the one shelf, the sets, one ad block, the fold, the questions; nothing the owner cut", () => {
   const page = src("app/page.tsx");
-  const order = ["<Hero>", "</Hero>", "<Tabs tabs={shelfTabs}", "<InlineAds", 'title="Latest sets"', "<Folds", '<Fold id="guides-h"', "Frequently asked questions"];
+  const order = ["<Hero>", "</Hero>", "<InlineAds", "<Tabs tabs={shelfTabs}", 'title="Latest sets"', "<Folds", '<Fold id="guides-h"', "Frequently asked questions"];
   let at = -1;
   for (const k of order) {
     const i = page.indexOf(k, at + 1);
@@ -216,9 +216,9 @@ test("the home page as a crawler reads it: one h1, every shelf list and the fold
   assert.match(html, /<p class="sr-only">[\d,]+(<!-- -->)? products tracked<\/p>/);
 });
 
-test("list pages show their products first: the headline, one line, the filters, the grid, the one ad block, then the reading", () => {
+test("list pages show their products first: the headline, one line, the filters, the two ad banners, the grid, then the reading", () => {
   const type = src("app/sealed/[type]/page.tsx");
-  const typeOrder = ["<Breadcrumbs", "<h1 ", '<nav aria-label="Other product types"', "<TileGrid", "<InlineAds"];
+  const typeOrder = ["<Breadcrumbs", "<h1 ", '<nav aria-label="Other product types"', "<InlineAds", "<TileGrid"];
   let at = -1;
   for (const k of typeOrder) {
     const i = type.indexOf(k, at + 1);
@@ -228,7 +228,7 @@ test("list pages show their products first: the headline, one line, the filters,
   assert.equal(count(type, /<InlineAds/g), 1);
   assert.doesNotMatch(code(type), /Other sealed products/, "the other types are the chips under the headline, not a block under the grid");
   const set = src("app/sets/[slug]/page.tsx");
-  const setOrder = ["<h1 ", "<SealedQuickBuy", "<TileGrid items={sealed} />", "<InlineAds", "<Folds", "<Fold "];
+  const setOrder = ["<h1 ", "<InlineAds", "<SealedQuickBuy", "<TileGrid items={sealed} />", "<Folds", "<Fold "];
   at = -1;
   for (const k of setOrder) {
     const i = set.indexOf(k, at + 1);
