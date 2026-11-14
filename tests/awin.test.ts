@@ -34,3 +34,12 @@ test("the /go redirect sends a store that accepted us on Awin through its deep l
   // Awin is asked first; only a store it does not cover can go straight to checkout.
   assert.match(src, /const awin = awinUrl\(plain, clickref\(SITE\.key, sub\)\);\n  if \(awin\) return awin;/);
 });
+
+test("Cardboard Hero (GoAffPro): a link to its own site gains our referral code, other stores do not", async () => {
+  const { directReferralUrl } = await import("../src/lib/awin");
+  assert.equal(awinUrl("https://cardboardhero.com/products/box?utm_source=x", "ref1"), "https://cardboardhero.com/products/box?utm_source=x&ref=apthvqnu");
+  assert.equal(awinUrl("https://www.cardboardhero.com/products/box", "ref1"), "https://www.cardboardhero.com/products/box?ref=apthvqnu");
+  assert.equal(directReferralUrl("https://cardboardhero.com/?ref=other"), "https://cardboardhero.com/?ref=other");
+  assert.equal(awinUrl("https://notcardboardhero.com/products/box", "ref1"), null);
+  assert.equal(directReferralUrl("https://cardboardhero.com.evil.example/x"), null);
+});
