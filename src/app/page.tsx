@@ -235,6 +235,13 @@ export default function Home() {
         </Section>
       )}
 
+      {/* The page's one ad block (owner, 2026-11-13): native, horizontal, right under the shelf (owner, 2026-11-14: eBay clicks fell once it sat at the bottom); never in the hero. */}
+      {inlineReady(ads, undefined) && (
+        <div className="reveal mt-10 sm:mt-14">
+          <InlineAds ads={ads} search={adSearch()} page="home" />
+        </div>
+      )}
+
       {latestSets.length > 0 && (
         <Section title="Latest sets" href="/sets" linkLabel="All sets" className="reveal mt-16 sm:mt-24">
           <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -247,12 +254,6 @@ export default function Home() {
         </Section>
       )}
 
-      {/* The page's one ad block (owner, 2026-11-13): native, horizontal, under everything the visitor came for; never in the hero. */}
-      {inlineReady(ads, undefined) && (
-        <div className="reveal mt-16 sm:mt-24">
-          <InlineAds ads={ads} search={adSearch()} page="home" />
-        </div>
-      )}
 
       {/* The reading matter: in the HTML for a crawler and for find-in-page, one line until opened (components/Fold.tsx). */}
       {posts().length > 0 && (
