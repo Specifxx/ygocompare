@@ -59,14 +59,15 @@ test("the ads are ONE native horizontal block per page (owner, 2026-11-13); the 
     assert.match(src, new RegExp(`page="${page}"`), f);
     assert.doesNotMatch(src, /CompactCardAds|CompactKitAds|KitEbayStrip|LandingAds|SideAds/, f);
   }
-  // Below the price table, never above a price: after the "Compare prices" section on a card and a kit page.
+  // The banners sit at the top (owner, 2026-11-14): right under the breadcrumbs on a card and a kit page, above the price table.
   for (const f of ["src/app/card/[slug]/page.tsx", "src/app/kit/[slug]/page.tsx"]) {
     const src = read(f);
-    assert.ok(src.indexOf("<InlineAds ") > src.indexOf("<PriceTable"), `${f}: below the price table`);
+    assert.ok(src.indexOf("<InlineAds ") < src.indexOf("<PriceTable"), `${f}: at the top`);
+    assert.ok(src.indexOf("<InlineAds ") > src.indexOf("<Breadcrumbs"), `${f}: under the breadcrumbs`);
   }
-  // Not in the hero: after the deals on the home page.
+  // Not in the hero: directly after it on the home page.
   const home = read("src/app/page.tsx");
-  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("Today's top deals"));
+  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("</Hero>"));
   assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
   for (const f of ["src/components/InlineAds.tsx", "src/components/DockAds.tsx"]) assert.match(read(f), /"use client"/, f);
 });

@@ -914,3 +914,35 @@ a.hero-pill:hover {
     background-color: rgb(var(--bg) / 0);
   }
 }
+
+/* The two big ad banners (owner, 2026-11-14), eBay and TCGplayer apart, at the top of a page: the site's own card, a dashed-free
+   hairline, ink button, no brand colours. The server sends empty boxes of the exact height (CLS 0). */
+.bnr-grid {
+  display: grid;
+  gap: 12px;
+}
+@media (min-width: 1024px) {
+  .bnr-grid:has(> :nth-child(2)) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.bnr-box {
+  height: 252px;
+}
+.bnr {
+  @apply card flex flex-col p-3 sm:p-4;
+  overflow: hidden;
+}
+.bnr-head {
+  @apply flex h-11 items-center justify-between gap-3;
+}
+.bnr-tiles {
+  @apply mt-3 h-[148px] gap-3;
+}
+.bnr-note {
+  @apply mt-auto text-[11px] leading-[14px] text-muted;
+  height: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
