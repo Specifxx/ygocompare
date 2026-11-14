@@ -147,7 +147,7 @@ test("Fold: reading matter stays in the HTML as a closed <details>, its heading 
 
 test("the home page in order: hero, the one shelf, the sets, one ad block, the fold, the questions; nothing the owner cut", () => {
   const page = src("app/page.tsx");
-  const order = ["<Hero>", "</Hero>", "<Tabs tabs={shelfTabs}", 'title="Latest sets"', "<InlineAds", "<Folds", '<Fold id="guides-h"', "Frequently asked questions"];
+  const order = ["<Hero>", "</Hero>", "<Tabs tabs={shelfTabs}", "<InlineAds", 'title="Latest sets"', "<Folds", '<Fold id="guides-h"', "Frequently asked questions"];
   let at = -1;
   for (const k of order) {
     const i = page.indexOf(k, at + 1);

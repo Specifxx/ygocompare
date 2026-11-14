@@ -2194,3 +2194,7 @@ page, 54 on the deal finder, 3 on a set page); every one of the 1,581 sitemap UR
 noindex; unknown URLs answer 404; robots.txt blocks only `/api/`, `/go` and query strings. No paid link, ad block, pinned row,
 buy button, affiliate tag, placement, URL or metadata changed, so the 19 November clicks-per-placement recheck is unaffected.
 No deploy marker: this rides the next release.
+
+## 2026-11-14: the one ad block moves up under the shelf
+
+Owner: eBay clicks dropped right after the minimal redesign and he asked for eBay ads back on the home page. The home pages' one native ad block (eBay and TCGplayer, labelled Ad) had been pushed to the very bottom, under the sets. It now sits directly under the product shelf. Still one block a page, still browser-only with its height reserved, no pop-up, no rail, quick view untouched, same placements and customid tags. Click numbers by placement were not readable from the build container; the 19 November recheck stands.
