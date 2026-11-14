@@ -19,7 +19,7 @@ export default function CartPage() {
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-6 sm:py-10">
       <h1 className="page-h1">Your cart</h1>
-      <p className="mt-2 text-sm opacity-75">
+      <p className="page-sub">
         Add store prices from any product page, then check out store by store. Your cart stays in this browser.
       </p>
       <CartListView />

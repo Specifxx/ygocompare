@@ -2173,3 +2173,24 @@ A product page on a sister engine showed an eBay row badged "Best price" and nam
 tiles and the quick buy could lead with an eBay price). Both now skip eBay and Amazon (`neverCheapest` in
 `src/lib/price-rows.ts`); eBay keeps its pinned row and its own ad list (`e`), and a paid alternative is never cheaper
 than the cheapest. `tests/never-cheapest.test.ts` pins it. The summary is rebuilt by the next import.
+
+## 2026-11-14: Review of the day's design pass: guide tables show their prices on a phone, every tool page's head matches
+
+An independent check of #156 and #157 against a build of the commit before them (b3bc2f1), 16 page types at 390 and 1440 px
+in both themes plus 28 URLs for screenshots, found one fault and one half-finished corner. Both fixed here, nothing else.
+
+- **Guides (posts and any reading page with a table).** #157 set `.prose-site` tables `whitespace-nowrap` on phones so they
+  scrolled in their own box. On the Black Friday guide the product names alone filled the screen: the TCGplayer and cheapest
+  store columns, the figures the post exists for, were off to the right behind a sideways scroll. The cells wrap again on
+  phones; the table keeps its own scroll box as a guard for a cell that cannot wrap, and every post measured at 390 px has no
+  sideways scroll, in the page or in its tables.
+- **Tool and utility page heads.** The tools index, "Is this a good price?", the selling fee calculator, the Price Duel, cart
+  and collection had the shared `page-h1` but their line under it was still the old `mt-2 text-muted` (cart and collection a
+  14px line at 75% opacity). They now use `page-sub`, the one quiet line every other page head has. Words unchanged.
+
+Checked and left as they were: the server HTML of 29 URLs (title, meta description, canonical, robots, Open Graph, JSON-LD,
+h1 identical; no h2 lost; internal links the same set; sponsored links the same hrefs, words and order, 36 on a busy product
+page, 54 on the deal finder, 3 on a set page); every one of the 1,581 sitemap URLs answers 200 with a self canonical and no
+noindex; unknown URLs answer 404; robots.txt blocks only `/api/`, `/go` and query strings. No paid link, ad block, pinned row,
+buy button, affiliate tag, placement, URL or metadata changed, so the 19 November clicks-per-placement recheck is unaffected.
+No deploy marker: this rides the next release.
