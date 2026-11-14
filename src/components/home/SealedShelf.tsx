@@ -7,7 +7,7 @@
 // Until 2026-11-13 this was SealedHero.tsx, a swipeable row with tabs of its own.
 import Link from "@/components/Link";
 import { money } from "@/lib/format";
-import { MARKET_LABEL, type Market } from "@/lib/site-types";
+import { marketInSentence, type Market } from "@/lib/site-types";
 import type { HeroItem } from "@/lib/sealed-hero";
 import { useMarket } from "@/components/ClientPrefs";
 
@@ -29,7 +29,7 @@ function ShelfCard({ i, market }: { i: HeroItem; market: Market }) {
       <div className="card-body pc-body">
         <p className="pc-name">{i.name}</p>
         <div className="mt-auto">
-          <p className={`pc-stock ${pr ? (pre ? "pc-pre" : "pc-open") : "pc-sold"}`} title={pr ? `${pre ? "Pre-order" : "In stock"} at ${unit} in ${MARKET_LABEL[market]}` : undefined}>
+          <p className={`pc-stock ${pr ? (pre ? "pc-pre" : "pc-open") : "pc-sold"}`} title={pr ? `${pre ? "Pre-order" : "In stock"} at ${unit} in ${marketInSentence(market)}` : undefined}>
             {pr ? (
               <>
                 {pre ? "Pre-order" : "In stock"}
@@ -57,7 +57,7 @@ export function SealedShelf({ items, sub }: { items: HeroItem[]; sub?: string })
   return (
     <>
       <p className="-mt-1 mb-5 text-sm text-muted">
-        Each at its cheapest store in {MARKET_LABEL[market]} today.{sub ? ` ${sub}.` : ""}
+        Each at its cheapest store in {marketInSentence(market)} today.{sub ? ` ${sub}.` : ""}
       </p>
       <div className="pc-grid pc-grid-4">
         {list.map((i) => (

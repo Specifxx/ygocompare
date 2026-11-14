@@ -88,7 +88,7 @@ export function PriceAlertForm({
   if (!open) {
     return (
       <div className={className}>
-        <button type="button" onClick={() => setOpen(true)} style={{ background: "none", border: 0, padding: 0, color: "inherit", font: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}>
+        <button type="button" onClick={() => setOpen(true)} style={{ background: "none", border: 0, padding: "10px 0", color: "inherit", font: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}>
           {summary}
         </button>
       </div>

@@ -37,9 +37,9 @@ function List({ title, rows }: { title: string; rows: ReturnType<typeof movers>[
       {!rows.length && <p className="text-sm text-muted">Not enough history yet — movers appear after the first week of daily prices.</p>}
       <ol>
         {rows.slice(0, 25).map((r, i) => (
-          <li key={r.p.id} className="flex items-center justify-between gap-2 border-t border-ink-800 py-1.5 text-sm">
-            <span className="w-6 text-muted">{i + 1}</span>
-            <Link className="min-w-0 flex-1 truncate hover:underline" href={`/card/${r.p.slug}`}>{shortName(r.p.name)}</Link>
+          <li key={r.p.id} className="flex items-center justify-between gap-2 border-t border-line text-sm">
+            <span className="w-6 tabular-nums text-muted">{i + 1}</span>
+            <Link className="min-w-0 flex-1 truncate py-2.5 hover:underline" href={`/card/${r.p.slug}`}>{shortName(r.p.name)}</Link>
             <span className="tabular-nums">{money(r.cents)}</span>
             <span className={`w-16 text-right tabular-nums ${r.change >= 0 ? "text-up" : "text-down"}`}>{pct(r.change)}</span>
           </li>

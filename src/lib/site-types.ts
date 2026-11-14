@@ -21,6 +21,11 @@ export const MARKET_LABEL: Record<Market, string> = {
   SG: "Singapore",
 };
 
+/** A market's name inside a sentence: "in the United States", "in Canada". */
+export function marketInSentence(m: Market): string {
+  return m === "US" || m === "UK" ? `the ${MARKET_LABEL[m]}` : MARKET_LABEL[m];
+}
+
 export interface StoreConfig {
   key: string;
   name: string;

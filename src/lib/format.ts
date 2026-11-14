@@ -19,3 +19,10 @@ export function ago(iso: string | null | undefined, now = Date.now()): string {
   if (h < 48) return Math.round(h) === 1 ? "1 hour ago" : `${Math.round(h)} hours ago`;
   return `${Math.round(h / 24)} days ago`;
 }
+
+/** "13 Nov 2026" from an ISO date (or its first ten characters): one fixed locale and UTC, so the server and every browser agree. */
+export function shortDate(iso: string | null | undefined): string {
+  if (!iso) return "—";
+  const d = new Date(`${iso.slice(0, 10)}T00:00:00Z`);
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+}

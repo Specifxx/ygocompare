@@ -5,7 +5,7 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { setBySlug, summaryOf } from "@/lib/data";
 import { preorderSetList, sealedInSet } from "@/lib/hubs";
-import { isPreorder, preorderPath } from "@/lib/preorders";
+import { isPreorder, longDate, preorderPath } from "@/lib/preorders";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { shortName } from "@/lib/names";
 import { TileGrid } from "@/components/ProductTile";
@@ -66,7 +66,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       <div>
         <Breadcrumbs items={[{ name: "Sets", href: "/sets" }, { name: s.name }]} />
         <header>
-          <p className="eyebrow">{s.upcoming ? "Upcoming" : "Released"} {s.releasedOn}</p>
+          <p className="eyebrow">{s.upcoming ? "Upcoming" : "Released"}{s.releasedOn ? ` ${longDate(s.releasedOn)}` : ""}</p>
           <h1 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-5xl">{s.name} booster box &amp; sealed prices</h1>
           <p className="mt-3 text-sm text-muted">
             {sealed.length} sealed product{sealed.length === 1 ? "" : "s"}, compared across every store we track, TCGplayer, eBay and Amazon.
@@ -93,8 +93,8 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         </Folds>
       )}
       <nav className="flex flex-wrap justify-between gap-3 text-sm" aria-label="Neighbouring sets">
-        {older ? <Link className="link" href={`/sets/${older.slug}`}>← {older.name}</Link> : <span />}
-        {newer && <Link className="link" href={`/sets/${newer.slug}`}>{newer.name} →</Link>}
+        {older ? <Link className="link inline-flex min-h-10 items-center" href={`/sets/${older.slug}`}>← {older.name}</Link> : <span />}
+        {newer && <Link className="link inline-flex min-h-10 items-center" href={`/sets/${newer.slug}`}>{newer.name} →</Link>}
       </nav>
       {others.length > 0 && (
         <section>

@@ -111,9 +111,10 @@ body {
 }
 
 :focus-visible {
+  /* The ring follows the element's own corners. It used to set a 6px radius, so a round button or a chip changed shape the moment
+     the keyboard reached it. */
   outline: 2px solid rgb(var(--brand));
   outline-offset: 2px;
-  border-radius: 6px;
 }
 
 h1, h2, h3 { letter-spacing: -0.01em; }
@@ -217,7 +218,7 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   }
   /* The stock line. Calm palette (2026-11-12): the words are grey, only the 6px dot carries the state's colour, nothing pulses. */
   .pc-stock {
-    @apply mt-1.5 flex min-h-4 min-w-0 items-center gap-1 whitespace-nowrap text-[11px] font-medium leading-4 text-muted;
+    @apply mt-1.5 flex min-h-4 min-w-0 items-center gap-1 whitespace-nowrap text-xs font-medium leading-4 text-muted;
   }
   .pc-stock::before {
     @apply h-1.5 w-1.5 shrink-0 rounded-full bg-current;
@@ -792,6 +793,19 @@ a.hero-pill:hover {
 }
 .fold[open] > .fold-body {
   animation: tab-in 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* A press answers: a chip, a way in or a set tile gives a little under the finger. Transform only, off for reduced motion. Never
+   on a buy button or an ad's link (those keep exactly the styles they had). */
+@media (prefers-reduced-motion: no-preference) {
+  .chip {
+    transition-property: color, background-color, border-color, transform;
+  }
+  .chip:active,
+  .way:active,
+  .set-tile:active {
+    transform: scale(0.97);
+  }
 }
 
 /* Motion. The hero's parts rise in one after another on load (--i is each part's place in line); the headline moves but is never

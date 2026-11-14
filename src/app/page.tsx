@@ -335,7 +335,7 @@ function SetTile({ s }: { s: SetInfo }) {
           {isPreorder(s) ? "Releases" : "Released"} {longDate(s.releasedOn)}
         </span>
         {/* The price and what it is never give way: on a narrow tile the product type shortens, not the figure. */}
-        <span className="mt-1 flex items-baseline gap-1.5 text-sm text-muted">
+        <span className="mt-1 flex items-baseline gap-1.5 text-[13px] text-muted">
           {lead ? (
             <>
               <span className="min-w-0 truncate">{lead.sealedType ?? "Sealed"}</span>

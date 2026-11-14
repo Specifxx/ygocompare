@@ -3,6 +3,7 @@ import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { posts } from "@/lib/posts";
+import { shortDate } from "@/lib/format";
 
 export const revalidate = 86400;
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function Blog() {
             )}
             <Link href={`/blog/${p.slug}`} className="text-lg font-semibold hover:underline">{p.title}</Link>
             <p className="mt-1 text-sm text-muted">{p.description}</p>
-            <p className="mt-2 text-xs text-muted">{p.updated ?? p.date}</p>
+            <p className="mt-2 text-xs text-muted">{shortDate(p.updated ?? p.date)}</p>
           </li>
         ))}
       </ul>
