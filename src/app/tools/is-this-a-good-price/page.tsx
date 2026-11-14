@@ -40,7 +40,7 @@ export default function Page() {
   return (
     <div className="max-w-3xl">
       <h1 className="page-h1">Is this a good price?</h1>
-      <p className="mt-2 text-muted">
+      <p className="page-sub">
         Paste the link to a {SITE.game} {things} at any store and see how its price compares with the cheapest and the typical in-stock price at every other store we read.
       </p>
       <LinkChecker />
