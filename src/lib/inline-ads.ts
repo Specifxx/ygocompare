@@ -47,5 +47,18 @@ function pickFor(ads: CardAds, market: Market): { tiles: InlineTile[]; ebayMarke
 /** Whether the block has enough to show. Judged on the baseline market (eBay US stands in elsewhere), so the server and the browser agree. */
 export function inlineReady(ads: CardAds | undefined, kitTiles: readonly unknown[] | undefined): boolean {
   if (kitTiles) return kitTiles.length >= INLINE_MIN;
-  return !!ads && pickInline(ads, "US").tiles.length >= INLINE_MIN;
+  if (!ads) return false;
+  const b = bannerSides(ads, "US");
+  return !!(b.ebay || b.tcgplayer);
+}
+
+/** Banners (owner, 2026-11-14: "separate big ad banners for TCGplayer/eBay"): one eBay banner and one TCGplayer banner, each with up to
+ *  BANNER_MAX photo tiles of its own; a side with fewer than BANNER_MIN has no banner. The kit page keeps its one eBay banner. */
+export const BANNER_MAX = 4;
+export const BANNER_MIN = 2;
+export function bannerSides(ads: CardAds, market: Market): { ebay: AdTile[] | null; tcgplayer: AdTile[] | null; ebayMarket: Market } {
+  const { tiles, market: ebayMarket } = ebayTilesFor(ads, market);
+  const e = tiles.filter((t) => t.image).slice(0, BANNER_MAX);
+  const t = ads.tcgplayer.filter((x) => x.image).slice(0, BANNER_MAX);
+  return { ebay: e.length >= BANNER_MIN ? e : null, tcgplayer: t.length >= BANNER_MIN ? t : null, ebayMarket };
 }

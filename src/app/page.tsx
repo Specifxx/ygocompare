@@ -229,17 +229,17 @@ export default function Home() {
         </p>
       </Hero>
 
+      {/* The two big ad banners (owner, 2026-11-14): eBay and TCGplayer apart, directly under the hero, never in it. */}
+      {inlineReady(ads, undefined) && (
+        <div className="-mt-10 sm:-mt-14">
+          <InlineAds ads={ads} search={adSearch()} page="home" />
+        </div>
+      )}
+
       {shelfTabs.length > 0 && (
         <Section title={`${SITE.gameShort} booster boxes and sealed`} className="reveal mt-8 sm:mt-12">
           <Tabs tabs={shelfTabs} label={`${SITE.gameShort} sealed products`} />
         </Section>
-      )}
-
-      {/* The page's one ad block (owner, 2026-11-13): native, horizontal, right under the shelf (owner, 2026-11-14: eBay clicks fell once it sat at the bottom); never in the hero. */}
-      {inlineReady(ads, undefined) && (
-        <div className="reveal mt-10 sm:mt-14">
-          <InlineAds ads={ads} search={adSearch()} page="home" />
-        </div>
       )}
 
       {latestSets.length > 0 && (

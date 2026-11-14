@@ -42,6 +42,7 @@ export default function Sealed() {
           </nav>
         )}
       </header>
+      <InlineAds ads={cardAds({ kind: "sealed", limit: 10 })} search={adSearch()} page="sealed" />
       {groups.map((g) => {
         const href = sealedHref(g.t);
         return (
@@ -58,7 +59,6 @@ export default function Sealed() {
           </section>
         );
       })}
-      <InlineAds ads={cardAds({ kind: "sealed", limit: 10 })} search={adSearch()} page="sealed" />
     </div>
   );
 }
