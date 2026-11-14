@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="max-w-3xl">
-      <h1 className="font-display text-3xl font-black">Selling fee calculator</h1>
+      <h1 className="page-h1">Selling fee calculator</h1>
       <p className="mt-2 text-muted">Estimates for a US seller using standard rates. Your actual fees depend on your seller level, store category and promotions, so check the marketplace&apos;s own fee page before relying on them.</p>
       <Fees />
     </div>

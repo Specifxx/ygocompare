@@ -31,7 +31,7 @@ export default function EmbedPage() {
   return (
     <article className="flex max-w-3xl flex-col gap-8">
       <header className="flex flex-col gap-2">
-        <h1 className="font-display text-3xl font-black">Free {SITE.gameShort} price widgets for your site</h1>
+        <h1 className="page-h1">Free {SITE.gameShort} price widgets for your site</h1>
         <p className="text-muted">
           Drop a live card price into any page with one line of HTML. It shows the cheapest in-stock store price in your readers&apos; market and updates every
           day by itself. Free, no signup, no tracking. The widget is marked noindex, so it never competes with your own pages in search.

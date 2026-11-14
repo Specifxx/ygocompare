@@ -38,7 +38,7 @@ export default function Kits() {
     <div className="flex flex-col gap-8">
       <header>
         <Breadcrumbs items={[{ name: cfg.label }]} />
-        <h1 className="font-display text-3xl font-black">{cfg.label} prices</h1>
+        <h1 className="page-h1">{cfg.label} prices</h1>
         <p className="mt-2 max-w-3xl text-muted">
           {all.length.toLocaleString()} {cfg.noun} compared across {cfg.stores.length} hobby shops in {markets.map((m) => MARKET_LABEL[m]).join(", ")}. Every kit is matched by the barcode on its box, so the prices you see are for the same kit. Cheapest in-stock first, in your own currency.
         </p>

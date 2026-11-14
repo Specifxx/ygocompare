@@ -107,14 +107,14 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const amazonRow = amazonUrl && amazonLive ? (
     <tr data-amazon-row className={`border-t border-line ${PIN_OUTLINE.amazon}`}>
       <td className="px-3 py-2.5">
-        <span className="font-medium text-ink">Amazon</span>
-        <StoreVote url={amazonUrl} name="Amazon" className="ml-2 text-muted" />
+        <span className="font-medium text-ink">Amazon</span>{" "}
+        <StoreVote url={amazonUrl} name="Amazon" className="ml-1 text-muted" />
         {!compact && amazonCart && <span className="block sm:hidden"><CartAddButton {...amazonCart} inline className="text-xs" /></span>}
         <span className="ad-pill ml-2">Ad</span>
       </td>
       <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">New, in stock on Amazon</td>
-      <td className="px-3 py-2.5 text-right font-semibold tabular-nums"><AmazonPrice {...amazonLive} /></td>
-      <td className="px-3 py-2.5 text-right">
+      <td className="px-2 py-2.5 text-right font-semibold tabular-nums sm:px-3"><AmazonPrice {...amazonLive} /></td>
+      <td className="py-2.5 pl-1 pr-2.5 text-right sm:px-3">
         <span className="inline-flex items-center justify-end gap-2">
           {!compact && amazonCart && <CartAddButton {...amazonCart} className="hidden text-muted sm:inline-flex" />}
           <a href={goHref({ url: amazonUrl, source: "amazon", market }, productId, `${page}_pinned`)} rel="sponsored nofollow noopener" target="_blank" className="btn-soft min-h-10 whitespace-nowrap px-3 py-1.5">
@@ -147,8 +147,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
               <Fragment key={i}>
                 <tr className={`border-t border-line ${best ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
                   <td className="px-3 py-2.5">
-                    <span className="font-medium text-ink">{sourceName(o)}</span>
-                    <StoreVote url={o.url} name={sourceName(o)} className="ml-2 text-muted" />
+                    <span className="font-medium text-ink [overflow-wrap:anywhere]">{sourceName(o)}</span>{" "}
+                    <StoreVote url={o.url} name={sourceName(o)} className="ml-1 text-muted" />
                     {/* Phones: the cart list's add button as a line under the store, where the row has no width to spare. */}
                     {!compact && o.inStock && o.source !== "tcgplayer" && (
                       <span className="block sm:hidden"><CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} inline className="text-xs" /></span>
@@ -163,14 +163,14 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                     {o.source === "tcgplayer" && <span>Lowest listing</span>}
                     {o.shippingCents != null && <span>+{money(o.shippingCents, o.currency)} shipping</span>}
                   </td>
-                  <td className="px-3 py-2.5 text-right font-semibold tabular-nums">
+                  <td className="px-2 py-2.5 text-right font-semibold tabular-nums sm:px-3">
                     {money(o.cents, o.currency)}
                     {c != null && <span className="block text-xs font-normal text-muted">{o.source === "tcgplayer" ? "" : "≈ "}{money(c, cur)}</span>}
                     {pinned.includes(o) && cheapest && o !== cheapest && o.currency === cheapest.currency && cheapest.cents > 0 && o.cents > cheapest.cents && (
                       <span className="block text-xs font-normal text-muted">+{Math.round(((o.cents - cheapest.cents) / cheapest.cents) * 100)}% vs cheapest</span>
                     )}
                   </td>
-                  <td className="px-3 py-2.5 text-right">
+                  <td className="py-2.5 pl-1 pr-2.5 text-right sm:px-3">
                     {/* The cart list (components/cart, owner 2026-11-06): an in-stock store row, beside its button. */}
                     <span className="inline-flex items-center justify-end gap-2">
                     {!compact && o.inStock && o.source !== "tcgplayer" && (

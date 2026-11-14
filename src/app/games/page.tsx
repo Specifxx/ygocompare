@@ -17,7 +17,7 @@ export default function Games() {
   if (!isMultiGame) notFound();
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="font-display text-3xl font-black">The card games we compare</h1>
+      <h1 className="page-h1">The card games we compare</h1>
       <GameTiles />
     </div>
   );

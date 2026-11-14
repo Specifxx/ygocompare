@@ -39,20 +39,20 @@ export default function Page() {
   };
   return (
     <div className="max-w-3xl">
-      <h1 className="font-display text-3xl font-black">Is this a good price?</h1>
+      <h1 className="page-h1">Is this a good price?</h1>
       <p className="mt-2 text-muted">
         Paste the link to a {SITE.game} {things} at any store and see how its price compares with the cheapest and the typical in-stock price at every other store we read.
       </p>
       <LinkChecker />
 
-      <h2 className="mt-10 font-display text-2xl font-black">How to use it</h2>
+      <h2 className="mt-10 font-display text-2xl font-bold tracking-tight">How to use it</h2>
       <ol className="mt-3 list-decimal space-y-1.5 pl-5 text-muted">
         {STEPS.map((s) => (
           <li key={s}>{s}</li>
         ))}
       </ol>
 
-      <h2 className="mt-10 font-display text-2xl font-black">Questions</h2>
+      <h2 className="mt-10 font-display text-2xl font-bold tracking-tight">Questions</h2>
       <dl className="mt-3 space-y-4">
         {FAQ.map((f) => (
           <div key={f.q}>

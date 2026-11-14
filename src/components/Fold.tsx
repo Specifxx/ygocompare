@@ -5,11 +5,12 @@ import type { ReactNode } from "react";
  * page's products, a set's guides under its grid. One line each, its heading still an <h2> in the page's outline, opened with a
  * tap. A native <details>: no script, and the browser's find-in-page opens it. Closed by default; a crawler reads it either way.
  */
-export function Fold({ id, title, children, open = false, ...data }: { id: string; title: ReactNode; children: ReactNode; open?: boolean; [key: `data-${string}`]: string | undefined }) {
+export function Fold({ id, title, meta, children, open = false, ...data }: { id: string; title: ReactNode; meta?: ReactNode; children: ReactNode; open?: boolean; [key: `data-${string}`]: string | undefined }) {
   return (
     <details className="fold" open={open || undefined} data-fold={id} {...data}>
       <summary>
         <h2 id={id}>{title}</h2>
+        {meta && <span className="ml-auto text-sm tabular-nums text-muted">{meta}</span>}
         <span className="fold-mark" aria-hidden="true">
           <svg viewBox="0 0 12 12" width="12" height="12">
             <path d="M6 1.5v9M1.5 6h9" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />

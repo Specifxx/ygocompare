@@ -16,8 +16,8 @@ export default function Page() {
   const rows = dealRows().map((r) => ({ ...r, name: shortName(r.name) }));
   return (
     <div>
-      <h1 className="font-display text-3xl font-black">{SITE.gameShort} Deal Finder</h1>
-      <p className="mt-2 text-muted">{rows.length} in-stock listings 8–60% below TCGplayer market right now. Prices converted to US$ for the comparison; the store charges its own currency.</p>
+      <h1 className="page-h1">{SITE.gameShort} Deal Finder</h1>
+      <p className="page-sub">{rows.length} in-stock listings 8–60% below TCGplayer market right now. Prices converted to US$ for the comparison; the store charges its own currency.</p>
       <DealFinder rows={rows} />
     </div>
   );

@@ -2109,3 +2109,48 @@ the "Best price" badge breaks over two lines in the price table on a phone, and 
 one line, so its three rows can read alike ("Magnificent Maestr…"). The store thumbs (20×16px) are still his "very tiny area".
 `tests/polish.test.ts` pins the search, the chart, the focus ring, the 404 and the date and market wording. No deploy marker: this
 rides the next release.
+
+## 2026-11-14: every page after the home page, in the home page's voice (owner: "make all the other pages more aesthetic as well")
+
+The home page set the look on 13 November; the pages behind it still spoke in three or four older voices (a heavy black h1 here, a
+bold one there, bulleted walls of underlined links, a guide set 95 characters wide). Each page type was opened at 390px and 1440px
+in both themes, before and after (screenshots in the project files, `redesign/2026-11-14-polish/ygo/r2-*`). Nothing was added to a
+page: no block, promo, badge or colour.
+
+- **One page head everywhere** (`PageHead` in `components/Section.tsx`, `.page-h1`, `.page-sub` in `globals.css`): the h1 the list
+  pages already used (display face, bold, tight, 3xl to 5xl), one muted line under it, an optional small line above. Twenty pages
+  that wrote `font-black` h1s of their own (sets, movers, tools, deal finder, pre-orders, holiday pages, games, kits, creators,
+  cart, collection…) use it; the static pages (about, stores, terms, privacy, contact, methodology…) get it through `StaticPage`.
+  The h1 text of every page is unchanged.
+- **Reading pages are set as articles** (`.prose-site`): a 68-character measure (it was the 768px column, ~95 characters on a
+  desktop), body text in ink a step softer than headings (was the muted grey), a heading scale with room above, quiet list
+  markers, links underlined in a faint brand line, and any table in a post scrolls in its own box instead of widening the page.
+  A post's date is the small line above its title; its FAQ opens row by row like the home page's (the questions are still h3s,
+  the answers still in the HTML, the FAQPage JSON-LD unchanged); "More guides" and "Free price tools" are plain rows of 40px
+  links.
+- **Guides index**: a quiet list (date, title, one line) instead of a stack of cards where one in eight had a picture; the post's
+  picture shows beside it from `sm` up. Same links.
+- **Stores** (`/stores`): eighteen phone screens of underlined links are now one row per market with its store count, each
+  opening (a native `<details>`, the market name still its h2) to the stores in columns, the name first and "N listings matched"
+  in quiet words after it. Every store, link and count is still in the server HTML. The suggest button is the brand button, not
+  the money green.
+- **Product page**: on a 390px phone the price table was 28px wider than its box and cut every "View deal" and "Buy now" button
+  short. A store name may now wrap anywhere and the price and button cells give up a little padding on a phone; the buttons'
+  words, colours, order and links are exactly as they were. A product with no TCGplayer price no longer shows a lone dash in 30px
+  type and "7d — · 30d —" in green: it says "No TCGplayer market price yet", hides the change line until there is one, and says
+  "No in-stock listings right now" for "0 in-stock listings worldwide".
+- **Deal finder**: on a phone the table cut the price column off. The store and market price move under the product name below
+  `sm` (their columns show from `sm`), the filters are the site's 40px fields, and an empty filter says what to try. The "Buy"
+  links are unchanged.
+- **Pre-orders, sets, movers**: the pre-order tiles' brand-coloured eyebrows are the neutral eyebrow (calm palette), their photo
+  sits on the site's plate, and they lift on hover like the home tiles; their FAQ opens row by row. `/sets` sits in the site's
+  card with a row hover. `/movers` says what it lists under its h1 ("Products worth $3 or more", it said "Cards" on a sealed-only
+  site).
+
+**Not touched, on purpose.** No paid link, ad block, pinned eBay, TCGplayer or Amazon row, buy button, affiliate tag or placement
+name was added, removed, moved, reordered or reworded: on fourteen sampled URLs the server HTML's sponsored links (36 on a busy
+product page, 54 on the deal finder) are the same hrefs with the same words in the same order, so the 19 November
+clicks-per-placement recheck is unaffected. No URL, redirect, title, meta description, canonical, robots, Open Graph tag, JSON-LD
+or h1 changed and no h2 was lost, on the same fourteen pages compared field by field against a build of `main`; their internal
+links are the same set. No new font, library, colour or client script; no `revalidate` or caching change. No deploy marker: this
+rides the next release.

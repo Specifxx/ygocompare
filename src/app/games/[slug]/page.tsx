@@ -37,7 +37,7 @@ export default function GamePage({ params }: { params: { slug: string } }) {
       <div>
         <Breadcrumbs items={[{ name: "Games", href: "/games" }, { name: line.name }]} />
         <header className="game-hero">
-          <h1 className="font-display text-3xl font-black md:text-4xl">{line.name} prices</h1>
+          <h1 className="page-h1">{line.name} prices</h1>
           <p className="mt-2 max-w-2xl text-muted">{line.blurb}</p>
           <p className="mt-2 text-sm text-muted">{v.sets.length} sets · {v.cards.toLocaleString()} cards · {v.sealed} sealed products, compared across TCGplayer, eBay and {SITE.stores.length} stores.</p>
           {v.newest && <p className="mt-3"><Link className="btn-primary" href={`/sets/${v.newest.slug}`}>Newest set: {v.newest.name} →</Link></p>}

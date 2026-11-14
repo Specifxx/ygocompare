@@ -37,16 +37,16 @@ export default function Preorders() {
     const stores = new Set(sealed.flatMap((p) => priceOf(p.id).offers.filter((o) => o.source !== "tcgplayer" && o.source !== "ebay").map((o) => o.source))).size;
     const days = daysUntil(s.releasedOn);
     return (
-      <Link key={s.id} href={preorderPath(s)} className="card-surface flex min-w-0 gap-4 p-4 hover:border-brand/60">
-        {box?.image ? <img src={imageAt(box.image, "200w")!} alt={box.name} className="h-24 w-20 shrink-0 object-contain" loading="lazy" /> : null}
+      <Link key={s.id} href={preorderPath(s)} className="card group flex min-w-0 gap-4 p-4 transition-[transform,border-color,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-ink/25 hover:shadow-lift motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+        {box?.image ? <span className="plate block h-24 w-20 shrink-0"><img src={imageAt(box.image, "200w")!} alt={box.name} className="h-full w-full object-contain p-1.5 mix-blend-multiply" loading="lazy" /></span> : null}
         <div className="min-w-0">
-          <p className="text-xs uppercase tracking-wide text-brand-400">{isPreorder(s) ? `Out ${longDate(s.releasedOn)}${days != null && days > 0 ? ` · ${days} days` : ""}` : `Released ${longDate(s.releasedOn)}`}</p>
-          <h2 className="text-lg font-bold">{s.name} {isPreorder(s) ? "pre-orders" : "prices"}</h2>
-          <p className="text-sm text-muted">
+          <p className="eyebrow">{isPreorder(s) ? `Out ${longDate(s.releasedOn)}${days != null && days > 0 ? ` · ${days} days` : ""}` : `Released ${longDate(s.releasedOn)}`}</p>
+          <h2 className="mt-1 font-display text-lg font-bold leading-snug tracking-tight transition-colors group-hover:text-brand">{s.name} {isPreorder(s) ? "pre-orders" : "prices"}</h2>
+          <p className="mt-1 text-sm leading-6 text-muted">
             {sealed.length ? <>{sealed.length} sealed product{sealed.length === 1 ? "" : "s"} · {stores} store{stores === 1 ? "" : "s"}</> : "No store listings yet"}
             {box && refCents(box.id) ? <> · {shortName(box.name)} {money(refCents(box.id))} on TCGplayer</> : null}
           </p>
-          <p className="mt-1 text-sm link">Compare every store →</p>
+          <p className="mt-2 text-sm font-semibold text-ink">Compare every store →</p>
         </div>
       </Link>
     );
@@ -55,19 +55,19 @@ export default function Preorders() {
     <div className="flex flex-col gap-10">
       {PREORDER_COPY.faq.length > 0 && <JsonLd data={{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: PREORDER_COPY.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) }} />}
       <header>
-        <p className="text-xs uppercase tracking-wide text-brand-400">Pre-order tracker · updated daily</p>
-        <h1 className="font-display text-3xl font-black md:text-4xl">{SITE.gameShort} pre-orders</h1>
-        {PREORDER_COPY.intro && <p className="mt-3 max-w-3xl text-muted" dangerouslySetInnerHTML={{ __html: PREORDER_COPY.intro }} />}
+        <p className="eyebrow mb-2">Pre-order tracker · updated daily</p>
+        <h1 className="page-h1">{SITE.gameShort} pre-orders</h1>
+        {PREORDER_COPY.intro && <p className="page-sub" dangerouslySetInnerHTML={{ __html: PREORDER_COPY.intro }} />}
       </header>
       {upcoming.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">Coming soon</h2>
+          <h2 className="mb-4 font-display text-2xl font-bold tracking-tight">Coming soon</h2>
           <div className="grid gap-3 md:grid-cols-2">{upcoming.map(card)}</div>
         </section>
       )}
       {recent.length > 0 && (
         <section>
-          <h2 className="mb-3 text-xl font-bold">Just released</h2>
+          <h2 className="mb-4 font-display text-2xl font-bold tracking-tight">Just released</h2>
           <div className="grid gap-3 md:grid-cols-2">{recent.map(card)}</div>
         </section>
       )}
@@ -75,9 +75,9 @@ export default function Preorders() {
       <FamilyCluster cluster="cards" kind="preorder" />
       {PREORDER_COPY.faq.length > 0 && (
         <section className="max-w-3xl">
-          <h2 className="mb-3 text-xl font-bold">Pre-order FAQ</h2>
+          <h2 className="mb-2 font-display text-2xl font-bold tracking-tight">Pre-order FAQ</h2>
           {PREORDER_COPY.faq.map((f) => (
-            <div key={f.q} className="border-b border-ink-800 py-3"><h3 className="font-medium">{f.q}</h3><p className="mt-1 text-sm text-muted">{f.a}</p></div>
+            <details key={f.q} className="faq"><summary><h3 className="text-[15px] font-semibold leading-6">{f.q}</h3></summary><p>{f.a}</p></details>
           ))}
         </section>
       )}
