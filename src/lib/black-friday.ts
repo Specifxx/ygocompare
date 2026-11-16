@@ -101,3 +101,33 @@ export function holidayFaq(event: HolidayEvent, year: number, o: { game: string;
     },
   ];
 }
+
+/** Whole days from `from` to `to` (YYYY-MM-DD both); negative once `to` is past. */
+export function daysUntil(from: string, to: string): number {
+  return Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000);
+}
+
+/** "in 11 days", "tomorrow", "today", "2 days ago": the sentence beside a real event date (never a sale deadline). */
+export function daysLabel(n: number): string {
+  if (n === 0) return "today";
+  if (n === 1) return "tomorrow";
+  if (n === -1) return "yesterday";
+  return n > 0 ? `in ${n} days` : `${-n} days ago`;
+}
+
+/**
+ * Group ranked deals by a key (the game), the groups ordered by their best deal's value (market × saving), each
+ * group's rows kept in the order given and cut to `perGroup`. Pure: tests/black-friday.test.ts.
+ */
+export function groupBy<T>(rows: readonly T[], key: (r: T) => string | null, value: (r: T) => number, perGroup = 8): { key: string; rows: T[]; total: number }[] {
+  const map = new Map<string, T[]>();
+  for (const r of rows) {
+    const k = key(r);
+    if (!k) continue;
+    (map.get(k) ?? map.set(k, []).get(k)!).push(r);
+  }
+  return [...map.entries()]
+    .map(([k, list]) => ({ key: k, rows: list.slice(0, perGroup), total: list.length, top: Math.max(...list.map(value)) }))
+    .sort((a, b) => b.top - a.top)
+    .map(({ key: k, rows: r, total }) => ({ key: k, rows: r, total }));
+}
