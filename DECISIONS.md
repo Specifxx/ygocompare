@@ -2198,3 +2198,9 @@ No deploy marker: this rides the next release.
 ## 2026-11-14: the one ad block moves up under the shelf
 
 Owner: eBay clicks dropped right after the minimal redesign and he asked for eBay ads back on the home page. The home pages' one native ad block (eBay and TCGplayer, labelled Ad) had been pushed to the very bottom, under the sets. It now sits directly under the product shelf. Still one block a page, still browser-only with its height reserved, no pop-up, no rail, quick view untouched, same placements and customid tags. Click numbers by placement were not readable from the build container; the 19 November recheck stands.
+
+## 2026-11-16: Black Friday and Cyber Monday pages as deal cards, grouped by game
+
+Ported from TCG Prices (its DECISIONS entry of the same date): hero with the real Black Friday and Cyber Monday dates, jump chips,
+the six biggest savings under TCGplayer, a section per game and each other market, every deal a card with the saving badge, View deal
+and a labelled Add to cart. Stores only, no "was" price, no deadline or urgency copy, no pop-up. URLs, titles, h1 and FAQ unchanged.

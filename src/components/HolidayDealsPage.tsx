@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
-import { deals, meta, storeDealsIn, type Deal } from "@/lib/data";
-import { money } from "@/lib/format";
-import { shortName } from "@/lib/names";
-import { sourceNameServer } from "@/lib/sources";
-import { blackFriday, cyberMonday, EVENT_NAME, holidayFaq, longDate, seasonYear, splitDeals, type HolidayEvent } from "@/lib/black-friday";
+import { deals, meta, storeDealsIn } from "@/lib/data";
+import { DaysUntil } from "@/components/DaysUntil";
+import { gameOf, UnderStoresCards, UnderTcgCards } from "@/components/DealCards";
+import { blackFriday, cyberMonday, daysLabel, daysUntil, EVENT_NAME, groupBy, holidayFaq, longDate, seasonYear, splitDeals, type HolidayEvent } from "@/lib/black-friday";
 import { listRegions } from "@/lib/sale-seasons";
 import { FamilyCluster } from "@/components/FamilyCluster";
 import { ADJ, IN, UnderStores } from "@/components/SaleSeasonPage";
@@ -59,28 +58,70 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
   const guides = postsAbout(["Black Friday", "Cyber Monday"]).slice(0, 3);
   const sister = event === "black-friday" ? { href: "/cyber-monday", label: "Cyber Monday deals" } : { href: "/black-friday", label: "Black Friday deals" };
 
+  const usAll = [...sealed, ...cards];
+  const byGame = groupBy(usAll, (d) => gameOf(d.p)?.id ?? null, (d) => d.market * d.saving, 6);
+  const gameName = (id: string) => gameOf(usAll.find((d) => gameOf(d.p)?.id === id)!.p)!.name;
+  const featured = [...usAll].sort((a, b) => b.saving - a.saving || b.market - a.market).slice(0, 6);
+  const biggest = featured[0]?.saving ?? 0;
+  const eventDate = event === "black-friday" ? bf : cm;
+  const nowDay = new Date().toISOString().slice(0, 10);
+  const page = event;
+
   return (
-    <article className="flex max-w-4xl flex-col gap-8">
-      <header className="flex flex-col gap-2">
-        <h1 className="page-h1">{SITE.gameShort} {EVENT_NAME[event]} deals {year}</h1>
-        <p className="text-muted">
-          {event === "black-friday" ? <>Black Friday is {longDate(bf)} and Cyber Monday is {longDate(cm)} {year}.{" "}</> : <>Cyber Monday is {longDate(cm)} {year}, the Monday after Black Friday ({longDate(bf)}).{" "}</>}
-          {before ? "Stores often start their sales earlier. " : ""}
-          Below is everything {SITE.stores.length} stores sell under TCGplayer&apos;s market price right now, in stock, rebuilt from each day&apos;s prices
-          {asOf ? ` (last updated ${asOf})` : ""}. Bookmark it: the same page updates every day through the sales.
+    <article className="flex max-w-5xl flex-col gap-8">
+      <header className="rounded-2xl border border-line bg-raised p-5 sm:p-7">
+        <p className="flex flex-wrap gap-2 text-xs font-semibold">
+          <span className="tag">Black Friday · {longDate(bf)} · <DaysUntil target={bf} initial={daysLabel(daysUntil(nowDay, bf))} /></span>
+          <span className="tag">Cyber Monday · {longDate(cm)} · <DaysUntil target={cm} initial={daysLabel(daysUntil(nowDay, cm))} /></span>
         </p>
+        <h1 className="mt-3 font-display text-3xl font-black sm:text-4xl">{SITE.gameShort} {EVENT_NAME[event]} deals {year}</h1>
+        <p className="mt-2 max-w-3xl text-muted">
+          Everything {SITE.stores.length.toLocaleString("en-US")} stores sell under the going price right now, in stock, rebuilt from each day&apos;s prices{asOf ? ` (last updated ${asOf})` : ""}.
+          {before ? " Stores often start their sales earlier, so the deals are here before the day." : ""} Bookmark it: the same page updates every day through the sales.
+        </p>
+        <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Stat n={String(usAll.length)} label="US deals today" />
+          <Stat n={biggest ? `${biggest}%` : "—"} label="biggest saving under TCGplayer" />
+          <Stat n={String(byGame.length || 1)} label={byGame.length === 1 ? "game" : "games with deals"} />
+          <Stat n={SITE.stores.length.toLocaleString("en-US")} label="stores compared" />
+        </dl>
+        <nav aria-label="Jump to" className="mt-4 flex flex-wrap gap-2 text-sm">
+          {featured.length > 0 && <a className="chip" href="#biggest">Biggest savings</a>}
+          {byGame.map((g) => <a key={g.key} className="chip" href={`#g-${g.key}`}>{gameName(g.key)}</a>)}
+          {others.map((m) => <a key={m} className="chip" href={`#${m.toLowerCase()}`}>{IN[m].replace(/^the /, "")}</a>)}
+        </nav>
       </header>
 
-      <Section title="Sealed product under TCGplayer today" rows={sealed} empty="No sealed product is under TCGplayer's market price in a US store today." />
-      {!SITE.sealedOnly && <Section title="Cards under TCGplayer today" rows={cards} empty="No card worth $5 or more is under TCGplayer's market price in a US store today." />}
+      {featured.length > 0 && (
+        <section id="biggest" className="flex scroll-mt-20 flex-col gap-3">
+          <h2 className="text-2xl font-bold">Biggest savings under TCGplayer</h2>
+          <UnderTcgCards rows={featured} page={`${page}_top`} />
+        </section>
+      )}
 
-      {others.map((m) => (
-        <section key={m} id={m.toLowerCase()} className="flex scroll-mt-20 flex-col gap-4">
-          <h2 className="text-2xl font-bold">{EVENT_NAME[event]} deals in {ADJ[m]} stores</h2>
-          <UnderStores title={`Sealed product under other ${ADJ[m]} stores`} rows={storeDealsIn(m, 12, "sealed")} m={m} />
-          {!SITE.sealedOnly && <UnderStores title={`Cards under other ${ADJ[m]} stores`} rows={storeDealsIn(m, 12, "card")} m={m} />}
+      {byGame.map((g) => (
+        <section key={g.key} id={`g-${g.key}`} className="flex scroll-mt-20 flex-col gap-3">
+          <h2 className="text-2xl font-bold">{gameName(g.key)} deals <span className="text-base font-normal text-muted">({g.total} under TCGplayer)</span></h2>
+          <UnderTcgCards rows={g.rows} page={`${page}_${g.key}`} />
         </section>
       ))}
+      {byGame.length === 0 && usAll.length > 0 && (
+        <section className="flex flex-col gap-3">
+          <h2 className="text-2xl font-bold">Under TCGplayer today</h2>
+          <UnderTcgCards rows={usAll.slice(0, 12)} page={`${page}_us`} />
+        </section>
+      )}
+      {usAll.length === 0 && <p className="text-sm text-muted">No product is under TCGplayer&apos;s market price in a US store today. This fills in as stores cut prices.</p>}
+
+      {others.map((m) => {
+        const rows = storeDealsIn(m, 12, SITE.sealedOnly ? "sealed" : undefined);
+        return (
+          <section key={m} id={m.toLowerCase()} className="flex scroll-mt-20 flex-col gap-3">
+            <h2 className="text-2xl font-bold">{EVENT_NAME[event]} deals in {ADJ[m]} stores</h2>
+            {rows.length ? <UnderStoresCards rows={rows} page={`${page}_${m.toLowerCase()}`} /> : <p className="text-sm text-muted">Nothing is 10% under the other stores in {IN[m]} today. This fills in as stores cut prices.</p>}
+          </section>
+        );
+      })}
 
       <FamilyCluster cluster="cards" kind="deal" />
       <section className="card-surface flex flex-col gap-2 p-4 text-sm">
@@ -111,33 +152,12 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
   );
 }
 
-function Section({ title, rows, empty }: { title: string; rows: Deal[]; empty: string }) {
+function Stat({ n, label }: { n: string; label: string }) {
   return (
-    <section className="flex flex-col gap-2">
-      <h2 className="text-lg font-bold">{title}</h2>
-      {!rows.length ? (
-        <p className="text-sm text-muted">{empty}</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[520px] text-left text-sm">
-            <thead className="text-xs uppercase text-muted">
-              <tr><th className="py-1 pr-3">Product</th><th className="py-1 pr-3 text-right">TCGplayer market</th><th className="py-1 pr-3 text-right">Store price</th><th className="py-1 pr-3">Store</th><th className="py-1 text-right">Under market</th></tr>
-            </thead>
-            <tbody>
-              {rows.map((d) => (
-                <tr key={d.p.id} className="border-t border-ink-800">
-                  <td className="py-1.5 pr-3"><Link className="hover:underline" href={`/card/${d.p.slug}`}>{shortName(d.p.name)}</Link></td>
-                  <td className="py-1.5 pr-3 text-right tabular-nums">{money(d.market)}</td>
-                  <td className="py-1.5 pr-3 text-right tabular-nums font-semibold">{money(d.offer.cents, d.offer.currency)}</td>
-                  <td className="py-1.5 pr-3">{sourceNameServer(d.offer)}</td>
-                  <td className="py-1.5 text-right tabular-nums text-up">{d.saving}%</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </section>
+    <div className="rounded-xl border border-line bg-surface px-3 py-2">
+      <dt className="sr-only">{label}</dt>
+      <dd className="text-2xl font-extrabold tabular-nums">{n}</dd>
+      <p className="text-xs text-muted">{label}</p>
+    </div>
   );
 }
-

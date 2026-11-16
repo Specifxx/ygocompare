@@ -37,3 +37,14 @@ test("the strip shows Black Friday from 1 November, then Cyber Monday, then noth
   assert.match(faq[0].a, /Monday 30 November/);
   for (const f of faq) assert.doesNotMatch(f.q + f.a, /was \$|ends soon|limited time/i);
 });
+
+test("daysUntil, daysLabel and groupBy", async () => {
+  const { daysUntil, daysLabel, groupBy } = await import("../src/lib/black-friday");
+  assert.equal(daysUntil("2026-11-16", "2026-11-27"), 11);
+  assert.equal(daysUntil("2026-11-27", "2026-11-27"), 0);
+  assert.equal(daysLabel(11), "in 11 days");
+  assert.equal(daysLabel(1), "tomorrow");
+  assert.equal(daysLabel(-3), "3 days ago");
+  const g = groupBy([{ k: "a", v: 1 }, { k: "b", v: 9 }, { k: "a", v: 5 }, { k: null as string | null, v: 99 }], (r) => r.k, (r) => r.v, 1);
+  assert.deepEqual(g.map((x) => [x.key, x.rows.length, x.total]), [["b", 1, 1], ["a", 1, 2]]);
+});
