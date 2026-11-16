@@ -46,7 +46,7 @@ export const PIN_OUTLINE = {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product, image = null }: { /** the product's picture, for the cart list (components/cart) */ image?: string | null; offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string | AmazonCell>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product, image = null, cartTitle }: { /** the product's picture, for the cart list (components/cart) */ image?: string | null; offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string | AmazonCell>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string; /** the cart's line title where `product` is left out (the quick view) */ cartTitle?: string }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
@@ -150,8 +150,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                     <span className="font-medium text-ink [overflow-wrap:anywhere]">{sourceName(o)}</span>{" "}
                     <StoreVote url={o.url} name={sourceName(o)} className="ml-1 text-muted" />
                     {/* Phones: the cart list's add button as a line under the store, where the row has no width to spare. */}
-                    {!compact && o.inStock && o.source !== "tcgplayer" && (
-                      <span className="block sm:hidden"><CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} inline className="text-xs" /></span>
+                    {o.inStock && (
+                      <span className={compact ? "block" : "block sm:hidden"}><CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? cartTitle ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} inline className="text-xs" /></span>
                     )}
                     {o.source === "ebay" && <span className="ad-pill ml-2">Ad</span>}
                     {best && <span className="ml-2 rounded-full bg-open-soft px-2 py-0.5 text-[10px] font-bold uppercase text-open">Best price</span>}
@@ -173,8 +173,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
                   <td className="py-2.5 pl-1 pr-2.5 text-right sm:px-3">
                     {/* The cart list (components/cart, owner 2026-11-06): an in-stock store row, beside its button. */}
                     <span className="inline-flex items-center justify-end gap-2">
-                    {!compact && o.inStock && o.source !== "tcgplayer" && (
-                      <CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} className="hidden text-muted sm:inline-flex" />
+                    {!compact && o.inStock && (
+                      <CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? cartTitle ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} className="hidden text-muted sm:inline-flex" />
                     )}
                     <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${o.source === "tcgplayer" && o.inStock ? "btn-tcg px-3 py-1.5" : best || (pinned.includes(o) && o.inStock) ? "btn-primary px-3 py-1.5" : o.inStock ? "btn-soft px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
                       {best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
