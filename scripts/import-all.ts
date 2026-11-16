@@ -9,6 +9,7 @@
 //
 // Env: EBAY_CLIENT_ID / EBAY_CLIENT_SECRET (optional; no eBay without them),
 // EBAY_REFRESH=false to skip eBay, IMPORT_SKIP_STORES=1 to skip stores (local testing).
+import { loadDenylist, withoutDenied } from "@/lib/denylist";
 import fs from "node:fs";
 import path from "node:path";
 import { SITE } from "@/site.config";
@@ -109,7 +110,7 @@ async function main() {
   if (process.env.IMPORT_SKIP_STORES !== "1") {
     // Stores in parallel (each one still paginates politely, one page at a
     // time): ~200 stores one after another would not fit the Actions timeout.
-    const queue = SITE.stores.slice();
+    const queue = withoutDenied(SITE.stores.slice(), await loadDenylist());
     const runStore = async (store: (typeof SITE.stores)[number]) => {
       try {
         const cur = await storeCurrency(store);
