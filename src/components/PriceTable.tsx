@@ -97,13 +97,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
   const live = [...inStock, ...refs];
   // Out-of-stock rows show when asked, or when nothing is in stock at all.
   const unfold = showOut || live.length === 0;
-  // Owner, 2026-11-17: ALL affiliated rows at the top, cheapest price first (eBay, TCGplayer and Amazon with a live price), then the cheapest
-  // store, then the rest. The pinned rows were eBay-then-TCGplayer; now the dearer of the two follows the cheaper.
-  const norm = (o: Offer) => (o.cents > 0 ? (o.currency === cur ? o.cents : Math.round((o.cents / (fx[o.currency] ?? 1)) * (fx[cur] ?? 1))) : Number.POSITIVE_INFINITY);
-  const byPrice = (list: Offer[]) => {
-    const pins = list.filter((o) => pinned.includes(o)).sort((a, b) => norm(a) - norm(b));
-    return [...pins, ...list.filter((o) => !pinned.includes(o))];
-  };
+  // Owner, 2026-11-17 (final): eBay first, then TCGplayer, then Amazon (priced), all above the stores; the pinned rows keep that order.
+  const byPrice = (list: Offer[]) => list;
   const uncapped = byPrice(compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o)));
   const shown = maxRows ? uncapped.slice(0, maxRows) : uncapped;
   const moreRows = maxRows ? uncapped.length - shown.length + (compact || unfold ? 0 : outOfStock.length) : 0;
@@ -134,9 +129,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
     </tr>
   ) : null;
   // Amazon is the second row, right under eBay (first when there is no eBay row).
-  // Amazon (live price only) sits among the affiliated rows by price: after every pinned row that is cheaper, first when none is.
-  const amazonCents = amazonLive && typeof amazonLive === "object" && "cents" in amazonLive ? Number((amazonLive as { cents?: number }).cents) || 0 : 0;
-  const amazonAfter = amazonCents > 0 ? shown.filter((o) => pinned.includes(o) && norm(o) < amazonCents).length - 1 : shown.findIndex((o) => o.source === "ebay" && pinned.includes(o));
+  // Amazon is the row right under the last pinned row (eBay, then TCGplayer), first when there is none.
+  const amazonAfter = shown.reduce((at, o, i) => (pinned.includes(o) ? i : at), -1);
   return (
     <div id={tableId ?? undefined} className="card overflow-hidden">
       {picker}
