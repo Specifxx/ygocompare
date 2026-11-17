@@ -156,24 +156,24 @@ export function QuickView() {
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 sm:p-5">
-          {/* The price history leads the panel (owner, 2026-11-17), above the prices and ads so their order is unchanged. */}
-          {got?.history && got.history.length >= 2 && (
-            <div className="mb-4 shrink-0 rounded-xl border border-ink-700 p-3 [min-height:12rem]">
-              <h3 className="mb-2 text-sm font-semibold">Price history</h3>
-              <PriceChart series={got.history} days={365} compact />
-            </div>
-          )}
           <h3 className="mb-3 text-sm font-semibold text-fg">Compare prices</h3>
           {data === "loading" ? (
             <Skeleton />
           ) : data ? (
             <>
-              <PriceTable offers={data.offers} fx={data.fx} productId={data.id} page="quickview" amazon={data.amazon} tableId={null} image={data.img} cartTitle={data.name} />
+              <PriceTable offers={data.offers} fx={data.fx} productId={data.id} page="quickview" maxRows={10} amazon={data.amazon} tableId={null} image={data.img} cartTitle={data.name} />
               {/* The small eBay + TCGplayer pair, as on the card page (owner, 2026-11-03). Never Amazon here. */}
               {data.ads && data.adSearch && <div className="mt-4"><CompactCardAds ads={data.ads} page="quickview" limit={6} {...data.adSearch} /></div>}
             </>
           ) : (
             <p className="rounded-xl border border-line p-4 text-sm text-muted">Prices did not load. The full page has every price.</p>
+          )}
+          {/* The price history sits below the rows (owner, 2026-11-17: moved from the top); the rows and ads above it are untouched. */}
+          {got?.history && got.history.length >= 2 && (
+            <div className="mt-4 shrink-0 rounded-xl border border-ink-700 p-3 [min-height:12rem]">
+              <h3 className="mb-2 text-sm font-semibold">Price history</h3>
+              <PriceChart series={got.history} days={365} compact />
+            </div>
           )}
         </div>
         <div className="border-t border-line p-4 sm:px-5">
