@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-16T22:42:53.263Z",
+ "generatedAt": "2026-11-17T21:27:38.407Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -47,23 +47,9 @@
    "currency": "USD",
    "store": "Key Items Collectibles",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/501748_200w.jpg",
-   "refCents": 12987,
+   "refCents": 12983,
    "refLabel": "TCGplayer market price",
    "savingPct": 42
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Quarter Century Stampede Booster Box",
-   "url": "https://ygocompare.com/card/quarter-century-stampede-booster-box",
-   "cents": 10999,
-   "currency": "USD",
-   "store": "Paragon City Games",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16232,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 32
   },
   {
    "kind": "deal",
@@ -83,6 +69,20 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
+   "title": "Quarter Century Stampede Booster Box",
+   "url": "https://ygocompare.com/card/quarter-century-stampede-booster-box",
+   "cents": 12000,
+   "currency": "USD",
+   "store": "Cosmic Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
+   "refCents": 16220,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 26
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
    "title": "Spell Ruler Booster Box (25th Anniversary Edition)",
    "url": "https://ygocompare.com/card/spell-ruler-booster-box-25th-anniversary-edition",
    "cents": 7999,
@@ -92,18 +92,6 @@
    "refCents": 9894,
    "refLabel": "TCGplayer market price",
    "savingPct": 19
-  },
-  {
-   "kind": "preorder",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Glorious Victors Booster Box",
-   "url": "https://ygocompare.com/preorders/glorious-victors",
-   "cents": 7000,
-   "currency": "USD",
-   "store": "Skybox Collectibles",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/713238_200w.jpg",
-   "releaseDate": "2026-12-04"
   }
  ]
 }
