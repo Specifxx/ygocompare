@@ -29,6 +29,8 @@
 export const CART_KEY = "ce_cart_v1";
 export const CART_EVENT = "ce-cart-change";
 export const CART_ADDED_EVENT = "ce-cart-added";
+export const CART_OPEN_EVENT = "ce-cart-open";
+export const CART_CLOSE_EVENT = "ce-cart-close";
 export const CART_MAX_LINES = 100;
 export const CART_MAX_QTY = 20;
 
@@ -115,10 +117,10 @@ export function storeHost(input: { href: string; productUrl?: string | null }): 
 }
 
 /**
- * TCGplayer and Cardmarket are references, never a cart line. eBay and Amazon rows are
- * (manual lines on their tagged links, owner 2026-11-06), still never counted as a store.
+ * Cardmarket is a reference, never a cart line. TCGplayer, eBay, Amazon and Fetch TCG rows are
+ * (manual lines on their tagged links; owner 2026-11-06 for eBay and Amazon, 2026-11-16 for TCGplayer and Fetch), still never counted as a store.
  */
-const MARKETPLACE = /(?:^|\.)(?:tcgplayer|cardmarket)(?:\.|$)/i;
+const MARKETPLACE = /(?:^|\.)cardmarket(?:\.|$)/i;
 
 export function isMarketplace(host: string | null | undefined): boolean {
   return !!host && MARKETPLACE.test(host);

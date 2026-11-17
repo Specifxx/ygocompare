@@ -12,7 +12,7 @@
 // price, inside bounds that rule out a wrong match.
 import { SITE } from "@/site.config";
 import { CURRENCY, MARKETS, type Market, type Product } from "@/lib/site-types";
-import { featureMin, priceOf, refCents, setById } from "@/lib/data";
+import { featureMin, priceOf, products, refCents, setById } from "@/lib/data";
 import { featuredSealed, preorderSetList, sealedInSet } from "@/lib/hubs";
 import { imageAt } from "@/lib/image";
 import { isPreorder, preorderPath } from "@/lib/preorders";
@@ -48,6 +48,8 @@ export interface HeroItem {
 
 export interface SealedHeroData {
   featured: HeroItem[];
+  /** Single booster packs from the newest released sets, each at its own price (owner, 2026-11-17). */
+  packs: HeroItem[];
   preorders: { name: string; href: string; releasesOn: string | null; items: HeroItem[] }[];
 }
 
@@ -125,5 +127,30 @@ export function sealedHero(featuredCount = 8, preorderSetsMax = 2, perSet = 4): 
     }))
     .filter((s) => s.items.length > 0)
     .slice(0, preorderSetsMax);
-  return { featured, preorders };
+  return { featured, packs: heroPacks(), preorders };
+}
+
+/**
+ * Single booster packs (owner, 2026-11-17: the front page "feels like it's just the booster boxes"): the newest released sets
+ * first, at most two packs a set so one set cannot fill the row, each at its own cheapest-store price. A pack that no store
+ * sells is left out; no box price is ever divided into a pack price.
+ */
+export function heroPacks(limit = 8, perSet = 2): HeroItem[] {
+  const released = (p: Product) => { const s = setById(p.setId); return s && !s.upcoming ? s.releasedOn ?? "" : ""; };
+  const pool = products()
+    .filter((p) => p.kind === "sealed" && p.sealedType === "Booster Pack" && released(p))
+    .sort((a, b) => released(b).localeCompare(released(a)) || (refCents(b.id) ?? 0) - (refCents(a.id) ?? 0))
+    .slice(0, 60);
+  const perSetCount = new Map<number, number>();
+  const out: HeroItem[] = [];
+  for (const p of pool) {
+    if (out.length >= limit) break;
+    const item = heroItem(p);
+    if (!Object.keys(item.prices).length) continue;
+    const n = perSetCount.get(p.setId) ?? 0;
+    if (n >= perSet) continue;
+    perSetCount.set(p.setId, n + 1);
+    out.push(item);
+  }
+  return out;
 }

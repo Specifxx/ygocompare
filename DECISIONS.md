@@ -2168,3 +2168,64 @@ on every card page, non-card sisters in `SITE.sisterSites`) it is removed. A con
 DexCompare's links read dexcompare.io (the old host is still accepted in a feed until Dex republishes). Not changed: price alerts,
 `alert-feed.json`, the family feeds and the sister data reads: they are data, not links. Also a "URL freeze" rule in CLAUDE.md:
 no mass path change without a redirect map, agents never flip hosts, no pop-unders or surprise navigation (this repo had none).
+
+## 2026-11-14: The price rows' cart button says "Add to cart"
+
+The owner, opening the price rows: "there needs to be an add to cart button ... right now, it just sends it to the site". The
+cart button was already on every store row, but as a bare grey cart icon on a computer (lost on the tinted best-price row) and
+as small coloured text on a phone, so it read as decoration. `CartAddButton` now carries its words by default ("Add to cart",
+"In cart" once added; "Add" beside the icon below 640px where a row has no room), with a firmer neutral border, and the phone's
+text button (`inline`) is drawn as a bordered button (`cart.css`). Neutral, never a new colour: the buy button stays the one
+filled action and the calm three-colour rule holds. Nothing else moved: which rows can be added (open store rows, eBay and
+Amazon with a live price; never a marketplace or a search row), the line's buy link and its affiliate tag, the row order, the
+buy button and every placement are unchanged. A caller can still ask for the bare icon (`label={false}`).
+
+## 2026-11-14: eBay and Amazon are never the cheapest
+
+A product page on a sister engine showed an eBay row badged "Best price" and named eBay in its "Cheapest in" box:
+`priceRows` took the first in-stock row whatever its source, and `summarize` kept eBay as a market's cheapest (so list
+tiles and the quick buy could lead with an eBay price). Both now skip eBay and Amazon (`neverCheapest` in
+`src/lib/price-rows.ts`); eBay keeps its pinned row and its own ad list (`e`), and a paid alternative is never cheaper
+than the cheapest. `tests/never-cheapest.test.ts` pins it. The summary is rebuilt by the next import.
+
+## 2026-11-14: Review of the day's design pass: guide tables show their prices on a phone, every tool page's head matches
+
+An independent check of #156 and #157 against a build of the commit before them (b3bc2f1), 16 page types at 390 and 1440 px
+in both themes plus 28 URLs for screenshots, found one fault and one half-finished corner. Both fixed here, nothing else.
+
+- **Guides (posts and any reading page with a table).** #157 set `.prose-site` tables `whitespace-nowrap` on phones so they
+  scrolled in their own box. On the Black Friday guide the product names alone filled the screen: the TCGplayer and cheapest
+  store columns, the figures the post exists for, were off to the right behind a sideways scroll. The cells wrap again on
+  phones; the table keeps its own scroll box as a guard for a cell that cannot wrap, and every post measured at 390 px has no
+  sideways scroll, in the page or in its tables.
+- **Tool and utility page heads.** The tools index, "Is this a good price?", the selling fee calculator, the Price Duel, cart
+  and collection had the shared `page-h1` but their line under it was still the old `mt-2 text-muted` (cart and collection a
+  14px line at 75% opacity). They now use `page-sub`, the one quiet line every other page head has. Words unchanged.
+
+Checked and left as they were: the server HTML of 29 URLs (title, meta description, canonical, robots, Open Graph, JSON-LD,
+h1 identical; no h2 lost; internal links the same set; sponsored links the same hrefs, words and order, 36 on a busy product
+page, 54 on the deal finder, 3 on a set page); every one of the 1,581 sitemap URLs answers 200 with a self canonical and no
+noindex; unknown URLs answer 404; robots.txt blocks only `/api/`, `/go` and query strings. No paid link, ad block, pinned row,
+buy button, affiliate tag, placement, URL or metadata changed, so the 19 November clicks-per-placement recheck is unaffected.
+No deploy marker: this rides the next release.
+
+## 2026-11-14: the one ad block moves up under the shelf
+
+Owner: eBay clicks dropped right after the minimal redesign and he asked for eBay ads back on the home page. The home pages' one native ad block (eBay and TCGplayer, labelled Ad) had been pushed to the very bottom, under the sets. It now sits directly under the product shelf. Still one block a page, still browser-only with its height reserved, no pop-up, no rail, quick view untouched, same placements and customid tags. Click numbers by placement were not readable from the build container; the 19 November recheck stands.
+
+## 2026-11-16: Black Friday and Cyber Monday pages as deal cards, grouped by game
+
+Ported from TCG Prices (its DECISIONS entry of the same date): hero with the real Black Friday and Cyber Monday dates, jump chips,
+the six biggest savings under TCGplayer, a section per game and each other market, every deal a card with the saving badge, View deal
+and a labelled Add to cart. Stores only, no "was" price, no deadline or urgency copy, no pop-up. URLs, titles, h1 and FAQ unchanged.
+
+## 2026-11-17: TCGplayer Cyber Weekend note on the deal pages
+
+TCGplayer's Impact email (17 Nov) announced Cyber Weekend 2026: 9AM New York time 28 Nov to 11PM 1 Dec, 10% store credit on all
+products (subscribers 13%+). The deal pages carry one text line under the hero from 20 Nov, "on now" from the start, gone after
+the end (`lib/cyber-weekend.ts`, read in the browser so a CDN-held page switches off on time). Text only: no banner, no link of its
+own, no pop-up, never in a price row or a ranking. Update the two instants next year.
+
+## 2026-11-17: booster packs on the home shelf
+
+Owner: the front page "feels like it's just the booster boxes". The home shelf gains a "Booster packs" tab (`heroPacks()` in `lib/sealed-hero.ts`): the newest released sets first, at most two packs a set, up to eight, each at its own cheapest-store price. A pack no store sells is left out and no box price is divided into a pack price. Homepage only; sealed pages, URLs and metadata are unchanged.

@@ -128,6 +128,19 @@ export default function Home() {
           },
         ]
       : []),
+    // Single booster packs (owner, 2026-11-17: the front page sold only boxes), each at its own price.
+    ...(hero.packs.length
+      ? [
+          {
+            label: "Booster packs",
+            panel: (
+              <Shelf heading={`The newest ${SITE.gameShort} booster packs, each at its cheapest store today`} note="Single packs, priced per pack." links={[{ href: "/sealed/booster-pack", label: "All booster packs" }]}>
+                <SealedShelf items={hero.packs} />
+              </Shelf>
+            ),
+          },
+        ]
+      : []),
     ...(hero.preorders.length
       ? [
           {
@@ -229,6 +242,13 @@ export default function Home() {
         </p>
       </Hero>
 
+      {/* The two big ad banners (owner, 2026-11-14): eBay and TCGplayer apart, directly under the hero, never in it. */}
+      {inlineReady(ads, undefined) && (
+        <div className="-mt-10 sm:-mt-14">
+          <InlineAds ads={ads} search={adSearch()} page="home" />
+        </div>
+      )}
+
       {shelfTabs.length > 0 && (
         <Section title={`${SITE.gameShort} booster boxes and sealed`} className="reveal mt-8 sm:mt-12">
           <Tabs tabs={shelfTabs} label={`${SITE.gameShort} sealed products`} />
@@ -247,12 +267,6 @@ export default function Home() {
         </Section>
       )}
 
-      {/* The page's one ad block (owner, 2026-11-13): native, horizontal, under everything the visitor came for; never in the hero. */}
-      {inlineReady(ads, undefined) && (
-        <div className="reveal mt-16 sm:mt-24">
-          <InlineAds ads={ads} search={adSearch()} page="home" />
-        </div>
-      )}
 
       {/* The reading matter: in the HTML for a crawler and for find-in-page, one line until opened (components/Fold.tsx). */}
       {posts().length > 0 && (

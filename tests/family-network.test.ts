@@ -50,9 +50,9 @@ test("KaeYoung is never in the network, and every label is region-neutral", () =
 test("clusters: cards, hobby (Gundam's Gunpla too) and tech", () => {
   assert.deepEqual(clusterSisters("figure", "hobby").map((s) => s.id), [], "figures meet no card or wargame site");
   assert.deepEqual(clusterSisters("empire", "tech").map((s) => s.id), ["cam"]);
-  assert.equal(clusterSisters("rift", "cards").length, 8);
+  assert.equal(clusterSisters("rift", "cards").length, 9);
   // Card sites list only card sites (Gundam's Gunpla side does not pull hobby sites into its footer).
-  assert.deepEqual(footerSisters("gundam").map((s) => s.id), ["rift", "op", "dex", "mtg", "lorcana", "ygo", "cyberpunk", "bandai"]);
+  assert.deepEqual(footerSisters("gundam").map((s) => s.id), ["rift", "op", "dex", "mtg", "lorcana", "ygo", "cyberpunk", "bandai", "sealed"]);
   for (const id of ["rift", "op", "dex", "mtg", "gundam", "lorcana", "ygo", "cyberpunk", "bandai"] as const) {
     assert.ok(footerSisters(id).every((s) => s.clusters.includes("cards") && s.id !== id), id);
   }

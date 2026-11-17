@@ -17,7 +17,7 @@ export default function Page() {
   return (
     <div>
       <h1 className="page-h1">{SITE.gameShort} Price Duel</h1>
-      <p className="mt-2 max-w-3xl text-muted">
+      <p className="page-sub">
         Ten pairs of sealed products. Tap the one worth more at TCGplayer&apos;s US market price. A new puzzle every day at midnight UTC, the same for everyone, so you can compare scores with friends.
       </p>
       {puzzles.length ? <DailyGame puzzles={puzzles} game={SITE.gameShort} /> : <p className="mt-6 text-muted">Today&apos;s puzzle isn&apos;t ready yet. Check back soon.</p>}

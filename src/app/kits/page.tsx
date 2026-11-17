@@ -45,6 +45,7 @@ export default function Kits() {
         <div className="mt-2"><CheckedAgo at={kitsUpdatedAt()} /></div>
         <div className="mt-4 max-w-xl"><KitSearch /></div>
       </header>
+      <InlineAds kit={kitAdTiles(popular(all), 12)} page="kits" />
       <nav aria-label="Grades" className="flex flex-wrap gap-2">
         {hubs.map((h) => (
           <Link key={h.slug} href={`/kits/grade/${h.slug}`} className="chip text-sm hover:border-brand">
@@ -73,7 +74,6 @@ export default function Kits() {
           </section>
         ) : null;
       })()}
-      <InlineAds kit={kitAdTiles(popular(all), 12)} page="kits" />
       <FamilyCluster cluster="hobby" kind="deal" />
       <section className="prose-site max-w-3xl text-sm">
         <h2>How {cfg.label} prices are compared</h2>
