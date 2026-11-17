@@ -7,6 +7,6 @@ test("the price table sorts its affiliated rows by price above the stores", () =
   const s = readFileSync(new URL("../src/components/PriceTable.tsx", import.meta.url), "utf8");
   assert.match(s, /const byPrice = \(list: Offer\[\]\) =>/);
   assert.match(s, /\.sort\(\(a, b\) => norm\(a\) - norm\(b\)\)/);
-  assert.match(s, /const uncapped = byPrice\(/);
+  assert.match(s, /const (uncapped|shown) = byPrice\(/);
   assert.match(s, /norm\(o\) < amazonCents/);
 });
