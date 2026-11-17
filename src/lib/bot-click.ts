@@ -12,5 +12,11 @@ export function looksLikeBot(headers: Headers): boolean {
   if (!ua || BOT_UA.test(ua)) return true;
   if (!headers.get("accept-language")) return true;
   if (!headers.get("sec-fetch-mode")) return true;
+  // 2026-11-17: the same hole Dex closed on 15 Nov (2,835 go_clicks from 1,381 devices on a day with 632 visitors, full browser headers).
+  // What a crawler cannot fake by opening /go URLs it collected: Sec-Fetch-Site. A /go link exists only on our own pages, so a person's
+  // click is "same-origin"; a URL opened directly is "none" and one followed from elsewhere "cross-site". An absent header (an old
+  // browser) is left alone: the rules only mark obvious bots.
+  const site = headers.get("sec-fetch-site");
+  if (site && site !== "same-origin" && site !== "same-site") return true;
   return false;
 }

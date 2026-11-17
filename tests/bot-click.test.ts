@@ -33,3 +33,12 @@ test("/go sends a bot to the shop untagged", async () => {
   const src = fs.readFileSync(new URL("../src/app/go/route.ts", import.meta.url), "utf8");
   assert.match(src, /looksLikeBot\(req\.headers\)/);
 });
+
+test("a request that did not come from a link on our own pages is a bot (Sec-Fetch-Site)", () => {
+  const h = (site?: string) => new Headers({ "user-agent": CHROME, "accept-language": "en-US", "sec-fetch-mode": "navigate", ...(site ? { "sec-fetch-site": site } : {}) });
+  assert.equal(looksLikeBot(h("same-origin")), false);
+  assert.equal(looksLikeBot(h("same-site")), false);
+  assert.equal(looksLikeBot(h()), false);
+  assert.equal(looksLikeBot(h("cross-site")), true);
+  assert.equal(looksLikeBot(h("none")), true);
+});
