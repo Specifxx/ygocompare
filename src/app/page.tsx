@@ -128,6 +128,19 @@ export default function Home() {
           },
         ]
       : []),
+    // Single booster packs (owner, 2026-11-17: the front page sold only boxes), each at its own price.
+    ...(hero.packs.length
+      ? [
+          {
+            label: "Booster packs",
+            panel: (
+              <Shelf heading={`The newest ${SITE.gameShort} booster packs, each at its cheapest store today`} note="Single packs, priced per pack." links={[{ href: "/sealed/booster-pack", label: "All booster packs" }]}>
+                <SealedShelf items={hero.packs} />
+              </Shelf>
+            ),
+          },
+        ]
+      : []),
     ...(hero.preorders.length
       ? [
           {

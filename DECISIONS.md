@@ -2211,3 +2211,7 @@ TCGplayer's Impact email (17 Nov) announced Cyber Weekend 2026: 9AM New York tim
 products (subscribers 13%+). The deal pages carry one text line under the hero from 20 Nov, "on now" from the start, gone after
 the end (`lib/cyber-weekend.ts`, read in the browser so a CDN-held page switches off on time). Text only: no banner, no link of its
 own, no pop-up, never in a price row or a ranking. Update the two instants next year.
+
+## 2026-11-17: booster packs on the home shelf
+
+Owner: the front page "feels like it's just the booster boxes". The home shelf gains a "Booster packs" tab (`heroPacks()` in `lib/sealed-hero.ts`): the newest released sets first, at most two packs a set, up to eight, each at its own cheapest-store price. A pack no store sells is left out and no box price is divided into a pack price. Homepage only; sealed pages, URLs and metadata are unchanged.
