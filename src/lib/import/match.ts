@@ -486,3 +486,30 @@ export function looksSealed(title: string, productType = "", style?: NumberStyle
     `${title} ${productType}`,
   ) && !numbersInTitle(title, "fraction").length && !numbersInTitle(title, "code").length && !numbersInTitle(title, "ygo").length && !numbersInTitle(title, "series").length;
 }
+
+// A single card filed under a sealed product's name. Live 2026-11-17: 92 store
+// offers on the summary came from singles stores, and most were cards, not
+// product: "Axe of Fools (V.1 - Common) [Battle Pack 2: War of the Giants]" at
+// US$0.02 on the pack's page, a "Portable Battery Pack: Light of Destruction"
+// at US$0.60 beside a US$132 first-edition pack, a Kaiba Evolution Starter Deck
+// at US$0.18. A sealed product's own title has no rarity and no card code.
+const CARD_RARITY = /\b(common|short print|super rare|ultra rare|secret rare|ultimate rare|ghost rare|starfoil( rare)?|shatterfoil( rare)?|mosaic rare|collector'?s rare|platinum rare|prismatic secret rare|quarter century secret rare|starlight rare|parallel rare)\b/i;
+const CARD_CODE = /\b[a-z0-9]{2,5}[- ]?(en|ae|sp|ju|fc|jp)\d{3}\b/i;
+const CARD_VERSION = /\bv\.?\s?\d\b/i;
+const EXTRA_OK = new Set([
+  "yu", "gi", "oh", "yugioh", "tcg", "konami", "sealed", "new", "pre", "order", "preorder", "north", "american", "english",
+  "unlimited", "1st", "first", "edition", "blister", "sleeved", "display", "of", "the", "a", "and", "official", "ocg", "box",
+]);
+
+/** True when a store title (and its URL slug, hyphens as spaces) names a single card, not a sealed product. */
+export function looksLikeCard(title: string, handle = ""): boolean {
+  const t = `${title} ${handle}`;
+  return CARD_RARITY.test(t) || CARD_CODE.test(t) || CARD_VERSION.test(title);
+}
+
+/** Title words the matched product's name lacks. A singles store's "Vylon Stella - Battle Pack 2: War of the Giants"
+ *  carries a card name the pack does not. */
+export function strangerWords(title: string, productName: string): number {
+  const own = new Set(tokens(productName));
+  return tokens(title).filter((w) => !own.has(w) && !EXTRA_OK.has(w) && !/^\d+$/.test(w)).length;
+}

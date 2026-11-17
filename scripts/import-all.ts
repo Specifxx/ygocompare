@@ -17,7 +17,7 @@ import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Prices, StoreS
 import { CURRENCY } from "@/lib/site-types";
 import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
 import { fetchStore, storeCurrency } from "@/lib/import/shopify";
-import { buildIndex, handleOf, isForeign, isPreorder, isUnfitListing, looksSealed, matchCard, matchSealed, printingOf } from "@/lib/import/match";
+import { buildIndex, handleOf, isForeign, isPreorder, isUnfitListing, looksLikeCard, looksSealed, strangerWords, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
   ebayCredentials,
   ebayRemaining,
@@ -77,6 +77,12 @@ function keepSlugs(products: Catalog["products"], prev: Catalog | null) {
   }
 }
 
+/** A product with no market price in any printing (a 1st Edition pack TCGplayer has only listings for) is still judged by its low. */
+function lowestCents(t: Record<string, { low?: number | null }> | undefined): number | null {
+  const v = Object.values(t ?? {}).map((p) => p.low).filter((x): x is number => x != null);
+  return v.length ? Math.min(...v) : null;
+}
+
 async function main() {
   const now = new Date();
   const today = dayNumber(now);
@@ -127,11 +133,14 @@ async function main() {
           const sealed = looksSealed(it.title, it.productType, SITE.numberStyle);
           const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;
+          // A single card filed under a pack's name (looksLikeCard), or, in a singles store, a title with a card's name in
+          // front of the product's (strangerWords): not a price for the product.
+          if (m.product.kind === "sealed" && (looksLikeCard(it.title, handleOf(it.url)) || (store.kind === "singles" && strangerWords(it.title, m.product.name) > 1))) continue;
           matched++;
           // Price sanity: a store price under a quarter or over four times the
           // TCGplayer reference is far likelier a bad match (or a damaged /
           // graded copy) than a real deal. Leave it out.
-          const ref = referenceCents(tcg[m.product.id]);
+          const ref = referenceCents(tcg[m.product.id]) ?? lowestCents(tcg[m.product.id]);
           const usd = it.cents / (fx[CURRENCY[store.market]] ?? 1);
           if (ref != null && ref >= 300 && (usd < ref * 0.25 || usd > ref * 4)) continue;
           const offer: Offer = {
