@@ -7,7 +7,10 @@ import { SITE } from "@/site.config";
 // with a descriptive anchor (the words a searcher types) rather than the brand.
 test("sister sites: the eleven or more others, once each, with descriptive anchors", () => {
   const hosts = SITE.sisterSites.map((s) => new URL(s.url).host);
-  assert.ok(SITE.sisterSites.length >= 11);
+  assert.ok(SITE.sisterSites.length >= 9);
+  // Owner, 2026-11-17 (Grok growth report, item 9): no link to a site on the other side of the network (perfume, K-beauty,
+  // car parts, cameras, figures, sports cards, tech); card sites and WargameCompare only.
+  assert.ok(!hosts.some((h) => /figurecompare|camcompare|compareempire|sportscardcompare|scentcompare|kaeyoung|motorcompare/.test(h)), "no non-TCG site");
   assert.equal(new Set(hosts).size, hosts.length, "no site twice");
   for (const s of SITE.sisterSites) {
     assert.equal(new URL(s.url).protocol, "https:", s.name);
@@ -28,7 +31,7 @@ test("footer: one link to /our-sites, which lists the other family sites", async
   assert.match(footer, /href="\/our-sites"/);
   assert.doesNotMatch(footer, /footerSisters|NETWORK_PAGE|href="https?:\/\//, "no external site links in the footer");
   const page = fs.readFileSync("src/app/our-sites/page.tsx", "utf8");
-  assert.match(page, /FAMILY_SITES\.filter\(\(s\) => s\.id !== SITE\.family\.id\)/);
+  assert.match(page, /FAMILY_SITES\.filter\(\(s\) => s\.id !== SITE\.family\.id && sameSide\(SITE\.family\.id, s\.id\)\)/);
   assert.match(page, /rel="noopener"/);
   assert.doesNotMatch(page, /nofollow|sponsored/);
   assert.ok(FAMILY_SITES.length >= 10 && !FAMILY_SITES.some((s) => /kaeyoung/i.test(s.url)));
