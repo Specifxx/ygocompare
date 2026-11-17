@@ -9,7 +9,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "@/components/Link";
 import type { Market, Offer } from "@/lib/site-types";
+import dynamic from "next/dynamic";
 import { PriceTable } from "./PriceTable";
+import type { Series } from "@/lib/series";
+
+// Loaded only when a panel has a series to draw: the chart's code is not in the page's first load.
+const PriceChart = dynamic(() => import("./PriceChart").then((m) => m.PriceChart), { ssr: false });
 import { CompactCardAds } from "./CardAds";
 import type { CardAds } from "@/lib/card-ads";
 import { ShareButton } from "./ShareButton";
@@ -25,6 +30,8 @@ interface Data {
   id: number;
   offers: Offer[];
   fx: Record<string, number>;
+  /** The daily price series; absent in a response the CDN kept from before. */
+  history?: Series;
   amazon: Partial<Record<Market, string>> | null;
   name: string;
   sub: string;
@@ -149,6 +156,13 @@ export function QuickView() {
           </button>
         </div>
         <div className="flex-1 overflow-y-auto p-4 sm:p-5">
+          {/* The price history leads the panel (owner, 2026-11-17), above the prices and ads so their order is unchanged. */}
+          {got?.history && got.history.length >= 2 && (
+            <div className="mb-4 shrink-0 rounded-xl border border-ink-700 p-3 [min-height:12rem]">
+              <h3 className="mb-2 text-sm font-semibold">Price history</h3>
+              <PriceChart series={got.history} days={365} compact />
+            </div>
+          )}
           <h3 className="mb-3 text-sm font-semibold text-fg">Compare prices</h3>
           {data === "loading" ? (
             <Skeleton />
