@@ -2248,3 +2248,16 @@ Owner, 2026-11-17: the price-history chart at the top of the quick view is "not 
 
 Site loop finding. The summary held 92 store offers from `kind: "singles"` stores, most of them cards: "Axe of Fools (V.1 - Common)" at US$0.02 on the Battle Pack 2 page, a "Portable Battery Pack: Light of Destruction" at US$0.60 beside a US$132 first-edition pack, a Kaiba Evolution deck card at US$0.18. They could be a page's cheapest store price. Two holes: a set or pack name in a card's title passes `looksSealed`, and the price band (quarter to four times TCGplayer) was skipped when the product's TCGplayer `market` is null in every printing (1st Edition packs with listings only).
 The import now drops a matched sealed listing whose title or URL slug carries a rarity or card code or "V.n" (`looksLikeCard`), and, from a singles store, one with more than one word the product's name lacks (`strangerWords`). The band falls back to TCGplayer's low when there is no market. Rules only refuse; no URL, price row order or paid link changes. Pinned in `tests/match.test.ts`. The summary is rebuilt by the next daily import; no deploy marker.
+
+## 2026-11-17: Fiverr first-time-shopper review of DexCompare, applied here (owner)
+
+The owner bought a professional first-time-shopper QA review of DexCompare and asked for every finding that generalises to reach every site.
+Applied here (the full reasoning is in DexCompare's DECISIONS.md, same date):
+
+- **Cart hand-off:** the cart drawer opens with "You pay each store on its own site. We never take payment." (normal-size text, first thing in the
+  drawer); "Total before postage" became "Estimated total (before postage)"; the add button's tooltip says you pay at the store. The label stays
+  "Add to cart" (owner, 2026-11-14: a literal "Add to cart" on every row).
+- **The quick view sets the tab title and description while it is open** and restores them on close (the tab used to keep the list's title).
+- **A total beside the shipping figure** on a row that charges postage ("+ $X shipping · ≈ $Y total").
+- **The pinned eBay row's button is the ink `btn-ad`,** the filled orange/primary button is a store's (the cheapest store's "Buy now").
+- Already true here, no change: an eBay or Amazon row is never "the cheapest" or "Best price" (`neverCheapest`), so the table never contradicts its own headline.
