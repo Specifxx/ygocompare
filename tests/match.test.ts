@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Product, SetInfo } from "@/lib/site-types";
-import { buildIndex, matchCard, matchSealed, markersAgree, numbersInTitle, printingOf } from "@/lib/import/match";
+import { buildIndex, looksLikeCard, matchCard, matchSealed, markersAgree, numbersInTitle, printingOf, strangerWords } from "@/lib/import/match";
 
 const set = (id: number, name: string): SetInfo => ({ id, name, code: String(id), slug: name, releasedOn: "2026-01-01", productCount: 1, upcoming: false });
 const card = (id: number, name: string, number: string, setId: number, rarity = "Rare"): Product => ({ id, slug: String(id), name, kind: "card", setId, number, rarity, attrs: {}, sealedType: null, image: null, tcgUrl: "", printings: [] });
@@ -178,4 +178,21 @@ test("Japanese boxes and wrong set codes never match (Gundam Compare, live 2026-
   assert.equal(matchSealed("Gundam Freedom Ascension Booster Box GD06", gidx), null);
   // The deck build box carries its parent set's code.
   assert.equal(matchSealed("Gundam Freedom Ascension Deck Build Box [GD05]", gidx)?.product.id, 693625);
+});
+
+test("a single card filed under a pack's name is not the pack (live 2026-11-17, YGO Compare)", () => {
+  for (const [title, handle] of [
+    ["Axe of Fools (V.1 - Common) [Battle Pack 2: War of the Giants]", "axe of fools v 1 common battle pack 2 war of the giants common 161 262"],
+    ["Photon Lizard (V.2 - Starfoil Rare)", "photon lizard v 2 starfoil rare star pack 2014 starfoil rare 006 26626"],
+    ["Yazi, Evil of the Yang Zing MP15-EN163 Secret Rare", "yazi evil of the yang zing mp15 en163 secret rare"],
+    ["Tribute Burial DPRP-EN010 Super Rare", "tribute burial dprp en010 super rare"],
+  ]) assert.equal(looksLikeCard(title, handle), true, title);
+  for (const title of ["Light of Destruction Booster Pack 1st Edition", "Maze of Muertos Booster Box 1st Edition", "Rage of the Abyss Special Edition Box"])
+    assert.equal(looksLikeCard(title), false, title);
+});
+
+test("a singles store's card name in front of the product's is a stranger", () => {
+  assert.equal(strangerWords("Vylon Stella - Battle Pack 2: War of the Giants", "Battle Pack 2: War of the Giants Booster Pack"), 2);
+  assert.equal(strangerWords("Warrior Dai Grepher - Starter Deck: Yugi Evolution", "Yugi Evolution Starter Deck [Unlimited Edition]"), 3);
+  assert.equal(strangerWords("Yu-Gi-Oh! Battle Pack 2: War of the Giants Booster Pack 1st Edition", "Battle Pack 2: War of the Giants Booster Pack"), 0);
 });
