@@ -116,6 +116,7 @@ export function Footer() {
           <p>
             {SITE.name} is an independent price comparison site, not affiliated with or endorsed by the publisher of {SITE.game}{SITE.kits ? ` or by ${SITE.kits.maker}` : ""}. As an eBay Partner and TCGplayer affiliate we may earn a commission from qualifying purchases made through links on this site, at no cost to you.{SITE.disclaimer ? ` ${SITE.disclaimer}` : ""} As an Amazon Associate we earn from qualifying purchases. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates. Prices change often; the store&apos;s checkout price is final.
           </p>
+          <p>This product uses TCGplayer data but is not endorsed or certified by TCGplayer.</p>
           <p>© {year} {SITE.name}</p>
         </div>
       </div>
