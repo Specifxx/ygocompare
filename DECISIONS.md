@@ -2204,3 +2204,10 @@ Owner: eBay clicks dropped right after the minimal redesign and he asked for eBa
 Ported from TCG Prices (its DECISIONS entry of the same date): hero with the real Black Friday and Cyber Monday dates, jump chips,
 the six biggest savings under TCGplayer, a section per game and each other market, every deal a card with the saving badge, View deal
 and a labelled Add to cart. Stores only, no "was" price, no deadline or urgency copy, no pop-up. URLs, titles, h1 and FAQ unchanged.
+
+## 2026-11-17: TCGplayer Cyber Weekend note on the deal pages
+
+TCGplayer's Impact email (17 Nov) announced Cyber Weekend 2026: 9AM New York time 28 Nov to 11PM 1 Dec, 10% store credit on all
+products (subscribers 13%+). The deal pages carry one text line under the hero from 20 Nov, "on now" from the start, gone after
+the end (`lib/cyber-weekend.ts`, read in the browser so a CDN-held page switches off on time). Text only: no banner, no link of its
+own, no pop-up, never in a price row or a ranking. Update the two instants next year.
