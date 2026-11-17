@@ -46,7 +46,7 @@ export const PIN_OUTLINE = {
 /** Where the phone's sticky buy bar hides (components/CardBuy.tsx). */
 export const PRICE_TABLE_ID = "price-comparison";
 
-export function PriceTable({ offers, fx, productId, page, compact = false, amazon = null, tableId = PRICE_TABLE_ID, product, image = null, cartTitle }: { /** the product's picture, for the cart list (components/cart) */ image?: string | null; offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; amazon?: Partial<Record<Market, string | AmazonCell>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string; /** the cart's line title where `product` is left out (the quick view) */ cartTitle?: string }) {
+export function PriceTable({ offers, fx, productId, page, compact = false, maxRows, amazon = null, tableId = PRICE_TABLE_ID, product, image = null, cartTitle }: { /** the product's picture, for the cart list (components/cart) */ image?: string | null; offers: Offer[]; fx: Record<string, number>; productId: number; page: string; compact?: boolean; /** the quick view lists at most this many rows (owner, 2026-11-17: 10 stores), pinned paid rows first, then the cheapest; the full page lists all */ maxRows?: number; amazon?: Partial<Record<Market, string | AmazonCell>> | null; /** null in the quick view: the page's own table keeps the id the buy bar watches */ tableId?: string | null; /** the product's name: shows "Report a wrong price" under the table */ product?: string; /** the cart's line title where `product` is left out (the quick view) */ cartTitle?: string }) {
   const { market, setMarket } = useMarket();
   const [showOut, setShowOut] = useState(false);
   // eBay and TCGplayer lead the table (lib/price-rows.ts `display`); "Cheapest"
@@ -97,8 +97,10 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
   const live = [...inStock, ...refs];
   // Out-of-stock rows show when asked, or when nothing is in stock at all.
   const unfold = showOut || live.length === 0;
-  const shown = compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o));
-  const folded = compact ? 0 : unfold ? 0 : outOfStock.length;
+  const uncapped = compact ? rows.slice(0, 6) : unfold ? rows : rows.filter((o) => live.includes(o));
+  const shown = maxRows ? uncapped.slice(0, maxRows) : uncapped;
+  const moreRows = maxRows ? uncapped.length - shown.length + (compact || unfold ? 0 : outOfStock.length) : 0;
+  const folded = compact || maxRows ? 0 : unfold ? 0 : outOfStock.length;
   // A string is the tagged search; a cell (lib/amazon-live.ts) is the item's own page, with this build's price while under 24 hours old.
   const amazonCell = amazon?.[market];
   const amazonUrl = typeof amazonCell === "string" ? amazonCell : amazonCell?.url;
@@ -189,6 +191,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, amazo
         </tbody>
       </table>
       {amazonLive && <p className="border-t border-ink-800 px-3 py-2 text-[11px] text-muted">* Amazon price: {AMAZON_PRICE_DISCLAIMER}</p>}
+      {moreRows > 0 && <p className="border-t border-line px-3 py-2 text-xs text-muted">{moreRows} more listing{moreRows === 1 ? "" : "s"} on the full page</p>}
       {folded > 0 && (
         <button type="button" onClick={() => setShowOut(true)} className="w-full border-t border-line px-3 py-2.5 text-left text-sm text-muted hover:bg-raised hover:text-ink">
           Show {folded} out-of-stock listing{folded === 1 ? "" : "s"} ↓
