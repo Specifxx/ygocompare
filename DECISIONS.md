@@ -2229,3 +2229,7 @@ own, no pop-up, never in a price row or a ranking. Update the two instants next 
 ## 2026-11-17: booster packs on the home shelf
 
 Owner: the front page "feels like it's just the booster boxes". The home shelf gains a "Booster packs" tab (`heroPacks()` in `lib/sealed-hero.ts`): the newest released sets first, at most two packs a set, up to eight, each at its own cheapest-store price. A pack no store sells is left out and no box price is divided into a pack price. Homepage only; sealed pages, URLs and metadata are unchanged.
+
+## 2026-11-17: TCGplayer data notice in the footer
+
+Grok growth report (2026-11-17), item 8 ("plain not-affiliated footer lines"), and the image-licence report (`/mnt/project-files/seo/grok-2026-11-17/image-licence-report.md`, item 11): TCGplayer's API terms ask for the notice "This product uses TCGplayer data but is not endorsed or certified by TCGplayer.", and no footer carried it. It is now one plain line in the footer, beside the existing not-affiliated lines (which are unchanged). Nothing else changed: no price, link, order or cache rule.

@@ -36,3 +36,8 @@ test("footer: one link to /our-sites, which lists the other family sites", async
   assert.doesNotMatch(page, /nofollow|sponsored/);
   assert.ok(FAMILY_SITES.length >= 10 && !FAMILY_SITES.some((s) => /kaeyoung/i.test(s.url)));
 });
+
+test("footer carries the TCGplayer data notice (TCGplayer API terms, 2026-11-17)", async () => {
+  const fs = await import("node:fs");
+  assert.ok(fs.readFileSync("src/components/Footer.tsx", "utf8").includes("This product uses TCGplayer data but is not endorsed or certified by TCGplayer."));
+});
