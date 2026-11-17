@@ -2155,6 +2155,20 @@ or h1 changed and no h2 was lost, on the same fourteen pages compared field by f
 links are the same set. No new font, library, colour or client script; no `revalidate` or caching change. No deploy marker: this
 rides the next release.
 
+## 2026-11-17: URL freeze, and two sides of the network, one footer link
+
+Owner, from the Grok growth report (items 5 and 9): stop the sitewide cross-links between the sites, and freeze URLs.
+The network now has two sides (`TCG_SIDE`, `sameSide`, `isTcgSide` in `src/lib/family-network.ts`, the same file in every repo): the
+card-game and wargame sites on one, perfume, K-beauty, car parts, cameras, figures, sports cards and tech on the other. `clusterSisters`
+and `footerSisters` return same-side sites only, so deal and pre-order tiles, the data jobs' copied feeds and the `/our-sites` (or
+`/network`) list never cross. The footer keeps its single link to `/our-sites`; the "Every Compare Empire site" link to
+compareempire.com is gone from the card sites. SportsCardCompare is on the other side from the card sites (its search results no
+longer offer their searches). Where this repo had a repeated block of sister links (a blog "Also from us" aside, "Compare other TCGs"
+on every card page, non-card sisters in `SITE.sisterSites`) it is removed. A contextual link from a guide to another game stays.
+DexCompare's links read dexcompare.io (the old host is still accepted in a feed until Dex republishes). Not changed: price alerts,
+`alert-feed.json`, the family feeds and the sister data reads: they are data, not links. Also a "URL freeze" rule in CLAUDE.md:
+no mass path change without a redirect map, agents never flip hosts, no pop-unders or surprise navigation (this repo had none).
+
 ## 2026-11-14: The price rows' cart button says "Add to cart"
 
 The owner, opening the price rows: "there needs to be an add to cart button ... right now, it just sends it to the site". The
