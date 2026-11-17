@@ -48,3 +48,13 @@ test("daysUntil, daysLabel and groupBy", async () => {
   const g = groupBy([{ k: "a", v: 1 }, { k: "b", v: 9 }, { k: "a", v: 5 }, { k: null as string | null, v: 99 }], (r) => r.k, (r) => r.v, 1);
   assert.deepEqual(g.map((x) => [x.key, x.rows.length, x.total]), [["b", 1, 1], ["a", 1, 2]]);
 });
+
+test("TCGplayer Cyber Weekend note: soon from 20 Nov, on from 9AM New York 28 Nov, off after 11PM 1 Dec", async () => {
+  const { cyberWeekendState } = await import("../src/lib/cyber-weekend");
+  assert.equal(cyberWeekendState(Date.parse("2026-11-19T12:00:00Z")), "off");
+  assert.equal(cyberWeekendState(Date.parse("2026-11-20T00:00:00Z")), "soon");
+  assert.equal(cyberWeekendState(Date.parse("2026-11-28T13:59:00Z")), "soon");
+  assert.equal(cyberWeekendState(Date.parse("2026-11-28T14:00:00Z")), "on");
+  assert.equal(cyberWeekendState(Date.parse("2026-12-02T03:59:00Z")), "on");
+  assert.equal(cyberWeekendState(Date.parse("2026-12-02T04:00:00Z")), "off");
+});

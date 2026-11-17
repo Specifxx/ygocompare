@@ -3,6 +3,8 @@ import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { deals, meta, storeDealsIn } from "@/lib/data";
+import { CyberWeekendNote } from "@/components/CyberWeekendNote";
+import { cyberWeekendState } from "@/lib/cyber-weekend";
 import { DaysUntil } from "@/components/DaysUntil";
 import { gameOf, UnderStoresCards, UnderTcgCards } from "@/components/DealCards";
 import { blackFriday, cyberMonday, daysLabel, daysUntil, EVENT_NAME, groupBy, holidayFaq, longDate, seasonYear, splitDeals, type HolidayEvent } from "@/lib/black-friday";
@@ -91,6 +93,8 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
           {others.map((m) => <a key={m} className="chip" href={`#${m.toLowerCase()}`}>{IN[m].replace(/^the /, "")}</a>)}
         </nav>
       </header>
+
+      <CyberWeekendNote initial={cyberWeekendState(Date.now())} />
 
       {featured.length > 0 && (
         <section id="biggest" className="flex scroll-mt-20 flex-col gap-3">
