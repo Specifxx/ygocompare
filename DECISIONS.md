@@ -2388,3 +2388,14 @@ units that show other products are ignored).
   not fall; otherwise remove it.
 - Rollback: remove `<LeaveNudge />` from `app/layout.tsx`.
 - Not on DexCompare or MTG Compare until their quick-view A/B test ends (3 Dec), so the two tests never mix.
+
+## 2026-11-18: Share for a deal, and guides, sets and Deal Finder can be shared (owner)
+
+Owner: "a share feature … the ability to share pages and guides", then "if you share … you can open Deal Finder … gives
+incentive". Ported from TCG Prices (same `lib/share.ts` and `ShareButton`). Half of browsers (`share_arm` in localStorage,
+`pickShareArm`) see "Share · get a deal"; after a share completes the button opens a small card under itself (the visitor's own
+tap, ✕ to close) with today's best store deal in their market and a link to Deal Finder, from the static `/share-deal.json`
+(`force-static`, built with the release, fetched only then). Store rows only, never eBay, Amazon or TCGplayer, and nothing that
+was not already free. The other half is the control. Events `share { medium, arm }`, `share_unlock { medium }`,
+`share_visit { medium }`. Guides, set pages and Deal Finder gain the button. Read the share rate per arm after two weeks; keep
+the offer only if it raises sharing.
