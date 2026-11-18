@@ -11,6 +11,7 @@
 // translucent borders) so the same file sits on light and dark sites; a site
 // passes its own button class. The same file is copied into every site.
 import { useState, type CSSProperties, type FormEvent } from "react";
+import { track } from "@vercel/analytics";
 
 export const ALERT_SERVICE = "https://riftcompare.com/api/sister-alerts";
 export const ALERT_PRIVACY = "https://riftcompare.com/privacy#sister-alerts";
@@ -39,7 +40,7 @@ export function parseAmount(s: string): number | null {
 
 type State = { status: "idle" | "sending" } | { status: "done"; confirm: boolean; weekly: boolean } | { status: "error"; message: string };
 
-export function PriceAlertForm({
+function PriceDropForm({
   site,
   productId,
   region,
@@ -145,6 +146,98 @@ export function PriceAlertForm({
       )}
       <p style={hint}>
         Free, no account. We email you once to confirm, then only when a store reaches your price (and once a week if you ticked the box); every email has a stop link, and alerts end after six months. Sent by our sister site RiftCompare&rsquo;s alert service (<a href={ALERT_PRIVACY} style={{ color: "inherit" }}>privacy</a>).
+      </p>
+    </form>
+  );
+}
+
+type PriceAlertProps = Parameters<typeof PriceDropForm>[0];
+
+/**
+ * The card page's alert form. With an in-stock price in the visitor's region it is the price-drop alert above; with none
+ * (sold out there) it is "email me when it's back in stock" (owner, 2026-11-18: back-in-stock alerts free for everyone, on
+ * RiftCompare's shared service as kind "restock", the same double opt-in). Event `restock_signup` {member, region}.
+ */
+export function PriceAlertForm(props: PriceAlertProps) {
+  return props.priceCents == null ? <RestockForm {...props} /> : <PriceDropForm {...props} />;
+}
+
+type RestockState = { status: "idle" | "sending" } | { status: "done"; confirm: boolean } | { status: "error"; message: string };
+
+function RestockForm({ site, productId, region, className, buttonClassName, defaultOpen = false, from = "page" }: PriceAlertProps) {
+  const [open, setOpen] = useState(defaultOpen);
+  const [state, setState] = useState<RestockState>({ status: "idle" });
+
+  async function submit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    if (String(f.get("website") ?? "")) return setState({ status: "done", confirm: true });
+    setState({ status: "sending" });
+    try {
+      const r = await fetch(ALERT_SERVICE, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ site, productId, region, email: String(f.get("email") ?? ""), kind: "restock" }),
+      });
+      const j = (await r.json().catch(() => ({}))) as { ok?: boolean; status?: string; error?: string };
+      if (r.ok && j.ok) {
+        try {
+          track("restock_signup", { member: "no", region });
+        } catch {
+          /* analytics never gets in the way */
+        }
+        window.dispatchEvent(new CustomEvent("price-alert", { detail: { kind: "saved", from } }));
+        setState({ status: "done", confirm: j.status !== "active" });
+      } else setState({ status: "error", message: j.error || "Couldn't save that. Please try again." });
+    } catch {
+      setState({ status: "error", message: "Couldn't save that. Check your connection and try again." });
+    }
+  }
+
+  if (!open) {
+    return (
+      <div className={className}>
+        <button type="button" onClick={() => {
+            setOpen(true);
+            window.dispatchEvent(new CustomEvent("price-alert", { detail: { kind: "open", from } }));
+          }} style={{ background: "none", border: 0, padding: "10px 0", color: "inherit", font: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}>
+          Email me when it&rsquo;s back in stock
+        </button>
+      </div>
+    );
+  }
+  if (state.status === "done") {
+    return (
+      <div className={className} style={box} role="status">
+        <strong>{state.confirm ? "Check your inbox to confirm." : "Done. We'll tell you when it's back."}</strong>
+        <p style={{ ...hint, opacity: 0.85 }}>
+          {state.confirm ? "One click in the email we just sent, and we'll email you when a store has it in stock again." : "We check stores once a day and email you when one has it in stock again."}
+        </p>
+      </div>
+    );
+  }
+  return (
+    <form className={className} style={box} onSubmit={submit}>
+      <strong style={{ fontSize: 15 }}>Sold out in {region}. Get an email when it&rsquo;s back in stock.</strong>
+      <label style={label} htmlFor={`rs-email-${from}-${productId}`}>
+        Your email
+      </label>
+      <input id={`rs-email-${from}-${productId}`} name="email" type="email" required autoComplete="email" placeholder="Your email address" style={field} />
+      <div style={hidden} aria-hidden="true">
+        <label>
+          Website <input name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
+      <button type="submit" disabled={state.status === "sending"} className={buttonClassName} style={buttonClassName ? { marginTop: 12 } : defaultButton}>
+        {state.status === "sending" ? "Saving…" : "Email me"}
+      </button>
+      {state.status === "error" && (
+        <p role="alert" style={{ ...hint, opacity: 1, color: "#c0392b" }}>
+          {state.message}
+        </p>
+      )}
+      <p style={hint}>
+        Free, no account. We email you once to confirm, then only when a store has it again; every email has a stop link, and alerts end after six months. Sent by our sister site RiftCompare&rsquo;s alert service (<a href={ALERT_PRIVACY} style={{ color: "inherit" }}>privacy</a>).
       </p>
     </form>
   );

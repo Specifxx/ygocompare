@@ -2505,3 +2505,14 @@ the footer, dialogs and the keyboard, ✕ for the visit, labelled Ad, rel sponso
 `dock_arm`. Verdict 2 Dec: buy clickers and paid buy clicks per arm. EPN's Network Agreement (Exhibit A §1.4, §2.5) puts any
 promotional method it does not expressly permit under prior written approval; the dock has run since 2026-11-06, this changes only
 when it shows. Not on Dex or MTG Compare (their phone A/B runs to 3 Dec).
+
+## 2026-11-18: Back in stock alerts on sold-out products, free for everyone
+
+**Owner** (retention programme, decision card 18 Nov): back-in-stock alerts are free for everyone. RiftCompare's
+`/api/sister-alerts` takes `kind: "restock"` with an email alone, under the same double opt-in (TCGEmpire #512).
+
+**What.** `PriceAlertForm` is now two forms behind one name: with an in-stock store price in the visitor's region it is the
+price-drop alert as before; with none it is "Email me when it's back in stock" (one email field, `kind: "restock"`). Both are
+inline, never a pop-up, on the card page and the top watch strip. A sold-out product is not in `/alert-feed.json`; the service
+holds a restock watch while its item is missing and fires on the first in-stock price. Event `restock_signup` {member, region},
+read per site with the retention programme on 2 Dec. `tests/restock-alert.test.ts`.
