@@ -2392,7 +2392,7 @@ units that show other products are ignored).
 ## 2026-11-18: the Amazon button is amber, and the quick view's "See full page" is a real button (owner)
 
 The owner wants the Amazon row to stand apart from the site's own buy button and from eBay's and TCGplayer's. `.btn-amazon` (`globals.css`) is now a calm amber
-(`#FFA41C`, hover `#FA8900`, 1px border `#E08A00`) with near-black words (`#111`, about 9:1), written with no theme variant so it reads the same in the light
+(`#F5A524`, hover `#DC8A0B`, 1px border `#B7791F`) with near-black words (`#111`, about 9:1), written with no theme variant so it reads the same in the light
 and the dark theme (`tests/contrast.test.ts` measures it where it lists the class). `PriceTable` draws the Amazon row's link with it (the row on the product page
 and in the quick view are the same component). The row's order, price, "Ad" pill, `rel="sponsored nofollow noopener"`, tracking and link are unchanged, and the
 Cheapest logic is untouched. This reverses the old comment that kept Amazon's own orange off the site; the owner's call, but the Associates agreement's wording on
@@ -2410,3 +2410,7 @@ tap, ✕ to close) with today's best store deal in their market and a link to De
 was not already free. The other half is the control. Events `share { medium, arm }`, `share_unlock { medium }`,
 `share_visit { medium }`. Guides, set pages and Deal Finder gain the button. Read the share rate per arm after two weeks; keep
 the offer only if it raises sharing.
+
+## 2026-11-18: the amber of the Amazon button is not Amazon's own orange
+
+The first cut used #FFA41C, which is Amazon's brand orange. Amazon's Associates agreement bars styling that could pass for Amazon, so the button is now a distinct, calmer amber (#F5A524, hover #DC8A0B, border #B7791F, dark text #111): still clearly different from the site's normal buy button, not Amazon's colour.
