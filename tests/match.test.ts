@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import type { Product, SetInfo } from "@/lib/site-types";
-import { buildIndex, looksLikeCard, matchCard, matchSealed, markersAgree, numbersInTitle, printingOf, strangerWords } from "@/lib/import/match";
+import { buildIndex, leadingStrangerWords, looksLikeCard, matchCard, matchSealed, markersAgree, numbersInTitle, printingOf, strangerWords } from "@/lib/import/match";
 
 const set = (id: number, name: string): SetInfo => ({ id, name, code: String(id), slug: name, releasedOn: "2026-01-01", productCount: 1, upcoming: false });
 const card = (id: number, name: string, number: string, setId: number, rarity = "Rare"): Product => ({ id, slug: String(id), name, kind: "card", setId, number, rarity, attrs: {}, sealedType: null, image: null, tcgUrl: "", printings: [] });
@@ -195,4 +195,20 @@ test("a singles store's card name in front of the product's is a stranger", () =
   assert.equal(strangerWords("Vylon Stella - Battle Pack 2: War of the Giants", "Battle Pack 2: War of the Giants Booster Pack"), 2);
   assert.equal(strangerWords("Warrior Dai Grepher - Starter Deck: Yugi Evolution", "Yugi Evolution Starter Deck [Unlimited Edition]"), 3);
   assert.equal(strangerWords("Yu-Gi-Oh! Battle Pack 2: War of the Giants Booster Pack 1st Edition", "Battle Pack 2: War of the Giants Booster Pack"), 0);
+});
+
+test("a singles store's one-word card name in front of the product's is refused", () => {
+  // Live 2026-11-18 (Mighty Cool Games, handles yubel-ra-yellow-mega-pack, steamroid-starter-deck-syrus-truesdale,
+  // the-tricky-legendary-collection-3-yugis-world): one stranger word each, so strangerWords alone let them through.
+  assert.equal(leadingStrangerWords("Yubel - Ra Yellow Mega-Pack", "Ra Yellow Mega-Pack Booster Pack"), 1);
+  assert.equal(leadingStrangerWords("Steamroid - Starter Deck: Syrus Truesdale", "Syrus Truesdale Starter Deck [1st Edition]"), 1);
+  assert.equal(leadingStrangerWords("The Tricky - Legendary Collection 3: Yugi's World", "Legendary Collection 3 - Yugi's World Box Set [1st Edition]"), 1);
+  // Real product titles from singles stores in the same import open with the product's own name.
+  for (const [title, name] of [
+    ["Doom of Dimensions Sleeved Booster Pack DOOD", "Doom of Dimensions Sleeved Booster Pack"],
+    ["Yu-Gi-Oh! Magnificent Maestros Box Display (10 Boxes)", "Magnificent Maestros Display"],
+    ["Yu-Gi-Oh! Legendary Duelists: Duels From the Deep 1st Edition Booster Box", "Legendary Duelists: Duels From the Deep Booster Box [1st Edition]"],
+    ["Maze of Muertos Booster Box 1st Edition", "Maze of Muertos Booster Box [1st Edition]"],
+    ["Pre-Order Beyond the Brave Booster Box 1st Edition", "Beyond the Brave Booster Box [1st Edition]"],
+  ]) assert.equal(leadingStrangerWords(title, name), 0, title);
 });
