@@ -29,6 +29,7 @@ import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
 import { cardIndexable, priceValidUntil } from "@/lib/indexing";
+import { gtinLabel, gtinLd } from "@/lib/gtin";
 
 export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
@@ -94,6 +95,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             name: p.name,
             image: p.image ? imageAt(p.image, "in_1000x1000") : undefined,
             sku: String(p.id),
+            productID: `tcgplayer:${p.id}`,
+            ...gtinLd(p.upc),
             brand: { "@type": "Brand", name: SITE.game },
             category: p.kind === "card" ? "Trading card" : "Sealed trading card product",
             url: abs(`/card/${p.slug}`),
@@ -126,6 +129,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             {set && (<><dt className="text-muted">Set</dt><dd><Link className="link" href={`/sets/${set.slug}`}>{set.name}</Link></dd></>)}
             {p.number && (<><dt className="text-muted">Number</dt><dd>{p.number}</dd></>)}
             {p.rarity && (<><dt className="text-muted">Rarity</dt><dd>{rarityHref(p.rarity) ? <Link className="link" href={rarityHref(p.rarity)!}>{p.rarity}</Link> : p.rarity}</dd></>)}
+            {p.upc && (<><dt className="text-muted">{gtinLabel(p.upc)} barcode</dt><dd className="tabular-nums">{p.upc}</dd></>)}
+            <dt className="text-muted">TCGplayer ID</dt><dd className="tabular-nums">{p.id}</dd>
             {p.sealedType && (<><dt className="text-muted">Type</dt><dd>{sealedHref(p.sealedType) ? <Link className="link" href={sealedHref(p.sealedType)!}>{p.sealedType}</Link> : p.sealedType}</dd></>)}
             {Object.entries(p.attrs).slice(0, 8).map(([k, v]) => { const hubs = attrHref(k, v); return (<Fragment key={k}><dt className="text-muted">{k.replace(/([a-z])([A-Z])/g, "$1 $2")}</dt><dd>{hubs ? hubs.map((l, i) => <Fragment key={l.label}>{i > 0 ? ", " : ""}{l.href ? <Link className="link" href={l.href}>{l.label}</Link> : l.label}</Fragment>) : v}</dd></Fragment>); })}
           </dl>

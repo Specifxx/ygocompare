@@ -1,6 +1,7 @@
 // TCGplayer catalogue and prices through TCGCSV (tcgcsv.com), which mirrors
 // TCGplayer's catalog API as static JSON once a day (~20:00 UTC). No key, no
 // quota: three requests per set.
+import { normaliseGtin, uniqueGtins } from "../gtin";
 import { SITE } from "@/site.config";
 import { SITE_HOST } from "@/lib/site";
 import type { Product, SetInfo, TcgPrice } from "@/lib/site-types";
@@ -149,6 +150,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
         image: p.imageCount === 0 ? null : p.imageUrl || null,
         tcgUrl: p.url,
         printings: [...(printings.get(p.productId) ?? [])],
+        ...(isCard ? {} : (() => { const upc = normaliseGtin(ext.UPC); return upc ? { upc } : {}; })()),
       });
     }
     await sleep(150);
@@ -156,6 +158,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
   fixRedatedSets(sets, products, now);
   sets.sort((a, b) => (b.releasedOn ?? "").localeCompare(a.releasedOn ?? ""));
   borrowImages(products);
+  uniqueGtins(products);
   if (SITE.slugStyle === "name-number") settleSlugs(products, sets);
   // Sealed only (owner, 2026-11-06): cards are dropped AFTER every slug is settled, so a sealed product's slug is
   // exactly the one it had beside the cards (a slug never changes).

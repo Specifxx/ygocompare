@@ -2347,3 +2347,11 @@ the "Cheapest in" line, whichever row it is. `cheapestOf` (`lib/price-rows.ts`):
 store, and not more than 25% under it (`EBAY_MAX_UNDER_STORES`: that is a wrong product, not a deal), is the cheapest; TCGplayer was always a
 candidate. Amazon still never is (its price is licensed for 24 hours and is not in the data). The summary (list tiles, alerts, reports, the
 alert feed) stays stores only. Row order unchanged: eBay, TCGplayer, Amazon, then the stores.
+## 2026-11-18: Barcodes on sealed pages (owner: "unique identifiers … are easy SEO results")
+
+Search Console (TCGEmpire maintenance task `gsc-identifiers`, 90 days to 15 Nov): KaeYoung's every Google click came from a typed barcode,
+and Gundam Compare's kit JANs and ScentCompare's EANs draw impressions too. TCGplayer's catalogue (`extendedData` "UPC") carries a barcode
+for about half of the sealed products, so the import keeps it as `Product.upc` (`lib/gtin.ts`, the same file as TCG Prices): check digit
+verified, an 11-digit UPC given back its leading zero, dropped when TCGplayer files one code on two or more products (a case code on every
+blister). Never taken from a store title, never invented. The product page shows it with the TCGplayer ID, its Product markup carries
+`gtin12`/`gtin13` and `productID: tcgplayer:<id>`, and `/api/search` finds a product by its whole barcode or TCGplayer id (exact only).

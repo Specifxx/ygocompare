@@ -325,6 +325,9 @@ export interface Product {
   image: string | null;
   tcgUrl: string;
   printings: string[];
+  /** The barcode TCGplayer files for a sealed product (UPC-A, EAN-13 / JAN), check digit verified and unique in the
+   *  catalogue (lib/gtin.ts); absent when TCGplayer has none. */
+  upc?: string;
 }
 
 export interface Offer {
