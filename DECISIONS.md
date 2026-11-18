@@ -2532,6 +2532,17 @@ read per site with the retention programme on 2 Dec. `tests/restock-alert.test.t
 
 Site loop check of the first import after the 2026-11-17 entry: store offers from `kind: "singles"` stores on the summary fell from 92 to 10, and no real sealed offer was lost to the new rules (the sealed and "both" offers that left had gone out of stock, or were cards). Three of the ten were still cards with a one-word name, which `strangerWords > 1` lets through: "Yubel" on the Ra Yellow Mega-Pack at US$4.80, "Steamroid" on Syrus Truesdale's starter deck at US$0.20, "The Tricky" on Legendary Collection 3 at US$0.60 (the last two have no TCGplayer price, so no band caught them). A real product's title opens with the product's own name or filler ("Yu-Gi-Oh!", "Pre-order", "Sealed"); a card filed under its set opens with the card's name. From a singles store, a sealed match whose title has any stranger word before the product's first name word (`leadingStrangerWords`) is now dropped. Only refuses; pinned in `tests/match.test.ts` with the seven real singles-store listings of that import. No deploy marker: the next daily import rebuilds the summary.
 
+## 2026-11-18: The ad-look A/B: half of the visitors see the sponsored units in their brands' colours
+
+The owner (18 Nov): the banner ads "can look more attractive … more decorated and more highlighted so people can actually click on
+them". Since 12 Nov the units have been drawn in the calm palette (ink button, no brand colours). Now half of the visitors
+(`lib/ad-look.ts`, localStorage `ad-look`, 50/50, storage failure is the old look) see look "b": the inline eBay / TCGplayer block
+gets its brand's stripe along the top (eBay's four colours, TCGplayer's blue), a tint, a filled brand-colour button with a slow
+shine, a lift on hover and the price in the brand colour; the phone dock gets the eBay stripe and a filled button; the leave
+nudge gets the stripe and a stronger shadow. Paint only (globals.css, "The ad-look A/B", under `html[data-adlook="b"]`): no size,
+position, timing, label, wording or rule changes, CLS 0, every motion off under reduced motion. `<html data-adlook>` is set when
+a sponsored unit mounts, and buy_click carries `ad_look`. Read on 2 Dec: paid clicks per 100 visitors, "b" against "a"; the
+winner becomes the only look. Not on Dex or MTG (their phone A/B runs to 3 Dec).
 ## 2026-11-18 — The bottom nav is a floating pill, and closing the cart gives it back
 
 Owner, 2026-11-18: "after you open the cart and then you close it, the little bottom navigation disappears", and the nav should be

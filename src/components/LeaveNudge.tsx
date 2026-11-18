@@ -3,6 +3,7 @@
 // none, when the pointer leaves through the top of the window (desktop) or after a long read with a scroll (phone), the "on" arm sees a
 // small dismissible card with the page's own eBay and TCGplayer links for that product.
 import { useEffect, useState } from "react";
+import { applyAdLook } from "@/lib/ad-look";
 import { track } from "@vercel/analytics";
 import { SITE } from "@/site.config";
 import {
@@ -40,6 +41,7 @@ const blocked = () =>
   [...document.querySelectorAll("[data-rate-card], [data-return-nudge], dialog[open], [role=dialog], [aria-modal=true]")].some(onScreen);
 
 export function LeaveNudge() {
+  useEffect(() => applyAdLook(), []);
   const [view, setView] = useState<View | null>(null);
 
   useEffect(() => {
