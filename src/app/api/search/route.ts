@@ -44,6 +44,7 @@ export function GET(req: Request) {
   if (u.searchParams.get("kind") === "kit")
     return NextResponse.json({ hits: kitHits(want, limit) }, { headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" } });
   const numQ = q.match(/\d+\s*\/\s*\d+|[A-Z]{1,4}\d{0,2}-\d{2,3}/i)?.[0]?.replace(/\s/g, "").toUpperCase();
+  const idQ = /^\s*\d{5,14}\s*$/.test(q) ? q.trim() : null;
   const scored: { s: number; i: number }[] = [];
   const all = products();
   const idx = want.length ? haystacks() : [];
@@ -53,6 +54,8 @@ export function GET(req: Request) {
       let hit = 0;
       for (const w of want) if (set.has(w) || hay.some((h) => h.startsWith(w))) hit++;
       if (numQ && p.number?.toUpperCase() === numQ) hit += want.length;
+      // A barcode or TCGplayer id typed whole finds its product (lib/gtin.ts): exact only, so "2025" matches no id.
+      if (idQ && (p.upc === idQ || (p.upc && p.upc.replace(/^0/, "") === idQ.replace(/^0/, "")) || String(p.id) === idQ)) hit = want.length + 2;
       if (hit < want.length) return;
       const ref = refCents(p.id) ?? 0;
       scored.push({ s: hit * 10 + Math.log10(1 + ref) + (p.kind === "card" ? 0.5 : 0), i });
