@@ -949,7 +949,7 @@ a.hero-pill:hover {
 
 /* The phone bottom nav (components/BottomNav.tsx, owner 2026-11-18; ported from TCG Prices): opaque (no blur: it would repaint every scroll
    frame on a phone), fixed to the foot of the screen, moved on transform only. The return nudge sits above it while it shows. */
-html[data-bottomnav] [data-return-nudge] { bottom: calc(env(safe-area-inset-bottom) + 72px); }
+html[data-bottomnav] [data-return-nudge], html[data-bottomnav] [data-leave-nudge] { bottom: calc(env(safe-area-inset-bottom) + 72px); }
 .bn { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: rgb(var(--surface)); border-top: 1px solid rgb(var(--line)); padding-bottom: env(safe-area-inset-bottom); contain: layout paint; will-change: transform; transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0s; transform: translateY(0); }
 .bn[data-bottomnav-bar="hidden"] { transform: translateY(100%); visibility: hidden; transition: transform 0.22s cubic-bezier(0.4, 0, 1, 1), visibility 0s linear 0.22s; }
 .bn-row { display: flex; align-items: stretch; margin: 0 auto; max-width: 640px; padding: 0; list-style: none; }
