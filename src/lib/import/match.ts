@@ -513,3 +513,20 @@ export function strangerWords(title: string, productName: string): number {
   const own = new Set(tokens(productName));
   return tokens(title).filter((w) => !own.has(w) && !EXTRA_OK.has(w) && !/^\d+$/.test(w)).length;
 }
+
+// Live 2026-11-18, after the first import with `strangerWords`: a singles store's card with a ONE-word name still
+// passed ("Yubel" on the Ra Yellow Mega-Pack at US$4.80, "Steamroid" on Syrus Truesdale's starter deck at US$0.20,
+// "The Tricky" on Legendary Collection 3 at US$0.60). A real product's title opens with the product's own name (or
+// "Yu-Gi-Oh!", "Sealed", "Pre-order"); a card listed under its set opens with the card's name.
+const LEAD_OK = new Set([...EXTRA_OK, "brand", "factory"]);
+
+/** Title words before the first word of the matched product's own name that are neither its words nor filler. */
+export function leadingStrangerWords(title: string, productName: string): number {
+  const own = new Set(tokens(productName));
+  let n = 0;
+  for (const w of tokens(title)) {
+    if (own.has(w)) return n;
+    if (!LEAD_OK.has(w) && !/^\d+$/.test(w)) n++;
+  }
+  return n;
+}

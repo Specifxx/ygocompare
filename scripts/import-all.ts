@@ -17,7 +17,7 @@ import type { Catalog, EbayPick, Market, Meta, Offer, PriceEntry, Prices, StoreS
 import { CURRENCY } from "@/lib/site-types";
 import { loadTcgcsv, referenceCents } from "@/lib/import/tcgcsv";
 import { fetchStore, storeCurrency } from "@/lib/import/shopify";
-import { buildIndex, handleOf, isForeign, isPreorder, isUnfitListing, looksLikeCard, looksSealed, strangerWords, matchCard, matchSealed, printingOf } from "@/lib/import/match";
+import { buildIndex, handleOf, isForeign, isPreorder, isUnfitListing, looksLikeCard, looksSealed, leadingStrangerWords, strangerWords, matchCard, matchSealed, printingOf } from "@/lib/import/match";
 import {
   ebayCredentials,
   ebayRemaining,
@@ -134,8 +134,8 @@ async function main() {
           const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;
           // A single card filed under a pack's name (looksLikeCard), or, in a singles store, a title with a card's name in
-          // front of the product's (strangerWords): not a price for the product.
-          if (m.product.kind === "sealed" && (looksLikeCard(it.title, handleOf(it.url)) || (store.kind === "singles" && strangerWords(it.title, m.product.name) > 1))) continue;
+          // front of the product's (strangerWords, leadingStrangerWords): not a price for the product.
+          if (m.product.kind === "sealed" && (looksLikeCard(it.title, handleOf(it.url)) || (store.kind === "singles" && (strangerWords(it.title, m.product.name) > 1 || leadingStrangerWords(it.title, m.product.name) > 0)))) continue;
           matched++;
           // Price sanity: a store price under a quarter or over four times the
           // TCGplayer reference is far likelier a bad match (or a damaged /
