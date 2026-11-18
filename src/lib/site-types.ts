@@ -102,6 +102,8 @@ export interface SiteConfig {
   /** Price alerts through RiftCompare's shared alert service (DECISIONS.md, 2026-11-02): the card page's
    *  "Email me when the price drops" form and /alert-feed.json. The site's `key` must be registered there. */
   priceAlerts?: boolean;
+  /** The phone bottom nav: "optin" (?bn=1 only), "on" (everyone on a phone) or "off" (the rollback). */
+  bottomNav?: "off" | "optin" | "on";
   /** The site's own Amazon US tracking ID (hard-coded, owner 2026-11-02); riftcompare-20 when unset. */
   amazonUsTag?: string;
   /** The site's own Amazon AU tracking ID in the owner's AU account (hard-coded, owner 2026-11-03); compareempire-22 when unset. */

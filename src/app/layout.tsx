@@ -10,6 +10,7 @@ import "@/components/site-reviews/site-reviews.css";
 // The site's own look on top of the shared one (src/content/site.css; empty on a site that needs none).
 import "@/content/site.css";
 import { SITE } from "@/site.config";
+import { BottomNav } from "@/components/BottomNav";
 import { SITE_URL } from "@/lib/site";
 import { THEME_BOOT_SCRIPT } from "@/lib/theme";
 import { CHRISTMAS_FESTIVE_LAYER, SEASON_BOOT_SCRIPT } from "@/lib/season";
@@ -96,6 +97,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <RateCard />
           {/* The phone dock (the side rails are gone, owner 2026-11-13): eBay and TCGplayer tiles along the foot of a narrow screen, after a scroll. */}
           <DockAds ads={cardAds({ limit: 10 })} />
+          {/* The phone bottom nav (BottomNav.tsx, owner 2026-11-18): SITE.bottomNav "optin" (?bn=1 only), "on" or "off" (the rollback). */}
+          {(SITE.bottomNav ?? "off") !== "off" && <BottomNav mode={SITE.bottomNav ?? "off"} />}
         </PrefsProvider>
         <Analytics />
         <BuyClickTracker />

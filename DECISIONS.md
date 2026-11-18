@@ -2285,3 +2285,21 @@ now opens with one list (`MoversTable.tsx`) of every product in its four lists, 
 search box, a "Sort by" menu (biggest % move either way, biggest gain, biggest loss, price, name), a 7/30-day switch and a Risers/Fallers
 toggle. It reads the rows the page already ranks (`movers()`), so no new data or fetch; every % is the product's own TCGplayer market change.
 The four lists stay below it. It hides itself until there are two movers.
+
+## 2026-11-18: The phone bottom nav, ported from TCG Prices (owner: "happy to have that nav bar on all our sites")
+
+The owner tried TCG Prices' bottom bar (`?bn=1`) on his phone, asked for the lag gone (done there: opaque, transform only, no layout
+reads while scrolling) and for it on every site. `components/BottomNav.tsx` is that file, made to stand alone so the same bytes run on
+YGO, Gundam, Bandai, Lorcana and Cyberpunk Compare: its own icons and its own "current tab" rule (`navActive`), no site helpers.
+
+- Tabs: Home, Search, Deals (`/tools/deal-finder`, current on `/movers` and `/preorders` too), Cart (opens the cart drawer), Menu
+  (clicks `button[aria-controls='site-menu']`; Lorcana and Cyberpunk's menu button gained that and the dialog its id). These sites have
+  no search page, so Search puts the cursor in the header's own search box, and the bar steps aside for the keyboard.
+- Placement is TCG Prices' and Rift's lesson: `fixed` to the foot plus `env(safe-area-inset-bottom)`, moved by `transform`, never a
+  measured address-bar height (`tests/bottom-nav.test.ts`). Hidden on scroll down, zoomed, typing, any open dialog, a buy-bar page, or
+  over an Add to cart button; the ad dock yields to it (`html[data-bottomnav]`).
+- `SITE.bottomNav`: shipped "optin" (`?bn=1`), then "on"; "off" is the rollback and ignores `?bn=1`.
+- Measured before merging, on a local production build: iPhone SE, Pixel 7, Z Fold cover and iPhone 15 Pro Max, 64 checks a site
+  (shows at the top flush to the screen's edge, hides on scroll down, back on the first flick up, every tab works, never over an Add to
+  cart on a product page swept top to bottom and back, no layout shift, hidden while pinch-zoomed, never on a desktop): all pass. At 4x
+  CPU throttle, no frame over 33 ms with or without the bar.
