@@ -37,6 +37,7 @@ export function BuyClickTracker() {
           page: q.get("from") ?? location.pathname,
           host,
           link_type: q.get("c") === "1" ? "checkout" : "product",
+          nudge_arm: (() => { try { return localStorage.getItem("rn-arm") ?? ""; } catch { return ""; } })(),
         });
       } catch {}
     };
