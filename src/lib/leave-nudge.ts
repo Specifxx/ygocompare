@@ -79,3 +79,7 @@ export function leaveEligible(s: LeaveState): boolean {
 export function leaveShows(s: LeaveState): boolean {
   return leaveEligible(s) && s.arm === "on";
 }
+
+/** Off (2026-11-19, the core-update quality pass; owner: "the ads and pop-ups ... let's get rid of them"): no card pops up when a
+ *  visitor leaves. The rules above stay, tested, in case the owner turns it back on. */
+export const LEAVE_NUDGE_ON = false;

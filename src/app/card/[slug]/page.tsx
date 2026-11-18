@@ -30,7 +30,8 @@ import { ShareButton } from "@/components/ShareButton";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
-import { cardIndexable, priceValidUntil } from "@/lib/indexing";
+import { priceValidUntil } from "@/lib/indexing";
+import { productAsksIndex } from "@/lib/index-asks";
 import { gtinLabel, gtinLd } from "@/lib/gtin";
 
 export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
@@ -49,9 +50,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: { absolute: title },
     description,
     alternates: { canonical: `/card/${p.slug}` },
-    // Pack inserts (worth cents, DECISIONS.md 2026-10-28) and cards with no
-    // price and no listing at all (lib/indexing.ts) stay out of the index.
-    ...(cardIndexable(p, ref, priceOf(p.id).offers.length, set) ? {} : { robots: { index: false, follow: true } }),
+    // Only a real comparison (3+ stores, one in stock), an upcoming set's product or a page people find in search asks to
+    // be indexed (lib/indexing.ts sealedAsksIndex, 2026-11-19); the rest stay live, noindex, follow.
+    ...(productAsksIndex(p) ? {} : { robots: { index: false, follow: true } }),
     // The image is ./opengraph-image.tsx: the card and its real price gap (lib/share.ts).
     openGraph: { type: "website", siteName: SITE.name, url: `/card/${p.slug}`, title, description },
     twitter: { card: "summary_large_image" },
@@ -115,7 +116,6 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         />
       )}
       <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
-      <InlineAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, limit: 10 })} search={adSearch(set?.name, set)} page="card" />
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         {/* Phones: the name, price and Buy come first; the big image and the
             details follow the prices (RiftCompare's card page, 2026-09-26). */}
@@ -202,6 +202,8 @@ export default function CardPage({ params }: { params: { slug: string } }) {
       )}
       {/* The page's one ad block (owner, 2026-11-13): native and horizontal, below the price table and everything else; never beside a buy button. */}
       <CardStickyBuyBar offers={e.offers} productId={p.id} />
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds ads={cardAds({ setId: p.setId, kind: p.kind, exclude: p.id, fill: true, limit: 10 })} search={adSearch(set?.name, set)} page="card" />
     </article>
   );
 }

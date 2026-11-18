@@ -1,3 +1,4 @@
+import { setPageAsksIndex } from "@/lib/index-asks";
 import type { Metadata } from "next";
 import Link from "@/components/Link";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -36,6 +37,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title,
     description: `${s.name} booster box, pack and sealed prices at every store we track: ${count} sealed product${count === 1 ? "" : "s"}, the cheapest in-stock price in the US, UK, Canada and Australia, beside TCGplayer, eBay and Amazon. Updated daily.`,
     ...canon(`/sets/${s.slug}`),
+    ...(setPageAsksIndex(s) ? {} : { robots: { index: false, follow: true } }),
     openGraph: { ...canon(`/sets/${s.slug}`).openGraph, title: title.absolute },
   };
 }
@@ -78,7 +80,6 @@ export default function SetPage({ params }: { params: { slug: string } }) {
           )}
         </header>
       </div>
-      <InlineAds ads={cardAds({ setId: s.id, fill: true, limit: 10 })} search={adSearch(s.name, s)} page="set" />
       <SealedQuickBuy
         title={`Buy ${s.name} booster boxes and sealed`}
         items={sealed.slice(0, 6).map((p) => ({ id: p.id, slug: p.slug, name: shortName(p.name), image: imageAt(p.image, "200w"), best: summaryOf(p.id).best, stores: summaryOf(p.id).listedSources }))}
@@ -104,6 +105,8 @@ export default function SetPage({ params }: { params: { slug: string } }) {
           <div className="flex flex-wrap gap-2">{others.map((x) => <Link key={x.id} href={`/sets/${x.slug}`} className="chip">{x.name}</Link>)}</div>
         </section>
       )}
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds ads={cardAds({ setId: s.id, fill: true, limit: 10 })} search={adSearch(s.name, s)} page="set" />
     </div>
   );
 }

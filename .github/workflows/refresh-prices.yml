@@ -67,6 +67,14 @@ jobs:
         if: ${{ !cancelled() }}
         continue-on-error: true
         run: DEMAND_WRITE_ONLY=1 bash scripts/pull-demand.sh ygo data/demand.json
+      # Pages Search Console shows people finding (gsc-pages.json on the demand branch): they keep asking to be indexed
+      # (lib/search-demand.ts, 2026-11-19). Never fatal: a failed fetch keeps yesterday's file.
+      - name: Search demand
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: |
+          git fetch --quiet --depth=1 origin demand
+          git show FETCH_HEAD:gsc-pages.json > data/public/search-demand.json.tmp && mv data/public/search-demand.json.tmp data/public/search-demand.json
       - name: Commit data (this commit is the daily release)
         run: |
           set -euo pipefail

@@ -2559,3 +2559,23 @@ sitting on top of it.
   `var(--bn-space)` + a small gap up, and the body's bottom padding follows it. Hidden, it slides fully off-screen (transform only, CLS 0).
 - **Measured** (local build, dock stacked): Pixel 7 412×915 nav + dock take 129px (14.1%); iPhone 15 393×852 with a 34px safe area
   143px (16.8%); iPhone SE 375×667 129px (19.3%); the old flush bar took about the same plus the full safe area.
+
+## 2026-11-19: Core-update quality pass: stricter indexing, fewer links, ads below content, no leave pop-up, who runs the site
+
+Google's November 2026 core update took YGO Compare from ~120 impressions a day to 0-9 (from 10 Nov). URL Inspection
+showed formerly ranking pages (/sets/chaos-origins) "Crawled - currently not indexed" with no technical fault: a quality
+verdict. 1,086 sealed pages asked to be indexed for 54 impressions in 56 days.
+
+- **Indexing** (`lib/indexing.ts` `sealedAsksIndex` / `setAsksIndex`, applied in `lib/index-asks.ts` for the product page,
+  the set page and the sitemap): a sealed page asks only when three or more stores list it and one has it in stock, or its
+  set is upcoming, or Search Console shows people finding it (`lib/search-demand.ts`, a click or 10+ impressions in 56
+  days, copied daily from the `demand` branch by `refresh-prices.yml`). A set page asks when two of its products do, or
+  people find it, or it is upcoming. About 644 of 1,086 products and 218 of 446 sets ask; the rest stay live, noindex, follow.
+- **Fewer links**: header menus show 6 types and 6 sets before their "All" link (was every type and 12 sets), three tools
+  and the tools page, no forum, creators or feedback links; the footer drops seasonal sale pages, widgets, tools, forum,
+  creators, feedback and list-your-store (the pages stay, linked from their hubs). Cross-site cluster tiles are off.
+- **Ads below content**: the one ad block now sits after each page's own content (after the price table, the grid, the FAQ),
+  never under the hero or the breadcrumbs. The exit "leave nudge" pop-up is off (`LEAVE_NUDGE_ON = false`).
+- **Who runs it**: the about page names the co-founders (Bill and George), says AI tools help with code and guides while
+  prices are read by a program, and gives the running cost (about A$790 a month for the group, our books to 15 Nov 2026).
+  It no longer links to the sister sites from the body.

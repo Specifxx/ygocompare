@@ -89,9 +89,9 @@ test("every navigation link points at a page of the site, and prices come first"
 
 // The minimal look (owner, 2026-11-13): the hero with no product, ONE tabbed shelf (the deals are one of its lists), the latest
 // sets, the one ad block, then the guides folded and the questions. tests/minimal-look.test.ts reads the rendered page.
-test("the homepage, in order: the hero, the one shelf, the latest sets, the one ad block, the guides folded, the FAQ, and nothing else", () => {
+test("the homepage, in order: the hero, the one shelf, the latest sets, the guides folded, the FAQ, the one ad block (2026-11-19), and nothing else", () => {
   const src = readFileSync("src/app/page.tsx", "utf8");
-  const order = ["Today's top deals", "<Hero>", "</Hero>", "<InlineAds ", "booster boxes and sealed`}", "<Tabs tabs={shelfTabs}", 'title="Latest sets"', "<Folds ", 'title="Guides"', "Frequently asked questions"];
+  const order = ["Today's top deals", "<Hero>", "</Hero>", "booster boxes and sealed`}", "<Tabs tabs={shelfTabs}", 'title="Latest sets"', "<Folds ", 'title="Guides"', "Frequently asked questions", "<InlineAds "];
   let at = -1;
   for (const o of order) {
     const i = src.indexOf(o, at + 1);

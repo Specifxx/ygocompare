@@ -48,7 +48,7 @@ test("eBay item links lose their old tracking; /go tags them again", () => {
   assert.equal(cleanEbayUrl("https://www.ebay.com/sch/i.html?_nkw=x"), "https://www.ebay.com/sch/i.html?_nkw=x");
 });
 
-test("the ads are ONE native horizontal block per page (owner, 2026-11-13); the quick view keeps its small pair; no rails, no strips", () => {
+test("the ads are ONE native horizontal block per page (owner, 2026-11-13), below the content (2026-11-19); the quick view keeps its small pair; no rails, no strips", () => {
   const read = (f: string) => readFileSync(f, "utf8");
   assert.match(read("src/components/QuickView.tsx"), /<CompactCardAds /);
   assert.match(read("src/app/layout.tsx"), /<DockAds ads=\{cardAds\(/);
@@ -59,15 +59,14 @@ test("the ads are ONE native horizontal block per page (owner, 2026-11-13); the 
     assert.match(src, new RegExp(`page="${page}"`), f);
     assert.doesNotMatch(src, /CompactCardAds|CompactKitAds|KitEbayStrip|LandingAds|SideAds/, f);
   }
-  // The banners sit at the top (owner, 2026-11-14): right under the breadcrumbs on a card and a kit page, above the price table.
+  // Below the page's own content (2026-11-19, core-update quality pass): after the price table on a card and a kit page.
   for (const f of ["src/app/card/[slug]/page.tsx", "src/app/kit/[slug]/page.tsx"]) {
     const src = read(f);
-    assert.ok(src.indexOf("<InlineAds ") < src.indexOf("<PriceTable"), `${f}: at the top`);
-    assert.ok(src.indexOf("<InlineAds ") > src.indexOf("<Breadcrumbs"), `${f}: under the breadcrumbs`);
+    assert.ok(src.indexOf("<InlineAds ") > src.indexOf("<PriceTable"), `${f}: below the price table`);
   }
-  // Not in the hero: directly after it on the home page.
+  // On the home page, after the questions, never under the hero.
   const home = read("src/app/page.tsx");
-  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("</Hero>"));
+  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("Frequently asked questions"));
   assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
   for (const f of ["src/components/InlineAds.tsx", "src/components/DockAds.tsx"]) assert.match(read(f), /"use client"/, f);
 });

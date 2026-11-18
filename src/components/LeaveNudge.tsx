@@ -7,7 +7,7 @@ import { applyAdLook } from "@/lib/ad-look";
 import { track } from "@vercel/analytics";
 import { SITE } from "@/site.config";
 import {
-  LEAVE_ARM_KEY, LEAVE_LAST_KEY, LEAVE_PHONE_DWELL_MS, LEAVE_SESSION_KEY, leaveEligible, leaveHref, leaveShows, pageProduct,
+  LEAVE_NUDGE_ON, LEAVE_ARM_KEY, LEAVE_LAST_KEY, LEAVE_PHONE_DWELL_MS, LEAVE_SESSION_KEY, leaveEligible, leaveHref, leaveShows, pageProduct,
 } from "@/lib/leave-nudge";
 import { pickArm } from "@/lib/return-nudge";
 
@@ -72,7 +72,7 @@ export function LeaveNudge() {
       try { localStorage.setItem(LEAVE_LAST_KEY, String(Date.now())); } catch {}
       const props = { arm: state.arm, trigger, product: prod.p, site: SITE.key, dwell_s: Math.round(state.dwellMs / 1000) };
       track("leave_eligible", props);
-      if (leaveShows(state)) {
+      if (LEAVE_NUDGE_ON && leaveShows(state)) {
         track("leave_shown", props);
         setView({ e: prod.ebay ? leaveHref(prod.ebay) : undefined, g: prod.tcg ? leaveHref(prod.tcg) : undefined });
       }

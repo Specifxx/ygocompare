@@ -17,6 +17,8 @@ export interface ShopNav {
   groups: NavGroup[];
 }
 
+/** Links a menu group shows before its "All" link (2026-11-19, "Fewer links on every page"). */
+export const MENU_LINKS = 6;
 const cap = (list: NavLink[], n: number, all: NavLink): NavLink[] => (list.length > n ? [...list.slice(0, n), all] : list);
 
 let memo: { at: unknown; v: ShopNav } | null = null;
@@ -34,11 +36,11 @@ function build(): ShopNav {
   const released = listed.filter((s) => !s.upcoming);
   const setLinks: NavLink[] = released.map((s) => ({ href: `/sets/${s.slug}`, label: s.name }));
   const all: NavLink = { href: "/sealed", label: "All sealed" };
-  const sealed: NavGroup[] = types.length ? [{ title: "By product type", links: [...types, all] }] : [];
-  const sets: NavGroup[] = [{ title: "Newest sets", links: cap(setLinks, 12, { href: "/sets", label: `All ${listed.length} sets` }) }];
+  const sealed: NavGroup[] = types.length ? [{ title: "By product type", links: cap(types, MENU_LINKS, all) }] : [];
+  const sets: NavGroup[] = [{ title: "Newest sets", links: cap(setLinks, MENU_LINKS, { href: "/sets", label: `All ${listed.length} sets` }) }];
   const groups: NavGroup[] = [
-    ...(types.length ? [{ title: "Sealed by type", links: [...types, all] }] : []),
-    { title: "Sets", links: cap(setLinks, 12, { href: "/sets", label: "Every set" }) },
+    ...(types.length ? [{ title: "Sealed by type", links: cap(types, MENU_LINKS, all) }] : []),
+    { title: "Sets", links: cap(setLinks, MENU_LINKS, { href: "/sets", label: "Every set" }) },
   ];
   return { menus: { sealed, sets }, groups };
 }
