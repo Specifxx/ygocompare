@@ -2339,6 +2339,22 @@ The browser keeps one token (`ygo_premium_v1`); no page reads a cookie or header
 ## 2026-11-18: llms.txt points AI agents at the free price file
 
 `/prices.json` already existed, but nothing an agent reads said so. `llms.txt` now has a "Free price data and citing" block: the file, that it is free and open to every origin, the date to quote and a suggested credit line. No new route, no spend.
+## 2026-11-18: Feedback asks: "Was this page useful?" in the footer, a /feedback page, counted by the daily triage (owner)
+
+The owner: "We need more feedback so can we find a way to get more". One RiftCompare visitor's note (sort the movers by %
+gain or loss) became a feature the same day, but across the network three weeks brought about 58 star ratings and fewer than
+ten written notes. Rift's own record also holds "too many popups asking for my opinion", so every ask here is inline.
+
+- `components/FeedbackAsk.tsx` (the same file on every site): one line at the top of the footer, "Was this page useful?
+  Yes / No". The tap is sent at once (a vote alone counts); only then does an optional "What would make it better?" box
+  open. Never a pop-up, nothing fixed or floating, hidden for the rest of the visit on a page already answered, and in no
+  quick view (the Dex / MTG quick-view A/B, 20 Nov to 3 Dec, is untouched).
+- `/feedback`: the full form (an idea, something wrong, something missing) and "You asked, we built it", the changes
+  visitors' notes have led to; add a line there when a note leads to a change. noindex, linked from the footer and the menu.
+- Both post to `/api/report` as kind `feedback` (`lib/reports-github.ts`). A note is an inbox file like any report; a bare
+  vote is `votes/<site>/<day>/<time>-up|down-<rand>.json`, counted from its file name by RiftCompare's daily *Reports
+  triage*, which now prints a 7-day feedback table per site and flags every note for a look. No email address is asked
+  for or kept: the thanks shows the site's inbox for anyone who wants a reply.
 
 ## 2026-11-18: an eBay row may be "Best price" again (owner)
 
@@ -2355,3 +2371,20 @@ for about half of the sealed products, so the import keeps it as `Product.upc` (
 verified, an 11-digit UPC given back its leading zero, dropped when TCGplayer files one code on two or more products (a case code on every
 blister). Never taken from a store title, never invented. The product page shows it with the TCGplayer ID, its Product markup carries
 `gtin12`/`gtin13` and `productID: tcgplayer:<id>`, and `/api/search` finds a product by its whole barcode or TCGplayer id (exact only).
+## 2026-11-18: Leave nudge, an A/B test of a small "Before you go" card (owner: "we could have pop up affiliate clicks")
+
+The owner asked for more clicks on the paid links and said pop-ups that drive them are fine. The return nudge (earlier today) only
+reaches visitors who clicked a store; most product-page readers click nothing. `components/LeaveNudge.tsx` (`lib/leave-nudge.ts`) shows
+the page's OWN eBay and TCGplayer links for that product in the return nudge's small card, when a reader who clicked no buy link is
+leaving: on a desktop when the pointer leaves the window through the top after 8 s on the page, on a phone after 35 s of reading with a
+scroll. Never on load, never after any buy click this session, once a session and once every three days per visitor, never Amazon,
+never a price or "best" claim, never a modal (a `role=status` card with a close button and an "Ad" label, gone after 25 s), yields
+to dialogs, the rating card and the return nudge. Only on `/card/<slug>` and only when the page's own paid links name one product (ad
+units that show other products are ignored).
+
+- A/B: half the visitors never see it (localStorage `ln-arm`). `leave_eligible` {arm, trigger} fires in both arms, `leave_shown`
+  and `leave_click` in the "on" arm, every `buy_click` carries `leave_arm`, and its links say `from=<placement>_leave`. Lift = paid
+  buy clicks per eligible visitor, on against off; read after two weeks (2 Dec). Keep it if paid clicks rise and total buy clicks do
+  not fall; otherwise remove it.
+- Rollback: remove `<LeaveNudge />` from `app/layout.tsx`.
+- Not on DexCompare or MTG Compare until their quick-view A/B test ends (3 Dec), so the two tests never mix.
