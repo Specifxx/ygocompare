@@ -2261,3 +2261,15 @@ Applied here (the full reasoning is in DexCompare's DECISIONS.md, same date):
 - **A total beside the shipping figure** on a row that charges postage ("+ $X shipping · ≈ $Y total").
 - **The pinned eBay row's button is the ink `btn-ad`,** the filled orange/primary button is a store's (the cheapest store's "Buy now").
 - Already true here, no change: an eBay or Amazon row is never "the cheapest" or "Best price" (`neverCheapest`), so the table never contradicts its own headline.
+
+## 2026-11-18: The return nudge, a targeted prompt for a visitor who has clicked a store (owner)
+
+Earnings fell and the owner asked for "targeted ads … in very subtle ways". The leak: about 70% of buy clicks go to stores that pay nothing, and
+Amazon clicks fell to near zero on 13 Nov. The one targeted placement shipped (the owner asked for it explicitly; it applies the rule "no pop-ups
+for new visitors" by needing a store click first): after a click on a STORE row, when the visitor comes back to the tab (away 4 s or more, within
+30 minutes), a small dismissible card says "Back from <store>?" with the same product's eBay and TCGplayer links already on the page, labelled Ad,
+rel sponsored, `from=<placement>_nudge`. Once a session, 20 s or ✕ or Esc, never Amazon, never a price or "best", yields to the rating card.
+**Measured, not assumed:** half the visitors are the control arm (localStorage `rn-arm`). `nudge_eligible` fires for both arms; `nudge_shown` and
+`nudge_click` for "on"; every `buy_click` carries `nudge_arm`. Lift = paid (eBay or TCGplayer) buy clicks per `nudge_eligible`, on against off, plus
+the placement's own clicks (`from` ends `_nudge`). Rollback: remove `<ReturnNudge />` from the root layout. `lib/return-nudge.ts`,
+`components/ReturnNudge.tsx`, `tests/return-nudge.test.ts`.
