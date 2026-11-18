@@ -12,6 +12,7 @@ import { HeaderNavItems, type HeaderNavItem } from "./HeaderNav";
 import { ThemeToggle } from "./ThemeToggle";
 import { SearchBox } from "./SearchBox";
 import { CartHeaderLink } from "@/components/cart/CartHeaderLink";
+import { AccountHeaderLink } from "@/components/premium/AccountHeaderLink";
 
 /**
  * The desktop nav (lg and up), in order: Sealed, Sets, Deals, More (five sections at most; a site with kits has the fifth). Sealed
@@ -71,6 +72,8 @@ export function Header() {
         <ThemeToggle className="hidden sm:inline-flex" />
         <MarketPicker />
         {/* The cart list (components/cart, owner 2026-11-06): every width, with its count. */}
+        {/* Accounts (2026-11-18): one quiet icon from sm up; phones get Sign in in the menu. */}
+        <AccountHeaderLink className="hidden sm:inline-flex" />
         <CartHeaderLink />
         <MobileMenu groups={groups} className="lg:hidden" />
       </div>

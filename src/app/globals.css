@@ -963,3 +963,10 @@ html[data-bottomnav] [data-return-nudge] { bottom: calc(env(safe-area-inset-bott
 .bn-tab[aria-current="page"] .bn-ico { transform: translateY(-1px); }
 .bn-badge { position: absolute; right: -10px; top: -6px; min-width: 16px; padding: 0 4px; border-radius: 999px; background: rgb(var(--ink)); color: rgb(var(--bg)); font-size: 10px; font-weight: 700; line-height: 16px; text-align: center; }
 @media (prefers-reduced-motion: reduce) { .bn, .bn[data-bottomnav-bar="hidden"], .bn-ico { transition: none; } }
+
+/* Premium members (lib/premium-member.ts, 2026-11-18): no banner ads. The sponsored banners, the inline block and the phone dock go;
+   price tables and their pinned rows are untouched. */
+html[data-adfree] [data-ad="banners"],
+html[data-adfree] [data-ad="inline"] {
+  display: none;
+}
