@@ -2273,3 +2273,7 @@ rel sponsored, `from=<placement>_nudge`. Once a session, 20 s or ✕ or Esc, nev
 `nudge_click` for "on"; every `buy_click` carries `nudge_arm`. Lift = paid (eBay or TCGplayer) buy clicks per `nudge_eligible`, on against off, plus
 the placement's own clicks (`from` ends `_nudge`). Rollback: remove `<ReturnNudge />` from the root layout. `lib/return-nudge.ts`,
 `components/ReturnNudge.tsx`, `tests/return-nudge.test.ts`.
+
+## 2026-11-18: cart checkout opens every store or none (owner)
+
+Checkout (`openAll`, `src/lib/cart-checkout.ts`) opens one blank tab per store inside the click, and only when every one opens does it send each to its store's own tagged link. If the browser refuses any, it closes the ones that opened, visits nothing, and the drawer shows the allow-pop-ups steps and a "Try again" button. Before, the first store opened and the rest were refused, which left the visitor with one tab. Chrome 157 on dexcompare.io and on url-opener.com (the owner's model, which does the same close-and-ask) both give one tab until pop-ups are allowed for the site; with them allowed, all open. No browser API grants that permission from a click, so the steps stay.
