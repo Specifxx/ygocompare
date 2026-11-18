@@ -45,3 +45,24 @@ test("the share button and the arrival counter are on the card page, the quick v
   // Text only: card art made each PNG ~580 KB of ISR writes (DECISIONS.md, 2026-11-08).
   assert.doesNotMatch(fs.readFileSync("src/app/card/[slug]/opengraph-image.tsx", "utf8"), /<img|imageAt/);
 });
+
+// Share-for-a-deal (owner, 2026-11-18).
+import { pickShareArm, shareDeals } from "../src/lib/share";
+
+test("the share arm is drawn once, half and half, and kept", () => {
+  assert.equal(pickShareArm(null, 0.1), "reward");
+  assert.equal(pickShareArm(null, 0.9), "plain");
+  assert.equal(pickShareArm("plain", 0.1), "plain");
+});
+
+test("the thank-you deal is a store row only, one per product, biggest saving first", () => {
+  const r = (slug: string, source: string, offerMarket: string, market: number, usd: number) => ({ slug, name: slug, source, offerMarket, cents: usd, currency: "USD", saving: Math.round((1 - usd / market) * 100), market, usd });
+  const d = shareDeals([r("a", "ebay", "US", 10000, 5000), r("b", "shopx", "US", 10000, 8000), r("c", "shopy", "US", 10000, 6000), r("c", "shopz", "US", 10000, 7000), r("d", "amazon", "UK", 9000, 1000)], (s) => s);
+  assert.deepEqual(d.US.map((x) => x.slug), ["c", "b"]);
+  assert.equal(d.UK, undefined, "never Amazon");
+});
+
+test("the thank-you file is static and the share button is on the set pages and Deal Finder", () => {
+  for (const f of ["src/app/sets/[slug]/page.tsx", "src/app/tools/deal-finder/page.tsx"]) assert.match(fs.readFileSync(f, "utf8"), /<ShareButton /, f);
+  assert.match(fs.readFileSync("src/app/share-deal.json/route.ts", "utf8"), /force-static/);
+});
