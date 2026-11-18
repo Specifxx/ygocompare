@@ -8,7 +8,11 @@ import { FeedbackAsk } from "@/components/FeedbackAsk";
 
 type FooterLink = { href: string; label: string };
 
-/** The footer's link columns (the same links as before the engine port, so every crawled link set is unchanged). */
+/**
+ * The footer's link columns: two short lists (2026-11-19, the core-update quality pass). The footer used to repeat 28 links on
+ * every page (every seasonal sale, tool and side project); the sidebar and header reach the shop, so the footer keeps the main
+ * price pages and who we are and how we work. DECISIONS.md, 2026-11-19 "Fewer links on every page".
+ */
 export function footerColumns(history: boolean): { title: string; links: FooterLink[] }[] {
   return [
     {
@@ -18,31 +22,17 @@ export function footerColumns(history: boolean): { title: string; links: FooterL
         { href: "/sealed/booster-box", label: "Booster box prices" },
         { href: "/sets", label: "Sets" },
         ...(SITE.kits ? [{ href: "/kits", label: `${SITE.kits.label} prices` }] : []),
-        ...(history ? [{ href: "/movers", label: "Price movers" }, { href: "/price-report", label: "Monthly price report" }] : []),
-        { href: "/black-friday", label: "Black Friday deals" },
-        { href: "/cyber-monday", label: "Cyber Monday deals" },
-        { href: "/boxing-day", label: "Boxing Day deals" },
-        { href: "/january-sales", label: "January sales" },
-        { href: "/lunar-new-year", label: "Lunar New Year deals" },
-        { href: "/embed", label: "Free price widgets" },
-        { href: "/tools/deal-finder", label: "Deal Finder" },
-        { href: "/preorders", label: "Pre-orders" },
+        ...(history ? [{ href: "/movers", label: "Price movers" }] : []),
       ],
     },
     {
       title: SITE.name,
       links: [
-        { href: "/about", label: "About" },
-        { href: "/collection", label: "My collection" },
+        { href: "/about", label: "Who runs this site" },
         { href: "/methodology", label: "How prices work" },
-        { href: "/stores", label: "Stores we track" },
-        { href: "/blog", label: "Guides" },
-        { href: "/forum", label: "Community forum · beta" },
-        ...(creatorsOn() ? [{ href: "/creators", label: "Creators" }] : []),
-        { href: "/feedback", label: "Send feedback" },
-        { href: "/contact", label: "Contact" },
-        { href: "/list-your-store", label: "List your store" },
         { href: "/how-we-pick-stores", label: "How we pick stores" },
+        { href: "/blog", label: "Guides" },
+        { href: "/contact", label: "Contact" },
         { href: "/privacy", label: "Privacy" },
         { href: "/terms", label: "Terms" },
       ],

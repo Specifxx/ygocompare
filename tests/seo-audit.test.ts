@@ -36,8 +36,20 @@ test("card pages with no price and no listing are kept out of the index", async 
   assert.equal(cardIndexable(card, null, 0, { upcoming: true }), true);
   assert.equal(cardIndexable({ kind: "sealed", sealedType: "Insert" }, 5000, 3, { upcoming: false }), false);
   assert.equal(priceValidUntil(Date.UTC(2026, 10, 4, 12)), "2026-11-05");
+  const { sealedAsksIndex, setAsksIndex } = await import("../src/lib/indexing");
+  const box = { kind: "sealed" as const, sealedType: "Booster Box" };
+  const live = { upcoming: false };
+  assert.equal(sealedAsksIndex(box, 5000, { listedSources: 2, inStockSources: 2 }, live, false), false, "two stores is not a comparison worth indexing");
+  assert.equal(sealedAsksIndex(box, 5000, { listedSources: 3, inStockSources: 0 }, live, false), false, "none in stock");
+  assert.equal(sealedAsksIndex(box, 5000, { listedSources: 3, inStockSources: 1 }, live, false), true);
+  assert.equal(sealedAsksIndex(box, 5000, { listedSources: 1, inStockSources: 1 }, live, true), true, "found in search");
+  assert.equal(sealedAsksIndex(box, null, { listedSources: 0, inStockSources: 0 }, { upcoming: true }, false), true, "upcoming set");
+  assert.equal(sealedAsksIndex({ kind: "sealed", sealedType: "Insert" }, 5000, { listedSources: 9, inStockSources: 9 }, live, true), false);
+  assert.equal(setAsksIndex(1, false, false), false);
+  assert.equal(setAsksIndex(2, false, false), true);
+  assert.equal(setAsksIndex(0, true, false), true);
   const src = read("src/app/card/[slug]/page.tsx");
-  assert.match(src, /cardIndexable\(/);
+  assert.match(src, /productAsksIndex\(p\)/);
   assert.match(src, /priceValidUntil: priceValidUntil\(\)/);
   // A Product with no offers is a Search Console error (Gundam, 20 pages, 2026-11-04):
   // the block is rendered only when an in-stock US offer backs it.

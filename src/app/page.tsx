@@ -246,12 +246,6 @@ export default function Home() {
         </p>
       </Hero>
 
-      {/* The two big ad banners (owner, 2026-11-14): eBay and TCGplayer apart, directly under the hero, never in it. */}
-      {inlineReady(ads, undefined) && (
-        <div className="-mt-10 sm:-mt-14">
-          <InlineAds ads={ads} search={adSearch()} page="home" />
-        </div>
-      )}
 
       {shelfTabs.length > 0 && (
         <Section title={`${SITE.gameShort} booster boxes and sealed`} className="reveal mt-8 sm:mt-12">
@@ -307,6 +301,12 @@ export default function Home() {
           </details>
         ))}
       </section>
+      {/* The ad banners sit below the page's own content, never under the hero (2026-11-19, core-update quality pass). */}
+      {inlineReady(ads, undefined) && (
+        <div className="mt-16 sm:mt-24">
+          <InlineAds ads={ads} search={adSearch()} page="home" />
+        </div>
+      )}
       <p className="sr-only">{products().length} products tracked</p>
     </div>
   );

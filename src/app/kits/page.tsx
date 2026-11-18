@@ -45,7 +45,6 @@ export default function Kits() {
         <div className="mt-2"><CheckedAgo at={kitsUpdatedAt()} /></div>
         <div className="mt-4 max-w-xl"><KitSearch /></div>
       </header>
-      <InlineAds kit={kitAdTiles(popular(all), 12)} page="kits" />
       <nav aria-label="Grades" className="flex flex-wrap gap-2">
         {hubs.map((h) => (
           <Link key={h.slug} href={`/kits/grade/${h.slug}`} className="chip text-sm hover:border-brand">
@@ -84,6 +83,8 @@ export default function Kits() {
           Run a hobby shop that sells {cfg.label}? <Link href="/contact">Ask to be listed</Link>, it&apos;s free.
         </p>
       </section>
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds kit={kitAdTiles(popular(all), 12)} page="kits" />
     </div>
   );
 }

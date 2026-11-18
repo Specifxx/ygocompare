@@ -5,7 +5,7 @@ import { preorderSetList, sealedHubs, sealedSets } from "@/lib/hubs";
 import { preorderPath } from "@/lib/preorders";
 import { SITE_URL } from "@/lib/site";
 import { creatorsOn } from "@/lib/creators";
-import { cardIndexable } from "@/lib/indexing";
+import { productAsksIndex, setPageAsksIndex } from "@/lib/index-asks";
 
 export const revalidate = 86400;
 
@@ -21,10 +21,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...fixed.map((p) => ({ url: `${SITE_URL}${p}`, lastModified: at, changeFrequency: "daily" as const, priority: p === "" ? 1 : 0.8 })),
     ...sealedHubs().map((h) => ({ url: `${SITE_URL}/sealed/${h.slug}`, lastModified: at, changeFrequency: "daily" as const, priority: 0.8 })),
     ...preorderSetList().map((s) => ({ url: `${SITE_URL}${preorderPath(s)}`, lastModified: at, changeFrequency: "daily" as const, priority: 0.8 })),
-    ...sealedSets().map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
+    ...sealedSets().filter(setPageAsksIndex).map((s) => ({ url: `${SITE_URL}/sets/${s.slug}`, lastModified: at, priority: 0.7 })),
     ...posts().map((p) => ({ url: `${SITE_URL}/blog/${p.slug}`, lastModified: new Date(p.updated ?? p.date), priority: 0.6 })),
     ...products()
-      .filter((p) => p.kind === "sealed" && cardIndexable(p, refCents(p.id), summaryOf(p.id).listedSources, setById(p.setId)))
+      .filter(productAsksIndex)
       .map((p) => ({ url: `${SITE_URL}/card/${p.slug}`, lastModified: at, priority: 0.6 })),
   ];
 }

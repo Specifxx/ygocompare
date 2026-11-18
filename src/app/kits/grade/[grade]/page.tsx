@@ -36,7 +36,6 @@ export default function GradePage({ params }: { params: { grade: string } }) {
         <h1 className="page-h1">{h.label} {SITE.kits.label} prices</h1>
         <p className="mt-2 text-muted">{h.items.length} kits, the ones most shops have in stock first. Open a kit to compare every shop.</p>
       </header>
-      <InlineAds kit={kitAdTiles(h.items, 12)} page="kit-grade" />
       <nav aria-label="Grades" className="flex flex-wrap gap-2">
         {gradeHubs().map((g) => (
           <Link key={g.slug} href={`/kits/grade/${g.slug}`} className={`chip ${g.slug === h.slug ? "chip-on" : ""}`}>{g.label}</Link>
@@ -56,6 +55,8 @@ export default function GradePage({ params }: { params: { grade: string } }) {
           </ul>
         </section>
       )}
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds kit={kitAdTiles(h.items, 12)} page="kit-grade" />
     </div>
   );
 }

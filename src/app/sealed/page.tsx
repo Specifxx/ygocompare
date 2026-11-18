@@ -42,7 +42,6 @@ export default function Sealed() {
           </nav>
         )}
       </header>
-      <InlineAds ads={cardAds({ kind: "sealed", limit: 10 })} search={adSearch()} page="sealed" />
       {groups.map((g) => {
         const href = sealedHref(g.t);
         return (
@@ -59,6 +58,8 @@ export default function Sealed() {
           </section>
         );
       })}
+      {/* Ads sit below the page's own content, never above it (2026-11-19, core-update quality pass). */}
+      <InlineAds ads={cardAds({ kind: "sealed", limit: 10 })} search={adSearch()} page="sealed" />
     </div>
   );
 }
