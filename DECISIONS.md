@@ -2326,3 +2326,12 @@ YGO, Gundam, Bandai, Lorcana and Cyberpunk Compare: its own icons and its own "c
   (shows at the top flush to the screen's edge, hides on scroll down, back on the first flick up, every tab works, never over an Add to
   cart on a product page swept top to bottom and back, no layout shift, hidden while pinch-zoomed, never on a desktop): all pass. At 4x
   CPU throttle, no frame over 33 ms with or without the bar.
+
+## 2026-11-18 — Accounts on YGO Compare (one network account)
+
+Owner (18 Nov): expand accounts beyond RiftCompare and OP Compare, team decides. YGO Compare plugs into RiftCompare's sister account
+service like DexCompare, MTG Compare and TCG Prices: `/account` (emailed sign-in link; Google once its own client id is set),
+`/watches` (every price alert set with that email, any device, with a stop button), `/premium` (RiftCompare Premium: no banner
+ads, 200 alerts). A quiet account icon in the header from sm up and "Sign in / My watches" in the phone menu; no pop-up, no corner
+card, no back-in-stock button yet. Members' banner ads (`data-ad="inline"`) hide under `data-adfree`; price tables are untouched.
+The browser keeps one token (`ygo_premium_v1`); no page reads a cookie or header. Sign-ups: RiftCompare admin Accounts › YGO Compare.
