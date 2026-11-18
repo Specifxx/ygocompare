@@ -69,8 +69,6 @@ export const metadata: Metadata = {
 // Dark by default (lib/theme.ts); the browser bar follows the default, not a saved light choice.
 export const viewport: Viewport = { themeColor: "#0f1013", colorScheme: "dark light" };
 
-const ADSENSE = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // The boot scripts stamp data-theme and data-season on this element before React hydrates; React must not report that.
@@ -80,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://tcgplayer-cdn.tcgplayer.com" />
         {/* Impact's verifier reads the tag exactly as it issues it: `value`, not `content`. */}
         {SITE.impactSiteVerification && <meta name="impact-site-verification" {...{ value: SITE.impactSiteVerification }} />}
-        {ADSENSE && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE}`} crossOrigin="anonymous" />}
+        {/* No AdSense (owner, 2026-11-18: AdSense is off). The loader cost phones ~180 KB of script and ~300 ms of blocking time even with no unit on the page. */}
       </head>
       <body className="flex min-h-screen flex-col font-sans">
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-surface focus:px-4 focus:py-2">
