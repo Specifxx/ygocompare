@@ -2447,3 +2447,20 @@ alert form in place (RiftCompare's alert service, double opt-in, weekly email st
 {kind: open | saved, from: top | page}; the page turns it into `watch_open` / `watch_signup` {arm, from}, and `watch_eligible` {arm}
 counts once a visitor-day on a product page. Read ~2 Dec: alerts per eligible visitor and the `return_visit` rate of each arm. A button
 in the page, never a pop-up. Rollback: remove `<WatchPrice />` from the card page.
+
+## 2026-11-18: "Since your last visit": cheaper since you looked, as a 50/50 test (retention lever 2)
+
+The owner (2026-11-18): "we want new visitors and we want to retain those visitors". A returning visitor had nothing new
+to come back to. Now a product page notes, in the visitor's own browser, the lowest prices it showed (`SeenPrice`,
+localStorage `seen-prices`, at most 30 products). On the first page of a LATER day, `SinceLastVisit` reads this site's
+static `/alert-feed.json` (the same prices the alert service reads, rebuilt every release, CDN-cached) and, when a product
+they looked at is now at least 1% cheaper in their market, shows ONE in-page line under the header naming up to three of
+them with the old and new price (`lib/since-visit.ts`). Then the noted prices move to today's, so a drop is told once.
+
+- Never a first visit (nothing is noted yet), never a pop-up or overlay, worked out at most once a day, one ✕ hides it.
+  It is personal and conditional, so it does not count as the shell's one promo strip.
+- 50/50 `since-arm`, assigned only when there is a drop to show: `since_eligible` {arm, drops} in both arms,
+  `since_shown` and `since_click` {pos} in the "on" arm. `return_visit` now carries `since` (lib/return-visit.ts
+  `ARM_KEYS`, the same file everywhere), so the lever reads its return rate on against off. Read about 2 Dec.
+- Nothing leaves the browser but the arm and counts. Same-site paths only; prices are the feed's (store and TCGplayer
+  in-stock lows, never eBay, never converted).
