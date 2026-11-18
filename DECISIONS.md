@@ -2517,3 +2517,13 @@ show a line) says "Prices and stock change: also check eBay and TCGplayer", nami
 has one; never that eBay is cheaper. The phone top buy block and sticky bar (`CardBuy`) and the set quick-buy list use the same
 test for their button. Not touched: sort order, which row is cheapest, links, rel, tracking, labels, JSON-LD, feeds, alerts, deal and
 price-drop badges. Measure: paid clicks per 100 buy clicks (`buy_click`) before and after. `tests/best-price.test.ts`.
+## 2026-11-18: Back in stock alerts on sold-out products, free for everyone
+
+**Owner** (retention programme, decision card 18 Nov): back-in-stock alerts are free for everyone. RiftCompare's
+`/api/sister-alerts` takes `kind: "restock"` with an email alone, under the same double opt-in (TCGEmpire #512).
+
+**What.** `PriceAlertForm` is now two forms behind one name: with an in-stock store price in the visitor's region it is the
+price-drop alert as before; with none it is "Email me when it's back in stock" (one email field, `kind: "restock"`). Both are
+inline, never a pop-up, on the card page and the top watch strip. A sold-out product is not in `/alert-feed.json`; the service
+holds a restock watch while its item is missing and fires on the first in-stock price. Event `restock_signup` {member, region},
+read per site with the retention programme on 2 Dec. `tests/restock-alert.test.ts`.
