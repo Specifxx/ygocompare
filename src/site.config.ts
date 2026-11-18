@@ -36,6 +36,9 @@ export const SITE: SiteConfig = {
   impactSiteVerification: "3c00a442-a61e-4003-a422-540b7435b80d",
 
   priceAlerts: true,
+  // The phone bottom nav (components/BottomNav.tsx, DECISIONS.md 2026-11-18): "optin" = only a visitor who opens any page with ?bn=1
+  // sees it; "on" = everyone on a phone; "off" is the rollback (it ignores ?bn=1 too).
+  bottomNav: "optin",
   // Amazon US tracking ID in the owner's US Associates account (verified live 2026-10-28).
   amazonUsTag: "ygocompare-20",
   amazonAuTag: "ygocompare-22",
