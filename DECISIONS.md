@@ -2321,7 +2321,7 @@ YGO, Gundam, Bandai, Lorcana and Cyberpunk Compare: its own icons and its own "c
 - Placement is TCG Prices' and Rift's lesson: `fixed` to the foot plus `env(safe-area-inset-bottom)`, moved by `transform`, never a
   measured address-bar height (`tests/bottom-nav.test.ts`). Hidden on scroll down, zoomed, typing, any open dialog, a buy-bar page, or
   over an Add to cart button; the ad dock yields to it (`html[data-bottomnav]`).
-- `SITE.bottomNav`: shipped "optin" (`?bn=1`), then "on"; "off" is the rollback and ignores `?bn=1`.
+- `SITE.bottomNav`: shipped "optin" (`?bn=1`) with a release of its own, then "on" for every phone visitor in the next daily release; "off" is the rollback and ignores `?bn=1` (`?bn=0` hides it for one visitor).
 - Measured before merging, on a local production build: iPhone SE, Pixel 7, Z Fold cover and iPhone 15 Pro Max, 64 checks a site
   (shows at the top flush to the screen's edge, hides on scroll down, back on the first flick up, every tab works, never over an Add to
   cart on a product page swept top to bottom and back, no layout shift, hidden while pinch-zoomed, never on a desktop): all pass. At 4x
