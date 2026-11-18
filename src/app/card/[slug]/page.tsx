@@ -11,6 +11,7 @@ import { shortName } from "@/lib/names";
 import { PriceTable } from "@/components/PriceTable";
 import { VaultOwn } from "@/components/vault/VaultOwn";
 import { PriceAlert } from "@/components/PriceAlert";
+import { WatchPrice } from "@/components/WatchPrice";
 import { lowestByMarket } from "@/lib/alert-feed";
 import { CardStickyBuyBar, CardTopBuy, CheckedAgo } from "@/components/CardBuy";
 import { EbayCallout } from "@/components/EbayCallout";
@@ -166,6 +167,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
                 ))}
               </p>
             )}
+            {SITE.priceAlerts && <WatchPrice site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
           </header>
           <section>
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">

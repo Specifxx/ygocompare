@@ -2436,3 +2436,14 @@ visitor count is the denominator), so it costs at most one event per returning v
 social, ai, other), plus the arm of each live 50/50 test (`rn`, `ln`, `share`, `cart`, `watch`) so every retention lever reads its
 return rate on against off. No id, date or URL leaves the browser. The identical file is in every Compare repo; read weekly by the
 retention thread. Rollback: remove `<ReturnBeacon />` from the layout.
+
+## 2026-11-18: "Watch this price" under the price, as a 50/50 test (retention lever 1)
+
+Retention baseline (18 Nov): a RiftCompare account comes back about ten times as often as a plain visitor, yet the sister sites held 5
+price alerts between them, because the alert ask was a quiet link under the long price table. `components/WatchPrice.tsx` adds a
+one-tap "Watch this price · free email when it drops" button in the product header, beside "I own this", that opens the same shared
+alert form in place (RiftCompare's alert service, double opt-in, weekly email still an unticked box). Half of the visitors (localStorage
+`watch-arm` = off) see no button; the link under the table stays for everyone. The form now sends a window event `price-alert`
+{kind: open | saved, from: top | page}; the page turns it into `watch_open` / `watch_signup` {arm, from}, and `watch_eligible` {arm}
+counts once a visitor-day on a product page. Read ~2 Dec: alerts per eligible visitor and the `return_visit` rate of each arm. A button
+in the page, never a pop-up. Rollback: remove `<WatchPrice />` from the card page.
