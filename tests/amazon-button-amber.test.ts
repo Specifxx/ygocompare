@@ -18,10 +18,10 @@ test("the Amazon row's link is the amber .btn-amazon button, keeping rel sponsor
 test(".btn-amazon is amber with dark words, written without a theme variant so both themes match", () => {
   const css = read("src/app/globals.css");
   const rule = /\.btn-amazon\s*\{([^}]*)\}/.exec(css)?.[1] ?? "";
-  assert.match(rule, /bg-\[#FFA41C\]/i);
+  assert.match(rule, /bg-\[#F5A524\]/i);
   assert.match(rule, /text-\[#111111\]/i);
-  assert.match(rule, /hover:bg-\[#FA8900\]/i);
-  assert.match(rule, /border-\[#E08A00\]/i);
+  assert.match(rule, /hover:bg-\[#DC8A0B\]/i);
+  assert.match(rule, /border-\[#B7791F\]/i);
   assert.doesNotMatch(css, /:root\[data-theme[^{]*\.btn-amazon|dark[^{]*\.btn-amazon/);
 });
 
