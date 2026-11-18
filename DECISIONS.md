@@ -2336,6 +2336,9 @@ ads, 200 alerts). A quiet account icon in the header from sm up and "Sign in / M
 card, no back-in-stock button yet. Members' banner ads (`data-ad="inline"`) hide under `data-adfree`; price tables are untouched.
 The browser keeps one token (`ygo_premium_v1`); no page reads a cookie or header. Sign-ups: RiftCompare admin Accounts › YGO Compare.
 
+## 2026-11-18: llms.txt points AI agents at the free price file
+
+`/prices.json` already existed, but nothing an agent reads said so. `llms.txt` now has a "Free price data and citing" block: the file, that it is free and open to every origin, the date to quote and a suggested credit line. No new route, no spend.
 ## 2026-11-18: Leave nudge, an A/B test of a small "Before you go" card (owner: "we could have pop up affiliate clicks")
 
 The owner asked for more clicks on the paid links and said pop-ups that drive them are fine. The return nudge (earlier today) only
