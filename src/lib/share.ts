@@ -5,11 +5,19 @@
 // Every shared link carries utm_source=share and utm_medium=<what was shared>,
 // so a visit it brings is counted: ShareArrival sends one Vercel "share_visit"
 // event, the button one "share" event, and RiftCompare's growth report reads
-// both per site from the Web Analytics API. No reward, no pop-up, no account.
+// both per site from the Web Analytics API. No pop-up, no account.
+//
+// Share-for-a-deal (owner, 2026-11-18: "if you share … you can open Deal
+// Finder"): half of browsers (shareArm, kept per browser) see the button say so,
+// and after a share completes it shows today's best store deal in their market
+// under the button, from the static /share-deal.json. Everything it shows is free
+// anyway (never the cheapest price withheld, never eBay or Amazon); the other
+// half is the control. share { medium, arm } and share_unlock { medium } let the
+// growth report see whether the offer raises sharing.
 import { SITE } from "@/site.config";
 import type { Market, Offer } from "./site-types";
 
-export type ShareMedium = "card" | "sealed" | "list" | "page" | "daily";
+export type ShareMedium = "card" | "sealed" | "list" | "page" | "daily" | "set" | "guide" | "tool";
 
 /** `path` on the canonical host with the share tags (an existing query string is kept). */
 export function shareUrl(base: string, path: string, medium: ShareMedium): string {
@@ -76,4 +84,79 @@ export function decodeList(s: string | null | undefined): { id: number; qty: num
     if (id > 0) out.set(id, (out.get(id) ?? 0) + qty);
   }
   return [...out].map(([id, qty]) => ({ id, qty: Math.min(99, qty) }));
+}
+
+// ---- Share-for-a-deal test ----
+export type ShareArm = "reward" | "plain";
+export const SHARE_ARM_KEY = "share_arm";
+
+/** The browser's arm, drawn once and kept (a roll in [0,1) decides it: under half is the reward). */
+export function pickShareArm(saved: string | null | undefined, roll: number): ShareArm {
+  if (saved === "reward" || saved === "plain") return saved;
+  return roll < 0.5 ? "reward" : "plain";
+}
+
+/** One market's deal the thank-you shows: a store row only, never eBay, Amazon or TCGplayer. */
+export interface ShareDeal {
+  slug: string;
+  name: string;
+  store: string;
+  cents: number;
+  currency: string;
+  /** Whole percent under TCGplayer's market price. */
+  saving: number;
+}
+
+export interface DealLike {
+  slug: string;
+  name: string;
+  source: string;
+  offerMarket: string;
+  cents: number;
+  currency: string;
+  saving: number;
+  market: number;
+  usd: number;
+}
+
+/** Up to `per` deals per market, biggest dollar saving first, one row per product. */
+export function shareDeals(rows: readonly DealLike[], name: (source: string, market: string) => string, per = 3): Record<string, ShareDeal[]> {
+  const out: Record<string, ShareDeal[]> = {};
+  const seen = new Set<string>();
+  const sorted = rows.slice().sort((a, b) => b.market - b.usd - (a.market - a.usd));
+  for (const r of sorted) {
+    if (r.source === "ebay" || r.source === "amazon" || r.source === "tcgplayer") continue;
+    const list = (out[r.offerMarket] ??= []);
+    const key = `${r.offerMarket}:${r.slug}`;
+    if (list.length >= per || seen.has(key)) continue;
+    seen.add(key);
+    list.push({ slug: r.slug, name: r.name, store: name(r.source, r.offerMarket), cents: r.cents, currency: r.currency, saving: r.saving });
+  }
+  return out;
+}
+
+// ---- The share image's sparkline (pure, so the image and the tests agree) ----
+/** The last `days` days of a [day, cents] series as an SVG path in a w×h box; null under three points or a flat line. */
+export function sparkPath(series: readonly [number, number][], w: number, h: number, days = 30): string | null {
+  if (!series.length) return null;
+  const last = series[series.length - 1][0];
+  const pts = series.filter(([d, c]) => d > last - days && c > 0);
+  if (pts.length < 3) return null;
+  const xs = pts.map(([d]) => d);
+  const ys = pts.map(([, c]) => c);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  if (x1 === x0 || y1 === y0) return null;
+  const pad = 4;
+  return pts
+    .map(([d, c], i) => `${i ? "L" : "M"}${(((d - x0) / (x1 - x0)) * (w - pad * 2) + pad).toFixed(1)} ${(h - pad - ((c - y0) / (y1 - y0)) * (h - pad * 2)).toFixed(1)}`)
+    .join(" ");
+}
+
+/** The one-line "what's moving" note on the share image, from real changes only. */
+export function moveNote(c7: number | null | undefined, c30: number | null | undefined): string | null {
+  const r = (v: number) => Math.round(Math.abs(v));
+  if (c7 != null && Math.abs(c7) >= 3) return `${c7 > 0 ? "Up" : "Down"} ${r(c7)}% this week`;
+  if (c30 != null && Math.abs(c30) >= 5) return `${c30 > 0 ? "Up" : "Down"} ${r(c30)}% this month`;
+  if (c7 != null || c30 != null) return "Steady this month";
+  return null;
 }

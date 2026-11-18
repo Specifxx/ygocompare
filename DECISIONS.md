@@ -2400,3 +2400,13 @@ styling that could pass for Amazon's own is worth a look if Amazon objects. No p
 
 The quick view's bottom link ("See price history and details", a ghost button) became a full-width `btn-primary` at least 48px tall, "See full page: price history and
 details", still pinned under the scrolling prices so it is on screen on a phone without scrolling. One button only. `tests/amazon-button-amber.test.ts` pins both.
+## 2026-11-18: Share for a deal, and guides, sets and Deal Finder can be shared (owner)
+
+Owner: "a share feature … the ability to share pages and guides", then "if you share … you can open Deal Finder … gives
+incentive". Ported from TCG Prices (same `lib/share.ts` and `ShareButton`). Half of browsers (`share_arm` in localStorage,
+`pickShareArm`) see "Share · get a deal"; after a share completes the button opens a small card under itself (the visitor's own
+tap, ✕ to close) with today's best store deal in their market and a link to Deal Finder, from the static `/share-deal.json`
+(`force-static`, built with the release, fetched only then). Store rows only, never eBay, Amazon or TCGplayer, and nothing that
+was not already free. The other half is the control. Events `share { medium, arm }`, `share_unlock { medium }`,
+`share_visit { medium }`. Guides, set pages and Deal Finder gain the button. Read the share rate per arm after two weeks; keep
+the offer only if it raises sharing.
