@@ -47,6 +47,8 @@ export function PriceAlertForm({
   className,
   buttonClassName,
   summary = "Email me when the price drops",
+  defaultOpen = false,
+  from = "page",
 }: {
   /** this site's key in the alert service ("mtg", "gundam", …) */
   site: string;
@@ -58,8 +60,12 @@ export function PriceAlertForm({
   className?: string;
   buttonClassName?: string;
   summary?: string;
+  /** open the form at once (lever 1 of the retention programme, components/WatchPrice.tsx) */
+  defaultOpen?: boolean;
+  /** where on the page this form is ("top" | "page"), sent with the open/saved window event */
+  from?: string;
 }) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen);
   const [state, setState] = useState<State>({ status: "idle" });
   const sym = SYMBOL[region] ?? "";
   const start = priceCents ? (suggestTarget(priceCents) / 100).toFixed(0) : "";
@@ -79,6 +85,7 @@ export function PriceAlertForm({
         body: JSON.stringify({ site, productId, region, email: String(f.get("email") ?? ""), weekly, targetCents }),
       });
       const j = (await r.json().catch(() => ({}))) as { ok?: boolean; status?: string; error?: string };
+      if (r.ok && j.ok) window.dispatchEvent(new CustomEvent("price-alert", { detail: { kind: "saved", from } }));
       setState(r.ok && j.ok ? { status: "done", confirm: j.status !== "active", weekly } : { status: "error", message: j.error || "Couldn't save your alert. Please try again." });
     } catch {
       setState({ status: "error", message: "Couldn't save your alert. Check your connection and try again." });
@@ -88,7 +95,10 @@ export function PriceAlertForm({
   if (!open) {
     return (
       <div className={className}>
-        <button type="button" onClick={() => setOpen(true)} style={{ background: "none", border: 0, padding: "10px 0", color: "inherit", font: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}>
+        <button type="button" onClick={() => {
+            setOpen(true);
+            window.dispatchEvent(new CustomEvent("price-alert", { detail: { kind: "open", from } }));
+          }} style={{ background: "none", border: 0, padding: "10px 0", color: "inherit", font: "inherit", fontSize: 14, fontWeight: 600, textDecoration: "underline", cursor: "pointer" }}>
           {summary}
         </button>
       </div>
@@ -108,14 +118,14 @@ export function PriceAlertForm({
   return (
     <form className={className} style={box} onSubmit={submit}>
       <strong style={{ fontSize: 15 }}>Email me when the price drops</strong>
-      <label style={label} htmlFor={`pa-target-${productId}`}>
+      <label style={label} htmlFor={`pa-target-${from}-${productId}`}>
         When a {region} store has it for {sym || "this price"} or less
       </label>
-      <input id={`pa-target-${productId}`} name="target" inputMode="decimal" required defaultValue={start} placeholder={start || "45"} style={field} autoComplete="off" />
-      <label style={label} htmlFor={`pa-email-${productId}`}>
+      <input id={`pa-target-${from}-${productId}`} name="target" inputMode="decimal" required defaultValue={start} placeholder={start || "45"} style={field} autoComplete="off" />
+      <label style={label} htmlFor={`pa-email-${from}-${productId}`}>
         Your email
       </label>
-      <input id={`pa-email-${productId}`} name="email" type="email" required autoComplete="email" placeholder="Your email address" style={field} />
+      <input id={`pa-email-${from}-${productId}`} name="email" type="email" required autoComplete="email" placeholder="Your email address" style={field} />
       <label style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: 13, margin: "10px 0 0", cursor: "pointer" }}>
         <input type="checkbox" name="weekly" style={{ marginTop: 3 }} />
         <span>Also email me this site&rsquo;s biggest price drops once a week</span>
