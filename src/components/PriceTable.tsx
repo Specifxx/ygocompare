@@ -18,6 +18,8 @@ import { priceRows } from "@/lib/price-rows";
 import { useMarket } from "./ClientPrefs";
 import { ReportPrice } from "./ReportForms";
 import { StoreVote } from "./StoreVote";
+import { bestTreatment } from "@/lib/best-price";
+import { BestPriceTag } from "./BestPriceTag";
 
 const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
@@ -66,6 +68,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
   // links). With no Amazon price there is no row (owner, 2026-11-12).
   const { inStock, refs, outOfStock, cheapest, display, pinned } = priceRows(offers, market);
   const rows = display;
+  // A cheapest row that pays nothing gets a plain tag, not the loud highlight (lib/best-price.ts, owner 2026-11-18).
+  const treatment = bestTreatment(cheapest, rows);
   const cur = CURRENCY[market];
   const conv = (o: Offer) => (o.currency === cur ? null : Math.round((o.cents / (fx[o.currency] ?? 1)) * (fx[cur] ?? 1)));
   // DexCompare's conversion layout (its buy-click rate is the family's highest, ~44%): the market the prices are for is stated and
@@ -148,9 +152,10 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
           {shown.map((o, i) => {
             const c = conv(o);
             const best = o === cheapest;
+            const loud = best && treatment.loud;
             return (
               <Fragment key={i}>
-                <tr className={`border-t border-line ${best ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
+                <tr className={`border-t border-line ${loud ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
                   <td className="px-3 py-2.5">
                     <span className="font-medium text-ink [overflow-wrap:anywhere]">{sourceName(o)}</span>{" "}
                     <StoreVote url={o.url} name={sourceName(o)} className="ml-1 text-muted" />
@@ -159,7 +164,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
                       <span className={compact ? "block" : "block sm:hidden"}><CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? cartTitle ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} inline className="text-xs" /></span>
                     )}
                     {o.source === "ebay" && <span className="ad-pill ml-2">Ad</span>}
-                    {best && <span className="ml-2 rounded-full bg-open-soft px-2 py-0.5 text-[10px] font-bold uppercase text-open">Best price</span>}
+                    {best && <BestPriceTag treatment={treatment} />}
                   </td>
                   <td className="hidden px-3 py-2.5 text-xs text-muted sm:table-cell">
                     {o.printing && o.printing !== "Normal" && <span className="tag mr-1">{o.printing}</span>}
@@ -182,8 +187,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
                     {!compact && o.inStock && (
                       <CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? cartTitle ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} className="hidden text-muted sm:inline-flex" />
                     )}
-                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${o.source === "tcgplayer" && o.inStock ? "btn-tcg px-3 py-1.5" : best ? "btn-primary px-3 py-1.5" : pinned.includes(o) && o.inStock ? "btn-ad px-3 py-1.5" : o.inStock ? "btn-soft px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
-                      {best ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
+                    <a href={goHref(o, productId, pinned.includes(o) ? `${page}_pinned` : page)} rel="sponsored nofollow noopener" target="_blank" className={`min-h-10 whitespace-nowrap ${o.source === "tcgplayer" && o.inStock ? "btn-tcg px-3 py-1.5" : loud ? "btn-primary px-3 py-1.5" : pinned.includes(o) && o.inStock ? "btn-ad px-3 py-1.5" : o.inStock ? "btn-soft px-3 py-1.5" : "btn-ghost px-3 py-1.5 opacity-80"}`}>
+                      {loud ? "Buy now" : o.inStock ? "View deal" : "View"} <span aria-hidden="true">↗</span>
                     </a>
                     </span>
                   </td>
