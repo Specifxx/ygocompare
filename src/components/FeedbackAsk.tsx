@@ -12,7 +12,7 @@
 // the daily triage with every price report and store suggestion. So nothing asks for an email address; a visitor who wants a
 // reply is shown the site's inbox instead. Styling is inherited (currentColor, translucent borders) so the file sits on light
 // and dark sites alike; a site passes its own button class.
-import Link from "next/link";
+import Link from "@/components/Link";
 import { useEffect, useState, type CSSProperties, type FormEvent } from "react";
 
 const box: CSSProperties = { border: "1px solid rgba(127,127,127,.35)", borderRadius: 10, padding: "12px 14px", marginTop: 8 };
