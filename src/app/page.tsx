@@ -27,6 +27,7 @@ import { InlineAds } from "@/components/InlineAds";
 import { inlineReady } from "@/lib/inline-ads";
 import { Section } from "@/components/Section";
 import { adSearch, cardAds } from "@/lib/card-ads";
+import { rankBy, rankProducts } from "@/lib/home-demand";
 
 // The homepage leads with "<game> Booster Box Prices" (sealed only since 2026-11-06) and the number of stores compared.
 export function generateMetadata(): Metadata {
@@ -72,16 +73,19 @@ export default function Home() {
   const m = meta();
   const latest = latestReleasedSet();
   // Sealed only (2026-11-06): the newest set's sealed products worth featuring.
-  const chase = latest ? sealedInSet(latest.id).filter((p) => worthFeaturing(p.id)).slice(0, 12) : [];
+  const chase = latest ? rankProducts(sealedInSet(latest.id).filter((p) => worthFeaturing(p.id))).slice(0, 12) : [];
   const shelf = featuredSealed(6);
   const hubs = sealedHubs();
   // The shelf's market-priced lists (lib/sealed-hero.ts): the newest boxes, then each set on pre-order.
   const hero = sealedHero();
   // Today's deals, one card a product (a product two stores discount keeps its bigger saving).
   const dealt = new Set<number>();
-  const topDeals = deals(24)
-    .filter((d) => !dealt.has(d.p.id) && dealt.add(d.p.id))
-    .slice(0, 8);
+  // Most likely to earn first (owner, 2026-11-18; lib/home-rank.ts), the saving order breaking ties.
+  const topDeals = rankBy(
+    deals(24)
+      .filter((d) => !dealt.has(d.p.id) && dealt.add(d.p.id)),
+    (d) => d.p,
+  ).slice(0, 8);
   const storeCount = SITE.stores.length;
   // The hero's one pill: the Christmas gift guide in its season (owner, 2026-11-12), else the release on pre-order.
   const xmas = seasonMarkupLive("christmas");
