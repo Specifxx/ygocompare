@@ -43,15 +43,27 @@ const isPaidSource = (o: Offer) => o.source === "ebay" || o.source === "tcgplaye
 
 const byPrice = (a: Offer, b: Offer) => a.cents - b.cents;
 
-/** eBay and Amazon are never "the cheapest" or "Best price" (owner rule, every Compare site; 2026-11-14 an eBay row was badged Best price). */
-export const neverCheapest = (o: Offer) => o.source === "ebay" || o.source === "amazon";
+/**
+ * Amazon is never "the cheapest" or "Best price" (its price is licensed for 24 hours and is not in this data). An eBay listing IS the cheapest
+ * when it is genuinely cheaper than every store (owner, 2026-11-18, withdrawing the 2026-11-14 rule): a stock listing, never more than 25%
+ * under the cheapest store (that is a wrong product, not a deal). TCGplayer is an ordinary candidate, as it always was.
+ */
+export const neverCheapest = (o: Offer) => o.source === "amazon";
+export const EBAY_MAX_UNDER_STORES = 0.75;
+export function cheapestOf(inStock: Offer[]): Offer | null {
+  const candidates = inStock.filter((o) => !neverCheapest(o));
+  const store = candidates.find((o) => o.source !== "ebay") ?? null;
+  const ebay = candidates.find((o) => o.source === "ebay") ?? null;
+  if (store && ebay && ebay.cents < store.cents && ebay.cents >= store.cents * EBAY_MAX_UNDER_STORES) return ebay;
+  return store;
+}
 
 export function priceRows(offers: Offer[], market: Market): PriceRows {
   const local = offers.filter((o) => o.market === market);
   const inStock = local.filter((o) => o.inStock).sort(byPrice);
   const outOfStock = local.filter((o) => !o.inStock).sort(byPrice);
   const refs = market === "US" ? [] : offers.filter((o) => o.market === "US" && (o.source === "tcgplayer" || o.source === "ebay")).sort(byPrice);
-  const cheapest = inStock.find((o) => !neverCheapest(o)) ?? null;
+  const cheapest = cheapestOf(inStock);
   let paidAlternative: PriceRows["paidAlternative"] = null;
   if (cheapest && !isPaidSource(cheapest)) {
     const alt = inStock.find(isPaidSource);
