@@ -17,6 +17,7 @@ import { featuredSealed, preorderSetList, sealedInSet } from "@/lib/hubs";
 import { imageAt } from "@/lib/image";
 import { isPreorder, preorderPath } from "@/lib/preorders";
 import { shortName } from "@/lib/names";
+import { rankProducts } from "@/lib/home-demand";
 
 const NOT_A_STORE = new Set(["ebay", "amazon", "tcgplayer"]);
 const STORE_NAME: Record<string, string> = Object.fromEntries(SITE.stores.map((s) => [s.key, s.name]));
@@ -111,16 +112,19 @@ const PREORDER_TYPES = new Set(["Booster Box", "Display", "Collection", "Special
 // Eight boxes: two full rows of the home shelf's four-across grid (it was seven in a swipeable row until 2026-11-13).
 export function sealedHero(featuredCount = 8, preorderSetsMax = 2, perSet = 4): SealedHeroData {
   const sold = (i: HeroItem) => Object.keys(i.prices).length > 0;
-  const featured = featuredSealed(featuredCount + 4).map(heroItem).filter(sold).slice(0, featuredCount);
+  // Most likely to earn first (owner, 2026-11-18; lib/home-rank.ts): a wider pool of the newest featured products, ranked by demand × value.
+  const featured = rankProducts(featuredSealed(featuredCount * 3)).map(heroItem).filter(sold).slice(0, featuredCount);
   const preorders = preorderSetList()
     .filter((s) => isPreorder(s))
     .map((s) => ({
       name: s.name,
       href: preorderPath(s),
       releasesOn: s.releasedOn ?? null,
-      items: sealedInSet(s.id)
+      items: rankProducts(
+        sealedInSet(s.id)
         .filter((p) => p.sealedType !== "Booster Pack" && p.sealedType !== "Case" && (PREORDER_TYPES.has(p.sealedType ?? "") || /box|display/i.test(p.name)))
-        .filter((p) => { const r = refCents(p.id); return r == null || r >= featureMin(); })
+        .filter((p) => { const r = refCents(p.id); return r == null || r >= featureMin(); }),
+      )
         .map(heroItem)
         .filter(sold)
         .slice(0, perSet),
@@ -141,9 +145,11 @@ export function heroPacks(limit = 8, perSet = 2): HeroItem[] {
     .filter((p) => p.kind === "sealed" && p.sealedType === "Booster Pack" && released(p))
     .sort((a, b) => released(b).localeCompare(released(a)) || (refCents(b.id) ?? 0) - (refCents(a.id) ?? 0))
     .slice(0, 60);
+  // Ranked by demand × value before the two-a-set rule (owner, 2026-11-18; lib/home-rank.ts).
+  const ranked = rankProducts(pool);
   const perSetCount = new Map<number, number>();
   const out: HeroItem[] = [];
-  for (const p of pool) {
+  for (const p of ranked) {
     if (out.length >= limit) break;
     const item = heroItem(p);
     if (!Object.keys(item.prices).length) continue;
