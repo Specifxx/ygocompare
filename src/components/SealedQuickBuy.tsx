@@ -11,6 +11,7 @@ import { money } from "@/lib/format";
 import { MARKET_LABEL, type Offer } from "@/lib/site-types";
 import { useMarket } from "./ClientPrefs";
 import { sourceName } from "./PriceTable";
+import { isPaidRow } from "@/lib/best-price";
 
 export interface QuickBuyItem {
   id: number;
@@ -48,7 +49,7 @@ export function SealedQuickBuy({ items, title }: { items: QuickBuyItem[]; title:
                 </p>
               </div>
               {o ? (
-                <a href={goHref(o, p.id, "set_quickbuy")} rel="sponsored nofollow noopener" target="_blank" className="btn-buy min-h-10 shrink-0 whitespace-nowrap">
+                <a href={goHref(o, p.id, "set_quickbuy")} rel="sponsored nofollow noopener" target="_blank" className={`${isPaidRow(o) ? "btn-buy" : "btn-soft"} min-h-10 shrink-0 whitespace-nowrap`}>
                   Buy now <span aria-hidden="true">↗</span>
                 </a>
               ) : (

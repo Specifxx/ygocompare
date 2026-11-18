@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { ago, money } from "@/lib/format";
 import { priceRows } from "@/lib/price-rows";
+import { isPaidRow } from "@/lib/best-price";
 import { MARKET_LABEL, type Offer } from "@/lib/site-types";
 import { useMarket } from "./ClientPrefs";
 import { PRICE_TABLE_ID, sourceName } from "./PriceTable";
@@ -26,7 +27,9 @@ function postage(o: Offer) {
 }
 
 function buyClass(o: Offer) {
-  return o.source === "ebay" ? "btn bg-[#0064d2] px-4 py-2 text-white hover:bg-[#0053ad]" : "btn-buy px-4 py-2";
+  if (o.source === "ebay") return "btn bg-[#0064d2] px-4 py-2 text-white hover:bg-[#0053ad]";
+  // A cheapest store that pays nothing gets the plain button, not the loud green (lib/best-price.ts, owner 2026-11-18).
+  return isPaidRow(o) ? "btn-buy px-4 py-2" : "btn-soft px-4 py-2";
 }
 
 export function CardTopBuy({ offers, productId, ebayQuery }: { offers: Offer[]; productId: number; ebayQuery?: string }) {
