@@ -17,7 +17,7 @@
 import { SITE } from "@/site.config";
 import type { Market, Offer } from "./site-types";
 
-export type ShareMedium = "card" | "sealed" | "list" | "page" | "daily" | "set" | "guide" | "tool";
+export type ShareMedium = "card" | "sealed" | "list" | "page" | "daily" | "set" | "guide" | "tool" | "movers";
 
 /** `path` on the canonical host with the share tags (an existing query string is kept). */
 export function shareUrl(base: string, path: string, medium: ShareMedium): string {

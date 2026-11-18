@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
-import { canon } from "@/lib/site";
 import { dealRows } from "@/lib/tools";
 import { shortName } from "@/lib/names";
 import { DealFinder } from "./DealFinder";
@@ -10,7 +9,10 @@ export const revalidate = 86400; // data only changes with a release (DECISIONS.
 export const metadata: Metadata = {
   title: `${SITE.gameShort} Deal Finder — cards selling below market`,
   description: `Every in-stock ${SITE.game} card and sealed product listed below its TCGplayer market price at stores and on eBay, in the US, UK, Canada, Australia and Europe. Free, updated daily.`,
-  ...canon("/tools/deal-finder"),
+  // No `images` key: the sibling opengraph-image.tsx is the preview (more shareable artefacts, 2026-11-18).
+  alternates: { canonical: "/tools/deal-finder" },
+  openGraph: { type: "website", siteName: SITE.name, url: "/tools/deal-finder" },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function Page() {

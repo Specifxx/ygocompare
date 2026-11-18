@@ -2473,3 +2473,10 @@ added, item count, three most valuable items, "Track yours free at <host>") in t
 can't be shared it saves the PNG and copies the link. No server, no function, no Vercel image cost, nothing sent to us.
 Link: `/?utm_source=share&utm_medium=collection&utm_campaign=collection-card`. Counted in Vercel as `share {kind:
 collection, how: image|text|saved|copy}`, only once it really went out.
+
+## Movers and Deal Finder share images (owner, 2026-11-18: "we need more shareable artefacts")
+
+`/movers` (this week's four risers and three fallers) and `/tools/deal-finder` (today's five biggest US store deals,
+the `shareDeals` rows of the share-for-a-deal card: never eBay, Amazon or TCGplayer) get their own
+`opengraph-image.tsx`, one image each, text only (2026-11-08 cost cap), a day in the CDN; their pages drop the
+`images` key so the sibling file is the preview. `/movers` gets a share button (medium `movers`). Ported from TCG Prices.
