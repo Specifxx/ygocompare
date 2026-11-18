@@ -11,6 +11,7 @@ import { readSetPrices, readSummary, type SummaryEntry } from "./price-store";
 import { decodeOffer } from "./offer-codec";
 import { referenceCents } from "./import/tcgcsv";
 import type { Series } from "./series";
+import type { HotInput } from "./hot100";
 import { SITE } from "@/site.config";
 
 const DIR = path.join(process.cwd(), "data");
@@ -134,6 +135,15 @@ export const refCents = (id: number): number | null => referenceCents(summaryOf(
 export function historyOf(p: Product): Series {
   const h = read<Record<string, Series>>(`history/${p.setId}.json`, {});
   return h[p.id] ?? [];
+}
+
+/** Every product with its price history for the weekly Hot 100 (lib/hot100.ts): one history file read per set. */
+export function hotInputs(): HotInput<Product>[] {
+  const bySet = new Map<number, Record<string, Series>>();
+  return products().map((p) => {
+    if (!bySet.has(p.setId)) bySet.set(p.setId, read<Record<string, Series>>(`history/${p.setId}.json`, {}));
+    return { item: p, series: bySet.get(p.setId)![p.id] };
+  });
 }
 
 export function productsInSet(setId: number) {
