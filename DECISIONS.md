@@ -2480,3 +2480,15 @@ collection, how: image|text|saved|copy}`, only once it really went out.
 the `shareDeals` rows of the share-for-a-deal card: never eBay, Amazon or TCGplayer) get their own
 `opengraph-image.tsx`, one image each, text only (2026-11-08 cost cap), a day in the CDN; their pages drop the
 `images` key so the sibling file is the preview. `/movers` gets a share button (medium `movers`). Ported from TCG Prices.
+
+## The weekly Hot 100 at /hot-100 — 2026-11-18
+
+**What.** A new page, `/hot-100`, with its own share image: every product whose TCGplayer market price rose over the
+last seven days, biggest rise first, up to 100, each with its place on last week's chart (▲ / ▼ / NEW). Built only from
+the committed daily price history (`lib/hot100.ts`, pure; `hotInputs()` in `lib/data.ts` reads one history file per
+set). A week with fewer real risers (products worth $3 or more) is the Hot 37, never padded with flat or falling ones,
+the same honesty rule as RiftCompare's Hot 40. `/movers` links to it.
+
+**Why.** Owner, 2026-11-18: RiftCompare's Hot chart works on Reddit as a plain link and title and brings real visits;
+every site should have one stable URL to post once a week (tagged `utm_source=reddit&utm_medium=social&utm_campaign=hot100-<site>-<date>`).
+Shipped with `[deploy] [urgent]` on the owner's ask for today's links. `tests/hot100.test.ts`.

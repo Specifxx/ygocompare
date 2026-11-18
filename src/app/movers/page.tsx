@@ -26,6 +26,7 @@ export default function Movers() {
         <h1 className="page-h1">{SITE.gameShort} price movers</h1>
         <ShareButton path="/movers" name={`${SITE.gameShort} price movers`} medium="movers" text={`This week's biggest ${SITE.gameShort} price moves, from daily TCGplayer market prices`} className="mt-2" />
         <p className="page-sub">Products worth $3 or more. Based on TCGplayer market price, recorded daily.</p>
+        <p className="mt-1 text-sm"><Link className="link" href="/hot-100">This week&apos;s {SITE.gameShort} Hot 100 →</Link></p>
       </header>
       <MoversTable rows={tableRows(w, mo)} noun="products" />
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
