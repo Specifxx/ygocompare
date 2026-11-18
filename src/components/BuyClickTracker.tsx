@@ -11,6 +11,7 @@ import { track } from "@vercel/analytics";
 import { SITE } from "@/site.config";
 import { cartArmNow } from "@/lib/cart-list";
 import { dockArmNow } from "@/lib/dock-arm";
+import { adLookNow } from "@/lib/ad-look";
 
 const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
@@ -31,7 +32,7 @@ export function BuyClickTracker() {
         try {
           host = new URL(q.get("u") ?? "").hostname.replace(/^www\./, "");
         } catch {}
-        track("buy_click", { dock_arm: dockArmNow(), cart_arm: cartArmNow(),
+        track("buy_click", { dock_arm: dockArmNow(), ad_look: adLookNow(), cart_arm: cartArmNow(),
           retailer: NAMES[source] ?? source,
           retailer_key: source,
           market: q.get("m") ?? "US",
