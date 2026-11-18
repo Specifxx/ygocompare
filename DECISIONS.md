@@ -2335,3 +2335,7 @@ service like DexCompare, MTG Compare and TCG Prices: `/account` (emailed sign-in
 ads, 200 alerts). A quiet account icon in the header from sm up and "Sign in / My watches" in the phone menu; no pop-up, no corner
 card, no back-in-stock button yet. Members' banner ads (`data-ad="inline"`) hide under `data-adfree`; price tables are untouched.
 The browser keeps one token (`ygo_premium_v1`); no page reads a cookie or header. Sign-ups: RiftCompare admin Accounts › YGO Compare.
+
+## 2026-11-18: llms.txt points AI agents at the free price file
+
+`/prices.json` already existed, but nothing an agent reads said so. `llms.txt` now has a "Free price data and citing" block: the file, that it is free and open to every origin, the date to quote and a suggested credit line. No new route, no spend.
