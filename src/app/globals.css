@@ -171,9 +171,9 @@ h1, h2, h3 { letter-spacing: -0.01em; }
   .btn-ad {
     @apply btn border border-transparent bg-ink text-surface hover:bg-ink/85; /* calm palette, 2026-11-12: ink, not eBay blue */
   }
-  /* Never Amazon's own orange: the Associates Operating Agreement forbids styling that could pass for Amazon's site. */
+  /* Amazon's button (owner, 2026-11-18): a calm amber with near-black words (9:1) in both themes, so it never reads as the site's own buy button or as eBay's or TCGplayer's. */
   .btn-amazon {
-    @apply btn bg-brand-soft text-brand-strong hover:brightness-105;
+    @apply btn border border-[#B7791F] bg-[#F5A524] text-[#111111] hover:bg-[#DC8A0B];
   }
   .ad-chip {
     @apply inline-flex items-center gap-1.5 rounded-full border border-dashed border-ad-line bg-surface px-3 py-1 text-xs font-medium text-ink transition-colors hover:border-ink;
