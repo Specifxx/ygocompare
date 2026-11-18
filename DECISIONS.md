@@ -2389,6 +2389,17 @@ units that show other products are ignored).
 - Rollback: remove `<LeaveNudge />` from `app/layout.tsx`.
 - Not on DexCompare or MTG Compare until their quick-view A/B test ends (3 Dec), so the two tests never mix.
 
+## 2026-11-18: the Amazon button is amber, and the quick view's "See full page" is a real button (owner)
+
+The owner wants the Amazon row to stand apart from the site's own buy button and from eBay's and TCGplayer's. `.btn-amazon` (`globals.css`) is now a calm amber
+(`#FFA41C`, hover `#FA8900`, 1px border `#E08A00`) with near-black words (`#111`, about 9:1), written with no theme variant so it reads the same in the light
+and the dark theme (`tests/contrast.test.ts` measures it where it lists the class). `PriceTable` draws the Amazon row's link with it (the row on the product page
+and in the quick view are the same component). The row's order, price, "Ad" pill, `rel="sponsored nofollow noopener"`, tracking and link are unchanged, and the
+Cheapest logic is untouched. This reverses the old comment that kept Amazon's own orange off the site; the owner's call, but the Associates agreement's wording on
+styling that could pass for Amazon's own is worth a look if Amazon objects. No priced row means no Amazon row (2026-11-12), so there is no unpriced search row to colour.
+
+The quick view's bottom link ("See price history and details", a ghost button) became a full-width `btn-primary` at least 48px tall, "See full page: price history and
+details", still pinned under the scrolling prices so it is on screen on a phone without scrolling. One button only. `tests/amazon-button-amber.test.ts` pins both.
 ## 2026-11-18: Share for a deal, and guides, sets and Deal Finder can be shared (owner)
 
 Owner: "a share feature … the ability to share pages and guides", then "if you share … you can open Deal Finder … gives
