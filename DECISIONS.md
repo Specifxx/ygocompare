@@ -2339,3 +2339,12 @@ The browser keeps one token (`ygo_premium_v1`); no page reads a cookie or header
 ## 2026-11-18: llms.txt points AI agents at the free price file
 
 `/prices.json` already existed, but nothing an agent reads said so. `llms.txt` now has a "Free price data and citing" block: the file, that it is free and open to every origin, the date to quote and a suggested credit line. No new route, no spend.
+
+## 2026-11-18: Barcodes on sealed pages (owner: "unique identifiers … are easy SEO results")
+
+Search Console (TCGEmpire maintenance task `gsc-identifiers`, 90 days to 15 Nov): KaeYoung's every Google click came from a typed barcode,
+and Gundam Compare's kit JANs and ScentCompare's EANs draw impressions too. TCGplayer's catalogue (`extendedData` "UPC") carries a barcode
+for about half of the sealed products, so the import keeps it as `Product.upc` (`lib/gtin.ts`, the same file as TCG Prices): check digit
+verified, an 11-digit UPC given back its leading zero, dropped when TCGplayer files one code on two or more products (a case code on every
+blister). Never taken from a store title, never invented. The product page shows it with the TCGplayer ID, its Product markup carries
+`gtin12`/`gtin13` and `productID: tcgplayer:<id>`, and `/api/search` finds a product by its whole barcode or TCGplayer id (exact only).
