@@ -24,6 +24,7 @@ import { QuickView } from "@/components/QuickView";
 import { RateCard } from "@/components/site-reviews/RateCard";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ReturnNudge } from "@/components/ReturnNudge";
+import { LeaveNudge } from "@/components/LeaveNudge";
 import { AdFreeSync } from "@/components/premium/AdFreeSync";
 import { ADFREE_BOOT_SCRIPT } from "@/lib/premium-member";
 import { ShareArrival } from "@/components/ShareArrival";
@@ -105,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <BuyClickTracker />
         <ReturnNudge />
+        <LeaveNudge />
         <AdFreeSync />
         <ShareArrival />
       </body>

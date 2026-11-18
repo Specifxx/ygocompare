@@ -2355,3 +2355,20 @@ for about half of the sealed products, so the import keeps it as `Product.upc` (
 verified, an 11-digit UPC given back its leading zero, dropped when TCGplayer files one code on two or more products (a case code on every
 blister). Never taken from a store title, never invented. The product page shows it with the TCGplayer ID, its Product markup carries
 `gtin12`/`gtin13` and `productID: tcgplayer:<id>`, and `/api/search` finds a product by its whole barcode or TCGplayer id (exact only).
+## 2026-11-18: Leave nudge, an A/B test of a small "Before you go" card (owner: "we could have pop up affiliate clicks")
+
+The owner asked for more clicks on the paid links and said pop-ups that drive them are fine. The return nudge (earlier today) only
+reaches visitors who clicked a store; most product-page readers click nothing. `components/LeaveNudge.tsx` (`lib/leave-nudge.ts`) shows
+the page's OWN eBay and TCGplayer links for that product in the return nudge's small card, when a reader who clicked no buy link is
+leaving: on a desktop when the pointer leaves the window through the top after 8 s on the page, on a phone after 35 s of reading with a
+scroll. Never on load, never after any buy click this session, once a session and once every three days per visitor, never Amazon,
+never a price or "best" claim, never a modal (a `role=status` card with a close button and an "Ad" label, gone after 25 s), yields
+to dialogs, the rating card and the return nudge. Only on `/card/<slug>` and only when the page's own paid links name one product (ad
+units that show other products are ignored).
+
+- A/B: half the visitors never see it (localStorage `ln-arm`). `leave_eligible` {arm, trigger} fires in both arms, `leave_shown`
+  and `leave_click` in the "on" arm, every `buy_click` carries `leave_arm`, and its links say `from=<placement>_leave`. Lift = paid
+  buy clicks per eligible visitor, on against off; read after two weeks (2 Dec). Keep it if paid clicks rise and total buy clicks do
+  not fall; otherwise remove it.
+- Rollback: remove `<LeaveNudge />` from `app/layout.tsx`.
+- Not on DexCompare or MTG Compare until their quick-view A/B test ends (3 Dec), so the two tests never mix.
