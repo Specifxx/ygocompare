@@ -2652,3 +2652,12 @@ this" sends a signed-out visitor to `/account?next=…` first. The header's acco
 words from 400px, the icon below), a gold "Premium" pill from md for non-members, and the phone menu opens with "Sign in / Sign
 up" and "Premium · 14 days free". `/account` signed in is an account hub. Browser-only (one CDN copy per page); the collection
 still lives in the browser. Same change as MTG Compare and DexCompare.
+
+## 2026-11-19 — Continue with Google and Discord on /account
+
+Owner, 19 Nov: Google and Discord sign-in on all our sites, accounts for retention. `/account` has "Continue with Google" and
+"Continue with Discord" (`OAuthButtons.tsx`): plain links to RiftCompare's `/api/sister-premium/oauth/<provider>`, which runs the
+provider's sign-in through RiftCompare's existing apps and comes back to `/account/verify#c=<code>&n=<path>`, the emailed link's own
+door. One account across our card sites, linked by the verified address. A site with its own Google client keeps Google's in-page
+button instead. `/account/verify` now lands on the page the visitor was headed to (or the account hub), and a failed round trip
+shows its reason on `/account`.
