@@ -12,6 +12,7 @@ import {
   pctChange,
   readDays,
   readVault,
+  collectionCsv,
   recordDay,
   setItemQty,
   shareText,
@@ -28,6 +29,8 @@ import {
 import { track as trackShare } from "@vercel/analytics";
 import { VAULT_SITE } from "./vault-config";
 import { cardLink, cardModel, drawCard, saveBlob } from "./collection-card";
+import { usePremium } from "@/components/premium/usePremium";
+import { MEMBER_HISTORY_DAYS } from "@/lib/premium-member";
 
 function Change({ from, to, currency, label }: { from: number; to: number; currency: string; label: string }) {
   const pct = pctChange(from, to);
@@ -42,7 +45,22 @@ function Change({ from, to, currency, label }: { from: number; to: number; curre
   );
 }
 
+function Spark({ days, market }: { days: DayTotal[]; market: string }) {
+  const pts = days.filter((x) => x.m === market);
+  if (pts.length < 2) return <p className="ce-vault-muted">Your value history builds one point a day, each day you open this page. Come back tomorrow.</p>;
+  const lo = Math.min(...pts.map((p) => p.c));
+  const hi = Math.max(...pts.map((p) => p.c));
+  const span = hi - lo || 1;
+  const d = pts.map((p, n) => `${n ? "L" : "M"}${((n / (pts.length - 1)) * 300).toFixed(1)} ${(46 - ((p.c - lo) / span) * 40).toFixed(1)}`).join(" ");
+  return (
+    <svg viewBox="0 0 300 52" role="img" aria-label={`Collection value, ${pts.length} days`} className="mt-2 h-14 w-full max-w-md" preserveAspectRatio="none">
+      <path d={d} fill="none" stroke="currentColor" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+    </svg>
+  );
+}
+
 export function VaultView() {
+  const member = usePremium().status === "member";
   const [items, setItems] = useState<VaultItem[] | null>(null);
   const [file, setFile] = useState<PriceFile | null>(null);
   const [failed, setFailed] = useState(false);
@@ -66,11 +84,11 @@ export function VaultView() {
   useEffect(() => {
     if (!file || !totals.length) return;
     let next = readDays();
-    for (const t of totals) if (t.nowCents > 0) next = recordDay(next, t.market, t.nowCents);
+    for (const t of totals) if (t.nowCents > 0) next = recordDay(next, t.market, t.nowCents, new Date(), member ? MEMBER_HISTORY_DAYS : undefined);
     writeDays(next);
     // once per load of the price file
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [file]);
+  }, [file, member]);
 
   if (items == null) return <p className="ce-vault-muted">Loading your collection…</p>;
   if (!items.length)
@@ -158,12 +176,33 @@ export function VaultView() {
                 {t.units === 1 ? "1 item" : `${t.units} items`}
                 {t.unpriced ? ` · ${t.unpriced} not in stock anywhere today, so not counted` : ""}
               </div>
+              {member ? <Spark days={readDays()} market={t.market} /> : (
+                <p className="ce-vault-muted">
+                  <a href="/premium">Premium</a> keeps a year of value history and exports your collection to a spreadsheet.
+                </p>
+              )}
               <button type="button" className="ce-vault-btn" onClick={() => share(t, since)}>
                 {copied ? "Picture saved, link copied" : "Share my collection"}
               </button>
             </section>
           );
         })}
+      {member && (
+        <button
+          type="button"
+          className="ce-vault-btn"
+          onClick={() => {
+            const url = URL.createObjectURL(new Blob([collectionCsv(valued)], { type: "text/csv;charset=utf-8" }));
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${VAULT_SITE.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-collection-${new Date().toISOString().slice(0, 10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+          }}
+        >
+          Export to spreadsheet (CSV)
+        </button>
+      )}
       <ul className="ce-vault-list">
         {valued.map((i) => {
           const key = itemKey(i);
