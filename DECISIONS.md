@@ -2662,6 +2662,16 @@ door. One account across our card sites, linked by the verified address. A site 
 button instead. `/account/verify` now lands on the page the visitor was headed to (or the account hub), and a failed round trip
 shows its reason on `/account`.
 
+## 2026-11-19: eBay's button is eBay blue again
+
+Owner (2026-11-19): "our eBay clicks have still stagnated. We're nowhere near our all-time high … I really need to increase it."
+Vercel buy clicks: eBay about 240 a day across the network before 12 Nov, about 170 since; 5-11 Nov vs 12-18 Nov DexCompare 706 to
+489, RiftCompare 298 to 165, OP Compare 153 to 61. The fall starts on 12 Nov, when the calm palette made eBay's button ink;
+TCGplayer, which kept its own blue button, rose (DexCompare 545 to 779, MTG Compare 160 to 363). So eBay's buttons wear eBay's own
+blue again (#3665f3, white ink, fixed in both themes) on every site; nothing else about the rows changes (no outline, tint, order or
+label), and the cheapest row keeps its mark. RiftCompare and OP Compare had started a 50/50 the same morning; it ended for
+everyone. Read: eBay buy clicks per 100 visitors, the week after release vs 12-18 Nov.
+
 ## 2026-11-19: The price history chart draws two lines, OP Compare's look (owner)
 
 Owner: "I really really like opcompare's price history where you have the tcgplayer market price as well as the cheapest
