@@ -2643,3 +2643,12 @@ content "spread across a large network of sites" and re-dating pages to look fre
   latest import: their words do not change with prices.
 
 Black Friday and Cyber Monday pages are unchanged (in season). Judge the effect on 1 to 8 Dec against 3 to 9 Nov.
+
+## 2026-11-19 — My collection needs an account; Sign in and Premium always visible
+
+Owner, 19 Nov: "you can only use my collection if you are signed in and the login/signup button should be visible for all
+sites", "premium should also be visible". `/collection` shows a sign-in card until this browser holds an account token; "I own
+this" sends a signed-out visitor to `/account?next=…` first. The header's account link now shows at every width ("Sign in" in
+words from 400px, the icon below), a gold "Premium" pill from md for non-members, and the phone menu opens with "Sign in / Sign
+up" and "Premium · 14 days free". `/account` signed in is an account hub. Browser-only (one CDN copy per page); the collection
+still lives in the browser. Same change as MTG Compare and DexCompare.
