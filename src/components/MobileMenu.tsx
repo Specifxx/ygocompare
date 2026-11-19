@@ -11,6 +11,7 @@ import { LogoMark } from "./Logo";
 import { isActivePath } from "./NavLink";
 import { MarketChooser } from "./ClientPrefs";
 import { ThemeToggle } from "./ThemeToggle";
+import { MenuAccount } from "@/components/premium/MenuAccount";
 
 /**
  * The menu button and its sheet (the engine's phone menu, from MTG Compare): a native modal <dialog> (showModal: the page behind is
@@ -76,6 +77,8 @@ export function MenuSheet({ groups, pathname, onClose: close }: { groups: NavGro
           <Icon name="close" size={20} />
         </button>
       </div>
+
+      <MenuAccount onNavigate={close} />
 
       <nav aria-label="Sections" className="mt-1">
         {groups.map((g) => (
