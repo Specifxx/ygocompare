@@ -2724,3 +2724,17 @@ against the $6 cap: every build rewrites the ISR cache and burns build CPU. `scr
 So one site builds at most three times a day, and the 19 production projects at most 57 a day (normally about 25).
 Batch urgent changes into one release instead of one per merge. Pinned by `tests/deploy-gap.test.ts`. The same change
 went to every Compare site's gate.
+
+## 2026-11-20: a title naming a longer set is that set's, and three more card/foreign leaks
+
+An audit of the 18 Nov import (in-stock store prices under 60% of TCGplayer's market) found the plain "Legendary
+Duelists Booster Box" (market US$213) and "Booster Pack" carrying about 70 offers from Soulburning Volcano, Synchro
+Storm, Duels From the Deep, Rage of Ra and Season 1-3 listings: a title without "1st Edition" missed its own product
+(which needs the edition word) and fell to the shorter set's, the only product whose name it still covered.
+`matchSealed` now refuses a product when the title carries the whole name of a longer set built on the product's set
+name ("Legendary Duelists: Soulburning Volcano" over "Legendary Duelists"), unless the product's own name carries those
+words (TCGplayer files "Raging Tempest Special Edition Box" under Raging Tempest). The same rule keeps "Dragons of Legend:
+The Complete Series" packs off the Dragons of Legend pack, Round 2 off Battle Pack 2 and "Onslaught of the Fire Kings"
+off "Fire Kings". It only refuses. Also left out now: Italian listings marked "ITA" (never "1a Edizione" alone, which
+Italian shops write on English boxes), German "XXXX-DE" / "DE 1. Auflage" packs, movie-pack cards coded "MVP1-ENSV5",
+and "1st Edition Rare" singles. Pinned in `tests/match.test.ts`.

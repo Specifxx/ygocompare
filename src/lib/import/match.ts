@@ -289,7 +289,13 @@ export interface MatchResult {
 // Chinese and Korean script count too.
 const FOREIGN = /\b(japanese|japan|jpn|jap|jp|chinese|simplified|traditional|chn|french|fran[cç]ais|german|deutsch|italian|italiano|spanish|espa[nñ]ol|korean|kor|portuguese|thai|indonesian|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\)|\(kr\))\b/i;
 const CJK = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
-export const isForeign = (title: string) => FOREIGN.test(title) || CJK.test(title);
+// Live 2026-11-20 (YGO): an Italian "Bustina 3 carte ... Star Pack VRAINS 1a Edizione ITA" at US$1.00 and a German
+// "Lord of the Tachyon Galaxy Booster Pack LTGY-DE 1. Auflage" sat on the English packs' pages. The language lives in
+// "ITA" or the set code's language part ("LTGY-DE"), which only an upper-case code can show safely. Never "1a
+// Edizione" alone: Italian shops write it on English boxes ("... 1a Edizione ENG").
+const FOREIGN_MORE = /\b(ita|deu)\b|\bde[\s-]+1\.?[\s-]+auflage\b/i;
+const FOREIGN_CODE = /\b[A-Z]{2,4}\d{0,2}-(DE|FR|IT|PT|KR|JP)\b/;
+export const isForeign = (title: string) => FOREIGN.test(title) || FOREIGN_MORE.test(title) || FOREIGN_CODE.test(title) || CJK.test(title);
 
 /** The listing's own URL slug ("...-gd06-jpn"): a store that keeps the
  *  language only in the handle is still a foreign product. Read for the
@@ -411,6 +417,18 @@ export function matchSealed(title: string, idx: MatchIndex): MatchResult | null 
   const have = new Set(tokens(title).filter((t) => !STOP.has(t) || t === "booster"));
   const type = sealedTypeOf(title);
   const codes = setCodesInTitle(title, idx);
+  // Sets whose whole name the title carries. Live 2026-11-20 (YGO): "Legendary Duelists 10: Soulburning Volcano Booster
+  // Box" without "1st Edition" missed its own product and fell to the plain "Legendary Duelists Booster Box" (US$213
+  // market) at US$47; five stores' Synchro Storm, Soulburning Volcano and Duels From the Deep boxes and packs did the
+  // same. A title that names a longer set built on a product's set name is that set's, never the shorter one's.
+  const named = [...idx.setName].filter(([, t]) => t.length && t.every((w) => have.has(w)));
+  // The product's own name may carry the longer set's words: TCGplayer files "Raging Tempest Special Edition Box" under
+  // Raging Tempest while a "Raging Tempest: Special Edition" set exists too.
+  const narrower = (p: Product) => {
+    const own = idx.setName.get(p.setId) ?? [];
+    const name = new Set(tokens(p.name));
+    return named.some(([id, t]) => id !== p.setId && t.length > own.length && own.every((w) => t.includes(w)) && !t.every((w) => own.includes(w) || name.has(w)));
+  };
   const scored: MatchResult[] = [];
   for (const p of idx.sealed) {
     if (sealedTypeOf(p.name) !== type) continue;
@@ -421,6 +439,7 @@ export function matchSealed(title: string, idx: MatchIndex): MatchResult | null 
     const setTokens = idx.setName.get(p.setId) ?? [];
     if (setTokens.length && overlap(setTokens, have) < 1) continue;
     if (!codesAgree(p, codes, idx)) continue;
+    if (narrower(p)) continue;
     const own = idx.editions ? idx.setEdition.get(p.setId) : null;
     const need = tokens(p.name).filter((t) => !STOP.has(t) && t !== own);
     const s = overlap(need, have);
@@ -494,7 +513,10 @@ export function looksSealed(title: string, productType = "", style?: NumberStyle
 // at US$0.60 beside a US$132 first-edition pack, a Kaiba Evolution Starter Deck
 // at US$0.18. A sealed product's own title has no rarity and no card code.
 const CARD_RARITY = /\b(common|short print|super rare|ultra rare|secret rare|ultimate rare|ghost rare|starfoil( rare)?|shatterfoil( rare)?|mosaic rare|collector'?s rare|platinum rare|prismatic secret rare|quarter century secret rare|starlight rare|parallel rare)\b/i;
-const CARD_CODE = /\b[a-z0-9]{2,5}[- ]?(en|ae|sp|ju|fc|jp)\d{3}\b/i;
+// "MVP1-ENSV5" (Live 2026-11-20: Obelisk the Tormentor on the Dark Side of Dimensions Movie Pack at US$4) is a card
+// code too, and so is "1st Edition Rare" ("Raigeki 1st Edition Rare Battle Pack Epic Dawn" at US$3 on the pack).
+const CARD_CODE = /\b[a-z0-9]{2,5}[- ]?(en|ae|sp|ju|fc|jp)(\d{3}|[a-z]{1,2}\d{1,3})\b/i;
+const EDITION_RARE = /\b(1st edition|unlimited( edition)?|limited edition) rare\b/i;
 const CARD_VERSION = /\bv\.?\s?\d\b/i;
 const EXTRA_OK = new Set([
   "yu", "gi", "oh", "yugioh", "tcg", "konami", "sealed", "new", "pre", "order", "preorder", "north", "american", "english",
@@ -504,7 +526,7 @@ const EXTRA_OK = new Set([
 /** True when a store title (and its URL slug, hyphens as spaces) names a single card, not a sealed product. */
 export function looksLikeCard(title: string, handle = ""): boolean {
   const t = `${title} ${handle}`;
-  return CARD_RARITY.test(t) || CARD_CODE.test(t) || CARD_VERSION.test(title);
+  return CARD_RARITY.test(t) || CARD_CODE.test(t) || EDITION_RARE.test(t) || CARD_VERSION.test(title);
 }
 
 /** Title words the matched product's name lacks. A singles store's "Vylon Stella - Battle Pack 2: War of the Giants"
