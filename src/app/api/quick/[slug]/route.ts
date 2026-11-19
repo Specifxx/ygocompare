@@ -5,7 +5,7 @@
 // Site"), but never Amazon's price: that stays on the card page (24-hour licence). A function response kept by Vercel's CDN for six hours,
 // like the pages (DECISIONS.md "Vercel cost"); the data only changes with a release.
 import { NextResponse } from "next/server";
-import { historyOf, meta, priceOf, productBySlug, setById } from "@/lib/data";
+import { historyOf, meta, priceOf, productBySlug, setById, storeLowsOf, historyThrough } from "@/lib/data";
 import { imageAt } from "@/lib/image";
 import { shortName } from "@/lib/names";
 import { adSearch, cardAds } from "@/lib/card-ads";
@@ -31,6 +31,9 @@ export function GET(_req: Request, { params }: { params: { slug: string } }) {
       fx: meta()?.fx ?? { USD: 1 },
       // The price history chart at the top of the panel (2026-11-17): the card page's own series.
       history: historyOf(p),
+      // The chart's local line (cheapest store price per market) and its right edge (2026-11-19).
+      lows: storeLowsOf(p),
+      through: historyThrough(),
       amazon: p.kind === "sealed" && amazonCarries(p) ? amazonLinks(p.id, shortName(p.name)) : null,
       // As the tile sends them (ProductTile.tsx), for a quick view opened from a plain link.
       name: shortName(p.name),
