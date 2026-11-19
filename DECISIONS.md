@@ -2579,3 +2579,28 @@ verdict. 1,086 sealed pages asked to be indexed for 54 impressions in 56 days.
 - **Who runs it**: the about page names the co-founders (Bill and George), says AI tools help with code and guides while
   prices are read by a program, and gives the running cost (about A$790 a month for the group, our books to 15 Nov 2026).
   It no longer links to the sister sites from the body.
+
+## 2026-11-19: The ad-intensity test — YGO Compare is a heavy site (owner)
+
+The owner, 2026-11-19, after a week of turning ad ideas on and off: test it instead. "Dex Compare and Yu-Gi-Oh! Compare go super
+heavy on ads, much heavier than ever done before. But people can still use the site once they close all the ads." Rift Compare and
+MTG Compare stay light (both still rank) on the core-update quality pass's placement (#212 here): ads below the content, no exit pop-up.
+
+The heavy set here (`lib/ad-heavy.ts`, `components/heavy/HeavyAds.tsx`, the root layout; `AD_HEAVY` is the one switch):
+
+- **The banner pair again at the TOP** of every page, above the content (`InlineAds` with page `heavytop`, so its /go tags are
+  `heavytop-banner-*`). The pair below the content stays. Browser only, its height held in the server HTML.
+- **A "Recommended for you" pop-up** of six TCGplayer products that covers the page until it is closed (✕, "No thanks, continue to
+  the site", Esc or the backdrop). Never on the page a visitor lands on (Google judges intrusive interstitials on the landing page);
+  on the 2nd, 5th and 8th page of a visit, at most three a visit. Tagged `heavy-popup`.
+- **A slide-in "Recommended on TCGplayer" card** after 12 s on a page without a pop-up, closable, at most four a visit (`heavy-slidein`).
+- **TCGplayer only in the pop-up and the slide-in:** the eBay Partner Network agreement needs EPN's written approval for pop-up
+  formats, and the owner chose to keep eBay out of pop-ups until it approves. eBay stays in the banners, the dock and the rows.
+- The leave nudge stays off: it carries eBay. Everything is labelled "Ad" and never shown to ad-free members.
+- CLAUDE.md's "no interstitials" line (owner, 2026-11-17) predates this; the owner's 2026-11-19 instruction is the exception for
+  this site, and the line itself is left for the owner to amend.
+
+The read is on 10 Dec. It compares the heavy pair (Dex, YGO) with the light pair (Rift, MTG) on paid buy clicks per 100 visitors,
+earnings per 100 visitors, returning visitors and pages per visit, each against the same site's 4-17 Nov. Stop rule: switch
+`AD_HEAVY` off if daily visitors fall 30% below the week before. YGO's Google impressions have been near zero since the core update,
+so Search Console is only watched here, not used to stop the test.
