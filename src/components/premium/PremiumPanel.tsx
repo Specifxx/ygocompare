@@ -12,9 +12,10 @@ const PLANS: Record<Plan, { price: string; per: string; note: string }> = {
 };
 
 const FEATURES = [
-  "No banner ads, on every page and on your phone",
+  "A year of collection value history, and your collection as a spreadsheet",
   "Up to 200 price alerts (free: 25)",
   "Your watch list with today's lowest price",
+  "No banner ads, on every page and on your phone",
   "One account for YGO Compare, DexCompare, MTG Compare, TCG Prices and RiftCompare",
 ];
 

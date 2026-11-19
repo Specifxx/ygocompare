@@ -104,7 +104,8 @@ const tabs = (): Tab[] => [
   { key: "search", label: "Search", icon: <svg {...SVG}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg> },
   { key: "deals", label: "Deals", href: "/tools/deal-finder", also: ["/movers", "/restocks", "/preorders"], icon: <svg {...SVG}><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z" /><circle cx="7.5" cy="7.5" r="1.5" /></svg> },
   { key: "cart", label: "Cart", icon: <CartIcon size={22} /> },
-  { key: "menu", label: "Menu", icon: <svg {...SVG}><path d="M4 7h16M4 12h16M4 17h16" /></svg> },
+  // My collection (owner, 2026-11-19: "replace the menu with My Collection"); the header keeps its menu button on phones.
+  { key: "collection", label: "Collection", href: "/collection", icon: <svg {...SVG}><rect x="7" y="3" width="13" height="17" rx="2" /><path d="M4 7v12a2 2 0 0 0 2 2h10" /></svg> },
 ];
 
 function narrowNow(): boolean {

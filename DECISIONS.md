@@ -2611,3 +2611,14 @@ The owner, 2026-11-19: "I want it for all the sites, so people have like an ad o
 2026-11-18 (`lib/dock-arm.ts`) ends early with its "on" arm for every visitor: the eBay (and, where the site has it, TCGplayer) dock is
 stacked just above the phone bottom nav whenever it shows, instead of taking turns with the nav. Its own rules are unchanged: after a
 scroll, labelled "Ad", ✕ for the visit, never Amazon. `dock_arm` on buy_click now always reads "on".
+
+## 2026-11-19 — Collector-first Premium page, members' collection history, Collection in the phone bar
+
+Owner, 2026-11-19: Premium "very easy to get", with a trial and a page as attractive as RiftCompare's, freemium; and "replace the menu
+with My Collection" on the bottom nav. YGO stays sealed-only until at least 9 Dec (decided with MTG Compare's card numbers).
+
+- **/premium**: DexCompare's and MTG Compare's new page with YGO's facts: a hero with the 14-day trial, six tiles of what ships, a Free and
+  Premium table and an FAQ.
+- **Members' collection history and CSV** (DexCompare's `vault.ts` / `VaultView.tsx`): the panel now promises it, so the collection keeps
+  `MEMBER_HISTORY_DAYS` for a member, with a chart and a spreadsheet export. Free visitors keep the change since their last look.
+- **Bottom nav**: Collection (/collection) replaces Menu; the header keeps its menu button on phones. No eBay calls.
