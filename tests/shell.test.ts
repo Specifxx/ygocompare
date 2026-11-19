@@ -17,7 +17,8 @@ test("the shell is one header row over one centred column: no sidebar, no ad in 
   const layout = readFileSync("src/app/layout.tsx", "utf8");
   assert.doesNotMatch(layout, /max-w-shell|SideNav|navGroups|shopNav/, "no shell beside a sidebar");
   assert.ok(!existsSync("src/components/SideNav.tsx"), "the sidebar is deleted, not hidden");
-  assert.match(layout, /<main id="main" className="min-w-0 flex-1">\s*<div className="page py-6">\{children\}<\/div>\s*<\/main>/);
+  // The ad-intensity test (lib/ad-heavy.ts, owner 2026-11-19) may put the banner pair above the content, behind AD_HEAVY only.
+  assert.match(layout, /<main id="main" className="min-w-0 flex-1">\s*(?:\{\/\*[\s\S]*?\*\/\}\s*\{AD_HEAVY && \([\s\S]*?\)\}\s*)?<div className="page py-6">\{children\}<\/div>\s*<\/main>/);
   assert.match(layout, /<DockAds /);
   assert.doesNotMatch(layout, /sidenav-w|fonts\.googleapis/);
   // One line under the header at most: the sale's strip in its season, else the release on pre-order (its link is in the Deals menu).
