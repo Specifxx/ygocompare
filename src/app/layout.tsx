@@ -33,6 +33,7 @@ import { adSearch, cardAds } from "@/lib/card-ads";
 import { InlineAds } from "@/components/InlineAds";
 import { HeavyPopups } from "@/components/heavy/HeavyAds";
 import { AD_HEAVY } from "@/lib/ad-heavy";
+import { AdRouteGate } from "@/components/AdRouteGate";
 import { ReturnBeacon } from "@/components/ReturnBeacon";
 import { SinceLastVisit } from "@/components/SinceLastVisit";
 
@@ -100,9 +101,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* The ad-intensity test (lib/ad-heavy.ts, owner 2026-11-19): YGO Compare is a HEAVY site, so the banner pair also sits at
                 the top of every page; the light sites keep it below the content only. */}
             {AD_HEAVY && (
-              <div className="page pt-4">
-                <InlineAds ads={cardAds({ limit: 10 })} search={adSearch()} page="heavytop" />
-              </div>
+              <AdRouteGate>
+                <div className="page pt-4">
+                  <InlineAds ads={cardAds({ limit: 10 })} search={adSearch()} page="heavytop" />
+                </div>
+              </AdRouteGate>
             )}
             <div className="page py-6">{children}</div>
           </main>
@@ -111,8 +114,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Rate us (owner, 2026-11-03): the corner card, asking only after real use; RiftCompare keeps the ratings. */}
           <RateCard />
           {/* The phone dock (the side rails are gone, owner 2026-11-13): eBay and TCGplayer tiles along the foot of a narrow screen, after a scroll. */}
-          <DockAds ads={cardAds({ limit: 10 })} />
-          {AD_HEAVY && <HeavyPopups tiles={cardAds({ limit: 10 }).tcgplayer} tcgplayerUrl={adSearch().tcgplayerUrl} />}
+          {/* No ad, dock or pop-up on Premium, account, sign-in, collection, watches or giveaway pages (lib/ad-free-paths.ts). */}
+          <AdRouteGate>
+            <DockAds ads={cardAds({ limit: 10 })} />
+            {AD_HEAVY && <HeavyPopups tiles={cardAds({ limit: 10 }).tcgplayer} tcgplayerUrl={adSearch().tcgplayerUrl} />}
+          </AdRouteGate>
           {/* The phone bottom nav (BottomNav.tsx, owner 2026-11-18): SITE.bottomNav "optin" (?bn=1 only), "on" or "off" (the rollback). */}
           {(SITE.bottomNav ?? "off") !== "off" && <BottomNav mode={SITE.bottomNav ?? "off"} />}
         </PrefsProvider>
