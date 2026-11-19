@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DiscordCta } from "@/components/DiscordCta";
 import Link from "@/components/Link";
 import { Fragment } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
@@ -179,6 +180,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
+            <DiscordCta href={SITE.discordInvite} className="mt-4" />
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
           <section className="card p-4 sm:p-5">

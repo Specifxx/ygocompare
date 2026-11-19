@@ -32,6 +32,8 @@ export const SITE: SiteConfig = {
   ],
   adminEmails: ["bill.jyang101@gmail.com"],
   supportEmail: "compareempire@gmail.com",
+  // The Discord hub's invite for this site (lands in #yugioh), 2026-11-20.
+  discordInvite: "https://discord.gg/Dg4qYhAV7X",
   ownerEmail: "bill.jyang101@gmail.com",
   impactSiteVerification: "3c00a442-a61e-4003-a422-540b7435b80d",
 
