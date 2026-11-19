@@ -2622,3 +2622,9 @@ with My Collection" on the bottom nav. YGO stays sealed-only until at least 9 De
 - **Members' collection history and CSV** (DexCompare's `vault.ts` / `VaultView.tsx`): the panel now promises it, so the collection keeps
   `MEMBER_HISTORY_DAYS` for a member, with a chart and a spreadsheet export. Free visitors keep the change since their last look.
 - **Bottom nav**: Collection (/collection) replaces Menu; the header keeps its menu button on phones. No eBay calls.
+
+## 2026-11-19: No ads on Premium, account, collection, watches, sign-in or giveaway pages
+
+A production check found /premium opening on phones under the heavy arm's two ad blocks, before its own heading. Premium promises
+no ads, and these are conversion and utility pages, so the top banner, the phone dock and the heavy test's pop-ups stand down on
+them (`lib/ad-free-paths.ts`, `AdRouteGate.tsx`, `tests/ad-free-paths.test.ts`). The heavy arm stays everywhere else.
