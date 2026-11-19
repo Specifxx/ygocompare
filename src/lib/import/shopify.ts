@@ -38,11 +38,20 @@ const MAX_PAGES = 40;
 const CONDITION_ONLY = /^(default title|near mint|nm|nm-m|mint|lightly played|lp|moderately played|mp|heavily played|hp|damaged|dmg|played|excellent|good|english|en|foil|non-foil|normal|cold foil|holo|holofoil|[^/]*\b(nm|lp|mp|hp|near mint|played)\b[^/]*)$/i;
 const BAD_CONDITION = /damaged|heavily|\bhp\b|\bdmg\b|poor|played\b(?!.*near)/i;
 
+// A variant that is a graded slab, not the raw card.
+export const GRADED_VARIANT =
+  /\b(psa|bgs|cgc|beckett|sgc|graded|slab(bed)?|gem\s*mint|ace\s*grading|black\s*label)\b|\b(?:tag|ags)\s?(?:10|[1-9](?:\.5)?)\b/i;
+export const isGradedVariant = (title: string | null | undefined): boolean => !!title && GRADED_VARIANT.test(title);
+
 /** One offer per product: the cheapest in-stock Near Mint-ish variant, or the
  *  cheapest variant at all when nothing is in stock. */
 export function pickVariant(p: ShopifyProduct): ShopifyVariant | null {
-  const ok = p.variants.filter((v) => !BAD_CONDITION.test(v.title || ""));
-  const pool = ok.length ? ok : p.variants;
+  // A graded slab sold as a variant of the raw card's product ("Graded - Beckett
+  // 9.5", "PSA 10") is never the raw price, in or out of stock (OP Compare,
+  // 2026-11-19: a US$115 slab shown as a Near Mint A$344 card).
+  const raw = p.variants.filter((v) => !isGradedVariant(v.title));
+  const ok = raw.filter((v) => !BAD_CONDITION.test(v.title || ""));
+  const pool = ok.length ? ok : raw;
   const inStock = pool.filter((v) => v.available);
   const list = (inStock.length ? inStock : pool).slice().sort((a, b) => Number(a.price) - Number(b.price));
   return list[0] ?? null;

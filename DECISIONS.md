@@ -2686,3 +2686,9 @@ The store line is new data: the daily import now records the cheapest in-stock s
 (`lib/import/store-lows.ts`, `data/store-lows/<setId>.json`, change-only points in the market's own cents, 0 = nothing in
 stock, never eBay, Amazon, TCGplayer or a pre-order; 730 days kept), the same file TCG Prices keeps. It was seeded once from TCG Prices' own record of the same sealed products (`tcgcompare` `data/store-lows`, kept since 2026-11-16 from this site's published prices), matched by TCGplayer product id; cards start from the next import.
 Pure maths in `lib/history-chart.ts`, pinned by `tests/history-chart.test.ts`.
+## 2026-11-19 — A graded-slab variant never prices the raw card
+
+A store can sell a raw card and its slabs as variants of ONE Shopify product ("Near Mint" A$344, "Graded - Beckett
+9.5" US$115, found on OP Compare). `pickVariant` took the cheapest in-stock variant, so the slab priced the card.
+It now drops every variant `isGradedVariant` reads as a slab (PSA, BGS, CGC, SGC, Beckett, TAG/AGS grades, Graded,
+Slab, ACE grading) before choosing; a product with only slabs gives no offer. `tests/graded-variant.test.ts`.
