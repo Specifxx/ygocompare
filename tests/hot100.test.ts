@@ -51,3 +51,16 @@ test("the page and its share image exist and read the same chart", () => {
     assert.doesNotMatch(src, /fetch\(/);
   }
 });
+
+test("the biggest drops: the same week and floor, the other way, biggest fall first (owner, 2026-11-20)", async () => {
+  const { hotDrops } = await import("../src/lib/hot100");
+  const inputs = [
+    { item: "up", series: s([D - 30, 1000], [D, 1500]) },
+    { item: "down10", series: s([D - 30, 1000], [D - 1, 900]) },
+    { item: "down40", series: s([D - 30, 1000], [D, 600]) },
+    { item: "cheap", series: s([D - 30, 400], [D, 200]) },
+    { item: "flat", series: s([D - 30, 1000]) },
+  ];
+  assert.deepEqual(hotDrops(inputs, D).map((r) => [r.item, r.rank, r.change]), [["down40", 1, -40], ["down10", 2, -10]]);
+  assert.equal(hotDrops(inputs, D, { max: 1 }).length, 1);
+});
