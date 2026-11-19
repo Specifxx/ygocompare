@@ -7,7 +7,7 @@ import { money } from "@/lib/format";
 import { shortName } from "@/lib/names";
 import { sourceNameServer } from "@/lib/sources";
 import { splitDeals } from "@/lib/black-friday";
-import { listRegions, saleHeading, saleIntro, saleYear, SALE_SEASONS, type SaleSlug } from "@/lib/sale-seasons";
+import { listRegions, saleHeading, saleIntro, saleYear, SALE_SEASONS, type SaleSlug, saleIndexable } from "@/lib/sale-seasons";
 import type { Market } from "@/lib/site-types";
 
 // The seasonal sale pages (DECISIONS.md, "Seasonal sale pages", 2026-11-02): /boxing-day,
@@ -41,6 +41,7 @@ export function saleMetadata(slug: SaleSlug): Metadata {
     title: `${SITE.gameShort} ${saleHeading(slug, year)}: Store Prices Compared`,
     description: `${SALE_SEASONS[slug].name} ${year} ${SITE.game} deals: booster boxes, sealed product and cards that stores in ${regions} sell under the other stores or TCGplayer today, updated every day.`,
     ...canon(`/${slug}`),
+    ...(saleIndexable(slug, new Date().toISOString().slice(0, 10)) ? {} : { robots: { index: false, follow: true } }),
   };
 }
 
