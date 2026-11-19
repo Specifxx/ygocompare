@@ -212,3 +212,47 @@ test("a singles store's one-word card name in front of the product's is refused"
     ["Pre-Order Beyond the Brave Booster Box 1st Edition", "Beyond the Brave Booster Box [1st Edition]"],
   ]) assert.equal(leadingStrangerWords(title, name), 0, title);
 });
+
+test("a title naming a longer set is never the shorter set's product (live 2026-11-20, YGO Compare)", () => {
+  const ysets = [
+    set(2049, "Legendary Duelists"),
+    set(23111, "Legendary Duelists: Soulburning Volcano"),
+    set(2829, "Legendary Duelists: Synchro Storm"),
+    set(1700, "Raging Tempest"),
+    set(1701, "Raging Tempest: Special Edition"),
+  ];
+  const yidx = buildIndex(
+    [
+      sealed(144981, "Legendary Duelists Booster Box", 2049),
+      sealed(144982, "Legendary Duelists Booster Pack", 2049),
+      sealed(493307, "Legendary Duelists: Soulburning Volcano Booster Box [1st Edition]", 23111),
+      sealed(240555, "Legendary Duelists: Synchro Storm Booster Pack [1st Edition]", 2829),
+      sealed(129303, "Raging Tempest Special Edition Box", 1700),
+    ],
+    ysets,
+    "ygo",
+  );
+  // Live: US$47 for a Soulburning Volcano box (no "1st Edition") on the US$213 Legendary Duelists box's page.
+  assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists 10: Soulburning Volcano Booster Box", yidx), null);
+  assert.equal(matchSealed("Legendary Duelists: Synchro Storm Booster Pack", yidx), null);
+  // The longer set's own product, and the plain set's, still match.
+  assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists: Soulburning Volcano Booster Box 1st Edition", yidx)?.product.id, 493307);
+  assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists Booster Box", yidx)?.product.id, 144981);
+  // A product filed under the shorter set whose own name carries the longer set's words keeps its match.
+  assert.equal(matchSealed("Yugioh Raging Tempest Special Edition Box", yidx)?.product.id, 129303);
+});
+
+test("Italian and German packs, MVP1 movie-pack cards and '1st Edition Rare' singles are left out (live 2026-11-20)", async () => {
+  const { handleOf, isForeign } = await import("@/lib/import/match");
+  assert.ok(isForeign(handleOf("https://bsastore.it/products/bustina-3-carte-yu-gi-oh-star-pack-vrains-1a-edizione-ita?variant=1")));
+  assert.ok(isForeign(handleOf("https://tradingtoys.de/products/yugioh-lord-of-the-tachyon-galaxy-booster-pack-ltgy-de-1-auflage?variant=1")));
+  assert.ok(isForeign("Yu-Gi-Oh! Lord of the Tachyon Galaxy Booster Pack LTGY-DE"));
+  // English product from the same shops stays.
+  assert.equal(isForeign(handleOf("https://bsastore.it/products/box-display-24-bustine-yu-gi-oh-crossover-breakers-1a-edizione-eng?variant=1")), false);
+  assert.equal(isForeign(handleOf("https://tradingtoys.de/products/yugioh-shadow-specters-karten-booster-pack-shsp-en-englisch-1st?variant=1")), false);
+  assert.equal(isForeign("Yu-Gi-Oh! Lord of the Tachyon Galaxy Booster Pack LTGY-EN 1st Edition"), false);
+  assert.equal(looksLikeCard("Obelisk the Tormentor MVP1-ENSV5", "obelisk the tormentor mvp1 ensv5 the dark side of dimensions movie pack secret edition limited"), true);
+  assert.equal(looksLikeCard("Raigeki - 1st Edition Rare - Battle Pack: Epic Dawn", "raigeki 1st edition rare battle pack epic dawn"), true);
+  for (const title of ["The Dark Side of Dimensions Movie Pack Secret Edition", "Rarity Collection 5 Booster Box 1st Edition", "Battle Pack: Epic Dawn Booster Pack 1st Edition"])
+    assert.equal(looksLikeCard(title), false, title);
+});
