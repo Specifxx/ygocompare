@@ -132,6 +132,18 @@ export const featureMin = (): number => SITE.featureMinCents ?? 0;
 export const worthFeaturing = (id: number): boolean => (refCents(id) ?? 0) >= featureMin();
 export const refCents = (id: number): number | null => referenceCents(summaryOf(id).tcg);
 
+/** The cheapest in-stock store price per market (data/store-lows, recorded by the daily import): the chart's local line. */
+export function storeLowsOf(p: Product): Record<string, Series> {
+  const h = read<Record<string, Record<string, Series>>>(`store-lows/${p.setId}.json`, {});
+  return h[p.id] ?? {};
+}
+
+/** The last day the price data covers (days since 1970), from the import's own time: the history chart's right edge. */
+export function historyThrough(): number {
+  const at = Date.parse(meta()?.updatedAt ?? "");
+  return Math.floor((Number.isFinite(at) ? at : Date.now()) / 86_400_000);
+}
+
 export function historyOf(p: Product): Series {
   const h = read<Record<string, Series>>(`history/${p.setId}.json`, {});
   return h[p.id] ?? [];
