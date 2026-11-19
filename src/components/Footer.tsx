@@ -5,6 +5,7 @@ import { creatorsOn } from "@/lib/creators";
 import { historyOn } from "@/lib/data";
 import { LogoMark } from "./Logo";
 import { FeedbackAsk } from "@/components/FeedbackAsk";
+import { DiscordCta } from "@/components/DiscordCta";
 
 type FooterLink = { href: string; label: string };
 
@@ -52,6 +53,7 @@ export function Footer() {
     <footer className="mt-20 border-t border-line bg-surface">
       {/* "Was this page useful?" (owner, 2026-11-18: more feedback). One inline line, never a pop-up. */}
       <div className="page pt-8"><FeedbackAsk email={SITE.supportEmail} /></div>
+      <div className="page pt-6"><DiscordCta href={SITE.discordInvite} className="max-w-2xl" /></div>
       <div className="page grid gap-x-6 gap-y-10 py-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,3fr)]">
         <div className="max-w-sm">
           <Link href="/" className="inline-flex min-h-10 items-center gap-2 font-display text-lg font-extrabold tracking-tight">

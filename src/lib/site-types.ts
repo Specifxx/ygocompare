@@ -95,6 +95,8 @@ export interface SiteConfig {
   adminEmails: string[];
   /** Public contact address, shown on the site. */
   supportEmail: string;
+  /** This site's own never-expiring invite to the family's Discord hub (DECISIONS.md, 2026-11-20). Unset: no box. */
+  discordInvite?: string;
   /** Private: where the ops monitor and form notifications go. Never rendered. */
   ownerEmail: string;
   /** Impact (affiliate network) site-verification id, rendered in every page's <head>. */
