@@ -14,11 +14,13 @@ test("the search box never sends Enter to a page that ignores the words, and say
   for (const href of ["/sealed", "/sets", "/tools/deal-finder"]) assert.ok(src.includes(`href="${href}"`), `the empty state offers ${href}`);
 });
 
-test("the price chart writes its figures as page text, not inside the scaled drawing", () => {
-  const src = read("src/components/PriceChart.tsx");
-  assert.ok(!src.includes("<text"), "text inside the SVG shrinks with it (5px on a phone)");
-  assert.match(src, /non-scaling-stroke/);
-  assert.ok(!/#[0-9a-f]{6}/i.test(src), "the line takes the theme's up and down tokens, not a fixed hex");
+test("the price chart's axis labels never shrink with a scaled drawing", () => {
+  // OP Compare's two-line chart (owner, 2026-11-19) labels its axes inside the SVG, so it draws in real pixels once the
+  // wrapper is measured: a fixed viewBox would squash 11px labels to 5px on a phone.
+  const src = read("src/components/PriceHistory.tsx");
+  assert.match(src, /ResizeObserver/);
+  assert.match(src, /viewBox=\{`0 0 \$\{W\} \$\{H\}`\}/);
+  assert.match(src, /preserveAspectRatio=\{measured == null \? "none" : undefined\}/);
 });
 
 test("the focus ring keeps the element's own corners", () => {

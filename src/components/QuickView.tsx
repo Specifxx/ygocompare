@@ -14,7 +14,7 @@ import { PriceTable } from "./PriceTable";
 import type { Series } from "@/lib/series";
 
 // Loaded only when a panel has a series to draw: the chart's code is not in the page's first load.
-const PriceChart = dynamic(() => import("./PriceChart").then((m) => m.PriceChart), { ssr: false });
+const PriceHistory = dynamic(() => import("./PriceHistory").then((m) => m.PriceHistory), { ssr: false });
 import { CompactCardAds } from "./CardAds";
 import type { CardAds } from "@/lib/card-ads";
 import { ShareButton } from "./ShareButton";
@@ -32,6 +32,9 @@ interface Data {
   fx: Record<string, number>;
   /** The daily price series; absent in a response the CDN kept from before. */
   history?: Series;
+  /** The cheapest store price per market, and the data's last day (absent in an older cached response). */
+  lows?: Record<string, Series>;
+  through?: number;
   amazon: Partial<Record<Market, string>> | null;
   name: string;
   sub: string;
@@ -186,10 +189,9 @@ export function QuickView() {
             <p className="rounded-xl border border-line p-4 text-sm text-muted">Prices did not load. The full page has every price.</p>
           )}
           {/* The price history sits below the rows (owner, 2026-11-17: moved from the top); the rows and ads above it are untouched. */}
-          {got?.history && got.history.length >= 2 && (
+          {got && ((got.history?.length ?? 0) >= 2 || Object.keys(got.lows ?? {}).length > 0) && (
             <div className="mt-4 shrink-0 rounded-xl border border-ink-700 p-3 [min-height:12rem]">
-              <h3 className="mb-2 text-sm font-semibold">Price history</h3>
-              <PriceChart series={got.history} days={365} compact />
+              <PriceHistory tcg={got.history} lows={got.lows} fx={got.fx} through={got.through ?? Math.floor(Date.now() / 86_400_000)} days={365} compact />
             </div>
           )}
         </div>
