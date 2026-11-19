@@ -4,7 +4,7 @@ import { SITE } from "@/site.config";
 import { hotInputs } from "@/lib/data";
 import { money, pct } from "@/lib/format";
 import { shortName } from "@/lib/names";
-import { dayLabel, hotChart, hotName, latestDay, moveLabel } from "@/lib/hot100";
+import { dayLabel, hotChart, hotDrops, hotName, latestDay, moveLabel } from "@/lib/hot100";
 import { ShareButton } from "@/components/ShareButton";
 
 // The weekly Hot 100 (owner, 2026-11-18): RiftCompare's chart idea for this site, one stable URL that is
@@ -18,6 +18,13 @@ function chart() {
   return day == null ? null : hotChart(inputs, day);
 }
 
+/** The week's biggest falls (owner, 2026-11-20): the same seven days and floor as the chart, the other way. */
+function drops() {
+  const inputs = hotInputs();
+  const day = latestDay(inputs);
+  return day == null ? [] : hotDrops(inputs, day);
+}
+
 export function generateMetadata(): Metadata {
   const c = chart();
   const n = c?.rows.length ?? 0;
@@ -25,7 +32,7 @@ export function generateMetadata(): Metadata {
   const top = c?.rows[0];
   return {
     title: c && top ? `${name}: ${shortName(top.item.name)} leads, up ${top.change.toFixed(1)}% (week to ${dayLabel(c.day)})` : `${SITE.gameShort} Hot 100: this week's biggest price risers`,
-    description: `The ${SITE.game} products whose TCGplayer market price rose most in the last seven days, ranked, with each one's place on last week's chart. From ${SITE.name}'s daily price history.`,
+    description: `The ${SITE.game} products whose TCGplayer market price rose most in the last seven days, ranked, with each one's place on last week's chart, and the biggest drops. From ${SITE.name}'s daily price history.`,
     // No `images` key: the sibling opengraph-image.tsx is the preview.
     alternates: { canonical: "/hot-100" },
     openGraph: { type: "website", siteName: SITE.name, url: "/hot-100" },
@@ -39,6 +46,7 @@ export default function Hot100() {
   const n = rows.length;
   const name = `${SITE.gameShort} ${n ? hotName(n) : "Hot 100"}`;
   const top = rows[0];
+  const falls = drops();
   return (
     <div className="flex flex-col gap-6">
       <header>
@@ -69,6 +77,24 @@ export default function Hot100() {
               );
             })}
           </ol>
+        </section>
+      )}
+      {falls.length > 0 && (
+        <section className="flex flex-col gap-2" aria-labelledby="drops">
+          <h2 id="drops" className="text-lg font-bold">Biggest drops this week</h2>
+          <p className="text-sm text-muted">The same seven days the other way: products worth $3 or more whose TCGplayer market price fell most, biggest fall first.</p>
+          <div className="card p-2 sm:p-4">
+            <ol>
+              {falls.map((r) => (
+                <li key={r.item.id} className="flex items-center gap-2 border-t border-ink-800 text-sm first:border-t-0 sm:gap-3">
+                  <span className="w-8 shrink-0 text-right font-display text-base font-bold tabular-nums">{r.rank}</span>
+                  <Link className="min-w-0 flex-1 truncate py-2.5 hover:underline" href={`/card/${r.item.slug}`}>{shortName(r.item.name)}</Link>
+                  <span className="tabular-nums">{money(r.cents)}</span>
+                  <span className="w-16 shrink-0 text-right font-semibold tabular-nums text-down">{pct(r.change)}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
         </section>
       )}
       <p className="text-sm text-muted">

@@ -56,16 +56,25 @@ function weekChange(series: Series | undefined, day: number): { cents: number; c
   return { cents: now, change: Math.round(((now - then) / then) * 1000) / 10 };
 }
 
-function rank<T>(inputs: HotInput<T>[], day: number, max: number, minCents: number) {
+function rank<T>(inputs: HotInput<T>[], day: number, max: number, minCents: number, dir: 1 | -1 = 1) {
   const rows: { input: HotInput<T>; cents: number; change: number }[] = [];
   for (const input of inputs) {
     const w = weekChange(input.series, day);
-    if (!w || w.change <= 0 || w.cents < minCents) continue;
+    if (!w || dir * w.change <= 0 || w.cents < minCents) continue;
     rows.push({ input, ...w });
   }
-  // Biggest rise first; a tie goes to the dearer product (more money moved), then a stable order.
-  rows.sort((a, b) => b.change - a.change || b.cents - a.cents);
+  // Biggest move first; a tie goes to the dearer product (more money moved), then a stable order.
+  rows.sort((a, b) => dir * (b.change - a.change) || b.cents - a.cents);
   return rows.slice(0, max);
+}
+
+// THE BIGGEST DROPS (owner, 2026-11-20, from a Reddit reply to a Hot 100 post: "show me the biggest drops. I just want to rip
+// and play"). The same seven days and the same $3 floor, the other way: every product whose market price fell, biggest fall
+// first. The share image draws half rises, half drops; the page lists them under the chart. `change` is negative.
+export const DROPS_MAX = 20;
+
+export function hotDrops<T>(inputs: HotInput<T>[], day: number, opts: { max?: number; minCents?: number } = {}): Omit<HotRow<T>, "lastRank">[] {
+  return rank(inputs, day, opts.max ?? DROPS_MAX, opts.minCents ?? HOT_MIN_CENTS, -1).map((r, i) => ({ item: r.input.item, rank: i + 1, cents: r.cents, change: r.change }));
 }
 
 export function hotChart<T>(inputs: HotInput<T>[], day: number, opts: { max?: number; minCents?: number } = {}): HotChart<T> {
