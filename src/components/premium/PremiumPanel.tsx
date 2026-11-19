@@ -16,7 +16,7 @@ const FEATURES = [
   "Up to 200 price alerts (free: 25)",
   "Your watch list with today's lowest price",
   "No banner ads, on every page and on your phone",
-  "One account for YGO Compare, DexCompare, MTG Compare, TCG Prices and RiftCompare",
+  "One account across all our price comparison sites",
 ];
 
 /**

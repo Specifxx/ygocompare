@@ -2692,3 +2692,18 @@ A store can sell a raw card and its slabs as variants of ONE Shopify product ("N
 9.5" US$115, found on OP Compare). `pickVariant` took the cheapest in-stock variant, so the slab priced the card.
 It now drops every variant `isGradedVariant` reads as a slab (PSA, BGS, CGC, SGC, Beckett, TAG/AGS grades, Graded,
 Slab, ACE grading) before choosing; a product with only slabs gives no offer. `tests/graded-variant.test.ts`.
+
+## 2026-11-19: Sign in is a filled button at every width, and the sign-in flow never names another site
+
+Owner, 2026-11-19: "there should be a login or sign up button, very visible for new … or non-logged in users … I don't want them to
+redirect. I don't want the [RiftCompare] logo to appear on any of the site signups."
+
+- Signed out, the header's account link is a filled button in the site's own colour reading "Sign in" from 340px wide (the icon alone
+  below that). Every header was measured at 360, 390, 430, 768, 1024, 1280, 1440 and 1536px: the button is on screen with no
+  sideways scroll at each. Where the row was full, other items stepped aside (the Premium pill, a sections row or a sponsored link
+  move to a wider breakpoint; the menu carries them), never Sign in.
+- Copy on the sign-in, account, Premium, watches, alert and privacy pages says "our shared alert service" and "all our price
+  comparison sites", never the name of the site that runs the shared account service.
+- `next.config.js` rewrites `/account-service/alerts/(confirm|manage|unsubscribe)` and `/account-service/oauth/(google|discord)[/callback]`
+  to the shared service, so alert emails and (once the owner registers the redirect addresses) Google and Discord sign-in keep the
+  visitor on this site's own address. A rewrite is not a redirect: the address bar never changes.
