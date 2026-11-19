@@ -5,7 +5,7 @@
 // (keyed by product id; ASINs may be stored, prices never are) and ride the data commit; a miss is retried after 30
 // days. Without credentials it does nothing; a store whose account has no API access yet (403) ends that market quietly
 // and the next still runs. data/amazon/status-<MARKET>.json says what the last run did (the ops monitor reads it).
-//   npx tsx scripts/amazon-asins.ts            AMAZON_SEARCH_BUDGET=400 a market by default
+//   npx tsx scripts/amazon-asins.ts            AMAZON_SEARCH_BUDGET=0 (owner, 2026-11-19: the network's Amazon API allowance is shared, mostly ScentCompare's) a market by default
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { AMAZON_STORES } from "@/lib/affiliate";
@@ -34,7 +34,7 @@ async function market(m: Market, idx: MatchIndex) {
     status({ state: "off" });
     return console.log(`Amazon ASINs ${m}: no AMAZON_CREATORS_* credentials yet, skipped.`);
   }
-  const budget = Number(process.env.AMAZON_SEARCH_BUDGET || 400);
+  const budget = Math.min(0, Number(process.env.AMAZON_SEARCH_BUDGET || 0));
   const today = new Date().toISOString().slice(0, 10);
   const known: AsinFile = existsSync(FILE) ? JSON.parse(readFileSync(FILE, "utf8")) : {};
   const list = marketSealed(m);
