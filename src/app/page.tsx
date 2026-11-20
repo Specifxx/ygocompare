@@ -4,7 +4,7 @@ import { SearchBox } from "@/components/SearchBox";
 import { MarketChooser } from "@/components/ClientPrefs";
 import { ChristmasGifts } from "@/components/ChristmasGifts";
 import { DealGrid, TileGrid } from "@/components/ProductTile";
-import { deals, latestReleasedSet, meta, products, refCents, worthFeaturing } from "@/lib/data";
+import { deals, latestReleasedSet, meta, products, refCents, setById, worthFeaturing } from "@/lib/data";
 import { ago, money } from "@/lib/format";
 import { posts } from "@/lib/posts";
 import { JsonLd } from "@/components/JsonLd";
@@ -75,6 +75,12 @@ export default function Home() {
   // Sealed only (2026-11-06): the newest set's sealed products worth featuring.
   const chase = latest ? rankProducts(sealedInSet(latest.id).filter((p) => worthFeaturing(p.id))).slice(0, 12) : [];
   const shelf = featuredSealed(6);
+  // MOST POPULAR FIRST (owner, 2026-11-20: "just have the most popular as the first … what shows on the homepage, and this should be
+  // across all sites"): every released sealed product worth featuring (Inserts never), ordered by what visitors viewed and bought
+  // (lib/home-rank.ts, data/demand.json), twelve of them, the shelf's first tab.
+  const popular = rankProducts(
+    products().filter((p) => p.kind === "sealed" && p.sealedType !== "Insert" && worthFeaturing(p.id) && !setById(p.setId)?.upcoming),
+  ).slice(0, 12);
   const hubs = sealedHubs();
   // The shelf's market-priced lists (lib/sealed-hero.ts): the newest boxes, then each set on pre-order.
   const hero = sealedHero();
@@ -120,6 +126,18 @@ export default function Home() {
   const boxes = hubs.some((h) => h.slug === "booster-box");
   const onShelf = new Set(hero.featured.map((i) => i.id));
   const shelfTabs: Tab[] = [
+    ...(popular.length
+      ? [
+          {
+            label: "Most popular",
+            panel: (
+              <Shelf heading={`The most popular ${SITE.gameShort} sealed products right now, each at its cheapest store today`} note="What shoppers open and buy most, refreshed daily." links={[{ href: "/sealed", label: "All sealed products" }]}>
+                <TileGrid items={popular} roomy />
+              </Shelf>
+            ),
+          },
+        ]
+      : []),
     ...(hero.featured.length
       ? [
           {
