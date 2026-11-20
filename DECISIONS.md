@@ -2793,3 +2793,15 @@ asked for hats and lights by name, so they come back after the 2026-11-08 tone-d
   but two class names, so titles, metadata and structured data are untouched. Favicons and share images are unchanged.
 - Off switch: `CHRISTMAS_FESTIVE_LAYER` (`lib/season.ts`, the `data-festive` attribute on `<html>`); the Christmas window
   also ends it on 27 December by itself. Remove after New Year: delete the block and the two classes.
+- Off switch: `CHRISTMAS_FESTIVE_LAYER` (`lib/season.ts`, the `data-festive` attribute on `<html>`); the Christmas window
+  also ends it on 27 December by itself. Remove after New Year: delete the block and the two classes.
+
+## The Hot 100 sells, not just ranks (2026-11-20)
+
+Reddit link posts land on `/hot-100`, and those visitors almost never clicked buy (13–19 Nov, across the network: Rift's
+Reddit visitors 0.7%, MTG's 2.9%, MTG's Hot 100 0 of 732, against 12–23% from Google; the buy-clicks boardroom, move 2).
+The page now has a "Shop the top risers" strip in the first screen (the top three, `SealedQuickBuy` with
+`from=hot_quickbuy`), and every row carries the cheapest in-stock price in the visitor's market and a Buy button
+(`HotBuy.tsx`) that opens the quick view, whose table puts eBay and TCGplayer first. Both read only `summaryOf(id).best`,
+already in memory for the page: no new data read, no fetch, the page's day-long cache unchanged. Read on 27 Nov and
+4 Dec as buy clickers among visitors with a reddit.com referrer; the target is 8% or more.

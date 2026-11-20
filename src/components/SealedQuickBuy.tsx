@@ -23,7 +23,7 @@ export interface QuickBuyItem {
   stores: number;
 }
 
-export function SealedQuickBuy({ items, title }: { items: QuickBuyItem[]; title: string }) {
+export function SealedQuickBuy({ items, title, from = "set_quickbuy" }: { items: QuickBuyItem[]; title: string; from?: string }) {
   const { market } = useMarket();
   if (!items.length) return null;
   return (
@@ -49,7 +49,7 @@ export function SealedQuickBuy({ items, title }: { items: QuickBuyItem[]; title:
                 </p>
               </div>
               {o ? (
-                <a href={goHref(o, p.id, "set_quickbuy")} rel="sponsored nofollow noopener" target="_blank" className={`${isPaidRow(o) ? "btn-buy" : "btn-soft"} min-h-10 shrink-0 whitespace-nowrap`}>
+                <a href={goHref(o, p.id, from)} rel="sponsored nofollow noopener" target="_blank" className={`${isPaidRow(o) ? "btn-buy" : "btn-soft"} min-h-10 shrink-0 whitespace-nowrap`}>
                   Buy now <span aria-hidden="true">↗</span>
                 </a>
               ) : (
