@@ -189,7 +189,7 @@ test("the home page as a crawler reads it: one h1, every shelf list and the fold
   for (const w of ["/preorders", "/tools/deal-finder", "/sets"]) assert.ok(ways.includes(w), `${w} is a way in`);
   // The shelf: every list's products are in the HTML whichever tab is chosen.
   const tabs = [...html.matchAll(/role="tab"[^>]*>([^<]+)/g)].map((m) => m[1]);
-  assert.equal(tabs[0], "Booster boxes");
+  assert.deepEqual(tabs.slice(0, 2), ["Most popular", "Booster boxes"], "Most popular first (owner, 2026-11-20)");
   const panels = html.split('role="tabpanel"').slice(1);
   assert.equal(panels.length, tabs.length);
   assert.equal(count(html, /role="tabpanel"[^>]* hidden=""/g), tabs.length - 1, "the lists not chosen are hidden, not absent");
