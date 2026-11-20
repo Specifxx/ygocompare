@@ -2805,3 +2805,11 @@ The page now has a "Shop the top risers" strip in the first screen (the top thre
 (`HotBuy.tsx`) that opens the quick view, whose table puts eBay and TCGplayer first. Both read only `summaryOf(id).best`,
 already in memory for the page: no new data read, no fetch, the page's day-long cache unchanged. Read on 27 Nov and
 4 Dec as buy clickers among visitors with a reddit.com referrer; the target is 8% or more.
+
+## One-tap price and restock alerts for anyone signed in (2026-11-20)
+
+As MTG Compare (2026-11-19; boardroom: one-tap restock and price-drop alerts, free for all, alerts stay free). Signed in with any
+account (free or Premium), the card page's alert (`components/PriceAlert.tsx`) is one button: "Alert me under <10% below today's
+lowest in-stock price in the visitor's market>", with "Pick my price" beside it, or, sold out there, "Tell me when it's back in
+stock". The account's token names the address (no email field; no confirmation when the address is verified). Signed out, the
+ordinary form, unchanged; the server HTML is that form. Nothing saves or opens by itself.
