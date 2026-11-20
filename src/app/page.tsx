@@ -18,7 +18,7 @@ import { isPreorder, longDate, preorderPath } from "@/lib/preorders";
 import { openPreorder } from "@/lib/preorder-nav";
 import { seasonMarkupLive } from "@/lib/season";
 import { imageAt } from "@/lib/image";
-import { sealedHero } from "@/lib/sealed-hero";
+import { heroItem, sealedHero } from "@/lib/sealed-hero";
 import { SealedShelf } from "@/components/home/SealedShelf";
 import { Hero, HeroPill, riseAt, WaysIn, type Way, type WayShape } from "@/components/home/Hero";
 import { Tabs, type Tab } from "@/components/Tabs";
@@ -78,9 +78,13 @@ export default function Home() {
   // MOST POPULAR FIRST (owner, 2026-11-20: "just have the most popular as the first … what shows on the homepage, and this should be
   // across all sites"): every released sealed product worth featuring (Inserts never), ordered by what visitors viewed and bought
   // (lib/home-rank.ts, data/demand.json), twelve of them, the shelf's first tab.
+  // Drawn like the box shelf: each at its cheapest in-stock store, "From $x" (heroItem), only products a store sells today.
   const popular = rankProducts(
     products().filter((p) => p.kind === "sealed" && p.sealedType !== "Insert" && worthFeaturing(p.id) && !setById(p.setId)?.upcoming),
-  ).slice(0, 12);
+  )
+    .map(heroItem)
+    .filter((i) => Object.keys(i.prices).length > 0)
+    .slice(0, 12);
   const hubs = sealedHubs();
   // The shelf's market-priced lists (lib/sealed-hero.ts): the newest boxes, then each set on pre-order.
   const hero = sealedHero();
@@ -132,7 +136,7 @@ export default function Home() {
             label: "Most popular",
             panel: (
               <Shelf heading={`The most popular ${SITE.gameShort} sealed products right now, each at its cheapest store today`} note="What shoppers open and buy most, refreshed daily." links={[{ href: "/sealed", label: "All sealed products" }]}>
-                <TileGrid items={popular} roomy />
+                <SealedShelf items={popular} />
               </Shelf>
             ),
           },
