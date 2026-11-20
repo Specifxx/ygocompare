@@ -132,7 +132,7 @@ async function main() {
           if (isUnfitListing(it.title)) continue;
           if (isForeign(handleOf(it.url))) continue;
           const sealed = looksSealed(it.title, it.productType, SITE.numberStyle);
-          const m = sealed ? matchSealed(it.title, idx) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
+          const m = sealed ? matchSealed(it.title, idx, handleOf(it.url)) : matchCard(it.title, idx, `${it.productType} | ${it.tags.join(" | ")}`);
           if (!m) continue;
           // A single card filed under a pack's name (looksLikeCard), or, in a singles store, a title with a card's name in
           // front of the product's (strangerWords, leadingStrangerWords): not a price for the product.

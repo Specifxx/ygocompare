@@ -412,7 +412,9 @@ function codesAgree(p: Product, codes: Set<number>, idx: MatchIndex): boolean {
   return false;
 }
 
-export function matchSealed(title: string, idx: MatchIndex): MatchResult | null {
+/** `handle` is the listing's URL handle (`handleOf`). It can only refuse: a handle naming a longer set than the title
+ *  ("yu-gi-oh-soulburning-volcano-booster-pack" titled as a plain Legendary Duelists pack) is that set's listing. */
+export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchResult | null {
   if (isForeign(title)) return null;
   const have = new Set(tokens(title).filter((t) => !STOP.has(t) || t === "booster"));
   const type = sealedTypeOf(title);
@@ -421,7 +423,11 @@ export function matchSealed(title: string, idx: MatchIndex): MatchResult | null 
   // Box" without "1st Edition" missed its own product and fell to the plain "Legendary Duelists Booster Box" (US$213
   // market) at US$47; five stores' Synchro Storm, Soulburning Volcano and Duels From the Deep boxes and packs did the
   // same. A title that names a longer set built on a product's set name is that set's, never the shorter one's.
-  const named = [...idx.setName].filter(([, t]) => t.length && t.every((w) => have.has(w)));
+  // Live 2026-11-21: Urban Empire's "yu-gi-oh-soulburning-volcano-booster-pack" was still on the plain Legendary
+  // Duelists pack (US$6.46 market): the handle names the longer set when the title doesn't, so it counts here (and
+  // only here, where it can only refuse).
+  const seen = new Set([...have, ...tokens(handle)]);
+  const named = [...idx.setName].filter(([, t]) => t.length && t.every((w) => seen.has(w)));
   // The product's own name may carry the longer set's words: TCGplayer files "Raging Tempest Special Edition Box" under
   // Raging Tempest while a "Raging Tempest: Special Edition" set exists too.
   const narrower = (p: Product) => {

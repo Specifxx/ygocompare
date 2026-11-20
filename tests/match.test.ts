@@ -240,6 +240,10 @@ test("a title naming a longer set is never the shorter set's product (live 2026-
   assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists Booster Box", yidx)?.product.id, 144981);
   // A product filed under the shorter set whose own name carries the longer set's words keeps its match.
   assert.equal(matchSealed("Yugioh Raging Tempest Special Edition Box", yidx)?.product.id, 129303);
+  // Live 2026-11-21: a listing whose handle names the longer set is that set's, whatever its title says.
+  assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists Booster Pack", yidx, "yu gi oh soulburning volcano booster pack"), null);
+  assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists Booster Pack", yidx, "legendary duelists booster pack")?.product.id, 144982);
+  assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists: Soulburning Volcano Booster Box 1st Edition", yidx, "ld10 soulburning volcano box")?.product.id, 493307);
 });
 
 test("Italian and German packs, MVP1 movie-pack cards and '1st Edition Rare' singles are left out (live 2026-11-20)", async () => {

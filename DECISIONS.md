@@ -2824,3 +2824,13 @@ to come back: the week's biggest price drops by email (the existing weekly email
 test: it is on for everyone. Measured as `weekly_signup` with placement `hot-100` (an existing event, no new event name) and
 the invite's uses in Discord. The email promises the week's drops, which is what the weekly email sends, not the Hot 100 chart
 itself.
+
+## 2026-11-21: A listing's handle can refuse a sealed match when it names a longer set
+
+The 19 Nov import after the "longer set wins" rule (2026-11-20) left the plain Legendary Duelists box with two store offers, both
+real, and the pack with one leak: Urban Empire's in-stock pack titled as plain Legendary Duelists at handle
+`yu-gi-oh-soulburning-volcano-booster-pack`. `matchSealed` now takes the listing's handle (`handleOf`), and its words count only
+for the longer-set check: a handle naming a longer set built on the product's set name refuses the match, as the title would.
+It never helps a match. Replayed on the 19 Nov data (7,144 store offers), it drops four, all a different product: that pack, a
+Rarity Collection II pack on the first Rarity Collection's page, an Onslaught of the Fire Kings deck on the Fire Kings deck, and
+a 25th Anniversary LOB box on the Unlimited LOB box.
