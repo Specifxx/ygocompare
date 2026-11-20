@@ -3,7 +3,7 @@ import { SITE } from "@/site.config";
 // The site's mark (public/icon.svg, drawn by scripts/og) and the wordmark.
 export function LogoMark({ className = "h-8 w-8" }: { className?: string }) {
   return (
-    <span className="relative inline-flex shrink-0">
+    <span className="relative inline-flex shrink-0 xmas-cap">
       <img src="/icon.svg" alt={`${SITE.name} logo`} width={32} height={32} className={`shrink-0 rounded-lg ${className}`} />
     </span>
   );
