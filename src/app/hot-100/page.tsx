@@ -9,6 +9,7 @@ import { dayLabel, hotChart, hotDrops, hotName, latestDay, moveLabel } from "@/l
 import { ShareButton } from "@/components/ShareButton";
 import { SealedQuickBuy } from "@/components/SealedQuickBuy";
 import { HotBuy } from "@/components/HotBuy";
+import { KeepUpStrip } from "@/components/KeepUpStrip";
 import type { Product } from "@/lib/site-types";
 
 // The weekly Hot 100 (owner, 2026-11-18): RiftCompare's chart idea for this site, one stable URL that is
@@ -88,6 +89,8 @@ export default function Hot100() {
           }))}
         />
       )}
+      {/* Owned audience (2026-11-20): the week's drops by email or the Discord, under the first buy cards (components/KeepUpStrip.tsx). */}
+      {SITE.priceAlerts && <KeepUpStrip site={SITE.key} siteName={SITE.name} discordHref={SITE.discordInvite} buttonClassName="btn-primary" />}
       {!n ? (
         <p className="card p-5 text-sm text-muted">Not enough price history yet: the chart appears after a week of daily prices.</p>
       ) : (

@@ -2813,3 +2813,14 @@ account (free or Premium), the card page's alert (`components/PriceAlert.tsx`) i
 lowest in-stock price in the visitor's market>", with "Pick my price" beside it, or, sold out there, "Tell me when it's back in
 stock". The account's token names the address (no email field; no confirmation when the address is verified). Signed out, the
 ordinary form, unchanged; the server HTML is that form. Nothing saves or opens by itself.
+
+## 2026-11-20: A "keep up" strip on the Hot 100 (owned audience)
+
+The Hot 100 is where Reddit posts land, and Reddit visitors rarely buy (about 2.3% click a buy button, against about 19% from
+Google), and a Reddit visitor who does not buy is gone. Under the first buy cards, before the chart, the page now offers two ways
+to come back: the week's biggest price drops by email (the existing weekly email on RiftCompare's shared alert service, kind
+"weekly", double opt-in; this site keeps no address) and the Discord hub through this site's own invite code
+(`components/KeepUpStrip.tsx`). Inline, never a pop-up, no heading, a fixed minimum height so nothing moves. It is not an A/B
+test: it is on for everyone. Measured as `weekly_signup` with placement `hot-100` (an existing event, no new event name) and
+the invite's uses in Discord. The email promises the week's drops, which is what the weekly email sends, not the Hot 100 chart
+itself.
