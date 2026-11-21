@@ -23,7 +23,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { AdSlot } from "@/components/AdSlot";
 import { InlineAds } from "@/components/InlineAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
-import { amazonSearchUrls } from "@/lib/affiliate";
+import { amazonSearchUrls, goHref } from "@/lib/affiliate";
+import { TcgplayerCyberBanner } from "@/components/TcgplayerCyberBanner";
+import { tcgplayerSlugOf } from "@/lib/lines";
 import { amazonCarries, amazonCells } from "@/lib/amazon-live";
 import { abs } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -180,6 +182,16 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
+            {/* TCGplayer's Cyber Weekend banner (lib/tcgplayer-cyber.ts): under the price table, 24 Nov to 1 Dec, labelled Ad. */}
+            <TcgplayerCyberBanner
+              href={goHref(
+                { url: `https://www.tcgplayer.com/search/${tcgplayerSlugOf(set)}/product?productLineName=${tcgplayerSlugOf(set)}&q=${encodeURIComponent(name)}&ProductTypeName=Sealed+Products`, source: "tcgplayer", market: "US" },
+                p.id,
+                "cyber_banner",
+              )}
+              at={Date.now()}
+              className="mt-4"
+            />
             <DiscordCta href={SITE.discordInvite} className="mt-4" />
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
