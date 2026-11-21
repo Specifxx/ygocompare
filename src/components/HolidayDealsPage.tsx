@@ -4,6 +4,7 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { deals, meta, storeDealsIn } from "@/lib/data";
 import { CyberWeekendNote } from "@/components/CyberWeekendNote";
+import { KeepUpStrip } from "@/components/KeepUpStrip";
 import { cyberWeekendState } from "@/lib/cyber-weekend";
 import { DaysUntil } from "@/components/DaysUntil";
 import { gameOf, UnderStoresCards, UnderTcgCards } from "@/components/DealCards";
@@ -95,6 +96,10 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
       </header>
 
       <CyberWeekendNote initial={cyberWeekendState(Date.now())} />
+
+      {/* Cyber Weekend capture (owned audience, 2026-11-21): the weekly drops email's Black Friday and Cyber Monday editions; email only,
+          the Discord box sits lower on this page (components/KeepUpStrip.tsx). */}
+      {SITE.priceAlerts && <KeepUpStrip site={SITE.key} siteName={SITE.name} placement="black-friday" what="Black Friday and Cyber Monday's real price drops" buttonClassName="btn-primary" />}
 
       {featured.length > 0 && (
         <section id="biggest" className="flex scroll-mt-20 flex-col gap-3">
