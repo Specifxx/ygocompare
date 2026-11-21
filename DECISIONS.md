@@ -2842,3 +2842,14 @@ The Black Friday and Cyber Monday pages carry one sign-up directly under the rea
 placement `black-friday`, email only because the Discord box sits lower on the page) on the sister-alert sites, a free-account
 prompt on the account sites. The weekly email has its own Black Friday (27 Nov) and Cyber Monday (30 Nov) editions on RiftCompare's
 service (TCGEmpire DECISIONS, same day), so a sign-up before 26 Nov gets the Black Friday one. Inline, never a pop-up; real drops only.
+
+## 2026-11-21: A deck display needs "display" in the title; a tin never takes one loose pack
+
+The 20 Nov import (after the handle rule) still had two kinds of wrong price on sealed pages. The Legend of the Crystal Beasts
+Structure Deck Display (US$29 market) carried 47 stores' single decks at US$8-15: a title with no edition missed the
+"[1st Edition]" deck and fell to the display, because five of the display's six name words is the "near-complete" score. And
+401games' and shopverse's loose tin packs (`...-2022-tin-of-the-pharaohs-gods-booster-pack`, US$5.95) sat on the whole tin,
+because the site's type rules read anything with "tin" as a Tin. `matchSealed` now refuses a deck product named "Display"
+unless the title says display, and a Tin whose name has no "pack" when the title or handle names one booster, loose or mega
+pack (singular). Both only refuse. Checked against the 20 Nov offers: every real deck-display offer (mechagames, progressccg,
+onboardgaming and others) says display in its handle; a single deck with no edition named is now no match rather than a guess.
