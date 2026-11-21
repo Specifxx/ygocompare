@@ -314,6 +314,7 @@ export const isUnfitListing = (title: string) => UNFIT.test(title);
 // Multiples: "(Pair)", "Bundle of 2", "Set of 4", "x2". A title and a product
 // must agree on whether they are a multiple.
 const MULTI = /\b(pair|bundle of \d+|set of \d+|\d+\s*x|x\s*\d+|\d+[- ]pack bundle|lot of)\b/i;
+const SINGLE_PACK = /\b(booster|loose|mega)\s+pack\b(?!s)/i;
 const isMulti = (s: string) => MULTI.test(s.replace(/\b\d+\s*packs?\)/i, ""));
 
 /** Titles that give the card's number in the set but not "n/total":
@@ -442,6 +443,14 @@ export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchR
     if (isMulti(p.name) !== isMulti(title)) continue;
     // "Pack Bundle Magnificent Maestros" is several packs, not one.
     if (/\bbundle\b/i.test(title) && !/\bbundle\b/i.test(p.name)) continue;
+    // Live 2026-11-21: 47 stores' single "Structure Deck: Legend of the Crystal Beasts" (US$8-15, no edition named)
+    // sat on the Structure Deck Display (US$29 market): five of its six words is "near-complete". A deck display is
+    // a box of decks, and the title must say so.
+    if (/\bdeck/i.test(p.name) && /\bdisplay\b/i.test(p.name) && !/\bdisplay\b/i.test(title)) continue;
+    // Live 2026-11-21: one loose pack from a tin ("yugioh-2022-tin-of-the-pharaohs-gods-booster-pack", US$5.95) sat on
+    // the whole 2022 Tin (US$12 market). A tin's own name has no "pack"; a listing that names one booster pack, in its
+    // title or its handle, is the pack (the handle can only refuse here).
+    if (type === "Tin" && !/\bpacks?\b/i.test(p.name) && SINGLE_PACK.test(`${title} ${handle.replace(/-/g, " ")}`)) continue;
     const setTokens = idx.setName.get(p.setId) ?? [];
     if (setTokens.length && overlap(setTokens, have) < 1) continue;
     if (!codesAgree(p, codes, idx)) continue;

@@ -246,6 +246,30 @@ test("a title naming a longer set is never the shorter set's product (live 2026-
   assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists: Soulburning Volcano Booster Box 1st Edition", yidx, "ld10 soulburning volcano box")?.product.id, 493307);
 });
 
+test("a single deck is never the deck display, and a tin's loose pack never the tin (live 2026-11-21, YGO Compare)", () => {
+  const ysets = [set(3096, "Structure Deck: Legend of the Crystal Beasts"), set(3100, "2022 Tin of the Pharaoh's Gods")];
+  const yidx = buildIndex(
+    [
+      sealed(275360, "Legend of the Crystal Beasts Structure Deck [1st Edition]", 3096),
+      sealed(275361, "Legend of the Crystal Beasts Structure Deck Display", 3096),
+      sealed(275402, "2022 Tin of the Pharaoh's Gods", 3100),
+      sealed(275401, "2022 Tin of the Pharaoh's Gods Mega Pack", 3100),
+    ],
+    ysets,
+    "ygo",
+  );
+  // Live: 47 single decks at US$8-15 on the US$29 display; with no edition named they are no match at all.
+  assert.notEqual(matchSealed("Yu-Gi-Oh! Structure Deck: Legend of the Crystal Beasts", yidx)?.product.id, 275361);
+  assert.notEqual(matchSealed("Legend of the Crystal Beasts Structure Deck", yidx)?.product.id, 275361);
+  assert.equal(matchSealed("Legend of the Crystal Beasts Structure Deck Display", yidx)?.product.id, 275361);
+  assert.equal(matchSealed("Yu-Gi-Oh! Legend of the Crystal Beasts Structure Deck 1st Edition", yidx)?.product.id, 275360);
+  // Live: 401games' "yugioh-2022-tin-of-the-pharaohs-gods-booster-pack" at US$5.95 on the US$12 tin.
+  assert.equal(matchSealed("Yugioh 2022 Tin of the Pharaoh's Gods", yidx, "yugioh 2022 tin of the pharaohs gods booster pack")?.product.id ?? null, null);
+  assert.notEqual(matchSealed("2022 Tin of the Pharaoh's Gods Booster Pack", yidx)?.product.id, 275402);
+  assert.equal(matchSealed("Yu-Gi-Oh! 2022 Tin of the Pharaoh's Gods", yidx, "yu-gi-oh-2022-tin-of-the-pharaohs-gods")?.product.id, 275402);
+  assert.equal(matchSealed("2022 Tin of the Pharaoh's Gods (3 Mega Packs)", yidx)?.product.id, 275402);
+});
+
 test("Italian and German packs, MVP1 movie-pack cards and '1st Edition Rare' singles are left out (live 2026-11-20)", async () => {
   const { handleOf, isForeign } = await import("@/lib/import/match");
   assert.ok(isForeign(handleOf("https://bsastore.it/products/bustina-3-carte-yu-gi-oh-star-pack-vrains-1a-edizione-ita?variant=1")));
