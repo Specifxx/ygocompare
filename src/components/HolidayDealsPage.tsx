@@ -4,6 +4,9 @@ import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
 import { deals, meta, storeDealsIn } from "@/lib/data";
 import { CyberWeekendNote } from "@/components/CyberWeekendNote";
+import { TcgplayerCyberBanner } from "@/components/TcgplayerCyberBanner";
+import { goHref } from "@/lib/affiliate";
+import { tcgplayerSlugOf } from "@/lib/lines";
 import { KeepUpStrip } from "@/components/KeepUpStrip";
 import { cyberWeekendState } from "@/lib/cyber-weekend";
 import { DaysUntil } from "@/components/DaysUntil";
@@ -132,6 +135,10 @@ export function HolidayDealsPage({ event }: { event: HolidayEvent }) {
         );
       })}
 
+      <TcgplayerCyberBanner
+        href={goHref({ url: `https://www.tcgplayer.com/search/${tcgplayerSlugOf(null)}/product?productLineName=${tcgplayerSlugOf(null)}&ProductTypeName=Sealed+Products`, source: "tcgplayer", market: "US" }, undefined, "cyber_banner")}
+        at={Date.now()}
+      />
       <FamilyCluster cluster="cards" kind="deal" />
       <section className="card-surface flex flex-col gap-2 p-4 text-sm">
         <h2 className="text-lg font-bold">How to read this</h2>
