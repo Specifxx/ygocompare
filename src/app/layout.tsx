@@ -102,7 +102,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 the top of every page; the light sites keep it below the content only. */}
             {AD_HEAVY && (
               <AdRouteGate>
-                <div className="page pt-4">
+                <div className="page hidden pt-4 md:block" data-heavy-top>
                   <InlineAds ads={cardAds({ limit: 10 })} search={adSearch()} page="heavytop" />
                 </div>
               </AdRouteGate>
