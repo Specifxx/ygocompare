@@ -125,7 +125,7 @@ export function ProfileHub({ info }: { info: StoredPremium }) {
             {initialOf(info.who)}
           </span>
           <div className="w-full min-w-0 flex-1 pb-1">
-            <h1 className="page-title">My account</h1>
+            <h1 className="font-display text-2xl font-black sm:text-3xl">My account</h1>
             <p className="truncate text-sm text-muted">{info.who ? `Signed in as ${info.who}` : "Signed in"}</p>
           </div>
           <div className="flex flex-wrap gap-2 pb-1">
