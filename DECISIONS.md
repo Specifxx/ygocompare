@@ -2834,3 +2834,76 @@ for the longer-set check: a handle naming a longer set built on the product's se
 It never helps a match. Replayed on the 19 Nov data (7,144 store offers), it drops four, all a different product: that pack, a
 Rarity Collection II pack on the first Rarity Collection's page, an Onslaught of the Fire Kings deck on the Fire Kings deck, and
 a 25th Anniversary LOB box on the Unlimited LOB box.
+
+
+## 2026-11-21: A Cyber Weekend sign-up under the real drops (owned audience)
+
+The Black Friday and Cyber Monday pages carry one sign-up directly under the real-drops block: the weekly drops email (KeepUpStrip,
+placement `black-friday`, email only because the Discord box sits lower on the page) on the sister-alert sites, a free-account
+prompt on the account sites. The weekly email has its own Black Friday (27 Nov) and Cyber Monday (30 Nov) editions on RiftCompare's
+service (TCGEmpire DECISIONS, same day), so a sign-up before 26 Nov gets the Black Friday one. Inline, never a pop-up; real drops only.
+
+## 2026-11-21: A deck display needs "display" in the title; a tin never takes one loose pack
+
+The 20 Nov import (after the handle rule) still had two kinds of wrong price on sealed pages. The Legend of the Crystal Beasts
+Structure Deck Display (US$29 market) carried 47 stores' single decks at US$8-15: a title with no edition missed the
+"[1st Edition]" deck and fell to the display, because five of the display's six name words is the "near-complete" score. And
+401games' and shopverse's loose tin packs (`...-2022-tin-of-the-pharaohs-gods-booster-pack`, US$5.95) sat on the whole tin,
+because the site's type rules read anything with "tin" as a Tin. `matchSealed` now refuses a deck product named "Display"
+unless the title says display, and a Tin whose name has no "pack" when the title or handle names one booster, loose or mega
+pack (singular). Both only refuse. Checked against the 20 Nov offers: every real deck-display offer (mechagames, progressccg,
+onboardgaming and others) says display in its handle; a single deck with no edition named is now no match rather than a guess.
+
+## 2026-11-22: Bot rules never untag a real person
+
+The owner (22 Nov): "make sure that there are literally zero false negatives when you filter bots, and false positives are okay."
+A buy link sent untagged to a real person is a lost sale; a bot sent tagged costs nothing we can see. `lib/bot-click.ts` had
+untagged anything with no Accept-Language, no Sec-Fetch-Mode, or a Sec-Fetch-Site of "none" or "cross-site". Real people
+send all of those: iOS before 16.4 and some in-app browsers send no Sec-Fetch-*, and a link opened from Discord, an email, a
+pasted URL or a translate proxy is "none" or "cross-site". "yandex" and "baidu" also matched real browsers' UAs (YaBrowser
+builds, baiduboxapp). Now `looksLikeBot` (the one thing that untags) is only an empty User-Agent or a self-named crawler or
+script; the header checks moved to `suspectClick`, which at most leaves a click out of the server-side click log, never the tag.
+The 10-14 Nov crawler with full browser headers will reach the networks tagged again: accepted by the owner's rule.
+
+## 2026-11-22: A giveaway, run by RiftCompare's points engine
+
+**Decision.** `/giveaway` (static) shows this site's prize (three Beyond the Brave 1st Edition booster packs, under A$20 at
+Australian stores), its points, the leaderboard and the official rules; the home page carries `GiveawayHomeBanner` under the hero
+while it is open, and the menu's "Guides & news" lists it. The entry panel (`components/giveaway/`) sends the visitor's stored
+RiftCompare session (`lib/premium-member.ts`) to `https://riftcompare.com/api/sister-giveaway`, and the board reads RiftCompare's
+CDN-held `/api/giveaway/leaderboard?site=ygo`; the draw (a public drand number), the winner's email and claim form, and the
+address are all RiftCompare's (TCGEmpire DECISIONS.md, 2026-11-22). This site stores no address and holds no key.
+`lib/giveaway.ts` repeats the prize and dates of RiftCompare's `ygo-beyond-the-brave-2026-12` entry and must change with it; a new
+round every two months.
+
+**Why.** Owner, 2026-11-22: "make all of that ... for ... Yu-Gi-Oh Compare ... a less than $20 most recent booster pack ... a point
+system ... every 2 months".
+
+## 2026-11-22: A sequel number reads both ways, a reprint names its reprint set, a lone EN### is a card
+
+**Decision.** Three refusals in `matchSealed` and `looksLikeCard` (`src/lib/import/match.ts`), each pinned in
+`tests/match.test.ts`:
+- A sequel number right after a word ("Rarity Collection 2") also reads as its roman spelling ("ii") and back, never as a
+  count ("2 Players", "2 Pack"). The title then scores on its own product, and the shorter set's product is refused by
+  the longer-set rule.
+- A title or handle that says "reprint" names TCGplayer's "(2020 Date Reprint)" set, whatever year the store prints: the
+  original printing refuses it when such a set exists.
+- A card number standing alone ("...-dueling-mirrors-en073-triple-tactics-thrust"), run into the next word, or a "PSA 10"
+  makes the listing a card.
+
+**Why.** Audit of the 21 Nov import: 31 stores' Rarity Collection II boxes and packs on the first Rarity Collection's pages,
+about 40 reprint packs, boxes and decks on the original printings (Realm of Light reprint deck at US$6.40 on the US$21
+original, Light of Destruction reprint packs at US$3.99 on the US$20 Unlimited pack), and three single cards (one graded)
+on the US$35 Dueling Mirrors tin. Replayed on that day's offers with each handle as the title: 72 of 7,068 change, all
+of them these listings; no other offer moved.
+
+## 2026-11-23: "Share this deal with your group chat" on the product page
+
+`components/DropShare.tsx` (ported from DexCompare) sits under the price header: the phone's share sheet, else one line copied with
+the cheapest in-stock STORE price in the visitor's market (`dropText` in `lib/share.ts`: never eBay, TCGplayer or Amazon, never
+converted, "Pre-order: " when that offer is one) and this page's link tagged `utm_source=share&utm_medium=drop`. A separate component,
+so ShareButton's share-for-a-deal A/B test is untouched; event `share { medium: "drop" }`.
+
+**Why.** On 22 Nov a CA$89.99 Delta Reign ETB pre-order at Cardboard Hero took ten referral orders in 41 minutes, almost none through
+a click we tracked: the store link had been pasted into a restock chat. People share drops anyway; this makes the link they paste ours.
+Owner, 2026-11-23: "apply all these learnings to all the other sites". Read `share` medium `drop` and `share_visit` a week after release.

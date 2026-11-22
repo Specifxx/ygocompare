@@ -54,6 +54,7 @@ export function navGroups(o: NavOptions = {}): NavGroup[] {
   const guides: NavLink[] = [
     { href: "/blog", label: "Guides" },
     { href: "/price-report", label: "Monthly price report" },
+    { href: "/giveaway", label: "Giveaway" },
     { href: "/about", label: "Who runs this site" },
   ];
   if (o.shop) {

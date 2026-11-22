@@ -246,6 +246,74 @@ test("a title naming a longer set is never the shorter set's product (live 2026-
   assert.equal(matchSealed("Yu-Gi-Oh! Legendary Duelists: Soulburning Volcano Booster Box 1st Edition", yidx, "ld10 soulburning volcano box")?.product.id, 493307);
 });
 
+test("a single deck is never the deck display, and a tin's loose pack never the tin (live 2026-11-21, YGO Compare)", () => {
+  const ysets = [set(3096, "Structure Deck: Legend of the Crystal Beasts"), set(3100, "2022 Tin of the Pharaoh's Gods")];
+  const yidx = buildIndex(
+    [
+      sealed(275360, "Legend of the Crystal Beasts Structure Deck [1st Edition]", 3096),
+      sealed(275361, "Legend of the Crystal Beasts Structure Deck Display", 3096),
+      sealed(275402, "2022 Tin of the Pharaoh's Gods", 3100),
+      sealed(275401, "2022 Tin of the Pharaoh's Gods Mega Pack", 3100),
+    ],
+    ysets,
+    "ygo",
+  );
+  // Live: 47 single decks at US$8-15 on the US$29 display; with no edition named they are no match at all.
+  assert.notEqual(matchSealed("Yu-Gi-Oh! Structure Deck: Legend of the Crystal Beasts", yidx)?.product.id, 275361);
+  assert.notEqual(matchSealed("Legend of the Crystal Beasts Structure Deck", yidx)?.product.id, 275361);
+  assert.equal(matchSealed("Legend of the Crystal Beasts Structure Deck Display", yidx)?.product.id, 275361);
+  assert.equal(matchSealed("Yu-Gi-Oh! Legend of the Crystal Beasts Structure Deck 1st Edition", yidx)?.product.id, 275360);
+  // Live: 401games' "yugioh-2022-tin-of-the-pharaohs-gods-booster-pack" at US$5.95 on the US$12 tin.
+  assert.equal(matchSealed("Yugioh 2022 Tin of the Pharaoh's Gods", yidx, "yugioh 2022 tin of the pharaohs gods booster pack")?.product.id ?? null, null);
+  assert.notEqual(matchSealed("2022 Tin of the Pharaoh's Gods Booster Pack", yidx)?.product.id, 275402);
+  assert.equal(matchSealed("Yu-Gi-Oh! 2022 Tin of the Pharaoh's Gods", yidx, "yu-gi-oh-2022-tin-of-the-pharaohs-gods")?.product.id, 275402);
+  assert.equal(matchSealed("2022 Tin of the Pharaoh's Gods (3 Mega Packs)", yidx)?.product.id, 275402);
+});
+
+test("Rarity Collection 2 is never the first one, a reprint never the original, a tin's single card never the tin (live 2026-11-22)", () => {
+  const ysets = [
+    set(23233, "25th Anniversary Rarity Collection"),
+    set(23416, "25th Anniversary Rarity Collection II"),
+    set(1304, "Anniversary Pack"),
+    set(1462, "Structure Deck: Realm of Light"),
+    set(24012, "Structure Deck: Realm of Light (2020 Date Reprint)"),
+    set(1292, "Retro Pack 2"),
+    set(24352, "Retro Pack 2 (2020 Date Reprint)"),
+  ];
+  const yidx = buildIndex(
+    [
+      sealed(501747, "25th Anniversary Rarity Collection Booster Pack", 23233),
+      sealed(501748, "25th Anniversary Rarity Collection Booster Box", 23233),
+      sealed(534532, "25th Anniversary Rarity Collection II Booster Box", 23416),
+      sealed(534539, "25th Anniversary Rarity Collection II Booster Pack", 23416),
+      sealed(272187, "Anniversary Pack", 1304),
+      sealed(91027, "Realm of Light Structure Deck", 1462),
+      sealed(607805, "Structure Deck: Realm of Light (2020 Date Reprint)", 24012),
+      sealed(166470, "Retro Pack 2 Booster Pack", 1292),
+    ],
+    ysets,
+    "ygo",
+  );
+  // Live: 31 stores' Rarity Collection 2 boxes and packs sat on the first Rarity Collection's pages.
+  assert.equal(matchSealed("Yu-Gi-Oh! 25th Anniversary Rarity Collection 2 Booster Box", yidx)?.product.id, 534532);
+  assert.equal(matchSealed("25th Anniversary Rarity Collection 2 Booster Pack 1st Edition", yidx)?.product.id, 534539);
+  assert.equal(matchSealed("25th Anniversary Rarity Collection II Booster Pack", yidx)?.product.id, 534539);
+  assert.equal(matchSealed("Yu-Gi-Oh! 25th Anniversary Rarity Collection Booster Box", yidx)?.product.id, 501748);
+  // "2 Players" is a count, not a sequel.
+  assert.equal(matchSealed("Yu-Gi-Oh! Trading Card Game 25th Anniversary Rarity Collection Booster Box - 24 Packs | Card Game, 2 Players", yidx)?.product.id, 501748);
+  // Live: reprint decks at US$6.40 on the US$21 original, reprint Retro Pack 2 packs on the original's page.
+  assert.notEqual(matchSealed("Yu-Gi-Oh! Realm of Light Structure Deck Reprint Unlimited Edition", yidx)?.product.id, 91027);
+  assert.notEqual(matchSealed("Structure Deck: Realm of Light 2024 Reprint", yidx)?.product.id, 91027);
+  assert.notEqual(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster Reprint Unlimited Edition", yidx)?.product.id, 166470);
+  assert.equal(matchSealed("Yu-Gi-Oh! Realm of Light Structure Deck", yidx)?.product.id, 91027);
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster Pack", yidx)?.product.id, 166470);
+  // Live: single cards (one a PSA 10) on the US$35 Dueling Mirrors tin.
+  assert.equal(looksLikeCard("2024 Yu-Gi-Oh! MP24 25th Anniversary Tin Dueling Mirrors EN073 Triple Tactics Thrust 1st Edition"), true);
+  assert.equal(looksLikeCard("Triple Tactics Thrust 25th Anniversary Tin Dueling Mirrors", "yu-gi-oh-tcg-triple-tactics-thrust-25th-anniversary-tin-dueling-mirrors-mp24-en073mp24-en073"), true);
+  assert.equal(looksLikeCard("Harpie's Feather Duster 25th Anniversary Tin Dueling Mirrors PSA 10"), true);
+  assert.equal(looksLikeCard("Yu-Gi-Oh! 25th Anniversary Tin: Dueling Mirrors"), false);
+});
+
 test("Italian and German packs, MVP1 movie-pack cards and '1st Edition Rare' singles are left out (live 2026-11-20)", async () => {
   const { handleOf, isForeign } = await import("@/lib/import/match");
   assert.ok(isForeign(handleOf("https://bsastore.it/products/bustina-3-carte-yu-gi-oh-star-pack-vrains-1a-edizione-ita?variant=1")));
