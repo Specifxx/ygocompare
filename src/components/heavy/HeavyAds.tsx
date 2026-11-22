@@ -9,7 +9,7 @@ import { SITE } from "@/site.config";
 import type { AdTile } from "@/lib/card-ads";
 import { goHref } from "@/lib/affiliate";
 import { money } from "@/lib/format";
-import { AD_HEAVY, MAX_SLIDES, SLIDE_AFTER_S, countView, heavyBlocked, notePopup, noteSlide, popupDue, popupsShown, slidesShown } from "@/lib/ad-heavy";
+import { AD_HEAVY, MAX_SLIDES, SLIDE_AFTER_S, countView, heavyBlocked, heavyPhone, notePopup, noteSlide, popupDue, popupsShown, slidesShown } from "@/lib/ad-heavy";
 
 function Pick({ t, page, big = false }: { t: AdTile; page: string; big?: boolean }) {
   return (
@@ -44,7 +44,7 @@ export function HeavyPopups({ tiles, tcgplayerUrl }: { tiles: AdTile[]; tcgplaye
   const picks = tiles.filter((t) => t.image).slice(0, 6);
 
   useEffect(() => {
-    if (!AD_HEAVY || picks.length < 3 || heavyBlocked()) return;
+    if (!AD_HEAVY || picks.length < 3 || heavyBlocked() || heavyPhone()) return;
     const view = countView();
     setSlide(false);
     let t1: number | undefined;
