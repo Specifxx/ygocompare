@@ -2878,3 +2878,21 @@ round every two months.
 
 **Why.** Owner, 2026-11-22: "make all of that ... for ... Yu-Gi-Oh Compare ... a less than $20 most recent booster pack ... a point
 system ... every 2 months".
+
+## 2026-11-22: A sequel number reads both ways, a reprint names its reprint set, a lone EN### is a card
+
+**Decision.** Three refusals in `matchSealed` and `looksLikeCard` (`src/lib/import/match.ts`), each pinned in
+`tests/match.test.ts`:
+- A sequel number right after a word ("Rarity Collection 2") also reads as its roman spelling ("ii") and back, never as a
+  count ("2 Players", "2 Pack"). The title then scores on its own product, and the shorter set's product is refused by
+  the longer-set rule.
+- A title or handle that says "reprint" names TCGplayer's "(2020 Date Reprint)" set, whatever year the store prints: the
+  original printing refuses it when such a set exists.
+- A card number standing alone ("...-dueling-mirrors-en073-triple-tactics-thrust"), run into the next word, or a "PSA 10"
+  makes the listing a card.
+
+**Why.** Audit of the 21 Nov import: 31 stores' Rarity Collection II boxes and packs on the first Rarity Collection's pages,
+about 40 reprint packs, boxes and decks on the original printings (Realm of Light reprint deck at US$6.40 on the US$21
+original, Light of Destruction reprint packs at US$3.99 on the US$20 Unlimited pack), and three single cards (one graded)
+on the US$35 Dueling Mirrors tin. Replayed on that day's offers with each handle as the title: 72 of 7,068 change, all
+of them these listings; no other offer moved.

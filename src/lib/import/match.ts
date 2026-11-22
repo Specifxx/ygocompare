@@ -314,6 +314,17 @@ export const isUnfitListing = (title: string) => UNFIT.test(title);
 // Multiples: "(Pair)", "Bundle of 2", "Set of 4", "x2". A title and a product
 // must agree on whether they are a multiple.
 const MULTI = /\b(pair|bundle of \d+|set of \d+|\d+\s*x|x\s*\d+|\d+[- ]pack bundle|lot of)\b/i;
+// A set's sequel number in its other spelling ("Rarity Collection 2" -> "ii", "Legendary Decks II" -> "2"), read only
+// right after a word and never as a count ("2 Players", "2 Pack").
+const SEQUEL = new Map([["2", "ii"], ["3", "iii"], ["4", "iv"], ["ii", "2"], ["iii", "3"], ["iv", "4"]]);
+function sequelAliases(words: string[]): string[] {
+  const out: string[] = [];
+  words.forEach((w, i) => {
+    const alt = SEQUEL.get(w);
+    if (alt && i > 0 && /^[a-z]+$/.test(words[i - 1]) && !/^(players?|packs?|boxes|decks?|tins?)$/.test(words[i + 1] ?? "")) out.push(alt);
+  });
+  return out;
+}
 const SINGLE_PACK = /\b(booster|loose|mega)\s+pack\b(?!s)/i;
 const isMulti = (s: string) => MULTI.test(s.replace(/\b\d+\s*packs?\)/i, ""));
 
@@ -418,6 +429,10 @@ function codesAgree(p: Product, codes: Set<number>, idx: MatchIndex): boolean {
 export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchResult | null {
   if (isForeign(title)) return null;
   const have = new Set(tokens(title).filter((t) => !STOP.has(t) || t === "booster"));
+  // Live 2026-11-22: 31 stores' "25th Anniversary Rarity Collection 2" boxes and packs sat on the first Rarity
+  // Collection's pages: the set is "... Rarity Collection II", and "2" never met "ii". A sequel number reads in either
+  // spelling, so the title scores on its own product and the shorter set refuses it below.
+  for (const w of sequelAliases(tokens(title))) have.add(w);
   const type = sealedTypeOf(title);
   const codes = setCodesInTitle(title, idx);
   // Sets whose whole name the title carries. Live 2026-11-20 (YGO): "Legendary Duelists 10: Soulburning Volcano Booster
@@ -428,6 +443,11 @@ export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchR
   // Duelists pack (US$6.46 market): the handle names the longer set when the title doesn't, so it counts here (and
   // only here, where it can only refuse).
   const seen = new Set([...have, ...tokens(handle)]);
+  for (const w of sequelAliases(tokens(handle.replace(/-/g, " ")))) seen.add(w);
+  // Live 2026-11-22: "Realm of Light Structure Deck Reprint" (US$6.40) and "Light of Destruction Booster Reprint
+  // Unlimited Edition" packs (US$3.99) sat on the original printings (US$21, US$20). TCGplayer files every reprint run
+  // ("2024 reprint", "July 2025 reprint") under a "(2020 Date Reprint)" set; a title that says reprint names that set.
+  if (seen.has("reprint")) for (const w of ["2020", "date"]) seen.add(w);
   const named = [...idx.setName].filter(([, t]) => t.length && t.every((w) => seen.has(w)));
   // The product's own name may carry the longer set's words: TCGplayer files "Raging Tempest Special Edition Box" under
   // Raging Tempest while a "Raging Tempest: Special Edition" set exists too.
@@ -530,7 +550,10 @@ export function looksSealed(title: string, productType = "", style?: NumberStyle
 const CARD_RARITY = /\b(common|short print|super rare|ultra rare|secret rare|ultimate rare|ghost rare|starfoil( rare)?|shatterfoil( rare)?|mosaic rare|collector'?s rare|platinum rare|prismatic secret rare|quarter century secret rare|starlight rare|parallel rare)\b/i;
 // "MVP1-ENSV5" (Live 2026-11-20: Obelisk the Tormentor on the Dark Side of Dimensions Movie Pack at US$4) is a card
 // code too, and so is "1st Edition Rare" ("Raigeki 1st Edition Rare Battle Pack Epic Dawn" at US$3 on the pack).
-const CARD_CODE = /\b[a-z0-9]{2,5}[- ]?(en|ae|sp|ju|fc|jp)(\d{3}|[a-z]{1,2}\d{1,3})\b/i;
+// Live 2026-11-22: "...-dueling-mirrors-en073-triple-tactics-thrust-1st-edition" (US$10, one card) and a PSA 10
+// "...-en058-harpies-fthr-duster" on the US$35 Dueling Mirrors tin: a card's "EN073" alone, or run into the next word
+// ("mp24-en073mp24-en073"), is a card code too. A sealed product never carries one.
+const CARD_CODE = /\b[a-z0-9]{2,5}[- ]?(en|ae|sp|ju|fc|jp)(\d{3}|[a-z]{1,2}\d{1,3})\b|(?<![a-z])en\d{3}(?!\d)|\bpsa[- ]?\d{1,2}\b/i;
 const EDITION_RARE = /\b(1st edition|unlimited( edition)?|limited edition) rare\b/i;
 const CARD_VERSION = /\bv\.?\s?\d\b/i;
 const EXTRA_OK = new Set([
