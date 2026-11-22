@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-21T19:38:42.437Z",
+ "generatedAt": "2026-11-22T20:03:07.111Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12666,
+   "refCents": 12673,
    "refLabel": "TCGplayer market price",
    "savingPct": 53
   },
@@ -61,7 +61,7 @@
    "currency": "USD",
    "store": "Cosmic Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16212,
+   "refCents": 16179,
    "refLabel": "TCGplayer market price",
    "savingPct": 26
   },
@@ -75,7 +75,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/488582_200w.jpg",
-   "refCents": 9858,
+   "refCents": 9860,
    "refLabel": "TCGplayer market price",
    "savingPct": 19
   },
@@ -83,15 +83,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "25th Anniversary Rarity Collection Booster Box",
-   "url": "https://ygocompare.com/card/25th-anniversary-rarity-collection-booster-box",
-   "cents": 10499,
+   "title": "Kaiba Evolution Starter Deck [Unlimited Edition]",
+   "url": "https://ygocompare.com/card/kaiba-evolution-starter-deck-unlimited-edition",
+   "cents": 10000,
    "currency": "USD",
-   "store": "Gamescape",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/501748_200w.jpg",
-   "refCents": 13007,
+   "store": "Gamer's Gauntlet",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/212809_200w.jpg",
+   "refCents": 11499,
    "refLabel": "TCGplayer market price",
-   "savingPct": 19
+   "savingPct": 13
   }
  ]
 }
