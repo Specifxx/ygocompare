@@ -1,4 +1,5 @@
 import { GiveawayHomeBanner } from "@/components/giveaway/GiveawayHomeBanner";
+import { SignInSlides } from "@/components/account/SignInSlides";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { SearchBox } from "@/components/SearchBox";
@@ -270,7 +271,7 @@ export default function Home() {
       </Hero>
       {/* The giveaway, while it is open (owner, 2026-11-22: "feature it on our homepage"). */}
       <div className="page">
-        <GiveawayHomeBanner />
+        <SignInSlides surface="home" variant="banner" fallback={<GiveawayHomeBanner />} />
       </div>
 
 

@@ -22,6 +22,7 @@ import { holidayNav } from "@/lib/holiday-nav";
 import { PrefsProvider } from "@/components/ClientPrefs";
 import { QuickView } from "@/components/QuickView";
 import { RateCard } from "@/components/site-reviews/RateCard";
+import { SignInCorner } from "@/components/account/SignInCorner";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ReturnNudge } from "@/components/ReturnNudge";
 import { LeaveNudge } from "@/components/LeaveNudge";
@@ -125,6 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Analytics />
         <BuyClickTracker />
         <ReturnNudge />
+        <SignInCorner />
         <LeaveNudge />
         <AdFreeSync />
         <ShareArrival />
