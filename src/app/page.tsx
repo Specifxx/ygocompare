@@ -1,3 +1,4 @@
+import { GiveawayHomeBanner } from "@/components/giveaway/GiveawayHomeBanner";
 import Link from "@/components/Link";
 import { SITE } from "@/site.config";
 import { SearchBox } from "@/components/SearchBox";
@@ -267,6 +268,10 @@ export default function Home() {
           )}
         </p>
       </Hero>
+      {/* The giveaway, while it is open (owner, 2026-11-22: "feature it on our homepage"). */}
+      <div className="page">
+        <GiveawayHomeBanner />
+      </div>
 
 
       {shelfTabs.length > 0 && (
