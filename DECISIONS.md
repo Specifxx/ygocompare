@@ -2864,3 +2864,17 @@ pasted URL or a translate proxy is "none" or "cross-site". "yandex" and "baidu" 
 builds, baiduboxapp). Now `looksLikeBot` (the one thing that untags) is only an empty User-Agent or a self-named crawler or
 script; the header checks moved to `suspectClick`, which at most leaves a click out of the server-side click log, never the tag.
 The 10-14 Nov crawler with full browser headers will reach the networks tagged again: accepted by the owner's rule.
+
+## 2026-11-22: A giveaway, run by RiftCompare's points engine
+
+**Decision.** `/giveaway` (static) shows this site's prize (three Beyond the Brave 1st Edition booster packs, under A$20 at
+Australian stores), its points, the leaderboard and the official rules; the home page carries `GiveawayHomeBanner` under the hero
+while it is open, and the menu's "Guides & news" lists it. The entry panel (`components/giveaway/`) sends the visitor's stored
+RiftCompare session (`lib/premium-member.ts`) to `https://riftcompare.com/api/sister-giveaway`, and the board reads RiftCompare's
+CDN-held `/api/giveaway/leaderboard?site=ygo`; the draw (a public drand number), the winner's email and claim form, and the
+address are all RiftCompare's (TCGEmpire DECISIONS.md, 2026-11-22). This site stores no address and holds no key.
+`lib/giveaway.ts` repeats the prize and dates of RiftCompare's `ygo-beyond-the-brave-2026-12` entry and must change with it; a new
+round every two months.
+
+**Why.** Owner, 2026-11-22: "make all of that ... for ... Yu-Gi-Oh Compare ... a less than $20 most recent booster pack ... a point
+system ... every 2 months".
