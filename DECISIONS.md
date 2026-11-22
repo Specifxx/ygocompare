@@ -2853,3 +2853,14 @@ because the site's type rules read anything with "tin" as a Tin. `matchSealed` n
 unless the title says display, and a Tin whose name has no "pack" when the title or handle names one booster, loose or mega
 pack (singular). Both only refuse. Checked against the 20 Nov offers: every real deck-display offer (mechagames, progressccg,
 onboardgaming and others) says display in its handle; a single deck with no edition named is now no match rather than a guess.
+
+## 2026-11-22: Bot rules never untag a real person
+
+The owner (22 Nov): "make sure that there are literally zero false negatives when you filter bots, and false positives are okay."
+A buy link sent untagged to a real person is a lost sale; a bot sent tagged costs nothing we can see. `lib/bot-click.ts` had
+untagged anything with no Accept-Language, no Sec-Fetch-Mode, or a Sec-Fetch-Site of "none" or "cross-site". Real people
+send all of those: iOS before 16.4 and some in-app browsers send no Sec-Fetch-*, and a link opened from Discord, an email, a
+pasted URL or a translate proxy is "none" or "cross-site". "yandex" and "baidu" also matched real browsers' UAs (YaBrowser
+builds, baiduboxapp). Now `looksLikeBot` (the one thing that untags) is only an empty User-Agent or a self-named crawler or
+script; the header checks moved to `suspectClick`, which at most leaves a click out of the server-side click log, never the tag.
+The 10-14 Nov crawler with full browser headers will reach the networks tagged again: accepted by the owner's rule.
