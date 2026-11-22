@@ -1,22 +1,24 @@
-// Is this /go request a bot rather than a person? (2026-11-13: a crawler that ignores robots.txt opened
-// ~10,000 TCGplayer buy links in three days, one per product, so the affiliate network saw thousands of clicks
-// with no sales.) A bot is still sent to the shop, but untagged: the network never counts it as our click.
-// Every browser a person uses sends a User-Agent and an Accept-Language; a known crawler names itself; and
-// every current browser (Chrome 76+, Firefox 90+, Safari 16.4+) marks a navigation with Sec-Fetch-Mode.
-// The rules may only mark obvious bots: a person is never refused a link, at worst sent untagged.
+// Bot rules for /go and /out (owner, 2026-11-22: "make sure that there are literally zero false negatives when you filter bots,
+// and false positives are okay"). Hiding or untagging a real person costs a sale; letting a bot through costs nothing we can see.
+// So the affiliate tag is taken off ONLY for a request that names itself a crawler or script (or sends no User-Agent at all,
+// which no browser does): looksLikeBot. Missing Accept-Language or Sec-Fetch-Mode (iOS before 16.4, some in-app and privacy
+// browsers) and a Sec-Fetch-Site of "none" or "cross-site" (a link pasted, opened from Discord, an email or a translate proxy)
+// are real people too; since 2026-11-22 they keep a tagged link and only skip the SERVER-side click log (suspectClick). The
+// browser's own buy_click event still counts them. History: a crawler opened ~28,000 links 10-13 Nov and came back with full
+// browser headers on 14 Nov (DECISIONS.md, "Bot clicks on TCGplayer"); those clicks now reach the networks tagged, by design.
 const BOT_UA =
-  /bot\b|bot\/|crawl|spider|slurp|scrape|headless|phantom|puppeteer|playwright|selenium|python|curl|wget|httpx|okhttp|axios|node-fetch|undici|go-http|java\/|libwww|aiohttp|scrapy|feedfetcher|facebookexternalhit|preview|bytespider|gptbot|claudebot|ccbot|perplexity|amazonbot|petalbot|semrush|ahrefs|mj12|dotbot|yandex|baidu/i;
+  /bot\b|bot\/|crawl|spider|slurp|scrape|headless|phantom|puppeteer|playwright|selenium|python|curl|wget|httpx|okhttp|axios|node-fetch|undici|go-http|java\/|libwww|aiohttp|scrapy|feedfetcher|facebookexternalhit|bytespider|gptbot|claudebot|ccbot|perplexity|amazonbot|petalbot|semrush|ahrefs|mj12|dotbot/i;
 
+/** A self-declared crawler or script. The ONLY reason a link is sent untagged. Pure and edge-safe. */
 export function looksLikeBot(headers: Headers): boolean {
   const ua = headers.get("user-agent") ?? "";
-  if (!ua || BOT_UA.test(ua)) return true;
-  if (!headers.get("accept-language")) return true;
-  if (!headers.get("sec-fetch-mode")) return true;
-  // 2026-11-17: the same hole Dex closed on 15 Nov (2,835 go_clicks from 1,381 devices on a day with 632 visitors, full browser headers).
-  // What a crawler cannot fake by opening /go URLs it collected: Sec-Fetch-Site. A /go link exists only on our own pages, so a person's
-  // click is "same-origin"; a URL opened directly is "none" and one followed from elsewhere "cross-site". An absent header (an old
-  // browser) is left alone: the rules only mark obvious bots.
+  return !ua || BOT_UA.test(ua);
+}
+
+/** Probably not a click on our page (or a declared bot). Used only to leave a click out of the server-side log, never to untag. */
+export function suspectClick(headers: Headers): boolean {
+  if (looksLikeBot(headers)) return true;
+  if (!headers.get("accept-language") || !headers.get("sec-fetch-mode")) return true;
   const site = headers.get("sec-fetch-site");
-  if (site && site !== "same-origin" && site !== "same-site") return true;
-  return false;
+  return !!site && site !== "same-origin" && site !== "same-site";
 }
