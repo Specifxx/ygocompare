@@ -15,9 +15,9 @@
 // half is the control. share { medium, arm } and share_unlock { medium } let the
 // growth report see whether the offer raises sharing.
 import { SITE } from "@/site.config";
-import type { Market, Offer } from "./site-types";
+import { MARKET_LABEL, type Market, type Offer } from "./site-types";
 
-export type ShareMedium = "card" | "sealed" | "list" | "page" | "daily" | "set" | "guide" | "tool" | "movers";
+export type ShareMedium = "card" | "sealed" | "list" | "page" | "daily" | "set" | "guide" | "tool" | "movers" | "drop";
 
 /** `path` on the canonical host with the share tags (an existing query string is kept). */
 export function shareUrl(base: string, path: string, medium: ShareMedium): string {
@@ -60,6 +60,16 @@ export function priceGap(offers: readonly Offer[], market: Market): PriceGap | n
 export function shareText(name: string, gap: PriceGap | null, money: (cents: number, currency: string) => string): string {
   if (!gap) return `${name}: every store's price on ${SITE.name}`;
   return `${name}: ${money(gap.low.cents, gap.low.currency)} at ${storeName(gap.low)}, up to ${money(gap.high.cents, gap.high.currency)} elsewhere (${gap.pct}% less). Compared on ${SITE.name}`;
+}
+
+// "Share this deal with your group chat" (owner, 2026-11-23, components/DropShare.tsx): the cheapest in-stock STORE price in one
+// market (never eBay, TCGplayer or Amazon, never converted), named and priced as the board shows it. Null when there is none.
+export function dropText(name: string, offers: readonly Offer[], market: Market, money: (cents: number, currency: string) => string): string | null {
+  const best = offers
+    .filter((o) => o.market === market && o.inStock && o.cents > 0 && o.source !== "ebay" && o.source !== "tcgplayer" && o.source !== "amazon")
+    .sort((a, b) => a.cents - b.cents)[0];
+  if (!best) return null;
+  return `${best.preorder ? "Pre-order: " : ""}${name} for ${money(best.cents, best.currency)} at ${storeName(best)}, the cheapest store price we found in ${MARKET_LABEL[market]}. Every store compared on ${SITE.name}:`;
 }
 
 // A shared list (/list?i=…): product ids and quantities in the URL, no account

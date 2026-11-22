@@ -30,6 +30,7 @@ import { amazonCarries, amazonCells } from "@/lib/amazon-live";
 import { abs } from "@/lib/site";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ShareButton } from "@/components/ShareButton";
+import { DropShare } from "@/components/DropShare";
 import { attrHref, rarityHref, sealedHref } from "@/lib/hubs";
 
 import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
@@ -164,6 +165,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             </div>
             <CardTopBuy offers={e.offers} productId={p.id} ebayQuery={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} />
             <VaultOwn id={p.id} name={`${name}${p.number ? ` ${p.number}` : ""}`} href={`/card/${p.slug}`} image={p.image ? imageAt(p.image, "200w") : null} prices={lowestByMarket(e.offers)} className="mt-3" />
+            <DropShare path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} offers={e.offers} className="mt-2" />
             {Object.keys(e.tcg).length > 1 && (
               <p className="mt-2 flex flex-wrap gap-2 text-xs">
                 {Object.entries(e.tcg).map(([k, v]) => (
