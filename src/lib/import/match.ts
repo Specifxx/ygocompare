@@ -325,6 +325,18 @@ function sequelAliases(words: string[]): string[] {
   });
   return out;
 }
+// A pack product sold as several packs, by its own name ("Retro Pack Box (4-Pack)", "Blister (3-Pack)").
+const MULTI_PACK_NAME = /\b(box|blister|tuck|display|bundle|bags?)\b|\d+-pack|\bpacks\b/i;
+// A title counting several packs: a tuckbox, a mini box, "4 Packs", "24 Bags", "2-Pack Blister", "Pack of 3".
+const MULTI_PACK_TITLE =
+  /\btuck\s*box(es)?\b|\bmini[\s-]*box\b|\b([2-9]|[1-9]\d)\s*(booster\s+)?packs\b|\b\d+\s*bags\b|\b([2-9]|[1-9]\d)[\s-]*packs?\s+(box|blister|tuck)|\bpack\s+of\s+([2-9]|[1-9]\d)\b/i;
+// "(3-Pack)", "4 Packs", "24 Bags", "Pack of 3": how many packs a name or title counts, or 0. Never the number after
+// "Pack" ("Retro Pack 2 Booster Pack").
+function packCount(s: string): number {
+  const m = s.match(/(?<!\bpack\s?)\b(\d{1,2})[\s-]*(?:booster\s+)?(?:packs?|bags)\b|\bpack\s+of\s+(\d{1,2})\b/i);
+  const n = m ? Number(m[1] ?? m[2]) : 0;
+  return n >= 2 ? n : 0;
+}
 const SINGLE_PACK = /\b(booster|loose|mega)\s+pack\b(?!s)/i;
 const isMulti = (s: string) => MULTI.test(s.replace(/\b\d+\s*packs?\)/i, ""));
 
@@ -447,6 +459,9 @@ export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchR
   // Live 2026-11-22: "Realm of Light Structure Deck Reprint" (US$6.40) and "Light of Destruction Booster Reprint
   // Unlimited Edition" packs (US$3.99) sat on the original printings (US$21, US$20). TCGplayer files every reprint run
   // ("2024 reprint", "July 2025 reprint") under a "(2020 Date Reprint)" set; a title that says reprint names that set.
+  // Live 2026-11-22: "yugioh-retro-pack-2-blister-2025-rerelease" sat on the 2009 Retro Pack 2 pack. A re-release is a
+  // reprint by another word.
+  if (seen.has("rerelease") || /\bre-release/i.test(`${title} ${handle}`)) seen.add("reprint");
   if (seen.has("reprint")) for (const w of ["2020", "date"]) seen.add(w);
   const named = [...idx.setName].filter(([, t]) => t.length && t.every((w) => seen.has(w)));
   // The product's own name may carry the longer set's words: TCGplayer files "Raging Tempest Special Edition Box" under
@@ -470,6 +485,13 @@ export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchR
     // Live 2026-11-21: one loose pack from a tin ("yugioh-2022-tin-of-the-pharaohs-gods-booster-pack", US$5.95) sat on
     // the whole 2022 Tin (US$12 market). A tin's own name has no "pack"; a listing that names one booster pack, in its
     // title or its handle, is the pack (the handle can only refuse here).
+    // Live 2026-11-22: 3-pack tuckboxes (US$19-69), 2-pack tuckboxes, a "Mini Box 4 Packs", a "Box 24 Bags" and 2-pack
+    // blisters sat on single booster packs' pages (US$2-14 market). A single pack refuses a title that counts several
+    // packs; "9-pack" alone is a card count ("Booster Pack 1st Edition 9-pack"), so a bare N-pack still matches.
+    if (type === "Booster Pack" && !MULTI_PACK_NAME.test(p.name) && MULTI_PACK_TITLE.test(title)) continue;
+    // A product that counts its packs ("Retro Pack 2 Box (3-Pack)") refuses a title counting others ("Mini Box 4 Packs",
+    // "Box 24 Bags").
+    if (type === "Booster Pack" && packCount(p.name) && packCount(title) && packCount(p.name) !== packCount(title)) continue;
     if (type === "Tin" && !/\bpacks?\b/i.test(p.name) && SINGLE_PACK.test(`${title} ${handle.replace(/-/g, " ")}`)) continue;
     const setTokens = idx.setName.get(p.setId) ?? [];
     if (setTokens.length && overlap(setTokens, have) < 1) continue;

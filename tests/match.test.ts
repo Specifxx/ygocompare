@@ -314,6 +314,48 @@ test("Rarity Collection 2 is never the first one, a reprint never the original, 
   assert.equal(looksLikeCard("Yu-Gi-Oh! 25th Anniversary Tin: Dueling Mirrors"), false);
 });
 
+test("A single pack refuses a tuckbox, a mini box and a count of packs; a re-release is a reprint (live 2026-11-22)", () => {
+  const idx = buildIndex(
+    [
+      sealed(534539, "25th Anniversary Rarity Collection II Booster Pack", 23416),
+      sealed(631994, "2025 Mega-Pack Mega Pack", 24100),
+      sealed(605104, "Quarter Century Stampede Booster Pack", 23900),
+      sealed(180732, "Legendary Duelists: Sisters of the Rose Booster Pack", 2400),
+      sealed(166470, "Retro Pack 2 Booster Pack", 1292),
+      sealed(166472, "Retro Pack 2 Box (3-Pack)", 1292),
+      sealed(637382, "Retro Pack 2 (2020 Date Reprint) 4-Pack Box", 24352),
+    ],
+    [
+      set(23416, "25th Anniversary Rarity Collection II"),
+      set(24100, "2025 Mega-Pack"),
+      set(23900, "Quarter Century Stampede"),
+      set(2400, "Legendary Duelists: Sisters of the Rose"),
+      set(1292, "Retro Pack 2"),
+      set(24352, "Retro Pack 2 (2020 Date Reprint)"),
+    ],
+    "ygo",
+  );
+  // Live: US$19-69 tuckboxes and blisters of 2-3 packs on US$5-14 single packs.
+  for (const title of [
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection 2 Tuckbox (2 Pack)",
+    "2025 Mega-Pack Tuck Box",
+    "Yu-Gi-Oh! Quarter Century Stampede Tuckbox 3-Pack",
+    "Yu-Gi-Oh! TCG Quarter Century Stampede 3-Pack Booster Tuckbox",
+    "Legendary Duelists: Sisters of the Rose Booster 2-Pack Blister",
+    "Yu-Gi-Oh! Retro Pack 2 Tuckbox",
+    "Yu-Gi-Oh! TCG 2025 Retro Pack 2 Mini Box (4 Packs)",
+    "Yu-Gi-Oh! TCG Retro Pack 2 Box 24 Bags ENG",
+    "YuGiOh Retro Pack 2 Blister 2025 Re-release",
+  ])
+    assert.equal(matchSealed(title, idx)?.product.id, undefined, title);
+  // Single packs, and "9-pack" as a card count, still match.
+  assert.equal(matchSealed("25th Anniversary Rarity Collection II Booster Pack 1st Edition", idx)?.product.id, 534539);
+  assert.equal(matchSealed("Yu-Gi-Oh! Quarter Century Stampede Trading Card Game Booster Pack 1st Edition 9-pack", idx)?.product.id, 605104);
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster Pack", idx)?.product.id, 166470);
+  // A counted box keeps its own count.
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Box (3-Pack)", idx)?.product.id, 166472);
+});
+
 test("Italian and German packs, MVP1 movie-pack cards and '1st Edition Rare' singles are left out (live 2026-11-20)", async () => {
   const { handleOf, isForeign } = await import("@/lib/import/match");
   assert.ok(isForeign(handleOf("https://bsastore.it/products/bustina-3-carte-yu-gi-oh-star-pack-vrains-1a-edizione-ita?variant=1")));
