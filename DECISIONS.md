@@ -2929,3 +2929,23 @@ Every sign-in prompt links `/account?src=<surface>`; the sign-in sends it on, an
 dexcompare and mtgcompare". In the week to 22 Nov, 118 of 125 new reachable people were RiftCompare accounts and Dex and MTG, with most of the Google traffic, added 6. Owner, 2026-11-23: "keep user experience high and not flooding them with ads and
 information" (ops/product-ux/page-budget.md): hence one prompt a visit and nothing on the first page.
 Ported from MTG Compare (mtgcompare, same date) and DexCompare.
+
+## 2026-11-23: "Is it worth it?" is written from each product's own data (SEO quality pass)
+
+A live audit of the sitemap's product pages on 23 Nov (24 random pages per page type, text inside `<main>` without the header,
+footer, nav and forms, 5-word shingles shared by more than a fifth of the sample counted as template) found a median of
+**57 words of a page's own** on YGO Compare's `/card/*` (19 of 24 under 80), against 653 on DexCompare's product pages. The
+"Is it worth it?" section was one sentence with the name and two prices slotted in: the same paragraph on all 645 indexed
+product pages, the shape of the scaled content Google's core updates demote.
+
+`lib/buyer-read.ts` (pure, `tests/buyer-read.test.ts`) now writes the section from the product's own prices, stock and
+history, choosing each sentence's form from the data: each market's in-stock store count, cheapest and dearest and what the
+gap saves; how the cheapest US-dollar store compares with TCGplayer's market price (never a converted price); one store
+versus many, sold out, pre-orders only; TCGplayer's lowest listing and the cheapest US eBay Buy It Now (never counted as
+stores); TCGplayer's market price since we started recording it, its tracked low and high with dates and where today sits;
+the set's release date and age, the product's rank among the set's priced sealed products, and how many of the set's
+cheapest pack it costs (a price ratio, never a claim about contents). Nothing is said without data on the render to back it,
+and a product with little data gets a short section, not padding. On the 645 indexed products the section goes from ~25
+words, identical in shape everywhere, to a median of 125 words of the product's own (10th percentile 59). The same file is
+copied into TCG Prices, BandaiCompare and Gundam Compare. Judge on 1 to 8 Dec against 3 to 9 Nov with the other quality
+changes; no URL, title, h1 or h2 changes.
