@@ -57,6 +57,8 @@ export interface BuyerReadInput {
   /** Markets in the order the site lists them (the US first). */
   marketOrder: BuyerMarket[];
   marketName: (m: BuyerMarket) => string;
+  /** false on a site that never shows an eBay price (TCG Prices, 2026-11-14). */
+  ebayPrices?: boolean;
 }
 
 const NOT_STORES = new Set(["ebay", "tcgplayer", "amazon"]);
@@ -177,7 +179,7 @@ function whereToBuy(i: BuyerReadInput, markets: MarketRead[]): string[] {
 /** The marketplaces beside the stores: TCGplayer's lowest listing and eBay's cheapest Buy It Now, never counted as stores. */
 function marketplaces(i: BuyerReadInput, markets: MarketRead[]): string | null {
   const usStore = markets.find((m) => m.market === "US")?.inStock[0];
-  const ebay = i.offers.filter((o) => o.source === "ebay" && o.inStock && o.currency === "USD").sort((a, b) => a.cents - b.cents)[0];
+  const ebay = i.ebayPrices === false ? undefined : i.offers.filter((o) => o.source === "ebay" && o.inStock && o.currency === "USD").sort((a, b) => a.cents - b.cents)[0];
   const parts: string[] = [];
   if (i.tcgLowCents && i.refCents && i.tcgLowCents < i.refCents * 0.97) {
     parts.push(`TCGplayer's lowest listing is ${i.money(i.tcgLowCents)}, ${pctOf(i.refCents, i.tcgLowCents)}% under its market price, which is what recent sales averaged`);

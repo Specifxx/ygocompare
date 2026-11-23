@@ -65,3 +65,8 @@ test("set rank and pack ratio come only from priced siblings", () => {
 test("nothing to say means nothing padded", () => {
   assert.deepEqual(buyerRead(base({ refCents: null, set: null })), []);
 });
+
+test("a site with no eBay prices never names one", () => {
+  const r = buyerRead(base({ ebayPrices: false, offers: [{ source: "ebay", market: "US", currency: "USD", cents: 7000, inStock: true }] })).join(" ");
+  assert.doesNotMatch(r, /eBay/);
+});
