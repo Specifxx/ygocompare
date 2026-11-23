@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { SITE } from "@/site.config";
 import { canon } from "@/lib/site";
-import { byValue, products, setById } from "@/lib/data";
+import { byValue, products } from "@/lib/data";
+import { rankProducts } from "@/lib/home-demand";
 import { InlineAds } from "@/components/InlineAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { SEALED_ORDER as ORDER, SEALED_PLURAL as PLURAL, sealedHref } from "@/lib/hubs";
@@ -26,7 +27,7 @@ export default function Sealed() {
     <div className="flex flex-col gap-12 sm:gap-16">
       <header>
         <h1 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">{SITE.gameShort} booster box and sealed prices</h1>
-        <p className="mt-3 text-sm text-muted">Newest sets first within each type. Open any product to compare every store.</p>
+        <p className="mt-3 text-sm text-muted">The most popular products of each type. Open any product to compare every store, or a type for all of it.</p>
         {types.length > 1 && (
           <nav aria-label="Product types" className="mt-5">
             {/* One row that scrolls sideways at every width: a wrapping row changes its line count when the web font arrives. */}
@@ -45,7 +46,7 @@ export default function Sealed() {
       {groups.map((g) => {
         const href = sealedHref(g.t);
         return (
-          <section key={g.t}>
+          <section key={g.t} className="type-shelf">
             <div className="mb-6 flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
               <h2 className="font-display text-2xl font-bold tracking-tight sm:text-3xl">{PLURAL[g.t] ?? g.t}</h2>
               {href && (
@@ -54,7 +55,7 @@ export default function Sealed() {
                 </Link>
               )}
             </div>
-            <TileGrid items={g.items.sort((a, b) => (setById(b.setId)?.releasedOn ?? "").localeCompare(setById(a.setId)?.releasedOn ?? "")).slice(0, 24)} />
+            <TileGrid items={rankProducts(g.items).slice(0, 10)} />
           </section>
         );
       })}
