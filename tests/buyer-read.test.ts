@@ -70,3 +70,17 @@ test("a site with no eBay prices never names one", () => {
   const r = buyerRead(base({ ebayPrices: false, offers: [{ source: "ebay", market: "US", currency: "USD", cents: 7000, inStock: true }] })).join(" ");
   assert.doesNotMatch(r, /eBay/);
 });
+
+import { setRead } from "../src/lib/buyer-read";
+test("set read: range, stock, under-TCGplayer, mover and box-to-pack ratio", () => {
+  const r = setRead({ name: "S", releasedOn: "2026-01-01", upcoming: false, today: 20780, money, marketName: (m) => String(m), products: [
+    { name: "S Booster Box", sealedType: "Booster Box", refCents: 10000, change30d: -12, best: [{ market: "US", currency: "USD", cents: 9000 }], inStockStores: 5 },
+    { name: "S Booster Pack", sealedType: "Booster Pack", refCents: 400, change30d: 1, best: [{ market: "US", currency: "USD", cents: 450 }], inStockStores: 2 },
+    { name: "S Tin", sealedType: "Tin", refCents: null, change30d: null, best: [], inStockStores: 0 },
+  ] }).join(" ");
+  assert.match(r, /We track 3 sealed products from it; 2 have a TCGplayer market price, from \$4\.00 for the S Booster Pack to \$100\.00 for the S Booster Box/);
+  assert.match(r, /2 of the 3 are in stock at a US store today; the S Booster Box has the widest choice, with 5 stores/);
+  assert.match(r, /1 of the 2 with both prices can be bought from a US store under TCGplayer's market price; the biggest gap is the S Booster Box, 10% under/);
+  assert.match(r, /down 12% to \$100\.00/);
+  assert.match(r, /costs as much as 25 of the S Booster Pack/);
+});

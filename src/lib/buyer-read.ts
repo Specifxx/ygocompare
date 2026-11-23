@@ -57,6 +57,9 @@ export interface BuyerReadInput {
   /** Markets in the order the site lists them (the US first). */
   marketOrder: BuyerMarket[];
   marketName: (m: BuyerMarket) => string;
+  /** What `history` is, in a sentence ("TCGplayer's market price" by default; a kit page passes its cheapest US shop price,
+   *  and then today's value is the series' last point rather than `refCents`). */
+  historyLabel?: string;
   /** false on a site that never shows an eBay price (TCG Prices, 2026-11-14). */
   ebayPrices?: boolean;
 }
@@ -163,7 +166,7 @@ function whereToBuy(i: BuyerReadInput, markets: MarketRead[]): string[] {
   }
   if (rest.length) {
     const parts = rest.map((m) => `${i.marketName(m.market)} ${m.inStock.length === 1 ? `has 1 store at ${i.money(m.inStock[0].cents, m.currency)}` : `has ${m.inStock.length} stores from ${i.money(m.inStock[0].cents, m.currency)}`}`);
-    out.push(`Outside ${i.marketName(lead!.market)}, ${parts.join("; ")}. Each market is priced in its own currency, and local stock usually beats importing once postage and duties are added.`);
+    out.push(`Outside ${i.marketName(lead!.market)}, ${parts.join("; ")}, each in its own currency.`);
   }
   const soldOut = markets.filter((m) => m.inStock.length === 0 && m.listed > 0);
   if (!lead && soldOut.length) {
@@ -190,13 +193,15 @@ function marketplaces(i: BuyerReadInput, markets: MarketRead[]): string | null {
   }
   if (!parts.length) return null;
   const s = parts.join("; ");
-  return `${s.charAt(0).toUpperCase()}${s.slice(1)}. Marketplace listings come from many sellers, so check each seller's rating and postage before you buy.`;
+  return `${s.charAt(0).toUpperCase()}${s.slice(1)}.`;
 }
 
 /** TCGplayer's market price since we started recording (family 3). */
 function trajectory(i: BuyerReadInput): string | null {
   const h = i.history.filter(([, c]) => c > 0);
-  if (h.length < 2 || !i.refCents) return null;
+  const label = i.historyLabel ?? "TCGplayer's market price";
+  const now = i.historyLabel ? h[h.length - 1]?.[1] : i.refCents;
+  if (h.length < 2 || !now) return null;
   const first = h[0];
   const span = i.today - first[0];
   if (span < 14) return null;
@@ -206,13 +211,12 @@ function trajectory(i: BuyerReadInput): string | null {
     if (p[1] < lo[1]) lo = p;
     if (p[1] > hi[1]) hi = p;
   }
-  const now = i.refCents;
   const change = pctOf(now, first[1]);
   const since = `since ${dayLabel(first[0])}, when we started recording it`;
   let s =
     Math.abs(change) < 3
-      ? `TCGplayer's market price has held steady ${since}: ${i.money(first[1])} then, ${i.money(now)} now.`
-      : `TCGplayer's market price is ${change > 0 ? "up" : "down"} ${Math.abs(change)}% ${since}, from ${i.money(first[1])} to ${i.money(now)}.`;
+      ? `${label.charAt(0).toUpperCase()}${label.slice(1)} has held steady ${since}: ${i.money(first[1])} then, ${i.money(now)} now.`
+      : `${label.charAt(0).toUpperCase()}${label.slice(1)} is ${change > 0 ? "up" : "down"} ${Math.abs(change)}% ${since}, from ${i.money(first[1])} to ${i.money(now)}.`;
   if (hi[1] > lo[1] && pctOf(hi[1], lo[1]) >= 5) {
     s += ` Its tracked range is ${i.money(lo[1])} (${dayLabel(lo[0])}) to ${i.money(hi[1])} (${dayLabel(hi[0])}).`;
     const pos = (now - lo[1]) / (hi[1] - lo[1]);
@@ -267,5 +271,82 @@ export function buyerRead(i: BuyerReadInput): string[] {
   const c = setContext(i);
   if (c) out.push(c);
   if (!out.length && i.refCents) out.push(`${i.name} sells for about ${i.money(i.refCents)} on TCGplayer. No store we track lists it yet.`);
+  return out;
+}
+
+// ─── The set page's "<set> prices at a glance", from the set's own products (2026-11-23) ───────────────────────────────
+
+export interface SetReadProduct {
+  name: string;
+  sealedType: string | null;
+  /** TCGplayer market price, US cents. */
+  refCents: number | null;
+  /** 30-day change of that price, percent. */
+  change30d: number | null;
+  /** Cheapest in-stock store price per market (never eBay, TCGplayer or Amazon). */
+  best: { market: BuyerMarket; currency: string; cents: number }[];
+  /** Stores that have it in stock, all markets. */
+  inStockStores: number;
+}
+
+export interface SetReadInput {
+  name: string;
+  releasedOn: string | null;
+  upcoming: boolean;
+  today: number;
+  products: SetReadProduct[];
+  money: (cents: number, currency?: string) => string;
+  marketName: (m: BuyerMarket) => string;
+}
+
+/** Paragraphs about the set's prices, each backed by its products' data; empty when there is nothing true to say. */
+export function setRead(i: SetReadInput): string[] {
+  const out: string[] = [];
+  const n = i.products.length;
+  if (!n) return out;
+  const priced = i.products.filter((p) => p.refCents && p.refCents > 0).sort((a, b) => b.refCents! - a.refCents!);
+  const rel = i.releasedOn ? isoDay(i.releasedOn) : null;
+  const when = i.upcoming
+    ? `${i.name} is not out yet${rel ? ` (due ${dayLabel(rel)})` : ""}, so every store price here is a pre-order.`
+    : rel != null && i.today >= rel ? `${i.name} came out on ${dayLabel(rel)}, ${age(i.today - rel)} ago.` : "";
+  if (priced.length >= 2) {
+    const top = priced[0];
+    const low = priced[priced.length - 1];
+    out.push(`${when ? `${when} ` : ""}We track ${plural(n, "sealed product")} from it; ${priced.length === n ? (n === 2 ? "both" : `all ${n}`) : priced.length} have a TCGplayer market price, from ${i.money(low.refCents!)} for the ${low.name} to ${i.money(top.refCents!)} for the ${top.name}.`);
+  } else if (when) {
+    out.push(`${when} We track ${plural(n, "sealed product")} from it.`);
+  }
+  const usInStock = i.products.filter((p) => p.best.some((b) => b.market === "US"));
+  const deep = [...i.products].sort((a, b) => b.inStockStores - a.inStockStores)[0];
+  const parts: string[] = [];
+  if (usInStock.length) parts.push(`${usInStock.length} of the ${n} ${usInStock.length === 1 ? "is" : "are"} in stock at a US store today`);
+  else if (!i.upcoming) parts.push(n === 2 ? "neither is in stock at a US store today" : `none of the ${n} is in stock at a US store today`);
+  if (deep && deep.inStockStores >= 2) parts.push(`the ${deep.name} has the widest choice, with ${plural(deep.inStockStores, "store")} in stock across our markets`);
+  if (parts.length) out.push(`${parts.join("; ").replace(/^./, (c) => c.toUpperCase())}.`);
+  // Store price against TCGplayer, US dollars only: how many products a store sells under TCGplayer's market price.
+  const cmp = i.products.filter((p) => p.refCents && p.best.some((b) => b.market === "US" && b.currency === "USD"));
+  if (cmp.length >= 2) {
+    const under = cmp.filter((p) => p.best.find((b) => b.market === "US")!.cents < p.refCents!).sort((a, b) => {
+      const da = a.best.find((x) => x.market === "US")!.cents / a.refCents!;
+      const db = b.best.find((x) => x.market === "US")!.cents / b.refCents!;
+      return da - db;
+    });
+    const best = under[0];
+    out.push(under.length
+      ? `${under.length} of the ${cmp.length} with both prices can be bought from a US store under TCGplayer's market price; the biggest gap is the ${best.name}, ${-pctOf(best.best.find((b) => b.market === "US")!.cents, best.refCents!)}% under at ${i.money(best.best.find((b) => b.market === "US")!.cents)}.`
+      : `None of the ${cmp.length} with both prices is cheaper at a US store than TCGplayer's market price today.`);
+  }
+  const moved = i.products.filter((p) => p.change30d != null && p.refCents && Math.abs(p.change30d) >= 5).sort((a, b) => Math.abs(b.change30d!) - Math.abs(a.change30d!));
+  if (moved.length) {
+    const m = moved[0];
+    const rest = moved.length - 1;
+    out.push(`The biggest move over 30 days is the ${m.name}, ${m.change30d! > 0 ? "up" : "down"} ${Math.abs(Math.round(m.change30d!))}% to ${i.money(m.refCents!)}${rest ? `; ${plural(rest, "other product")} moved 5% or more` : ""}.`);
+  }
+  const pack = priced.filter((p) => PACK.test(p.sealedType ?? "") || /booster pack/i.test(p.name)).sort((a, b) => a.refCents! - b.refCents!)[0];
+  const box = priced.find((p) => /booster box|display/i.test(`${p.sealedType ?? ""} ${p.name}`) && !/case/i.test(`${p.sealedType ?? ""} ${p.name}`));
+  if (pack && box && box.refCents! > pack.refCents! * 1.5) {
+    const r = box.refCents! / pack.refCents!;
+    out.push(`On TCGplayer the ${box.name} costs as much as ${r >= 10 ? Math.round(r) : r.toFixed(1)} of the ${pack.name} (${i.money(pack.refCents!)} each).`);
+  }
   return out;
 }

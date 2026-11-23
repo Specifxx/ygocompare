@@ -2949,3 +2949,10 @@ and a product with little data gets a short section, not padding. On the 645 ind
 words, identical in shape everywhere, to a median of 125 words of the product's own (10th percentile 59). The same file is
 copied into TCG Prices, BandaiCompare and Gundam Compare. Judge on 1 to 8 Dec against 3 to 9 Nov with the other quality
 changes; no URL, title, h1 or h2 changes.
+
+Set pages too: `setRead` in the same file writes "<set> prices at a glance" under the product grid from the set's own
+products (release and age, how many have a TCGplayer price and their range, how many are in stock at a US store and which has
+the widest choice, how many a US store sells under TCGplayer's market price and the biggest gap, the biggest 30-day move, and
+the box-to-pack price ratio). Stores only; each market's prices in its own currency. The live audit found a median of 68 words
+of a set page's own; the new section adds a median of 91 on the 225 indexed set pages. The marketplace and import advice
+sentences that would repeat on every page were left out on purpose: they are template text.
