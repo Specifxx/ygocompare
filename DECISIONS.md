@@ -2929,3 +2929,20 @@ Every sign-in prompt links `/account?src=<surface>`; the sign-in sends it on, an
 dexcompare and mtgcompare". In the week to 22 Nov, 118 of 125 new reachable people were RiftCompare accounts and Dex and MTG, with most of the Google traffic, added 6. Owner, 2026-11-23: "keep user experience high and not flooding them with ads and
 information" (ops/product-ux/page-budget.md): hence one prompt a visit and nothing on the first page.
 Ported from MTG Compare (mtgcompare, same date) and DexCompare.
+
+## 2026-11-23: The pages past the home page: a filter bar on type pages, a folded sets list (ported from TCG Prices)
+
+Owner: "we spend so much time on the landing page that we've kind of forgoed the database pages, the filters … and hubs."
+On a 390px phone `/sealed/booster-box` was 53,791 px (330 tiles, no filter, no sort), `/sealed` 36,753, `/sets` 24,372.
+After: 8,779, 5,998 and about 4,000. Ported from TCG Prices (tcgcompare #165), same files:
+
+- **`/sealed/<type>`**: `FilterGrid.tsx` renders EVERY tile in the server HTML, most likely to be bought first (`rankProducts`;
+  it was newest set first), folded after 40. `ListControls.tsx` is the bar: name filter, sort (popular, newest set, price up
+  or down, most stores) and "In stock now". It only hides tiles and sets CSS `order`: no fetch, no navigation, no query string;
+  the choice is in the hash. Scripts off: a `<noscript>` rule shows every tile.
+- **`/sealed`**: ten of each type, most popular first (it was 24, newest first), one sideways row on a phone.
+- **`/sets`**: `FoldFinder.tsx`, a find box and the newest 30 sets as rows, "Show all" for the rest. Every set link is in the HTML.
+
+Unchanged: URLs, titles, canonicals, h1s, JSON-LD types, the price table, the ad block's place under the grid and the heavy-ad
+test's arms (nothing here reads or moves them). No new prompt or banner. `tests/list-controls.test.ts` pins it. Read 7 Dec with
+TCG Prices: buy clickers per 100 on `/sealed/*`; if worse, newest-first goes back as the default sort.

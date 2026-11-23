@@ -218,7 +218,7 @@ test("the home page as a crawler reads it: one h1, every shelf list and the fold
 
 test("list pages show their products first: the headline, one line, the filters, the grid, the reading, then the ad banners (2026-11-19)", () => {
   const type = src("app/sealed/[type]/page.tsx");
-  const typeOrder = ["<Breadcrumbs", "<h1 ", '<nav aria-label="Other product types"', "<TileGrid", "<InlineAds"];
+  const typeOrder = ["<Breadcrumbs", "<h1 ", '<nav aria-label="Other product types"', "<FilterGrid", "<InlineAds"];
   let at = -1;
   for (const k of typeOrder) {
     const i = type.indexOf(k, at + 1);

@@ -19,7 +19,7 @@ const STORE_NAME = new Map(SITE.stores.map((s) => [s.key as string, s.name]));
  * `deal` (the home page's deals, lib/data.ts deals): the same card with the store's price as the headline, TCGplayer's market
  * price beside it and the one badge a photo may carry, the saving. Never a badge without a saving.
  */
-export function ProductTile({ p, deal }: { p: Product; deal?: Deal }) {
+export function ProductTile({ p, deal, lc, folded }: { p: Product; deal?: Deal; /** FilterGrid.tsx: what its bar sorts and filters by, and whether the tile starts folded away. */ lc?: string; folded?: boolean }) {
   const ref = refCents(p.id);
   const e = summaryOf(p.id);
   const stores = e.inStockSources;
@@ -39,7 +39,8 @@ export function ProductTile({ p, deal }: { p: Product; deal?: Deal }) {
       data-qv-name={name}
       data-qv-sub={[set, p.number].filter(Boolean).join(" · ") || undefined}
       data-qv-img={img ?? undefined}
-      className="group pc-link"
+      data-lc={lc}
+      className={folded ? "group pc-link lc-x" : "group pc-link"}
     >
       {/* The photo on its plate (globals.css .plate): white in light mode, a light plate in dark mode, so a store's white-backed
           photo is never a glaring square on a dark page. */}
