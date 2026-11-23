@@ -37,6 +37,9 @@ import { cardTitleCandidates, fitTitle } from "@/lib/seo-title";
 import { priceValidUntil } from "@/lib/indexing";
 import { productAsksIndex } from "@/lib/index-asks";
 import { gtinLabel, gtinLd } from "@/lib/gtin";
+import { buyerRead } from "@/lib/buyer-read";
+import { sourceNameServer } from "@/lib/sources";
+import { MARKETS, marketInSentence, type Market, type Offer } from "@/lib/site-types";
 
 export const dynamic = "force-dynamic"; // one CDN copy per URL (next.config.js CDN_PAGES), never ISR
 
@@ -86,6 +89,21 @@ export default function CardPage({ params }: { params: { slug: string } }) {
   const related = byValue(productsInSet(p.setId).filter((x) => x.id !== p.id && x.kind === p.kind)).slice(0, 6);
   const inStock = e.offers.filter((o) => o.inStock);
   const usOffers = inStock.filter((o) => o.currency === "USD");
+  const read = buyerRead({
+    name,
+    sealedType: p.kind === "sealed" ? p.sealedType : null,
+    refCents: ref,
+    tcgLowCents: Object.values(e.tcg).map((t) => t.low).filter((c): c is number => c != null).sort((a, b) => a - b)[0] ?? null,
+    history: series,
+    today: historyThrough(),
+    offers: e.offers,
+    storeName: (o) => sourceNameServer(o as Offer),
+    set: set ? { name: set.name, releasedOn: set.releasedOn, upcoming: set.upcoming } : null,
+    siblings: p.kind === "sealed" ? productsInSet(p.setId).filter((x) => x.id !== p.id && x.kind === "sealed").map((x) => ({ name: shortName(x.name), sealedType: x.sealedType, refCents: refCents(x.id) })) : [],
+    money,
+    marketOrder: MARKETS,
+    marketName: (mk) => marketInSentence(mk as Market),
+  });
   // Sealed only: the markets' tagged searches, upgraded to the item's own page and this build's price where the API found them.
   const amazon = p.kind === "sealed" && amazonCarries(p) ? amazonCells(p.id, amazonSearchUrls(`${SITE.game} ${name}`)) : null;
   return (
@@ -203,10 +221,9 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           </section>
           <section className="prose-site max-w-none text-sm">
             <h2>Is {name} worth it?</h2>
-            <p>
-              {name} {ref ? `sells for about ${money(ref)} on TCGplayer` : "has no TCGplayer market price yet"}
-              {e.change30d != null ? `, ${e.change30d >= 0 ? "up" : "down"} ${Math.abs(e.change30d)}% over 30 days` : ""}. {inStock.length ? `The cheapest in-stock listing we track is ${money(inStock[0].cents, inStock[0].currency)}.` : ""} Prices from {SITE.stores.length} stores, TCGplayer and eBay are checked every day.
-            </p>
+            {/* Written from this product's own prices, stock and history (lib/buyer-read.ts, 2026-11-23 SEO quality pass). */}
+            {read.map((t, k) => <p key={k}>{t}</p>)}
+            <p className="text-muted">Prices from {SITE.stores.length} stores, TCGplayer and eBay are checked every day.</p>
           </section>
         </div>
       </div>

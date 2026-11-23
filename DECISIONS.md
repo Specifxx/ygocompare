@@ -2946,3 +2946,29 @@ After: 8,779, 5,998 and about 4,000. Ported from TCG Prices (tcgcompare #165), s
 Unchanged: URLs, titles, canonicals, h1s, JSON-LD types, the price table, the ad block's place under the grid and the heavy-ad
 test's arms (nothing here reads or moves them). No new prompt or banner. `tests/list-controls.test.ts` pins it. Read 7 Dec with
 TCG Prices: buy clickers per 100 on `/sealed/*`; if worse, newest-first goes back as the default sort.
+## 2026-11-23: "Is it worth it?" is written from each product's own data (SEO quality pass)
+
+A live audit of the sitemap's product pages on 23 Nov (24 random pages per page type, text inside `<main>` without the header,
+footer, nav and forms, 5-word shingles shared by more than a fifth of the sample counted as template) found a median of
+**57 words of a page's own** on YGO Compare's `/card/*` (19 of 24 under 80), against 653 on DexCompare's product pages. The
+"Is it worth it?" section was one sentence with the name and two prices slotted in: the same paragraph on all 645 indexed
+product pages, the shape of the scaled content Google's core updates demote.
+
+`lib/buyer-read.ts` (pure, `tests/buyer-read.test.ts`) now writes the section from the product's own prices, stock and
+history, choosing each sentence's form from the data: each market's in-stock store count, cheapest and dearest and what the
+gap saves; how the cheapest US-dollar store compares with TCGplayer's market price (never a converted price); one store
+versus many, sold out, pre-orders only; TCGplayer's lowest listing and the cheapest US eBay Buy It Now (never counted as
+stores); TCGplayer's market price since we started recording it, its tracked low and high with dates and where today sits;
+the set's release date and age, the product's rank among the set's priced sealed products, and how many of the set's
+cheapest pack it costs (a price ratio, never a claim about contents). Nothing is said without data on the render to back it,
+and a product with little data gets a short section, not padding. On the 645 indexed products the section goes from ~25
+words, identical in shape everywhere, to a median of 125 words of the product's own (10th percentile 59). The same file is
+copied into TCG Prices, BandaiCompare and Gundam Compare. Judge on 1 to 8 Dec against 3 to 9 Nov with the other quality
+changes; no URL, title, h1 or h2 changes.
+
+Set pages too: `setRead` in the same file writes "<set> prices at a glance" under the product grid from the set's own
+products (release and age, how many have a TCGplayer price and their range, how many are in stock at a US store and which has
+the widest choice, how many a US store sells under TCGplayer's market price and the biggest gap, the biggest 30-day move, and
+the box-to-pack price ratio). Stores only; each market's prices in its own currency. The live audit found a median of 68 words
+of a set page's own; the new section adds a median of 91 on the 225 indexed set pages. The marketplace and import advice
+sentences that would repeat on every page were left out on purpose: they are template text.
