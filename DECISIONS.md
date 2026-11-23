@@ -2972,3 +2972,14 @@ the widest choice, how many a US store sells under TCGplayer's market price and 
 the box-to-pack price ratio). Stores only; each market's prices in its own currency. The live audit found a median of 68 words
 of a set page's own; the new section adds a median of 91 on the 225 indexed set pages. The marketplace and import advice
 sentences that would repeat on every page were left out on purpose: they are template text.
+
+
+## 2026-11-23: Clicks that feel instant, on the real URLs (NavBoost)
+
+Owner, 23 Nov: "I want the sites to be very, very fast to use ... clicking all the tabs". Ported from TCG Prices (its DECISIONS.md,
+same date). `components/NavBoost.tsx`, one delegated listener mounted once in the layout, nothing in the server HTML: a same-site
+link starts loading on touch-down, on a 65 ms hover and on keyboard focus (`router.prefetch`, once a visit); the main tabs are
+fetched once when the browser is idle (skipped on Save-Data and 2g); and a tap draws a line on the top edge until the new page is
+in. The viewport prefetch `components/Link.tsx` turns off for cost stays off (`tests/nav-boost.test.ts`). Never `/go`, `/out`,
+`/api`, a sponsored link, a new-tab link or another host. Measured on TCG Prices (emulated phone, tap to first paint): a warmed
+tab 871 to 567 ms. Rollback: remove `<NavBoost>` from the layout.
