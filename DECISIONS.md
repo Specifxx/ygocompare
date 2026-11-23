@@ -2983,3 +2983,18 @@ fetched once when the browser is idle (skipped on Save-Data and 2g); and a tap d
 in. The viewport prefetch `components/Link.tsx` turns off for cost stays off (`tests/nav-boost.test.ts`). Never `/go`, `/out`,
 `/api`, a sponsored link, a new-tab link or another host. Measured on TCG Prices (emulated phone, tap to first paint): a warmed
 tab 871 to 567 ms. Rollback: remove `<NavBoost>` from the layout.
+
+## 2026-11-23: A single pack never takes a tuckbox or a count of packs; a re-release is a reprint
+
+**Decision.** Two refusals in `matchSealed` (`src/lib/import/match.ts`), pinned in `tests/match.test.ts`:
+- A single booster pack (a pack product whose name counts nothing: no box, blister, tuck, display, bundle or N-pack) refuses
+  a title that counts several packs: a tuckbox, a mini box, "4 Packs", "24 Bags", "2-Pack Blister", "Pack of 3". A bare
+  "9-pack" still matches: stores write the card count that way ("Booster Pack 1st Edition 9-pack"). A product that counts
+  its packs ("Retro Pack 2 Box (3-Pack)") refuses a title counting a different number.
+- "Re-release" / "rerelease" reads as "reprint", so the original printing refuses it when a "(2020 Date Reprint)" set exists.
+
+**Why.** Audit of the 22 Nov import (the first after the 2026-11-22 entry, which it verified: Rarity Collection II rows moved
+onto their own pages, the reprint rows and the Dueling Mirrors cards left). 3-pack tuckboxes (US$19-69), 2-pack tuckboxes,
+2025 Mega-Pack tuck boxes (US$9-25 on the US$4.81 Mega Pack), 2-pack blisters, a "Mini Box 4 Packs" and a 24-pack "Box 24
+Bags" (A$148) sat on single packs' pages. Replayed on that day's 7,043 store offers with each handle as the title: 35
+offers drop, all of them these listings; none moves to another product and no other offer changes.
