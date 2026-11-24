@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: `${SITE.gameShort} selling fee calculator — TCGplayer and eBay`,
   description: `How much you keep when you sell a ${SITE.game} card on TCGplayer or eBay, after fees. Free calculator.`,
   ...canon("/tools/selling-fees"),
+  // Noindex, follow (page scorecard, 2026-11-23): a card-selling calculator on a sealed-only site, shown by Google only past
+  // page 3 (position 45) and never clicked. It stays live for the tools list and the card-value guide; it is not in the sitemap.
+  robots: { index: false, follow: true },
 };
 
 export default function Page() {
