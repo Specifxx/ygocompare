@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-22T20:03:07.111Z",
+ "generatedAt": "2026-11-24T00:13:55.377Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -19,7 +19,7 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12673,
+   "refCents": 12735,
    "refLabel": "TCGplayer market price",
    "savingPct": 53
   },
@@ -61,7 +61,7 @@
    "currency": "USD",
    "store": "Cosmic Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16179,
+   "refCents": 16190,
    "refLabel": "TCGplayer market price",
    "savingPct": 26
   },
@@ -75,9 +75,9 @@
    "currency": "USD",
    "store": "Collectors Emporium NY",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/488582_200w.jpg",
-   "refCents": 9860,
+   "refCents": 9792,
    "refLabel": "TCGplayer market price",
-   "savingPct": 19
+   "savingPct": 18
   },
   {
    "kind": "deal",
