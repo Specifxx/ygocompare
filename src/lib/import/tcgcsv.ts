@@ -101,6 +101,7 @@ export async function loadTcgcsv(now = new Date()): Promise<{
       fetchJson<{ results: RawProduct[] }>(`${BASE}/${cat}/${g.groupId}/products`, TCGCSV_INIT),
       fetchJson<{ results: RawPrice[] }>(`${BASE}/${cat}/${g.groupId}/prices`, TCGCSV_INIT),
     ]);
+    g.name = setNameOf(g.name);
     const setSlug = uniqueSetSlug(g.name, g.line, usedSetSlugs);
     const released = g.publishedOn ? g.publishedOn.slice(0, 10) : null;
     sets.push({
@@ -174,6 +175,14 @@ export async function loadTcgcsv(now = new Date()): Promise<{
   }
   return { sets, products, tcg };
 }
+
+/** TCGplayer's typos in a set's name, fixed before the slug is made (2026-11-24). A store titles the set correctly, so the
+ *  matcher needs the real name, and the URL must be right before the set's page first goes live (URLs are frozen after).
+ *  Only a set with no page yet may be added here. */
+export const SET_NAME_FIXES: Readonly<Record<string, string>> = {
+  "Immortal Pheonix": "Immortal Phoenix", // Konami: Immortal Phoenix (IMPH), 29 Jan 2027
+};
+export const setNameOf = (name: string): string => SET_NAME_FIXES[name.trim()] ?? name;
 
 /** A set's URL slug: its name, and on a multi-game site the game's slug
  *  before it when two games share a set name ("promotion-cards"). */
