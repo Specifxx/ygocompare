@@ -56,3 +56,18 @@ test("card pages with no price and no listing are kept out of the index", async 
   assert.match(src, /\{usOffers\.length > 0 && \(\s*<JsonLd/);
   assert.doesNotMatch(src, /offers: usOffers\.length\s*\?/);
 });
+
+// Page scorecard (2026-11-23): impressions past page 3 with no click do not hold a page in the index.
+test("search demand: a click or 10+ impressions within position 30 is found; past page 3 alone is not", async () => {
+  const { foundPaths } = await import("../src/lib/search-demand");
+  const found = foundPaths({
+    "/sets/clicked-deep": [1, 3, 60],
+    "/sets/seen-page-2": [0, 14, 22.8],
+    "/sets/seen-at-30": [0, 10, 30],
+    "/sets/past-page-3": [0, 25, 34],
+    "/sets/few": [0, 9, 4],
+    "/sets/no-position": [0, 12],
+  });
+  assert.deepEqual([...found].sort(), ["/sets/clicked-deep", "/sets/no-position", "/sets/seen-at-30", "/sets/seen-page-2"]);
+  assert.match(read("src/app/tools/selling-fees/page.tsx"), /robots: \{ index: false, follow: true \}/);
+});

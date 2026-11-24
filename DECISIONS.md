@@ -3064,3 +3064,23 @@ The owner reviewed DexCompare on desktop (AU) on 2026-11-23 and asked for the fi
 
 **Measure** (24): `search_zero` and `search_fixed` (Vercel) count sent searches that matched nothing or only after a correction,
 the words only. The other P2 items (Deals menu, set logos, alert pattern, a11y, performance, mobile pass) are not in this release.
+
+## 2026-11-24: Past page 3 is not "found" (page scorecard, job D)
+
+The first page scorecard (`/mnt/project-files/strategy/page-scorecard-2026-11-23.html`) marked YGO pages that rank past position
+30 with no click "noindex or merge". Most of its YGO list was already handled: the single-card URLs, `/cards/*`, the card
+`/blog/*-most-valuable-cards` guides and `/tools/demand` and `/tools/trade` 301 since sealed-only (2026-11-06); Google's 28-day
+window still shows them. Two real gaps were left:
+
+- `lib/search-demand.ts`: a page with 10+ impressions in 56 days counted as "found" and kept asking to be indexed whatever its
+  rank, so set pages Google only shows at position 31+ (Duel Devastator at 34, Speed Duel Battle City Finals at 37, one product
+  each) overrode the data rule of 2026-11-19. Impressions now count only at an average position of 30 or better; a click always
+  counts, and a row with no position keeps the old reading. On the 24 Nov data this takes those two set pages out of the
+  index and changes nothing else (every product page and the other set pages keep their answer).
+- `/tools/selling-fees` (a card-selling calculator on a sealed-only site, position 45, no clicks) is noindex, follow. It stays
+  live and linked; it was never in the sitemap.
+
+Not taken: the scorecard's other "noindex" set pages (Maximum Gold, The Grand Creators, Shadow Specters, Chaos Impact,
+Ignition Assault, The Lost Millennium) still ask, because two or more of their products are real comparisons (3+ stores, one
+in stock). They are the products' hub, and noindexing a hub over its indexed products would cut the internal path to them.
+Their fix is "enrich" (unique price text), not noindex. Nothing is deleted and no URL changes.
