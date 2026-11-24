@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-24T12:51:02.575Z",
+ "generatedAt": "2026-11-24T22:44:40.714Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -69,15 +69,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Spell Ruler Booster Box (25th Anniversary Edition)",
-   "url": "https://ygocompare.com/card/spell-ruler-booster-box-25th-anniversary-edition",
-   "cents": 7999,
+   "title": "Beyond the Brave Booster Box [1st Edition]",
+   "url": "https://ygocompare.com/card/beyond-the-brave-booster-box-1st-edition",
+   "cents": 4499,
    "currency": "USD",
-   "store": "Collectors Emporium NY",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/488582_200w.jpg",
-   "refCents": 9792,
+   "store": "Smoke and Mirrors Hobby",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/711263_200w.jpg",
+   "refCents": 5534,
    "refLabel": "TCGplayer market price",
-   "savingPct": 18
+   "savingPct": 19
   },
   {
    "kind": "deal",
