@@ -34,14 +34,16 @@ import {
 const PAGE = 20;
 const ALERT_AFTER = 5;
 
-const BASIS_LABEL: Record<SaleBasis, { tab: string; ref: string; tip: string }> = {
+const BASIS_LABEL: Record<SaleBasis, { tab: string; badge: string; ref: string; tip: string }> = {
   tcg: {
     tab: "Under TCGplayer",
+    badge: "TCGplayer",
     ref: "TCGplayer market",
     tip: "Against TCGplayer's market price (recent sales), in US dollars on both sides: 8% to 60% under, products worth $5 or more.",
   },
   median: {
     tab: "Under other stores today",
+    badge: "median",
     ref: "store median",
     tip: "Against the middle price of the stores that have it in stock in this country today (three or more stores, 10% to 45% under: more than that is far likelier a wrong match than a sale), in its own currency.",
   },
@@ -229,7 +231,7 @@ function SaleRow({ row, basis, fmt, alertBar, siteKey, discordHref, page, email 
           ) : null}
         </div>
         <div className="col-span-2 flex flex-wrap items-baseline gap-x-2 sm:col-span-1 sm:block sm:text-right">
-          {pct != null && <span className="mr-1 inline-block rounded-md bg-open px-1.5 py-0.5 text-sm font-bold text-white sm:mb-1">−{pct}%</span>}
+          {pct != null && <span title={BASIS_LABEL[basis].tip} className="mr-1 inline-block rounded-md bg-open px-1.5 py-0.5 text-sm font-bold text-white sm:mb-1">{pct}% under {BASIS_LABEL[basis].badge}</span>}
           <b className="tabular text-xl font-extrabold">{fmt(row.priceCents)}</b>
           {ref != null && (
             <s className="tabular ml-1 text-sm text-muted" title={BASIS_LABEL[basis].ref}>
