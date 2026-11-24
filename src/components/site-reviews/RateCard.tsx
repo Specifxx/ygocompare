@@ -15,6 +15,7 @@ import {
   shouldAsk,
 } from "@/lib/site-reviews";
 import { RatingForm } from "./RatingForm";
+import { visitorBusy, watchTyping } from "@/lib/visitor-busy";
 
 // The rate-us corner card, mounted once in the root layout. When it asks on
 // its own is lib/site-reviews.ts (never on arrival, after real use or a store
@@ -58,8 +59,8 @@ function askedThisVisit(): boolean {
 /** Another dialog is open, or they are typing: not the moment. */
 function busy(): boolean {
   if (document.querySelector('[aria-modal="true"]')) return true;
-  const a = document.activeElement;
-  return !!a && (a.tagName === "INPUT" || a.tagName === "TEXTAREA" || a.tagName === "SELECT");
+  // Never over a visitor who is typing (owner, 2026-11-23 UX review): a focused field or a key in the last few seconds.
+  return visitorBusy();
 }
 
 export function RateCard() {
@@ -72,6 +73,7 @@ export function RateCard() {
 
   // Count every page view.
   useEffect(() => {
+    watchTyping();
     saveState(countPage(loadState(), Date.now()));
   }, [path]);
 

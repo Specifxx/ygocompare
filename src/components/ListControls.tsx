@@ -5,16 +5,28 @@
 // changes the URL's path or query (one CDN copy per URL). The choice lives in the hash, so a filtered list can be shared.
 import { useCallback, useEffect, useRef, useState } from "react";
 
+// Owner's UX review (2026-11-23, P0 3): sort by price, % under market and newest, filter by set, era, edition and price band. Price
+// per pack is left out on purpose: TCGplayer files no pack count for YGO sealed, and a pack count is never guessed (CLAUDE.md).
+// Language is left out too: the site matches English product only, so the edition (1st / Unlimited) is the split a buyer reads.
 export interface LcGame { id: string; name: string; n: number }
-type Sort = "pop" | "new" | "lo" | "hi" | "stores";
-const SORTS: [Sort, string][] = [["pop", "Most popular"], ["new", "Newest set"], ["lo", "Price: low to high"], ["hi", "Price: high to low"], ["stores", "Most stores"]];
-interface Row { el: HTMLElement; i: number; date: string; cents: number; stores: number; pre: boolean; game: string; name: string }
+export interface LcSet { id: string; name: string; date: string; n: number }
+type Sort = "pop" | "new" | "lo" | "hi" | "under" | "stores";
+const SORTS: [Sort, string][] = [["pop", "Most popular"], ["new", "Newest set"], ["lo", "Price: low to high"], ["hi", "Price: high to low"], ["under", "% under market"], ["stores", "Most stores"]];
+/** Price bands on TCGplayer's market price, in US$ (the price every tile shows). */
+const BANDS: [string, string, number, number][] = [["u25", "Under $25", 0, 2500], ["25-100", "$25–100", 2500, 10000], ["100-250", "$100–250", 10000, 25000], ["250", "$250+", 25000, Infinity]];
+const ERAS: [string, string, (y: number) => boolean][] = [["2024", "2024 on", (y) => y >= 2024], ["2020", "2020–2023", (y) => y >= 2020 && y < 2024], ["2010", "2010–2019", (y) => y >= 2010 && y < 2020], ["old", "Before 2010", (y) => y > 0 && y < 2010]];
+const EDITIONS: [string, string][] = [["1st", "1st Edition"], ["unl", "Unlimited"]];
+interface Row { el: HTMLElement; i: number; date: string; cents: number; stores: number; pre: boolean; game: string; set: string; ed: string; under: number; name: string }
 
-export function ListControls({ target, total, games, first, noun = "products" }: { target: string; total: number; games: LcGame[]; first: number; noun?: string }) {
+export function ListControls({ target, total, games, sets = [], first, noun = "products" }: { target: string; total: number; games: LcGame[]; sets?: LcSet[]; first: number; noun?: string }) {
   const [q, setQ] = useState("");
   const [sort, setSort] = useState<Sort>("pop");
   const [stock, setStock] = useState(false);
   const [game, setGame] = useState("");
+  const [set, setSet] = useState("");
+  const [era, setEra] = useState("");
+  const [ed, setEd] = useState("");
+  const [band, setBand] = useState("");
   const [limit, setLimit] = useState(first);
   const [count, setCount] = useState(total);
   const rows = useRef<Row[] | null>(null);
@@ -25,8 +37,8 @@ export function ListControls({ target, total, games, first, noun = "products" }:
     const grid = document.getElementById(target);
     rows.current = grid
       ? Array.from(grid.querySelectorAll<HTMLElement>("[data-lc]")).map((el, i) => {
-          const [date, cents, stores, pre, g] = (el.dataset.lc ?? "").split("|");
-          return { el, i, date, cents: Number(cents) || 0, stores: Number(stores) || 0, pre: pre === "1", game: g ?? "", name: (el.dataset.qvName ?? el.textContent ?? "").toLowerCase() };
+          const [date, cents, stores, pre, g, st, e, u] = (el.dataset.lc ?? "").split("|");
+          return { el, i, date, cents: Number(cents) || 0, stores: Number(stores) || 0, pre: pre === "1", game: g ?? "", set: st ?? "", ed: e ?? "", under: Number(u) || 0, name: (el.dataset.qvName ?? el.textContent ?? "").toLowerCase() };
         })
       : [];
     return rows.current;
@@ -42,19 +54,39 @@ export function ListControls({ target, total, games, first, noun = "products" }:
     if (g && games.some((x) => x.id === g)) setGame(g);
     const text = h.get("q");
     if (text) setQ(text.slice(0, 60));
+    const st = h.get("set");
+    if (st && sets.some((x) => x.id === st)) setSet(st);
+    const er = h.get("era");
+    if (er && ERAS.some(([k]) => k === er)) setEra(er);
+    const e = h.get("ed");
+    if (e && EDITIONS.some(([k]) => k === e)) setEd(e);
+    const b = h.get("price");
+    if (b && BANDS.some(([k]) => k === b)) setBand(b);
     ready.current = true;
-  }, [games]);
+  }, [games, sets]);
 
   useEffect(() => {
     const all = read();
     const words = q.toLowerCase().split(/\s+/).filter(Boolean);
-    const keep = all.filter((r) => (!game || r.game === game) && (!stock || (r.stores > 0 && !r.pre)) && words.every((w) => r.name.includes(w)));
+    const bandOf = BANDS.find(([k]) => k === band);
+    const eraOf = ERAS.find(([k]) => k === era);
+    const keep = all.filter(
+      (r) =>
+        (!game || r.game === game) &&
+        (!stock || (r.stores > 0 && !r.pre)) &&
+        (!set || r.set === set) &&
+        (!ed || r.ed === ed) &&
+        (!eraOf || eraOf[2](Number(r.date.slice(0, 4)) || 0)) &&
+        (!bandOf || (r.cents > 0 && r.cents >= bandOf[2] && r.cents < bandOf[3])) &&
+        words.every((w) => r.name.includes(w)),
+    );
     const priced = (r: Row) => (r.cents > 0 ? 0 : 1); // a product with no price never leads a price sort
     const by: Record<Sort, (a: Row, b: Row) => number> = {
       pop: (a, b) => a.i - b.i,
       new: (a, b) => b.date.localeCompare(a.date) || a.i - b.i,
       lo: (a, b) => priced(a) - priced(b) || a.cents - b.cents || a.i - b.i,
       hi: (a, b) => priced(a) - priced(b) || b.cents - a.cents || a.i - b.i,
+      under: (a, b) => b.under - a.under || a.i - b.i,
       stores: (a, b) => b.stores - a.stores || a.i - b.i,
     };
     keep.sort(by[sort]);
@@ -71,13 +103,18 @@ export function ListControls({ target, total, games, first, noun = "products" }:
       if (stock) h.set("stock", "1");
       if (game) h.set("game", game);
       if (q) h.set("q", q);
+      if (set) h.set("set", set);
+      if (era) h.set("era", era);
+      if (ed) h.set("ed", ed);
+      if (band) h.set("price", band);
       const s = h.toString();
       if (s || window.location.hash) history.replaceState(null, "", s ? `#${s}` : window.location.pathname + window.location.search);
     }
-  }, [q, sort, stock, game, limit, read]);
+  }, [q, sort, stock, game, set, era, ed, band, limit, read]);
 
   const change = <T,>(set: (v: T) => void) => (v: T) => { set(v); setLimit(first); };
-  const filtered = !!(q || stock || game);
+  const filtered = !!(q || stock || game || set || era || ed || band);
+  const hasEd = useHasEditions(target);
   const shown = Math.min(limit, count);
   return (
     <div className="lc" data-lc-bar>
@@ -93,6 +130,15 @@ export function ListControls({ target, total, games, first, noun = "products" }:
             {SORTS.map(([k, label]) => <option key={k} value={k}>{label}</option>)}
           </select>
         </label>
+        {sets.length > 1 && (
+          <label className="lc-sort">
+            <span className="sr-only">Set</span>
+            <select value={set} onChange={(e) => change(setSet)(e.target.value)}>
+              <option value="">All sets</option>
+              {sets.map((x) => <option key={x.id} value={x.id}>{x.name} ({x.n})</option>)}
+            </select>
+          </label>
+        )}
       </div>
       <div className="scroller lc-chips" role="group" aria-label="Filters">
         <button type="button" aria-pressed={stock} onClick={() => change(setStock)(!stock)} className={`chip min-h-10 whitespace-nowrap ${stock ? "chip-on" : ""}`}>
@@ -103,10 +149,27 @@ export function ListControls({ target, total, games, first, noun = "products" }:
             {g.name} <span className="tabular text-xs opacity-60">{g.n}</span>
           </button>
         ))}
+        {hasEd && EDITIONS.map(([k, label]) => (
+          <button key={k} type="button" aria-pressed={ed === k} onClick={() => change(setEd)(ed === k ? "" : k)} className={`chip min-h-10 whitespace-nowrap ${ed === k ? "chip-on" : ""}`}>{label}</button>
+        ))}
+        <label className="chip min-h-10 whitespace-nowrap">
+          <span className="sr-only">Era</span>
+          <select value={era} onChange={(e) => change(setEra)(e.target.value)} className="bg-transparent outline-none">
+            <option value="">Any year</option>
+            {ERAS.map(([k, label]) => <option key={k} value={k}>{label}</option>)}
+          </select>
+        </label>
+        <label className="chip min-h-10 whitespace-nowrap">
+          <span className="sr-only">Price</span>
+          <select value={band} onChange={(e) => change(setBand)(e.target.value)} className="bg-transparent outline-none">
+            <option value="">Any price</option>
+            {BANDS.map(([k, label]) => <option key={k} value={k}>{label}</option>)}
+          </select>
+        </label>
       </div>
       <p className="lc-count" aria-live="polite">
         {count === 0 ? `No ${noun} match.` : `Showing ${shown.toLocaleString()} of ${count.toLocaleString()}${filtered ? ` (${total.toLocaleString()} in all)` : ""}`}
-        {filtered && <button type="button" className="lc-clear" onClick={() => { setQ(""); setStock(false); setGame(""); setLimit(first); }}>Clear filters</button>}
+        {filtered && <button type="button" className="lc-clear" onClick={() => { setQ(""); setStock(false); setGame(""); setSet(""); setEra(""); setEd(""); setBand(""); setLimit(first); }}>Clear filters</button>}
       </p>
       {/* The grid sits between the bar and this foot in the page; `order` in the wrapper (globals.css .lc-wrap) puts it last. */}
       {count > limit && (
@@ -117,4 +180,14 @@ export function ListControls({ target, total, games, first, noun = "products" }:
       )}
     </div>
   );
+}
+
+/** Whether the grid holds both editions (a type with none, Tins say, gets no edition chips). */
+function useHasEditions(target: string): boolean {
+  const [has, setHas] = useState(false);
+  useEffect(() => {
+    const eds = new Set(Array.from(document.getElementById(target)?.querySelectorAll<HTMLElement>("[data-lc]") ?? []).map((el) => (el.dataset.lc ?? "").split("|")[6]).filter(Boolean));
+    setHas(eds.size > 1);
+  }, [target]);
+  return has;
 }

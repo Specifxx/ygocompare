@@ -228,7 +228,7 @@ test("list pages show their products first: the headline, one line, the filters,
   assert.equal(count(type, /<InlineAds/g), 1);
   assert.doesNotMatch(code(type), /Other sealed products/, "the other types are the chips under the headline, not a block under the grid");
   const set = src("app/sets/[slug]/page.tsx");
-  const setOrder = ["<h1 ", "<SealedQuickBuy", "<TileGrid items={sealed} />", "<Folds", "<Fold ", "<InlineAds"];
+  const setOrder = ["<h1 ", "<SealedQuickBuy", "<FilterGrid items={sealed}", "<Folds", "<Fold ", "<InlineAds"];
   at = -1;
   for (const k of setOrder) {
     const i = set.indexOf(k, at + 1);

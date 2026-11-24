@@ -27,12 +27,12 @@ import { SignInCorner } from "@/components/account/SignInCorner";
 import { BuyClickTracker } from "@/components/BuyClickTracker";
 import { ReturnNudge } from "@/components/ReturnNudge";
 import { LeaveNudge } from "@/components/LeaveNudge";
+import { ImageFallback } from "@/components/ImageFallback";
 import { AdFreeSync } from "@/components/premium/AdFreeSync";
 import { ADFREE_BOOT_SCRIPT } from "@/lib/premium-member";
 import { ShareArrival } from "@/components/ShareArrival";
 import { DockAds } from "@/components/DockAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
-import { InlineAds } from "@/components/InlineAds";
 import { HeavyPopups } from "@/components/heavy/HeavyAds";
 import { AD_HEAVY } from "@/lib/ad-heavy";
 import { AdRouteGate } from "@/components/AdRouteGate";
@@ -101,16 +101,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               its menus down the left of every desktop page is gone; the page is one centred column (tailwind.config.ts max-w-page). */}
           {/* Retention lever 2 (2026-11-18): a returning visitor's first page of a day, only when something they looked at is cheaper. */}
           {SITE.priceAlerts && <SinceLastVisit wrap="page" />}
+          {/* The heavy test's banner pair at the TOP of every page is gone (owner, 2026-11-23 UX review, P0 6: about 200px of header
+              before the title; ads below content). The pair stays below the content, as on every site. */}
           <main id="main" className="min-w-0 flex-1">
-            {/* The ad-intensity test (lib/ad-heavy.ts, owner 2026-11-19): YGO Compare is a HEAVY site, so the banner pair also sits at
-                the top of every page; the light sites keep it below the content only. */}
-            {AD_HEAVY && (
-              <AdRouteGate>
-                <div className="page hidden pt-4 md:block" data-heavy-top>
-                  <InlineAds ads={cardAds({ limit: 10 })} search={adSearch()} page="heavytop" />
-                </div>
-              </AdRouteGate>
-            )}
             <div className="page py-6">{children}</div>
           </main>
           <Footer />
@@ -134,6 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AdFreeSync />
         <ShareArrival />
         <ReturnBeacon />
+        <ImageFallback />
       </body>
     </html>
   );

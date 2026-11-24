@@ -116,7 +116,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
     <tr data-amazon-row className={`border-t border-line ${PIN_OUTLINE.amazon}`}>
       <td className="px-3 py-2.5">
         <span className="font-medium text-ink">Amazon</span>{" "}
-        <StoreVote url={amazonUrl} name="Amazon" className="ml-1 text-muted" />
+        <StoreVote url={amazonUrl} name="Amazon" className="ml-1 text-muted max-sm:hidden" />
         {!compact && amazonCart && <span className="block sm:hidden"><CartAddButton {...amazonCart} inline className="text-xs" /></span>}
         <span className="ad-pill ml-2">Ad</span>
       </td>
@@ -135,30 +135,25 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
   // Amazon is the second row, right under eBay (first when there is no eBay row).
   // Amazon is the row right under the last pinned row (eBay, then TCGplayer), first when there is none.
   const amazonAfter = shown.reduce((at, o, i) => (pinned.includes(o) ? i : at), -1);
-  return (
-    <div id={tableId ?? undefined} className="card overflow-hidden">
-      {picker}
-      <table className="w-full text-sm">
-        <thead className="bg-raised text-left text-xs uppercase tracking-wide text-muted">
-          <tr>
-            <th className="px-3 py-2">Store</th>
-            <th className="hidden px-3 py-2 sm:table-cell">Details</th>
-            <th className="px-3 py-2 text-right">Price</th>
-            <th className="px-3 py-2"><span className="sr-only">Buy</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          {amazonAfter < 0 && amazonRow}
-          {shown.map((o, i) => {
-            const c = conv(o);
-            const best = o === cheapest;
-            const loud = best && treatment.loud;
-            return (
+  // The product page leads with the stores, cheapest first, and puts eBay, TCGplayer and Amazon in a labelled "Marketplaces · Ad"
+  // block under them (owner's UX review, 2026-11-23, P1 10: "Lead with the best-price store and move marketplaces to a labelled
+  // block below"). This reverses the pinned-at-top order of 2026-10-27 / 11-17 for the full page only; the quick view keeps it.
+  const below = !compact && !maxRows;
+  const isMarket = (o: Offer) => o.source === "ebay" || o.source === "tcgplayer";
+  const storeRows = shown.filter((o) => !isMarket(o) && o.inStock);
+  const marketRows = shown.filter(isMarket);
+  const outRows = shown.filter((o) => !isMarket(o) && !o.inStock);
+  const marketAmazonAt = marketRows.reduce((at, o, k) => (pinned.includes(o) ? k : at), marketRows.length ? 0 : -1);
+  const row = (o: Offer, i: number, withAmazon: boolean) => {
+    const c = conv(o);
+    const best = o === cheapest;
+    const loud = best && treatment.loud;
+    return (
               <Fragment key={i}>
                 <tr className={`border-t border-line ${loud ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
                   <td className="px-3 py-2.5">
                     <span className="font-medium text-ink [overflow-wrap:anywhere]">{sourceName(o)}</span>{" "}
-                    <StoreVote url={o.url} name={sourceName(o)} className="ml-1 text-muted" />
+                    <StoreVote url={o.url} name={sourceName(o)} className="ml-1 text-muted max-sm:hidden" />
                     {/* Phones: the cart list's add button as a line under the store, where the row has no width to spare. */}
                     {o.inStock && (
                       <span className={compact ? "block" : "block sm:hidden"}><CartAddButton href={tagged(o.url, subId(o.market, `${page}_cart`, productId), { checkout: true })} productUrl={o.url} storeName={sourceName(o)} title={product ?? cartTitle ?? o.title} detail={o.printing && o.printing !== "Normal" ? o.printing : null} priceCents={o.cents} currency={o.currency} image={image} inline className="text-xs" /></span>
@@ -193,10 +188,43 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
                     </span>
                   </td>
                 </tr>
-                {i === amazonAfter && amazonRow}
+                {withAmazon && amazonRow}
               </Fragment>
-            );
-          })}
+    );
+  };
+  return (
+    <div id={tableId ?? undefined} className="card overflow-hidden">
+      {picker}
+      <table className="w-full text-sm">
+        <thead className="bg-raised text-left text-xs uppercase tracking-wide text-muted">
+          <tr>
+            <th className="px-3 py-2">Store</th>
+            <th className="hidden px-3 py-2 sm:table-cell">Details</th>
+            <th className="px-3 py-2 text-right">Price</th>
+            <th className="px-3 py-2"><span className="sr-only">Buy</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {below ? (
+            <>
+              {storeRows.map((o) => row(o, shown.indexOf(o), false))}
+              {(marketRows.length > 0 || amazonRow) && (
+                <tr className="border-t border-line bg-raised" data-marketplaces>
+                  <th colSpan={4} scope="rowgroup" className="px-3 py-1.5 text-left text-[11px] font-semibold uppercase tracking-wide text-muted">
+                    Marketplaces <span className="ad-pill ml-1 normal-case">Ad</span>
+                  </th>
+                </tr>
+              )}
+              {marketRows.length === 0 && amazonRow}
+              {marketRows.map((o, k) => row(o, shown.indexOf(o), k === marketAmazonAt))}
+              {outRows.map((o) => row(o, shown.indexOf(o), false))}
+            </>
+          ) : (
+            <>
+              {amazonAfter < 0 && amazonRow}
+              {shown.map((o, i) => row(o, i, i === amazonAfter))}
+            </>
+          )}
         </tbody>
       </table>
       {amazonLive && <p className="border-t border-ink-800 px-3 py-2 text-[11px] text-muted">* Amazon price: {AMAZON_PRICE_DISCLAIMER}</p>}

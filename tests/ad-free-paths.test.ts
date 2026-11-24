@@ -9,9 +9,10 @@ test("the utility and conversion pages are ad-free", () => {
   for (const p of ["/", "/card/x", "/sealed", "/premiums", "/sets/premium-pack", null]) assert.equal(adFreePath(p), false, String(p));
 });
 
-test("the layout's top banner, dock and pop-ups sit inside the gate", () => {
+test("the layout's dock and pop-up sit inside the gate, and no banner pair sits at the top (owner's UX review, 2026-11-23)", () => {
   const src = readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8");
-  for (const unit of ['page="heavytop"', "<DockAds", "<HeavyPopups"]) {
+  assert.ok(!src.includes('page="heavytop"'), "no top banner pair");
+  for (const unit of ["<DockAds", "<HeavyPopups"]) {
     const at = src.indexOf(unit);
     assert.ok(at > 0, unit);
     assert.ok(src.lastIndexOf("<AdRouteGate>", at) > src.lastIndexOf("</AdRouteGate>", at), `${unit} is gated`);

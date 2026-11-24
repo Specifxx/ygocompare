@@ -11,7 +11,7 @@ import { preorderSetList, sealedInSet } from "@/lib/hubs";
 import { isPreorder, longDate, preorderPath } from "@/lib/preorders";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { shortName } from "@/lib/names";
-import { TileGrid } from "@/components/ProductTile";
+import { FilterGrid } from "@/components/FilterGrid";
 import { JsonLd } from "@/components/JsonLd";
 import { abs } from "@/lib/site";
 import { fitTitle, setTitleCandidates } from "@/lib/seo-title";
@@ -105,7 +105,8 @@ export default function SetPage({ params }: { params: { slug: string } }) {
       />
       <section>
         <h2 className="mb-6 font-display text-2xl font-bold tracking-tight sm:text-3xl">Every {s.name} sealed product</h2>
-        <TileGrid items={sealed} />
+        {/* Sort and filter on every listing of 8 or more (owner's UX review, 2026-11-23, P0 3). */}
+        <FilterGrid items={sealed} id="set-grid" noun="products" />
       </section>
       {glance.length > 0 && (
         <section className="prose-site max-w-none text-sm">

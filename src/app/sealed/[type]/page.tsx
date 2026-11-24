@@ -38,7 +38,8 @@ export default function SealedHub({ params }: { params: { type: string } }) {
       <header>
         <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, { name: h.label }]} />
         <h1 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">{SITE.gameShort} {h.label.toLowerCase()}</h1>
-        <p className="mt-3 text-sm text-muted">{h.items.length.toLocaleString()} products, most popular first. Filter by name or stock, sort by price, then open one to compare every store and eBay.</p>
+        {/* One line plus "How it works" (owner's UX review, 2026-11-23, P1 14). */}
+        <p className="mt-3 text-sm text-muted">{h.items.length.toLocaleString()} products, most popular first. <Link href="/methodology" className="link">How it works</Link></p>
         {others.length > 0 && (
           <nav aria-label="Other product types" className="mt-5">
             {/* One row that scrolls sideways at every width: a wrapping row changes its line count when the web font arrives. */}

@@ -47,8 +47,8 @@ export function ProductTile({ p, deal, lc, folded }: { p: Product; deal?: Deal; 
       <div className="plate pc-plate">
         {img ? <img src={img} alt={p.kind === "card" ? `${name} card` : name} loading="lazy" decoding="async" className="pc-img" /> : <div className="pc-noimg">No image yet</div>}
         {deal && (
-          <span className="pc-badge" title={`${deal.saving}% under TCGplayer's market price`}>
-            −{deal.saving}%
+          <span className="pc-badge" title={`${deal.saving}% under TCGplayer's market price (its recent sales)`}>
+            {deal.saving}% under market
           </span>
         )}
       </div>
