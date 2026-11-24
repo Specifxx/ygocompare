@@ -1,0 +1,60 @@
+name: Price freshness
+
+# Owner, 2026-11-23 UX review, P0 2: "Add a pipeline alert when data is over 12 hours old". Every two hours this reads the
+# data on main (data/public/meta.json `updatedAt`, written by every import) and the time of the last commit that released it
+# ([deploy] in the subject). Data over 12 hours old: it starts Refresh prices with eBay off (GitHub starts scheduled runs hours
+# late) and fails red, so GitHub emails the owner. Released prices over 26 hours old: red too (the import ran but no build took
+# it). Reads only git; no Vercel call, no secret.
+
+on:
+  schedule:
+    - cron: "23 */2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: freshness
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 200
+      - name: Data and release age
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          now=$(date -u +%s)
+          gen=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("data/public/meta.json","utf8")).updatedAt)')
+          data_h=$(( (now - $(date -u -d "$gen" +%s)) / 3600 ))
+          rel=$(git log -200 --format='%ct %s' | grep -iF '[deploy]' | head -1 | cut -d' ' -f1 || true)
+          rel_h=$([ -n "$rel" ] && echo $(( (now - rel) / 3600 )) || echo 999)
+          echo "Data ${gen} (${data_h}h old); last release commit ${rel_h}h ago."
+          echo "### YGO Compare freshness: data ${data_h}h old, last release ${rel_h}h ago" >> "$GITHUB_STEP_SUMMARY"
+          bad=0
+          if [ "$data_h" -ge 12 ]; then
+            running=$(gh run list -w refresh-prices.yml -s in_progress --json databaseId -q 'length')
+            queued=$(gh run list -w refresh-prices.yml -s queued --json databaseId -q 'length')
+            if [ "$running" = "0" ] && [ "$queued" = "0" ]; then
+              gh workflow run refresh-prices.yml -f ebay=false
+              echo "Started Refresh prices (eBay off)."
+            else
+              echo "Refresh prices is already running or queued."
+            fi
+            echo "::error::YGO Compare's price data is ${data_h} hours old (over 12)."
+            bad=1
+          fi
+          if [ "$rel_h" -ge 26 ]; then
+            echo "::error::YGO Compare's prices were last released ${rel_h} hours ago (over 26): check the build gate and the release job."
+            bad=1
+          fi
+          exit $bad

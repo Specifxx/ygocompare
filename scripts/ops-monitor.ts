@@ -52,8 +52,9 @@ async function main() {
         ? { status: "ok", detail: `${r.status} → ${to.replace(site, "")}` }
         : { status: "fail", detail: `/card/${slugs[0]} answered HTTP ${r.status}${to ? ` → ${to}` : ""}, not a permanent redirect to its set` };
     }),
+    // Twice a day since 2026-11-24 (owner's UX review, P0 2); freshness.yml raises the 12-hour alarm and restarts the import.
     check("Daily price import", async () =>
-      ageH < 30 ? { status: "ok", detail: `${ageH.toFixed(1)}h old` } : { status: ageH < 54 ? "warn" : "fail", detail: `data is ${ageH.toFixed(0)}h old — check the Refresh prices workflow` },
+      ageH < 14 ? { status: "ok", detail: `${ageH.toFixed(1)}h old` } : { status: ageH < 26 ? "warn" : "fail", detail: `data is ${ageH.toFixed(0)}h old — check the Refresh prices workflow` },
     ),
     check("Store imports", async () => {
       const bad = Object.entries(meta.stores).filter(([, s]) => !s.ok || s.matched === 0);

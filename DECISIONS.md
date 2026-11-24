@@ -3018,3 +3018,49 @@ bigger thumbnails, one slim alerts bar, phone rows with 44px targets, and click 
 - Clicks keep going through `/go` with `from=<page>_list` (and `_list_ebay`); `bf_section` counts each section's first view
   (scroll depth), `bf_filter` each filter used. The weekly email box became the alerts bar after the fifth row (email, Discord,
   Telegram).
+
+## 2026-11-24: The owner's UX review, site-wide (ported from DexCompare)
+
+The owner reviewed DexCompare on desktop (AU) on 2026-11-23 and asked for the fixes "urgently" on every site (DexCompare's
+`apps/dexcompare-sealed/DECISIONS.md`, "The owner's UX review", P0 and P1). What YGO Compare took, and what it left:
+
+**P0**
+1. **No interrupting ads.** The heavy test's pop-up now opens at most ONCE a visit, from the 2nd page, never while a text field has
+   focus or a key was pressed in the last 5 s (`lib/visitor-busy.ts`), and only when the visit's one prompt slot is free. The
+   slide-in card is gone (it covered tiles). The sign-in corner and the rating card ask `visitorBusy()` too. The owner's rule
+   overrides the heavy-ad test (2026-11-19, read 10 Dec): the 10 Dec read compares desktop before and after this release's deploy
+   time separately, never pooled (cut time in ops/product-ux/log.md).
+2. **Fresh prices.** Pages said "checked 30 hours ago". Cause: one import a day, which GitHub starts 7 to 12 hours late, and on
+   24 Nov a manual release six minutes before the data commit made the 12-hour gate skip the day's prices. `refresh-prices.yml` now
+   runs twice a day (12:17 with eBay, 00:17 without, so the shared eBay app's day is unchanged), both commits carry `[deploy]`
+   and the gate still allows one production build per 12 hours. `freshness.yml` (every 2 hours) restarts the import with eBay off
+   and fails red (GitHub emails the owner) when the data is over 12 hours old, or the last release over 26. The ops monitor's
+   import check is ok under 14 hours, red from 26.
+3. **Sort and filter on every listing of 8+** (`ListControls`, `FilterGrid`; type pages and now set pages): price both ways,
+   % under market, newest set, most stores; set, era (release year), edition (1st / Unlimited) and price band. Price per pack is
+   left out: TCGplayer files no pack count for YGO sealed and a count is never guessed. Language is left out: the site matches
+   English product only, so the edition is the split a buyer reads.
+4. **One visible order.** YGO's grids have no ad tile among the products; the default order is named ("Most popular") in the bar.
+5. **Typo-tolerant search** (`lib/search-fuzzy.ts`, `/api/search`): shorthand becomes product words ("bb" → booster box, "sd" →
+   structure deck), a word that matches nothing is replaced by the nearest catalogue word (1 edit for 4-6 letters, 2 for 7+), and the
+   box says "Showing results for …"; still nothing, it lists the most widely stocked products as "Popular right now".
+6. **Less above the title.** The heavy test's banner pair at the top of every desktop page is gone (the pair below the content
+   stays), and the sale line under the header closes with ✕ for 7 days (`StripClose`).
+
+**P1**
+- **Stores first, marketplaces below** (10): on the product page the stores lead, cheapest first, and eBay, TCGplayer and Amazon sit
+  under a labelled "Marketplaces · Ad" row. This reverses the pinned-at-top order (2026-10-27, 2026-11-17) for the product page only;
+  the quick view and the phone buy block keep theirs. Click guard: eBay and TCGplayer clicks per 100 product views at release+2d.
+- **One primary action** (11): "View deal" stays the button; the thumbs hide on phones; the cart button is a quiet "Save".
+- **The cart is the Shortlist** (12): every label says Shortlist / Save, and the drawer says what it is each time it opens ("We sell
+  nothing: you buy at each store on its own site"). The `/cart` URL stays (URL freeze).
+- **Jump links** (13): Prices, History, Facts, Is it worth it?, sticky under the header, plain anchors (the h2 outline is unchanged).
+- **One discount definition, on the badge** (8): "N% under market" (TCGplayer's market price) or "under median" (the middle store
+  price), the definition on hover. The sale pages' badges are the Black Friday entry's.
+- **One-line intros** (14) with "How it works" (/methodology) on the type, sealed, sets and deal-finder pages.
+- **Reliable images** (15): an image that fails is tried once more after 1.5 s, then shows the site mark (`ImageFallback`).
+- **Not taken: delivered price by default** (9). YGO's store offers carry no postage (only eBay rows do), so a delivered order
+  would be eBay's alone; the item price stays the order and eBay rows keep their "≈ total".
+
+**Measure** (24): `search_zero` and `search_fixed` (Vercel) count sent searches that matched nothing or only after a correction,
+the words only. The other P2 items (Deals menu, set logos, alert pattern, a11y, performance, mobile pass) are not in this release.

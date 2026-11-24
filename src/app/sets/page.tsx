@@ -34,7 +34,7 @@ export default function Sets() {
       <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} sets`, numberOfItems: listed.length, itemListElement: listed.map((s, i) => ({ "@type": "ListItem", position: i + 1, name: s.name, url: abs(`/sets/${s.slug}`) })) }} />
       <noscript><style>{`.ff-x{display:flex!important}.ff-box,[data-ff-more]{display:none!important}`}</style></noscript>
       <h1 className="page-h1">{SITE.gameShort} sets in order</h1>
-      <p className="page-sub">{listed.length.toLocaleString()} sets{groups.length > 1 ? ` across ${groups.length} games` : ""}, newest first. Open a set for its booster boxes and sealed at every store.</p>
+      <p className="page-sub">{listed.length.toLocaleString()} sets{groups.length > 1 ? ` across ${groups.length} games` : ""}, newest first. <Link href="/methodology" className="link">How it works</Link></p>
       <div className="mt-5 max-w-xl"><FoldFinder placeholder={`Find a set, e.g. ${listed.find((s) => !s.upcoming)?.name ?? "a set name"}`} noun="sets" /></div>
       {groups.length > 1 && (
         <nav aria-label="Jump to a game" className="mt-2">

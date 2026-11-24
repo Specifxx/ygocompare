@@ -27,7 +27,7 @@ export default function Sealed() {
     <div className="flex flex-col gap-12 sm:gap-16">
       <header>
         <h1 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">{SITE.gameShort} booster box and sealed prices</h1>
-        <p className="mt-3 text-sm text-muted">The most popular products of each type. Open any product to compare every store, or a type for all of it.</p>
+        <p className="mt-3 text-sm text-muted">The most popular products of each type. <Link href="/methodology" className="link">How it works</Link></p>
         {types.length > 1 && (
           <nav aria-label="Product types" className="mt-5">
             {/* One row that scrolls sideways at every width: a wrapping row changes its line count when the web font arrives. */}

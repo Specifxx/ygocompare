@@ -7,9 +7,17 @@ name: Refresh prices
 # per site so Lorcana Compare and Gundam Compare never overlap on the shared
 # eBay app (SITE.ebay.runHourUtc) — keep this cron's hour equal to it.
 
+#
+# TWICE A DAY (owner, 2026-11-23 UX review, P0 2: pages said "checked 30 hours ago" against our "about twice a day"). GitHub
+# starts scheduled runs 7 to 12 hours late, and one import a day left live prices a day and more old. The 00:17 run reads the
+# stores and TCGplayer only (no eBay calls: the shared app's day stays on the 12:17 run). Both commits carry [deploy];
+# scripts/vercel-ignore-build.sh still allows at most one production build per 12 hours (owner, 2026-11-02).
+# freshness.yml starts this workflow (eBay off) and fails red when the data is over 12 hours old.
+
 on:
   schedule:
     - cron: "17 12 * * *"
+    - cron: "17 0 * * *"
   workflow_dispatch:
     inputs:
       ebay:
@@ -41,7 +49,7 @@ jobs:
         env:
           EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
           EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
-          EBAY_REFRESH: ${{ github.event_name == 'workflow_dispatch' && !inputs.ebay && 'false' || 'true' }}
+          EBAY_REFRESH: ${{ ((github.event_name == 'schedule' && github.event.schedule == '17 0 * * *') || (github.event_name == 'workflow_dispatch' && !inputs.ebay)) && 'false' || 'true' }}
         run: npx tsx scripts/import-all.ts
       # Amazon ASINs for the sealed pages' Amazon row (Creators API searchItems, matched by the store matcher; ASINs only,
       # prices are fetched by each Vercel build and never committed: DECISIONS.md 2026-11-05). A no-op until the secrets exist.
@@ -85,7 +93,7 @@ jobs:
             echo "No data changes."
             exit 0
           fi
-          git commit -m "data: daily prices $(date -u +%F) [deploy]" -m "Written by refresh-prices.yml. This is the one scheduled production build a day."
+          git commit -m "data: daily prices $(date -u +%F) [deploy]" -m "Written by refresh-prices.yml (twice a day). The build gate allows one production build per 12 hours."
           for i in 1 2 3 4; do
             git push origin HEAD:main && exit 0
             sleep $((2 ** i)); git pull --rebase origin main

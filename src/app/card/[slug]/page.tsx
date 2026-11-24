@@ -138,6 +138,17 @@ export default function CardPage({ params }: { params: { slug: string } }) {
         />
       )}
       <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, ...(set ? [{ name: set.name, href: `/sets/${set.slug}` }] : []), { name }]} />
+      {/* Jump links (owner's UX review, 2026-11-23, P1 13: "Add sticky anchors (Prices, History, Facts, FAQ)"). Plain anchors in
+          the server HTML, no headings (the h2 outline is unchanged). */}
+      <nav aria-label="On this page" className="sticky top-[var(--hdr)] z-20 -mx-4 -my-4 border-b border-line bg-bg/90 px-4 backdrop-blur sm:mx-0 sm:rounded-full sm:border">
+        <ul className="scroller gap-1 py-1.5 text-sm font-semibold">
+          {[["prices", "Prices"], ["history", "History"], ["facts", "Facts"], ["worth", "Is it worth it?"]].map(([id, label]) => (
+            <li key={id}>
+              <a href={`#${id}`} className="inline-flex min-h-9 items-center whitespace-nowrap rounded-full px-3 text-muted hover:bg-raised hover:text-ink focus-visible:bg-raised focus-visible:text-ink">{label}</a>
+            </li>
+          ))}
+        </ul>
+      </nav>
       <div className="grid gap-8 md:grid-cols-[minmax(0,320px)_1fr]">
         {/* Phones: the name, price and Buy come first; the big image and the
             details follow the prices (RiftCompare's card page, 2026-09-26). */}
@@ -149,7 +160,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="h-full w-full object-contain p-5 mix-blend-multiply" width={400} height={400} />
             </div>
           )}
-          <dl className="card-surface grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 text-sm">
+          <dl id="facts" className="scroll-mt-16 card-surface grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 text-sm">
             {set && (<><dt className="text-muted">Set</dt><dd><Link className="link" href={`/sets/${set.slug}`}>{set.name}</Link></dd></>)}
             {p.number && (<><dt className="text-muted">Number</dt><dd>{p.number}</dd></>)}
             {p.rarity && (<><dt className="text-muted">Rarity</dt><dd>{rarityHref(p.rarity) ? <Link className="link" href={rarityHref(p.rarity)!}>{p.rarity}</Link> : p.rarity}</dd></>)}
@@ -194,7 +205,7 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             {SITE.priceAlerts && <WatchPrice site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
             {SITE.priceAlerts && <SeenPrice productId={p.id} prices={lowestByMarket(e.offers)} />}
           </header>
-          <section>
+          <section id="prices" className="scroll-mt-16">
             <div className="mb-2 flex flex-wrap items-baseline justify-between gap-x-4">
               <h2 className="font-display text-lg font-bold tracking-tight">Compare prices</h2>
               <CheckedAgo at={m?.updatedAt} />
@@ -215,11 +226,11 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             <DiscordCta href={SITE.discordInvite} className="mt-4" />
           </section>
           <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_CARD} />
-          <section className="card p-4 sm:p-5">
+          <section id="history" className="card scroll-mt-16 p-4 sm:p-5">
             <h2 className="mb-3 font-display text-lg font-bold tracking-tight">Price history</h2>
             <PriceHistory tcg={series} lows={storeLowsOf(p)} fx={m?.fx} through={historyThrough()} days={365} />
           </section>
-          <section className="prose-site max-w-none text-sm">
+          <section id="worth" className="prose-site max-w-none scroll-mt-16 text-sm">
             <h2>Is {name} worth it?</h2>
             {/* Written from this product's own prices, stock and history (lib/buyer-read.ts, 2026-11-23 SEO quality pass). */}
             {read.map((t, k) => <p key={k}>{t}</p>)}

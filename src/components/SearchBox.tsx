@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useId, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { track } from "@vercel/analytics";
 import { SITE } from "@/site.config";
 import Link from "./Link";
 import { Icon } from "./Icon";
@@ -21,15 +22,33 @@ export function SearchBox({ big = false, size, placeholder }: { big?: boolean; s
   const [active, setActive] = useState(-1);
   // The query the hits on screen answer: "nothing matches" is only said once the answer for the typed words is in.
   const [answered, setAnswered] = useState("");
+  // "Did you mean" (owner's UX review, 2026-11-23, P0 5): the words /api/search corrected a typo to, or "popular" when nothing matched.
+  const [fixed, setFixed] = useState<string | null>(null);
+  const [popular, setPopular] = useState(false);
   const router = useRouter();
   const id = useId();
   const t = useRef<ReturnType<typeof setTimeout>>();
+  const last = useRef<{ k: string; popular: boolean; fixed: string | null } | null>(null);
+  // Funnel data (owner's UX review, 2026-11-23, item 24): a search the visitor sent (Enter) that matched nothing, or only after a
+  // correction, so the next round of synonyms and fixes comes from real queries. The words only, cut to 40 letters, once a query.
+  const sent = useRef("");
+  const report = (k: string) => {
+    const l = last.current;
+    if (!l || l.k !== k || sent.current === k) return;
+    sent.current = k;
+    if (l.popular) track("search_zero", { q: k.slice(0, 40) });
+    else if (l.fixed) track("search_fixed", { q: k.slice(0, 40), to: l.fixed.slice(0, 40) });
+  };
   const key = q.trim().toLowerCase();
   const find = async (k: string): Promise<Hit[] | null> => {
     try {
       // Lower-cased so "Dark Magician" and "dark magician" share one CDN entry.
       const r = await fetch(`/api/search?q=${encodeURIComponent(k)}`);
-      const found = ((await r.json()) as { hits: Hit[] }).hits ?? [];
+      const body = (await r.json()) as { hits: Hit[]; fixed?: string; popular?: boolean };
+      const found = body.hits ?? [];
+      setFixed(body.fixed ?? null);
+      setPopular(!!body.popular);
+      last.current = { k, popular: !!body.popular, fixed: body.fixed ?? null };
       setHits(found);
       setAnswered(k);
       setOpen(true);
@@ -70,7 +89,8 @@ export function SearchBox({ big = false, size, placeholder }: { big?: boolean; s
         clearTimeout(t.current);
         const found = answered === key ? hits : await find(key);
         if (!found) return;
-        if (found.length === 1) {
+        report(key);
+        if (found.length === 1 && !popular) {
           setOpen(false);
           router.push(hrefOf(found[0]));
         } else {
@@ -110,7 +130,12 @@ export function SearchBox({ big = false, size, placeholder }: { big?: boolean; s
         className={`w-full rounded-full border border-line bg-surface text-ink text-ellipsis placeholder:text-ellipsis placeholder:text-muted focus:border-brand focus:outline-none ${big ? "py-4 pl-12 pr-5 text-lg shadow-lift" : size === "sm" ? "h-10 pl-9 pr-3 text-sm" : "py-2.5 pl-9 pr-3 text-sm"}`}
       />
       {listed && (
-        <ul id={`${id}-list`} role="listbox" className={`${panel} max-h-96 overflow-auto p-1`}>
+        <ul id={`${id}-list`} role="listbox" aria-label={popular ? "Popular products" : "Suggestions"} className={`${panel} max-h-96 overflow-auto p-1`}>
+          {(fixed || popular) && (
+            <li role="presentation" className="px-3 pb-1 pt-2 text-xs text-muted">
+              {fixed ? <>Showing results for <b className="text-ink">{fixed}</b></> : <>Nothing matches &ldquo;{q.trim()}&rdquo;. Popular right now:</>}
+            </li>
+          )}
           {hits.map((h, i) => (
             <li key={h.href ?? h.slug} id={`${id}-${i}`} role="option" aria-selected={i === active}>
               <a href={hrefOf(h)} className={`flex items-center gap-3 rounded-xl px-3 py-2 hover:bg-raised ${i === active ? "bg-raised" : ""}`} onMouseEnter={() => setActive(i)}>

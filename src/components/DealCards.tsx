@@ -31,7 +31,11 @@ function Card({ p, offer, saving, against, againstLabel, page }: { p: Product; o
     <li className="flex gap-3 rounded-xl border border-line bg-raised p-3">
       <Link href={`/card/${p.slug}`} className="plate relative block h-24 w-20 shrink-0 overflow-hidden rounded-lg sm:h-28 sm:w-24">
         {img ? <img src={img} alt={name} loading="lazy" decoding="async" className="h-full w-full object-contain" /> : <span className="flex h-full items-center justify-center p-1 text-center text-[10px] text-muted">No image</span>}
-        <span className="pc-badge" title={`${saving}% under ${againstLabel}`}>−{saving}%</span>
+        {/* One discount definition, said on the badge (owner's UX review, 2026-11-23, P1 8): "under market" (TCGplayer's market price)
+            or "under median" (the middle store price), the definition on hover. */}
+        <span className="pc-badge text-center !leading-3" title={`${saving}% under ${againstLabel === "TCGplayer market" ? "TCGplayer's market price (its recent sales)" : `the median store price (the ${againstLabel})`}`}>
+          −{saving}%<span className="block text-[9px] font-semibold">under {againstLabel === "TCGplayer market" ? "market" : "median"}</span>
+        </span>
       </Link>
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         {game && <p className="text-[11px] font-semibold uppercase tracking-wide text-muted">{game.short}</p>}
