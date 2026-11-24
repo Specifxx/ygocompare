@@ -2998,3 +2998,23 @@ onto their own pages, the reprint rows and the Dueling Mirrors cards left). 3-pa
 2025 Mega-Pack tuck boxes (US$9-25 on the US$4.81 Mega Pack), 2-pack blisters, a "Mini Box 4 Packs" and a 24-pack "Box 24
 Bags" (A$148) sat on single packs' pages. Replayed on that day's 7,043 store offers with each handle as the title: 35
 offers drop, all of them these listings; none moves to another product and no other offer changes.
+
+## Black Friday page: one deal list, deals above the fold (owner's review, 2026-11-24)
+
+The owner reviewed DexCompare's Black Friday page and asked for the changes "urgently" on every site: deals above the fold with a
+one-line intro, one list with a toggle, a discount badge on every row, filters and sort, sticky section chips, per-row freshness,
+delivered price, a sparkline, plain labels, one affiliate disclosure, aligned rows, the store button primary and eBay a text link,
+bigger thumbnails, one slim alerts bar, phone rows with 44px targets, and click and scroll tracking per section.
+
+- The page's lists (US "under TCGplayer", each country's "under other stores") are ONE list (`lib/sale-deals.ts`,
+  `lib/sale-deals-data.ts`, `components/SaleDeals.tsx`). Each row is the cheapest in-stock store price for a product in one country,
+  and both savings are measured against that price; the toggle ("Under TCGplayer" / "Under other stores today") picks the basis
+  that badges and ranks, a country select picks the market (the visitor's own once the page loads; the server HTML is the US). The
+  struck price is that basis's reference, labelled for screen readers, never "was".
+- The strongest 48 rows per country and basis ship to the browser, so the filters run without a request and the page stays light.
+- A row whose store was read more than 12 hours ago says so in amber (the store's own `meta.stores[...].at`). Delivered price
+  only where the store's shipping was read; otherwise "Shipping at checkout". The sparkline is the country's cheapest in-stock
+  store price per day (`data/store-lows`), the last 30 days.
+- Clicks keep going through `/go` with `from=<page>_list` (and `_list_ebay`); `bf_section` counts each section's first view
+  (scroll depth), `bf_filter` each filter used. The weekly email box became the alerts bar after the fifth row (email, Discord,
+  Telegram).
