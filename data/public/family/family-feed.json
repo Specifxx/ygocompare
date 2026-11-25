@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-25T08:38:31.606Z",
+ "generatedAt": "2026-11-25T22:02:58.833Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -9,20 +9,6 @@
   }
  },
  "items": [
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Rarity Collection 5 Booster Box",
-   "url": "https://ygocompare.com/card/rarity-collection-5-booster-box",
-   "cents": 5999,
-   "currency": "USD",
-   "store": "Collectors Emporium NY",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12735,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 53
-  },
   {
    "kind": "deal",
    "cluster": "cards",
@@ -61,7 +47,7 @@
    "currency": "USD",
    "store": "Cosmic Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16190,
+   "refCents": 16186,
    "refLabel": "TCGplayer market price",
    "savingPct": 26
   },
@@ -69,15 +55,29 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Beyond the Brave Booster Box [1st Edition]",
-   "url": "https://ygocompare.com/card/beyond-the-brave-booster-box-1st-edition",
-   "cents": 4499,
+   "title": "Rarity Collection 5 Booster Box",
+   "url": "https://ygocompare.com/card/rarity-collection-5-booster-box",
+   "cents": 9999,
    "currency": "USD",
-   "store": "Smoke and Mirrors Hobby",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/711263_200w.jpg",
-   "refCents": 5534,
+   "store": "Mystic TCG",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
+   "refCents": 12675,
    "refLabel": "TCGplayer market price",
-   "savingPct": 19
+   "savingPct": 21
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Photon Hypernova Booster Box",
+   "url": "https://ygocompare.com/card/photon-hypernova-booster-box",
+   "cents": 5995,
+   "currency": "USD",
+   "store": "Digital Heroes",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/451303_200w.jpg",
+   "refCents": 6852,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 13
   },
   {
    "kind": "deal",
