@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { usePremium } from "@/components/premium/usePremium";
 import { addItem, itemKey, onVaultChange, readVault, setItemQty, track, writeVault, type VaultItem } from "@/lib/vault";
 
-export function VaultAddButton({ className = "", ...item }: Omit<VaultItem, "qty" | "addedAt"> & { className?: string }) {
+export function VaultAddButton({ className = "", hint = true, ...item }: Omit<VaultItem, "qty" | "addedAt"> & { className?: string; hint?: boolean }) {
   const key = itemKey(item);
   const [qty, setQty] = useState(0);
 
@@ -32,10 +32,10 @@ export function VaultAddButton({ className = "", ...item }: Omit<VaultItem, "qty
   if (!qty)
     return (
       <div className={`ce-vault-add ${className}`}>
-        <button type="button" className="ce-vault-btn" onClick={add}>
+        <button type="button" className="ce-vault-btn" onClick={add} title="Track what your collection is worth. Free with an account.">
           <span aria-hidden="true">+</span> I own this
         </button>
-        <span className="ce-vault-hint">Track what your collection is worth. Free with an account.</span>
+        {hint && <span className="ce-vault-hint">Track what your collection is worth. Free with an account.</span>}
       </div>
     );
   return (

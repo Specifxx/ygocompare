@@ -6,7 +6,7 @@ import { useMarket } from "@/components/ClientPrefs";
 import { CURRENCY, type Market } from "@/lib/site-types";
 import { VaultAddButton } from "./VaultAddButton";
 
-export function VaultOwn({ id, name, href, image, prices, className }: { id: number; name: string; href: string; image: string | null; prices: Partial<Record<Market, number>>; className?: string }) {
+export function VaultOwn({ id, name, href, image, prices, className, hint }: { id: number; name: string; href: string; image: string | null; prices: Partial<Record<Market, number>>; className?: string; hint?: boolean }) {
   const { market } = useMarket();
-  return <VaultAddButton key={market} id={String(id)} name={name} href={href} image={image} market={market} currency={CURRENCY[market]} addedCents={prices[market] ?? 0} className={className} />;
+  return <VaultAddButton key={market} id={String(id)} name={name} href={href} image={image} market={market} currency={CURRENCY[market]} addedCents={prices[market] ?? 0} className={className} hint={hint} />;
 }
