@@ -3092,3 +3092,18 @@ ones that pay us, and found the product page's top too wordy. Ported here: under
 listed, whether it pays us or not, in price order" linked to /methodology; "I own this" (its hint now a tooltip) and "Share deal"
 (was "Share this deal with your group chat") in one row; a long one-word store name wraps instead of pushing the price table
 past a phone's edge. Cart and watch wording wait for their A/B verdicts.
+
+## 2026-11-25: A year from 2020 on is a reprint run; a display refuses a single
+
+**Decision.** Two more refusals in `matchSealed` (`src/lib/import/match.ts`), pinned in `tests/match.test.ts`:
+- A title or handle naming a year from 2020 to 2039 reads as "reprint", as "re-release" already does (2026-11-23). Every set
+  TCGplayer gives a "(2020 Date Reprint)" printing is older than 2020, so the original printing refuses it. It only refuses:
+  the reprint set's products still need their own words in the title, so these listings drop rather than move.
+- A display refuses a listing whose title or handle says "single" or "1P".
+
+**Why.** Verifying the 24-25 Nov imports after the 2026-11-23 entry: all 35 multi-pack rows it targeted are gone and nothing
+else was lost. The audit then found the 2025 run of Retro Pack 2 ("blister-2025", "2025-booster-pack") still on the 2009 pack,
+the 2024 Retro Pack run on the 2008 pack, seven stores' "Saga of Blue-Eyes White Dragon 2022 Unlimited Edition" (the 2022
+reprint) on the 2013 Unlimited deck, two "Realm of Light 2024" decks on the 2014 deck, and a "Mini Box Display ... 1P Single
+Pack" at US$9.99 on the US$34 Midterm Paradox display. Replayed on the 25 Nov data's 7,039 store offers with each handle as
+the title: 17 drop, all of them these listings; no other offer changes.

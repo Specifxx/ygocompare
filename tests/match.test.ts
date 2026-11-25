@@ -370,3 +370,42 @@ test("Italian and German packs, MVP1 movie-pack cards and '1st Edition Rare' sin
   for (const title of ["The Dark Side of Dimensions Movie Pack Secret Edition", "Rarity Collection 5 Booster Box 1st Edition", "Battle Pack: Epic Dawn Booster Pack 1st Edition"])
     assert.equal(looksLikeCard(title), false, title);
 });
+
+test("a title naming a year from 2020 on is a reprint run; a display refuses a single (live 2026-11-25)", () => {
+  const idx = buildIndex(
+    [
+      sealed(166470, "Retro Pack 2 Booster Pack", 1292),
+      sealed(637381, "Retro Pack 2 (2020 Date Reprint) Booster Pack", 24352),
+      sealed(245542, "Structure Deck: Saga of Blue-Eyes White Dragon [Unlimited Edition]", 1400),
+      sealed(279461, "Speed Duel GX: Midterm Paradox Mini Box", 2800),
+      sealed(448704, "Speed Duel GX: Midterm Paradox Mini Box Display", 2800),
+      sealed(631994, "2025 Mega-Pack Mega Pack", 24100),
+    ],
+    [
+      set(1292, "Retro Pack 2"),
+      set(24352, "Retro Pack 2 (2020 Date Reprint)"),
+      set(1400, "Structure Deck: Saga of Blue-Eyes White Dragon"),
+      set(23100, "Structure Deck: Saga of Blue Eyes White Dragon (2020 Date Reprint)"),
+      set(2800, "Speed Duel GX: Midterm Paradox"),
+      set(24100, "2025 Mega-Pack"),
+    ],
+    "ygo",
+  );
+  // Live: the 2025 run of Retro Pack 2 and the 2022 Saga of Blue-Eyes deck on the original printings' pages.
+  for (const [title, handle] of [
+    ["YuGiOh Retro Pack 2 Blister 2025", "yugioh-retro-pack-2-blister-2025"],
+    ["Yugioh Retro Pack 2 2025 Booster Pack", "yugioh-retro-pack-2-2025-booster-pack"],
+    ["Structure Deck: Saga of Blue-Eyes White Dragon 2022 Unlimited Edition", "structure-deck-saga-of-blue-eyes-white-dragon-2022-unlimited-edition"],
+  ])
+    assert.equal(matchSealed(title, idx, handle)?.product.id, undefined, title);
+  // Live: a single mini box ("1P Single Pack") at US$9.99 on the US$34 six-box display.
+  assert.equal(
+    matchSealed("Yu-Gi-Oh! TCG Speed Duel GX Midterm Paradox Mini Box Display (KON 85733) 1P Single Pack", idx, "yu-gi-oh-tcg-speed-duel-gx-midterm-paradox-mini-box-display-kon-85733-1p-single-pack")?.product.id,
+    undefined,
+  );
+  // The originals, the display and a set whose own name carries the year still match.
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster Pack", idx)?.product.id, 166470);
+  assert.equal(matchSealed("Structure Deck: Saga of Blue-Eyes White Dragon Unlimited Edition", idx)?.product.id, 245542);
+  assert.equal(matchSealed("Yugioh Speed Duel GX Midterm Paradox Mini Box Display of 6", idx)?.product.id, 448704);
+  assert.equal(matchSealed("Yu-Gi-Oh! 2025 Mega-Pack Mega Pack", idx)?.product.id, 631994);
+});
