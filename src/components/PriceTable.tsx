@@ -115,7 +115,7 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
   const amazonRow = amazonUrl && amazonLive ? (
     <tr data-amazon-row className={`border-t border-line ${PIN_OUTLINE.amazon}`}>
       <td className="px-3 py-2.5">
-        <span className="font-medium text-ink">Amazon</span>{" "}
+        <span className="font-medium text-ink [overflow-wrap:anywhere]">Amazon</span>{" "}
         <StoreVote url={amazonUrl} name="Amazon" className="ml-1 text-muted max-sm:hidden" />
         {!compact && amazonCart && <span className="block sm:hidden"><CartAddButton {...amazonCart} inline className="text-xs" /></span>}
         <span className="ad-pill ml-2">Ad</span>

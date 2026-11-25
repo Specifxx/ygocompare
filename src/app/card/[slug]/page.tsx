@@ -193,8 +193,11 @@ export default function CardPage({ params }: { params: { slug: string } }) {
               <p className="text-sm text-muted">{inStock.length ? `${inStock.length} in-stock listing${inStock.length === 1 ? "" : "s"} worldwide` : "No in-stock listings right now"}</p>
             </div>
             <CardTopBuy offers={e.offers} productId={p.id} ebayQuery={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} />
-            <VaultOwn id={p.id} name={`${name}${p.number ? ` ${p.number}` : ""}`} href={`/card/${p.slug}`} image={p.image ? imageAt(p.image, "200w") : null} prices={lowestByMarket(e.offers)} className="mt-3" />
-            <DropShare path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} offers={e.offers} className="mt-2" />
+            {/* One short row of actions (Fiverr usability review, 2026-11-25: "a lot of the buttons have a lot of text"). */}
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+              <VaultOwn id={p.id} name={`${name}${p.number ? ` ${p.number}` : ""}`} href={`/card/${p.slug}`} image={p.image ? imageAt(p.image, "200w") : null} prices={lowestByMarket(e.offers)} hint={false} />
+              <DropShare path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} offers={e.offers} short />
+            </div>
             {Object.keys(e.tcg).length > 1 && (
               <p className="mt-2 flex flex-wrap gap-2 text-xs">
                 {Object.entries(e.tcg).map(([k, v]) => (
@@ -212,6 +215,10 @@ export default function CardPage({ params }: { params: { slug: string } }) {
             </div>
             <div className="mb-3"><EbayCallout offers={e.offers} productId={p.id} query={`${SITE.ebay.query} ${name} ${p.number ?? ""}`.trim()} /></div>
             <PriceTable offers={e.offers} fx={m?.fx ?? { USD: 1 }} productId={p.id} page="card" amazon={amazon} image={p.image ? imageAt(p.image, "200w") : null} product={`${name}${p.number ? ` ${p.number}` : ""}`} />
+            {/* Fiverr usability review, 2026-11-25: "is this looking at all the pricing, or only the sites you get a commission from?" */}
+            <p className="mt-2 text-xs text-muted">
+              Every store we track is listed, whether it pays us or not, in price order. <Link className="link" href="/methodology">How we compare</Link>
+            </p>
             {SITE.priceAlerts && <PriceAlert site={SITE.key} productId={p.id} prices={lowestByMarket(e.offers)} />}
             {/* TCGplayer's Cyber Weekend banner (lib/tcgplayer-cyber.ts): under the price table, 22 Nov to 1 Dec, labelled Ad. */}
             <TcgplayerCyberBanner

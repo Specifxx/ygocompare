@@ -3084,3 +3084,11 @@ Not taken: the scorecard's other "noindex" set pages (Maximum Gold, The Grand Cr
 Ignition Assault, The Lost Millennium) still ask, because two or more of their products are real comparisons (3+ stores, one
 in stock). They are the products' hub, and noindexing a hub over its indexed products would cut the internal path to them.
 Their fix is "enrich" (unique price text), not noindex. Nothing is deleted and no URL changes.
+
+## 2026-11-25 — Fiverr usability review, ported from TCG Prices
+
+A paid tester's think-aloud on TCG Prices (tcgcompare DECISIONS.md, 2026-11-25) asked whether we compare every store or only the
+ones that pay us, and found the product page's top too wordy. Ported here: under the price table, "Every store we track is
+listed, whether it pays us or not, in price order" linked to /methodology; "I own this" (its hint now a tooltip) and "Share deal"
+(was "Share this deal with your group chat") in one row; a long one-word store name wraps instead of pushing the price table
+past a phone's edge. Cart and watch wording wait for their A/B verdicts.
