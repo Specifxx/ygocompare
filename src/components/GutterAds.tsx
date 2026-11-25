@@ -17,7 +17,7 @@ import { SITE } from "@/site.config";
 import type { AdTile, CardAds } from "@/lib/card-ads";
 import { ebaySearchUrl, goHref } from "@/lib/affiliate";
 import { money } from "@/lib/format";
-import { ebayTilesFor } from "@/lib/inline-ads";
+import { BANNER_MAX, ebayTilesFor } from "@/lib/inline-ads";
 import { useMarket } from "./ClientPrefs";
 
 /** The narrowest window with room for a column beside the page's 1152px content (about 110px each, 14px clear of it): 1440px laptops up. */
@@ -42,8 +42,8 @@ export function GutterAds({ ads, search, sides = "both" }: { ads: CardAds; searc
 
   const searchMarket = (SEARCH_MARKETS as readonly string[]).includes(market) ? (market as (typeof SEARCH_MARKETS)[number]) : "US";
   const { tiles, market: ebayMarket } = ebayTilesFor(ads, market);
-  const ebay = tiles.filter((t) => t.image).slice(0, GUTTER_TILES);
-  const tcg = ads.tcgplayer.filter((t) => t.image).slice(0, GUTTER_TILES);
+  const ebay = pastBanner(tiles.filter((t) => t.image));
+  const tcg = pastBanner(ads.tcgplayer.filter((t) => t.image));
   const us = market === "US";
 
   return (
@@ -76,6 +76,13 @@ export function GutterAds({ ads, search, sides = "both" }: { ads: CardAds; searc
       )}
     </>
   );
+}
+
+/** The banner pair shows the first BANNER_MAX of each side; the columns start after them when enough are left, so a page never shows
+ *  the same product twice side by side. Pure, for the tests. */
+export function pastBanner<T>(tiles: T[]): T[] {
+  const rest = tiles.slice(BANNER_MAX);
+  return (rest.length >= GUTTER_TILES / 2 ? rest : tiles).slice(0, GUTTER_TILES);
 }
 
 function Column({ side, brand, sub, cta, ctaHref, tiles, line, price, href }: {

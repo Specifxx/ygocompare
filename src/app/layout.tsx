@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div className="page py-6">{children}</div>
             {/* The gutter ads (owner, 2026-11-25): a labelled eBay and TCGplayer column in each empty side of a wide window, from 1480px. */}
             <AdRouteGate>
-              <GutterAds ads={cardAds({ limit: 10 })} search={adSearch()} sides={AD_HEAVY ? "both" : "right"} />
+              <GutterAds ads={cardAds({ limit: 14 })} search={adSearch()} sides={AD_HEAVY ? "both" : "right"} />
             </AdRouteGate>
           </main>
           <Footer />

@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { navGroups, phoneNav } from "@/lib/nav";
 import { isActivePath } from "@/components/NavLink";
 import { MIN_WIDTH, MAX_TILES } from "@/components/DockAds";
-import { GUTTER_MIN } from "@/components/GutterAds";
+import { GUTTER_MIN, pastBanner } from "@/components/GutterAds";
 import { ebayTilesFor } from "@/lib/inline-ads";
 import type { CardAds } from "@/lib/card-ads";
 
@@ -66,6 +66,8 @@ test("the dock below 1280px; the gutter ads (owner, 2026-11-25) only in the empt
   assert.match(gutter, /"gutter-tcg"/);
   assert.match(gutter, /className="ad-pill">Ad</);
   assert.doesNotMatch(gutter, /amazon/i, "never Amazon");
+  assert.deepEqual(pastBanner([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), [5, 6, 7, 8, 9, 10], "after the banner's four");
+  assert.deepEqual(pastBanner([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5], "too few left: all of them");
   const layout = readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8");
   assert.match(layout, /<main id="main" className="relative /, "the columns sit inside main, so they end where the content ends");
   assert.match(layout, /<AdRouteGate>\s*<GutterAds /, "never on the ad-free pages");
