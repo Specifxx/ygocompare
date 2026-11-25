@@ -32,6 +32,7 @@ import { AdFreeSync } from "@/components/premium/AdFreeSync";
 import { ADFREE_BOOT_SCRIPT } from "@/lib/premium-member";
 import { ShareArrival } from "@/components/ShareArrival";
 import { DockAds } from "@/components/DockAds";
+import { GutterAds } from "@/components/GutterAds";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { HeavyPopups } from "@/components/heavy/HeavyAds";
 import { AD_HEAVY } from "@/lib/ad-heavy";
@@ -103,8 +104,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {SITE.priceAlerts && <SinceLastVisit wrap="page" />}
           {/* The heavy test's banner pair at the TOP of every page is gone (owner, 2026-11-23 UX review, P0 6: about 200px of header
               before the title; ads below content). The pair stays below the content, as on every site. */}
-          <main id="main" className="min-w-0 flex-1">
+          <main id="main" className="relative min-w-0 flex-1">
             <div className="page py-6">{children}</div>
+            {/* The gutter ads (owner, 2026-11-25): a labelled eBay and TCGplayer column in each empty side of a wide window, from 1480px. */}
+            <AdRouteGate>
+              <GutterAds ads={cardAds({ limit: 14 })} search={adSearch()} sides={AD_HEAVY ? "both" : "right"} />
+            </AdRouteGate>
           </main>
           <Footer />
           <QuickView />

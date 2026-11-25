@@ -48,7 +48,7 @@ test("eBay item links lose their old tracking; /go tags them again", () => {
   assert.equal(cleanEbayUrl("https://www.ebay.com/sch/i.html?_nkw=x"), "https://www.ebay.com/sch/i.html?_nkw=x");
 });
 
-test("the ads are ONE native horizontal block per page (owner, 2026-11-13), below the content (2026-11-19); the quick view keeps its small pair; no rails, no strips", () => {
+test("the ads are ONE native horizontal block per page (owner, 2026-11-13), after the content (2026-11-19; mid-page on the home page, 2026-11-25); the quick view keeps its small pair; no old rails, no strips", () => {
   const read = (f: string) => readFileSync(f, "utf8");
   assert.match(read("src/components/QuickView.tsx"), /<CompactCardAds /);
   assert.match(read("src/app/layout.tsx"), /<DockAds ads=\{cardAds\(/);
@@ -64,9 +64,11 @@ test("the ads are ONE native horizontal block per page (owner, 2026-11-13), belo
     const src = read(f);
     assert.ok(src.indexOf("<InlineAds ") > src.indexOf("<PriceTable"), `${f}: below the price table`);
   }
-  // On the home page, after the questions, never under the hero.
+  // On the home page mid-page (owner, 2026-11-25): after the product shelf, before the sets, guides and questions; never under the hero.
   const home = read("src/app/page.tsx");
-  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("Frequently asked questions"));
+  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("<Tabs tabs={shelfTabs}"), "after the shelf");
+  assert.ok(home.indexOf("<InlineAds ") < home.indexOf("Frequently asked questions"), "before the questions");
+  assert.ok(home.indexOf("<InlineAds ") > home.indexOf("</Hero>"), "never under the hero");
   assert.doesNotMatch(read("src/components/CardAds.tsx"), /export function (EbayCardStrip|TcgplayerCardStrip|CardAdPair)/);
   for (const f of ["src/components/InlineAds.tsx", "src/components/DockAds.tsx"]) assert.match(read(f), /"use client"/, f);
 });

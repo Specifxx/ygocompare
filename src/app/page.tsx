@@ -281,6 +281,14 @@ export default function Home() {
         </Section>
       )}
 
+      {/* The ad banners mid-page (owner, 2026-11-25: "why are the display ads at the very bottom of the site?"): after the shelf the
+          visitor came for, before the sets, guides and FAQ. Never under the hero or above the first products (2026-11-19 quality pass). */}
+      {inlineReady(ads, undefined) && (
+        <div className="mt-12 sm:mt-16">
+          <InlineAds ads={ads} search={adSearch()} page="home" />
+        </div>
+      )}
+
       {latestSets.length > 0 && (
         <Section title="Latest sets" href="/sets" linkLabel="All sets" className="reveal mt-16 sm:mt-24">
           <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -329,12 +337,6 @@ export default function Home() {
           </details>
         ))}
       </section>
-      {/* The ad banners sit below the page's own content, never under the hero (2026-11-19, core-update quality pass). */}
-      {inlineReady(ads, undefined) && (
-        <div className="mt-16 sm:mt-24">
-          <InlineAds ads={ads} search={adSearch()} page="home" />
-        </div>
-      )}
       <p className="sr-only">{products().length} products tracked</p>
     </div>
   );

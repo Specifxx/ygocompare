@@ -4,6 +4,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { navGroups, phoneNav } from "@/lib/nav";
 import { isActivePath } from "@/components/NavLink";
 import { MIN_WIDTH, MAX_TILES } from "@/components/DockAds";
+import { GUTTER_MIN, pastBanner } from "@/components/GutterAds";
 import { ebayTilesFor } from "@/lib/inline-ads";
 import type { CardAds } from "@/lib/card-ads";
 
@@ -18,7 +19,7 @@ test("the shell is one header row over one centred column: no sidebar, no ad in 
   assert.doesNotMatch(layout, /max-w-shell|SideNav|navGroups|shopNav/, "no shell beside a sidebar");
   assert.ok(!existsSync("src/components/SideNav.tsx"), "the sidebar is deleted, not hidden");
   // The ad-intensity test (lib/ad-heavy.ts, owner 2026-11-19) may put the banner pair above the content, behind AD_HEAVY only.
-  assert.match(layout, /<main id="main" className="min-w-0 flex-1">\s*(?:\{\/\*[\s\S]*?\*\/\}\s*\{AD_HEAVY && \([\s\S]*?\)\}\s*)?<div className="page py-6">\{children\}<\/div>\s*<\/main>/);
+  assert.match(layout, /<main id="main" className="relative min-w-0 flex-1">\s*<div className="page py-6">\{children\}<\/div>\s*(?:\{\/\*[\s\S]*?\*\/\}\s*)?<AdRouteGate>\s*<GutterAds [^\n]*\/>\s*<\/AdRouteGate>\s*<\/main>/);
   assert.match(layout, /<DockAds /);
   assert.doesNotMatch(layout, /sidenav-w|fonts\.googleapis/);
   // One line under the header at most: the sale's strip in its season, else the release on pre-order (its link is in the Deals menu).
@@ -47,12 +48,29 @@ test("the current section is marked by whole path segments", () => {
   assert.ok(!isActivePath("/", "/cards"));
 });
 
-test("no side rails: the dock is the only fixed ad, below 1280px, and nothing narrows the page column for an ad", () => {
+test("the dock below 1280px; the gutter ads (owner, 2026-11-25) only in the empty sides, never narrowing the page column", () => {
   assert.equal(MIN_WIDTH, 1280);
   assert.equal(MAX_TILES, 10);
-  assert.ok(!existsSync("src/components/SideAds.tsx"), "the rail code is deleted");
+  assert.ok(!existsSync("src/components/SideAds.tsx"), "the old rail code stays deleted");
   const css = readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
-  assert.doesNotMatch(css, /rail-scroll|--rail|side-rail/, "no rail and no room kept for one (owner, 2026-11-13)");
+  assert.doesNotMatch(css, /rail-scroll|--rail|side-rail/, "no old rail, and no room taken from the page for one");
+  assert.match(css, /\.gutter-ads \{[^}]*--g: calc\(\(100% - 1152px\) \/ 2\)/, "the gutter is measured beside the page content (1152px)");
+  assert.match(css, /--gw: min\(180px, calc\(var\(--g\) - 28px\)\)/, "and kept 14px clear of it");
+  assert.match(css, /\.gutter-card \{[^}]*position: sticky/);
+  assert.equal(GUTTER_MIN, 1440);
+  assert.ok(GUTTER_MIN >= 1152 + 2 * (100 + 28), "a column of at least 100px fits from GUTTER_MIN, even beside a scrollbar");
+  const gutter = readFileSync(new URL("../src/components/GutterAds.tsx", import.meta.url), "utf8");
+  assert.match(gutter, /data-adfree/, "never for ad-free members");
+  assert.match(gutter, /rel="sponsored nofollow noopener"/);
+  assert.match(gutter, /"gutter-ebay"/);
+  assert.match(gutter, /"gutter-tcg"/);
+  assert.match(gutter, /className="ad-pill">Ad</);
+  assert.doesNotMatch(gutter, /amazon/i, "never Amazon");
+  assert.deepEqual(pastBanner([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), [5, 6, 7, 8, 9, 10], "after the banner's four");
+  assert.deepEqual(pastBanner([1, 2, 3, 4, 5]), [1, 2, 3, 4, 5], "too few left: all of them");
+  const layout = readFileSync(new URL("../src/app/layout.tsx", import.meta.url), "utf8");
+  assert.match(layout, /<main id="main" className="relative /, "the columns sit inside main, so they end where the content ends");
+  assert.match(layout, /<AdRouteGate>\s*<GutterAds /, "never on the ad-free pages");
   const t = (id: number) => ({ id, slug: `s${id}`, name: "x", image: null, cents: 100, currency: "USD", url: "https://www.ebay.com/itm/1", ref: null });
   const ads: CardAds = { ebay: { US: [t(1), t(2), t(3)], UK: [t(4)] }, tcgplayer: [] };
   assert.equal(ebayTilesFor(ads, "UK").market, "US");
@@ -90,9 +108,9 @@ test("every navigation link points at a page of the site, and prices come first"
 
 // The minimal look (owner, 2026-11-13): the hero with no product, ONE tabbed shelf (the deals are one of its lists), the latest
 // sets, the one ad block, then the guides folded and the questions. tests/minimal-look.test.ts reads the rendered page.
-test("the homepage, in order: the hero, the one shelf, the latest sets, the guides folded, the FAQ, the one ad block (2026-11-19), and nothing else", () => {
+test("the homepage, in order: the hero, the one shelf, the one ad block (mid-page, owner 2026-11-25), the latest sets, the guides folded, the FAQ, and nothing else", () => {
   const src = readFileSync("src/app/page.tsx", "utf8");
-  const order = ["Today's top deals", "<Hero>", "</Hero>", "booster boxes and sealed`}", "<Tabs tabs={shelfTabs}", 'title="Latest sets"', "<Folds ", 'title="Guides"', "Frequently asked questions", "<InlineAds "];
+  const order = ["Today's top deals", "<Hero>", "</Hero>", "booster boxes and sealed`}", "<Tabs tabs={shelfTabs}", "<InlineAds ", 'title="Latest sets"', "<Folds ", 'title="Guides"', "Frequently asked questions"];
   let at = -1;
   for (const o of order) {
     const i = src.indexOf(o, at + 1);
