@@ -3192,3 +3192,24 @@ DexCompare (CompareEmpire #369) and MTG Compare (#278).
   store's shipping, the one-store order) is returned by `/api/basket` only when RiftCompare's sister-premium status says the
   token is Premium right now. It is withheld in the response, not hidden with CSS.
 - **Placement:** one link on `/cart` once the list holds two or more products. There is no pop-up.
+
+## 2026-11-26: the phone's home page, tidied (one path: the headline, the search, six products)
+
+**Owner, 2026-11-26:** "we should still tidy up the landing page for our sites a little bit, because I think there's just too
+much going on, especially for mobile phone."
+
+**Measured at 390px before:** 6,305px tall. Above the first product: the sale strip, the gift pill, the headline, three lines of
+sub-text, the search, six market chips, six tiles in three rows, a line of counts and the giveaway card. The first product began
+on the third screen.
+
+**Now, below 640px only:** the headline, the search, the six ways in as ONE sideways row of chips, then the shelf (six products
+and the button to the rest), then the giveaway, the ad block, three sets, the guides and the questions. 4,745px, and the first
+products are on the first screen. Hidden on a phone: the gift pill (the sale strip is the page's one promo, page budget rule 4),
+the sub-line, the hero's market chips (the header's chooser is on the same screen), the line of counts, the shelf's notes, the
+shelf's products after the sixth and the fourth set. The giveaway moves under the shelf by `order`, on a phone only.
+
+**Unchanged:** the HTML is the same at every width, so a crawler, find-in-page and a desktop see every block; no URL, title,
+heading or JSON-LD changes; no ad moves (the ads thread owns placement). CSS only, in one block at the end of `globals.css`
+("The phone's home page, tidied"); the hooks are `hero-gift`, `hero-markets`, `home-flow`, `home-give`, `home-shelf`, `home-sets`.
+
+**Read:** phone bounce (non-Reddit) and buy clickers per 100 on the home page, the week after release against the week before.

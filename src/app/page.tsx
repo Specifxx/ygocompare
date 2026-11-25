@@ -209,7 +209,7 @@ export default function Home() {
   ];
 
   return (
-    <div>
+    <div className="home-flow">
       <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
       <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` } }} />
       {/* The products on this page, by their own URLs: the shelf and the newest set's sealed (SEO audit, 2026-11-03). */}
@@ -222,7 +222,7 @@ export default function Home() {
       <Hero>
         {/* The one small line above the headline. */}
         {xmas ? (
-          <div className="rise">
+          <div className="rise hero-gift">
             <ChristmasGifts />
           </div>
         ) : (
@@ -243,7 +243,7 @@ export default function Home() {
         <div className="hero-search rise" style={riseAt(2)}>
           <SearchBox big />
         </div>
-        <div className="rise mt-6" style={riseAt(3)}>
+        <div className="rise hero-markets mt-6" style={riseAt(3)}>
           <MarketChooser className="justify-center" />
         </div>
         <WaysIn links={ways} label={`Popular ${SITE.gameShort} pages`} />
@@ -270,13 +270,13 @@ export default function Home() {
         </p>
       </Hero>
       {/* The giveaway, while it is open (owner, 2026-11-22: "feature it on our homepage"). */}
-      <div className="page">
+      <div className="page home-give">
         <SignInSlides surface="home" variant="banner" fallback={<GiveawayHomeBanner />} />
       </div>
 
 
       {shelfTabs.length > 0 && (
-        <Section title={`${SITE.gameShort} booster boxes and sealed`} className="reveal mt-8 sm:mt-12">
+        <Section title={`${SITE.gameShort} booster boxes and sealed`} className="home-shelf reveal mt-8 sm:mt-12">
           <Tabs tabs={shelfTabs} label={`${SITE.gameShort} sealed products`} />
         </Section>
       )}
@@ -291,7 +291,7 @@ export default function Home() {
 
       {latestSets.length > 0 && (
         <Section title="Latest sets" href="/sets" linkLabel="All sets" className="reveal mt-16 sm:mt-24">
-          <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <ul className="home-sets grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {latestSets.map((s) => (
               <li key={s.id} className="flex">
                 <SetTile s={s} />
