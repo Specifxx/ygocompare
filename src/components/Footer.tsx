@@ -50,7 +50,7 @@ export function Footer() {
   const cols = footerColumns(historyOn());
   const year = new Date().getUTCFullYear();
   return (
-    <footer className="mt-20 border-t border-line bg-surface">
+    <footer className="ftr mt-20 border-t border-line bg-surface">
       {/* "Was this page useful?" (owner, 2026-11-18: more feedback). One inline line, never a pop-up. */}
       <div className="page pt-8"><FeedbackAsk email={SITE.supportEmail} /></div>
       <div className="page pt-6"><DiscordCta href={SITE.discordInvite} className="max-w-2xl" /></div>

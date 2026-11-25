@@ -73,7 +73,7 @@ export const metadata: Metadata = {
 };
 
 // Dark by default (lib/theme.ts); the browser bar follows the default, not a saved light choice.
-export const viewport: Viewport = { themeColor: "#0f1013", colorScheme: "dark light" };
+export const viewport: Viewport = { themeColor: "#0c0a14", colorScheme: "dark light" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -64,7 +64,7 @@ test("the two themes are read from the stylesheet: the dark theme is the default
   assert.deepEqual(light.get("open"), [20, 118, 56]);
   assert.deepEqual(dark.get("open"), [74, 206, 120]);
   assert.deepEqual(light.get("surface"), [255, 255, 255]);
-  assert.deepEqual(dark.get("surface"), [23, 24, 29]);
+  assert.deepEqual(dark.get("surface"), [22, 19, 34]);
   assert.equal(names.get("buy"), "open", "the old colour name is the same token");
   // The arithmetic, against the published pairs: black on white is 21:1, and the bug this file is for was 2.0:1.
   assert.equal(Math.round(contrast([0, 0, 0], [255, 255, 255])), 21);

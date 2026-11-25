@@ -10,33 +10,38 @@
    (lib/theme.ts THEME_BOOT_SCRIPT), decided before first paint from the visitor's
    saved choice, so one CDN copy of each page serves everyone. */
 :root {
-  --bg: 246 246 243;
+  /* The light theme: warm ivory, royal violet for what is pressed, gold for what shines (the lively look, 2026-11-26). */
+  --bg: 250 247 240;
   --surface: 255 255 255;
-  --raised: 250 250 248;
-  --line: 228 227 222;
-  --ink: 21 23 28;
-  --muted: 92 96 108;
-  --faint: 100 104 115; /* 5.2:1 on --bg, 5.6:1 on --surface (WCAG AA for small text) */
-  --brand: 37 87 201; /* Gundam Compare blue (#2557c9); white on it is 6.4:1 */
+  --raised: 252 249 243;
+  --line: 232 226 212;
+  --ink: 26 20 38;
+  --muted: 94 88 108;
+  --faint: 104 98 118; /* 5.3:1 on --bg, 5.8:1 on --surface (WCAG AA for small text) */
+  --brand: 91 47 192; /* royal violet (#5b2fc0); white on it is 7.9:1 */
   --brand-ink: 255 255 255;
-  --brand-soft: 229 237 255;
-  --brand-strong: 26 64 160; /* brand as TEXT on --brand-soft and on --surface: chips and .btn-soft */
-  --accent: 229 48 63; /* the red of the mobile suit's chest: highlights only */
-  --spark: 229 48 63;
+  --brand-soft: 238 231 255;
+  --brand-strong: 68 32 150; /* brand as TEXT on --brand-soft and on --surface: chips and .btn-soft */
+  --accent: 190 58 36; /* the ember red of the logo's card: highlights only */
+  --spark: 190 58 36;
+  --gold: 176 118 12; /* the gold as a line or a fill's edge on a light page */
+  --glow: 124 82 235; /* the violet that lights the page's ground */
   --open: 20 118 56; /* 5.0:1 on --open-soft, 5.7:1 on --surface: the 12px stock pill is AA */
   --open-soft: 226 245 232;
-  --sold: 100 104 115;
-  --sold-soft: 238 238 240;
+  --sold: 104 98 118;
+  --sold-soft: 240 237 242;
   --stale: 143 88 0;
   --stale-soft: 253 243 219;
   --pre: 88 76 214;
   --pre-soft: 236 234 252;
   --up: 20 118 56;
   --down: 196 40 70;
-  --ad: 243 246 252; /* sponsored units: a cool tint no store row or product card uses */
-  --ad-line: 120 128 148;
-  --shadow: 24 22 18;
-  --wordmark: linear-gradient(180deg, #1a40a0 0%, #2557c9 60%, #3d7bff 100%);
+  --ad: 246 243 252; /* sponsored units: a cool tint no store row or product card uses */
+  --ad-line: 126 120 150;
+  --shadow: 40 24 70;
+  --wordmark: linear-gradient(180deg, #c98a1b 0%, #a86a0a 55%, #7a4a04 100%);
+  /* The foil a headline's key word is written in. */
+  --foil: linear-gradient(100deg, #5b2fc0 0%, #8a3fd6 28%, #c2410c 52%, #b7791f 72%, #5b2fc0 100%);
   /* The sticky header's height: sticky offsets (top-[var(--hdr)]) and anchor jumps (scroll-padding-top below) follow it. */
   --hdr: 60px;
   color-scheme: light;
@@ -48,34 +53,39 @@
   }
 }
 
+/* The dark theme, the default: a midnight violet page, Millennium gold for what is pressed and what shines, the logo's ember
+   for highlights. Until 2026-11-26 this site wore Gundam Compare's blue on plain black (the engine's copy); the owner: "so dull". */
 :root:not([data-theme="light"]) {
-  --bg: 15 16 19;
-  --surface: 23 24 29;
-  --raised: 29 31 37;
-  --line: 45 47 55;
-  --ink: 238 238 241;
-  --muted: 166 170 181;
-  --faint: 140 144 156; /* 6.0:1 on --bg, 5.6:1 on --surface */
-  --brand: 122 165 255; /* #7aa5ff: 7.8:1 on --bg */
-  --brand-ink: 10 20 44;
-  --brand-soft: 26 40 76;
-  --brand-strong: 170 198 255; /* on --brand-soft and on --surface */
-  --accent: 255 102 118;
-  --spark: 255 102 118;
+  --bg: 12 10 20;
+  --surface: 22 19 34;
+  --raised: 31 27 47;
+  --line: 54 48 80;
+  --ink: 243 241 249;
+  --muted: 174 169 192;
+  --faint: 146 141 166; /* 6.2:1 on --bg, 5.6:1 on --surface */
+  --brand: 244 196 82; /* #f4c452: 12:1 on --bg */
+  --brand-ink: 33 22 4;
+  --brand-soft: 60 45 14;
+  --brand-strong: 255 220 132; /* on --brand-soft and on --surface */
+  --accent: 255 128 104;
+  --spark: 255 128 104;
+  --gold: 244 196 82;
+  --glow: 140 98 255;
   --open: 74 206 120;
   --open-soft: 20 48 30;
-  --sold: 150 154 164;
-  --sold-soft: 38 40 46;
+  --sold: 150 146 168;
+  --sold-soft: 38 34 54;
   --stale: 240 180 60;
   --stale-soft: 52 40 14;
-  --pre: 160 150 255;
-  --pre-soft: 36 32 70;
+  --pre: 176 156 255;
+  --pre-soft: 40 32 78;
   --up: 74 206 120;
   --down: 255 112 140;
-  --ad: 26 31 45;
-  --ad-line: 120 130 156;
+  --ad: 24 22 42;
+  --ad-line: 126 120 160;
   --shadow: 0 0 0;
-  --wordmark: linear-gradient(180deg, #ffffff 0%, #b9ceff 45%, #7aa5ff 100%);
+  --wordmark: linear-gradient(180deg, #fff1c9 0%, #f2c14e 50%, #c98a1b 100%);
+  --foil: linear-gradient(100deg, #fff1c9 0%, #f4c452 22%, #ff9d6b 45%, #c9a0ff 68%, #f4c452 86%, #fff1c9 100%);
   color-scheme: dark;
 }
 
@@ -564,14 +574,13 @@ html:has(.menu-sheet[open]) {
 /* ---------------------------------------------------------------------------
    Christmas logo (owner, 2026-11-20: "put a Santa hat on top of the logos for all
    of our websites, and add some decorations here and there, like some Christmas
-   lights … and Santa Claus"). A Santa hat on the logo mark (.xmas-cap), a string
-   of lights hanging under the header (.xmas-garland), and a small Santa on the
+   lights … and Santa Claus"). A Santa hat on the logo mark (.xmas-cap), and a small Santa on the
    home page's gift-guide line (.xmas-guide). CSS only: three small inline SVGs,
    no request, no script, no motion, nothing in the flow (absolute and
    pointer-events none, so no layout shift and no click is ever caught).
    Same switch as the festive layer: CHRISTMAS_FESTIVE_LAYER in lib/season.ts
    (data-festive on <html>), and the season window ends it by itself on
-   27 December. Remove after New Year: delete this block and the xmas-cap / xmas-garland classes.
+   27 December. Remove after New Year: delete this block and the xmas-cap class.
    --------------------------------------------------------------------------- */
 :root[data-season="christmas"][data-festive] .xmas-cap {
   position: relative;
@@ -587,17 +596,6 @@ html:has(.menu-sheet[open]) {
   pointer-events: none;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 56'%3E%3Cpath d='M9 43C11 27 21 10 37 7c10-2 18 3 22 12 1 3 1 6 0 8-3-5-8-8-13-6 3 6 6 14 8 22z' fill='%23d42a3c'/%3E%3Cpath d='M37 7c-9 4-16 15-19 31' fill='none' stroke='%239e1527' stroke-width='3' stroke-linecap='round' opacity='.45'/%3E%3Ccircle cx='58' cy='29' r='6.2' fill='%23fff' stroke='%23c9ced6' stroke-width='1.2'/%3E%3Crect x='4' y='39.5' width='55' height='13' rx='6.5' fill='%23fff' stroke='%23c9ced6' stroke-width='1.2'/%3E%3C/svg%3E") center / contain no-repeat;
   transform: rotate(-18deg);
-}
-:root[data-season="christmas"][data-festive] .xmas-garland::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  top: 100%;
-  height: 15px;
-  pointer-events: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 17'%3E%3Cpath d='M0 2.5Q12 9 24 2.5T48 2.5T72 2.5T96 2.5' fill='none' stroke='%234a5560' stroke-width='1.2'/%3E%3Ccircle cx='12' cy='11' r='5' fill='%23ef4444' opacity='.22'/%3E%3Crect x='10.6' y='5' width='2.8' height='2.4' rx='.6' fill='%235b6470'/%3E%3Cellipse cx='12' cy='11' rx='2.8' ry='3.8' fill='%23ef4444'/%3E%3Ccircle cx='36' cy='11' r='5' fill='%23f5b301' opacity='.22'/%3E%3Crect x='34.6' y='5' width='2.8' height='2.4' rx='.6' fill='%235b6470'/%3E%3Cellipse cx='36' cy='11' rx='2.8' ry='3.8' fill='%23f5b301'/%3E%3Ccircle cx='60' cy='11' r='5' fill='%2322b35e' opacity='.22'/%3E%3Crect x='58.6' y='5' width='2.8' height='2.4' rx='.6' fill='%235b6470'/%3E%3Cellipse cx='60' cy='11' rx='2.8' ry='3.8' fill='%2322b35e'/%3E%3Ccircle cx='84' cy='11' r='5' fill='%233b82f6' opacity='.22'/%3E%3Crect x='82.6' y='5' width='2.8' height='2.4' rx='.6' fill='%235b6470'/%3E%3Cellipse cx='84' cy='11' rx='2.8' ry='3.8' fill='%233b82f6'/%3E%3C/svg%3E") 0 0 / 84px 15px repeat-x;
 }
 :root[data-season="christmas"][data-festive] .xmas-guide::before {
   content: "";
@@ -681,14 +679,25 @@ html:has(.menu-sheet[open]) {
 }
 .hero-bg {
   position: absolute;
-  inset: 0;
-  z-index: -1;
+  /* Edge to edge of the window, whatever the column's width (the body clips sideways overflow): the lights and the stars fade
+     out by their own masks, never in a line at the column's edge. */
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  z-index: -2;
   overflow: clip;
   pointer-events: none;
-  background-image: radial-gradient(rgb(var(--ink) / 0.09) 1px, transparent 1.5px);
-  background-size: 26px 26px;
-  -webkit-mask-image: radial-gradient(60% 85% at 50% 0%, #000 20%, transparent 78%);
-  mask-image: radial-gradient(60% 85% at 50% 0%, #000 20%, transparent 78%);
+  /* A field of stars: three sizes of dot on three grids that never line up, fading out before the column's edge. */
+  background-image:
+    radial-gradient(rgb(var(--ink) / 0.5) 0.8px, transparent 1.3px),
+    radial-gradient(rgb(var(--gold) / 0.55) 1px, transparent 1.6px),
+    radial-gradient(rgb(var(--glow) / 0.6) 1.2px, transparent 1.9px);
+  background-size: 131px 97px, 211px 173px, 317px 263px;
+  background-position: 12px 20px, 80px 64px, 170px 30px;
+  -webkit-mask-image: radial-gradient(75% 95% at 50% 0%, #000 25%, transparent 82%);
+  mask-image: radial-gradient(75% 95% at 50% 0%, #000 25%, transparent 82%);
 }
 .hero-bg::before,
 .hero-bg::after {
@@ -699,33 +708,34 @@ html:has(.menu-sheet[open]) {
 }
 .hero-bg::before {
   left: 50%;
-  top: -18rem;
-  width: 62rem;
-  height: 34rem;
-  margin-left: -31rem;
-  background: radial-gradient(closest-side, rgb(var(--brand) / 0.2), transparent);
+  top: -20rem;
+  width: 70rem;
+  height: 40rem;
+  margin-left: -42rem;
+  background: radial-gradient(closest-side, rgb(var(--glow) / 0.34), transparent);
 }
 .hero-bg::after {
   left: 50%;
-  top: -8rem;
-  width: 28rem;
-  height: 20rem;
-  margin-left: 1rem;
-  background: radial-gradient(closest-side, rgb(var(--brand) / 0.1), transparent);
+  top: -12rem;
+  width: 44rem;
+  height: 30rem;
+  margin-left: 2rem;
+  background: radial-gradient(closest-side, rgb(var(--gold) / 0.16), transparent);
 }
 :root[data-theme="light"] .hero-bg::before {
-  background: radial-gradient(closest-side, rgb(var(--brand) / 0.13), transparent);
+  background: radial-gradient(closest-side, rgb(var(--glow) / 0.2), transparent);
 }
+
 .hero-in {
   @apply relative mx-auto flex w-full flex-col items-center px-4 text-center sm:px-6;
   padding-top: clamp(3rem, 7vw, 5.5rem);
   padding-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 .hero-h1 {
-  @apply max-w-4xl text-balance font-display font-bold;
-  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
-  line-height: 1.02;
-  letter-spacing: -0.035em;
+  @apply max-w-4xl text-balance font-display font-extrabold;
+  font-size: clamp(2.5rem, 6.8vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
 }
 .hero-sub {
   @apply mt-4 max-w-2xl text-pretty text-base leading-7 text-muted sm:mt-5 sm:text-lg;
@@ -1258,3 +1268,407 @@ html[data-adlook="b"] [data-leave-nudge]::before {
 html[data-nav] .nav-line { opacity: 1; animation: nav-line 2.4s cubic-bezier(0.1, 0.7, 0.2, 1) 120ms both; }
 @keyframes nav-line { from { transform: scaleX(0); } to { transform: scaleX(0.92); } }
 @media (prefers-reduced-motion: reduce) { html[data-nav] .nav-line { animation: none; transform: none; } }
+
+/* ── The lively look (owner, 2026-11-26: "YGO Compare is so dull … we want it to be a very nice experience … oh look, these sites
+   are amazing"). The site's own colours at last (midnight violet and Millennium gold; it wore Gundam Compare's blue on black), a
+   page that glows, a summoning circle turning behind the headline, cards that catch the light. What it does NOT change: the
+   blocks of a page and their order (the minimal look, 2026-11-13, still decides those), any URL, title or heading, where an ad
+   sits, a price row's order or its buttons. CSS only: transforms, opacity and gradients; nothing here moves the layout, and
+   every animation is off for prefers-reduced-motion. DECISIONS.md, 2026-11-26. ───────────────────────────────────── */
+
+/* The page's ground: two soft lights behind everything, fixed, so no page is flat black (or flat ivory). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 34rem at 12% -8%, rgb(var(--glow) / 0.16), transparent 70%),
+    radial-gradient(48rem 30rem at 96% 4%, rgb(var(--gold) / 0.07), transparent 70%),
+    radial-gradient(70rem 40rem at 50% 118%, rgb(var(--glow) / 0.1), transparent 70%);
+}
+:root[data-theme="light"] body::before {
+  background:
+    radial-gradient(60rem 34rem at 12% -8%, rgb(var(--glow) / 0.1), transparent 70%),
+    radial-gradient(48rem 30rem at 96% 4%, rgb(var(--gold) / 0.1), transparent 70%);
+}
+@media print {
+  body::before { display: none; }
+}
+
+/* The header's line is a thread of gold running into violet. */
+.hdr::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(var(--gold) / 0.7) 22%, rgb(var(--glow) / 0.75) 60%, transparent);
+}
+
+/* The hero's art (components/home/Hero.tsx HeroArt). Behind the words (z-index), never in the flow, never clickable. */
+.hero-art {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  z-index: -1;
+  overflow: clip;
+  pointer-events: none;
+}
+.hero-circle {
+  position: absolute;
+  left: 50%;
+  top: clamp(-9rem, -6vw, -3rem);
+  width: min(46rem, 150vw);
+  height: auto;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  stroke: rgb(var(--gold));
+  --hc-o: 0.34;
+  opacity: var(--hc-o);
+  -webkit-mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 55%, transparent 100%);
+}
+:root[data-theme="light"] .hero-circle {
+  stroke: rgb(var(--brand));
+  --hc-o: 0.2;
+}
+.hero-circle g {
+  transform-box: view-box;
+  transform-origin: 300px 300px;
+}
+.hero-circle .hc-b {
+  stroke: rgb(var(--glow));
+}
+.hero-circle .hc-node {
+  fill: rgb(var(--gold));
+  stroke: none;
+}
+/* A face-down card of our own design: a gold-edged back with a violet whirl in an oval, and a band of light across it. */
+.hero-card {
+  position: absolute;
+  display: none;
+  width: 7.4rem;
+  aspect-ratio: 59 / 86;
+  border-radius: 0.6rem;
+  border: 1.5px solid rgb(var(--gold) / 0.85);
+  background:
+    linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 0.22) 46%, transparent 58%) 0 0 / 250% 100% no-repeat,
+    radial-gradient(ellipse 34% 26% at 50% 50%, #0c0a14 0 62%, rgb(var(--gold) / 0.9) 64% 70%, transparent 72%),
+    conic-gradient(from 20deg at 50% 50%, #3b1d8a, #7c4dff, #c084fc, #f4c452, #7c4dff, #2a1466, #3b1d8a);
+  box-shadow:
+    inset 0 0 0 5px #171226,
+    inset 0 0 0 6px rgb(var(--gold) / 0.5),
+    0 30px 60px -20px rgb(0 0 0 / 0.7),
+    0 0 50px -6px rgb(var(--glow) / 0.55);
+  will-change: transform;
+}
+@media (min-width: 1100px) {
+  .hero-card {
+    display: block;
+  }
+}
+/* On a phone the circle sits behind running text, so it is fainter there. */
+@media (max-width: 639px) {
+  .hero-circle {
+    --hc-o: 0.2;
+    top: -2rem;
+  }
+}
+/* Signing in is the violet button, so it never passes for the gold Premium pill beside it. White on it is 4.8:1 or better. */
+.hdr-signin {
+  background: linear-gradient(135deg, #7c4dff, #5b2fc0);
+  color: #fff;
+  box-shadow: 0 8px 20px -10px rgb(124 77 255 / 0.9), inset 0 0 0 1px rgb(255 255 255 / 0.16);
+}
+.hero-card-1 { left: max(1.5rem, calc(50% - 43rem)); top: 5.5rem; --r: -16deg; --s: 1; }
+.hero-card-2 { left: max(6rem, calc(50% - 36rem)); top: 21rem; --r: 9deg; --s: 0.72; opacity: 0.8; }
+.hero-card-3 { right: max(1.5rem, calc(50% - 43rem)); top: 4.5rem; --r: 14deg; --s: 0.94; }
+.hero-card-4 { right: max(6.5rem, calc(50% - 37rem)); top: 20rem; --r: -11deg; --s: 0.68; opacity: 0.75; }
+.hero-card { transform: rotate(var(--r)) scale(var(--s)); }
+
+/* The headline's key word is written in foil, and light runs across it. */
+.hero-h1 .text-brand,
+.foil {
+  background: var(--foil) 0 0 / 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.hero-h1 {
+  text-shadow: 0 0 60px rgb(var(--glow) / 0.35);
+}
+:root[data-theme="light"] .hero-h1 {
+  text-shadow: none;
+}
+
+/* The search: a gold and violet edge that is always faintly lit, and lights up when it is used. */
+.hero-search::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(var(--gold) / 0.75), rgb(var(--glow) / 0.85), rgb(var(--gold) / 0.75)) 0 0 / 200% 100%;
+  filter: blur(10px);
+  opacity: 0.38;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.hero-search:focus-within::before {
+  opacity: 0.8;
+}
+.hero-search input {
+  border-color: rgb(var(--gold) / 0.45);
+  background-color: rgb(var(--surface) / 0.92);
+}
+
+/* The ways in, each in a colour of its own (a card frame's: orange, teal, magenta, violet, gold, blue). */
+.way {
+  --c: var(--gold);
+  position: relative;
+  overflow: hidden;
+  border-color: rgb(var(--c) / 0.28);
+  background: linear-gradient(140deg, rgb(var(--c) / 0.16), rgb(var(--surface) / 0.7) 62%);
+}
+.ways > li:nth-child(6n + 1) .way { --c: 255 150 82; }
+.ways > li:nth-child(6n + 2) .way { --c: 45 212 191; }
+.ways > li:nth-child(6n + 3) .way { --c: 240 100 176; }
+.ways > li:nth-child(6n + 4) .way { --c: 168 134 255; }
+.ways > li:nth-child(6n + 5) .way { --c: 244 196 82; }
+.ways > li:nth-child(6n + 6) .way { --c: 96 165 250; }
+:root[data-theme="light"] .ways > li:nth-child(6n + 1) .way { --c: 194 86 12; }
+:root[data-theme="light"] .ways > li:nth-child(6n + 2) .way { --c: 13 128 116; }
+:root[data-theme="light"] .ways > li:nth-child(6n + 3) .way { --c: 186 36 120; }
+:root[data-theme="light"] .ways > li:nth-child(6n + 4) .way { --c: 100 62 210; }
+:root[data-theme="light"] .ways > li:nth-child(6n + 5) .way { --c: 150 98 6; }
+:root[data-theme="light"] .ways > li:nth-child(6n + 6) .way { --c: 29 98 200; }
+.way-icon {
+  background: rgb(var(--c) / 0.16);
+  color: rgb(var(--c));
+  box-shadow: inset 0 0 0 1px rgb(var(--c) / 0.4), 0 0 18px -4px rgb(var(--c) / 0.6);
+  --tw-ring-shadow: 0 0 #0000;
+}
+.way:hover {
+  border-color: rgb(var(--c) / 0.7);
+  background: linear-gradient(140deg, rgb(var(--c) / 0.26), rgb(var(--surface) / 0.9) 70%);
+  box-shadow: 0 14px 34px -14px rgb(var(--c) / 0.6);
+}
+.way:hover .way-icon {
+  background: rgb(var(--c));
+  color: rgb(var(--bg));
+}
+/* A band of light crosses a tile as the pointer arrives (transform only). */
+.way::after,
+.set-tile::after,
+.pc-plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.28) 48%, transparent 60%);
+  transform: translateX(-120%);
+}
+.hero-meta .live {
+  box-shadow: 0 0 0 0 rgb(var(--open) / 0.6);
+}
+
+/* A product's plate catches the light: a gold and violet halo when the pointer is on it, and the band of light across it. */
+.pc-plate {
+  box-shadow: 0 0 0 1px rgb(var(--line)), 0 18px 40px -26px rgb(var(--glow) / 0.55);
+}
+.group:hover .pc-plate {
+  box-shadow:
+    0 0 0 1.5px rgb(var(--gold) / 0.9),
+    0 0 0 4px rgb(var(--glow) / 0.28),
+    0 26px 50px -18px rgb(var(--glow) / 0.7);
+}
+.pc-plate::after {
+  z-index: 1;
+  background: linear-gradient(115deg, transparent 32%, rgb(255 255 255 / 0.65) 46%, rgb(200 170 255 / 0.35) 52%, transparent 62%);
+  mix-blend-mode: screen;
+}
+.pc-price {
+  letter-spacing: -0.01em;
+  color: rgb(var(--brand-strong));
+}
+/* A quiet button warms when the pointer reaches it: a gold edge and a little light (still one filled button a table). */
+.btn-soft,
+.btn-ghost {
+  transition-property: color, background-color, border-color, box-shadow;
+}
+.btn-soft:hover,
+.btn-ghost:hover {
+  border-color: rgb(var(--gold) / 0.75);
+  box-shadow: 0 8px 22px -12px rgb(var(--gold) / 0.7);
+}
+.pc-badge {
+  box-shadow: 0 6px 16px -6px rgb(var(--open) / 0.8);
+}
+
+/* A section's title wears a small gold diamond, and its "see all" link is the brand's. */
+.sec-h {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.sec-h::before {
+  content: "";
+  flex: none;
+  width: 0.62em;
+  height: 0.62em;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, rgb(var(--gold)), rgb(var(--glow)));
+  box-shadow: 0 0 18px rgb(var(--gold) / 0.6);
+}
+.sec-more {
+  color: rgb(var(--brand-strong));
+}
+
+/* Tabs: the chosen one is underlined in gold that glows. */
+.tab[aria-selected="true"] {
+  border-color: transparent;
+}
+.tab::after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: -1px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, rgb(var(--gold)), rgb(var(--glow)));
+  box-shadow: 0 0 14px rgb(var(--gold) / 0.7);
+  transform: scaleX(0);
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.tab[aria-selected="true"]::after {
+  transform: scaleX(1);
+}
+
+/* A latest set's tile, and every card: a surface with a little light in it rather than a flat slab. */
+.set-tile {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(150deg, rgb(var(--glow) / 0.1), rgb(var(--surface) / 0.75) 55%);
+}
+.set-tile:hover {
+  border-color: rgb(var(--gold) / 0.6);
+  box-shadow: 0 16px 36px -18px rgb(var(--glow) / 0.7);
+}
+.card,
+.card-surface {
+  background-image: linear-gradient(160deg, rgb(var(--glow) / 0.06), transparent 45%);
+}
+
+/* The filled button is gold leaf: a little light on top, a glow under it. Its colours (and so its contrast) are the tokens'. */
+.btn-primary {
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.28), transparent 55%);
+  box-shadow: 0 8px 22px -10px rgb(var(--brand) / 0.75), inset 0 0 0 1px rgb(255 255 255 / 0.14);
+}
+.chip:hover {
+  border-color: rgb(var(--brand) / 0.55);
+}
+
+/* Every page's head (components/Section.tsx PageHead) ends in a short bar of gold running into violet. */
+.page-head .page-h1::after,
+.page-head .page-h1-article::after,
+.list-h1::after {
+  content: "";
+  display: block;
+  width: 3.5rem;
+  height: 4px;
+  margin-top: 0.7rem;
+  border-radius: 4px;
+  background: linear-gradient(90deg, rgb(var(--gold)), rgb(var(--glow)));
+}
+
+/* The product page (app/card/[slug]/page.tsx): the photo stands in a ring of turning light, like a foil card tilted under a
+   lamp, and the market price is written in foil. */
+.pp-frame {
+  position: relative;
+  isolation: isolate;
+  border-radius: 22px;
+  padding: 3px;
+  background: conic-gradient(from var(--pp-a, 0deg), rgb(var(--gold)), rgb(var(--glow)), #ff9d6b, rgb(var(--gold)), rgb(var(--glow)), rgb(var(--gold)));
+  box-shadow: 0 30px 70px -30px rgb(var(--glow) / 0.8);
+}
+.pp-frame::before {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  z-index: -1;
+  border-radius: 40px;
+  background: inherit;
+  filter: blur(34px);
+  opacity: 0.35;
+}
+.pp-frame > .plate {
+  border-radius: 19px;
+  --tw-ring-shadow: 0 0 #0000;
+  box-shadow: none;
+}
+.pp-price {
+  background: var(--foil) 0 0 / 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+@property --pp-a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* The footer starts with the same thread of light the header ends with. */
+.ftr {
+  position: relative;
+}
+.ftr::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(var(--glow) / 0.7) 30%, rgb(var(--gold) / 0.7) 70%, transparent);
+}
+
+/* The motion. Slow, and only what a compositor moves: the circle turns, the cards bob, light runs over foil and across a tile
+   the pointer has reached. All of it stays still for a visitor who asked for less motion. */
+@media screen and (prefers-reduced-motion: no-preference) {
+  .hero-circle .hc-a { animation: hc-spin 140s linear infinite; }
+  .hero-circle .hc-b { animation: hc-spin 90s linear infinite reverse; }
+  .hero-circle .hc-c { animation: hc-spin 60s linear infinite; }
+  .hero-circle { animation: hc-breathe 9s ease-in-out infinite alternate; }
+  .hero-card { animation: card-bob 9s ease-in-out infinite alternate, card-shine 7s ease-in-out infinite; }
+  .hero-card-2 { animation-duration: 11s, 9s; animation-delay: -3s, -2s; }
+  .hero-card-3 { animation-duration: 10s, 8s; animation-delay: -5s, -4s; }
+  .hero-card-4 { animation-duration: 12s, 10s; animation-delay: -1s, -6s; }
+  .hero-h1 .text-brand,
+  .foil,
+  .pp-price { animation: foil-run 7s ease-in-out infinite alternate; }
+  .hero-search::before { animation: foil-run 6s linear infinite alternate; }
+  .hero-meta .live { animation: live-pulse 2.2s ease-out infinite; }
+  .pp-frame { animation: pp-turn 9s linear infinite; }
+  .way:hover::after,
+  .set-tile:hover::after,
+  .group:hover .pc-plate::after { transform: translateX(120%); transition: transform 0.75s ease-out; }
+  .group:hover .pc-plate { transform: translateY(-6px) perspective(700px) rotateX(3deg); }
+}
+@keyframes hc-spin { to { transform: rotate(360deg); } }
+@keyframes hc-breathe { to { opacity: calc(var(--hc-o) * 1.4); } }
+@keyframes card-bob { to { transform: translate3d(0, -18px, 0) rotate(calc(var(--r) + 4deg)) scale(var(--s)); } }
+@keyframes card-shine { 0%, 55% { background-position: 130% 0, 0 0, 0 0; } 100% { background-position: -80% 0, 0 0, 0 0; } }
+@keyframes foil-run { to { background-position: 100% 0; } }
+@keyframes live-pulse { to { box-shadow: 0 0 0 9px rgb(var(--open) / 0); } }
+@keyframes pp-turn { to { --pp-a: 360deg; } }

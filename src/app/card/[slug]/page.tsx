@@ -156,8 +156,10 @@ export default function CardPage({ params }: { params: { slug: string } }) {
           {/* The photo on the site's plate, like every product card: a square that is reserved before the photo arrives (the bare
               image was laid out as a 400×560 card and jumped to the photo's own shape), white behind a white-backed photo in the dark theme. */}
           {p.image && (
-            <div className="plate hidden aspect-square rounded-2xl md:block">
-              <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="h-full w-full object-contain p-5 mix-blend-multiply" width={400} height={400} />
+            <div className="pp-frame hidden md:block">
+              <div className="plate aspect-square">
+                <img src={imageAt(p.image, "400w")!} alt={`${name} ${SITE.gameShort} card`} className="h-full w-full object-contain p-5 mix-blend-multiply" width={400} height={400} />
+              </div>
             </div>
           )}
           <dl id="facts" className="scroll-mt-16 card-surface grid grid-cols-2 gap-x-3 gap-y-1.5 p-4 text-sm">
@@ -179,11 +181,11 @@ export default function CardPage({ params }: { params: { slug: string } }) {
                 </span>
               )}
               <h1 className="min-w-0 flex-1 font-display text-2xl font-bold tracking-tight md:text-3xl">{name} {p.number && <span className="text-muted">{p.number}</span>} price</h1>
-              <ShareButton path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} medium={p.kind === "sealed" ? "sealed" : "card"} offers={e.offers} compact className="mt-1" />
+              <ShareButton path={`/card/${p.slug}`} name={`${name}${p.number ? ` ${p.number}` : ""}`} medium={p.kind === "sealed" ? "sealed" : "card"} offers={e.offers} compact className="mt-1 max-sm:hidden" />
             </div>
             <div className="mt-3 flex flex-wrap items-baseline gap-x-6 gap-y-2">
               {ref ? (
-                <p><span className="tabular font-display text-3xl font-bold text-ink">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
+                <p><span className="pp-price tabular font-display text-4xl font-extrabold text-ink">{money(ref)}</span> <span className="text-sm text-muted">TCGplayer market</span></p>
               ) : (
                 <p className="text-sm text-muted">No TCGplayer market price yet</p>
               )}

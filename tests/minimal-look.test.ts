@@ -93,7 +93,11 @@ test("the hero: a section of words, a pill, a search and ways in; server markup,
       React.createElement(WaysIn, { label: "Popular pages", links: [{ href: "/sealed/booster-box", label: "Booster boxes", icon: "box" }, { href: "/tools/deal-finder", label: "Deals", icon: "tag" }] }),
     ),
   );
-  assert.match(html, /^<section class="hero"><div class="hero-bg" aria-hidden="true"><\/div><div class="hero-in">/);
+  // The ground, then the art (the lively look, 2026-11-26: a summoning circle and four face-down cards of our own drawing), then the words.
+  assert.match(html, /^<section class="hero"><div class="hero-bg" aria-hidden="true"><\/div><div class="hero-art" aria-hidden="true"><svg class="hero-circle"[\s\S]*?<\/svg>(?:<span class="hero-card hero-card-\d"><\/span>){4}<\/div><div class="hero-in">/);
+  const art = html.slice(html.indexOf('<div class="hero-art"'), html.indexOf('<div class="hero-in">'));
+  assert.ok(art.length < 1500, `the art is ${art.length} bytes of markup`);
+  assert.doesNotMatch(art, /<a\b|<img|href=|<text|<image/, "decoration only: no link, no photo, no words");
   assert.match(html, /<a (?=[^>]*class="hero-pill rise")(?=[^>]*href="\/preorders\/glorious-victors")[^>]*><span class="hero-pill-dot" aria-hidden="true"><\/span>Glorious Victors pre-orders/);
   assert.match(html, /<ul class="ways rise" style="--i:4" aria-label="Popular pages">/);
   assert.match(html, /<li class="flex"><a (?=[^>]*class="way flex-1")(?=[^>]*href="\/sealed\/booster-box")[^>]*><span class="way-icon" aria-hidden="true"><svg /);
@@ -108,6 +112,12 @@ test("the hero: a section of words, a pill, a search and ways in; server markup,
   assert.ok(bg.length > 0);
   assert.match(bg, /radial-gradient/);
   assert.doesNotMatch(bg, /url\(/, "no image in the hero's ground");
+  // The art and everything else the lively look adds is gradients, transforms and opacity: no image, and still for reduced motion.
+  const lively = css.slice(css.indexOf("── The lively look"));
+  assert.ok(lively.length > 2000);
+  assert.doesNotMatch(lively, /url\(/, "no image in the lively look");
+  const motion = lively.slice(lively.indexOf("@media screen and (prefers-reduced-motion: no-preference)"));
+  assert.equal(count(lively.replace(motion, ""), /\banimation(?:-name)?:/g), 0, "every animation of the lively look is inside the no-preference block");
   // The search's suggestions open over the hero's edge and the sections under it: the hero is never the box that clips them.
   assert.doesNotMatch(/\n\.hero \{[^}]*\}/.exec(css)?.[0] ?? "", /overflow/, ".hero does not clip");
 });

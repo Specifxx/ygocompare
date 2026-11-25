@@ -15,7 +15,7 @@ export function AccountHeaderLink({ className = "" }: { className?: string }) {
       href="/account"
       aria-label={signedIn ? (v.status === "member" ? "My account (Premium)" : "My account") : "Sign in or create a free account"}
       data-account-link
-      className={`relative inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full px-2.5 text-sm font-semibold transition sm:px-3.5 ${signedIn ? "border border-line bg-surface text-ink hover:border-ink/30" : "bg-brand text-brand-ink shadow-sm hover:brightness-110"} ${className}`}
+      className={`relative inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full px-2.5 text-sm font-semibold transition sm:px-3.5 ${signedIn ? "border border-line bg-surface text-ink hover:border-ink/30" : "bg-brand text-brand-ink shadow-sm hover:brightness-110 hdr-signin"} ${className}`}
     >
       <svg aria-hidden viewBox="0 0 20 20" className="h-4 w-4 fill-none stroke-current" strokeWidth="1.7"><circle cx="10" cy="7" r="3.2" /><path d="M3.8 17c.8-3.1 3.2-4.8 6.2-4.8s5.4 1.7 6.2 4.8" strokeLinecap="round" /></svg>
       {signedIn ? <span className="hidden xl:inline">Account</span> : <span className="hidden whitespace-nowrap min-[340px]:inline">Sign in</span>}

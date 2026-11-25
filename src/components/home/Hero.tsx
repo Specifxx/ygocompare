@@ -2,7 +2,7 @@ import Link from "@/components/Link";
 import type { CSSProperties, ReactNode } from "react";
 
 // The home page's hero (owner, 2026-11-13: "get rid of the products on the hero … minimalistic, dynamic, aesthetic and smooth
-// without having everything there"). Words, the search and a few ways in, centred, on a ground of two slow glows and a dot grid
+// without having everything there"). Words, the search and a few ways in, centred, on a ground of two slow glows and a field of stars
 // (globals.css .hero-bg: gradients only, no canvas, no image). Never a product card, a badge for a feature or a second banner: at
 // most one small pill above the headline. Server components: no script of their own.
 
@@ -13,8 +13,49 @@ export function Hero({ children }: { children: ReactNode }) {
   return (
     <section className="hero">
       <div className="hero-bg" aria-hidden="true" />
+      <HeroArt />
       <div className="hero-in">{children}</div>
     </section>
+  );
+}
+
+/**
+ * The hero's art (the lively look, owner 2026-11-26: "so dull … we want it to be a very nice experience"): a summoning circle of
+ * our own drawing turning slowly behind the headline (plain geometry: rings, ticks, two squares and two triangles, nobody's seal or
+ * logo), and four face-down cards of our own design floating at the sides of a wide screen. Decoration only: aria-hidden, never
+ * a product, a photo or a link, drawn by the server as one small SVG and four empty spans, moved by CSS alone (transform and
+ * opacity; still for prefers-reduced-motion). Nothing here is in the layout's flow: it is absolute inside the hero, so nothing
+ * shifts when it paints.
+ */
+function HeroArt() {
+  return (
+    <div className="hero-art" aria-hidden="true">
+      <svg className="hero-circle" viewBox="0 0 600 600" fill="none" focusable="false">
+        <g className="hc-a">
+          <circle cx="300" cy="300" r="296" strokeWidth="1.5" />
+          <circle cx="300" cy="300" r="270" strokeWidth="1" />
+          {/* The ticks round the rim: one dashed ring, 72 strokes. */}
+          <circle cx="300" cy="300" r="283" strokeWidth="14" strokeDasharray="1.5 23.196" />
+        </g>
+        <g className="hc-b">
+          <circle cx="300" cy="300" r="232" strokeWidth="1" strokeDasharray="2 10" />
+          <path d="M300 68 464 464H136Z" strokeWidth="1.25" />
+          <path d="M300 532 136 136h328Z" strokeWidth="1.25" opacity=".55" />
+          <circle cx="300" cy="68" r="5" className="hc-node" />
+          <circle cx="464" cy="464" r="5" className="hc-node" />
+          <circle cx="136" cy="464" r="5" className="hc-node" />
+        </g>
+        <g className="hc-c">
+          <rect x="182" y="182" width="236" height="236" strokeWidth="1" />
+          <rect x="182" y="182" width="236" height="236" strokeWidth="1" transform="rotate(45 300 300)" />
+          <circle cx="300" cy="300" r="118" strokeWidth="1.25" />
+        </g>
+      </svg>
+      <span className="hero-card hero-card-1" />
+      <span className="hero-card hero-card-2" />
+      <span className="hero-card hero-card-3" />
+      <span className="hero-card hero-card-4" />
+    </div>
   );
 }
 
