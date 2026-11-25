@@ -115,6 +115,8 @@ export function CartListView() {
   const totals = new Map<string, number>();
   for (const l of lines) if (!soldOutId(l)) totals.set(l.currency, (totals.get(l.currency) ?? 0) + (checks[l.id]?.priceCents ?? l.priceCents) * l.qty);
   const items = lines.reduce((s, l) => s + l.qty, 0);
+  // Best Basket (2026-11-25): offered once the list holds two or more products saved from their product pages.
+  const basketReady = new Set(lines.map((l) => /^\/card\/([a-z0-9-]+)/.exec(l.page ?? "")?.[1]).filter(Boolean)).size >= 2;
 
   return (
     <div className="ce-cart-page">
@@ -133,6 +135,14 @@ export function CartListView() {
             : "Prices are as they were when you added them."}{" "}
         Each store is its own checkout, paid on the store&apos;s own site (we never take payment). The store charges its live price and postage, and opening a store&apos;s cart replaces anything already in your cart there.
       </p>
+
+      {basketReady && (
+        <p className="ce-cart-note">
+          <a className="ce-cart-btn" href="/tools/best-basket">
+            Find the cheapest way to buy all of these
+          </a>
+        </p>
+      )}
 
       {groups.map((g) => {
         const live = (l: CartLine) => checks[l.id];

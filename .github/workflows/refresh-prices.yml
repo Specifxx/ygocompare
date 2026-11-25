@@ -83,6 +83,12 @@ jobs:
         run: |
           git fetch --quiet --depth=1 origin demand
           git show FETCH_HEAD:gsc-pages.json > data/public/search-demand.json.tmp && mv data/public/search-demand.json.tmp data/public/search-demand.json
+      # Best Basket's store shipping (lib/borrowed-shipping.ts, 2026-11-25): DexCompare's and MTG Compare's weekly checkout
+      # measurements of the same shops, matched by host and market. Never fatal: a sister it cannot read keeps yesterday's rows.
+      - name: Borrow measured shipping
+        if: ${{ !cancelled() }}
+        continue-on-error: true
+        run: npx tsx scripts/borrow-shipping.ts
       - name: Commit data (this commit is the daily release)
         run: |
           set -euo pipefail
