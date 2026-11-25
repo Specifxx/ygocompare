@@ -46,9 +46,17 @@ function kitHits(want: string[], limit: number) {
   return out;
 }
 
+// A case, display or "set of N" holds several of the product; its price outranked the box itself, so "booster box" listed
+// cases first (owner, 2026-11-26: sealed search must find the product). Multiples rank under the single unit unless the
+// words ask for them ("booster box case", "display").
+// "Booster Display" is the box itself on Bandai's and Lorcana's shelves, so only a display of decks, tins or packs counts.
+const isBulk = (name: string) => /\b(case|set of \d+)\b|\(\d+\s*(boxes|packs|decks)\)|(?<!booster )\bdisplay\b/i.test(name);
+const asksBulk = (q: string) => /\b(case|cases|display|displays|set of)\b/i.test(q);
+
 export function GET(req: Request) {
   const u = new URL(req.url);
   const q = (u.searchParams.get("q") ?? "").slice(0, 80);
+  const bulkUnwanted = !asksBulk(q);
   const limit = Math.min(60, Number(u.searchParams.get("limit") ?? 8) || 8);
   const want = tokens(q);
   if (u.searchParams.get("kind") === "kit")
@@ -69,7 +77,7 @@ export function GET(req: Request) {
         if (idQ && (p.upc === idQ || (p.upc && p.upc.replace(/^0/, "") === idQ.replace(/^0/, "")) || String(p.id) === idQ)) hit = want.length + 2;
         if (hit < want.length) return;
         const ref = refCents(p.id) ?? 0;
-        scored.push({ s: hit * 10 + Math.log10(1 + ref) + (p.kind === "card" ? 0.5 : 0), i });
+        scored.push({ s: hit * 10 + Math.log10(1 + ref) + (p.kind === "card" ? 0.5 : 0) - (bulkUnwanted && isBulk(p.name) ? 3 : 0), i });
       });
     }
     return scored.sort((a, b) => b.s - a.s);
