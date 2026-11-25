@@ -1037,6 +1037,40 @@ a.hero-pill:hover {
   text-overflow: ellipsis;
 }
 
+/* The gutter ads (components/GutterAds.tsx, owner 2026-11-25): one slim labelled column in each empty side of a wide window. Each
+   sits absolutely inside <main> (position: relative), so it starts under the header line and ends where the content ends; its card is
+   sticky under the header. Sized to the gutter beside the page's 1152px content (about 110px at 1440, at most 180px), always at least
+   14px clear of the content and of the window. Mounted only from 1440px (GUTTER_MIN), so the page column never gives up any width. */
+.gutter-ads {
+  --g: calc((100% - 1152px) / 2);
+  --gw: min(180px, calc(var(--g) - 28px));
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  width: var(--gw);
+  z-index: 10;
+}
+.gutter-ads-left { left: calc((var(--g) - var(--gw)) / 2); }
+.gutter-ads-right { right: calc((var(--g) - var(--gw)) / 2); }
+.gutter-card {
+  position: sticky;
+  top: calc(var(--hdr) + 16px);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--hdr) - 80px);
+  padding: 10px;
+}
+.gutter-list {
+  display: grid;
+  gap: 12px;
+  min-height: 0;
+  flex: 1 1 auto;
+  margin-top: 8px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
 /* The phone bottom nav (components/BottomNav.tsx, owner 2026-11-18; ported from TCG Prices): opaque (no blur: it would repaint every scroll
    frame on a phone), fixed to the foot of the screen, moved on transform only. The return nudge sits above it while it shows. */
 html[data-bottomnav] [data-return-nudge], html[data-bottomnav] [data-leave-nudge] { bottom: calc(var(--bn-space) + 16px); }
@@ -1387,10 +1421,11 @@ body::before {
   color: #fff;
   box-shadow: 0 8px 20px -10px rgb(124 77 255 / 0.9), inset 0 0 0 1px rgb(255 255 255 / 0.16);
 }
-.hero-card-1 { left: max(1.5rem, calc(50% - 43rem)); top: 5.5rem; --r: -16deg; --s: 1; }
-.hero-card-2 { left: max(6rem, calc(50% - 36rem)); top: 21rem; --r: 9deg; --s: 0.72; opacity: 0.8; }
-.hero-card-3 { right: max(1.5rem, calc(50% - 43rem)); top: 4.5rem; --r: 14deg; --s: 0.94; }
-.hero-card-4 { right: max(6.5rem, calc(50% - 37rem)); top: 20rem; --r: -11deg; --s: 0.68; opacity: 0.75; }
+/* Inside the page's column, never in the window's empty sides: those belong to the gutter ads from 1440px (2026-11-25). */
+.hero-card-1 { left: max(1rem, calc(50% - 34.5rem)); top: 5.5rem; --r: -16deg; --s: 1; }
+.hero-card-2 { left: max(3rem, calc(50% - 30.5rem)); top: 21.5rem; --r: 9deg; --s: 0.7; opacity: 0.8; }
+.hero-card-3 { right: max(1rem, calc(50% - 34.5rem)); top: 4.5rem; --r: 14deg; --s: 0.94; }
+.hero-card-4 { right: max(3rem, calc(50% - 30.5rem)); top: 20.5rem; --r: -11deg; --s: 0.66; opacity: 0.75; }
 .hero-card { transform: rotate(var(--r)) scale(var(--s)); }
 
 /* The headline's key word is written in foil, and light runs across it. */
