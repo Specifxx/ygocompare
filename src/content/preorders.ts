@@ -15,7 +15,7 @@ export const PREORDER_COPY: PreorderCopy = {
   sets: {
     "magnificent-maestros": {
       intro:
-        "Every store taking pre-orders for <b>Magnificent Maestros</b>, compared cheapest first in your currency. It releases on 13 November 2026 in tuckboxes of three 5-card packs, like Magnificent Monsters.",
+        "Every store selling <b>Magnificent Maestros</b>, compared cheapest first in your currency. It released on 13 November 2026 in tuckboxes of three 5-card packs, like Magnificent Monsters.",
       facts: [
         { label: "Release", value: "13 November 2026" },
         { label: "Format", value: "Tuckbox · 3 packs of 5 cards" },
@@ -23,7 +23,7 @@ export const PREORDER_COPY: PreorderCopy = {
         { label: "Grand Master Rares", value: "Numbered #001 to #100" },
       ],
       faq: [
-        { q: "When does Magnificent Maestros release?", a: "13 November 2026. Each tuckbox holds three 5-card packs, with three Secret Rares per pack that can be upgraded to Starlight Rares." },
+        { q: "When did Magnificent Maestros release?", a: "On 13 November 2026. Each tuckbox holds three 5-card packs, with three Secret Rares per pack that can be upgraded to Starlight Rares." },
         { q: "What is in Magnificent Maestros?", a: "18 anime-style reprints of cards used by TV-series characters including Seto Kaiba, Zane Truesdale and Jack Atlas, which also appear as serial-numbered Grand Master Rares (#001 to #100); 21 new cards for Toon, Witchcrafter and Unchained decks; and 24 extended-art cards." },
       ],
     },
