@@ -145,9 +145,9 @@ test("Fold: reading matter stays in the HTML as a closed <details>, its heading 
   assert.doesNotMatch(src("components/Fold.tsx"), /^"use client"|useState|onClick/m, "a native <details>: no script");
 });
 
-test("the home page in order: hero, the one shelf, the sets, the fold, the questions, one ad block (2026-11-19); nothing the owner cut", () => {
+test("the home page in order: hero, the one shelf, one ad block (mid-page, owner 2026-11-25), the sets, the fold, the questions; nothing the owner cut", () => {
   const page = src("app/page.tsx");
-  const order = ["<Hero>", "</Hero>", "<Tabs tabs={shelfTabs}", 'title="Latest sets"', "<Folds", '<Fold id="guides-h"', "Frequently asked questions", "<InlineAds"];
+  const order = ["<Hero>", "</Hero>", "<Tabs tabs={shelfTabs}", "<InlineAds", 'title="Latest sets"', "<Folds", '<Fold id="guides-h"', "Frequently asked questions"];
   let at = -1;
   for (const k of order) {
     const i = page.indexOf(k, at + 1);

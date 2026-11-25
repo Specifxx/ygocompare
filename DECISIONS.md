@@ -3107,3 +3107,25 @@ the 2024 Retro Pack run on the 2008 pack, seven stores' "Saga of Blue-Eyes White
 reprint) on the 2013 Unlimited deck, two "Realm of Light 2024" decks on the 2014 deck, and a "Mini Box Display ... 1P Single
 Pack" at US$9.99 on the US$34 Midterm Paradox display. Replayed on the 25 Nov data's 7,039 store offers with each handle as
 the title: 17 drop, all of them these listings; no other offer changes.
+
+## 2026-11-25: The banner pair mid-page on the home page, and ad columns in the empty sides of a wide window (owner)
+
+The owner, 2026-11-25, looking at the home page on a desktop: "Why are the display ads at the very bottom of the site? I think that in
+itself is an issue … there's so much space on the left and the right side of the website."
+
+- **Home page: the eBay and TCGplayer banner pair moves up** from under the FAQ to right after the product shelf (the first thing the
+  visitor came for), before Latest sets, the guides and the FAQ. Still never in or under the hero, never above the first products
+  (the 2026-11-19 quality pass), still ONE block. Card, set and list pages keep the pair straight after their content (price table,
+  grid), which is already where a reader finishes.
+- **Gutter ads** (`components/GutterAds.tsx`, `.gutter-ads` in globals.css): from 1440px wide, one slim labelled column in each empty
+  side of the window, eBay on the left and TCGplayer on the right (a light-ad site keeps the TCGplayer column only). They are sized to
+  the gutter beside the page's 1152px content (about 110px at 1440, 180px at most) and stay 14px clear of it and of the window; they sit
+  absolutely inside `<main>` with a sticky card, so they start under the header line, end where the content ends (never over the
+  footer) and never take width from the page column. This reverses "never re-add rails" (2026-11-13) on the owner's own word; unlike
+  the 2026-11-06 rails, the page column keeps its full width at every size.
+- Same rules as every unit: browser only (nothing in the server HTML, absolutely placed, CLS 0), labelled "Ad", rel sponsored through
+  /go under `gutter-ebay` / `gutter-tcg` (and `-all`), the import's own tiles (no request), never Amazon, never for ad-free members or
+  in the app, never on the ad-free pages (`AdRouteGate`). Static: nothing animates or opens. Below 1440px nothing mounts; phones keep
+  the dock.
+- **Read:** gutter clicks per 100 desktop visitors from the release, and whether desktop buy clicks per visitor hold (a fall of 10% on
+  the home page or the product page means the columns go: render nothing in `GutterAds`). Part of the heavy/light read on 10 Dec.
