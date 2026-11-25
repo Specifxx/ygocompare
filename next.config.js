@@ -19,7 +19,6 @@ const RETIRED = [
   { source: "/cards/:path*", destination: "/sealed" },
   { source: "/tools/rising", destination: "/tools" },
   { source: "/tools/demand", destination: "/tools" },
-  { source: "/tools/best-basket", destination: "/tools" },
   { source: "/tools/trade", destination: "/tools" },
   { source: "/list", destination: "/sealed" },
   // Guides that were card price tables (each set's most valuable cards, the chase-rarity era, the most expensive cards,

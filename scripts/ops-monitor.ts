@@ -67,6 +67,18 @@ async function main() {
       if (age > 30) return { status: "warn", detail: `last eBay run ${age.toFixed(0)}h ago` };
       return { status: "ok", detail: `${meta.ebay.calls}/${meta.ebay.budget} calls on ${meta.ebay.day}, ${meta.ebay.eligible} eligible` };
     }),
+    // Best Basket's borrowed store shipping (scripts/borrow-shipping.ts, 2026-11-25): stale or thin means baskets leave stores out.
+    check("Best Basket shipping", async () => {
+      try {
+        const f = JSON.parse(fs.readFileSync(path.join(process.cwd(), "data/shipping/borrowed.json"), "utf8")) as { generatedAt: string; stores: Record<string, unknown> };
+        const age = (Date.now() - new Date(f.generatedAt).getTime()) / 3_600_000;
+        const n = Object.keys(f.stores).length;
+        if (age > 24 * 9) return { status: "fail", detail: `borrowed.json is ${(age / 24).toFixed(0)} days old — check the Refresh prices workflow's "Borrow measured shipping" step` };
+        return { status: age > 72 || n < SITE.stores.length / 2 ? "warn" : "ok", detail: `${n} of ${SITE.stores.length} stores measured, ${age.toFixed(0)}h old` };
+      } catch {
+        return { status: "warn", detail: "data/shipping/borrowed.json missing — Best Basket has no store shipping" };
+      }
+    }),
     // The Compare Empire network feed (scripts/family-sync.ts): sisters' "Also in this cluster"
     // blocks read it from GitHub, so a stale one silently empties their tiles for this site.
     check("Family feed", async () => {
