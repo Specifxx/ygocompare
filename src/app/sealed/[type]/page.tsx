@@ -37,7 +37,7 @@ export default function SealedHub({ params }: { params: { type: string } }) {
     <div className="flex flex-col gap-8 sm:gap-10">
       <header>
         <Breadcrumbs items={[{ name: "Sealed", href: "/sealed" }, { name: h.label }]} />
-        <h1 className="font-display text-3xl font-bold tracking-tight sm:text-5xl">{SITE.gameShort} {h.label.toLowerCase()}</h1>
+        <h1 className="list-h1 font-display text-3xl font-bold tracking-tight sm:text-5xl">{SITE.gameShort} {h.label.toLowerCase()}</h1>
         {/* One line plus "How it works" (owner's UX review, 2026-11-23, P1 14). */}
         <p className="mt-3 text-sm text-muted">{h.items.length.toLocaleString()} products, most popular first. <Link href="/methodology" className="link">How it works</Link></p>
         {others.length > 0 && (

@@ -57,7 +57,7 @@ export function Header() {
   // "Deals" and "More" are everything the shopping dropdowns do not already list.
   const items = headerNavItems(navGroups({ history, sale, preorder, shop: [] }), shop.menus);
   return (
-    <header className="hdr sticky top-0 z-40 h-[var(--hdr)] border-b border-line bg-bg/80 backdrop-blur-xl xmas-garland">
+    <header className="hdr sticky top-0 z-40 h-[var(--hdr)] border-b border-line bg-bg/80 backdrop-blur-xl">
       <div className="page flex h-full items-center gap-2 sm:gap-3 xl:gap-4">
         <Link href="/" className="flex h-11 shrink-0 items-center rounded-lg" aria-label={`${SITE.name} home`}>
           <Logo wordmark="hidden sm:inline" />

@@ -3129,3 +3129,44 @@ itself is an issue … there's so much space on the left and the right side of t
   the dock.
 - **Read:** gutter clicks per 100 desktop visitors from the release, and whether desktop buy clicks per visitor hold (a fall of 10% on
   the home page or the product page means the columns go: render nothing in `GutterAds`). Part of the heavy/light read on 10 Dec.
+
+## 2026-11-26: the lively look (the site's own colours, a hero that moves, cards that catch the light); the Christmas lights go
+
+**Owner.** "Some of the sites like YGO Compare is so dull. And I honestly don't really like the Christmas lights on the very top
+… when experiences are very dull people aren't going to be like, wow, I found this really cool site, you should check it out …
+we want it to be a very nice experience, because even though it doesn't increase the functionality, it's like, oh, look, these
+sites are amazing."
+
+**What was wrong.** Since the 2026-11-06 engine port this site wore Gundam Compare's blue on near-black: `globals.css` kept the
+engine's tokens (its own comment said "Gundam Compare blue"), while `site.config.ts` and the icon had always said gold. Nothing
+on a page had a colour of its own, and the minimal look (2026-11-13) had rightly removed the blocks without giving the page
+that was left any character.
+
+**Decision.** A presentation change only, in `globals.css` ("The lively look" block and the tokens at the top), with five small
+markup hooks (`Hero.tsx` HeroArt, `Section.tsx` `.sec-h`, the product page's `.pp-frame` / `.pp-price`, `.list-h1`, `.ftr`):
+- **Colours.** Dark (the default): a midnight violet page, Millennium gold as the brand (buttons, links, prices), the logo's
+  ember as the accent, violet as the light behind the page. Light: warm ivory, royal violet as the brand, gold as the edge. Gold
+  cannot be read as text on ivory, so the two themes swap which of the pair is pressed and which shines. `tests/contrast.test.ts`
+  still measures every filled control from the tokens (the dark surface it pins moved).
+- **The hero.** A summoning circle of our own drawing (rings, ticks, two squares and two triangles: plain geometry, nobody's
+  seal, logo or card art) turns slowly behind the headline; four face-down cards of our own design float at the sides from
+  1100px; the game's name is written in foil that light runs across; the search has a lit edge; the six ways in each have a
+  card frame's colour. Still words, a search and ways in, never a product (2026-11-13 stands). The art is under 1.5 KB of
+  server HTML, aria-hidden, absolute (no layout shift), with no image and no script.
+- **Everywhere else.** Two fixed lights behind every page, a thread of gold and violet under the header and over the footer, a
+  gold diamond on section titles, a glowing underline on the chosen tab, a halo and a band of light on a product's plate under
+  the pointer, prices in the brand's strong colour, a short gold bar under a list page's h1, and on the product page the photo
+  in a ring of turning light with the market price in foil.
+- **Signing in is the violet button** (`.hdr-signin`), so it never passes for the gold Premium pill beside it.
+- **Phones:** the product page's header Share button is hidden under 640px (the title was squeezed to one word a line; the
+  "Share deal" link two rows down is the same action).
+- **The Christmas lights are removed** on every site (`.xmas-garland`), the owner's words above. The Santa hat on the logo, the
+  gift-guide line and the 3px hairline stay until the season ends.
+
+**What it does not change.** No URL, title, description, heading text or order of blocks; no ad's place (another thread is
+moving the eBay and TCGplayer blocks); the price table's rows, order and buttons; the one-prompt-a-visit rule. Motion is
+transform, opacity and gradient position only, all of it inside `prefers-reduced-motion: no-preference`
+(`tests/minimal-look.test.ts` pins that, that the look loads no image, and the hero's markup).
+
+**Not verified here.** The cloud sandbox cannot load TCGplayer's image host, so the look was checked with stand-in product
+photos; check the live product tiles and the product page's ring after the release.

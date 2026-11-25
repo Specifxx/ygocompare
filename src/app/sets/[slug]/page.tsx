@@ -89,7 +89,7 @@ export default function SetPage({ params }: { params: { slug: string } }) {
         <Breadcrumbs items={[{ name: "Sets", href: "/sets" }, { name: s.name }]} />
         <header>
           <p className="eyebrow">{s.upcoming ? "Upcoming" : "Released"}{s.releasedOn ? ` ${longDate(s.releasedOn)}` : ""}</p>
-          <h1 className="mt-2 font-display text-3xl font-bold tracking-tight sm:text-5xl">{s.name} booster box &amp; sealed prices</h1>
+          <h1 className="mt-2 list-h1 font-display text-3xl font-bold tracking-tight sm:text-5xl">{s.name} booster box &amp; sealed prices</h1>
           <ShareButton path={`/sets/${s.slug}`} name={`${s.name} prices`} medium="set" text={`${s.name}: every price compared on ${SITE.name}`} className="mt-3" />
           <p className="mt-3 text-sm text-muted">
             {sealed.length} sealed product{sealed.length === 1 ? "" : "s"}, compared across every store we track, TCGplayer, eBay and Amazon.
