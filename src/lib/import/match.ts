@@ -462,6 +462,11 @@ export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchR
   // Live 2026-11-22: "yugioh-retro-pack-2-blister-2025-rerelease" sat on the 2009 Retro Pack 2 pack. A re-release is a
   // reprint by another word.
   if (seen.has("rerelease") || /\bre-release/i.test(`${title} ${handle}`)) seen.add("reprint");
+  // Live 2026-11-25: "yugioh-retro-pack-2-blister-2025" and "yugioh-retro-pack-2-2025-booster-pack" (the 2025 run) still
+  // sat on the 2009 Retro Pack 2 pack: they name the year, not the word. Every set TCGplayer gives a "(2020 Date Reprint)"
+  // printing is older than 2020, so a title naming a year from 2020 on is a reprint run of it (it can only refuse: the
+  // reprint set's own products still need their words in the title).
+  if ([...seen].some((w) => /^20[2-3]\d$/.test(w))) seen.add("reprint");
   if (seen.has("reprint")) for (const w of ["2020", "date"]) seen.add(w);
   const named = [...idx.setName].filter(([, t]) => t.length && t.every((w) => seen.has(w)));
   // The product's own name may carry the longer set's words: TCGplayer files "Raging Tempest Special Edition Box" under
@@ -482,6 +487,10 @@ export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchR
     // sat on the Structure Deck Display (US$29 market): five of its six words is "near-complete". A deck display is
     // a box of decks, and the title must say so.
     if (/\bdeck/i.test(p.name) && /\bdisplay\b/i.test(p.name) && !/\bdisplay\b/i.test(title)) continue;
+    // Live 2026-11-25: "...mini-box-display-kon-85733-1p-single-pack" (US$9.99) sat on the Midterm Paradox Mini Box
+    // Display (US$34 market). A display is several boxes; a listing that says it sells one, in its title or its handle
+    // (which can only refuse), is not the display.
+    if (/\bdisplay\b/i.test(p.name) && /\bsingle\b|\b1\s?p\b/i.test(`${title} ${handle.replace(/-/g, " ")}`)) continue;
     // Live 2026-11-21: one loose pack from a tin ("yugioh-2022-tin-of-the-pharaohs-gods-booster-pack", US$5.95) sat on
     // the whole 2022 Tin (US$12 market). A tin's own name has no "pack"; a listing that names one booster pack, in its
     // title or its handle, is the pack (the handle can only refuse here).
