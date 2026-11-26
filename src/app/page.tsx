@@ -41,7 +41,9 @@ export function generateMetadata(): Metadata {
   const title = fitTitle([`${g} Booster Box Prices — Compare ${n} Stores${brand}`, `${g} Booster Box Prices — ${n} Stores${brand}`, `${g} Booster Box Prices${brand}`, `${g} Booster Box Prices — Compare ${n} Stores`, `${g} Booster Box Prices`]);
   return {
     title,
-    description: `Compare ${SITE.game} booster box, tin, structure deck and pre-order prices across TCGplayer, eBay, Amazon and ${n} online stores. Cheapest in-stock first, in your currency, updated daily.`,
+    // Search Recovery, 2026-11-26: Bing (so Yahoo and DuckDuckGo) corrects the one-word query "ygocompare" to "gocompare" and
+    // flagged this description as too long, so it opens with the one-word brand and stays under 160 characters.
+    description: `${SITE.shortName}: compare ${SITE.gameShort} booster box, tin and structure deck prices across TCGplayer, eBay, Amazon and ${n} stores. Cheapest in stock first, updated daily.`,
     alternates: { canonical: "/", types: { "application/rss+xml": "/feed.xml" } },
     openGraph: { type: "website", siteName: SITE.name, url: "/", title: title.absolute },
   };
@@ -210,8 +212,8 @@ export default function Home() {
 
   return (
     <div className="home-flow">
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` } }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#org`, name: SITE.name, alternateName: [SITE.shortName, SITE.domain], url: SITE_URL, logo: `${SITE_URL}/icon.svg` }} />
+      <JsonLd data={{ "@context": "https://schema.org", "@type": "WebSite", name: SITE.name, alternateName: [SITE.shortName, SITE.domain], url: SITE_URL, publisher: { "@id": `${SITE_URL}/#org` } }} />
       {/* The products on this page, by their own URLs: the shelf and the newest set's sealed (SEO audit, 2026-11-03). */}
       {shelf.length + chase.length > 0 && (
         <JsonLd data={{ "@context": "https://schema.org", "@type": "ItemList", name: `${SITE.gameShort} booster box and sealed prices`, itemListElement: [...shelf, ...chase].map((p, i) => ({ "@type": "ListItem", position: i + 1, url: `${SITE_URL}/card/${p.slug}`, name: p.name })) }} />
