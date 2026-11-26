@@ -1,0 +1,6660 @@
+{
+ "probedOn": "2026-11-26",
+ "stores": [
+  {
+   "key": "1uprm",
+   "name": "1UP",
+   "base": "https://1uprm.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 14,
+     "ygo": 11,
+     "sample": 14,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Alliance Insight da 24 Buste - 1a Edizione - ENG",
+    "Yu-Gi-Oh! Maze Of The Master da 24 Buste - 1a Edizione - ENG",
+    "Yu-Gi-Oh! Supreme Darkness Display da 24 Buste - 1a Edizione - ENG",
+    "Quarter Century Stampede - Display da 24 Buste (1a Edizione - ENG)"
+   ]
+  },
+  {
+   "key": "adcardcollectibles",
+   "name": "AdCard Collectibles",
+   "base": "https://adcardcollectibles.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-boosters-boxes",
+     "count": 8,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-boosters",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-outros",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Photon Hypernova Booster Display (24 Packs)",
+    "Yu-Gi-Oh! - Age of Overlord Booster Display (24 Packs)",
+    "Yu-Gi-Oh! - Valiant Smashers Booster Display (24 Packs)",
+    "Yu-Gi-Oh! - Maze of Millenia - Booster Display (36 Boosters)",
+    "Yu-Gi-Oh! - Legendary Duelists - Soulburning Volcano Booster",
+    "Yu-Gi-Oh! - Duelist Nexus Booster",
+    "Yu-Gi-Oh! - Valiant Smashers Booster",
+    "Yu-Gi-Oh! - Phantom Nightmare Booster",
+    "YU-GI-OH! - LEGENDARY DRAGON DECKS UNLIMITED REPRINT - EN",
+    "YU-GI-OH! - 25TH ANNIVERSARY TIN - DUELING MIRRORS"
+   ]
+  },
+  {
+   "key": "aiegames",
+   "name": "Aïe Games",
+   "base": "https://aie-games.be",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 33,
+     "ygo": 18,
+     "sample": 18,
+     "sealed": 17,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-boxen",
+     "count": 12,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-packs",
+     "count": 6,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 5,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-collection-boxes",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Blazing Dominion Booster Pack - EN",
+    "Yu-Gi-Oh! Blazing Dominion Booster Box",
+    "Yu-Gi-Oh! Legendary Duelists Soulburning Volcano booster pack",
+    "Yu-Gi-Oh! - Legendary Duelists Duels from the Deep Booster Display (36 Boosters) - EN",
+    "Yu-Gi-Oh! Blazing Dominion Booster Box",
+    "Yu-Gi-Oh! - Legendary Duelists Duels from the Deep Booster Display (36 Boosters) - EN",
+    "Yu-Gi-Oh! - Legendary Duelists: Synchro Storm Booster Display (36 Boosters) - EN",
+    "Yu-Gi-Oh! - Genesis Impact Booster Display (24 Boosters) - EN",
+    "Yu-Gi-Oh! Blazing Dominion Booster Pack - EN",
+    "Yu-Gi-Oh! Legendary Duelists Soulburning Volcano booster pack",
+    "Yu-Gi-Oh! Duelist Nexus Booster Pack",
+    "Yu-Gi-Oh! - Glorious Victors Booster Pack - EN"
+   ]
+  },
+  {
+   "key": "allyoucanplay",
+   "name": "All You Can Play",
+   "base": "https://allyoucanplay.eu",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 29,
+     "ygo": 29,
+     "sample": 29,
+     "sealed": 29,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-2025-mega-pack",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-alliance-insight",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-burst-protocol",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-duelists-advance",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-maze-of-muertos",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-phantom-revenge",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-quarter-century-bonanza",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Beyond the Brave - Booster Box | ENG",
+    "Yu-Gi-Oh! - Magnificent Maestros - Tuckbox | ENG",
+    "Yu-Gi-Oh! - Display Booster Box -  Battles of Legend: Glorious Gallery ENG",
+    "Yu-Gi-Oh! - Display Booster Box -  Blazing Dominion ENG",
+    "Yu-Gi-Oh! - Mega-Pack 2025 - Booster Pack | ENG",
+    "Yu-Gi-Oh! - Mega-Pack 2025 - Tuckbox 3 Boosters ENG",
+    "Yu-Gi-Oh! - Booster Pack - Alliance Insight | ENG",
+    "Yu-Gi-Oh! - Display Booster Box - Alliance Insight ENG\\ITA",
+    "Yu-Gi-Oh! - Booster Pack -  Burst Protocol ENG",
+    "Yu-Gi-Oh! - Display Booster Box -  Burst Protocol ENG",
+    "Yu-Gi-Oh! - Booster Pack -  Duelist’s Advance | ENG",
+    "Yu-Gi-Oh! - Display Booster Box -  Duelist’s Advance ENG"
+   ]
+  },
+  {
+   "key": "animerch",
+   "name": "Animerch",
+   "base": "https://animerch.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-trading-card-game",
+     "count": 6,
+     "ygo": 5,
+     "sample": 6,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Rarity Collection V Booster Box",
+    "Rarity Collection V Booster Pack",
+    "YGO Burst Protocol Booster Box",
+    "Yu-Gi-Oh Burst Protocol Booster Pack"
+   ]
+  },
+  {
+   "key": "ashtcg",
+   "name": "ASH",
+   "base": "https://ash-tcg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "cartes-yu-gi-oh-coffrets-officiels-boosters-et-decks",
+     "count": 15,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 14,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Tuckbox Yu-Gi-Oh! Les Monstres Légendaires – FR",
+    "Blister Yu-Gi-Oh! Le Labyrinthe des Morts – Boosters Cartonné - FR",
+    "Blister Yu-Gi-Oh! Retro Pack 2 – Réimpression – Boosters Cartonné - FR",
+    "Coffret Yu-Gi-Oh! – Collection Légendaire Kaiba – Réédition (FR)"
+   ]
+  },
+  {
+   "key": "baruzcard",
+   "name": "BaruZcard Tcg & Accessori",
+   "base": "https://baruzcard.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 118,
+     "ygo": 29,
+     "sample": 40,
+     "sealed": 38,
+     "singles": 0
+    },
+    {
+     "handle": "box-di-buste-yugioh",
+     "count": 54,
+     "ygo": 21,
+     "sample": 40,
+     "sealed": 32,
+     "singles": 0
+    },
+    {
+     "handle": "bustine-singole-yugioh",
+     "count": 10,
+     "ygo": 9,
+     "sample": 10,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "deck-precostruiti-yugioh",
+     "count": 10,
+     "ygo": 9,
+     "sample": 10,
+     "sealed": 10,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! OCG Original Artwork Collection YAC1 30th Anniversary Booster Box 15 Buste – JAP",
+    "Yugioh Limit over collection the rivals Display Box 15 Buste Jap",
+    "Yugioh Limit over collection the heroes Display Box 15 Buste Jap",
+    "Yugioh Rarity Collection 5 Collezione Rarità 5 Display Box 24 Buste ITA",
+    "Yugioh Rarity Collection 5 Collezione Rarità 5 Display Box 24 Buste ITA",
+    "Yu-Gi-Oh Cacciatori della Giustizia Box ITA - 1a Edizione",
+    "Yu-Gi-Oh Avanzamento del duellante Box ITA - 1a Edizione",
+    "Yu-Gi-Oh Battaglie della Leggenda Tumulto di Mostri Box ITA - 1a Edizione",
+    "Yugioh Collezione Rarità 25° Anniversario II - Tuckbox da 2 Buste ITA",
+    "Yugioh Forza Dimensionale Bustina 1a Edizione ITA",
+    "Yugioh Sopravissuti Selvaggi Bustina Singola ITA 1a edizione",
+    "Yugioh Accesso Cybertempesta bustina ITA"
+   ]
+  },
+  {
+   "key": "battlebear",
+   "name": "Battle Bear Trading Cards & Games",
+   "base": "https://battle-bear.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 144,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 34,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 75,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 21,
+     "ygo": 21,
+     "sample": 21,
+     "sealed": 20,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays",
+     "count": 17,
+     "ygo": 17,
+     "sample": 17,
+     "sealed": 13,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-zubehor",
+     "count": 16,
+     "ygo": 16,
+     "sample": 16,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Beyond the Brave Booster Deutsch",
+    "Yu-Gi-Oh! Legendary Duelists: Sisters of the Rose Booster Display (18 Boosters) Deutsch",
+    "Yu-Gi-Oh!  - Legendary Arc-V Decks 2026 Deutsch",
+    "Yu-Gi-Oh!  Legendary Arc-V Decks 2026 Englisch",
+    "Yu-Gi-Oh! Duelist Pack Rivals of the Pharaoh Booster Pack Deutsch",
+    "Yu-Gi-Oh! Legendary Duelists Ancient Millennium Booster Pack Deutsch",
+    "Yu-Gi-Oh! - 25th Anniversary Rarity Collection 2 Booster - DE",
+    "Yu-Gi-Oh! Legendary Duelist Soulburning Volcano Booster - DE",
+    "Yu-Gi-Oh! Structure Deck Blue-Eyes White Destiny Deutsch (Reprint)",
+    "Yu-Gi-Oh! The Chronicles Deck (Spirit Charmers - All-Foil Edition) Deutsch",
+    "Yu-Gi-Oh! Structure Deck Dark World - englisch",
+    "Yu-Gi-Oh!  Legendary Arc-V Decks 2026 Englisch"
+   ]
+  },
+  {
+   "key": "battlebearkl",
+   "name": "Battle Bear Kaiserslautern",
+   "base": "https://battle-bear-kl.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-einzelkarten",
+     "count": 1582,
+     "ygo": 28,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 28
+    },
+    {
+     "handle": "yu-gi-oh-einzelkarten-bis-10",
+     "count": 1470,
+     "ygo": 31,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 31
+    },
+    {
+     "handle": "deutsche-yu-gi-oh-einzelkarten",
+     "count": 1336,
+     "ygo": 28,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 28
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 898,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 34,
+     "singles": 0
+    },
+    {
+     "handle": "english-yu-gi-oh-singles",
+     "count": 210,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 48,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Auslöschungsinformant (V.2) RA02-063 Ultra Rare Near Mint Deutsch 1. Auflage",
+    "Angriffssynchron (V.1) BLMR-003 Secret Rare Excellent Deutsch 1. Auflage",
+    "Feierlicher Schlag (V.1) GRCR-059 Rare Excellent Deutsch 1. Auflage",
+    "Albtraumritterin Beschädigerin Iblee BLMR-057 Secret Rare Excellent Deutsch 1. Auflage",
+    "Auslöschungsinformant (V.2) RA02-063 Ultra Rare Near Mint Deutsch 1. Auflage",
+    "Angriffssynchron (V.1) BLMR-003 Secret Rare Excellent Deutsch 1. Auflage",
+    "Feierlicher Schlag (V.1) GRCR-059 Rare Excellent Deutsch 1. Auflage",
+    "Albtraumritterin Beschädigerin Iblee BLMR-057 Secret Rare Excellent Deutsch 1. Auflage",
+    "Auslöschungsinformant (V.2) RA02-063 Ultra Rare Near Mint Deutsch 1. Auflage",
+    "Angriffssynchron (V.1) BLMR-003 Secret Rare Excellent Deutsch 1. Auflage",
+    "Feierlicher Schlag (V.1) GRCR-059 Rare Excellent Deutsch 1. Auflage",
+    "Albtraumritterin Beschädigerin Iblee BLMR-057 Secret Rare Excellent Deutsch 1. Auflage"
+   ]
+  },
+  {
+   "key": "battlebearsb",
+   "name": "Battle Bear Saarbrücken",
+   "base": "https://www.battle-bear-sb.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-einzelkarten-bis-10",
+     "count": 3890,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 39
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 3237,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 33,
+     "singles": 0
+    },
+    {
+     "handle": "deutsche-yu-gi-oh-einzelkarten",
+     "count": 3220,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 39
+    },
+    {
+     "handle": "english-yu-gi-oh-singles",
+     "count": 968,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 40,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 39,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-events",
+     "count": 40,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Erebus der Unterweltmonarch (V.2) RA04-019 Ultra Rare Boosterfrisch Deutsch 1. Auflage",
+    "Unendliche Unbeständigkeit SDWD-031 Common Near Mint Deutsch 1. Auflage",
+    "Hugin die runischen Schwingen MP23-249 Secret Rare Near Mint Deutsch 1. Auflage",
+    "Gilford die Legende SD5-001 Ultra Rare Good Deutsch 1. Auflage",
+    "Yu-Gi-Oh! 25th Anniversary Tin: Dueling Heroes - DE",
+    "Yu-Gi-Oh! Rarity Collection V Booster Englisch",
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection Booster Englisch",
+    "Yu-Gi-Oh! Quarter Century Stampede Booster Englisch",
+    "Erebus der Unterweltmonarch (V.2) RA04-019 Ultra Rare Boosterfrisch Deutsch 1. Auflage",
+    "Unendliche Unbeständigkeit SDWD-031 Common Near Mint Deutsch 1. Auflage",
+    "Hugin die runischen Schwingen MP23-249 Secret Rare Near Mint Deutsch 1. Auflage",
+    "Gilford die Legende SD5-001 Ultra Rare Good Deutsch 1. Auflage"
+   ]
+  },
+  {
+   "key": "bescards",
+   "name": "Bescards",
+   "base": "https://www.bescards.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 39,
+     "ygo": 39,
+     "sample": 39,
+     "sealed": 34,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-boxes",
+     "count": 8,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-packs",
+     "count": 8,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Magnificent Maestros Box",
+    "YU-GI-OH! Mega-Pack Tin 2025",
+    "Yu-Gi-Oh! Duelist's Advance Booster Box",
+    "Yu-Gi-Oh Egyptian God Deck - Obelisk the Tormentor",
+    "Yu-Gi-Oh! Duelist's Advance Booster Box",
+    "Yu-Gi-Oh: Rarity Collection V - Booster Box",
+    "Konami - Yu-Gi-Oh TCG Crossover Breakers Booster Display 24 Pcs",
+    "Yu-Gi-Oh! – Quarter Century Stampede Booster Display (24 Packs)",
+    "Yu-Gi-Oh! TCG Dimension Force Booster Pack",
+    "Yu-Gi-Oh! Tactical Masters Booster Pack",
+    "Yu-Gi-Oh! - Maze of Muertos Boosterpack",
+    "Yu-Gi-Oh! Burst Protocol Booster Pack"
+   ]
+  },
+  {
+   "key": "blockhousegames",
+   "name": "Blockhouse Games",
+   "base": "https://blockhousegames.net",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-tcg",
+     "count": 37,
+     "ygo": 37,
+     "sample": 37,
+     "sealed": 35,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YuGiOh! - Magnificent Maestros",
+    "YuGiOh -  Beyond the Brave Booster",
+    "YuGiOh -  Beyond the Brave Booster Display",
+    "YuGiOh -  Chaos Origins Booster"
+   ]
+  },
+  {
+   "key": "boostertcg",
+   "name": "BoosterTCG",
+   "base": "https://boostertcg.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh: Magnificent Monsters Box - Deutsch",
+    "Yu-Gi-Oh: Magnificent Monsters Box - Englisch",
+    "Yu-Gi-Oh: Blue-Eyes White Destiny Structure Deck Reprint - Englisch",
+    "Yu-Gi-Oh: Legendary Collection Kaiba Reprint - Englisch"
+   ]
+  },
+  {
+   "key": "boostrclub",
+   "name": "Boostrclub",
+   "base": "https://boostrclub.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 15,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 13,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Display de 24 Boosters - Origines du Chaos [FR]",
+    "Yu-Gi-Oh! - Display de 24 Boosters - Collection Rareté V [FR]",
+    "Yu-Gi-Oh! - Display de 24 Boosters - Batailles de Légende : La Glorieuse Galerie [FR]",
+    "Yu-Gi-Oh! - Display de 10 Boosters - WCS 2025 Limited Pack [EN]"
+   ]
+  },
+  {
+   "key": "breakthecase",
+   "name": "BreakTheCase",
+   "base": "https://www.breakthecase.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 1440,
+     "ygo": 72,
+     "sample": 40,
+     "sealed": 8,
+     "singles": 32
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 1406,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "einzelkarten-yu-gi-oh",
+     "count": 1387,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-produkte",
+     "count": 49,
+     "ygo": 41,
+     "sample": 40,
+     "sealed": 31,
+     "singles": 1
+    },
+    {
+     "handle": "yu-gi-oh-displays",
+     "count": 24,
+     "ygo": 24,
+     "sample": 24,
+     "sealed": 18,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 15,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 14,
+     "singles": 0
+    },
+    {
+     "handle": "top-karten-yu-gi-oh",
+     "count": 8,
+     "ygo": 16,
+     "sample": 8,
+     "sealed": 0,
+     "singles": 8
+    },
+    {
+     "handle": "yu-gi-oh-boxen",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Beyond the Brave Booster - 1. Auflage - Deutsch (DE)",
+    "Yu-Gi-Oh! - Magnificent Monsters Booster - 1. Auflage - Deutsch (DE)",
+    "Yu-Gi-Oh! Alliance Insight - ALIN - Booster Display - Deutsch - 1. Auflage",
+    "Yu-Gi-Oh! - Magnificent Maestros Case (4 Displays / 40 Boxen) - 1. Auflage - Englisch (EN)",
+    "Hiita, die Feuerverzaubererin in Flammen - Maximum Gold: El Dorado (Rare) [MGED-119]",
+    "Eria, die Wasserverzaubererin in sanft - Maximum Gold: El Dorado (Rare) [MGED-122]",
+    "Aussa, die unerschütterliche Erdverzaubererin - Maximum Gold: El Dorado (Rare) [MGED-121]",
+    "Wynn, die Windverzaubererin in grün - Maximum Gold: El Dorado (Rare) [MGED-120]",
+    "Himmelsjäger-Mech - Witwenanker - Magnificent Monsters (Starlight Rare) [MAMO-019]",
+    "Cyberse-Vertrag-Hexe - Magnificent Monsters (Starlight Rare) [MAMO-018]",
+    "W:P Eleganter Ball - Magnificent Monsters (Starlight Rare) [MAMO-028]",
+    "Mitsu die Insekten-Ninja - Darkwing Blast (Starlight Rare) [DABL-016]"
+   ]
+  },
+  {
+   "key": "bsastore",
+   "name": "BSA Carte Collezionabili",
+   "base": "https://bsastore.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 334,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 25,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-ita",
+     "count": 277,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 27,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-eng",
+     "count": 44,
+     "ygo": 71,
+     "sample": 40,
+     "sealed": 8,
+     "singles": 31
+    },
+    {
+     "handle": "yu-gi-oh-espansioni-ita",
+     "count": 36,
+     "ygo": 36,
+     "sample": 36,
+     "sealed": 25,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-bustine-ita",
+     "count": 31,
+     "ygo": 31,
+     "sample": 31,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-carte-singole-eng",
+     "count": 31,
+     "ygo": 62,
+     "sample": 31,
+     "sealed": 0,
+     "singles": 31
+    }
+   ],
+   "sampleTitles": [
+    "Structure Deck - SDCK - Il Re Cremisi - 1a Edizione - ITA - Yu-Gi-Oh!",
+    "Tin Eroi Duellanti - 1a Edizione 25° Anniversario - ITA - Yu-Gi-Oh!",
+    "Starter Deck Divinità Egizie - EGS1 - Slifer il Drago del Cielo -  Ristampa 2023 - ITA - Yu-Gi-Oh!",
+    "Collezione Leggendaria - Edizione 25° Anniversario - ITA - Yu-Gi-Oh!",
+    "Structure Deck - SDCK - Il Re Cremisi - 1a Edizione - ITA - Yu-Gi-Oh!",
+    "Starter Deck Divinità Egizie - EGS1 - Slifer il Drago del Cielo -  Ristampa 2023 - ITA - Yu-Gi-Oh!",
+    "Collezione Leggendaria - Edizione 25° Anniversario - ITA - Yu-Gi-Oh!",
+    "Structure Deck - Deck Moderni Leggendari 2026 - 1a Edizione - ITA - Yu-Gi-Oh!",
+    "Box Display 10 Bustine Yu-Gi-Oh! World Championship 2026 Limited Pack - 1a Edizione - ENG - Preordine",
+    "Box Display 10 Bustine Yu-Gi-Oh! World Championship 2025 Limited Pack - 1a Edizione - ENG",
+    "Bustina 5 carte Yu-Gi-Oh! Quarter Century Bonanza - 1a Edizione - ENG",
+    "Bustina 4 carte Yu-Gi-Oh! World Championship 2026 Limited Pack - 1a Edizione - ENG - Preordine"
+   ]
+  },
+  {
+   "key": "cardbuddys",
+   "name": "CardBuddys",
+   "base": "https://cardbuddys.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 42,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 10,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Monsters 1st Einzelbox DE",
+    "Yu-Gi-Oh! Magnificent Monsters 1st Einzelbox EN",
+    "Yu-Gi-Oh! Magnificent Maestros 1st Einzelbox EN",
+    "Yu-Gi-Oh! Beyond The Brave 1st Edition Display DE"
+   ]
+  },
+  {
+   "key": "cardclub",
+   "name": "Card Club",
+   "base": "https://cardclub.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 16,
+     "ygo": 16,
+     "sample": 16,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-display",
+     "count": 10,
+     "ygo": 10,
+     "sample": 10,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tin",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Chaos Origins – Booster Display - englisch",
+    "Yu-Gi-Oh - Display - Phantom Revenge- deutsch",
+    "Yu-Gi-Oh! - Doom of Dimensions - Display - deutsch",
+    "Yu-Gi-Oh - Battle of Legend I Monster Mayhem - englisch",
+    "Yu-Gi-Oh - Display - Quarter Century Stampede - Display - englisch",
+    "Yu-Gi-Oh - Display - Phantom Revenge- deutsch",
+    "Yu-Gi-Oh! - Doom of Dimensions - Display - deutsch",
+    "Yu-Gi-Oh! - Supreme Darkness Display - deutsch",
+    "Yu-Gi-Oh! - Maze of the Master Booster - deutsch",
+    "Yu-Gi-Oh! - Supreme Darkness Booster - deutsch",
+    "Yu-Gi-Oh! - Supreme Darkness Booster - englisch",
+    "Yu-Gi-Oh! - Maze of the Master Booster - englisch"
+   ]
+  },
+  {
+   "key": "cardcollective",
+   "name": "Card Collective",
+   "base": "https://cardcollective.eu",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-displays-boosters",
+     "count": 61,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 30,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 53,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 24,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-trading-card-games-week",
+     "count": 21,
+     "ygo": 10,
+     "sample": 10,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 15,
+     "ygo": 12,
+     "sample": 12,
+     "sealed": 11,
+     "singles": 0
+    },
+    {
+     "handle": "outlet-yu-gi-oh",
+     "count": 8,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins-boxes",
+     "count": 7,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Maestros Tuckbox",
+    "Yu-Gi-Oh! Magnificent Monsters Tuckbox",
+    "Yu-Gi-Oh! - Chaos Origins Booster Pack",
+    "Yu-Gi-Oh! Rarity Collection V 3-Pack Tuckbox",
+    "Yu-Gi-Oh! - Legendary Modern Decks",
+    "Yu-Gi-Oh! Magnificent Maestros Tuckbox",
+    "Yu-Gi-Oh! - Beyond the Brave Booster",
+    "Yu-Gi-Oh! Magnificent Monsters Tuckbox",
+    "Yu-Gi-Oh! Light of Destruction (Unlimited) Display",
+    "Yu-Gi-Oh! Hidden Arsenal - Chapter 1 Display",
+    "Yu-Gi-Oh! Maze of Millenia Special Booster",
+    "Yu-Gi-Oh! Egyptian God Deck - Obelisk the Tormentor"
+   ]
+  },
+  {
+   "key": "cardcollector",
+   "name": "Card Collector",
+   "base": "https://card-collector.net",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-1",
+     "count": 212,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 154,
+     "ygo": 38,
+     "sample": 38,
+     "sealed": 35,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-side-event",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Time Wizard / GOAT Turnier – Freitag 04.12.2026 ab 18:00 Uhr",
+    "Yu-Gi-Oh! Time Wizard / GOAT Turnier – Samstag 12.12.2026 ab 14:00 Uhr",
+    "Yu-Gi-Oh! Time Wizard / GOAT Turnier – Freitag 18.12.2026 ab 18:00 Uhr",
+    "Yu-Gi-Oh! - Magnificent Maestros Deutsch",
+    "Yu-Gi-Oh! - Magnificent Maestros Englisch",
+    "Yu-Gi-Oh! - Magnificent Monsters (3 Booster) Deutsch",
+    "Yu-Gi-Oh! - Magnificent Monsters (3 Booster) Englisch",
+    "Yu-Gi-Oh! TCG – 2-Booster Battle | Micro Duel mit Basis-Kit",
+    "Yu-Gi-Oh! TCG – Puzzle Challenge | Löse das Duell",
+    "Yu-Gi-Oh! TCG – King of the Hill | König der Duellanten",
+    "Yu-Gi-Oh! TCG – Leihdeck-Roulette Side Event | Zufälliges Structure Deck"
+   ]
+  },
+  {
+   "key": "cardcosmos",
+   "name": "cardcosmos",
+   "base": "https://cardcosmos.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "konami",
+     "count": 202,
+     "ygo": 41,
+     "sample": 40,
+     "sealed": 35,
+     "singles": 1
+    },
+    {
+     "handle": "yu-gi-oh-neu-eingetroffen",
+     "count": 202,
+     "ygo": 41,
+     "sample": 40,
+     "sealed": 31,
+     "singles": 1
+    },
+    {
+     "handle": "yu-gi-oh-geschenke",
+     "count": 189,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 36,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-booster-display-karten",
+     "count": 189,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 36,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-booster-displays",
+     "count": 78,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 23,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-packs",
+     "count": 67,
+     "ygo": 38,
+     "sample": 38,
+     "sealed": 38,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-sale-angebote",
+     "count": 61,
+     "ygo": 41,
+     "sample": 40,
+     "sealed": 33,
+     "singles": 1
+    },
+    {
+     "handle": "yu-gi-oh-highlights",
+     "count": 57,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 36,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Limit Over Collection - The Heroes Booster Display - KOR",
+    "Yu-Gi-Oh! - Magnificent Monsters 3 Pack Tuckbox - DE",
+    "Yu-Gi-Oh! - Retro Pack 2 Special Edition - DE",
+    "Yu-Gi-Oh! - Magnificent Monsters 3 Pack Tuckbox - EN",
+    "Yu-Gi-Oh! - Magnificent Maestros Tuckbox - DE",
+    "Yu-Gi-Oh! - Speed Duel GX: Midterm Paradox Mini Box - EN",
+    "Yu-Gi-Oh! - Speed Duel: Battle City Box - DE",
+    "Yu-Gi-Oh! - Original Artwork Collection YAC1 Booster Display - JPN",
+    "Yu-Gi-Oh! Limit Over Collection - The Heroes Booster Display - KOR",
+    "Yu-Gi-Oh! - Magnificent Monsters 3 Pack Tuckbox - DE",
+    "Yu-Gi-Oh! - Retro Pack 2 Special Edition - DE",
+    "Yu-Gi-Oh! - Magnificent Monsters 3 Pack Tuckbox - EN"
+   ]
+  },
+  {
+   "key": "cardgames24",
+   "name": "cardgames24",
+   "base": "https://cardgames24.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 44,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-boxen",
+     "count": 7,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! 2021 Mega Tin of Ancient Battles Englisch 1. Auflage",
+    "Yu-Gi-Oh! 2021 Mega Tin of Ancient Battles Englisch 1. Auflage"
+   ]
+  },
+  {
+   "key": "cardgazertcg",
+   "name": "Cardgazer TCG",
+   "base": "https://cardgazertcg.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-display",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Quarter Century Stampede - Display DE",
+    "Yu-Gi-Oh! 2025 Mega-Pack Bundle DE",
+    "Yu-Gi-Oh! Duelist´s Advance - Display DE",
+    "Yu-Gi-Oh! Alliance Insight - Display DE",
+    "Yu-Gi-Oh! Quarter Century Stampede - Display DE",
+    "Yu-Gi-Oh! 2025 Mega-Pack Bundle DE",
+    "Yu-Gi-Oh! Duelist´s Advance - Display DE",
+    "Yu-Gi-Oh! Alliance Insight - Display DE"
+   ]
+  },
+  {
+   "key": "cardhome",
+   "name": "CARDHOME",
+   "base": "https://cardhome.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-single",
+     "count": 257,
+     "ygo": 78,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 38
+    },
+    {
+     "handle": "yugioh",
+     "count": 242,
+     "ygo": 77,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 37
+    },
+    {
+     "handle": "yu-gi-oh-einzelkarten",
+     "count": 217,
+     "ygo": 79,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 39
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 38,
+     "ygo": 18,
+     "sample": 19,
+     "sealed": 19,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-displays",
+     "count": 24,
+     "ygo": 11,
+     "sample": 12,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-booster",
+     "count": 7,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "legendary-collection-yu-gi-oh",
+     "count": 3,
+     "ygo": 6,
+     "sample": 3,
+     "sealed": 0,
+     "singles": 3
+    },
+    {
+     "handle": "misprints-yu-gi-oh",
+     "count": 1,
+     "ygo": 2,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 1
+    }
+   ],
+   "sampleTitles": [
+    "Herold der Vollkommenheit - Gold Series 5: Haunted Mine (Ghost Rare) [GLD5-030]",
+    "Topf der Gier - Legend of Blue Eyes White Dragon (Rare) [LOB-119]",
+    "Tausendäugiges Opfer - Pharaoh's Servant (Ultra Rare) [PSV-084]",
+    "Möbius der Frostmonarch - Soul of the Duelist (Super Rare) [SOD-022]",
+    "Yu-Gi-Oh ! Blue-Eyes White Destiny Deck Reprint DE",
+    "Herold der Vollkommenheit - Gold Series 5: Haunted Mine (Ghost Rare) [GLD5-030]",
+    "Topf der Gier - Legend of Blue Eyes White Dragon (Rare) [LOB-119]",
+    "Tausendäugiges Opfer - Pharaoh's Servant (Ultra Rare) [PSV-084]",
+    "Dark Paladin - Wave-Motion - Original Artwork Collection (OCG) (Starlight Rare) [YAC1-JP-009]",
+    "Harpie Lady - Elegant Egotist - Original Artwork Collection (OCG) (Starlight Rare) [YAC1-JP-003]",
+    "Exodia the Obliterator - Original Artwork Collection (OCG) (Starlight Rare) [YAC1-JP-001]",
+    "Spiralspeerstoß - Flaming Eternity (Ultimate Rare) [FET-043]"
+   ]
+  },
+  {
+   "key": "cardknights",
+   "name": "Card-Knights",
+   "base": "https://card-knights.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 29,
+     "ygo": 14,
+     "sample": 24,
+     "sealed": 20,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Blue-Eyes White Destiny Structure Deck Display",
+    "Structure Deck: Fire Kings",
+    "Yu-Gi-Oh! TCG - Special Booster - 25th Anniversary Rarity Collection II Blister",
+    "Quarter Century Bonanza - Display 1st Edition"
+   ]
+  },
+  {
+   "key": "cardsplace",
+   "name": "Cardsplace",
+   "base": "https://cardsplace.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-trading-card-game",
+     "count": 54,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-trading-card-game-booster-packs",
+     "count": 19,
+     "ygo": 16,
+     "sample": 16,
+     "sealed": 16,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-trading-card-game-booster-displays",
+     "count": 18,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 15,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-trading-card-game-special-boxen-sets",
+     "count": 17,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 13,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Trading Card Game - Yugi's Legendary Decks: King of Games - Reprint YGLD (Deutsch)",
+    "Yu-Gi-Oh! Trading Card Game - Chaos Origins Booster Display (1. Auflage) - Deutsch",
+    "Yu-Gi-Oh! Trading Card Game - Chaos Origins Booster Display (1. Auflage) - English",
+    "Yu-Gi-Oh! Trading Card Game - Limit Over Collection: The Rivals Booster Display [LOCR] - Japanisch",
+    "Yu-Gi-Oh! Trading Card Game - Metal Raiders 25th Anniversary Booster Pack (Englisch)",
+    "Yu-Gi-Oh! Trading Card Game - Brothers of Legend Booster Pack - 1. Auflage BROL (Deutsch)",
+    "Yu-Gi-Oh! Trading Card Game - Brothers of Legend Booster Pack - 1. Auflage BROL (Englisch)",
+    "Yu-Gi-Oh! Trading Card Game - Chaos Origins Booster Pack (1. Auflage) - Deutsch",
+    "Yu-Gi-Oh! Trading Card Game - Chaos Origins Booster Display (1. Auflage) - Deutsch",
+    "Yu-Gi-Oh! Trading Card Game - Chaos Origins Booster Display (1. Auflage) - English",
+    "Yu-Gi-Oh! Trading Card Game - Limit Over Collection: The Rivals Booster Display [LOCR] - Japanisch",
+    "Yu-Gi-Oh! Trading Card Game - Limit Over Collection: The Heroes Booster Display [LOCH] - Japanisch"
+   ]
+  },
+  {
+   "key": "cardverse",
+   "name": "Cardverse",
+   "base": "https://cardverse.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 51,
+     "ygo": 41,
+     "sample": 40,
+     "sealed": 17,
+     "singles": 1
+    },
+    {
+     "handle": "yu-gi-oh-italiano",
+     "count": 15,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-inglese",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-giapponese",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh - Magnificent Monsters Box 3 Buste (IT)",
+    "Yu-Gi-Oh - Immortal Phoenix Box 24 Buste (ENG)",
+    "Yu-Gi-Oh - Fenice Immortale Box 24 Buste (IT)",
+    "Yu-Gi-Oh - Structure Deck Yugi Muto (ENG)",
+    "Yu-Gi-Oh - Magnificent Monsters Box 3 Buste (IT)",
+    "Yu-Gi-Oh - Fenice Immortale Box 24 Buste (IT)",
+    "Yu-Gi-Oh - Structure Deck Seto Kaiba (IT)",
+    "Yu-Gi-Oh - Structure Deck Yugi Muto (IT)",
+    "Yu-Gi-Oh - Immortal Phoenix Box 24 Buste (ENG)",
+    "Yu-Gi-Oh - Structure Deck Yugi Muto (ENG)",
+    "Yu-Gi-Oh - Structure Deck Seto Kaiba (ENG)",
+    "Yu-Gi-Oh! - Glorious Victors Booster Box (ENG)"
+   ]
+  },
+  {
+   "key": "cartespokemon",
+   "name": "CPC - Cartes Pokémon, One Piece & Yu-Gi-Oh !",
+   "base": "https://cartespokemon.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "display-box-yu-gi-oh",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Display Yu-Gi-Oh! OCG – Limit Over Collection: The Rivals",
+    "Display Box Yu-Gi-Oh! Original Artwork Collection",
+    "Yu-Gi-Oh! OCG - Limit Over Special Pack Vol.2",
+    "Booster Box Yu-Gi-Oh! OCG - Chaos Origins",
+    "Display Box Yu-Gi-Oh! Premium Pack - Legend of Duels: Quarter CENTURY EDITION",
+    "Display Box Yu-Gi-Oh! OCG Limit Over Collection - The Heroes",
+    "Display Box Yu-Gi-Oh! Original Artwork Collection"
+   ]
+  },
+  {
+   "key": "ccncards",
+   "name": "CCN Cards",
+   "base": "https://ccncards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-boxbreak",
+     "count": 32,
+     "ygo": 22,
+     "sample": 22,
+     "sealed": 7,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-boxbreak",
+     "count": 27,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-boxbreak-de",
+     "count": 14,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Beyond The Brave - ENG",
+    "Yu-Gi-Oh! Beyond The Brave - DE",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery - DE",
+    "YuGiOh! - Magnificent Monsters Box - ENG",
+    "Yu-Gi-Oh! - QUARTER CENTURY CHRONICLE side:PRIDE - JAP",
+    "Yu-Gi-Oh! Chaos Origins - ENG",
+    "YuGiOh! - Magnificent Monsters Box - ENG",
+    "Yu-Gi-Oh! - RARITY COLLECTION – QUARTER CENTURY EDITION - JAP",
+    "YuGiOh! - Magnificent Monsters Box - DE",
+    "Yu-Gi-Oh! Chaos Origins - DE",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery - DE",
+    "Yu-Gi-Oh! - Supreme Darkness 1. Auflage - DE"
+   ]
+  },
+  {
+   "key": "collectavenue",
+   "name": "Collect Avenue",
+   "base": "https://collect-avenue.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-scelle-tous-les-produits",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-scelle",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Magnificent Monsters Box 3 Boosters - Version Anglaise",
+    "Yu-Gi-Oh! - Magnificent Monsters Box 3 Boosters - Version Anglaise"
+   ]
+  },
+  {
+   "key": "collectorexpert",
+   "name": "Collector Expert",
+   "base": "https://collector-expert.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-karten",
+     "count": 29,
+     "ygo": 29,
+     "sample": 29,
+     "sealed": 18,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-sondercollections",
+     "count": 9,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-displays",
+     "count": 8,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-structure-decks",
+     "count": 8,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-tin-boxen",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Speed Duel Battle City Box 1. Auflage",
+    "Yu-Gi-Oh! Yugi's Legendary Decks I Reprint",
+    "Yu-Gi-Oh! Yugi's Legendary Decks I Reprint",
+    "Yu-Gi-Oh! Speed Duel Battle City Box 1. Auflage",
+    "Yu-Gi-Oh! Speed Duel Battle City Box 1. Auflage",
+    "Yu-Gi-Oh! Yugi's Legendary Decks I Reprint",
+    "Yu-Gi-Oh! Speed Duel Battle City Box 1. Auflage",
+    "Yu-Gi-Oh! Yugi's Legendary Decks I Reprint",
+    "Yu-Gi-Oh Ghosts From The Past: The 2nd Haunting Display",
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection II Display",
+    "Yu-Gi-Oh! Legendary Duelists Rage of Ra Display 1.Edition",
+    "Yu-Gi-Oh! 2020 Ghosts From The Past Display 1. Auflage"
+   ]
+  },
+  {
+   "key": "collectorstorecards",
+   "name": "Collector Store Cards",
+   "base": "https://collectorstorecards.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "carte-singole-yu-gi-oh",
+     "count": 347,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 174,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 22,
+     "singles": 0
+    },
+    {
+     "handle": "preordini-yugioh",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Drago Toon Occhi Blu MAMS 120 I Magnifici Maestri ITA",
+    "Yu-Gi-Oh! Fame Svincolata MAMS 059 I Magnifici Maestri ITA",
+    "Yu-Gi-Oh! Reincarnazione dello Svincolato MAMS 058 I Magnifici Maestri ITA",
+    "Yu-Gi-Oh! Unchained Soul of Abominable Rage MAMS 057 I Magnifici Maestri ITA",
+    "Yu-Gi-Oh! Vincitori Gloriosi Booster Box 24 Buste ITA",
+    "Yu-Gi-Oh! Magnifici Maestri Display 10x ITA 1ª Edizione",
+    "Yu-Gi-Oh! Magnifici Maestri ITA 1ª Edizione",
+    "Yu-Gi-Oh! Oltre il Coraggio Booster Box 24 Buste ITA",
+    "Yu-Gi-Oh! Vincitori Gloriosi Booster Box 24 Buste ITA"
+   ]
+  },
+  {
+   "key": "collgamers",
+   "name": "CollGamers",
+   "base": "https://collgamers.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 7,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-booster-box",
+     "count": 5,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-collectors-sets-en-meer",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "pre-order-yu-gi-oh",
+     "count": 3,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YuGiOh! Chaos Origins Booster Box (EU) - Konami",
+    "YuGiOh! Magnificent Monsters Box (EU) - Konami",
+    "YuGiOh! Magnificent mavens box (ENG) - Konami",
+    "YuGiOh! Magnificent Maestros Box (EU) - Konami",
+    "YuGiOh! Chaos Origins Booster Box (EU) - Konami",
+    "YuGiOh! Magnificent Monsters Box (EU) - Konami",
+    "YuGiOh! Magnificent Maestros Box (EU) - Konami",
+    "YuGiOh! Battle Of Chaos Booster Box (EU) - Konami",
+    "YuGiOh! Magnificent Monsters Box (EU) - Konami",
+    "YuGiOh! Magnificent mavens box (ENG) - Konami",
+    "YuGiOh! Magnificent Maestros Box (EU) - Konami",
+    "YuGiOh! Maximum Gold El Dorado Unlimited box - Konami"
+   ]
+  },
+  {
+   "key": "crispycards",
+   "name": "CrispyCards",
+   "base": "https://crispycards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-gesamtuebersicht",
+     "count": 85,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 29,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-auf-deutsch-1",
+     "count": 54,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 25,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-auf-englisch",
+     "count": 37,
+     "ygo": 35,
+     "sample": 36,
+     "sealed": 24,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays-auf-deutsch",
+     "count": 16,
+     "ygo": 15,
+     "sample": 16,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-box-sets-auf-deutsch",
+     "count": 14,
+     "ygo": 13,
+     "sample": 14,
+     "sealed": 10,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-box-sets-auf-englisch",
+     "count": 13,
+     "ygo": 12,
+     "sample": 13,
+     "sealed": 11,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays-auf-englisch",
+     "count": 12,
+     "ygo": 11,
+     "sample": 12,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-sale",
+     "count": 11,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Duelist's Advance Display (DE)",
+    "Yu-Gi-Oh Crossover Breakers Display (DE)",
+    "Yu-Gi-Oh Legacy of Destruction Display (DE)",
+    "Yu-Gi-Oh Supreme Darkness Display (DE)",
+    "Yu-Gi-Oh! Duelist's Advance Display (DE)",
+    "Yu-Gi-Oh Supreme Darkness Display (DE)",
+    "Yu-Gi-Oh Crossover Breakers Display (DE)",
+    "Yu-Gi-Oh Legacy of Destruction Display (DE)",
+    "Yu-Gi-Oh Rarity Collection 5 (ENG)",
+    "Yu-Gi-Oh! Duelist's Advance Display (ENG)",
+    "Yu-Gi-Oh Cyberstorm Access Display (ENG)",
+    "Yu-Gi-Oh 25th Anniversary Rarity Collection: Special 3-Pack Tuckbox (ENG)"
+   ]
+  },
+  {
+   "key": "dadiemattoncini",
+   "name": "Dadi e Mattoncini",
+   "base": "https://dadiemattoncini.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "carte-yu-gi-oh",
+     "count": 14,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "yu-gi-oh! - magnificent maestros - box 3 bustine (eng)",
+    "yu-gi-oh! - oltre il coraggio - blister 3 bustine da 9 carte (ita)",
+    "yu-gi-oh! - alliance insight - bustina singola 9 carte (eng)",
+    "yu-gi-oh! - supreme darkness - bustina singola 9 carte (eng)"
+   ]
+  },
+  {
+   "key": "dateacard",
+   "name": "DateACard",
+   "base": "https://dateacard.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 194,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-dac-vault",
+     "count": 153,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "protege-cartes-yu-gi-oh",
+     "count": 103,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "tournois-yu-gi-oh",
+     "count": 19,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "display-yu-gi-oh",
+     "count": 15,
+     "ygo": 14,
+     "sample": 15,
+     "sealed": 14,
+     "singles": 0
+    },
+    {
+     "handle": "produits-derives-yu-gi-oh",
+     "count": 13,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "coffret-yu-gi-oh",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "deck-de-structure-yu-gi-oh",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Display de 24 boosters - Beyond the brave - FRANCAIS - BETB",
+    "Yu-Gi-Oh! - Tuckbox - Magnificent Monsters - MAMO",
+    "Yu-Gi-Oh! - Tuckbox - Magnificent Maestros - MAMS",
+    "Yu-Gi-Oh! - 15 Protège-cartes exclusifs - YCS Top Cut",
+    "Yu-Gi-Oh! - 15 Protège-cartes exclusifs - YCS Top Cut",
+    "Yu-Gi-Oh! - 15 Protège cartes OCG - Japonaises - Diabellze la sorcière blanche",
+    "Tapis de jeu Yu-Gi-Oh! - OCG - Japonais - Diabellstar et Diabellze - 10th YCS Tokyo",
+    "Yu-Gi-Oh! - 15 Protège-cartes exclusifs - WCQ Top Cut  2025 - Rouge - WCQ",
+    "Yu-Gi-Oh! - 15 Protège-cartes exclusifs - YCS Top Cut",
+    "Yu-Gi-Oh! - 15 Protège cartes OCG - Japonaises - Diabellze la sorcière blanche",
+    "Yu-Gi-Oh! - 15 Protège-cartes exclusifs - WCQ Top Cut  2025 - Rouge - WCQ",
+    "Yu-Gi-Oh! - 70 Protège cartes OCG - Japonaises - Quart de siècle noir"
+   ]
+  },
+  {
+   "key": "deichcards",
+   "name": "deichcards.de",
+   "base": "https://deichcards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-karten",
+     "count": 55,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 39,
+     "singles": 0
+    },
+    {
+     "handle": "konami-yu-gi-oh-klassiker-neue-strategien-im-tcg",
+     "count": 53,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 39,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Burst Protocol Display Box (DE)",
+    "Yu-Gi-Oh! Retro Pack 2 Tuck Box (Reprint, EN)",
+    "Yu-Gi-Oh! Retro Pack 2 Tuck Box (Reprint, DE)",
+    "Yu-Gi-Oh! Retro Pack 2 Display Box (Reprint, EN)",
+    "Yu-Gi-Oh! Burst Protocol Display Box (DE)",
+    "Yu-Gi-Oh! Retro Pack 2 Tuck Box (Reprint, EN)",
+    "Yu-Gi-Oh! Retro Pack 2 Tuck Box (Reprint, DE)",
+    "Yu-Gi-Oh! Retro Pack 2 Display Box (Reprint, EN)"
+   ]
+  },
+  {
+   "key": "discarded",
+   "name": "Discarded",
+   "base": "https://discarded.ie",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 33,
+     "ygo": 16,
+     "sample": 23,
+     "sealed": 19,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Mega Tin (2025)",
+    "Light Of Destruction Reprint Unlimited Booster Box (24 Packs)",
+    "The Chronicles Deck: Spirit Charmers - All Foil Edition",
+    "Rarity Collection II Booster Box (24 Packs)"
+   ]
+  },
+  {
+   "key": "divinecards",
+   "name": "Divine Cards",
+   "base": "https://divine-cards.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-booster-packs",
+     "count": 60,
+     "ygo": 29,
+     "sample": 30,
+     "sealed": 30,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-sonderkollektionen",
+     "count": 44,
+     "ygo": 22,
+     "sample": 22,
+     "sealed": 16,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays",
+     "count": 32,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 7,
+     "singles": 0
+    },
+    {
+     "handle": "exklusives-yu-gi-oh-zubehoer",
+     "count": 28,
+     "ygo": 17,
+     "sample": 17,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-structure-decks",
+     "count": 27,
+     "ygo": 24,
+     "sample": 24,
+     "sealed": 21,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-neuzugaenge",
+     "count": 14,
+     "ygo": 14,
+     "sample": 14,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "sale-yu-gi-oh",
+     "count": 8,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Limited Pack World Championship 2026 Booster Display – (EN)",
+    "Yu-Gi-Oh! - Legacy of Destruction Booster Pack 1.Auflage (englisch)",
+    "Yu-Gi-Oh! - Maze of Millennia Booster Pack 1. Auflage (englisch)",
+    "Yu-Gi-Oh! - Maze of Millennia Booster Pack (DE)",
+    "Yu-Gi-Oh! Speed Duel GX: Duelists of Shadow (EN)",
+    "Yu-Gi-Oh! Speed Duel GX: Midterm Paradox Mini Box (englisch)",
+    "Yu-Gi-Oh! Speed Duel GX: Midterm Paradox Mini Box (deutsch)",
+    "Yu-Gi-Oh Mega Tin 2021 - Tin of Ancient Battles (DE)",
+    "Yu-Gi-Oh! Chaos Origins Booster Display (EN)",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery Booster Display (EN)",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery Booster Display (DE)",
+    "Yu-Gi-Oh! Alliance Insight - Booster Display (englisch)"
+   ]
+  },
+  {
+   "key": "donmazo",
+   "name": "Don Mazo",
+   "base": "https://donmazo.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 19,
+     "ygo": 7,
+     "sample": 13,
+     "sealed": 8,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "The Chronicles Deck: The Fallen & The Virtuous",
+    "Battels of Legends - Monster Mayhem: Booster Box",
+    "Condena de Dimensiones: Booster Box",
+    "Duelist’s Advance: Sobre"
+   ]
+  },
+  {
+   "key": "dracaugames",
+   "name": "DracauGames",
+   "base": "https://www.dracaugames.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "jeux-de-cartes-yu-gi-oh-accessoires",
+     "count": 46,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 7,
+     "singles": 0
+    },
+    {
+     "handle": "jeux-de-cartes-yu-gi-oh-decks-starters",
+     "count": 15,
+     "ygo": 12,
+     "sample": 12,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "coffret-packs-yu-gi-oh",
+     "count": 13,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "jeux-de-cartes-yu-gi-oh-displays-boites-de-boosters",
+     "count": 13,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "jeux-de-cartes-yu-gi-oh-boosters",
+     "count": 6,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "50 pochettes Héros Élémentaire - Accessoires Yu-Gi-Oh!",
+    "Yu-Gi-Oh! Playmat / Tapis de jeu Game Mat : Kuriboh Kollection",
+    "Deck Box 70+ Héros Élémentaire - Accessoires Yu-Gi-Oh!",
+    "Yu-Gi-Oh! Dé à 6 faces : Dragon Blanc aux Yeux Bleus blanc",
+    "Yu-Gi-Oh! Deck de Structure \"Dragon Blanc\" : La Destinée Blanche aux Yeux Bleus",
+    "Yu-Gi-Oh! Coffret Decks Modernes Légendaires 2026 : Assaut de l'Air, Sabre X et Mitsurugi",
+    "Yu-Gi-Oh! Coffret Decks Légendaires 5D's",
+    "Yu-Gi-Oh! Deck de Structure : La Saga du Dragon Blanc aux Yeux Bleus",
+    "Yu-Gi-Oh! Coffret Tuckbox Pack 3 Boosters : Les Maîtres Fantastiques",
+    "Yu-Gi-Oh! Carton de 12 Coffrets Tuckbox Pack 3 Boosters : Les Monstres Fantastiques",
+    "Yu-Gi-Oh! Coffret Tuckbox Pack 3 Boosters : Les Monstres Fantastiques",
+    "Yu-Gi-Oh! Coffret Collection Légendaire de Kaiba"
+   ]
+  },
+  {
+   "key": "dragoncard",
+   "name": "The Dragoncard",
+   "base": "https://www.dragoncard.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-trading-card-game",
+     "count": 80,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-display",
+     "count": 21,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 13,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-packs",
+     "count": 16,
+     "ygo": 12,
+     "sample": 12,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-boosterpacks",
+     "count": 16,
+     "ygo": 12,
+     "sample": 12,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-cases",
+     "count": 12,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins",
+     "count": 9,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-structure-decks",
+     "count": 8,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Glorious Victors - Booster Case",
+    "Yu-Gi-Oh! Glorious Victors - Booster Display",
+    "Yu-Gi-Oh! Glorious Victors - Booster Pack",
+    "Yu-Gi-Oh! Magnificent Maestros - Display of 10 Tuckboxes",
+    "Yu-Gi-Oh! Glorious Victors - Booster Display",
+    "Yu-Gi-Oh! Magnificent Maestros - Display of 10 Tuckboxes",
+    "Yu-Gi-Oh! Beyond the Brave - Booster Display",
+    "Yu-Gi-Oh! Chaos Origins - Booster Display",
+    "Yu-Gi-Oh! Quarter Century Stampede - Booster Pack",
+    "Yu-Gi-Oh! Alliance Insight - Booster Pack",
+    "Yu-Gi-Oh! - Supreme Darkness - Booster",
+    "Yu-Gi-Oh! Quarter Century Bonanza - Booster Pack"
+   ]
+  },
+  {
+   "key": "dungeonstreet",
+   "name": "Dungeon Street",
+   "base": "https://dungeonstreet.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Structure Deck: Blue-Eyes White Destiny ITA",
+    "Yu-Gi-Oh! Eredità Di Distruzione LEDE - Booster Box da 24 buste ITA",
+    "Rarity Collection 5 RA05 Yu-Gi-Oh! - Box da 24 buste ITA",
+    "Yu-Gi-Oh! Il Labirinto del Maestro MZTM - Booster Box 24 Buste ITA"
+   ]
+  },
+  {
+   "key": "dutchtcgcompany",
+   "name": "DutchTCGCompany",
+   "base": "https://dutchtcgcompany.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-tcg",
+     "count": 12,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 11,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-pre-orders",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! TCG – Magnificent Monsters Booster Box",
+    "Yu-Gi-Oh! TCG – Magnificent Maestros Booster Box",
+    "DutchTCGCompany Bundle ×2 – Yu-Gi-Oh! Beyond the Brave Sleeved Booster Packs",
+    "DutchTCGCompany Bundle ×2 – Yu-Gi-Oh! Rarity Collection V Boosters",
+    "Yu-Gi-Oh! TCG – Immortal Phoenix Blister Pack – Pre-order",
+    "Yu-Gi-Oh! TCG – Immortal Phoenix Booster Box – Pre-order"
+   ]
+  },
+  {
+   "key": "eclipsetcg",
+   "name": "Eclipse TCG",
+   "base": "https://eclipsetcg.be",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-1",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! – Limit Over Collection “The Heroes” (JP)",
+    "Yu-Gi-Oh! Chaos Origins Booster Box (1st Edition/Unlimited) English | Sealed Display",
+    "Yu-Gi-Oh! Limit Over Collection The Rivals – Boîte JP Scellée",
+    "Yu-Gi-Oh! – Rarity Collection (RA05) (EN)– Booster Box Scellée",
+    "Yu-Gi-Oh! – Limit Over Collection “The Heroes” (JP)",
+    "Yu-Gi-Oh! – Rarity Collection (RA05) (EN)– Booster Box Scellée",
+    "Yu-Gi-Oh! Limit Over Collection The Rivals – Boîte JP Scellée",
+    "Yu-Gi-Oh! Booster Batailles de Légende La Glorieuse Galerie VF — 1 Secret Rare + 4 Ultra Rares"
+   ]
+  },
+  {
+   "key": "elduelista",
+   "name": "El Duelista ",
+   "base": "https://www.elduelista.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 3981,
+     "ygo": 72,
+     "sample": 40,
+     "sealed": 8,
+     "singles": 32
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 3950,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-display",
+     "count": 9,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-promo-products",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "ofertas-yu-gi-oh",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-tapetes",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-structure-deck",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Doom of Dimensions Booster Box [DOOD]",
+    "Yu-Gi-Oh! Duelist's Advance Booster Box [DUAD]",
+    "Yu-Gi-Oh! Glorious Victors Booster Box [GLVI]",
+    "Yu-Gi-Oh! The Chronicles Deck Spirit Charmers (All-Foil Edition) [CH02]",
+    "Crimson Dragon Quetzacoatl (V.1 - Ultra Rare) - Magnificent Maestros (Ultra Rare) [MAMS-007]",
+    "Galaxy-Eyes Photon Change Dragon (V.1 - Ultra Rare) - Magnificent Maestros (Ultra Rare) [MAMS-011]",
+    "Galaxy-Eyes Photon Change Dragon (V.2 - Ultra Rare) - Magnificent Maestros (Ultra Rare) [MAMS-011]",
+    "Galaxy Defense Robot Orbital 7 (V.1 - Ultra Rare) - Magnificent Maestros (Ultra Rare) [MAMS-012]",
+    "Yu-Gi-Oh! Duelist's Advance Booster Box [DUAD]",
+    "Yu-Gi-Oh! Doom of Dimensions Booster Box [DOOD]",
+    "Yu-Gi-Oh! Glorious Victors Booster Box [GLVI]",
+    "Yu-Gi-Oh! Blazing Dominion Booster Box [BLZD]"
+   ]
+  },
+  {
+   "key": "emeraldcardcave",
+   "name": "EmeraldCardCave",
+   "base": "https://emeraldcardcave.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-karten",
+     "count": 12,
+     "ygo": 12,
+     "sample": 12,
+     "sealed": 11,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-karten-englisch",
+     "count": 9,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-karten-deutsch",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - 25th Anniversary Rarity Collection II - 1st Edition - Display (EN)",
+    "Yu-Gi-Oh! - Amazing Defenders - 1st Edition - Booster Display (EN)",
+    "Yu-Gi-Oh!: Duelist's Advance - 1st Edition - Booster Display (EN)",
+    "Yu-Gi-Oh!: Valiant Smashers - 1st Edition - Booster Display (EN)",
+    "Yu-Gi-Oh!: Valiant Smashers - 1st Edition - Booster Display (EN)",
+    "Yu-Gi-Oh! - 25th Anniversary Rarity Collection II - 1st Edition - Display (EN)",
+    "Yu-Gi-Oh! - Amazing Defenders - 1st Edition - Booster Display (EN)",
+    "Yu-Gi-Oh!: Duelist's Advance - 1st Edition - Booster Display (EN)",
+    "Yu-Gi-Oh!: Duelist's Advance - 1. Auflage - Booster Display (DE)",
+    "Yu-Gi-Oh!: Phantom Nightmare - 1. Auflage - Booster Display (DE)"
+   ]
+  },
+  {
+   "key": "endturn",
+   "name": "End Turn",
+   "base": "https://endturn.pt",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 8704,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 8655,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-booster",
+     "count": 17,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 13,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-display",
+     "count": 10,
+     "ygo": 10,
+     "sample": 10,
+     "sealed": 10,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-promo-products",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "legendary-collection-yu-gi-oh",
+     "count": 2,
+     "ygo": 2,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 1
+    },
+    {
+     "handle": "starter-deck-yu-gi-oh-5d-s",
+     "count": 2,
+     "ygo": 4,
+     "sample": 2,
+     "sealed": 0,
+     "singles": 2
+    }
+   ],
+   "sampleTitles": [
+    "Cross-Sheep (V.1 - Ultra Rare) - Rarity Collection 5 (Ultra Rare) [RA05-106]",
+    "Witchcrafter Madame Rilliona (V.2 - Secret Rare) - Magnificent Maestros (Secret Rare) [MAMS-048]",
+    "Nerva the Power Patron of Creation - Magnificent Maestros (Ultra Rare) [MAMS-091]",
+    "Magistus Chorozo - Magnificent Maestros (Ultra Rare) [MAMS-090]",
+    "Cross-Sheep (V.1 - Ultra Rare) - Rarity Collection 5 (Ultra Rare) [RA05-106]",
+    "Witchcrafter Madame Rilliona (V.2 - Secret Rare) - Magnificent Maestros (Secret Rare) [MAMS-048]",
+    "Nerva the Power Patron of Creation - Magnificent Maestros (Ultra Rare) [MAMS-091]",
+    "Magistus Chorozo - Magnificent Maestros (Ultra Rare) [MAMS-090]",
+    "Chaos Origins Booster - Chaos Origins",
+    "Battles of Legend: Glorious Gallery Booster - Battles of Legend: Glorious Gallery",
+    "Rarity Collection 5 Booster - Rarity Collection 5",
+    "Duelist Pack: Aster Phoenix Booster - Duelist Pack: Aster Phoenix"
+   ]
+  },
+  {
+   "key": "evlutcg",
+   "name": "Evolution TCG",
+   "base": "https://evlutcg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-sealed-products",
+     "count": 99,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 37,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Maestros - EU English - Sealed Case (4x Displays) Preorder",
+    "Yu-Gi-Oh! Magnificent Maestros - EU English - Display (10x Boxes) Preorder",
+    "Yu-Gi-Oh! Magnificent Monsters - EU English - Sealed Case (12x Displays) Preorder",
+    "Yu-Gi-Oh! Battle of Legend: Glorious Gallery Sealed Case (12x booster boxes) EU English Preorder"
+   ]
+  },
+  {
+   "key": "exchangeplayinvest",
+   "name": "E.P.I.",
+   "base": "https://exchangeplayinvest.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-confezioni-speciali",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Battaglie della Leggenda: Galleria Gloriosa - Display 24 Buste (1a Edizione - ITA)"
+   ]
+  },
+  {
+   "key": "fantasiacards",
+   "name": "FantasiaCards",
+   "base": "https://fantasiacards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 13,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 10,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YuGiOh! - Magnificent Maestros - Booster [DE]",
+    "YuGiOh! - Magnificent Maestros - Booster [ENG]",
+    "YuGiOh! - Magnificent Maestros Box [DE]",
+    "YuGiOh! - Original Artwork Collection (Manga Style) - Booster [JP]"
+   ]
+  },
+  {
+   "key": "feenturm",
+   "name": "Feenturm.de",
+   "base": "https://feenturm.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 87,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-altere-editionen",
+     "count": 21,
+     "ygo": 21,
+     "sample": 21,
+     "sealed": 21,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-supreme-darkness",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-maze-of-the-master",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-mega-pack-tin-2025",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-battles-of-legend-glorious-gallery",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-battles-of-legend-monster-mayhem",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg-beyon-the-brave",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Battles of Legend: Glorious Gallery - Booster-Display (24 Booster) 1. Auflage - deutsch",
+    "Yu-Gi-Oh! - Battles of Legend: Glorious Gallery - Booster-Display (24 Booster) 1. Auflage - englisch",
+    "Yu-Gi-Oh! - Beyond The Brave Display (24 Booster) 1. Auflage - deutsch - Early-Bird-Angebot - Jetzt vorbestellen",
+    "Yu-Gi-Oh! - Beyond The Brave Display (24 Booster) 1. Auflage - englisch - Early-Bird-Angebot - Jetzt vorbestellen",
+    "Yu-Gi-Oh! TCG - Rage of the Abyss - Booster Display (24 Booster) - Deutsch",
+    "Yu-Gi-Oh! TCG - 25th Anniversary Mega Tin Box: Dueling Mirrors - deutsch",
+    "Yu-Gi-Oh! TCG - Quarter Century Stampede - Booster Display (24 Booster) - deutsch",
+    "Yu-Gi-Oh! TCG - Supreme Darkness Booster Display (24 Booster) - deutsch",
+    "Yu-Gi-Oh! TCG - Supreme Darkness Booster (1 Booster) - deutsch",
+    "Yu-Gi-Oh! TCG - Supreme Darkness Booster (1 Booster) - englisch",
+    "Yu-Gi-Oh! TCG - Supreme Darkness Booster Display (24 Booster) - deutsch",
+    "Yu-Gi-Oh! TCG - Supreme Darkness Booster Display (24 Booster) - englisch"
+   ]
+  },
+  {
+   "key": "fireanddice",
+   "name": "Fire & Dice",
+   "base": "https://fireanddice.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 1201,
+     "ygo": 38,
+     "sample": 40,
+     "sealed": 9,
+     "singles": 13
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 1160,
+     "ygo": 77,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 37
+    },
+    {
+     "handle": "yugioh-display",
+     "count": 15,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 15,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-promo-products",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "promos-yu-gi-oh",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 0,
+     "singles": 1
+    },
+    {
+     "handle": "yugioh-booster",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-structure-deck",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "NEYMAR JR - Promos (Token) [PROM-EFC1-TKN]",
+    "Whisker Blitzclique (V.2 - Starlight Rare) - Chaos Origins (Starlight Rare) [CORI-010]",
+    "Obelisk the Tormentor - Premium Gold (Gold Secret Rare) [PGLD-030]",
+    "Breaker the Magical Warrior - World Championship Celebration Promos (Secret Rare) [WCCP-2025-P01]",
+    "NEYMAR JR - Promos (Token) [PROM-EFC1-TKN]",
+    "Whisker Blitzclique (V.2 - Starlight Rare) - Chaos Origins (Starlight Rare) [CORI-010]",
+    "Obelisk the Tormentor - Premium Gold (Gold Secret Rare) [PGLD-030]",
+    "Breaker the Magical Warrior - World Championship Celebration Promos (Secret Rare) [WCCP-2025-P01]",
+    "Magnificent Monsters Booster Box - Magnificent Monsters",
+    "Phantom Revenge Booster Box - Phantom Revenge",
+    "Phantom Revenge Case (12 Booster Boxes) - Phantom Revenge",
+    "Retro Pack 2 (2025 Reprint) Booster Box - Retro Pack 2"
+   ]
+  },
+  {
+   "key": "freakcorp",
+   "name": "FreakCorp",
+   "base": "https://freakcorp.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 44,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 34,
+     "singles": 0
+    },
+    {
+     "handle": "outlet-yugioh",
+     "count": 14,
+     "ygo": 14,
+     "sample": 14,
+     "sealed": 11,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YUGIOH - RETRO PACK 2 - BOOSTER BOX",
+    "YUGIOH - DOOM OF DIMENSIONS - BOOSTER BOX",
+    "YUGIOH - BLAZING DOMINION - BOOSTER BOX",
+    "YUGIOH - Magnificent Maestros",
+    "YUGIOH QUARTER CENTURY STAMPEDE – Booster",
+    "YUGIOH Phantom Revenge – Booster",
+    "YUGIOH - LEGENDARY DECKS II 2024 Unlimited Reprint",
+    "YUGIOH QUARTER CENTURY STAMPEDE – Booster Box"
+   ]
+  },
+  {
+   "key": "fumetteriageco",
+   "name": "Fumetteria Geco",
+   "base": "https://fumetteriageco.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-1",
+     "count": 31,
+     "ygo": 31,
+     "sample": 31,
+     "sealed": 25,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "BOX YU-GI-OH! - BATTAGLIE DELLA LEGGENDA GALLERIA GLORIOSA (24 BUSTE) - ITA",
+    "YU-GI-OH! STRUCTURE DECK: REAME DELLA LUCE UNLIMITED - ITA",
+    "YU-GI-OH! STRUCTURE DECK: DIVINITA' EGIZIE OBELISK UNLIMITED - ITA",
+    "BOX YU-GI-OH! - MAZE OF MUERTOS (24 BUSTE) - ITA"
+   ]
+  },
+  {
+   "key": "funside",
+   "name": "Funside.it",
+   "base": "https://funside.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 196,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 32,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-carte-collezionabili",
+     "count": 99,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "box-yugioh",
+     "count": 50,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-funko-pop",
+     "count": 33,
+     "ygo": 28,
+     "sample": 28,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-inglese",
+     "count": 29,
+     "ygo": 21,
+     "sample": 21,
+     "sealed": 21,
+     "singles": 0
+    },
+    {
+     "handle": "mazzi-e-deck-yu-gi-oh",
+     "count": 28,
+     "ygo": 24,
+     "sample": 24,
+     "sealed": 24,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-gadget",
+     "count": 25,
+     "ygo": 25,
+     "sample": 23,
+     "sealed": 0,
+     "singles": 2
+    },
+    {
+     "handle": "tuckbox-yugioh",
+     "count": 19,
+     "ygo": 19,
+     "sample": 19,
+     "sealed": 19,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "TUCKBOX YU-GI-OH! - GLORIOUS VICTORS (3 BUSTE) - ITA",
+    "BOX YU-GI-OH! - GLORIOUS VICTORS (24 BUSTE) - ITA",
+    "TUCKBOX YU-GI-OH! - MAZE OF THE MACHINES (3 BUSTE) - ITA",
+    "BOX YU-GI-OH! - MAZE OF THE MACHINES (24 BUSTE) - ITA",
+    "TUCKBOX YU-GI-OH! - GLORIOUS VICTORS (3 BUSTE) - ITA",
+    "BOX YU-GI-OH! - GLORIOUS VICTORS (24 BUSTE) - ITA",
+    "TUCKBOX YU-GI-OH! - MAZE OF THE MACHINES (3 BUSTE) - ITA",
+    "BOX YU-GI-OH! - MAZE OF THE MACHINES (24 BUSTE) - ITA",
+    "BOX YU-GI-OH! - GLORIOUS VICTORS (24 BUSTE) - ITA",
+    "BOX YU-GI-OH! - MAZE OF THE MACHINES (24 BUSTE) - ITA",
+    "BOX YU-GI-OH! - PHANTOM REVENGE (24 BUSTE) - ITA",
+    "BOX YU-GI-OH! - MAGNIFICENT MAESTROS (3 BUSTE) - ITA"
+   ]
+  },
+  {
+   "key": "gamerzparadize",
+   "name": "GamerzParadize",
+   "base": "https://gamerzparadize.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 116,
+     "ygo": 36,
+     "sample": 40,
+     "sealed": 24,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-packs",
+     "count": 26,
+     "ygo": 23,
+     "sample": 23,
+     "sealed": 22,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-themed-accessoires",
+     "count": 25,
+     "ygo": 23,
+     "sample": 23,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-boxen",
+     "count": 20,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 18,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 15,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-special-editions",
+     "count": 14,
+     "ygo": 14,
+     "sample": 14,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-losse-kaarten",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "10 Random Rare Yu-Gi-Oh! Kaarten",
+    "10 Random Super Yu-Gi-Oh! Kaarten",
+    "1000 Random Common Yu-Gi-Oh! Kaarten",
+    "2025 Mega Pack Tuckbox Yu-Gi-Oh!",
+    "2025 Mega Pack Tuckbox Yu-Gi-Oh!",
+    "2025 Mega Tin Booster Pack Yu-Gi-Oh!",
+    "Beyond The Brave Booster Pack - Yu-Gi-Oh!",
+    "Burst Protocol 3-Booster Blister Yu-Gi-Oh!",
+    "Doom Of Dimensions Playmat - Yu-Gi-Oh!",
+    "Legendary Duelists Season 2: Amazoness Baby Tiger Dice Yu-Gi-Oh!",
+    "Rage of the Abyss Playmat - Yu-Gi-Oh!",
+    "Yu-Gi-Oh! Albaz - Ecclesia - Tri-Brigade Card Case"
+   ]
+  },
+  {
+   "key": "gamesavenue",
+   "name": "Games Avenue",
+   "base": "https://gamesavenue.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "coffret-yu-gi-oh",
+     "count": 30,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "deck-yu-gi-oh",
+     "count": 24,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "display-yu-gi-oh",
+     "count": 21,
+     "ygo": 10,
+     "sample": 11,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 19,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "accessoires-yu-gi-oh",
+     "count": 16,
+     "ygo": 16,
+     "sample": 16,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "booster-yugioh",
+     "count": 11,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "portfolio-classeur-1",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "proteges-cartes-yu-gi-oh",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh ! Coffret Collection Légendaire Édition 25e anniversaire - Version Française !",
+    "Yu-Gi-Oh ! Coffret \"Decks Légendaires de Yugi\" (YGLD) - Version Française !",
+    "Yu-Gi-Oh ! Coffret \"Deck Du Héro Légendaire\" (Aster/Ragnarok/Yuto) Version Française !",
+    "Yu-Gi-Oh ! Deck Collector \"Legendary 5D’s Decks\" - Français !",
+    "Yu-Gi-Oh ! Deck de Structure \" Attention aux Traptrix\" Version Française !",
+    "Yu-Gi-Oh ! Deck de Structure : deck des Chroniques \"Le Déchu et la Vertueuse\" - Français !",
+    "Yu-Gi-Oh ! Deck Collector \"Legendary 5D’s Decks\" - Français !",
+    "Yu-Gi-Oh ! 2 Decks de Structure - Dieux Egyptiens \"Slifer & Obelisk\"",
+    "Yu-Gi-Oh ! Display \"Les Origines du Chaos\" Français !",
+    "Yu-Gi-Oh - Display \"Collection Rareté du 25e Anniversaire\" Version Française !",
+    "Yu-Gi-Oh ! Display 24 Boosters \"Le Labyrinthe du Maître\" - Français !",
+    "Yu-Gi-Oh - Display de 10 Boosters WCS Ltd Pack 2025 - Anglais !"
+   ]
+  },
+  {
+   "key": "gamestimeaversa",
+   "name": "Games Time Aversa",
+   "base": "https://gamestimeaversa.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 145,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 14,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 140,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 13,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 58,
+     "ygo": 38,
+     "sample": 40,
+     "sealed": 37,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Box 24 Buste Rarity Collection 5 ITA",
+    "Firewall Defenser⁣ - Cyberstorm Access⁣ (Ultra Rare)⁣ [001]",
+    "Despian Luluwalilith (V.1 - Secret Rare)⁣ - Cyberstorm Access⁣ (Secret Rare)⁣ [042]",
+    "Infestation Pandemic⁣ - Hidden Arsenal 7⁣ (Secret Rare)⁣ [068]",
+    "Firewall Defenser⁣ - Cyberstorm Access⁣ (Ultra Rare)⁣ [001]",
+    "Despian Luluwalilith (V.1 - Secret Rare)⁣ - Cyberstorm Access⁣ (Secret Rare)⁣ [042]",
+    "Infestation Pandemic⁣ - Hidden Arsenal 7⁣ (Secret Rare)⁣ [068]",
+    "Mannadium Riumheart⁣ - Cyberstorm Access⁣ (Ultra Rare)⁣ [012]",
+    "Yu-Gi-Oh! Box Original Artwork Collection 15/4 JP",
+    "BOX YU-GI-OH! - MAGNIFICENT MAESTROS (3 BUSTE) - ENG",
+    "BOX YU-GI-OH! - MAGNIFICENT MAESTROS (3 BUSTE) - ITA",
+    "BOX YU-GI-OH! - MAGNIFICENT MONSTERS (3 BUSTE) - ENG"
+   ]
+  },
+  {
+   "key": "geeksheaven",
+   "name": "Geeksheaven",
+   "base": "https://geeksheaven.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 317,
+     "ygo": 28,
+     "sample": 40,
+     "sealed": 24,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-boxen",
+     "count": 101,
+     "ygo": 37,
+     "sample": 40,
+     "sealed": 32,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-booster",
+     "count": 14,
+     "ygo": 12,
+     "sample": 13,
+     "sealed": 13,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-display",
+     "count": 5,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Legend of Blue Eyes White Dragon 25th Anniversary Display deutsch",
+    "Yu-Gi-Oh! Legendary Duelists: Synchro Storm – Booster Display (deutsch)",
+    "Yu-Gi-Oh! Pharaoh's Servant – 25th Anniversary Booster Display (deutsch)",
+    "Yu-Gi-Oh! - Spell Ruler 25th Anniversary Display (DE/EN)",
+    "Yu-Gi-Oh! - Legend of Blue Eyes White Dragon 25th Anniversary Display deutsch",
+    "Yugioh - Invasion of Chaos 25th Anniversary Display (DE/EN)",
+    "Yu-Gi-Oh! - Spell Ruler 25th Anniversary Display (DE/EN)",
+    "Yu-Gi-Oh! Pharaoh's Servant – 25th Anniversary Booster Display (deutsch)",
+    "Yu-Gi-Oh! Rarity Collection V Booster Blister (Englisch)",
+    "Yu-Gi-Oh! Rarity Collection V Tuckbox (Englisch)",
+    "Yu-Gi-Oh! Rarity Collection II – 2 Booster Pack (englisch)",
+    "Yu-Gi-Oh! Limit Over Collection - The Heroes Einzelbooster (japanisch)"
+   ]
+  },
+  {
+   "key": "gemcards",
+   "name": "Gem Cards",
+   "base": "https://gemcards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-25th-anniversary",
+     "count": 30,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-deutsch",
+     "count": 29,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 10,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-karten",
+     "count": 27,
+     "ygo": 26,
+     "sample": 26,
+     "sealed": 23,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-englisch",
+     "count": 26,
+     "ygo": 10,
+     "sample": 10,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-englisch",
+     "count": 13,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays-englisch",
+     "count": 11,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays-deutsch",
+     "count": 9,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-deutsch",
+     "count": 7,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection II Display (EN)",
+    "Yu-Gi-Oh! Legendary Collection: 25th Anniversary Edition (EN)",
+    "Yu-Gi-Oh! – Magnificent Monsters – Box Set (DE)",
+    "Yu-Gi-Oh! Legendary Decks II – Reprint (DE)",
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection II Booster (DE)",
+    "Yu-Gi-Oh! Structure Deck: The Crimson King (DE)",
+    "Yu-Gi-Oh! – Magnificent Monsters – Box Set (DE)",
+    "Yu-Gi-Oh! OCG – Limit Over Collection: The Heroes – Booster Box Display (JP)",
+    "Yu-Gi-Oh! – Magnificent Monsters – Box Set (EN)",
+    "Yu-Gi-Oh! Legendary Decks II – Reprint (DE)",
+    "Yu-Gi-Oh! – Magnificent Monsters – Box Set (EN)",
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection II Display (EN)"
+   ]
+  },
+  {
+   "key": "godofcards",
+   "name": "God Of Cards",
+   "base": "https://godofcards.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "cards-yu-gi-oh-filtersystem",
+     "count": 1109,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 25,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-karten",
+     "count": 1109,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 27,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Legendary Duelists: Synchro Storm 36er Display",
+    "Yu-Gi-Oh! Limit Over Collection: The Rivals 15er Display Japanisch",
+    "Yu-Gi-Oh! <br> Structure Deck <br> Cyber Strike",
+    "Yu-Gi-Oh! Structure Deck R: Onslaught of the Fire Kings Koreanisch",
+    "Yu-Gi-Oh! Legendary Duelists: Synchro Storm 36er Display",
+    "Yu-Gi-Oh! Limit Over Collection: The Rivals 15er Display Japanisch",
+    "Yu-Gi-Oh! <br> Structure Deck <br> Cyber Strike",
+    "Yu-Gi-Oh! Structure Deck R: Onslaught of the Fire Kings Koreanisch"
+   ]
+  },
+  {
+   "key": "goosegames",
+   "name": "Goose Games",
+   "base": "https://goose-games.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 19,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Magnificent Monsters - DE",
+    "Yu-Gi-Oh! - Magnificent Monsters - EN",
+    "Yu-Gi-Oh - Chaos Origins - Booster Display (24 Boosters) - EN",
+    "Yu-Gi-Oh - Beyond the Brave - Booster Display (24 Boosters) - EN"
+   ]
+  },
+  {
+   "key": "gsgameon",
+   "name": "GS-Gameon",
+   "base": "https://www.gs-gameon.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-single",
+     "count": 13077,
+     "ygo": 78,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 38
+    },
+    {
+     "handle": "sigillati-yugioh",
+     "count": 115,
+     "ygo": 19,
+     "sample": 19,
+     "sealed": 15,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 66,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-box-da-24-bustine",
+     "count": 57,
+     "ygo": 12,
+     "sample": 12,
+     "sealed": 12,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-structure-deck",
+     "count": 25,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-prodotti-promo",
+     "count": 18,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Drago Armato Oscuro - Phantom Darkness (Secret Rare) [PTDN-019]",
+    "Odd-Eyes Override Dragon - Legendary Arc-V Decks (Ultra Rare) [LAVD-O38]",
+    "Odd-Eyes Solblaze Dragon - Legendary Arc-V Decks (Ultra Rare) [LAVD-O26]",
+    "Drago Rivoluzione Occhi Diversi - Legendary Arc-V Decks (Common) [LAVD-O12]",
+    "Magnificent Monsters - Case Sigillato 12 Box (ENG)",
+    "Yu-Gi-Oh! TCG: Magnificent Maestros - Display (10 Box) (ITA)",
+    "Rarity Collection 5 - Booster Box da 24 Buste (ENG - 1a Edizione)",
+    "Yu-Gi-Oh! Limit Over Collection: The Heroes - Booster Box 15 Buste (JAP)",
+    "Yu-Gi-Oh! Limit Over Collection: The Rivals - Booster Box 15 Buste (JAP)",
+    "25th Anniversary Rarity Collection Booster Box 24 Buste (ENG - 1a Edizione)",
+    "Yu-Gi-Oh! Limit Over Collection: The Heroes - Booster Box 15 Buste (JAP)",
+    "Rarity Collection 5 - Booster Box da 24 Buste (ENG - 1a Edizione)"
+   ]
+  },
+  {
+   "key": "heartforcards",
+   "name": "Heartforcards",
+   "base": "https://heartforcards.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 40,
+     "ygo": 31,
+     "sample": 35,
+     "sealed": 26,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays",
+     "count": 37,
+     "ygo": 31,
+     "sample": 31,
+     "sealed": 31,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 35,
+     "ygo": 32,
+     "sample": 32,
+     "sealed": 32,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks-1",
+     "count": 26,
+     "ygo": 21,
+     "sample": 21,
+     "sealed": 21,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-einzelkarten",
+     "count": 7,
+     "ygo": 6,
+     "sample": 7,
+     "sealed": 0,
+     "singles": 1
+    },
+    {
+     "handle": "yu-gi-oh-kartensets",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins",
+     "count": 7,
+     "ygo": 5,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yugioh Kartenset mit 100 Karten DEUTSCH (85 Commons - 10 rares - 5 Holos) - mit möglichen Magiern oder Drachen + 1 zufälligen aktuellen Booster in erster Edition + Heartforcards®Versandschutz",
+    "Yugioh! Mystery Box 4er Booster Set - verschiedene aktuelle Sets - DEUTSCH - Überraschungspaket Yu-Gi-Oh! + Heartforcards® Versandschutz",
+    "Yu‑Gi‑Oh! TCG 2022 Tin of The Pharaoh's Gods –  1. Auflage Deutsch (Megatin 2022) + Heartforcards® Versandschutz",
+    "3er Yugioh Special Mystery Set - 3 zufällige Yugioh Battle Decks - DEUTSCH + Heartforcards® Versandschutz",
+    "Yu-Gi-Oh! Brothers of Legend Display Deutsch – 24 Boosterpacks",
+    "Yu-Gi-Oh! Legend of Blue-Eyes White Dragon 25th Anniversary Edition Booster Display – Deutsch",
+    "Yu-Gi-Oh! TCG Limited Pack World Championship 2026 Booster Display – 20 Karten",
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection Display Deutsch – 24 Booster",
+    "Yugioh! Mystery Box 4er Booster Set - verschiedene aktuelle Sets - DEUTSCH - Überraschungspaket Yu-Gi-Oh! + Heartforcards® Versandschutz",
+    "Yu-Gi-Oh! Rarity Collection 4 – Quarter Century Stampede | 4x Boosterpacks | Englisch | Jubiläumsedition 2025 + Heartforcards®Versandschutz",
+    "Yu-Gi-Oh! Duelist Nexus Display Deutsch – Booster Display mit 24 Packs",
+    "Yu-Gi-Oh! Legendary Duelists: Season 2 Deutsch – Sammelbox mit exklusiven Karten"
+   ]
+  },
+  {
+   "key": "hikarudistribution",
+   "name": "Hikaru Distribution",
+   "base": "https://hikarudistribution.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Display Yu-Gi-Oh! Limit Over Collection - The Rivals"
+   ]
+  },
+  {
+   "key": "hitechgames",
+   "name": "Hi-Tech Games",
+   "base": "https://www.hitechgames.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-single",
+     "count": 1,
+     "ygo": 2,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 1
+    },
+    {
+     "handle": "yugioh",
+     "count": 1,
+     "ygo": 2,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 1
+    }
+   ],
+   "sampleTitles": [
+    "I:P Masquerena (V.3 - Secret Rare) - Prismatic Art Collection (Secret Rare) [PAC1-034]",
+    "I:P Masquerena (V.3 - Secret Rare) - Prismatic Art Collection (Secret Rare) [PAC1-034]"
+   ]
+  },
+  {
+   "key": "iconiccards",
+   "name": "ICONIC CARDS",
+   "base": "https://iconic-cards.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Original Artwork Collection Display – 15 Buste (Giapponese)"
+   ]
+  },
+  {
+   "key": "ikigaicomicstienda",
+   "name": "IKIGAI COMICS",
+   "base": "https://ikigaicomicstienda.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 31,
+     "ygo": 31,
+     "sample": 31,
+     "sealed": 18,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Magnificent Monsters INGLÉS - Yu-Gi-Oh!",
+    "Magnificent Monsters Español - Yu-Gi-Oh!",
+    "Limited Pack World Championship 2026 (10 Sobres) Inglés - Yu-Gi-Oh!",
+    "Barajas Legendarias ARC-V  (INGLÉS) - YU-GI-OH!"
+   ]
+  },
+  {
+   "key": "isengard",
+   "name": "Isengard Fantasy Shop",
+   "base": "https://isengard.com.cy",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 116,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 11,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Rarity Collection 5 Booster/ Display (24ct)",
+    "Supreme Darkness Booster",
+    "Tactical Masters - Special Booster Pack",
+    "Blazing Dominion Booster Pack"
+   ]
+  },
+  {
+   "key": "kaibacards",
+   "name": "KaibaCards e.U.",
+   "base": "https://kaibacards.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 30,
+     "ygo": 16,
+     "sample": 16,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yugioh Elemental Hero 9 Pocket Duelist Portfolio (Platz für 180 Karten)",
+    "Yugioh Card Sleeves",
+    "Yugioh Elementa Hero Card Sleeves 50 Stück Tournament Legal",
+    "Yugioh Elementa Hero Game Mat"
+   ]
+  },
+  {
+   "key": "kazuma",
+   "name": "Kazuma games shop",
+   "base": "https://kazuma.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "tcg-yugioh-1",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YU-GI-OH! OSCURITÁ SUPREMA BOOSTER BOX",
+    "YU-GI-OH! VENDETTA FANTASMA BOOSTER BOX",
+    "YU-GI-OH! DISTRUTTORI INCROCIATI TUCK BOX",
+    "YU-GI-OH! DESTINO DELLE DIMENSIONI BOOSTER BOX"
+   ]
+  },
+  {
+   "key": "lagildastore",
+   "name": "La Gilda Store",
+   "base": "https://lagildastore.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 44,
+     "ygo": 7,
+     "sample": 10,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "I Deck delle Cronache - Ammaliatrici di Spiriti - ITA",
+    "Yu-Gi-Oh! Legendary Modern Decks 2026 ITA",
+    "Yu-Gi-Oh! - Destino delle Dimensioni - Display 24 Buste",
+    "World Championship 2026 - Limited Pack ENG"
+   ]
+  },
+  {
+   "key": "lakecards",
+   "name": "LAKE-CARDS",
+   "base": "https://lakecards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 137,
+     "ygo": 68,
+     "sample": 40,
+     "sealed": 6,
+     "singles": 28
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 112,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 18,
+     "ygo": 18,
+     "sample": 18,
+     "sealed": 16,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-display",
+     "count": 5,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-structure-deck",
+     "count": 2,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-promo-products",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! TCG – Magnificent Monsters Box – Englisch – 1st Edition",
+    "Yu-Gi-Oh! TCG – Magnificent Monsters Box – Deutsch – 1. Auflage",
+    "Yu-Gi-Oh! – Magnificent Maestros Box (Englisch) – Vorbestellung",
+    "Yu-Gi-Oh! – Magnificent Maestros Box (Deutsch) – Vorbestellung",
+    "König der wilden Kobolde - Battles of Legend: Monster Mayhem (Starlight Rare) [BLMM-154]",
+    "Es kann nur einen geben - Wild Survivors (Rare) [WISU-060]",
+    "Buerillabaisse der Nouvelles - Wild Survivors (Rare) [WISU-029]",
+    "Deckverwüstungsvirus - Wild Survivors (Rare) [WISU-058]",
+    "YGO - Light of Destruction Reprint Booster Display (24 Packs) - DE",
+    "YGO - Maze of the Master Booster Display (24 Packs) DE 1. AUFLAGE",
+    "YGO - 25TH ANNIVERSARY RARITY COLLECTION II BOOSTER DISPLAY (24 PACKS) - DE",
+    "YGO - Valiant Smashers Booster Display (24 Packs) - EN"
+   ]
+  },
+  {
+   "key": "lemantcg",
+   "name": "Léman TCG",
+   "base": "https://lemantcg.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 17,
+     "ygo": 12,
+     "sample": 12,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YU-GI-OH ! DISPLAY Collection Rareté",
+    "YU-GI-OH ! Coffret Collection Légendaire Kaiba",
+    "YU-GI-OH ! DISPLAY La Ruée QUART DE SIÈCLE (RA04)",
+    "YU-GI-OH ! DUELIST TIN 25TH"
+   ]
+  },
+  {
+   "key": "lepotoryko",
+   "name": "Le Poto Ryko",
+   "base": "https://lepotoryko.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 42,
+     "ygo": 22,
+     "sample": 25,
+     "sealed": 15,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Bundle Case - Yu-Gi-Oh! - Les Glorieux Vainqueurs - FR",
+    "Bundle 3 Display - Yu-Gi-Oh! - Les Glorieux Vainqueurs - FR",
+    "Yu-Gi-Oh! - Deck de Structure - Seto Kaiba - FR",
+    "Yu-Gi-Oh! - Deck de Structure - Yugi Muto - FR"
+   ]
+  },
+  {
+   "key": "lichcards",
+   "name": "Lichcards",
+   "base": "https://lichcards.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "losse-yu-gi-oh-kaarten",
+     "count": 10107,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 9159,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-single-english",
+     "count": 1834,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-25th-anniversary-rarity-collection-losse-kaarten",
+     "count": 381,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 102,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 38,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh",
+     "count": 64,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 38,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-amazing-defenders-losse-kaarten",
+     "count": 56,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-duels-from-the-deep-losse-kaarten",
+     "count": 48,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    }
+   ],
+   "sampleTitles": [
+    "Blue-Eyes Abyss Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-016]",
+    "Magicalized Fusion (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection (Ultra Rare) [RA01-058]",
+    "Red-Eyes Flare Metal Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-038]",
+    "Galaxy-Eyes Full Armor Photon Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-037]",
+    "Blue-Eyes Abyss Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-016]",
+    "Magicalized Fusion (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection (Ultra Rare) [RA01-058]",
+    "Red-Eyes Flare Metal Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-038]",
+    "Galaxy-Eyes Full Armor Photon Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-037]",
+    "Blue-Eyes Abyss Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-016]",
+    "Magicalized Fusion (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection (Ultra Rare) [RA01-058]",
+    "Red-Eyes Flare Metal Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-038]",
+    "Galaxy-Eyes Full Armor Photon Dragon (V.1 - Super Rare) - 25th Anniversary Rarity Collection (Super Rare) [RA01-037]"
+   ]
+  },
+  {
+   "key": "lmshandel",
+   "name": "lms-handel",
+   "base": "https://lms-handel.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-displays",
+     "count": 49,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 5,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-boxen",
+     "count": 22,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-fieldcenter",
+     "count": 18,
+     "ygo": 8,
+     "sample": 11,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-starter-structure-decks",
+     "count": 15,
+     "ygo": 1,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-boosterpacks",
+     "count": 10,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Rarity Collection 5 – Display (24 Booster) | Deutsch | 1. Auflage - Erscheinungsdatum: 09.04.2026",
+    "Yu-Gi-Oh! Rarity Collection 5 – Display (24 Booster) | Englisch | 1. Auflage - Erscheinungsdatum: 09.04.2026",
+    "Yu-Gi-Oh! Chaos Origins – Display (24 Booster) | Deutsch | 1. Auflage - Erscheinungsdatum: 02.07.2026",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery Display (Englisch) – 24 Booster – TCG – Neu & OVP",
+    "Yu-Gi-Oh! Magnificent Monsters Booster Box Englisch | 3 Packs + 3 Secret Rares | OVP",
+    "Yu-Gi-Oh! Magnificent Monsters Booster Box Deutsch | 3 Packs + 3 Secret Rares | OVP",
+    "Yu-Gi-Oh! Legendary Modern Decks 2026 | Englisch",
+    "Yu-Gi-Oh! Legendary Modern Decks 2026 | Deutsch",
+    "Set",
+    "Cube",
+    "LMS - Fieldcenter",
+    "Lyla, Lichtverpflichtete Zauberin - SDLI-DE008 - Common - Deutsch - Unlimitierte Auflage - Structure Deck: The Realm of Light Einzelkarten"
+   ]
+  },
+  {
+   "key": "lootboxjeux",
+   "name": "Lootbox",
+   "base": "https://lootboxjeux.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 9,
+     "ygo": 7,
+     "sample": 9,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YU-GI-OH! - Les Ténèbres Suprêmes - Booster",
+    "YU-GI-OH! - Le labyrinthe du Maître - Booster",
+    "YU-GI-OH! - La ruée du quart de siècle - Booster",
+    "YU-GI-OH! - Intuition d'Alliance - Booster"
+   ]
+  },
+  {
+   "key": "loufoque",
+   "name": "Boutique Loufoque",
+   "base": "https://shop.loufoque.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-cartes",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Display Au-delà Du Courage (FR)",
+    "Yu-Gi-Oh! - Booster Au-delà Du Courage (FR)"
+   ]
+  },
+  {
+   "key": "mabasso",
+   "name": "MaBasso",
+   "base": "https://mabasso.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 16,
+     "ygo": 13,
+     "sample": 16,
+     "sealed": 11,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "[DE] Yu-Gi-Oh - Retro Pack 2 - Booster Display",
+    "[DE] Magnificent Monsters Box",
+    "[DE] Yu-Gi-Oh - Maze of Muertos Display",
+    "[DE] Yu-Gi-Oh - Maze of Muertos Booster"
+   ]
+  },
+  {
+   "key": "madridnortetcg",
+   "name": "Madrid Norte TCG",
+   "base": "https://madridnortetcg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 14,
+     "ygo": 14,
+     "sample": 14,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "booster-boxes-yugioh",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Más Allá de la Valentía (Beyond the Brave) — Booster Box 24 Sobres Español",
+    "Yu-Gi-Oh! TCG Maestros Magníficos (Magnificent Maestros) - Español",
+    "Yu-Gi-Oh! Baraja de Estructura Seto Kaiba - 45 Cartas (ES)",
+    "Yu-Gi-Oh! Baraja de Estructura Yugi Muto - 45 Cartas (ES)",
+    "Yu-Gi-Oh! Más Allá de la Valentía (Beyond the Brave) — Booster Box 24 Sobres Español",
+    "Booster Box Beyond the Brave (24 Sobres) Inglés – Yu-Gi-Oh! TCG",
+    "Booster Box Glorious Victors (24 Packs) – Yu-Gi-Oh! (EN)",
+    "Booster Box Glorious Victors (24 Sobres) – Yu-Gi-Oh! (ES)"
+   ]
+  },
+  {
+   "key": "magicianscircle",
+   "name": "Magician's Circle Cards",
+   "base": "https://www.magicians-circle.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 10506,
+     "ygo": 48,
+     "sample": 40,
+     "sealed": 8,
+     "singles": 8
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 10506,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-espansioni-a-b",
+     "count": 3324,
+     "ygo": 42,
+     "sample": 40,
+     "sealed": 16,
+     "singles": 2
+    },
+    {
+     "handle": "yu-gi-oh-espansioni-s-z",
+     "count": 2240,
+     "ygo": 41,
+     "sample": 40,
+     "sealed": 11,
+     "singles": 1
+    },
+    {
+     "handle": "yu-gi-oh-espansioni-c-d",
+     "count": 1700,
+     "ygo": 45,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 5
+    },
+    {
+     "handle": "yu-gi-oh-espansioni-p-r",
+     "count": 1533,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-espansioni-i-l",
+     "count": 1315,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-espansioni-e-h",
+     "count": 1300,
+     "ygo": 52,
+     "sample": 40,
+     "sealed": 2,
+     "singles": 13
+    }
+   ],
+   "sampleTitles": [
+    "Junora the Power Patron of Tuning - Burst Protocol (Super Rare) [BPRO-039]",
+    "Dark Magician⁣ - Starter Deck: Yugi (MIY)⁣ (Ultra Rare)⁣ [005]",
+    "Blue-Eyes White Dragon (V.2 - Ultimate Rare)⁣ - Starter Deck: Kaiba Reloaded⁣ (Ultimate Rare)⁣ [001]",
+    "Justi-Break⁣ - Structure Deck: Warrior's Strike⁣ (Common)⁣ [036]",
+    "Dragon Master Magia (V.1 - Platinum Secret Rare) - Quarter Century Stampede (Platinum Secret Rare) [RA04-055]",
+    "Codarus - Absolute Powerforce (Common) [ABPF-032]",
+    "Raigeki Break - Battles of Legend: Glorious Gallery (Ultra Rare) [BLGG-131]",
+    "S-Force Bridgehead - Battles of Legend: Glorious Gallery (Ultra Rare) [BLGG-118]",
+    "\"Infernoble Arms - Durendal\"⁣ - Amazing Defenders⁣ (Rare)⁣ [042]",
+    "\"Infernoble Arms - Hauteclere\"⁣ - 2021 Tin of Ancient Battles⁣ (Super Rare)⁣ [137]",
+    "\"Infernoble Arms - Joyeuse\"⁣ - 2021 Tin of Ancient Battles⁣ (Super Rare)⁣ [138]",
+    "1st Movement Solo⁣ - 25th Anniversary Tin: Dueling Mirrors⁣ (Quarter Century Secret Rare)⁣ [038]"
+   ]
+  },
+  {
+   "key": "magicomens",
+   "name": "Magic Omens - TCG & Accessories store",
+   "base": "https://magicomens.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 170,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 37,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Maestros",
+    "Yu-Gi-Oh! Beyond the Brave - Booster Pack (9 cards)",
+    "Yu-Gi-Oh! Beyond the Brave - Booster Box (24 packs)",
+    "Yu-Gi-Oh! Phantom Revenge - Booster Box (24 packs)"
+   ]
+  },
+  {
+   "key": "magictraders",
+   "name": "Magic Traders",
+   "base": "https://magictraders.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 24,
+     "ygo": 24,
+     "sample": 24,
+     "sealed": 23,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! TCG: Quarter Century Bonanza - Booster Box",
+    "Yu-Gi-Oh! TCG: Amazing Defenders - Sleeved Boosterpack",
+    "Yu-Gi-Oh! TCG: 3 Booster Pack - Maze of Memories",
+    "Yu-Gi-Oh! TCG: 2023 Speed Duel GX Box"
+   ]
+  },
+  {
+   "key": "manamarket",
+   "name": "ManaMarket",
+   "base": "https://manamarket.eu",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 2056,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh",
+     "count": 2056,
+     "ygo": 71,
+     "sample": 40,
+     "sealed": 5,
+     "singles": 33
+    },
+    {
+     "handle": "yu-gi-oh-single",
+     "count": 2012,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 2012,
+     "ygo": 79,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 39
+    },
+    {
+     "handle": "yu-gi-oh-ultra-rare",
+     "count": 716,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-common",
+     "count": 633,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-secret-rare",
+     "count": 339,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yu-gi-oh-super-rare",
+     "count": 159,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    }
+   ],
+   "sampleTitles": [
+    "Lunalight Yellow Marten (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-L08]",
+    "Hi-Speedroid Cork Shooter (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-S31]",
+    "Performapal Odd-Eyes Seer (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-O17]",
+    "Performapal Monkeyboard (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-O04]",
+    "THE CHRONICLES DECK: The Fallen & The Virtuous (All-Foil Edition) - THE CHRONICLES DECK: The Fallen & The Virtuous (All-Foil Edition)",
+    "Structure Deck: Blue-Eyes White Destiny⁣ - Structure Deck: Blue-Eyes White Dest",
+    "Ghosts From the Past Box - Ghosts From the Past",
+    "Ghosts From the Past : The 2nd Haunting Box - Ghosts From the Past: The 2nd Haunting",
+    "Lunalight Yellow Marten (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-L08]",
+    "Hi-Speedroid Cork Shooter (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-S31]",
+    "Performapal Odd-Eyes Seer (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-O17]",
+    "Performapal Monkeyboard (V.3 - Starlight Rare) - Legendary Arc-V Decks (Starlight Rare) [LAVD-O04]"
+   ]
+  },
+  {
+   "key": "mazeek",
+   "name": "Mazeek di Andrea Fiore ",
+   "base": "https://mazeek.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 66,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 38,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Monsters (3 buste) ITA",
+    "Yu-Gi-Oh! Legendary 5D'S Decks Set ITA",
+    "Yu-Gi-Oh! Legendary Modern Deck 2026 ITA",
+    "Yu-Gi-Oh! BOX: Chaos Origins ITA"
+   ]
+  },
+  {
+   "key": "mbforce",
+   "name": "GbR Bönigk",
+   "base": "https://mb-force.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "kategorie-yugioh-displays",
+     "count": 20,
+     "ygo": 12,
+     "sample": 20,
+     "sealed": 16,
+     "singles": 0
+    },
+    {
+     "handle": "kategorie-yugioh-structure-decks",
+     "count": 9,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-collections",
+     "count": 5,
+     "ygo": 4,
+     "sample": 5,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh Rarity Collection 5 Booster Display DE",
+    "Crossover Breakers Booster Box - American",
+    "Yu-Gi-Oh! Age of Overlord Display 1. Auflage Deutsch",
+    "CENTURY STAMPEDE BOOSTER DISPLAY [American]",
+    "Yu-Gi-Oh! Legendary Modern Decks 2026 - Box - Deutsch - 1. Auflage",
+    "Structure Deck Revamped: Fire Kings - deutsch",
+    "Structure Deck Revamped: Fire Kings - Englisch",
+    "Yu-Gi-Oh! Structure Deck The Crimson King - englisch",
+    "Yu-Gi-Oh! TCG - Legendary 5D's Decks - Einzelbox 1. Auflage - deutsch",
+    "Yu-Gi-Oh! The Infinite Forbidden 3-Pack Tuckbox /deutsch",
+    "Battles of Legend: Terminal Revenge 3-Pack Tuckbox /Deutsch",
+    "Yu-Gi-Oh! Legendary Collection -25th Anniversary Edition- English"
+   ]
+  },
+  {
+   "key": "mcgillicuddystoyshop",
+   "name": "McGillicuddy's Toy Shop",
+   "base": "https://mcgillicuddystoyshop.ie",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 19,
+     "ygo": 14,
+     "sample": 14,
+     "sealed": 14,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Monsters Tuckbox",
+    "Yu-Gi-Oh! Legendary Duelists Soulburning Volcano: Trading Card Game- Booster Pack (1st Edition, 5 pack)",
+    "Yu-Gi-Oh! Alliance Insight: Trading Card Game- Booster Pack (1st Edition, 9 pack)",
+    "Yu-Gi-Oh! Rarity Collection II: Trading Card Game- Booster Pack (1st Edition, 9 pack)"
+   ]
+  },
+  {
+   "key": "mcgillicuddystoyshop",
+   "name": "McGillicuddy's Toy Shop",
+   "base": "https://mcgillicuddystoyshop.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 19,
+     "ygo": 14,
+     "sample": 14,
+     "sealed": 14,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Monsters Tuckbox",
+    "Yu-Gi-Oh! Legendary Duelists Soulburning Volcano: Trading Card Game- Booster Pack (1st Edition, 5 pack)",
+    "Yu-Gi-Oh! Alliance Insight: Trading Card Game- Booster Pack (1st Edition, 9 pack)",
+    "Yu-Gi-Oh! Rarity Collection II: Trading Card Game- Booster Pack (1st Edition, 9 pack)"
+   ]
+  },
+  {
+   "key": "metamorphcenter",
+   "name": "Metamorph Center",
+   "base": "https://metamorphcenter.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Caja Yu-Gi-Oh! Original Artwork Collection - Japonés",
+    "Limit Over Collection: The Heroes - Japonés",
+    "Limit Over Collection: The RIVALS - Japonés",
+    "Yu-Gi-Oh! Chaos Origins CORI - Inglés"
+   ]
+  },
+  {
+   "key": "mikiscardshop",
+   "name": "Miki's Card Shop",
+   "base": "https://mikiscardshop.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 105,
+     "ygo": 35,
+     "sample": 40,
+     "sealed": 27,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-displays",
+     "count": 59,
+     "ygo": 31,
+     "sample": 31,
+     "sealed": 29,
+     "singles": 0
+    },
+    {
+     "handle": "sale-ygo",
+     "count": 54,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 34,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-box-collection",
+     "count": 20,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 11,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks-1",
+     "count": 17,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 11,
+     "singles": 0
+    },
+    {
+     "handle": "sonstiges-zubehor",
+     "count": 9,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins-boxen",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Magnificent Monsters Box - 1. Auflage - Deutsch",
+    "Yu-Gi-Oh! - Chaos Origins Booster Display 1.Edition - Englisch",
+    "Yu-Gi-Oh! - Chaos Origins Booster Display 1. Auflage - Deutsch",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery Display 1.Edition - Englisch",
+    "Yu-Gi-Oh! - Beyond The Brave Booster  Display 1.Auflage - Deutsch",
+    "Yu-Gi-Oh! - Beyond The Brave Booster  Display 1.Edition - Englisch",
+    "Yu-Gi-Oh! - Chaos Origins Booster Display 1.Edition - Englisch",
+    "Yu-Gi-Oh! - Chaos Origins Booster Display 1. Auflage - Deutsch",
+    "Yugioh The Infinite Forbidden Cardboard Blister - 1. Auflage - Deutsch",
+    "Yu-Gi-Oh! Legendary Duelists: Season 3 Box- 1.Auflage - Deutsch",
+    "Yu-Gi-Oh! Structure Deck: Dark World 1.Auflage - Deutsch",
+    "Yu-Gi-Oh!  25th Anniversary Tin: Dueling Heroes - 1. Edition - Englisch"
+   ]
+  },
+  {
+   "key": "miraicards",
+   "name": "Mirai Cards Portugal",
+   "base": "https://miraicards.pt",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 74,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 38,
+     "singles": 0
+    },
+    {
+     "handle": "sets-yu-gi-oh",
+     "count": 62,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 39,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-boxes",
+     "count": 31,
+     "ygo": 30,
+     "sample": 30,
+     "sealed": 30,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-packs",
+     "count": 22,
+     "ygo": 22,
+     "sample": 22,
+     "sealed": 22,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 9,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 7,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Immortal Phoenix Booster Box",
+    "Yu-Gi-Oh! - Chaos Origins Booster Box",
+    "Yu-Gi-Oh! - Battles of Legend: Glorious Gallery Booster Pack",
+    "Yu-Gi-Oh! - Magnificent Monsters",
+    "Yu-Gi-Oh! - Immortal Phoenix Booster Box",
+    "Yu-Gi-Oh! - Chaos Origins Booster Box",
+    "Yu-Gi-Oh! - Battles of Legend: Glorious Gallery Booster Pack",
+    "Yu-Gi-Oh! - Magnificent Monsters",
+    "Yu-Gi-Oh! - Immortal Phoenix Booster Box",
+    "Yu-Gi-Oh! - Chaos Origins Booster Box",
+    "Yu-Gi-Oh! - Glorious Victors Booster Box",
+    "Yu-Gi-Oh! - Beyond the Brave Booster Box"
+   ]
+  },
+  {
+   "key": "misticards",
+   "name": "MistiCards",
+   "base": "https://misticards.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 28,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-merchandise",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YuGiOh! Battles of Legend: Glorious Gallery Display (Englisch)",
+    "Yu-Gi-Oh ! 25th Anniversary -Tin Dueling Heroes (Deutsch)",
+    "Yu-Gi-Oh! Legendary Dragon Decks Box Reprint (Englisch)",
+    "Yu-Gi-Oh ! 25th Anniversary -Tin Dueling Heroes (Englisch)",
+    "Yu-Gi-Oh Notizbuch A5"
+   ]
+  },
+  {
+   "key": "mocards",
+   "name": "MoCards",
+   "base": "https://mocards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "konami-yu-gi-oh-1",
+     "count": 17,
+     "ygo": 3,
+     "sample": 6,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Dunkles Magiermädchen/Dark Magician Girl Zubehör",
+    "Valiant Smashers - Tuckbox (3 Booster) 1. Auflage - deutsch",
+    "Structure Deck Ägyptischer Gott Obelisk",
+    "The Chronicles Deck: The Fallen & The Virtuous (All-Foil Edition) - EN"
+   ]
+  },
+  {
+   "key": "moonshadow",
+   "name": "Moon-Shadow Store",
+   "base": "https://moon-shadow.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Magnificent Maestros -  1. Auflage - deutsch",
+    "Yu-Gi-Oh! - Magnificent Maestros -  1. Auflage - englisch"
+   ]
+  },
+  {
+   "key": "mucollectibles",
+   "name": "MuCollectibles",
+   "base": "https://www.mucollectibles.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-neu",
+     "count": 11,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-boxen",
+     "count": 4,
+     "ygo": 3,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-starter-decks",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-displays",
+     "count": 3,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Cyberstorm Access Booster Display | Englisch | 1. Edition",
+    "Yu-Gi-Oh! – Blue-Eyes Toon Dragon Schlüsselanhänger | Funko Pocket POP! Keychain",
+    "Yu-Gi-Oh! Magnificent Monsters Box 1. Auflage | Deutsch |",
+    "Yu-Gi-Oh! Structure Deck Cyber Strike – 1. Auflage – Deutsch – Neu & OVP",
+    "Yu-Gi-Oh! Cyberstorm Access Booster Display | Englisch | 1. Edition",
+    "Yu-Gi-Oh! Magnificent Monsters Box 1. Auflage | Deutsch |",
+    "Yu-Gi-Oh! Ghosts From the Past Tuckbox – 1st Edition – Englisch – Neu & OVP",
+    "u-Gi-Oh! Yugi’s Legendary Decks 1 – Reprint – Deutsch – Neu & OVP",
+    "Yu-Gi-Oh! Structure Deck Blue-Eyes White Destiny – Reprint – Englisch – Neu & OVP",
+    "Yu-Gi-Oh! Spirit Charmers Structure Deck – 1st Edition – Englisch – Neu & OVP",
+    "Yu-Gi-Oh! Structure Deck Cyber Strike – 1. Auflage – Deutsch – Neu & OVP",
+    "Yu-Gi-Oh! Dawn of Majesty Booster Box Display – 24 Booster – Englisch – Neu & OVP"
+   ]
+  },
+  {
+   "key": "mulligantcg",
+   "name": "Mulligan TCG Shop",
+   "base": "https://mulligantcg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "ygo",
+     "count": 11,
+     "ygo": 6,
+     "sample": 8,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh - Burst Protocol - Booster Eng",
+    "Yu-Gi-Oh - Burst Protocol Booster DE",
+    "Yu-Gi-Oh! - Maze of Muertos - Booster DE",
+    "Dragon Shield - Japanese Size Matte Hüllen (60)"
+   ]
+  },
+  {
+   "key": "nerdbank",
+   "name": "Spielewelt",
+   "base": "https://nerdbank.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 214,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 24,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays",
+     "count": 85,
+     "ygo": 32,
+     "sample": 32,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 79,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-kopie",
+     "count": 31,
+     "ygo": 26,
+     "sample": 26,
+     "sealed": 21,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 21,
+     "ygo": 10,
+     "sample": 10,
+     "sealed": 10,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-box",
+     "count": 19,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins",
+     "count": 11,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-alliance-insight",
+     "count": 4,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Beyond the Brave Display - DE",
+    "Yu-Gi-Oh! Beyond the Brave Display - EN",
+    "Yu-Gi-Oh! Magnificent Monsters Box - EN",
+    "Yu-Gi-Oh! Magnificent Monsters Box - DE",
+    "Yu-Gi-Oh! Beyond the Brave Display - DE",
+    "Yu-Gi-Oh! Beyond the Brave Display - EN",
+    "Yu-Gi-Oh! Chaos Origins Display - EN",
+    "Yu-Gi-Oh! Chaos Origins Display - DE",
+    "Yu-Gi-Oh! Chaos Orignis Booster DE",
+    "Yu-Gi-Oh! Chaos Orignis Booster EN",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery Booster - EN",
+    "Yu-Gi-Oh! Blazing Dominion Booster - EN"
+   ]
+  },
+  {
+   "key": "nordiclegends",
+   "name": "Nordic Legends",
+   "base": "https://nordic-legends.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 16,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-structure-deck",
+     "count": 3,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "THE CHRONICLES DECK: Spirit Charmers (All-Foil Edition) - THE CHRONICLES DECK: Spirit Charmers (All-Foil Edition)",
+    "Structure Deck: Blue-Eyes White Destiny⁣ - Structure Deck: Blue-Eyes White Destiny",
+    "Structure Deck: Blue-Eyes White Destiny⁣ - Structure Deck: Blue-Eyes White Destiny",
+    "THE CHRONICLES DECK: Spirit Charmers (All-Foil Edition) - THE CHRONICLES DECK: Spirit Charmers (All-Foil Edition)"
+   ]
+  },
+  {
+   "key": "ohanagiochi",
+   "name": "Ohana",
+   "base": "https://ohanagiochi.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Tin Mega-Pack 2025 (3 Mega Pack) (ITA)",
+    "Yu-Gi-Oh! - Mazzi - Destino Bianco Occhi Blu Structure Deck (ITA)",
+    "Yu-Gi-Oh! - Tuckbox Mega-Pack 2025 (3 Mega Pack) (ITA)"
+   ]
+  },
+  {
+   "key": "oportogg",
+   "name": "OportoGG",
+   "base": "https://oportogg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 11,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! TCG — Magnificent Maestros — Box (EN)",
+    "Yu-Gi-Oh! TCG — Beyond the Brave — Booster Box",
+    "Yu-Gi-Oh! Magnificent Monsters – Box",
+    "Yu-Gi-Oh! Beyond the Brave Booster Box + Magnificent Monsters Box"
+   ]
+  },
+  {
+   "key": "opssmarket",
+   "name": "OPSS MARKET",
+   "base": "https://opssmarket.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "all-yugioh",
+     "count": 3,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tin",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh 25° Anniversario TIN Specchi Duellanti - ITALIANO",
+    "Yu-Gi-Oh 25° Anniversario TIN Specchi Duellanti - ITALIANO"
+   ]
+  },
+  {
+   "key": "outpostbrussels",
+   "name": "OutpostBrussels",
+   "base": "https://outpostbrussels.be",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 267,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 38,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-display",
+     "count": 100,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 38,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Beyond the Brave - Booster Display (24) - EN",
+    "Yu-Gi-Oh! - Beyond the Brave - Display de Boosters (24) - FR",
+    "Yu-Gi-Oh! - Magnificent Monsters Box - FR",
+    "Yu-Gi-Oh! - Magnificent Monsters Box - EN",
+    "Yu-Gi-Oh! - Rarity Collection II 24 Booster Box - EN",
+    "Yu-Gi-Oh! - Quarter Century Bonanza Booster Display (24 Packs) - EN",
+    "Yu-Gi-Oh! - Boite de 24 Boosters Collection Rareté du 25ème Anniversaire - FR",
+    "Yu-Gi-Oh! - Boite de 24 Boosters La Légende du Dragon Blanc aux Yeux Bleus (25è) - FR",
+    "Yu-Gi-Oh! - Realm of Light Structure Deck - EN"
+   ]
+  },
+  {
+   "key": "peeronline",
+   "name": "Peer's Online-Shop",
+   "base": "https://www.peer-online.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 85,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 33,
+     "singles": 0
+    },
+    {
+     "handle": "sonderkollektionen",
+     "count": 22,
+     "ygo": 22,
+     "sample": 22,
+     "sealed": 22,
+     "singles": 0
+    },
+    {
+     "handle": "decks",
+     "count": 18,
+     "ygo": 18,
+     "sample": 18,
+     "sealed": 18,
+     "singles": 0
+    },
+    {
+     "handle": "displays-2",
+     "count": 15,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 15,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 9,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-speed-duel",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "megatin",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Speed Duel GX: Streets of Battle City Box - 228 Karten",
+    "Yu-Gi-Oh! Ghosts From the Past: The 2nd Haunting Tuckbox 2022 English 1. Edition - 4 Booster Packs",
+    "Yu-Gi-Oh! Der geflügelte Drache von Ra\n\n- LC01-DE003 - Limitierte Auflage - Ultra Rare",
+    "Yu-Gi-Oh - 25th Anniversary Phantom Nightmare Tuckbox - 3 Booster Packs der 1. Auflage in deutscher Sprache",
+    "Yu-Gi-Oh! Ghosts From the Past: The 2nd Haunting Tuckbox 2022 English 1. Edition - 4 Booster Packs",
+    "Yu-Gi-Oh - 25th Anniversary Phantom Nightmare Tuckbox - 3 Booster Packs der 1. Auflage in deutscher Sprache",
+    "Yu-Gi-Oh Sammelkarte Invasion of Chaos 25th Anniversary Edition Booster Deutsch",
+    "Yu-Gi-Oh - 25th Anniversary Rarity Collection Tuckbox - 3 Booster Packs der 1. Auflage Deutsch",
+    "Yu-Gi-Oh! Cyber Strike Structure Deck - 1. Auflage DE",
+    "Yu-Gi-Oh! Structure Deck Dark World 1.Auflage - deutsches Sammelkartenspiel",
+    "Yu-Gi-Oh! Structure Deck Saga of Blue Eyes White Dragon - Unlimited Edition (deutsch)",
+    "Yu-Gi-Oh! Structure Deck Revamped: Fire Kings - deutsch - 1. Auflage"
+   ]
+  },
+  {
+   "key": "pelikrypta",
+   "name": "Pelikrypta Ikamaa",
+   "base": "https://pelikrypta.fi",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "tuoteryhma-yu-gi-oh",
+     "count": 50,
+     "ygo": 28,
+     "sample": 28,
+     "sealed": 17,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Valiant Smashers Booster",
+    "Yu-Gi-Oh! TCG Doom Of Dimensions Booster",
+    "Yu-Gi-Oh! Blazing Dominion Booster",
+    "Yu-Gi-Oh! Maze Of The Master Booster"
+   ]
+  },
+  {
+   "key": "playmaniac",
+   "name": "Play-Maniac",
+   "base": "https://www.play-maniac.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 44,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Maze of Millennia: Special 3-Pack Tuckbox Englisch",
+    "Yu-Gi-Oh! 25th Anniversary Rarity Collection II 2-Pack Tuckbox Englisch",
+    "Yu-Gi-Oh! Phantom Nightmare - 3 Pack Tuckbox Englisch",
+    "Yu-Gi-Oh! Magnificent Maestros Tuckbox Deutsch"
+   ]
+  },
+  {
+   "key": "pokebundles",
+   "name": "Pokebundles Ireland",
+   "base": "https://www.pokebundles.ie",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Battles of Legends Glorious Gallery Booster Box"
+   ]
+  },
+  {
+   "key": "pokeca",
+   "name": "Pokeca.NL",
+   "base": "https://pokeca.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 77,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 39,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-boxen",
+     "count": 51,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tin",
+     "count": 12,
+     "ygo": 11,
+     "sample": 11,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-deck",
+     "count": 6,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-beyond-the-brave-booster",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Glorious Victors Booster Box",
+    "Yu-Gi-Oh! Magnificent Maestros Box",
+    "Yu-Gi-Oh! Beyond The Brave Sleeved Booster Pack",
+    "Yu-Gi-Oh! Darkwing Blast Booster Box",
+    "Yu-Gi-Oh! Glorious Victors Booster Box",
+    "Yu-Gi-Oh! Darkwing Blast Booster Box",
+    "Yu-Gi-Oh! World Championship 2026 Limited Pack Booster Box",
+    "Yu-Gi-Oh! Beyond The Brave Booster Box",
+    "Yu-Gi-Oh! Magnificent Maestros Box",
+    "Yu-Gi-Oh! Magnificent Monsters Box",
+    "Yu-Gi-Oh! Chaos Origins 3-pack Tuckbox",
+    "Yu-Gi-Oh! Burst Protocol 3-Pack Tuckbox"
+   ]
+  },
+  {
+   "key": "pokecardsstore",
+   "name": "Slabstore",
+   "base": "https://pokecardsstore.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 36,
+     "ygo": 32,
+     "sample": 36,
+     "sealed": 29,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YU-GI-OH Limit Over Collection The Heroes 2026 JP",
+    "YU-GI-OH Limit Over Collection The Rivals 2026 JP",
+    "I Deck delle Cronache il Caduto & la Virtuosa 1a Edizione Tutta Foil ITA",
+    "Legendary 5D's Decks ENG Yu-Gi-Oh!"
+   ]
+  },
+  {
+   "key": "pokechest",
+   "name": "pokechest.at",
+   "base": "https://pokechest.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 20,
+     "ygo": 20,
+     "sample": 20,
+     "sealed": 20,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-OH! 25th Anniversary Rarity Collection II Booster Display (24 Packs) - Deutsch",
+    "Yu-Gi-OH! 25th Anniversary Rarity Collection II Booster Display (24 Packs) - Englisch",
+    "Yu-Gi-OH! 25th Anniversary Rarity Collection II 2-Pack Tuckbox  - Englisch",
+    "Yu-Gi-OH! 25th Anniversary Rarity Collection II 2-Pack Tuckbox  - Deutsch"
+   ]
+  },
+  {
+   "key": "pokemillon",
+   "name": "POKEMILLON - La Tienda Pokémon",
+   "base": "https://www.pokemillon.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 44,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 29,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yugioh! Battles of Legend: Chapter 1 Yu-Gi-Oh!",
+    "Yu-Gi-Oh! | Legendary 5D's Deck",
+    "Yu-Gi-Oh! | Booster Box 24 Sobres Duelist Nexus",
+    "Yu-Gi-Oh! | Booster Box 24 Sobres Amazing Defenders"
+   ]
+  },
+  {
+   "key": "poneglyphcards",
+   "name": "PoneglyphCards",
+   "base": "https://poneglyphcards.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "structure-deck-yu-gi-oh-ita",
+     "count": 6,
+     "ygo": 4,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Structure Deck Destino Bianco Occhi Blu 1 Edizione (ITA)",
+    "Structure Deck Destino Bianco Occhi Blu Unlimited (ITA)",
+    "I Deck Delle Cronache Ammaliatrici Di Spiriti (ITA)",
+    "Structure Deck Reame della Luce (ITA)"
+   ]
+  },
+  {
+   "key": "primeprotector",
+   "name": "Prime Protector",
+   "base": "https://primeprotector.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 39,
+     "ygo": 26,
+     "sample": 37,
+     "sealed": 25,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! TCG: Glorious Victors Booster Display (Englisch)",
+    "Yu-Gi-Oh! TCG: Glorious Victors Booster Display (Deutsch)",
+    "Yu-Gi-Oh! TCG: Glorious Victors Booster Pack (Englisch)",
+    "Yu-Gi-Oh! TCG: Glorious Victors Booster Pack (Deutsch)"
+   ]
+  },
+  {
+   "key": "pruckis",
+   "name": "Prückis Cards",
+   "base": "https://pruckis.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! B. Skull Dragon Limited Edition Metallkarte",
+    "Yu-Gi-Oh! Dunkles Magier Mädchen Spielmatte (36x60cm)",
+    "Yu-Gi-Oh! Replik Karte Celtic Guardian Limited Edition",
+    "Yu-Gi-Oh! Replik Karte Marshmallon (vergoldet) Limited Edition"
+   ]
+  },
+  {
+   "key": "pushdichtcg",
+   "name": "PUSHDICH-TCG",
+   "base": "https://www.pushdich-tcg.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-karten",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "KONAMI Yu-Gi-Oh! EGYPTIAN GOD DECK - Obelisk der Peiniger DE (SEALED)",
+    "KONAMI Yu-Gi-Oh! EGYPTIAN GOD DECK - Slifer der Himmelsdrache DE (SEALED)",
+    "KONAMI Yu-Gi-Oh! EGYPTIAN GOD DECK - Obelisk the Tormentor ENG (SEALED)",
+    "KONAMI Yu-Gi-Oh! EGYPTIAN GOD DECK - Slifer der Himmelsdrache ENG (SEALED)"
+   ]
+  },
+  {
+   "key": "rarecards",
+   "name": "RareCards",
+   "base": "https://rarecards.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 4,
+     "ygo": 4,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Rage of the Abyss: Booster Pack",
+    "Yu-Gi-Oh! - Phantom Nightmare: Booster Pack",
+    "Yu-Gi-Oh! - Valiant Smashers: Booster Pack",
+    "Yu-Gi-Oh! - Blazing Vortex: Booster Pack"
+   ]
+  },
+  {
+   "key": "recollectibles",
+   "name": "ReCollectibles",
+   "base": "https://recollectibles.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-amerikanische-einzelkarten",
+     "count": 261,
+     "ygo": 38,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 38
+    }
+   ],
+   "sampleTitles": [
+    "Secret Barrel DEM1-EN017 Common Amerikanisch",
+    "Wynn the Wind Charmer, Verdant MP20-EN124 Ultra Rare Amerikanisch",
+    "Danger! Chupacabra! SDSA-EN018 Common Amerikanisch",
+    "Rescue Hamster (V.1) NECH-EN039 Super Rare Amerikanisch"
+   ]
+  },
+  {
+   "key": "relictcg",
+   "name": "RelicTCG",
+   "base": "https://relictcg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "riftbound-league-of-legends-copie",
+     "count": 25,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Coffret Yu-Gi-Oh! - Les Monstres Fantastiques - FR"
+   ]
+  },
+  {
+   "key": "retroempire",
+   "name": "Retro Empire Gaming",
+   "base": "https://retro-empire.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 1045,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 20,
+     "ygo": 13,
+     "sample": 13,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-boosters-en-boosterboxen",
+     "count": 15,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-special-collections",
+     "count": 5,
+     "ygo": 5,
+     "sample": 5,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-decks",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Magnificent Monsters Pack - Yu-Gi-Oh!",
+    "Yu-Gi-Oh! - Blazing Dominion",
+    "Yu-Gi-Oh! Maze of Muertos",
+    "Burst Protocol - Yu-Gi-Oh!",
+    "Beyond The Brave - Yu-Gi-Oh!",
+    "Blue-Eyes white destiny - Preconstructed YuGiOh Deck",
+    "Burst Protocol - Yu-Gi-Oh!",
+    "Legendary ARC-V Deck - Yu-Gi-Oh!",
+    "Magnificent Monsters Pack - Yu-Gi-Oh!",
+    "Yu-Gi-Oh! - Blazing Dominion",
+    "Yu-Gi-Oh! Maze of Muertos",
+    "Burst Protocol - Yu-Gi-Oh!"
+   ]
+  },
+  {
+   "key": "ronintcg",
+   "name": "Ronin il Covo dei Samurai",
+   "base": "https://ronintcg.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 27,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YU-GI-OH! Magnificent Monsters 3 Buste ENG",
+    "YU-GI-OH! Magnificent Monsters 3 Buste ITA",
+    "Yu-Gi-Oh! 3x Deck delle Cronache: Ammaliatrici di Spiriti - Edizione Tutta Foil (1a Edizione - ITA)",
+    "Yu-Gi-Oh! The Chronicles Deck: Spirit Charmers - All-Foil 1a Edizione - ITA"
+   ]
+  },
+  {
+   "key": "sarumangames",
+   "name": "Saruman Games",
+   "base": "https://sarumangames.es",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-juego-de-cartas-coleccionables",
+     "count": 34,
+     "ygo": 32,
+     "sample": 34,
+     "sealed": 10,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YU-GI-OH!: Maestros Magníficos (español)",
+    "YU-GI-OH!: Monstruos Magníficos (español)",
+    "Yu-Gi-Oh!: Dominio Abrasador - Caja de sobres",
+    "SOBRE Yu-Gi-Oh!: CAZADORES DE LA JUSTICIA"
+   ]
+  },
+  {
+   "key": "sgames",
+   "name": "S-Games",
+   "base": "https://s-games.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 30,
+     "ygo": 15,
+     "sample": 19,
+     "sealed": 16,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Preorder - Yu-Gi-Oh - Special Booster: Maze of Machines Display (24 Boosters) - DE",
+    "Preorder - Yu-Gi-Oh - Special Booster: Maze of Machines Display (24 Boosters) - EN",
+    "Preorder - Yu-Gi-Oh - Special Booster: Glorious Victors Display (24 Boosters) - EN",
+    "Preorder - Yu-Gi-Oh - Special Booster: Glorious Victors Display (24 Boosters) - DE"
+   ]
+  },
+  {
+   "key": "shopponistore",
+   "name": "Shopponi Store",
+   "base": "https://shopponistore.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 888,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "carte-singole-yu-gi-oh",
+     "count": 881,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 881,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    }
+   ],
+   "sampleTitles": [
+    "Mago del Chaos Nero - Chaos Oscuro - Chaos Origins (Secret Rare) [CORI-027]",
+    "Spright Blu - Collezione Rarità 5 (Starlight Rare) [RA05-021]",
+    "Granito Valoroso - Limit Over Collection: The Heroes (Super Rare) [LOCH-JP-060]",
+    "Prigione del Drago di Ghiaccio - 25th Anniversary Rarity Collection (Quarter Century Secret Rare) [RA01-078]",
+    "Acceleratore Rottame - 25th Anniversary Rarity Collection (Super Rare) [RA01-032]",
+    "Acceleratore Rottame - 25th Anniversary Rarity Collection (Ultra Rare) [RA01-032]",
+    "Acquascivolo Silvano - 2015 Mega-Tin Mega Pack (Common) [MP15-042]",
+    "Adattatore Universale - 2019 Gold Sarcophagus Tin Mega Pack (Common) [MP19-134]",
+    "Mago del Chaos Nero - Chaos Oscuro - Chaos Origins (Secret Rare) [CORI-027]",
+    "Spright Blu - Collezione Rarità 5 (Starlight Rare) [RA05-021]",
+    "Granito Valoroso - Limit Over Collection: The Heroes (Super Rare) [LOCH-JP-060]",
+    "Prigione del Drago di Ghiaccio - 25th Anniversary Rarity Collection (Quarter Century Secret Rare) [RA01-078]"
+   ]
+  },
+  {
+   "key": "side7",
+   "name": "Side7",
+   "base": "https://side7.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 21,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Age of Overlord boosterpack",
+    "Yu-Gi-Oh! The Crimson King structure deck"
+   ]
+  },
+  {
+   "key": "skupisve",
+   "name": "Skupi sve",
+   "base": "https://skupisve.hr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 12,
+     "ygo": 8,
+     "sample": 8,
+     "sealed": 8,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Booster - Yu-Gi-Oh! - 25th Anniversary Rarity Collection II",
+    "Booster Display - Yu-Gi-Oh! - 25th Anniversary Rarity Collection II (24 boostera)",
+    "Booster - Yu-Gi-Oh! - Quarter Century Stampede",
+    "Booster - Yu-Gi-Oh! - Battles of Legend: Crystal Revenge"
+   ]
+  },
+  {
+   "key": "speldorado",
+   "name": "Speldorado",
+   "base": "https://speldorado.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "nieuwe-yu-gi-oh-kaarten",
+     "count": 34,
+     "ygo": 26,
+     "sample": 29,
+     "sealed": 13,
+     "singles": 9
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 34,
+     "ygo": 26,
+     "sample": 29,
+     "sealed": 13,
+     "singles": 9
+    }
+   ],
+   "sampleTitles": [
+    "Magnificent Maestros",
+    "Beyond the Brave Booster",
+    "One Piece Card Game ST-33 Starter Deck",
+    "One Piece Card Game - Heroines Special Set - EN",
+    "Battle of Legend: Glorious Gallery Booster",
+    "Battles of Legend: Monster Mayhem Booster",
+    "Beyond the Brave Booster",
+    "Burst Protocol Booster"
+   ]
+  },
+  {
+   "key": "spellnexus",
+   "name": "SpellNexus",
+   "base": "https://spellnexus.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 703,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 703,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-sealed",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Ultimate Slayer (V.2 - Secret Rare) - Magnificent Maestros (Secret Rare) [MAMS-037]",
+    "Awakening of the Crystal Ultimates - Magnificent Maestros (Ultra Rare) [MAMS-106]",
+    "Gordian Slicer - Magnificent Maestros (Ultra Rare) [MAMS-108]",
+    "Crimson Dragon Quetzacoatl (V.1 - Ultra Rare) - Magnificent Maestros (Ultra Rare) [MAMS-007]",
+    "Ultimate Slayer (V.2 - Secret Rare) - Magnificent Maestros (Secret Rare) [MAMS-037]",
+    "Awakening of the Crystal Ultimates - Magnificent Maestros (Ultra Rare) [MAMS-106]",
+    "Gordian Slicer - Magnificent Maestros (Ultra Rare) [MAMS-108]",
+    "Crimson Dragon Quetzacoatl (V.1 - Ultra Rare) - Magnificent Maestros (Ultra Rare) [MAMS-007]",
+    "YuGiOh World Championship 2026 Limited Pack Set English",
+    "YuGiOh Magnificent Monsters Set English",
+    "YuGiOh Magnificent Monsters Set Spanish",
+    "YuGiOh Glorious Victors Booster Box English"
+   ]
+  },
+  {
+   "key": "spieleheldtcg",
+   "name": "Spieleheld TCG",
+   "base": "https://spieleheldtcg.at",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 15,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-display",
+     "count": 13,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-legendary-collection",
+     "count": 5,
+     "ygo": 1,
+     "sample": 2,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh Alliance Insight Display 1 Auflage Deutsch",
+    "Yu-Gi-Oh Legendary Arc-V Decks Deutsch B-Ware",
+    "Yu-Gi-Oh Alliance Insight Display 1 Auflage Deutsch",
+    "Yu-Gi-Oh Legendary Arc-V Decks Deutsch B-Ware",
+    "Yu.Gi-Oh Legendary Collection Kaiba (2025 Reprint) Englisch"
+   ]
+  },
+  {
+   "key": "spieles",
+   "name": "spiel-es.de",
+   "base": "https://spiel-es.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 10,
+     "ygo": 10,
+     "sample": 10,
+     "sealed": 8,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Legendary Duelists Soulburning Volcano Display (DE)",
+    "Yu-Gi-Oh! Tactical Masters Booster Display (DE)",
+    "Yu-Gi-Oh Hüllen - Dunkles Magier-Mädchen (50 Stück)",
+    "Bundel Yu-Gi-Oh! & Pokemon - Magnificent Maestros Box & 30 Jahre Kokowei Blister (DE)"
+   ]
+  },
+  {
+   "key": "spielewelt",
+   "name": "Spielewelt",
+   "base": "https://spielewelt.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 214,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 24,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-displays",
+     "count": 85,
+     "ygo": 32,
+     "sample": 32,
+     "sealed": 0,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster",
+     "count": 79,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-kopie",
+     "count": 31,
+     "ygo": 26,
+     "sample": 26,
+     "sealed": 21,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 21,
+     "ygo": 10,
+     "sample": 10,
+     "sealed": 10,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-box",
+     "count": 19,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tins",
+     "count": 11,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-alliance-insight",
+     "count": 4,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Beyond the Brave Display - DE",
+    "Yu-Gi-Oh! Beyond the Brave Display - EN",
+    "Yu-Gi-Oh! Magnificent Monsters Box - EN",
+    "Yu-Gi-Oh! Magnificent Monsters Box - DE",
+    "Yu-Gi-Oh! Beyond the Brave Display - DE",
+    "Yu-Gi-Oh! Beyond the Brave Display - EN",
+    "Yu-Gi-Oh! Chaos Origins Display - EN",
+    "Yu-Gi-Oh! Chaos Origins Display - DE",
+    "Yu-Gi-Oh! Chaos Orignis Booster DE",
+    "Yu-Gi-Oh! Chaos Orignis Booster EN",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery Booster - EN",
+    "Yu-Gi-Oh! Blazing Dominion Booster - EN"
+   ]
+  },
+  {
+   "key": "sunnystore",
+   "name": "SUNNY COLLECTIBLES S.L",
+   "base": "https://sunnystore.es",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 9,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "BOOSTER BOX CHAOS ORIGINS 1ST EDITION YU-GI-OH! (INGLÉS)",
+    "BOOSTER BOX BATTLES OF LEGEND GLORIOUS GALLERY 1ST EDITION YU-GI-OH! (INGLÉS)",
+    "CAJA MONSTRUOS MAGNIFICOS 1ª EDICIÓN YU-GI-OH! (ESPAÑOL)",
+    "CAJA MAGNIFICENT MAESTROS YU-GI-OH! (INGLÉS)"
+   ]
+  },
+  {
+   "key": "tcg",
+   "name": "OTAKUYA TCG",
+   "base": "https://tcg.otakuya.es",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "tcg-yu-gi-oh",
+     "count": 15,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Premium Pack Set Inglés Magnificent Maestros - Yu-Gi-Oh!",
+    "Limited Pack World Championship 2026 (10 Sobres) Inglés - Yu-Gi-Oh!",
+    "Magnificent Monsters Inglés - Yu-Gi-Oh!",
+    "Magnificent Monsters Español - Yu-Gi-Oh!"
+   ]
+  },
+  {
+   "key": "tcggarden",
+   "name": "TCG Garden",
+   "base": "https://tcg-garden.myshopify.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-1",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Magnificent Maestros Box - DE/EN"
+   ]
+  },
+  {
+   "key": "tcgplatform",
+   "name": "TCG Platform",
+   "base": "https://tcgplatform.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-collectie-boxen",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-box",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh!: Magnificent Monsters - Box",
+    "Yu-Gi-Oh! Magnificent Maestros - Box",
+    "Yu-Gi-Oh! Rarity Collection V - Booster Box",
+    "Yu-Gi-Oh!: Magnificent Monsters - Box",
+    "Yu-Gi-Oh! Magnificent Maestros - Box",
+    "Yu-Gi-Oh! Rarity Collection V - Booster Box"
+   ]
+  },
+  {
+   "key": "tcgreus",
+   "name": "TcgReus",
+   "base": "https://www.tcgreus.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 12,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 9,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-booster-box",
+     "count": 9,
+     "ygo": 6,
+     "sample": 6,
+     "sealed": 6,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-deck",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tin",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! TCG - The Chronicles Deck: Spirit Charmers",
+    "Yu-Gi-Oh! TCG - Mega Pack Tin",
+    "Yu-Gi-Oh! TCG - Battles of Legend: Monster Mayham Booster Box",
+    "Yu-Gi-Oh! TCG - Rarity Collection V Booster Box",
+    "Yu-Gi-Oh! TCG - Battles of Legend: Monster Mayham Booster Box",
+    "Yu-Gi-Oh! TCG - Blazing Dominion Booster Box",
+    "Yu-Gi-Oh! TCG - Burst Protocol Booster Box",
+    "Yu-Gi-Oh! TCG - Rarity Collection V Booster Box",
+    "Yu-Gi-Oh! TCG - The Chronicles Deck: Spirit Charmers",
+    "Yu-Gi-Oh! TCG - The Chronicles Deck: The Fallen & The Virtuous",
+    "Yu-Gi-Oh! TCG - Mega Pack Tin"
+   ]
+  },
+  {
+   "key": "tcgstar",
+   "name": "TCG STAR",
+   "base": "https://tcgstar.eu",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 2,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YuGiOh!  - Blazing Dominion Booster Display (24 Boosters)"
+   ]
+  },
+  {
+   "key": "tcgstars",
+   "name": "TCG Stars",
+   "base": "https://www.tcgstars.nl",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 511,
+     "ygo": 76,
+     "sample": 40,
+     "sealed": 4,
+     "singles": 36
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 423,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-25th-anniversary-rarity-collection-ii",
+     "count": 264,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-battles-of-legend-glorious-gallery",
+     "count": 119,
+     "ygo": 78,
+     "sample": 40,
+     "sealed": 2,
+     "singles": 38
+    },
+    {
+     "handle": "yugioh-blazing-dominion",
+     "count": 73,
+     "ygo": 79,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 39
+    },
+    {
+     "handle": "yugioh-25th-anniversary-tin-dueling-mirrors",
+     "count": 35,
+     "ygo": 69,
+     "sample": 35,
+     "sealed": 1,
+     "singles": 34
+    },
+    {
+     "handle": "yu-gi-oh",
+     "count": 21,
+     "ygo": 21,
+     "sample": 21,
+     "sealed": 21,
+     "singles": 0
+    },
+    {
+     "handle": "nieuw-van-magic-kopie",
+     "count": 20,
+     "ygo": 20,
+     "sample": 20,
+     "sealed": 20,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Chaos Origins Booster Box - Engels",
+    "Yu-Gi-Oh! Rarity Collection 5 Booster Box",
+    "Yu-Gi-Oh! Magnificent Monsters Box",
+    "Legendary Arc-V Decks - Legendary Arc-V Decks",
+    "Legendary Six Samurai - Shi En - Battles of Legend: Glorious Gallery (Secret Rare) [BLGG-007]",
+    "Chaos Hunter (V.3 - Secret Rare) - 25th Anniversary Rarity Collection II (Secret Rare) [RA02-007]",
+    "D.D. Crow (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection II (Ultra Rare) [RA02-002]",
+    "Mind Control (V.3 - Secret Rare) - 25th Anniversary Rarity Collection II (Secret Rare) [RA02-046]",
+    "Blue-Eyes Spirit Dragon (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection II (Ultra Rare) [RA02-030]",
+    "Magicians' Souls (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection II (Ultra Rare) [RA02-014]",
+    "Droll & Lock Bird (V.3 - Ultra Rare) - 25th Anniversary Rarity Collection II (Ultra Rare) [RA02-006]",
+    "D.D. Crow (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection II (Ultra Rare) [RA02-002]"
+   ]
+  },
+  {
+   "key": "tcgtavern",
+   "name": "TCG Tavern",
+   "base": "https://tcgtavern.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-tcg-booster-packs-sets-neuheiten",
+     "count": 20,
+     "ygo": 20,
+     "sample": 20,
+     "sealed": 19,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Rarity Collection 5 Booster Pack (DE)",
+    "Yu-Gi-Oh! Chaos Origins Booster Pack (EN)",
+    "Yu-Gi-Oh! Battles of Legend: Glorious Gallery Booster Pack (EN)",
+    "Yu-Gi-Oh! Chaos Origins Booster Display (EN)"
+   ]
+  },
+  {
+   "key": "tcgviert",
+   "name": "TCGViert",
+   "base": "https://tcgviert.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-stuff",
+     "count": 48,
+     "ygo": 26,
+     "sample": 28,
+     "sealed": 16,
+     "singles": 0
+    },
+    {
+     "handle": "merchandise-yu-gi-oh",
+     "count": 5,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 0,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! | Magnificent Maestros | Box (DE)",
+    "Yu-Gi-Oh!: Blue-Eyes White Destiny Unlimited Reprint - Structure Deck (DE)",
+    "Yu-Gi-Oh!: Blue-Eyes White Destiny Unlimited Reprint - Structure Deck (EN)",
+    "Yu‑Gi‑Oh! – Burst Protocol – Booster Display (1. Auflage) (DE)",
+    "YU-GI-OH! - Acryl® - Yami Yugi",
+    "YU-GI-OH! - A5 Notebook \"Millennium Items\"",
+    "YU-GI-OH! - Flexible mousepad - Yugi vs Kaiba*"
+   ]
+  },
+  {
+   "key": "templarsarena",
+   "name": "Templars Arena Gamecenter",
+   "base": "https://templarsarena.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 21,
+     "ygo": 9,
+     "sample": 18,
+     "sealed": 15,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-decks",
+     "count": 4,
+     "ygo": 3,
+     "sample": 4,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-beyond-the-brave",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Legendary Modern Deck 2026",
+    "Yu-Gi-Oh! - The Chronicles Deck: The Fallen & The Virtuous - EN",
+    "Yu‑Gi‑Oh! Legendary 5D’s Decks",
+    "Yu-Gi-Oh! Beyond the Brave Booster Box - English 1st Edition",
+    "Yu-Gi-Oh! - Legendary Modern Deck 2026",
+    "Yu-Gi-Oh! - The Chronicles Deck: The Fallen & The Virtuous - EN",
+    "Yu‑Gi‑Oh! Legendary 5D’s Decks",
+    "Yu-Gi-Oh! – Mega-Pack Tin 2025 – EN",
+    "Yu-Gi-Oh! Beyond the Brave Booster Box - English 1st Edition"
+   ]
+  },
+  {
+   "key": "thehouseofgames",
+   "name": "House of Games",
+   "base": "https://thehouseofgames.eu",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 10,
+     "ygo": 3,
+     "sample": 6,
+     "sealed": 5,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Retro Pack 2 Booster Pack",
+    "YGO Magnificent Monsters Tuckbox",
+    "Yu-Gi-Oh! Chaos Origins Booster EN",
+    "Yu-Gi-Oh! Legendary Collection Kaiba"
+   ]
+  },
+  {
+   "key": "timetwistergames",
+   "name": "TimeTwister Games",
+   "base": "https://timetwistergames.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 26,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-tcg",
+     "count": 6,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "outlet-yu-gi-oh",
+     "count": 5,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Furia Ingranaggian - Structure Deck (ITA - 1a Edizione)",
+    "Yu-Gi-Oh! - Resa dei Conti dello Spazio-Tempo - Super Starter - Power Up Pack",
+    "Yu-Gi-Oh! - Furia Ingranaggian - Structure Deck (ITA - 1a Edizione)",
+    "Yu-Gi-Oh! - Resa dei Conti dello Spazio-Tempo - Super Starter - Power Up Pack",
+    "Yu-Gi-Oh! - Furia Ingranaggian - Structure Deck (ITA - 1a Edizione)",
+    "Yu-Gi-Oh! - Resa dei Conti dello Spazio-Tempo - Super Starter - Power Up Pack"
+   ]
+  },
+  {
+   "key": "tkcollectibles",
+   "name": "TKCollectibles",
+   "base": "https://www.tkcollectibles.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-prodotti-speciali",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! I Deck Leggendari Box Sealed Italiano",
+    "Yu-Gi-Oh! Magnificent Monsters Box Set Collezione 1st edition ENGLISH",
+    "Yu-Gi-Oh! Mega Pack 2025 MP25 Tuckbox 1 edizione italiano"
+   ]
+  },
+  {
+   "key": "tobistoys",
+   "name": "TobisToys",
+   "base": "https://tobistoys.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 6,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! TCG Magnificent Maestros Box Deutsch 1st Edition",
+    "Yu-Gi-Oh! TCG Magnificent Maestros Box Englisch 1st Edition"
+   ]
+  },
+  {
+   "key": "toytreasure",
+   "name": "Toy Treasure",
+   "base": "https://toy-treasure.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 45,
+     "ygo": 39,
+     "sample": 40,
+     "sealed": 15,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Original Artwork Collection 30th Anniversary Display - Japanisch",
+    "Yu-Gi-Oh! King's Court - Display (ENG)",
+    "Yu-Gi-Oh! Battle of Chaos - Display (ENG)",
+    "Yu-Gi-Oh! Duelist Nexus - Display (DEU)"
+   ]
+  },
+  {
+   "key": "tradehunter",
+   "name": "Trade Hunter",
+   "base": "https://tradehunter.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 15,
+     "ygo": 15,
+     "sample": 15,
+     "sealed": 12,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! – Coffret Les Maîtres Fantastiques MAMS (Français)",
+    "Yu-Gi-Oh! – Display Original Artwork Collection – 15 Boosters (Japonais)",
+    "Yu-Gi-Oh! – Display 24 Boosters Au-Delà du Courage (FR)",
+    "Boîte métallique Yu-Gi-Oh! 2025 Méga-Pack (FR)"
+   ]
+  },
+  {
+   "key": "tradingcardsxxx",
+   "name": "Tradingcardsxxx",
+   "base": "https://tradingcardsxxx.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 346,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 32,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Coffret Collector : Les Maitres Fantastiques",
+    "Yu-Gi-Oh! Display de 10 coffrets : Les Maitres Fantastiques",
+    "Yu-Gi-Oh! Carton de 40 coffrets : Les Maitres Fantastiques",
+    "Yu-Gi-Oh! Pack de 3 boosters : Au-Delà du Courage"
+   ]
+  },
+  {
+   "key": "tradingtoys",
+   "name": "www.Tradingtoys.de",
+   "base": "https://www.tradingtoys.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-shop",
+     "count": 154,
+     "ygo": 42,
+     "sample": 40,
+     "sealed": 36,
+     "singles": 2
+    },
+    {
+     "handle": "yugioh-booster-packs",
+     "count": 142,
+     "ygo": 42,
+     "sample": 40,
+     "sealed": 36,
+     "singles": 2
+    },
+    {
+     "handle": "yugioh-booster-packs-kaufen",
+     "count": 105,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 39,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-karten-kaufen",
+     "count": 30,
+     "ygo": 29,
+     "sample": 30,
+     "sealed": 26,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-karten-specialedition",
+     "count": 20,
+     "ygo": 20,
+     "sample": 20,
+     "sealed": 20,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Konami Yu-Gi-Oh ! Star Pack 2015 ARC-V 1 Booster",
+    "YuGiOh Turbo Pack 2 - gegradet 8.5 Mint 2010",
+    "Yu-Gi-Oh! Star Pack ARC-V Booster Pack – Deutsche 1. Auflage | NEU & OVP – 3 Karten pro Pack",
+    "YuGiOh Turbo Pack 6 - gegradet 8.5 Mint 2011",
+    "YuGiOh Turbo Pack 2 - gegradet 8.5 Mint 2010",
+    "Yu Gi Oh Turbo Pack 3 - gegradet 8.5 Mint 2010",
+    "YuGiOh Turbo Pack 6 - gegradet 8.5 Mint 2011",
+    "YuGiOh Turbo Pack 7 - gegradet 8.5 Mint 2012",
+    "Yu-Gi-Oh Mystery Box kaufen🔥 Grading Karte GARANTIERT✓",
+    "Yu-Gi-Oh! Star Pack ARC-V Booster Pack – Deutsche 1. Auflage | NEU & OVP – 3 Karten pro Pack",
+    "YuGiOh Cosmo Blazer Karten Booster Pack CBLZ-DE Deutsch 1 Auflage (offen)",
+    "Yu-Gi-Oh! Mystery Box S 🔥 Limited Edition kaufen"
+   ]
+  },
+  {
+   "key": "trextcg",
+   "name": "T-REX TCG",
+   "base": "https://www.t-rextcg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 86,
+     "ygo": 79,
+     "sample": 40,
+     "sealed": 1,
+     "singles": 39
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 85,
+     "ygo": 80,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 40
+    },
+    {
+     "handle": "yugioh-display",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Kwagar Hercules (V.1 - Super Rare) - Tournament Pack 1 (Super Rare) [TP1-003]",
+    "Justice Hunters Booster Box - Justice Hunters",
+    "Cyberdark Dragon (V.1 - Ultra Rare) - Cyberdark Impact (Ultra Rare) [CDIP-035]",
+    "K9-17 Izuna (V.1 - Ultra Rare) - Justice Hunters (Ultra Rare) [JUSH-031]",
+    "K9-EW Special Release Experiment - Justice Hunters (Rare) [JUSH-041]",
+    "YummyRedemption (V.2 - Super Rare) - Justice Hunters (Super Rare) [JUSH-026]",
+    "Dracotail Pan (V.2 - Super Rare) - Justice Hunters (Super Rare) [JUSH-003]",
+    "Artifact Durendal (V.1 - Rare) - Justice Hunters (Rare) [JUSH-057]",
+    "Justice Hunters Booster Box - Justice Hunters"
+   ]
+  },
+  {
+   "key": "trinketmage",
+   "name": "Trinket Mage",
+   "base": "https://trinket-mage.eu",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 5132,
+     "ygo": 57,
+     "sample": 40,
+     "sealed": 8,
+     "singles": 23
+    },
+    {
+     "handle": "yugioh-single",
+     "count": 5101,
+     "ygo": 78,
+     "sample": 40,
+     "sealed": 0,
+     "singles": 38
+    },
+    {
+     "handle": "yu-gi-oh-sealed-produkte",
+     "count": 35,
+     "ygo": 14,
+     "sample": 14,
+     "sealed": 14,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-display",
+     "count": 6,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-promo-products",
+     "count": 4,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-booster",
+     "count": 3,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "starter-deck-yu-gi-oh-5d-s",
+     "count": 2,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Ultimate Guard Card Covers Toploading (25) – 35 pt",
+    "Yu-Gi-Oh! – Beyond the Brave Booster",
+    "Yu-Gi-Oh! Magnificent Monsters Box",
+    "Yu-Gi-Oh! Limited Pack: World Championship 2026 Booster Display (10 Boosters) – EN",
+    "K9-X Forced Release - Justice Hunters (Super Rare) [JUSH-039]",
+    "Dogmatika Ecclesia, the Virtuous (V.2 - Ultra Rare) - 25th Anniversary Rarity Collection (Ultra Rare) [020]",
+    "Hecahands Xeno - Phantom Revenge (Super Rare) [PHRE-007]",
+    "Hecahands Gaigas (V.1 - Rare) - Phantom Revenge (Rare) [PHRE-004]",
+    "Yu-Gi-Oh! Magnificent Maestros Box (VVK - 12.11.2026)",
+    "Yu-Gi-Oh! – Beyond the Brave Booster",
+    "Yu-Gi-Oh! – Beyond the Brave Booster Display (24 Booster)",
+    "Yu-Gi-Oh! Magnificent Monsters Box"
+   ]
+  },
+  {
+   "key": "underpaidcollectibles",
+   "name": "underpaidcollectibles",
+   "base": "https://underpaidcollectibles.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh-sammelkarten",
+     "count": 45,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 36,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Limit Over Collection: The Heroes (JP)",
+    "Yu-Gi-Oh! Blazing Dominion Tuck Box (3 Booster) (DE)",
+    "YuGiOh! Chaos Origins Booster Display (DE)",
+    "YuGiOh! - Chaos Origins Booster Display Box (JP)"
+   ]
+  },
+  {
+   "key": "universetcg",
+   "name": "Universe TCG",
+   "base": "https://www.universetcg.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-card-game",
+     "count": 356,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-booster-sets",
+     "count": 93,
+     "ygo": 40,
+     "sample": 40,
+     "sealed": 40,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-legendary-sets",
+     "count": 22,
+     "ygo": 22,
+     "sample": 22,
+     "sealed": 4,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-structure-decks",
+     "count": 22,
+     "ygo": 22,
+     "sample": 22,
+     "sealed": 22,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-tins",
+     "count": 9,
+     "ygo": 9,
+     "sample": 9,
+     "sealed": 8,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-liov",
+     "count": 5,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-agov",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yugioh-alin",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! SP18 Booster Box Case Star Pack: VRAINS",
+    "Yu-Gi-Oh! SPDS Booster Box Case Dark Saviors",
+    "Yu-Gi-Oh! LED6 Booster Box Case Legendary Duelists: Magical Hero",
+    "Yu-Gi-Oh! LED5 Booster Box Case Legendary Duelists: Immortal Destiny",
+    "Yu-Gi-Oh! SP18 Booster Box Star Pack: VRAINS",
+    "Yu-Gi-Oh! SPDS Booster Box Dark Saviors",
+    "Yu-Gi-Oh! LED5 Booster Box Legendary Duelists: Immortal Destiny",
+    "Yu-Gi-Oh! LED6 Booster Box Legendary Duelists: Magical Hero",
+    "Yu-Gi-Oh! 25th Anniversary Ultimate Kaiba Set",
+    "Yu-Gi-Oh! Legendary Collection Kaiba [LCKC]",
+    "Yu-Gi-Oh! Legendary Hero Decks [LEHD]",
+    "Yu-Gi-Oh! Duel Power [DUPO]"
+   ]
+  },
+  {
+   "key": "varietycards",
+   "name": "Variety Cards",
+   "base": "https://variety-cards.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh",
+     "count": 52,
+     "ygo": 36,
+     "sample": 40,
+     "sealed": 16,
+     "singles": 0
+    },
+    {
+     "handle": "vorbestellung-yu-gi-oh",
+     "count": 19,
+     "ygo": 17,
+     "sample": 19,
+     "sealed": 6,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Dark World Structure Deck 1.Edition  Yu-gi-oh! - Deutsch",
+    "Structure Deck Saga of Blue-Eyes White Dragon Unlimited Ed. Yu-gi-oh! - Deutsch",
+    "Yu-gi-Oh Legend of Blue Eyes White Dragon Display - Koreanisch",
+    "Legend of the Crystal Beasts Structure Deck 1. Edition Yu-gi-oh! - Deutsch",
+    "Wild Survivors Display - Englisch- Vorbestellung 1.06.*",
+    "Wild Survivors Display - Deutsch- Vorbestellung 1.06.*",
+    "Dueling Heroes Tin - Yu-Gi-Oh! 25th Anniversary Edition - Deutsch",
+    "Dueling Heroes Tin - Yu-Gi-Oh! 25th Anniversary Edition - Englisch"
+   ]
+  },
+  {
+   "key": "vaultofdelights",
+   "name": "Vault of Delights",
+   "base": "https://vaultofdelights.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yugioh-cards",
+     "count": 9,
+     "ygo": 3,
+     "sample": 4,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Blazing Vortex Booster Box (24 Packs) - EN",
+    "Dragon Shield Japanese Matte Sleeves — Blood Red (60)",
+    "Yu-Gi-Oh! Legendary ARC-V Decks - EN",
+    "Yu-Gi-Oh! TCG Battle of Legends: Glorious Gallery Booster Box - EN"
+   ]
+  },
+  {
+   "key": "vegastore",
+   "name": "VegaStore",
+   "base": "https://www.vegastore.fr",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 2,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Display Yu-Gi-Oh! Au-Delà du Courage",
+    "Display Yu-Gi-Oh! de 24 Boosters -  Les Glorieux Vainqueurs",
+    "Yu-Gi-Oh! - Tuckbox - Les maitres fantastiques"
+   ]
+  },
+  {
+   "key": "venturacardgames",
+   "name": "Ventura Games",
+   "base": "https://venturacardgames.com",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "ygo-starter-decks",
+     "count": 5,
+     "ygo": 3,
+     "sample": 5,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "ygo-structure-decks",
+     "count": 2,
+     "ygo": 2,
+     "sample": 2,
+     "sealed": 2,
+     "singles": 0
+    },
+    {
+     "handle": "ygo-tins",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "YGO - Blue-Eyes White Destiny Structure Deck - EN",
+    "YGO - Dark Magician Girl Card Sleeves (50 Sleeves)",
+    "YGO - Dark Magician Girl Game Playmat",
+    "YGO 2022 Tin Of The Pharaoh's Gods - Limited Edition Collectible Tin",
+    "YGO - Blue-Eyes White Destiny Structure Deck - EN",
+    "YGO - Realm Of Light (Reprint) Structure Deck",
+    "YGO 2022 Tin Of The Pharaoh's Gods - Limited Edition Collectible Tin"
+   ]
+  },
+  {
+   "key": "versusgamecenter",
+   "name": "Versus Gamecenter",
+   "base": "https://versusgamecenter.pt",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 178,
+     "ygo": 34,
+     "sample": 34,
+     "sealed": 33,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! - Magnificent Maestros - EN",
+    "Yu-Gi-Oh! - Limited Pack World Championship 2026 Booster - EN",
+    "Yu-Gi-Oh! - Beyond the Brave Booster Display (24 Packs) - EN",
+    "Yu-Gi-Oh! - Beyond the Brave Booster - EN"
+   ]
+  },
+  {
+   "key": "yonkotcg",
+   "name": "Yonko TCG",
+   "base": "https://yonko-tcg.de",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 7,
+     "ygo": 7,
+     "sample": 7,
+     "sealed": 3,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "[JP] Yu-Gi-Oh! Display - LIMIT OVER COLLECTION -THE HEROES- (LOCH)",
+    "[JP] Yu-Gi-Oh! Display - LIMIT OVER COLLECTION -THE RIVALS- (LOCR)",
+    "[ENG] Yu-Gi-Oh! Box - Magnificent Monsters (EU)",
+    "[JP] Yu-Gi-Oh! Display - Original Artwork Collection (YAC1)"
+   ]
+  },
+  {
+   "key": "zillerstore",
+   "name": "Zillerstore Fumetteria",
+   "base": "https://zillerstore.it",
+   "market": "EU",
+   "collections": [
+    {
+     "handle": "yu-gi-oh",
+     "count": 32,
+     "ygo": 19,
+     "sample": 32,
+     "sealed": 23,
+     "singles": 0
+    },
+    {
+     "handle": "mazzi-1",
+     "count": 16,
+     "ygo": 14,
+     "sample": 16,
+     "sealed": 15,
+     "singles": 0
+    },
+    {
+     "handle": "edizioni-speciali-1",
+     "count": 3,
+     "ygo": 3,
+     "sample": 3,
+     "sealed": 3,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-magnificent-maestros-magnifici-maestri-box-3-bustine-eng",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    },
+    {
+     "handle": "yu-gi-oh-magnificent-maestros-magnifici-maestri-box-3-bustine-ita",
+     "count": 1,
+     "ygo": 1,
+     "sample": 1,
+     "sealed": 1,
+     "singles": 0
+    }
+   ],
+   "sampleTitles": [
+    "Yu-Gi-Oh! Chaos Origins Display Box 24 Buste - Edizione Italiana (ITA) | Konami",
+    "Yu-Gi-Oh! I Deck Moderni Leggendari 2026 - 1a Edizione ITA",
+    "BOX YU-GI-OH! CHAOS ORIGINS - ENG (24 BUSTE)",
+    "Yu-Gi-Oh! Magnificent Monsters Booster Box ENG - Grand Master Rare Anime Reimagined",
+    "Yu-Gi-Oh! I Deck Moderni Leggendari 2026 - 1a Edizione ITA",
+    "Yu-Gi-Oh TCG Deck delle Cronache Ammaliatrici di Spiriti 1a Edizione ITA Tutta Foil 51 Carte Ultra Rare Starlight",
+    "Kaiba - Collezione Leggendaria - Ristampa (ITA)",
+    "La Saga Del Drago Bianco Occhi Blu - Structure Deck (ITA - Unlimited - Nuova Ristampa)",
+    "Yu-Gi-Oh! Magnificent Monsters Booster Box ENG - Grand Master Rare Anime Reimagined",
+    "Yu-Gi-Oh! I Deck 5D ' s Leggendari 1a Edizione ITA - Box Set Yusei Akiza Crow",
+    "YU-GI-OH! TIN 25TH.ANNIVERSARY SPECCHI DUELLANTI",
+    "Yu-Gi-Oh! Magnificent Maestros - Magnifici Maestri Box 3 Bustine ENG"
+   ]
+  }
+ ]
+}
