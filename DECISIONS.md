@@ -3213,3 +3213,15 @@ heading or JSON-LD changes; no ad moves (the ads thread owns placement). CSS onl
 ("The phone's home page, tidied"); the hooks are `hero-gift`, `hero-markets`, `home-flow`, `home-give`, `home-shelf`, `home-sets`.
 
 **Read:** phone bounce (non-Reddit) and buy clickers per 100 on the home page, the week after release against the week before.
+
+## 2026-11-26 — The home page's description opens with "YGOCompare", and the structured data names it
+
+**Why (Search Recovery; Bill asked whether the sites show on Yahoo and DuckDuckGo):** both use Bing. Checked 26 Nov: 17 of
+18 active sites come first (or near it) for their one-word brand on Yahoo and DuckDuckGo. YGO Compare does not appear at
+all for "ygocompare": Bing corrects it to "gocompare". The home page is indexed in Bing (URL Inspection: "Indexed
+successfully"), but Bing flagged its meta description as too long.
+
+**Now:** the home description starts with `SITE.shortName` ("YGOCompare") and stays under 160 characters; the
+Organization and WebSite JSON-LD carry `alternateName: ["YGOCompare", "ygocompare.com"]`. Title and URL unchanged.
+
+**Read:** "ygocompare" on Yahoo and DuckDuckGo around 10 Dec.
