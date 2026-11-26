@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-26T08:23:07.523Z",
+ "generatedAt": "2026-11-26T21:56:00.335Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -55,15 +55,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Rarity Collection 5 Booster Box",
-   "url": "https://ygocompare.com/card/rarity-collection-5-booster-box",
-   "cents": 9999,
+   "title": "25th Anniversary Tin: Dueling Heroes Case",
+   "url": "https://ygocompare.com/card/25th-anniversary-tin-dueling-heroes-case",
+   "cents": 11999,
    "currency": "USD",
-   "store": "Mystic TCG",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12675,
+   "store": "Paragon City Games",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/493309_200w.jpg",
+   "refCents": 15045,
    "refLabel": "TCGplayer market price",
-   "savingPct": 21
+   "savingPct": 20
   },
   {
    "kind": "deal",
