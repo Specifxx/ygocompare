@@ -409,3 +409,38 @@ test("a title naming a year from 2020 on is a reprint run; a display refuses a s
   assert.equal(matchSealed("Yugioh Speed Duel GX Midterm Paradox Mini Box Display of 6", idx)?.product.id, 448704);
   assert.equal(matchSealed("Yu-Gi-Oh! 2025 Mega-Pack Mega Pack", idx)?.product.id, 631994);
 });
+
+test("a handle ending in its language, and 'deutsche Karten', are foreign; Italian bag counts are several packs (live 2026-11-26)", async () => {
+  const { handleOf, isForeignHandle, isForeign } = await import("@/lib/import/match");
+  for (const url of [
+    "https://tcgtavern.de/products/yugioh-magnificent-monsters-box-de?variant=1",
+    "https://outpostbrussels.be/products/ygo-2025-mega-pack-tin-fr?variant=1",
+    "https://ashtcg.fr/products/blister-yu-gi-oh-retro-pack-2-reimpression-boosters-cartonne-fr?variant=1",
+    "https://cardverse.it/products/yu-gi-oh-magnificent-monsters-box-3-buste-it?variant=1",
+    "https://underpaidcollectibles.de/products/rarity-collection-5-booster-pack-1-auflage-de?variant=1",
+    "https://peeronline.de/products/yu-gi-oh-age-of-overlord-deutsche-karten-1-auflage-1-sleeved-booster-pack?variant=1",
+    "https://tcgtavern.de/products/yugioh-magnificent-monsters-box-de-1?variant=1",
+    "https://tcgtavern.de/products/yugioh-magnificent-monsters-box-de-copy?variant=1",
+  ])
+    assert.ok(isForeignHandle(handleOf(url)), url);
+  assert.ok(isForeign("Yu-Gi-Oh! Magnificent Mavens 1. Auflage Deutsche Karten Holiday Box 2022"));
+  assert.ok(isForeign("Yu-Gi-Oh! Rarity Collection 5 Deutsches Display 1. Auflage"));
+  // English listings, also from the same shops, stay.
+  for (const url of [
+    "https://funside.it/products/box-yu-gi-oh-magnificent-monsters-3-buste-eng?variant=1",
+    "https://cardcosmos.de/products/yu-gi-oh-speed-duel-gx-midterm-paradox-mini-box-englisch?variant=1",
+    "https://pokemillon.es/products/yu-gi-oh-booster-box-de-24-sobres-de-battles-of-legend-monstrous-revenge-2022-ingles?variant=1",
+    "https://tradingtoys.de/products/yugioh-shadow-specters-karten-booster-pack-shsp-en-englisch-1st?variant=1",
+    "https://store.com/products/yugioh-magnificent-monsters-box?variant=1",
+    "https://store.de/products/yugioh-magnificent-monsters-booster-display-en-de?variant=1",
+    "https://store.com/products/yu-gi-oh-duelist-pack-pt?variant=1",
+  ])
+    assert.equal(isForeignHandle(handleOf(url)), false, url);
+  // A title's last word is never read as a language ("EN/DE" sells both).
+  assert.equal(isForeign("Yu-Gi-Oh! Magnificent Monsters Box EN/DE"), false);
+
+  const idx = buildIndex([sealed(166470, "Retro Pack 2 Booster Pack", 1292)], [set(1292, "Retro Pack 2")], "ygo");
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster 24 Buste ENG", idx), null);
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster 24 Sobres", idx), null);
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster Pack", idx)?.product.id, 166470);
+});

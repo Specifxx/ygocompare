@@ -287,7 +287,7 @@ export interface MatchResult {
 // "JPN" was missing until 2026-11-08 (Gundam Compare: a store's "... [GD06]
 // JPN" box at a third of the price sat on the English box's page). Japanese,
 // Chinese and Korean script count too.
-const FOREIGN = /\b(japanese|japan|jpn|jap|jp|chinese|simplified|traditional|chn|french|fran[cç]ais|german|deutsch|italian|italiano|spanish|espa[nñ]ol|korean|kor|portuguese|thai|indonesian|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\)|\(kr\))\b/i;
+const FOREIGN = /\b(japanese|japan|jpn|jap|jp|chinese|simplified|traditional|chn|french|fran[cç]ais|german|deutsch(?:e[nrs]?)?|italian|italiano|spanish|espa[nñ]ol|korean|kor|portuguese|thai|indonesian|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\)|\(kr\))\b/i;
 const CJK = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
 // Live 2026-11-20 (YGO): an Italian "Bustina 3 carte ... Star Pack VRAINS 1a Edizione ITA" at US$1.00 and a German
 // "Lord of the Tachyon Galaxy Booster Pack LTGY-DE 1. Auflage" sat on the English packs' pages. The language lives in
@@ -296,6 +296,16 @@ const CJK = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
 const FOREIGN_MORE = /\b(ita|deu)\b|\bde[\s-]+1\.?[\s-]+auflage\b/i;
 const FOREIGN_CODE = /\b[A-Z]{2,4}\d{0,2}-(DE|FR|IT|PT|KR|JP)\b/;
 export const isForeign = (title: string) => FOREIGN.test(title) || FOREIGN_MORE.test(title) || FOREIGN_CODE.test(title) || CJK.test(title);
+// Live 2026-11-26 (YGO, after the EU store sweep): German, French and Italian shops end a listing's handle with its
+// language ("yugioh-magnificent-monsters-box-de", "ygo-2025-mega-pack-tin-fr", "...-box-3-buste-it"): five in-stock
+// German Magnificent Monsters boxes and a French Retro Pack 2 reprint blister sat on the English products' pages. A
+// handle's last word is read as a language only there (the title is never read this way: "EN/DE" is a two-language
+// listing).
+// Only the codes seen live (de, fr, it), also before Shopify's duplicate suffix ("-de-1", "-de-copy"); "-en-de" sells
+// both languages and stays.
+const HANDLE_LANG = /(?<!\s(?:en|eng))\s(de|fr|it)(\s+(\d{1,2}|copy))?\s*$/i;
+/** `isForeign` for a listing's handle (`handleOf`), which may also end in its language code. */
+export const isForeignHandle = (handle: string) => isForeign(handle) || HANDLE_LANG.test(handle);
 
 /** The listing's own URL slug ("...-gd06-jpn"): a store that keeps the
  *  language only in the handle is still a foreign product. Read for the
@@ -329,11 +339,11 @@ function sequelAliases(words: string[]): string[] {
 const MULTI_PACK_NAME = /\b(box|blister|tuck|display|bundle|bags?)\b|\d+-pack|\bpacks\b/i;
 // A title counting several packs: a tuckbox, a mini box, "4 Packs", "24 Bags", "2-Pack Blister", "Pack of 3".
 const MULTI_PACK_TITLE =
-  /\btuck\s*box(es)?\b|\bmini[\s-]*box\b|\b([2-9]|[1-9]\d)\s*(booster\s+)?packs\b|\b\d+\s*bags\b|\b([2-9]|[1-9]\d)[\s-]*packs?\s+(box|blister|tuck)|\bpack\s+of\s+([2-9]|[1-9]\d)\b/i;
+  /\btuck\s*box(es)?\b|\bmini[\s-]*box\b|\b([2-9]|[1-9]\d)\s*(booster\s+)?packs\b|\b\d+\s*(bags|buste|bustine|sobres)\b|\b([2-9]|[1-9]\d)[\s-]*packs?\s+(box|blister|tuck)|\bpack\s+of\s+([2-9]|[1-9]\d)\b/i;
 // "(3-Pack)", "4 Packs", "24 Bags", "Pack of 3": how many packs a name or title counts, or 0. Never the number after
 // "Pack" ("Retro Pack 2 Booster Pack").
 function packCount(s: string): number {
-  const m = s.match(/(?<!\bpack\s?)\b(\d{1,2})[\s-]*(?:booster\s+)?(?:packs?|bags)\b|\bpack\s+of\s+(\d{1,2})\b/i);
+  const m = s.match(/(?<!\bpack\s?)\b(\d{1,2})[\s-]*(?:booster\s+)?(?:packs?|bags|buste|bustine|sobres)\b|\bpack\s+of\s+(\d{1,2})\b/i);
   const n = m ? Number(m[1] ?? m[2]) : 0;
   return n >= 2 ? n : 0;
 }
