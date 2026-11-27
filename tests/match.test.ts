@@ -444,3 +444,38 @@ test("a handle ending in its language, and 'deutsche Karten', are foreign; Itali
   assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster 24 Sobres", idx), null);
   assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Booster Pack", idx)?.product.id, 166470);
 });
+
+test("German language names, a full box's mini box and 'pack de 3 boosters' are refused (live 2026-11-27)", async () => {
+  const { handleOf, isForeignHandle, isForeign } = await import("@/lib/import/match");
+  // Live: a Korean structure deck (EUR 10.12) on the English deck's page.
+  assert.ok(isForeignHandle(handleOf("https://godofcards.com/products/yugioh-structure-deck-r-onslaught-of-the-fire-kings-koreanisch?variant=1")));
+  assert.ok(isForeign("Yu-Gi-Oh! Structure Deck Albaz Strike Japanisch"));
+  assert.ok(isForeign("Yu-Gi-Oh! Rarity Collection 5 Display Französisch"));
+  // "Englisch" is how German shops mark English product.
+  assert.equal(isForeignHandle(handleOf("https://tradingtoys.de/products/yugioh-shadow-specters-karten-booster-pack-shsp-en-englisch-1st?variant=1")), false);
+
+  const idx = buildIndex(
+    [
+      sealed(668522, "Rarity Collection 5 Booster Box", 24500),
+      sealed(694075, "Rarity Collection 5 Mini Booster Box (Retail Exclusive)", 24500),
+      sealed(586046, "Supreme Darkness Booster Box [1st Edition]", 23700),
+      sealed(620233, "Supreme Darkness Booster Box [1st Edition] Mini Box (Retail Exclusive)", 23700),
+      sealed(631994, "2025 Mega-Pack Mega Pack", 24100),
+      sealed(282048, "Magnificent Mavens Box", 3200),
+    ],
+    [set(24500, "Rarity Collection 5"), set(23700, "Supreme Darkness"), set(24100, "2025 Mega-Pack"), set(3200, "Magnificent Mavens")],
+    "ygo",
+  );
+  // Live: a 5-pack mini box (US$34.99) on the US$125 box, a mini box on the Supreme Darkness box, a French 3-pack on one pack.
+  assert.equal(matchSealed("Yu-Gi-Oh! Rarity Collection 5 Mini Box 5 Packs", idx, "yugioh rarity coll 5 mini box 5 packs")?.product.id, undefined);
+  assert.equal(matchSealed("Rarity Collection 5 Booster Box", idx, "yugioh rarity coll 5 mini box 5 packs")?.product.id, undefined);
+  assert.equal(matchSealed("Supreme Darkness Booster Box 1st Edition", idx, "supreme darkness booster box 1st edition mini box")?.product.id, undefined);
+  assert.equal(matchSealed("Yu-Gi-Oh! Pack de 3 Boosters Ensemble 2025 Mega-Pack", idx)?.product.id, undefined);
+  assert.equal(matchSealed("Yu-Gi-Oh! 2025 Mega-Pack 3 Boosters", idx)?.product.id, undefined);
+  // The full boxes, the mini boxes, a single pack and a product a store calls a mini box still match.
+  assert.equal(matchSealed("Yu-Gi-Oh! Rarity Collection 5 Booster Box", idx)?.product.id, 668522);
+  assert.equal(matchSealed("Rarity Collection 5 Mini Booster Box (Retail Exclusive)", idx)?.product.id, 694075);
+  assert.equal(matchSealed("Supreme Darkness Booster Box 1st Edition Mini Box Retail Exclusive", idx)?.product.id, 620233);
+  assert.equal(matchSealed("Yu-Gi-Oh! 2025 Mega-Pack Mega Pack", idx)?.product.id, 631994);
+  assert.equal(matchSealed("Yu-Gi-Oh! Magnificent Mavens Box", idx, "yu gi oh magnificent mavens mini box 2022")?.product.id, 282048);
+});
