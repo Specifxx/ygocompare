@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-27T08:35:46.563Z",
+ "generatedAt": "2026-11-27T21:41:16.188Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -47,7 +47,7 @@
    "currency": "USD",
    "store": "Cosmic Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16186,
+   "refCents": 16222,
    "refLabel": "TCGplayer market price",
    "savingPct": 26
   },
@@ -61,9 +61,9 @@
    "currency": "USD",
    "store": "The Warp Gate",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/691167_200w.jpg",
-   "refCents": 8659,
+   "refCents": 8503,
    "refLabel": "TCGplayer market price",
-   "savingPct": 24
+   "savingPct": 22
   },
   {
    "kind": "deal",
@@ -83,15 +83,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Kaiba Evolution Starter Deck [Unlimited Edition]",
-   "url": "https://ygocompare.com/card/kaiba-evolution-starter-deck-unlimited-edition",
-   "cents": 10000,
+   "title": "Rarity Collection 5 Booster Box",
+   "url": "https://ygocompare.com/card/rarity-collection-5-booster-box",
+   "cents": 9999,
    "currency": "USD",
-   "store": "Gamer's Gauntlet",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/212809_200w.jpg",
-   "refCents": 11499,
+   "store": "Mystic TCG",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
+   "refCents": 12188,
    "refLabel": "TCGplayer market price",
-   "savingPct": 13
+   "savingPct": 18
   }
  ]
 }
