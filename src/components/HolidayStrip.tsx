@@ -5,7 +5,7 @@ import { saleStrip } from "@/lib/black-friday";
 import { StripClose } from "./StripClose";
 import { BfModeBar } from "@/components/BfModeBar";
 import { goHref } from "@/lib/affiliate";
-import { bfModeOn } from "@/lib/bf-mode";
+import { bfModeOn, bfPhase } from "@/lib/bf-mode";
 
 // One line under the header on every page from 1 November to the day after Cyber Monday, linking the
 // Black Friday page, then the Cyber Monday page (lib/black-friday.ts saleStrip; DECISIONS.md, "Black
@@ -27,7 +27,7 @@ export function HolidayStrip() {
   if (!on) return strip;
   return (
     <BfModeBar
-      on={on}
+      on={on} phase={bfPhase(Date.now())}
       href="/black-friday"
       title={`${SITE.gameShort} sealed deals`}
       line="store prices under TCGplayer today"
