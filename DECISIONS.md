@@ -3271,3 +3271,9 @@ product price table carries a small chip saying what its sale is (`TcgSaleChip`,
 `lib/bf-mode.ts`). It is drawn only in the browser after the clock is read, so cached HTML never shows it outside the sale. It
 ranks nothing and marks no row the cheapest. Delete it with the bar after the sale.
 Released at 14:12 UTC on 27 Nov once the 8-hour gate opened: the bar through Cyber Monday and the TCGplayer sale chip.
+
+## 2026-11-27 — The rating card no longer asks on its own
+
+Owner, 27 Nov: "make sure that users have a good experience … not too many pop-ups … the feedback pop-up on Rift Compare
+can be taken down a little because we already have enough feedback". The rate-us corner card never opens by itself any
+more (`AUTO_ASK = false`); a "Rate us" link still opens it. During Cyber Weekend the visit's one prompt goes to the sale card.
