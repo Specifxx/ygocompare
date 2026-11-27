@@ -341,17 +341,19 @@ function sequelAliases(words: string[]): string[] {
 // A pack product sold as several packs, by its own name ("Retro Pack Box (4-Pack)", "Blister (3-Pack)").
 const MULTI_PACK_NAME = /\b(box|blister|tuck|display|bundle|bags?)\b|\d+-pack|\bpacks\b/i;
 // A title counting several packs: a tuckbox, a mini box, "4 Packs", "24 Bags", "2-Pack Blister", "Pack of 3", and (live
-// 2026-11-27: a French shop's "pack de 3 boosters", EUR 15.90 on the US$4.86 2025 Mega-Pack pack) "3 Boosters", "Pack de 3".
+// 2026-11-27: a French shop's "pack de 3 boosters", EUR 15.90 on the US$4.86 2025 Mega-Pack pack) "3 Boosters", "Pack de 3 Boosters"
+// (never "1 of 24 Boosters", a pack from a display, nor "Pack de 9 cartes", a card count).
 const MULTI_PACK_TITLE =
-  /\btuck\s*box(es)?\b|\bmini[\s-]*box\b|\b([2-9]|[1-9]\d)\s*(booster\s+)?packs\b|\b\d+\s*(bags|buste|bustine|sobres)\b|\b([2-9]|[1-9]\d)[\s-]*packs?\s+(box|blister|tuck)|\bpack\s+of\s+([2-9]|[1-9]\d)\b|\b([2-9]|[1-9]\d)\s*boosters\b|\bpack\s+de\s+([2-9]|[1-9]\d)\b/i;
+  /\btuck\s*box(es)?\b|\bmini[\s-]*box\b|\b([2-9]|[1-9]\d)\s*(booster\s+)?packs\b|\b\d+\s*(bags|buste|bustine|sobres)\b|\b([2-9]|[1-9]\d)[\s-]*packs?\s+(box|blister|tuck)|\bpack\s+of\s+([2-9]|[1-9]\d)\b|(?<!\b(?:of|from|de)\s+)\b([2-9]|[1-9]\d)\s*boosters\b|\bpack\s+de\s+([2-9]|[1-9]\d)\s+(boosters?|packs?)\b/i;
 // "(3-Pack)", "4 Packs", "24 Bags", "Pack of 3": how many packs a name or title counts, or 0. Never the number after
 // "Pack" ("Retro Pack 2 Booster Pack").
 function packCount(s: string): number {
-  const m = s.match(/(?<!\bpack\s?)\b(\d{1,2})[\s-]*(?:booster\s+)?(?:packs?|bags|buste|bustine|sobres)\b|\bpack\s+of\s+(\d{1,2})\b/i);
+  const m = s.match(/(?<!\bpack\s?)\b(\d{1,2})[\s-]*(?:booster\s+)?(?:packs?|boosters|bags|buste|bustine|sobres)\b|\bpack\s+of\s+(\d{1,2})\b/i);
   const n = m ? Number(m[1] ?? m[2]) : 0;
   return n >= 2 ? n : 0;
 }
-const MINI_BOX = /\bmini[\s-]*(booster\s+)?box(es)?\b/i;
+// "free mini box", "bonus mini box" or "with mini box" is an extra, not what the listing sells.
+const MINI_BOX = /(?<!\b(?:free|bonus|promo|with|plus)\s+)\bmini[\s-]*(booster\s+)?box(es)?\b/i;
 const SINGLE_PACK = /\b(booster|loose|mega)\s+pack\b(?!s)/i;
 const isMulti = (s: string) => MULTI.test(s.replace(/\b\d+\s*packs?\)/i, ""));
 

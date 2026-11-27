@@ -478,4 +478,11 @@ test("German language names, a full box's mini box and 'pack de 3 boosters' are 
   assert.equal(matchSealed("Supreme Darkness Booster Box 1st Edition Mini Box Retail Exclusive", idx)?.product.id, 620233);
   assert.equal(matchSealed("Yu-Gi-Oh! 2025 Mega-Pack Mega Pack", idx)?.product.id, 631994);
   assert.equal(matchSealed("Yu-Gi-Oh! Magnificent Mavens Box", idx, "yu gi oh magnificent mavens mini box 2022")?.product.id, 282048);
+  assert.equal(matchSealed("Supreme Darkness Booster Box 1st Edition", idx, "supreme darkness booster box 1st edition free mini box promo")?.product.id, 586046);
+  // A card count and a pack from a display are one pack; a counted box keeps its own count.
+  assert.equal(matchSealed("Yu-Gi-Oh! 2025 Mega-Pack Mega Pack de 9 cartes", idx)?.product.id, 631994);
+  assert.equal(matchSealed("Yu-Gi-Oh! 2025 Mega-Pack Mega Pack - 1 of 24 Boosters", idx)?.product.id, 631994);
+  const boxIdx = buildIndex([sealed(166472, "Retro Pack 2 Box (3-Pack)", 1292)], [set(1292, "Retro Pack 2")], "ygo");
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Box Pack de 6 Boosters", boxIdx)?.product.id, undefined);
+  assert.equal(matchSealed("Yu-Gi-Oh! Retro Pack 2 Box (3-Pack)", boxIdx)?.product.id, 166472);
 });
