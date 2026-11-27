@@ -4,6 +4,7 @@ import { meta } from "@/lib/data";
 import { saleStrip } from "@/lib/black-friday";
 import { StripClose } from "./StripClose";
 import { BfModeBar } from "@/components/BfModeBar";
+import { TcgSalePopup } from "@/components/TcgSalePopup";
 import { goHref } from "@/lib/affiliate";
 import { bfModeOn, bfPhase } from "@/lib/bf-mode";
 
@@ -26,6 +27,7 @@ export function HolidayStrip() {
   const on = bfModeOn(Date.now());
   if (!on) return strip;
   return (
+    <>
     <BfModeBar
       on={on} phase={bfPhase(Date.now())}
       href="/black-friday"
@@ -43,6 +45,13 @@ export function HolidayStrip() {
     >
       {strip}
     </BfModeBar>
+    {/* TCGplayer's sale card (owner, 2026-11-27): once a visit, never while typing, closes for good (TcgSalePopup.tsx). */}
+    <TcgSalePopup slotKey="ce_prompt_slot" dealsHref="/black-friday">
+      <a href={goHref({ url: `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&q=booster+box&ProductTypeName=Sealed+Products`, source: "tcgplayer", market: "US" }, undefined, "bf_popup")} rel="sponsored nofollow noopener">Booster boxes</a>
+      <a href={goHref({ url: `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&ProductTypeName=Sealed+Products`, source: "tcgplayer", market: "US" }, undefined, "bf_popup")} rel="sponsored nofollow noopener">All sealed</a>
+      <a href={goHref({ url: `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&ProductTypeName=Cards`, source: "tcgplayer", market: "US" }, undefined, "bf_popup")} rel="sponsored nofollow noopener">Singles</a>
+    </TcgSalePopup>
+    </>
   );
 }
 

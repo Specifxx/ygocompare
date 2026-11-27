@@ -3272,6 +3272,16 @@ product price table carries a small chip saying what its sale is (`TcgSaleChip`,
 ranks nothing and marks no row the cheapest. Delete it with the bar after the sale.
 Released at 14:12 UTC on 27 Nov once the 8-hour gate opened: the bar through Cyber Monday and the TCGplayer sale chip.
 
+## 2026-11-27 — TCGplayer's sale card, once a visit, to the end of its sale (owner)
+
+The owner asked for "a pop-up on every single website" for TCGplayer's Cyber Weekend sale, naming the 10% store credit and
+"some items to get started". `TcgSalePopup.tsx` (drawn by `HolidayStrip.tsx` beside the Black Friday bar) is a small labelled
+Ad card in the corner, or a short sheet along the bottom on a phone: no backdrop, nothing blocked, ✕ or Escape closes it for
+good. It opens only while the sale runs (`tcgSaleOn`, 14:00 UTC 27 Nov to 04:00 UTC 1 Dec), nine seconds into a page, never
+while a text field has focus or a key was pressed in the last five seconds, and only when it can take the visit's one prompt
+slot. Its three links are this site's own tagged TCGplayer searches; no eBay and no Amazon (pop-ups are TCGplayer only). It
+is off by itself when the sale ends. Not on Compare Empire, KaeYoung or ScentCompare: TCGplayer sells nothing they compare.
+
 ## 2026-11-27 — The rating card no longer asks on its own
 
 Owner, 27 Nov: "make sure that users have a good experience … not too many pop-ups … the feedback pop-up on Rift Compare
