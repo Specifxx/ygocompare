@@ -20,6 +20,7 @@ import { ReportPrice } from "./ReportForms";
 import { StoreVote } from "./StoreVote";
 import { bestTreatment } from "@/lib/best-price";
 import { BestPriceTag } from "./BestPriceTag";
+import { TcgSaleChip } from "@/components/TcgSaleChip";
 
 const NAMES: Record<string, string> = {
   tcgplayer: "TCGplayer",
@@ -152,7 +153,8 @@ export function PriceTable({ offers, fx, productId, page, compact = false, maxRo
               <Fragment key={i}>
                 <tr className={`border-t border-line ${loud ? "bg-open-soft/40" : ""} ${o.inStock ? "" : "opacity-60"} ${best && inStock.length > 1 ? PIN_OUTLINE.cheapest : o.source === "ebay" && pinned.includes(o) ? PIN_OUTLINE.ebay : ""}`}>
                   <td className="px-3 py-2.5">
-                    <span className="font-medium text-ink [overflow-wrap:anywhere]">{sourceName(o)}</span>{" "}
+                    <span className="font-medium text-ink [overflow-wrap:anywhere]">{sourceName(o)}</span>
+                    {o.source === "tcgplayer" ? <TcgSaleChip className="ml-2" /> : null}{" "}
                     <StoreVote url={o.url} name={sourceName(o)} className="ml-1 text-muted max-sm:hidden" />
                     {/* Phones: the cart list's add button as a line under the store, where the row has no width to spare. */}
                     {o.inStock && (
