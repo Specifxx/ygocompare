@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-26T21:56:00.335Z",
+ "generatedAt": "2026-11-27T08:35:46.563Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -55,6 +55,20 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
+   "title": "Chaos Origins Booster Box [1st Edition]",
+   "url": "https://ygocompare.com/card/chaos-origins-booster-box-1st-edition",
+   "cents": 6599,
+   "currency": "USD",
+   "store": "The Warp Gate",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/691167_200w.jpg",
+   "refCents": 8659,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 24
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
    "title": "25th Anniversary Tin: Dueling Heroes Case",
    "url": "https://ygocompare.com/card/25th-anniversary-tin-dueling-heroes-case",
    "cents": 11999,
@@ -64,20 +78,6 @@
    "refCents": 15045,
    "refLabel": "TCGplayer market price",
    "savingPct": 20
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Photon Hypernova Booster Box",
-   "url": "https://ygocompare.com/card/photon-hypernova-booster-box",
-   "cents": 5995,
-   "currency": "USD",
-   "store": "Digital Heroes",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/451303_200w.jpg",
-   "refCents": 6852,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 13
   },
   {
    "kind": "deal",
