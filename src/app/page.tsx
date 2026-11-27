@@ -30,6 +30,7 @@ import { inlineReady } from "@/lib/inline-ads";
 import { Section } from "@/components/Section";
 import { adSearch, cardAds } from "@/lib/card-ads";
 import { rankBy, rankProducts } from "@/lib/home-demand";
+import { MascotGuide } from "@/components/MascotGuide";
 
 // The homepage leads with "<game> Booster Box Prices" (sealed only since 2026-11-06) and the number of stores compared.
 export function generateMetadata(): Metadata {
@@ -245,6 +246,8 @@ export default function Home() {
         <div className="hero-search rise" style={riseAt(2)}>
           <SearchBox big />
         </div>
+        {/* Penny suggests a first search (owner, 2026-11-27: "a little mascot saying, hey, search this term here"). */}
+        <MascotGuide examples={["Booster Box", "Tin", "Structure Deck"]} fallbackHref="/sealed?q=" />
         <div className="rise hero-markets mt-6" style={riseAt(3)}>
           <MarketChooser className="justify-center" />
         </div>
