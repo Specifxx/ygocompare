@@ -287,7 +287,10 @@ export interface MatchResult {
 // "JPN" was missing until 2026-11-08 (Gundam Compare: a store's "... [GD06]
 // JPN" box at a third of the price sat on the English box's page). Japanese,
 // Chinese and Korean script count too.
-const FOREIGN = /\b(japanese|japan|jpn|jap|jp|chinese|simplified|traditional|chn|french|fran[cç]ais|german|deutsch(?:e[nrs]?)?|italian|italiano|spanish|espa[nñ]ol|korean|kor|portuguese|thai|indonesian|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\)|\(kr\))\b/i;
+// Live 2026-11-27 (YGO): a German shop's "...structure-deck-r-onslaught-of-the-fire-kings-koreanisch" (EUR 10.12) sat on
+// the English deck's page (US$29.61 market): German shops name the language in German ("koreanisch", "japanisch").
+// Never "englisch", which is how they mark English product.
+const FOREIGN = /\b(japanese|japan|jpn|jap|jp|chinese|simplified|traditional|chn|french|fran[cç]ais|german|deutsch(?:e[nrs]?)?|italian|italiano|spanish|espa[nñ]ol|korean|kor|portuguese|thai|indonesian|koreanisch|japanisch|chinesisch|italienisch|spanisch|franz(?:ö|oe|o)sisch|portugiesisch|\(fr\)|\(de\)|\(it\)|\(jp\)|\(cn\)|\(kr\))\b/i;
 const CJK = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
 // Live 2026-11-20 (YGO): an Italian "Bustina 3 carte ... Star Pack VRAINS 1a Edizione ITA" at US$1.00 and a German
 // "Lord of the Tachyon Galaxy Booster Pack LTGY-DE 1. Auflage" sat on the English packs' pages. The language lives in
@@ -337,16 +340,20 @@ function sequelAliases(words: string[]): string[] {
 }
 // A pack product sold as several packs, by its own name ("Retro Pack Box (4-Pack)", "Blister (3-Pack)").
 const MULTI_PACK_NAME = /\b(box|blister|tuck|display|bundle|bags?)\b|\d+-pack|\bpacks\b/i;
-// A title counting several packs: a tuckbox, a mini box, "4 Packs", "24 Bags", "2-Pack Blister", "Pack of 3".
+// A title counting several packs: a tuckbox, a mini box, "4 Packs", "24 Bags", "2-Pack Blister", "Pack of 3", and (live
+// 2026-11-27: a French shop's "pack de 3 boosters", EUR 15.90 on the US$4.86 2025 Mega-Pack pack) "3 Boosters", "Pack de 3 Boosters"
+// (never "1 of 24 Boosters", a pack from a display, nor "Pack de 9 cartes", a card count).
 const MULTI_PACK_TITLE =
-  /\btuck\s*box(es)?\b|\bmini[\s-]*box\b|\b([2-9]|[1-9]\d)\s*(booster\s+)?packs\b|\b\d+\s*(bags|buste|bustine|sobres)\b|\b([2-9]|[1-9]\d)[\s-]*packs?\s+(box|blister|tuck)|\bpack\s+of\s+([2-9]|[1-9]\d)\b/i;
+  /\btuck\s*box(es)?\b|\bmini[\s-]*box\b|\b([2-9]|[1-9]\d)\s*(booster\s+)?packs\b|\b\d+\s*(bags|buste|bustine|sobres)\b|\b([2-9]|[1-9]\d)[\s-]*packs?\s+(box|blister|tuck)|\bpack\s+of\s+([2-9]|[1-9]\d)\b|(?<!\b(?:of|from|de)\s+)\b([2-9]|[1-9]\d)\s*boosters\b|\bpack\s+de\s+([2-9]|[1-9]\d)\s+(boosters?|packs?)\b/i;
 // "(3-Pack)", "4 Packs", "24 Bags", "Pack of 3": how many packs a name or title counts, or 0. Never the number after
 // "Pack" ("Retro Pack 2 Booster Pack").
 function packCount(s: string): number {
-  const m = s.match(/(?<!\bpack\s?)\b(\d{1,2})[\s-]*(?:booster\s+)?(?:packs?|bags|buste|bustine|sobres)\b|\bpack\s+of\s+(\d{1,2})\b/i);
+  const m = s.match(/(?<!\bpack\s?)\b(\d{1,2})[\s-]*(?:booster\s+)?(?:packs?|boosters|bags|buste|bustine|sobres)\b|\bpack\s+of\s+(\d{1,2})\b/i);
   const n = m ? Number(m[1] ?? m[2]) : 0;
   return n >= 2 ? n : 0;
 }
+// "free mini box", "bonus mini box" or "with mini box" is an extra, not what the listing sells.
+const MINI_BOX = /(?<!\b(?:free|bonus|promo|with|plus)\s+)\bmini[\s-]*(booster\s+)?box(es)?\b/i;
 const SINGLE_PACK = /\b(booster|loose|mega)\s+pack\b(?!s)/i;
 const isMulti = (s: string) => MULTI.test(s.replace(/\b\d+\s*packs?\)/i, ""));
 
@@ -501,6 +508,11 @@ export function matchSealed(title: string, idx: MatchIndex, handle = ""): MatchR
     // Display (US$34 market). A display is several boxes; a listing that says it sells one, in its title or its handle
     // (which can only refuse), is not the display.
     if (/\bdisplay\b/i.test(p.name) && /\bsingle\b|\b1\s?p\b/i.test(`${title} ${handle.replace(/-/g, " ")}`)) continue;
+    // Live 2026-11-27: "yugioh-rarity-coll-5-mini-box-5-packs" (US$34.99, in stock) sat on the Rarity Collection 5 Booster
+    // Box (US$125 market), and a Supreme Darkness "booster-box-1st-edition-mini-box" on its full box: the title lacked the
+    // mini box product's "Retail Exclusive", so the full box was the only fit. A full booster box refuses a listing that
+    // says mini box, in its title or its handle (which can only refuse); the mini box products keep it.
+    if (/\bbooster\s+box\b/i.test(p.name) && !/\bmini\b/i.test(p.name) && MINI_BOX.test(`${title} ${handle.replace(/-/g, " ")}`)) continue;
     // Live 2026-11-21: one loose pack from a tin ("yugioh-2022-tin-of-the-pharaohs-gods-booster-pack", US$5.95) sat on
     // the whole 2022 Tin (US$12 market). A tin's own name has no "pack"; a listing that names one booster pack, in its
     // title or its handle, is the pack (the handle can only refuse here).
