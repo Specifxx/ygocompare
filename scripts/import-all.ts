@@ -28,7 +28,7 @@ import {
   useSetEditions,
   type EbayState,
 } from "@/lib/import/ebay";
-import { ebayReferenceUsd, ebayTrusted, tcgplayerOfferCents } from "@/lib/import/sanity";
+import { displayUnits, ebayReferenceUsd, ebayTrusted, pricedAsOneUnit, tcgplayerOfferCents } from "@/lib/import/sanity";
 import { appendPoint, dayNumber, pctChange, readSetHistory, writeSetHistory } from "@/lib/import/history";
 import { readSetLows, recordLows, storeLowsByMarket, writeSetLows } from "@/lib/import/store-lows";
 import { fetchJson } from "@/lib/import/http";
@@ -106,6 +106,7 @@ async function main() {
   const fx = await fxRates(prevMeta?.fx ?? {});
 
   // 2. Stores
+  const units = displayUnits(products);
   const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases, setEditions: SITE.setEditions });
   useSetEditions(sets);
   const storeOffers = new Map<number, Offer[]>();
@@ -144,6 +145,9 @@ async function main() {
           const ref = referenceCents(tcg[m.product.id]) ?? lowestCents(tcg[m.product.id]);
           const usd = it.cents / (fx[CURRENCY[store.market]] ?? 1);
           if (ref != null && ref >= 300 && (usd < ref * 0.25 || usd > ref * 4)) continue;
+          // A display priced like one of its own units is that unit (pricedAsOneUnit).
+          const unit = units.get(m.product.id);
+          if (unit != null && pricedAsOneUnit(usd, ref, referenceCents(tcg[unit]) ?? lowestCents(tcg[unit]))) continue;
           const offer: Offer = {
             source: store.key,
             market: store.market,

@@ -3301,3 +3301,12 @@ shipping on Direct orders over $50, help.tcgplayer.com "Buying from TCGplayer Di
 code, credit or countdown (`tests/offer-calendar.test.ts`). The card keeps its rules: once a visit, the visit's one prompt slot,
 never while typing; after the sale its ✕ keeps it away for 7 days instead of for good. Both re-read the clock in the browser, so the
 switch needs no build. Change a partner line only after reading its page again.
+
+## 2026-11-28 — A display priced like one of its units is that unit
+
+Live 28 Nov: j2games' "...midterm-paradox-mini-box-display-toys" (US$11.99, in stock) sat on the Speed Duel GX: Midterm
+Paradox Mini Box Display (US$33.34 market). One mini box is US$9.45, so the listing is one mini box, but 36% of the display
+is inside the quarter-to-4x band and its words match the display. The import now finds each display's own unit (same set,
+TCGplayer's name without "Display", `displayUnits` in `lib/import/sanity.ts`) and refuses a store row priced at most 1.5x
+that unit's market and under half the display's (`pricedAsOneUnit`). It can only refuse. Replayed on the 28 Nov data: 1 of
+79 display store rows drops, this one. A display with no unit product in its set keeps the old band only.
