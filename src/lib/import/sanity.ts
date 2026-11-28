@@ -27,3 +27,42 @@ export function ebayReferenceUsd(ref: number | null | undefined, storeUsd: numbe
 export function ebayTrusted(usd: number, reference: number | null): boolean {
   return reference != null && usd >= reference * 0.25 && usd <= reference * 4;
 }
+
+const words = (s: string): string[] => s.toLowerCase().match(/[a-z0-9]+/g) ?? [];
+
+/** A display's single unit in the same set: TCGplayer names it the display's name without "Display" ("Midterm Paradox
+ *  Mini Box Display" -> "Midterm Paradox Mini Box"; "Special Edition Display Box" -> "Special Edition Box"). Map of
+ *  display id -> unit id; a display with no such sibling is left out. */
+export function displayUnits(products: { id: number; setId: number; name: string; kind: string }[]): Map<number, number> {
+  // A name two products share is ambiguous: no unit rather than a wrong one.
+  const byName = new Map<string, number | null>();
+  for (const p of products) {
+    if (p.kind !== "sealed") continue;
+    const k = `${p.setId}|${words(p.name).join(" ")}`;
+    byName.set(k, byName.has(k) ? null : p.id);
+  }
+  const out = new Map<number, number>();
+  for (const p of products) {
+    if (p.kind !== "sealed") continue;
+    const w = words(p.name);
+    if (!w.includes("display")) continue;
+    const at = w.indexOf("display");
+    const plain = `${p.setId}|${w.filter((_, i) => i !== at).join(" ")}`;
+    // "Display Box" -> "Box": only the "box" right after "display" is dropped.
+    const unit = byName.has(plain)
+      ? byName.get(plain)
+      : w[at + 1] === "box"
+        ? byName.get(`${p.setId}|${w.filter((_, i) => i !== at + 1 && i !== at).join(" ")}`)
+        : undefined;
+    if (unit != null && unit !== p.id) out.set(p.id, unit);
+  }
+  return out;
+}
+
+/** Live 2026-11-28 (YGO): j2games' "...midterm-paradox-mini-box-display-toys" at US$11.99 sat on the Midterm Paradox
+ *  Mini Box Display (US$33 market), inside the quarter-to-4x band, while one mini box is US$9.45. A display priced like
+ *  one of its units (at most 1.5x the unit's market) and under half the display's own market is one unit, not the
+ *  display. It can only refuse. */
+export function pricedAsOneUnit(usd: number, displayRef: number | null | undefined, unitRef: number | null | undefined): boolean {
+  return displayRef != null && unitRef != null && unitRef > 0 && usd <= unitRef * 1.5 && usd < displayRef * 0.5;
+}

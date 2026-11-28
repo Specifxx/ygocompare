@@ -28,7 +28,7 @@ import {
   useSetEditions,
   type EbayState,
 } from "@/lib/import/ebay";
-import { ebayReferenceUsd, ebayTrusted, tcgplayerOfferCents } from "@/lib/import/sanity";
+import { displayUnits, ebayReferenceUsd, ebayTrusted, pricedAsOneUnit, tcgplayerOfferCents } from "@/lib/import/sanity";
 import { appendPoint, dayNumber, pctChange, readSetHistory, writeSetHistory } from "@/lib/import/history";
 import { readSetLows, recordLows, storeLowsByMarket, writeSetLows } from "@/lib/import/store-lows";
 import { fetchJson } from "@/lib/import/http";
@@ -106,6 +106,12 @@ async function main() {
   const fx = await fxRates(prevMeta?.fx ?? {});
 
   // 2. Stores
+  const units = displayUnits(products);
+  // A display priced like one of its own units is that unit (pricedAsOneUnit); the unit is judged by its market price only.
+  const isOneUnit = (id: number, displayRef: number | null | undefined, usd: number) => {
+    const unit = units.get(id);
+    return unit != null && pricedAsOneUnit(usd, displayRef, referenceCents(tcg[unit]));
+  };
   const idx = buildIndex(products, sets, SITE.numberStyle, { rarityMustAgree: SITE.rarityMustAgree, rarityAliases: SITE.rarityAliases, setEditions: SITE.setEditions });
   useSetEditions(sets);
   const storeOffers = new Map<number, Offer[]>();
@@ -144,6 +150,7 @@ async function main() {
           const ref = referenceCents(tcg[m.product.id]) ?? lowestCents(tcg[m.product.id]);
           const usd = it.cents / (fx[CURRENCY[store.market]] ?? 1);
           if (ref != null && ref >= 300 && (usd < ref * 0.25 || usd > ref * 4)) continue;
+          if (isOneUnit(m.product.id, ref, usd)) continue;
           const offer: Offer = {
             source: store.key,
             market: store.market,
@@ -268,12 +275,16 @@ async function main() {
   let offerCount = 0;
   for (const p of products) {
     const t = tcg[p.id] ?? {};
-    const offers: Offer[] = [...(storeOffers.get(p.id) ?? [])];
     const ref = refUsd.get(p.id);
+    // Rows carried from an earlier run (a failed store, IMPORT_SKIP_STORES) and eBay rows get the unit check too.
+    const unitRef = ref ?? lowestCents(t);
+    const oneUnit = (o: Offer) => isOneUnit(p.id, unitRef, o.cents / (fx[o.currency] ?? 1));
+    const offers: Offer[] = (storeOffers.get(p.id) ?? []).filter((o) => !oneUnit(o));
     const ebayRef = ebayReferenceUsd(ref, offers.filter((o) => o.inStock).map((o) => o.cents / (fx[o.currency] ?? 1)));
     for (const [market, e] of Object.entries(ebayState[p.id] ?? {}) as [Market, { at: string; offer: Offer | null }][]) {
       if (!e.offer || now.getTime() - new Date(e.at).getTime() >= EBAY_MAX_AGE_H * 3_600_000) continue;
       if (!ebayTrusted(e.offer.cents / (fx[e.offer.currency] ?? 1), ebayRef)) continue;
+      if (oneUnit(e.offer)) continue;
       offers.push({ ...e.offer, market });
     }
     const tcgLow = Object.values(t).map((x) => x.low).filter((x): x is number => x != null);
