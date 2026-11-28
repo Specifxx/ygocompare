@@ -39,6 +39,19 @@ test("a display priced like one of its units is that unit", () => {
   assert.equal(units.get(3), 4);
   assert.equal(units.has(5), false); // no unit product
   assert.equal(units.has(7), false); // another set's deck is not its unit
+  // "Structure Deck Display Box" -> "Structure Deck"; two products sharing the unit's name -> no unit.
+  const more = displayUnits([
+    { id: 11, setId: 50, kind: "sealed", name: "Rokket Revolt Structure Deck Display Box" },
+    { id: 12, setId: 50, kind: "sealed", name: "Rokket Revolt Structure Deck" },
+    { id: 13, setId: 60, kind: "sealed", name: "X Mini Box Display" },
+    { id: 14, setId: 60, kind: "sealed", name: "X Mini Box" },
+    { id: 15, setId: 60, kind: "sealed", name: "X Mini-Box" },
+    { id: 16, setId: 70, kind: "sealed", name: "Y Deck Box Display" },
+    { id: 17, setId: 70, kind: "sealed", name: "Y Deck" },
+  ]);
+  assert.equal(more.get(11), 12);
+  assert.equal(more.has(13), false);
+  assert.equal(more.has(16), false); // only the "box" right after "display" is dropped
   assert.equal(pricedAsOneUnit(1199, 3334, 945), true);
   assert.equal(pricedAsOneUnit(3199, 3334, 945), false); // a display's real price
   assert.equal(pricedAsOneUnit(1599, 3334, 945), false); // over 1.5x one unit

@@ -34,15 +34,26 @@ const words = (s: string): string[] => s.toLowerCase().match(/[a-z0-9]+/g) ?? []
  *  Mini Box Display" -> "Midterm Paradox Mini Box"; "Special Edition Display Box" -> "Special Edition Box"). Map of
  *  display id -> unit id; a display with no such sibling is left out. */
 export function displayUnits(products: { id: number; setId: number; name: string; kind: string }[]): Map<number, number> {
-  const byName = new Map<string, number>();
-  for (const p of products) if (p.kind === "sealed") byName.set(`${p.setId}|${words(p.name).join(" ")}`, p.id);
+  // A name two products share is ambiguous: no unit rather than a wrong one.
+  const byName = new Map<string, number | null>();
+  for (const p of products) {
+    if (p.kind !== "sealed") continue;
+    const k = `${p.setId}|${words(p.name).join(" ")}`;
+    byName.set(k, byName.has(k) ? null : p.id);
+  }
   const out = new Map<number, number>();
   for (const p of products) {
     if (p.kind !== "sealed") continue;
     const w = words(p.name);
     if (!w.includes("display")) continue;
-    const base = w.filter((x) => x !== "display");
-    const unit = byName.get(`${p.setId}|${base.join(" ")}`) ?? byName.get(`${p.setId}|${base.filter((x) => x !== "box").join(" ")}`);
+    const at = w.indexOf("display");
+    const plain = `${p.setId}|${w.filter((_, i) => i !== at).join(" ")}`;
+    // "Display Box" -> "Box": only the "box" right after "display" is dropped.
+    const unit = byName.has(plain)
+      ? byName.get(plain)
+      : w[at + 1] === "box"
+        ? byName.get(`${p.setId}|${w.filter((_, i) => i !== at + 1 && i !== at).join(" ")}`)
+        : undefined;
     if (unit != null && unit !== p.id) out.set(p.id, unit);
   }
   return out;
