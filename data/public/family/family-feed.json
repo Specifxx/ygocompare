@@ -1,7 +1,7 @@
 {
  "v": 1,
  "site": "ygo",
- "generatedAt": "2026-11-28T07:54:10.165Z",
+ "generatedAt": "2026-11-28T20:33:21.523Z",
  "links": {
   "US": {
    "deals": "https://ygocompare.com/black-friday",
@@ -47,23 +47,9 @@
    "currency": "USD",
    "store": "Cosmic Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/605103_200w.jpg",
-   "refCents": 16222,
+   "refCents": 16194,
    "refLabel": "TCGplayer market price",
    "savingPct": 26
-  },
-  {
-   "kind": "deal",
-   "cluster": "cards",
-   "region": "US",
-   "title": "Chaos Origins Booster Box [1st Edition]",
-   "url": "https://ygocompare.com/card/chaos-origins-booster-box-1st-edition",
-   "cents": 6599,
-   "currency": "USD",
-   "store": "The Warp Gate",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/691167_200w.jpg",
-   "refCents": 8503,
-   "refLabel": "TCGplayer market price",
-   "savingPct": 22
   },
   {
    "kind": "deal",
@@ -75,7 +61,21 @@
    "currency": "USD",
    "store": "Paragon City Games",
    "image": "https://tcgplayer-cdn.tcgplayer.com/product/493309_200w.jpg",
-   "refCents": 15045,
+   "refCents": 15176,
+   "refLabel": "TCGplayer market price",
+   "savingPct": 21
+  },
+  {
+   "kind": "deal",
+   "cluster": "cards",
+   "region": "US",
+   "title": "Chaos Origins Booster Box [1st Edition]",
+   "url": "https://ygocompare.com/card/chaos-origins-booster-box-1st-edition",
+   "cents": 6599,
+   "currency": "USD",
+   "store": "The Warp Gate",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/691167_200w.jpg",
+   "refCents": 8298,
    "refLabel": "TCGplayer market price",
    "savingPct": 20
   },
@@ -83,15 +83,15 @@
    "kind": "deal",
    "cluster": "cards",
    "region": "US",
-   "title": "Rarity Collection 5 Booster Box",
-   "url": "https://ygocompare.com/card/rarity-collection-5-booster-box",
-   "cents": 9999,
+   "title": "Kaiba Evolution Starter Deck [Unlimited Edition]",
+   "url": "https://ygocompare.com/card/kaiba-evolution-starter-deck-unlimited-edition",
+   "cents": 10000,
    "currency": "USD",
-   "store": "Mystic TCG",
-   "image": "https://tcgplayer-cdn.tcgplayer.com/product/668522_200w.jpg",
-   "refCents": 12188,
+   "store": "Gamer's Gauntlet",
+   "image": "https://tcgplayer-cdn.tcgplayer.com/product/212809_200w.jpg",
+   "refCents": 11499,
    "refLabel": "TCGplayer market price",
-   "savingPct": 18
+   "savingPct": 13
   }
  ]
 }
