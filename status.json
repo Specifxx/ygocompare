@@ -1,0 +1,53 @@
+{
+ "v": 1,
+ "site": "ygocompare.com",
+ "at": "2026-11-28T17:46:27.069Z",
+ "overall": "warn",
+ "checks": [
+  {
+   "name": "Live site",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "The sealed hub",
+   "status": "ok",
+   "detail": "200"
+  },
+  {
+   "name": "Retired card URLs redirect",
+   "status": "ok",
+   "detail": "308 → /sets/beyond-the-brave"
+  },
+  {
+   "name": "Daily price import",
+   "status": "ok",
+   "detail": "10.0h old"
+  },
+  {
+   "name": "Store imports",
+   "status": "warn",
+   "detail": "cardbot: 0 matched; cardbot2: 0 matched; grailborne: 0 matched; legendsandcollectables: 0 matched; guf: 0 matched; oneplacetcs: 0 matched; millenniumcomics: https://millenniumcomics.com.au/collections/yugioh-singles-instock/products.json?limit=250&page=1&country=AU: HTTP 429; raptorgames: 0 matched; manamarket: 0 matched; thecollectorsmith: 0 matched; altf4online: 0 matched; generalgames: 0 matched; cardhouse: 0 matched; cartessportivesrivesud: 0 matched; criticalhitgaminglounge: 0 matched; boutiquelechevalier: 0 matched; eacollectibles: 0 matched; emmettstoystop: 0 matched; commonboxgames: 0 matched; gamezilla: 0 matched; dragoncardsandgames: 0 matched; game3: 0 matched; hopeclubshop: 0 matched; facetofacegames: 0 matched; levelzerogames: 0 matched; kunaigames: 0 matched; hobbiesville: 0 matched; manalounge: 0 matched; merchantsinventory: 0 matched; pokejeux: 0 matched; playntradewpg: https://playntradewpg.com/collections/yugioh-singles-all/products.json?limit=250&page=1&country=CA: Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON; laboitemystere: 0 matched; screenfreegames: 0 matched; realmhoppers: 0 matched; thecgrealm: 0 matched; battlebearkl: 0 matched; battlebearsb: 0 matched; cardhome: 0 matched; elduelista: 0 matched; totalplay: 0 matched; gamestimeaversa: 0 matched; manamarketx: 0 matched; endturn: 0 matched; recollectibles: 0 matched; 1uprm: 0 matched; aiegames: 0 matched; tistacards: 0 matched; animerch: 0 matched; cardbuddys: 0 matched; boostrclub: 0 matched; cardcollector: 0 matched; cardgames24: 0 matched; cardgazertcg: 0 matched; cartespokemon: 0 matched; dateacard: 0 matched; dadiemattoncini: 0 matched; deichcards: 0 matched; dracaugames: 0 matched; dungeonstreet: 0 matched; exchangeplayinvest: 0 matched; dutchtcgcompany: 0 matched; gamesavenue: 0 matched; goosegames: 0 matched; hikarudistribution: 0 matched; iconiccards: 0 matched; kazuma: 0 matched; lemantcg: 0 matched; lepotoryko: 0 matched; lmshandel: 0 matched; lootboxjeux: 0 matched; loufoque: 0 matched; mazeek: 0 matched; metamorphcenter: 0 matched; moonshadow: 0 matched; ohanagiochi: 0 matched; mulligantcg: 0 matched; opssmarket: 0 matched; playmaniac: 0 matched; pokebundles: 0 matched; primeprotector: store charges USD, but is configured for EU (EUR) — fix its market in src/content/stores.ts; poneglyphcards: 0 matched; pruckis: 0 matched; rarecards: 0 matched; pushdichtcg: 0 matched; relictcg: 0 matched; ronintcg: 0 matched; sarumangames: 0 matched; side7: 0 matched; spieleheldtcg: 0 matched; tcggarden: 0 matched; tcgreus: 0 matched; tcgstar: 0 matched; timetwistergames: 0 matched; tkcollectibles: 0 matched; tradehunter: 0 matched; trextcg: 0 matched; vaultofdelights: 0 matched; vegastore: 0 matched; zillerstore: 0 matched; bossminis: 0 matched; cardxchange: 0 matched; collectbydesign: 0 matched; diceanddestiny: 0 matched; etoysworld: 0 matched; hiddengemcards: 0 matched; magicianscircle: 0 matched; untouchables: 0 matched; jgccollectables: 0 matched; lichcards: 0 matched; tokyotoys: 0 matched; 1stcapitalgaming: 0 matched; atlasgames: https://atlasgames.store/collections/yu-gi-oh/products.json?limit=250&page=1&country=US: HTTP 401 ; atlantiscomics: 0 matched; bluejayscauldron: 0 matched; bluemistcollectibles: 0 matched; archerongames: 0 matched; thegrumpygoblin: 0 matched; capefearcollectibles: 0 matched; pucapucagames: 0 matched; gamehq: 0 matched; dragonsdenshop: 0 matched; brainwashcards: 0 matched; foxfablehaven: 0 matched; galactictoys: 0 matched; bricksandheroes: 0 matched; gatorscardden: 0 matched; hoarditall: 0 matched; darkholdgames: 0 matched; jerseyscc: https://jerseyscc.com/collections/yu-gi-oh/products.json?limit=250&page=1&country=US: HTTP 401 ; liquidgames: 0 matched; metagames: 0 matched; pcatoys: 0 matched; pegasusgameswi: 0 matched; punkouter: 0 matched; phatcatzgaming: 0 matched; safarizone: 0 matched; sparkstradingcards: 0 matched; tradeshop: 0 matched; tier1games: 0 matched; graygauntletgames: 0 matched; wnygaming: 0 matched; joshscards: 0 matched; pro: 0 matched"
+  },
+  {
+   "name": "eBay budget",
+   "status": "ok",
+   "detail": "2200/2200 calls on 2026-11-27, 1223 eligible"
+  },
+  {
+   "name": "Best Basket shipping",
+   "status": "ok",
+   "detail": "469 of 599 stores measured, 10h old"
+  },
+  {
+   "name": "Family feed",
+   "status": "ok",
+   "detail": "6 items, 9.9h old; 9 sister feeds (rift, op, dex, mtg, gundam, lorcana, cyberpunk, bandai, sealed)"
+  },
+  {
+   "name": "Amazon ASIN finder",
+   "status": "ok",
+   "detail": "AU: ok, 21 ASINs, 10h ago; CA: ok, 0 ASINs, 10h ago; EU: ok, 0 ASINs, 10h ago; UK: ok, 0 ASINs, 10h ago; US: ok, 71 ASINs, 10h ago"
+  }
+ ]
+}
