@@ -7,6 +7,7 @@ import { BfModeBar } from "@/components/BfModeBar";
 import { TcgSalePopup } from "@/components/TcgSalePopup";
 import { goHref } from "@/lib/affiliate";
 import { bfModeOn, bfPhase } from "@/lib/bf-mode";
+import { TCGPLAYER_STANDING } from "@/lib/offer-calendar";
 
 // One line under the header on every page from 1 November to the day after Cyber Monday, linking the
 // Black Friday page, then the Cyber Monday page (lib/black-friday.ts saleStrip; DECISIONS.md, "Black
@@ -24,13 +25,29 @@ export function HolidayStrip() {
       <StripClose id={s.event} />
     </div>
   ) : null;
-  const on = bfModeOn(Date.now());
-  if (!on) return strip;
+  const now = Date.now();
+  const on = bfModeOn(now);
+  // After the sale the bar and the card keep running with the offer calendar (lib/offer-calendar.ts, owner 2026-11-28).
   return (
     <>
     <BfModeBar
-      on={on} phase={bfPhase(Date.now())}
+      on={on} phase={bfPhase(now)} now={now}
       href="/black-friday"
+      evergreen={{
+        title: `${SITE.gameShort} sealed deals`,
+        line: "store prices under TCGplayer today",
+        href: "/sealed",
+        hrefs: { afterChristmas: "/boxing-day", newYear: "/january-sales" },
+        ad: (
+        <a
+          href={goHref({ url: `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&ProductTypeName=Sealed+Products`, source: "tcgplayer", market: "US" }, undefined, "offer_bar")}
+          rel="sponsored nofollow noopener"
+          className="underline underline-offset-2"
+        >
+          <span style={{ color: "#fff" }}>{TCGPLAYER_STANDING.short}</span> · Ad
+        </a>
+        ),
+      }}
       title={`${SITE.gameShort} sealed deals`}
       line="store prices under TCGplayer today"
       ad={
@@ -46,7 +63,7 @@ export function HolidayStrip() {
       {strip}
     </BfModeBar>
     {/* TCGplayer's sale card (owner, 2026-11-27): once a visit, never while typing, closes for good (TcgSalePopup.tsx). */}
-    <TcgSalePopup slotKey="ce_prompt_slot" dealsHref="/black-friday">
+    <TcgSalePopup slotKey="ce_prompt_slot" dealsHref="/black-friday" offerHref={"/sealed"}>
       <a href={goHref({ url: `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&q=booster+box&ProductTypeName=Sealed+Products`, source: "tcgplayer", market: "US" }, undefined, "bf_popup")} rel="sponsored nofollow noopener">Booster boxes</a>
       <a href={goHref({ url: `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&ProductTypeName=Sealed+Products`, source: "tcgplayer", market: "US" }, undefined, "bf_popup")} rel="sponsored nofollow noopener">All sealed</a>
       <a href={goHref({ url: `https://www.tcgplayer.com/search/${SITE.tcgplayerSlug}/product?productLineName=${SITE.tcgplayerSlug}&ProductTypeName=Cards`, source: "tcgplayer", market: "US" }, undefined, "bf_popup")} rel="sponsored nofollow noopener">Singles</a>
